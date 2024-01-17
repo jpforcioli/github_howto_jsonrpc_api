@@ -37,7 +37,7 @@ ruamel.yaml.clib==0.2.7
 six==1.16.0
 snowballstemmer==2.2.0
 soupsieve==2.4.1
-Sphinx==6.2.1
+Sphinx
 sphinx-autodoc-typehints==1.24.0
 sphinx-book-theme==1.0.1
 sphinx-copybutton==0.5.2

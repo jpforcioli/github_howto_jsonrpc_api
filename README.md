@@ -53,5 +53,5 @@ with your browser.
 ## Readthedoc
 
 ```txt
-cp -rv *rst Makefile README.md _build/ _images/ _static/ conf.py images index.rst make.bat ../github_howto_jsonrpc_api/
+cp -rv *rst Makefile README.md _build _images _static conf.py images index.rst make.bat .readthedocs.yaml requirements.txt ../github_howto_jsonrpc_api/
 ```
