@@ -6,6 +6,7 @@
     - [Install sphinx](#install-sphinx)
     - [To generate the HTML documentation](#to-generate-the-html-documentation)
     - [To read the HTML documentation](#to-read-the-html-documentation)
+  - [Readthedoc](#readthedoc)
 
 ## Linux with python3
 
@@ -48,3 +49,9 @@ _build/html/index.html
 ```
 
 with your browser.
+
+## Readthedoc
+
+```txt
+cp -rv *rst Makefile README.md _build/ _images/ _static/ conf.py images index.rst make.bat ../github_howto_jsonrpc_api/
+```
