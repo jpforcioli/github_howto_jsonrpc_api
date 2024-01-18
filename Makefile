@@ -8,7 +8,7 @@ SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = .
 
 ifdef $(READTHEDOCS_OUTPUT)
-BUILDDIR	  =$(READTHEDOCS_OUTPUT)
+BUILDDIR	  =$(READTHEDOCS_OUTPUT)/html
 else
 BUILDDIR      = _build
 endif
