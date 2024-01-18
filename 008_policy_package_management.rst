@@ -2373,6 +2373,79 @@ ADOM:
            ``ppkg_001`` and ``ppkg_002`` Policy Packages will be ``111`` and
            ``4`` respectively
 
+How to clone firewall policy from a Policy Package to a Policy Block?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Why would you need to perform such clone operation?
+
+It just how the FortiManager GUI is implementing the copy & paste operation:
+
+- FortiManager administrator right-clicks and copy a firewall policy from a 
+  Policy Package
+- Then he right-clicks and paste it in a Policy Block
+
+The above process is triggering two |fmg_api| calls:
+
+#. A clone operation
+#. A move operation
+
+Clone operation
+_______________
+
+To clone firewall policy with ``policyid`` ``1`` from the ``ppkg_001`` Policy 
+Package into the ``sites_HBLK`` Policy Block from the ``dc_emea`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "clone",
+           "params": [
+             {
+               "data": {
+                 "name": "New_Policy_Name",
+                 "new parent": "pblock/sites_HBLK"
+               },
+               "url": "/pm/config/adom/dc_emea/pkg/ppkg_001/firewall/policy/1"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         - Cloned firewall policy will have its ``name`` attribute set with 
+           ``New_Policy_Name``
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "policyid": 1071741830
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/dc_emea/pkg/ppkg_001/firewall/policy/1"
+             }
+           ]
+         }
+
+      .. note::
+
+         - The FortiManager returns the ``policyid`` of the cloned firewall
+           policy: ``1071741830``
+         
 Policies
 --------
 
