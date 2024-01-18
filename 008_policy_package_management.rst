@@ -2373,12 +2373,12 @@ ADOM:
            ``ppkg_001`` and ``ppkg_002`` Policy Packages will be ``111`` and
            ``4`` respectively
 
-How to clone firewall policy from a Policy Package to a Policy Block?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to clone a firewall policy from a Policy Package to a Policy Block?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Why would you need to perform such clone operation?
 
-It just how the FortiManager GUI is implementing the copy & paste operation:
+It is just how the FortiManager GUI is implementing the copy & paste operation:
 
 - FortiManager administrator right-clicks and copy a firewall policy from a 
   Policy Package
