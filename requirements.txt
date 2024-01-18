@@ -39,7 +39,7 @@ snowballstemmer==2.2.0
 soupsieve==2.4.1
 Sphinx
 sphinx-autodoc-typehints==1.24.0
-sphinx-book-theme==1.0.1
+sphinx-book-theme
 sphinx-copybutton==0.5.2
 sphinx-jinja2-compat==0.2.0
 sphinx-prompt==1.5.0
