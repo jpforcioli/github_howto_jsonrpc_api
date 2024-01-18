@@ -22,9 +22,9 @@ How to create an IAM API user
 
 7. In *3. Confirmation* click *CONFIRM*
 8. In *4. Successful API User Registration* click *DOWNLOAD CREDENTIALS*
-9. We obtain the file ``API_Credential_E8766032-7319-409F-902A-96376117D045_12_10_2021.txt``
+9. We obtain the file ``API_Credential_E8766032-7319-409F-902A-REDACTEDD045_12_10_2021.txt``
 
-   .. literalinclude:: datas/API_Credential_E8766032-7309-409F-902A-96376117D045_12_10_2021.txt
+   .. literalinclude:: datas/API_Credential_E8766032-7309-409F-902A-REDACTEDD045_12_10_2021.txt
 
 How to generate the access token?
 ---------------------------------
