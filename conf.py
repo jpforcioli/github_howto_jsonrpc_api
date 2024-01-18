@@ -37,13 +37,12 @@ release = '1.0.0'
 
 extensions = [ 
     "sphinx_tabs.tabs",
-#    "sphinx_rtd_theme",
     'sphinx_toolbox.collapse',
     'sphinx.ext.autosectionlabel',    
     'sphinxcontrib.images',    
     'sphinx_copybutton',
     "sphinx_design",
-    ]
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -58,11 +57,6 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '.gitignore', '.venv']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-#html_theme = 'alabaster'
-#html_theme = 'sphinx_materialdesign_theme'
-#html_theme = 'sphinx_rtd_theme'
-#html_theme = 'furo'
-#html_theme = "pydata_sphinx_theme"
 html_theme = "sphinx_book_theme"
 
 # Configuration for the sphinxcontrib.images extension
@@ -76,15 +70,19 @@ images_config = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
+DOC_LOGO = "fortimanager_api.png"
 html_static_path = ['_static']
 html_theme_options = {
     "announcement": "How to FortiManager API?",
     "logo": {
-        "image_light": "_static/light-fortinet-logo.png",
-        "image_dark": "_static/dark-fortinet-logo.png",
+#        "image_light": "_static/light-fortinet-logo.png",
+#        "image_dark": "_static/dark-fortinet-logo.png",
+        "image_light": f"_static/{DOC_LOGO}",
+        "image_dark": f"_static/{DOC_LOGO}",
     },
     "show_toc_level": 5,
     "show_nav_level": 5,
+    "navigation_with_keys": False,
 }
 
 version = "1.0_20230413_001"

@@ -2271,7 +2271,109 @@ The following request, insert policy block ``ppb_001`` above policy id
 		  ],
 		  "session": 49476
 		}
+
+How to where used a Policy Block?
++++++++++++++++++++++++++++++++++
+
+This is for when you want to get the list of Policy Packages (and relative ``policyid`` the Policy Packages' firewall policies) referencing the given
+Policy Block.
+
+For instance, to where used the ``sites_HBLK`` Policy Block from the ``dc_emea``
+ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "option": [
+                 "where_used"
+               ],
+               "url": "/pm/pblock/adom/dc_emea/sites_HBLK"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+         
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "sites_HBLK",
+                 "oid": 5276,
+                 "package settings": {
+                   "central-nat": 0,
+                   "consolidated-firewall-mode": 0,
+                   "fwpolicy-implicit-log": 0,
+                   "fwpolicy6-implicit-log": 0,
+                   "hitc-taskid": 0,
+                   "hitc-timestamp": 0,
+                   "ngfw-mode": 0,
+                   "policy-offload-level": 0
+                 },
+                 "type": "pblock",
+                 "where_used": [
+                   {
+                     "data": [
+                       {
+                         "category": 181,
+                         "mapping_name": "firewall policy",
+                         "mattr": "policyid",
+                         "mkey": "110",
+                         "pkg": {
+                           "name": "ppkg_001",
+                           "oid": 6079
+                         }
+                       },
+                       {
+                         "category": 181,
+                         "mapping_name": "firewall policy",
+                         "mattr": "policyid",
+                         "mkey": "3",
+                         "pkg": {
+                           "name": "ppkg_002",
+                           "oid": 6181
+                         }
+                       }
+                     ],
+                     "root": {
+                       "name": "dc_emea",
+                       "oid": 165
+                     }
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/pblock/adom/dc_emea/sites_HBLK"
+             }
+           ]
+         }
 		  
+      .. note::
+
+         - The response indicates that the `sites_HBLK` Policy Block is used in
+           the ``ppkg_001`` and ``ppkg_002`` Policy Packages 
+         - The relative ``policyid`` is given by the ``mkey`` attribute
+         - It is ``110`` in the ``ppkg_001`` Policy Package and ``3`` in the
+           ``ppkg_002`` Policy Package
+         - It means that next firewall policy that will get created in the
+           ``ppkg_001`` and ``ppkg_002`` Policy Packages will be ``111`` and
+           ``4`` respectively
+
 Policies
 --------
 

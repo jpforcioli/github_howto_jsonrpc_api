@@ -393,6 +393,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-create-a-policy-package-block">9.4.1. How to create a Policy Package block?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-policy-in-a-policy-package-block">9.4.2. How to add a policy in a policy package block?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-insert-a-policy-block-in-a-policy-package">9.4.3. How to insert a policy block in a policy package?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-where-used-a-policy-block">9.4.4. How to where used a Policy Block?</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#policies">9.5. Policies</a><ul class="visible nav section-nav flex-column">
@@ -2115,7 +2116,7 @@ corresponding device’s Device DB.</p>
 <p><em>Hitcount</em> refers to the set of attributes linked to a firewall policy that
 maintain several utilization information like the Last Used, First Use, Packets, Bytes, etc. as shown below:</p>
 <a class=""
-               data-lightbox="group-8506008a-8210-4090-9113-84341560f1bc"
+               data-lightbox="group-7aeb22a1-d2e3-4b84-bbf9-851fd078c3b5"
                href="_images/image_004.png"
                title=""
                data-title=""
@@ -2583,6 +2584,110 @@ following request:</p>
 </pre></div>
 </div>
 </section>
+<section id="how-to-where-used-a-policy-block">
+<h3><span class="section-number">9.4.4. </span>How to where used a Policy Block?<a class="headerlink" href="#how-to-where-used-a-policy-block" title="Link to this heading">#</a></h3>
+<p>This is for when you want to get the list of Policy Packages (and relative <code class="docutils literal notranslate"><span class="pre">policyid</span></code> the Policy Packages’ firewall policies) referencing the given
+Policy Block.</p>
+<p>For instance, to where used the <code class="docutils literal notranslate"><span class="pre">sites_HBLK</span></code> Policy Block from the <code class="docutils literal notranslate"><span class="pre">dc_emea</span></code>
+ADOM:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-10" name="sd-tab-set-5" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-10">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;option&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;where_used&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/pblock/adom/dc_emea/sites_HBLK&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{session}}&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-11" name="sd-tab-set-5" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-11">
+RESPONSE</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sites_HBLK&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5276</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;package settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;central-nat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;consolidated-firewall-mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;fwpolicy-implicit-log&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;fwpolicy6-implicit-log&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;hitc-taskid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;hitc-timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;ngfw-mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;policy-offload-level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pblock&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;where_used&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">181</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;mapping_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;firewall policy&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;mattr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;policyid&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;mkey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;110&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;pkg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ppkg_001&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6079</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">181</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;mapping_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;firewall policy&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;mattr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;policyid&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;mkey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;pkg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ppkg_002&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6181</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">              </span><span class="p">}</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;root&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dc_emea&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">165</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/pblock/adom/dc_emea/sites_HBLK&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>The response indicates that the <cite>sites_HBLK</cite> Policy Block is used in
+the <code class="docutils literal notranslate"><span class="pre">ppkg_001</span></code> and <code class="docutils literal notranslate"><span class="pre">ppkg_002</span></code> Policy Packages</p></li>
+<li><p>The relative <code class="docutils literal notranslate"><span class="pre">policyid</span></code> is given by the <code class="docutils literal notranslate"><span class="pre">mkey</span></code> attribute</p></li>
+<li><p>It is <code class="docutils literal notranslate"><span class="pre">110</span></code> in the <code class="docutils literal notranslate"><span class="pre">ppkg_001</span></code> Policy Package and <code class="docutils literal notranslate"><span class="pre">3</span></code> in the
+<code class="docutils literal notranslate"><span class="pre">ppkg_002</span></code> Policy Package</p></li>
+<li><p>It means that next firewall policy that will get created in the
+<code class="docutils literal notranslate"><span class="pre">ppkg_001</span></code> and <code class="docutils literal notranslate"><span class="pre">ppkg_002</span></code> Policy Packages will be <code class="docutils literal notranslate"><span class="pre">111</span></code> and
+<code class="docutils literal notranslate"><span class="pre">4</span></code> respectively</p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="policies">
 <h2><span class="section-number">9.5. </span>Policies<a class="headerlink" href="#policies" title="Link to this heading">#</a></h2>
@@ -2880,8 +2985,8 @@ package <code class="docutils literal notranslate"><span class="pre">pp.003</spa
 <p>To insert a new firewall policy after the firewall policy with <code class="docutils literal notranslate"><span class="pre">policyid</span></code>
 <code class="docutils literal notranslate"><span class="pre">13</span></code> in the <code class="docutils literal notranslate"><span class="pre">pp.001</span></code> Policy Package from the <code class="docutils literal notranslate"><span class="pre">DEMO</span></code> ADOM:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-10" name="sd-tab-set-5" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-10">
+<input checked="checked" id="sd-tab-item-12" name="sd-tab-set-6" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-12">
 REQUEST</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
@@ -2923,8 +3028,8 @@ REQUEST</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-11" name="sd-tab-set-5" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-11">
+<input id="sd-tab-item-13" name="sd-tab-set-6" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-13">
 RESPONSE</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
@@ -2961,8 +3066,8 @@ firewall policy</p></li>
 <p>To insert a new firewall policy before the firewall policy with <code class="docutils literal notranslate"><span class="pre">policyid</span></code>
 <code class="docutils literal notranslate"><span class="pre">3</span></code> in the <code class="docutils literal notranslate"><span class="pre">pp.001</span></code> Policy Package from the <code class="docutils literal notranslate"><span class="pre">DEMO</span></code> ADOM:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-12" name="sd-tab-set-6" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-12">
+<input checked="checked" id="sd-tab-item-14" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-14">
 REQUEST</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
@@ -3009,8 +3114,8 @@ REQUEST</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-13" name="sd-tab-set-6" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-13">
+<input id="sd-tab-item-15" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-15">
 REQUEST</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
@@ -4793,8 +4898,8 @@ firewall address from the <code class="docutils literal notranslate"><span class
 its <code class="docutils literal notranslate"><span class="pre">root</span></code> VDOM.</p>
 <p>You also have to specify the <code class="docutils literal notranslate"><span class="pre">preview</span></code> flag.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-14" name="sd-tab-set-7" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-14">
+<input checked="checked" id="sd-tab-item-16" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-16">
 REQUEST</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
@@ -4824,8 +4929,8 @@ REQUEST</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-15" name="sd-tab-set-7" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-15">
+<input id="sd-tab-item-17" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-17">
 RESPONSE</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
@@ -4854,8 +4959,8 @@ RESPONSE</label><div class="sd-tab-content docutils">
 FortiManager will manage to collect the preview information generated via
 previous step.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-16" name="sd-tab-set-8" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-16">
+<input checked="checked" id="sd-tab-item-18" name="sd-tab-set-9" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-18">
 REQUEST</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
@@ -4873,8 +4978,8 @@ REQUEST</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-17" name="sd-tab-set-8" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-17">
+<input id="sd-tab-item-19" name="sd-tab-set-9" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-19">
 RESPONSE</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -4899,8 +5004,8 @@ RESPONSE</label><div class="sd-tab-content docutils">
 <li><p>Finally, you can obtain the preview report</p></li>
 </ol>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-18" name="sd-tab-set-9" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-18">
+<input checked="checked" id="sd-tab-item-20" name="sd-tab-set-10" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-20">
 REQUEST</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
@@ -4919,8 +5024,8 @@ REQUEST</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-19" name="sd-tab-set-9" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-19">
+<input id="sd-tab-item-21" name="sd-tab-set-10" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-21">
 RESPONSE</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -5139,8 +5244,8 @@ end
 </li>
 <li><p>Trigger partial install</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-20" name="sd-tab-set-10" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-20">
+<input checked="checked" id="sd-tab-item-22" name="sd-tab-set-11" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-22">
 REQUEST</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
@@ -5183,8 +5288,8 @@ firewall address</p></li>
 </ul>
 </div>
 </div>
-<input id="sd-tab-item-21" name="sd-tab-set-10" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-21">
+<input id="sd-tab-item-23" name="sd-tab-set-11" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-23">
 RESPONSE</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
@@ -5265,8 +5370,8 @@ to <code class="docutils literal notranslate"><span class="pre">10.0.1.0/24</spa
 </li>
 <li><p>Trigger partial install</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-22" name="sd-tab-set-11" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-22">
+<input checked="checked" id="sd-tab-item-24" name="sd-tab-set-12" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-24">
 REQUEST</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
@@ -5306,8 +5411,8 @@ updated firewall policy</p></li>
 </ul>
 </div>
 </div>
-<input id="sd-tab-item-23" name="sd-tab-set-11" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-23">
+<input id="sd-tab-item-25" name="sd-tab-set-12" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-25">
 RESPONSE</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
@@ -5430,7 +5535,7 @@ end
 </li>
 <li><p>This is the resulting new firewall policy:</p>
 <a class=""
-               data-lightbox="group-a824576c-ad5e-4223-813a-9249622d78f3"
+               data-lightbox="group-56d9562c-62c3-4f88-9026-653df525ba66"
                href="_images/image_0011.png"
                title=""
                data-title=""
@@ -5447,8 +5552,8 @@ to <code class="docutils literal notranslate"><span class="pre">10.0.1.0/24</spa
 </li>
 <li><p>Trigger partial install</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-24" name="sd-tab-set-12" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-24">
+<input checked="checked" id="sd-tab-item-26" name="sd-tab-set-13" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-26">
 REQUEST</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
@@ -5487,8 +5592,8 @@ REQUEST</label><div class="sd-tab-content docutils">
 </ul>
 </div>
 </div>
-<input id="sd-tab-item-25" name="sd-tab-set-12" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-25">
+<input id="sd-tab-item-27" name="sd-tab-set-13" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-27">
 RESPONSE</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
@@ -5586,7 +5691,7 @@ install finished
 new and updated objects, at the correct location</p>
 <p>This is same firewall policy seen from FortiGate GUI:</p>
 <a class=""
-               data-lightbox="group-37767edd-1eed-4339-8190-6462aaa8b0e9"
+               data-lightbox="group-427c876a-3d44-4e74-bab4-2648c4c04cc7"
                href="_images/image_002.png"
                title=""
                data-title=""
@@ -5616,8 +5721,8 @@ to <code class="docutils literal notranslate"><span class="pre">10.0.1.0/24</spa
 </li>
 <li><p>Trigger partial install</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-26" name="sd-tab-set-13" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-26">
+<input checked="checked" id="sd-tab-item-28" name="sd-tab-set-14" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-28">
 REQUEST</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
@@ -5657,8 +5762,8 @@ firewall policy</p></li>
 </ul>
 </div>
 </div>
-<input id="sd-tab-item-27" name="sd-tab-set-13" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-27">
+<input id="sd-tab-item-29" name="sd-tab-set-14" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-29">
 RESPONSE</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
@@ -5734,8 +5839,8 @@ to <code class="docutils literal notranslate"><span class="pre">10.0.1.0/24</spa
 </li>
 <li><p>Trigger partial install</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-28" name="sd-tab-set-14" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-28">
+<input checked="checked" id="sd-tab-item-30" name="sd-tab-set-15" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-30">
 REQUEST</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
@@ -5773,8 +5878,8 @@ REQUEST</label><div class="sd-tab-content docutils">
 policy</p>
 </div>
 </div>
-<input id="sd-tab-item-29" name="sd-tab-set-14" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-29">
+<input id="sd-tab-item-31" name="sd-tab-set-15" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-31">
 RESPONSE</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
@@ -5856,8 +5961,8 @@ to <code class="docutils literal notranslate"><span class="pre">10.0.1.0/24</spa
 <ul>
 <li><p>Step #1: Trigger the partial install with the preview option</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-30" name="sd-tab-set-15" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-30">
+<input checked="checked" id="sd-tab-item-32" name="sd-tab-set-16" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-32">
 REQUEST</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
@@ -5898,8 +6003,8 @@ just required to preview</p></li>
 </ul>
 </div>
 </div>
-<input id="sd-tab-item-31" name="sd-tab-set-15" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-31">
+<input id="sd-tab-item-33" name="sd-tab-set-16" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-33">
 RESPONSE</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
@@ -5923,8 +6028,8 @@ RESPONSE</label><div class="sd-tab-content docutils">
 </li>
 <li><p>Step #2: Once the returned task is completed, get the preview result</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-32" name="sd-tab-set-16" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-32">
+<input checked="checked" id="sd-tab-item-34" name="sd-tab-set-17" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-34">
 REQUEST</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
@@ -5943,8 +6048,8 @@ REQUEST</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-33" name="sd-tab-set-16" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-33">
+<input id="sd-tab-item-35" name="sd-tab-set-17" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-35">
 RESPONSE</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
@@ -6579,6 +6684,7 @@ whatever the policy package it was assigned to:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-create-a-policy-package-block">9.4.1. How to create a Policy Package block?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-policy-in-a-policy-package-block">9.4.2. How to add a policy in a policy package block?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-insert-a-policy-block-in-a-policy-package">9.4.3. How to insert a policy block in a policy package?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-where-used-a-policy-block">9.4.4. How to where used a Policy Block?</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#policies">9.5. Policies</a><ul class="visible nav section-nav flex-column">
