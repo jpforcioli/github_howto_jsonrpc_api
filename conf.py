@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'FortiManager JSON API'
+project = 'How to FortiManager API?'
 copyright = '2024, Jean-Pierre Forcioli'
 author = 'NOC/SOC Fortinet CSE Team'
 
