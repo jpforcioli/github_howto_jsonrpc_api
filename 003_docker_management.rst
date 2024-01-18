@@ -4,7 +4,7 @@ Docker Management
 How to get docker status?
 -------------------------
 
-Caught in Mantis #0600260.
+Caught in #0600260.
 
 **REQUEST:**
 
