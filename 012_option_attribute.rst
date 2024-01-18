@@ -181,7 +181,9 @@ the ``syntax`` option when the firewall address table/object from any ADOMs:
 			},
 		[...]
 
-Since FMG 6.2.4/6.4.0 (Mantis #0603847, this option is also returning the table limit with attribute ``alimit``. For instance, from the above output, we can see it is possible to have up to 400000 firewall addresses.
+Since FMG 6.2.4/6.4.0 (#0603847, this option is also returning the table limit
+with attribute ``alimit``. For instance, from the above output, we can see it
+is possible to have up to 400000 firewall addresses.
 
 How to get default values?
 ++++++++++++++++++++++++++
@@ -502,12 +504,12 @@ For instance, you can obtain the checksum of the object database for the
 
 Not very clear.
 
-Few explanation in Mantis #0305108.
+Few explanation in #0305108.
 
 *datasrc*
 ---------
 
-Caught in Mantis #0622870.
+Caught in #0622870.
 
 This option is generally used to get list of possible object types and the
 objects themselves that could be used within an object you want to create or
@@ -614,7 +616,7 @@ just ask to get its ``datasrc``:
 *chksum*
 --------
 
-Caught in Mantis #0254612.
+Caught in #0254612.
 
 This option is used to retrieve the version or checksum of a specific table.
 

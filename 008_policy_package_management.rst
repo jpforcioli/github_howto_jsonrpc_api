@@ -202,8 +202,7 @@ We create policy package ``pp.003`` in adom ``DEMO``:
      ]
    }
 
-Starting with FMG 7.0.1 (Mantis #708471), the response will also contain the
-``pkg oid``.
+Starting with FMG 7.0.1 (#708471), the response will also contain the ``pkg oid``.
 
 How to assign a device to a Policy Package?
 +++++++++++++++++++++++++++++++++++++++++++
@@ -450,7 +449,7 @@ only.
 	    ]
 	  }
 
-Mantis #02764941 is stating that when the scope is just having a ``name`` attribute, it is considered a device group.
+#02764941 is stating that when the scope is just having a ``name`` attribute, it is considered a device group.
 
 If device group ``france`` is in a device group ``emea``, we can just use the full path in the ``name`` attribute:
 
@@ -1430,7 +1429,7 @@ package folder ``emea/spain`` in ADOM ``TEST``:
 How to figure out whether interface pair view are supported by a type of policies?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0601320.
+Caught in #0601320.
 
 For instance, if one of the policy is having source or destination
 interface set to ``any``, section view mode isn't supported.
@@ -1653,7 +1652,7 @@ Once the task is completed, you can proceed with step 2.
    It determines the nature of the output produced in the preview report: CLI
    based when it is ``none`` and obviously JSON based when it is ``json``.
 
-   There is a bug (Mantis #0713778) where using:
+   There is a bug (#0713778) where using:
    
    .. code-block::
 
@@ -1791,7 +1790,7 @@ Once the task is completed, you can proceed with step 3.
 How to get the Policy Package hitcount?
 +++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0673650 (and applicable to FMG 6.4.7+ and FMG 7.0.3+).
+Caught in #0673650 (and applicable to FMG 6.4.7+ and FMG 7.0.3+).
 
 *Hitcount* refers to the set of attributes linked to a firewall policy that 
 maintain several utilization information like the Last Used, First Use, Packets, Bytes, etc. as shown below:
@@ -1959,7 +1958,7 @@ For instance, to get the policy hitcount for firewall policies in the
 
 Starting with FortiManager 7.4.1, the Last Used (i.e, ``_last_hit`` attribute) 
 can be maintained as it is in FortiManager side, even if it gets reset on the
-FortiGate side (caught in Mantis #0910402).
+FortiGate side (caught in #0910402).
 
 It's configurable with the following FortiManager CLI:
 
@@ -2698,7 +2697,7 @@ _______________________________________
 Use the ``object position`` attribute
 ______________________________________
 
-Caught in Mantis #0306003.
+Caught in #0306003.
 
 To insert a new firewall policy after the firewall policy with ``policyid`` 
 ``13`` in the ``pp.001`` Policy Package from the ``DEMO`` ADOM:
@@ -3060,7 +3059,7 @@ title named ``Project #001``.
 How to insert a section title for a consolidated policy?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0597802.
+Caught in #0597802.
 
 **REQUEST:**
 
@@ -3550,7 +3549,7 @@ In that case, when fortimanger returns a policy's detail, and when there is no
 *Installation Targets* situation or the *None* one?
 
 This is the trick.
-We have to check for the presence of the ``obj flags`` attribute (see Mantis #0305108).
+We have to check for the presence of the ``obj flags`` attribute (see #0305108).
 
 When we're in the default *Installation Targets* case, this is what we should
 get:

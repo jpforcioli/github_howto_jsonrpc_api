@@ -134,8 +134,7 @@ From now on, the returned ``session`` value should be used in all subsequent
 Token-based authentication
 ++++++++++++++++++++++++++
 
-Starting with FortiManager 7.2.2 (Mantis #0809732), it is now possible to use a
-pre-defined API key or token.
+Starting with FortiManager 7.2.2 (#0809732), it is now possible to use a pre-defined API key or token.
 
 The API key (or token) is obtained by:
 
@@ -708,46 +707,50 @@ The ``params`` attribute of the JSON RPC payload is a list.
 It is possible to pass multiple elements in this list as shown in the next
 sessions.
 
-Same JSON RPC url
+Same JSON RPC URL
 +++++++++++++++++
 
-For instance from Mantis #0767076, we can use the following request to get
-the webfilter profiles of multiple ADOMs:
+Seen in #0767076.
 
-**REQUEST**:
+You can use the following request to get the webfilter profiles of multiple
+ADOMs:
 
-.. code-block:: json
+.. tab-set:: 
+  
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1,
-     "method": "get",
-     "params": [
-       {
-         "url": "pm/config/adom/adom_001/obj/webfilter/profile",
-         "fields": [
-           "name"
-         ],
-         "loadsub": 0
-       },
-       {
-         "url": "pm/config/adom/adom_002/obj/webfilter/profile",
-         "fields": [
-           "name"
-         ],
-         "loadsub": 0
-       },
-       {
-         "url": "pm/config/adom/adom_003/obj/webfilter/profile",
-         "fields": [
-           "name"
-         ],
-         "loadsub": 0
-       }
-     ],
-     "session": "{{session_id}}"
-   }
-
-Different JSON RPC url
+     .. code-block:: json
+     
+        {
+          "id": 1,
+          "method": "get",
+          "params": [
+            {
+              "url": "pm/config/adom/adom_001/obj/webfilter/profile",
+              "fields": [
+                "name"
+              ],
+              "loadsub": 0
+            },
+            {
+              "url": "pm/config/adom/adom_002/obj/webfilter/profile",
+              "fields": [
+                "name"
+              ],
+              "loadsub": 0
+            },
+            {
+              "url": "pm/config/adom/adom_003/obj/webfilter/profile",
+              "fields": [
+                "name"
+              ],
+              "loadsub": 0
+            }
+          ],
+          "session": "{{session_id}}"
+        }
+     
+Different JSON RPC URL
 ++++++++++++++++++++++
 
 To get the list of managed devices and FortiGate ADOMs:
@@ -1277,7 +1280,7 @@ This section is to explain some important mechanism related to tables, their obj
 How to unset a specific attribute?
 ++++++++++++++++++++++++++++++++++
 
-The capability to unset a specific attribute was added in FMG 5.4.1 (Mantis #0365372).
+The capability to unset a specific attribute was added in FMG 5.4.1 (#0365372).
 
 To unset the IP address the ``dmz`` interface from managed device ``TEST-FGT``:
 
@@ -1321,7 +1324,7 @@ To unset the IP address the ``dmz`` interface from managed device ``TEST-FGT``:
    }
 
 Sometimes, it seems just enough to *unset* an attribute by ommiting it when
-doing the ``set`` (captured in Mantis #891341).
+doing the ``set`` (captured in #891341).
 
 In following example, to unset the ``secondary`` attribute of a System Template,
 you just need to set the System Template without mentioning the attribute:

@@ -33,7 +33,7 @@ Hence the corresponding |fmg_api| url will be:
 How to get the tablesize (maximum values) information?
 ------------------------------------------------------
 
-Caught in Mantis 0380729.
+Caught in #0380729.
 
 This is to get the tablesize (or maximum values) for multiple components of FortiManager.
 

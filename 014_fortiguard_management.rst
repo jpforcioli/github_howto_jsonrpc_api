@@ -834,7 +834,7 @@ The FortiManager JSON API request/response:
 How to export/import FortiGuard objects?
 ----------------------------------------
 
-Caught in Mantis #077802 (FortiManager 7.2.2).
+Caught in #077802 (FortiManager 7.2.2).
 
 
 Those export/import operations have been implemented to allow an air-gapped FortiManager to receive FortiGuard Updates in an automated manner.
@@ -1086,7 +1086,7 @@ Object?`):
 How to export/import Entitlement?
 ---------------------------------
 
-Caught in Mantis #0778029.
+Caught in #0778029.
 
 TBD.
 
@@ -1143,7 +1143,7 @@ To download FortiOS firmware 7.0.1 build 0489 for the FortiGate-100F platform:
 External Resources
 ------------------
 
-Starting with FortiManager 7.4.1 (Mantis #0934664), it is possible to manage
+Starting with FortiManager 7.4.1 (#0934664), it is possible to manage
 external resource files hosted by FortiManager.
 
 How to add a new external resource file?

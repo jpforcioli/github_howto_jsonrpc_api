@@ -6,7 +6,7 @@ REST API
 
 Yes you can use REST API!
 
-Caught in Mantis #0872278.
+Caught in #0872278.
 
 Most |fmg_api| requests have a REST counterpart.
 
@@ -149,7 +149,7 @@ Get list of ADOMs
 Using FortiManager GUI
 ----------------------
 
-Caught in Mantis #273964.
+Caught in #273964.
 
 It seems to be available only with the new FortiManager flat UI (FortiManager 5.0.0).
 
@@ -177,7 +177,7 @@ For instance, to get firewall policy ID 2 from Policy Package ``default`` locate
 Using *requests* python module
 ------------------------------
 
-Caught in Mantis #600130.
+Caught in #600130.
 
 The advantage is that we don't have to:
 
@@ -215,7 +215,7 @@ The advantage is that we don't have to:
 Using *ServiceProxy* python module
 ----------------------------------
 
-Caught in Mantis #602275.
+Caught in #602275.
 
 1. Enter the FortiManager shell and launch python
    

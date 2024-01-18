@@ -323,14 +323,14 @@ How to run a script against a FortiManager template?
 
 For instance a system template, a fortiswitch template, etc.?
 
-Caught in Mantis #0209576.
+Caught in #0209576.
 
 Run a script against a SD-WAN template
 ++++++++++++++++++++++++++++++++++++++
 
 .. note:: 
   
-   - Caught in Mantis #0209576.
+   - Caught in #0209576.
 
 #. Create a CLI Script (target = ADOM Database)
 

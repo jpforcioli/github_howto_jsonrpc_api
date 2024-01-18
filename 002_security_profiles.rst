@@ -412,7 +412,7 @@ in our Web Filter Profile ``web_filter_profile_001`` located in ADOM ``root``:
 How to get the webfilter categories?
 ____________________________________
 
-Caught in Mantis #0227646.
+Caught in #0227646.
 
 We can use the ``datasrc`` option as shown below:
 
@@ -674,7 +674,7 @@ For instance:
 How to get the list of Application Categories?
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0278734.
+Caught in #0278734.
 
 We can use either of those URLs:
 
@@ -745,7 +745,7 @@ Devices, the output will be null.
 	    ]
 	  }
 
-Please also consider the new information from Mantis #0370036.
+Please also consider the new information from #0370036.
 
 .. code::
 
@@ -771,7 +771,7 @@ DLP Profile Management
 How to add a new DLP File Pattern?
 ++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #594984.
+Caught in #594984.
 
 .. tab-set::
   

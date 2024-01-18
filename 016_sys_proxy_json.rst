@@ -6,7 +6,7 @@ Security
 
 - TODO
 
-   - Find the mantis...
+   - Find the Internal Reference...
    
      The resource need to be in file
      ``/usr/local/webclient/config/fos_json_api.json`` or
@@ -222,7 +222,7 @@ attribute:
 With this in mind, we can now easily convert any FOS REST API calls to a FOS
 REST API call encapsulated in FMG JSON RPC API.
 
-Recentely (Mantis #0689396) FMG exposed a new attribute:
+Recentely (#0689396) FMG exposed a new attribute:
 
 * The ``timeout`` option to avoid waiting the complete timeout:
 

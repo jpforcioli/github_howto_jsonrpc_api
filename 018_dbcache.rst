@@ -4,7 +4,7 @@ Using ``dbcache``
 How to get the list of interfaces for a specific device?
 --------------------------------------------------------
 
-Caught in Mantis #455627.
+Caught in #455627.
 
 **REQUEST:**
 
@@ -45,7 +45,7 @@ Caught in Mantis #455627.
 How to get the SD-WAN configuration for all devices?
 ----------------------------------------------------
 
-Caught in Mantis #0467643 and #0574392
+Caught in #0467643 and #0574392.
 
 **REQUEST:**
 

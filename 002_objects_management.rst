@@ -1641,7 +1641,7 @@ We're getting the member elements of our ``grp_003`` address group:
 How to get the full ADOM database objects syntax?
 -------------------------------------------------
 
-Caught in Mantis #0607071.
+Caught in #0607071.
 
 **REQUEST:**
 
@@ -1895,7 +1895,7 @@ service object:
 How to get the list of the Internet Service objects?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0622870.
+Caught in #0622870.
 
 **REQUEST:**
 
@@ -1944,8 +1944,8 @@ and
 		  ]
 		}
 
-But according to the above mentioned Mantis, it is better to consider
-the method explained in section [TODO] (datasrc).
+But according to the #0622870, it is better to consider the method explained in
+section [TODO] (datasrc).
 
 Operations on objects
 ---------------------
@@ -2069,7 +2069,7 @@ To get firewall address groups containing member ``host_001``:
 How to filter firewall address according to their IPs?
 ______________________________________________________
 
-Caught in Mantis #0363496.
+Caught in #0363496.
 
 - To retrieve firewall address included in a specific IP address
 
@@ -2395,7 +2395,7 @@ _____________________________________________
 Idea is to retrieve the list of objects more recent that a specific
 timestamp.
 
-Caught in Mantis #0539624.
+Caught in #0539624.
 
 .. tab-set:: 
   
@@ -3686,7 +3686,7 @@ First you need to *where used* the antivirus profile ``av-profile-001`` object:
 How to find and replace objects in firewall policy?
 ___________________________________________________
 
-Caught in Mantis #0636807.
+Caught in #0636807.
 
 **REQUEST:**
 
@@ -3821,7 +3821,7 @@ ______________________________
 How to check for a duplicate object name?
 +++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #893698
+Caught in #893698
 
 To check whether an object name is already used, you can use the option
 ``duplicate check``:

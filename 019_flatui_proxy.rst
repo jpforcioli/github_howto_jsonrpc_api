@@ -345,7 +345,7 @@ TODO
 How to get session information?
 -------------------------------
 
-Caught in Mantis #0643655.
+Caught in #0643655.
 
 **REQUEST:**
 
@@ -385,10 +385,11 @@ Caught in Mantis #0643655.
 
 How to get the installation log for a given revision?
 -----------------------------------------------------
+
 TODO
 
-Some URLs caught in Mantis #0659916:
-------------------------------------
+Some URLs caught in #0659916
+----------------------------
 
 .. code-block::
 

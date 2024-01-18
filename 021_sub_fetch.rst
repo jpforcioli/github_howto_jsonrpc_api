@@ -191,7 +191,7 @@ This |fmg_api| request is:
 How to hide a specific sub-table?
 ---------------------------------
 
-Caught in Mantis #0378630.
+Caught in #0378630.
 
 ``"loadsub": 0`` will hide all sub-tables.
 What if we need to hide specific sub-tables?

@@ -333,7 +333,7 @@ See section :ref:`*devinfo*`.
 How to manage the ADOM and Device Display Options?
 --------------------------------------------------
 
-Starting with FMG 7.0.1 (Mantis #0716016), FMG JSON RPC API introduces new endpoints.
+Starting with FMG 7.0.1 (#0716016), FMG JSON RPC API introduces new endpoints.
 
 The only important item of interest is that the prefix URL also changed from:
 
@@ -1509,7 +1509,7 @@ use the following ``clone`` operation:
 How to upgrade an ADOM?
 -----------------------
 
-From Mantis #0764328
+From #0764328.
 
 **REQUEST:**
 

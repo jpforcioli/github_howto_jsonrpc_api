@@ -4,18 +4,20 @@ Meta-fields Management
 TODO
 ----
 
-From Mantis #0450247, the list of |fmg_api| URLs for meta-fields management:
+Seen in #0450247.
 
-a. ``pm/config/_meta_fields/firewall/address``
-b. ``pm/config/_meta_fields/firewall/addrgrp``
-c. ``pm/config/_meta_fields/firewall/service/custom``
-d. ``pm/config/_meta_fields/firewall/service/group``
-e. ``pm/config/_meta_fields/firewall/policy``
-f. ``pm/config/_meta_fields/firewall/central-snat-map``
-g. ``dvmdb/_meta_fields/device``
-h. ``dvmdb/_meta_fields/group``
-i. ``dvmdb/_meta_fields/adom``
-j. ``cli/global/_meta_fields/system/admin/user``
+The list of |fmg_api| URLs for meta-fields management:
+
+- ``pm/config/_meta_fields/firewall/address``
+- ``pm/config/_meta_fields/firewall/addrgrp``
+- ``pm/config/_meta_fields/firewall/service/custom``
+- ``pm/config/_meta_fields/firewall/service/group``
+- ``pm/config/_meta_fields/firewall/policy``
+- ``pm/config/_meta_fields/firewall/central-snat-map``
+- ``dvmdb/_meta_fields/device``
+- ``dvmdb/_meta_fields/group``
+- ``dvmdb/_meta_fields/adom``
+- ``cli/global/_meta_fields/system/admin/user``
 
 Firewall Policy meta-fields
 ---------------------------

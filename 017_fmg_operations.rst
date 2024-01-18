@@ -304,7 +304,7 @@ Session Management
 How to get user session information?
 ____________________________________
 
-Has been added in FMG 6.4.1 with Mantis #0632548.
+Has been added in FMG 6.4.1 with #0632548.
 
 .. tab-set::
   
@@ -535,7 +535,7 @@ How to lock a firewall policy?
 How to lock a device?
 +++++++++++++++++++++
 
-Device lock has been introduced in Mantis #0544637 (FMG 6.0.5/6.2.0).
+Device lock has been introduced in #0544637 (FMG 6.0.5/6.2.0).
 
 We lock device ``demo_005_device_100`` in ADOM ``DEMO_005``.
 
@@ -1606,7 +1606,7 @@ This feature has been introduced in FortiManager 7.4.0 (Internal Reference:
 How to keep the session idle?
 -----------------------------
 
-Caught in Mantis #0643153.
+Caught in #0643153.
 
 Sometimes, we need to perform some actions but we don't want to reset the
 idle_timeout timer. This is making sense from the GUI where some background
@@ -1656,7 +1656,7 @@ For instance:
 How to get details about the connected API user?
 ------------------------------------------------
 
-Caught in Mantis #0632548.
+Caught in #0632548.
 
 **REQUEST**: 
 
@@ -1706,7 +1706,7 @@ Operating the FortiManager system
 How to reboot FortiManager?
 +++++++++++++++++++++++++++
 
-Caught in Mantis #621300.
+Caught in #621300.
 
 .. tabs::
 
@@ -1841,7 +1841,7 @@ FMG/FAZ restore could be triggered with this one:
 Using |fmg_api| to restore FortiManager
 _______________________________________
 
-Caught in Mantis #0746154.x
+Caught in #0746154.
 
 It is possible to restore a FortiManager system using the |fmg_api| form,
 provided the FortiManager backup file has been uploaded in an external FTP, SCP

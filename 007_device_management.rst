@@ -354,7 +354,7 @@ RPC API ``url``:
 
 by touching the ``latidude`` and ``longitude`` attributes.
 
-According to Mantis #0708937, FMG is saving the method used to change the coordinates in the attribute ``location_from`` from device's metadata.
+According to #0708937, FMG is saving the method used to change the coordinates in the attribute ``location_from`` from device's metadata.
 
 This attribute could have value like ``gui``, ``json``, ``config`` or
 ``unset``. It helps FMG to figure out how to set the coordinates. It helps to
@@ -453,7 +453,7 @@ configuration before their on-boarding in FMG:
 How to get the full device database syntax?
 -------------------------------------------
 
-Caught in Mantis #0607071.
+Caught in #0607071.
 
 **REQUEST:**
 
@@ -1246,17 +1246,13 @@ How to create a model device and add in in a group with a single request?
 How to enable the auto-link flag on a model device?
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Starting with FMG 7.0.3, this is no longer required. From Mantis #605560: *add
+Starting with FMG 7.0.3, this is no longer required. From #605560: *add
 linked_to_model to the default flag when adding model device to match GUI
 behavior when add from GUI*.
 
 For older FMG version:
 
-Considering Mantis #0605560, it
-is not possible to create a model device and set the auto-link
-flag with a single API call. We need two separate API calls. Below is
-the one to enable the auto-link on an already created  model device
-platform (ie. the first API call):
+Considering #0605560, it is not possible to create a model device and set the auto-link flag with a single API call. We need two separate API calls. Below is the one to enable the auto-link on an already created  model device platform (ie. the first API call):
 
 **REQUEST**:
 
@@ -1403,7 +1399,7 @@ Hence, to enable the VDOM mode on a Model Device, better to review section
 How to enable the ``need_reset`` flag on a model device? 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This flag has been introduced in FortiManager 7.0/5/7.2.2 with Mantis #773777.
+This flag has been introduced in FortiManager 7.0/5/7.2.2 with #773777.
 
 It instructs FortiManager to factory reset the device being on-boarded.
 
@@ -1757,7 +1753,7 @@ To get all Model Devices, you have to use the bitwise AND operator in the ``filt
 How to get the ADOM a device belongs to?
 ----------------------------------------
 
-Caught in Mantis #0414003.
+Caught in #0414003.
 
 There are two methods:
 
@@ -1829,7 +1825,7 @@ URL. We also have to use two additional attributes: ``fields`` and
 	       ]
              }
 
-Since Mantis #0462768, we can use just the option ``extra info`` as shown below:
+Since #0462768, we can use just the option ``extra info`` as shown below:
 
 **REQUEST:**
 
@@ -2068,8 +2064,7 @@ TODO
 
 TODO
 
-For the moment, it is not supported.
-We have Mantis #0617705.
+For the moment, it is not supported (#0617705).
 
 How to create a device group?
 +++++++++++++++++++++++++++++
@@ -3298,7 +3293,7 @@ We set the details of the second auto-generated system interface for the
 How to delete a VDOM?
 +++++++++++++++++++++
 
-Caught in Mantis #0617663.
+Caught in #0617663.
 
 **REQUEST**:
 
@@ -3567,9 +3562,9 @@ To set the Device VDOM metafields for VDOM ``cust_002`` from device
 How to get default settings for a particular type of device?
 ------------------------------------------------------------
 
-Caught in Mantis #0613941 & #0953698.
+Caught in #0613941 & #0953698.
 
-Few FMG JSON API URL are given in the Mantis:
+Few FMG JSON API URLs are given:
 
 .. code-block::
 
@@ -3629,7 +3624,7 @@ Another simpler example to get the ``system.global`` default settings:
 How to get the policy package status when getting list of devices?
 ------------------------------------------------------------------
 
-Starting with Mantis #462768 it is now possible to get the policy package status directly when getting the list of devices with FMG API URL ``/dvmdb/device[/<device>]``.
+Starting with #462768 it is now possible to get the policy package status directly when getting the list of devices with FMG API URL ``/dvmdb/device[/<device>]``.
 
 We just have to pass the two options ``extra info`` and ``assignment info`` as shown below:
 
@@ -3854,7 +3849,7 @@ Device revisions
 How to get the list of device revisions for a particular device?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0392486.
+Caught in #0392486.
 
 To get the list of device revision for the ``hub2`` managed device:
 
@@ -3941,7 +3936,7 @@ To get the list of device revision for the ``hub2`` managed device:
 How to get a specific device revision for a particular device?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0392486.
+Caught in #0392486.
 
 To get the revision number ``8`` for the ``hub2`` managed devices:
 
@@ -3999,7 +3994,7 @@ To get the revision number ``8`` for the ``hub2`` managed devices:
 How to get the current device database configuration for a particular device?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0392486.
+Caught in #0392486.
 
 **REQUEST:**
 
@@ -4044,7 +4039,7 @@ Caught in Mantis #0392486.
 How to revert to a specific device revision?
 ++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0563988.
+Caught in #0563988.
 
 We want to revert device ``foobar`` to its device revision #2:
 
@@ -4089,7 +4084,7 @@ We want to revert device ``foobar`` to its device revision #2:
 How to import a device revision?
 ++++++++++++++++++++++++++++++++
 
-Starting with FMG 7.0.3 (Mantis #0451960), it is possible to import a device
+Starting with FMG 7.0.3 (#0451960), it is possible to import a device
 revision. 
 
 **REQUEST:**
@@ -4291,7 +4286,7 @@ We retrieve from device ``apac-12-fgt-01`` to ``apac-24-fgt-01`` in ADOM
 Firmware upgrade
 ----------------
 
-Most of the information are available in Mantis #0375414.
+Most of the information are available in #0375414.
 
 To debug the upgrade firmware operations we can use following
 FortiManager CLI commands:
@@ -4444,10 +4439,11 @@ With the introduction of the new Firmware Template (starting with FortiManager
 How to get list of available firmware for a specific platform?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0645390: The |fmg_api| URL ``/um/image/version/list`` will
-return all the available versions of firmwares for a certain platform. It
-includes all the version in our FortiGuard servers (FDS servers) and all the
-versions from firmware files imported by FortiManager administrators.
+Caught in #0645390.
+
+The |fmg_api| URL ``/um/image/version/list`` will return all the available versions of firmwares for a certain platform. 
+
+It includes all the version in our FortiGuard servers (FDS servers) and all the versions from firmware files imported by FortiManager administrators.
 
 **REQUEST:**
 
@@ -4523,10 +4519,11 @@ versions from firmware files imported by FortiManager administrators.
 How to get list of firmwares available on FortiManager drive?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0645390: |fmg_api| URL `/um/image/list`, will return all the
-firmware files present on FortiManager local disk. Those firmware files could
-be the ones imported by the FortiManager administrators and or the ones
-downloaded from FortiGuard servers (FDS servers).
+Caught in #0645390.
+
+|fmg_api| URL `/um/image/list`, will return all the firmware files present on FortiManager local disk. 
+
+Those firmware files could be the ones imported by the FortiManager administrators and or the ones downloaded from FortiGuard servers (FDS servers).
 
 **REQUEST:**
 
@@ -5036,7 +5033,7 @@ following FMG JSON RPC API call:
 How to show certificate details?
 ++++++++++++++++++++++++++++++++
 
-It's a new feature from FMG 6.2.4/6.4.1 (Mantis #629877).
+It's a new feature from FMG 6.2.4/6.4.1 (#629877).
 
 Now we can get either in the normal or global ADOM the following
 certificate types:
@@ -5074,7 +5071,7 @@ Device Monitoring
 Generate an IP Pool Mapping
 +++++++++++++++++++++++++++
 
-Caught in Mantis #0604135.
+Caught in #0604135.
 
 To get the IP Pool Mapping for some devices:
 
@@ -5396,7 +5393,7 @@ Once the task is completed, you can proceed with step 2.
 How to get the platform_id, the platform_name and the ostype from a Serial Number?
 ----------------------------------------------------------------------------------
 
-Caught in Mantis 0310534 & 0380729.
+Caught in #0310534 & #0380729.
 
 The get the ``platform_id``, the ``platform_name`` and the ``ostype``
 information for serial number ``FGT60F0000000001``:
@@ -5536,7 +5533,7 @@ information for a FortiADC-200D with serial number prefix ``FAD2HD``:
 How to get all supported devices?
 ---------------------------------
 
-Caught in Mantis 0310534 & 0380729.
+Caught in #0310534 & #0380729.
 
 To get all supported FortiADC models (along with their ``platform_id``,
 ``platform_name`` and ``ostype``):
@@ -5788,17 +5785,18 @@ It is composed of two FortiGate-60E devices: ``FGT60E0000005021`` and
       
          - Prior to FMG 6.4.11, 7.0.7 and 7.2.2, naming convention used in the
            ``ha_slave`` list was flexible:
-           For instance, FortiManager GUI was using the following naming convention:
+           For instance, FortiManager GUI was using the following naming
+           convention:
            if main device name was ``foo`` then the cluster member names in the
            ``ha_slave`` list were ``foo-0`` (for the primary) and ``foo-1``,
            ``foo-2``, etc. for the secondary members.
-         - Starting with FMG 6.4.11, 7.0.7 and 7.2.2 (see Mantis #0800191), device
-           name has to be equal to the primary member name in the ``ha_slave`` list
-           (see the above example)
+         - Starting with FMG 6.4.11, 7.0.7 and 7.2.2 (see #0800191), device
+           name has to be equal to the primary member name in the ``ha_slave``
+           list (see the above example)
       .. warning::
 
-         - The ``prio`` attribute in the ``ha_slave`` list has to be set with an integer!   
-      
+         - The ``prio`` attribute in the ``ha_slave`` list has to be set With
+           an integer!         
 
    .. tab-item:: RESPONSE
 
@@ -7366,7 +7364,7 @@ Device Blueprint
 How to get the list of metadata used by a Device Blueprint?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0947563.
+Caught in #0947563.
 
 .. tab-set::
 

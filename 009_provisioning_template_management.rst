@@ -126,7 +126,7 @@ Getting all templates from ADOM `adom_72_003`:
 How to get the controller status?
 ---------------------------------
 
-Caught in multiple Mantis:
+Caught in:
 
 - #454555
 - #469731
@@ -162,7 +162,7 @@ Firmware Template
 Introduction
 ++++++++++++
 
-Caught in Mantis #711918.
+Caught in #711918.
 
 Main FMG JSON RPC API ``url`` for firmware template seems to be:
 
@@ -173,7 +173,7 @@ Main FMG JSON RPC API ``url`` for firmware template seems to be:
 How to assign a device?
 +++++++++++++++++++++++
 
-Caught in Mantis #964977.
+Caught in #964977.
 
 .. tab-set:: 
 
@@ -639,10 +639,9 @@ We want the list of system templates in ADOM ``DEMO_009``.
 How to clone a system template?
 +++++++++++++++++++++++++++++++
 
-Caught in Mantis #0624808.
+Caught in #0624808.
 
-According to this above Mantis, it is possible to clone the following
-kind of templates:
+It is possible to clone the following kind of templates:
 
 - ``pm/devprof/adom/<adom>/<template>``
 - ``pm/ecprof/adom/<adom>/<template>``
@@ -881,7 +880,7 @@ where ``widget`` could be the following paths:
 The legacy widget are the ones without override or per-device mapping support.
 
 Here we're showing how to modify the syslog severity for System Template
-``default`` in ADOM ``root`` (caught in Mantis #0593505):
+``default`` in ADOM ``root`` (caught in #0593505):
 
 **REQUEST:**
 
@@ -1390,7 +1389,7 @@ We change the FortiAnalyzer IP address and Serial Number set in System Template
 How to import a system template?
 ++++++++++++++++++++++++++++++++
 
-Caught in Mantis #069924.
+Caught in #069924.
 
 TBC.
 
@@ -1623,7 +1622,7 @@ adding a Model AP.
 How to delete a FortiAP profile?
 ++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0600899.
+Caught in #0600899.
 
 When in Central FortiAP Management mode, we can use this trick where we delete what is matching the filter:
 
@@ -1648,7 +1647,7 @@ When in Central FortiAP Management mode, we can use this trick where we delete w
 How to get list of managed FortiAPs from ADOM DB?
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0610724.
+Caught in #0610724.
 
 To get the managed FortiAPs for managed device ``cluster_site_2`` and its
 ``root`` VDOM from ADOM ``production``:
@@ -2485,7 +2484,7 @@ How to assign a FortiSwitch template to a FortiSwitch?
 How to import a FortiSwitch Template from a managed device?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #612834.
+Caught in #612834.
 
 **REQUEST:**
 
@@ -4285,7 +4284,7 @@ page:
 TODO: SD-WAN Monitoring - Table View
 ++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0598650.
+Caught in #0598650.
 
 **REQUEST:**
 
@@ -5142,7 +5141,7 @@ TO BE DOUBLE-CHECKED...
    How to update/set a static route template?
    ++++++++++++++++++++++++++++++++++++++++++
 
-   Caught in Mantis #0690603.
+   Caught in #0690603.
    
    **REQUEST:**
 
@@ -5608,7 +5607,7 @@ How to create a template group?
 How to assign a template group to a device group?
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in Mantis #0751625.
+Caught in #0751625.
 
 **REQUEST:**
 
