@@ -2445,6 +2445,62 @@ Package into the ``sites_HBLK`` Policy Block from the ``dc_emea`` ADOM:
 
          - The FortiManager returns the ``policyid`` of the cloned firewall
            policy: ``1071741830``
+
+         - The cloned firewall policy is located at the end of the firewall 
+           policy list
+
+Move operation
+______________
+
+To cloned firewall policy has been placed at the end of the firewall policy list in the Policy Block.
+
+To move the cloned firewall policy with ``policyid`` ``1071741830`` above the firewall policy with ``policyid`` ``1071741828``, both being in the ``sites_HBLK`` Policy Block of the ``dc_emea`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "move",
+           "params": [
+             {
+               "option": "before",
+               "target": "1071741828",
+               "url": "pm/config/adom/dc_emea/pblock/sites_HBLK/firewall/policy/1071741830"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "policyid": 1071741830
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "pm/config/adom/dc_emea/pblock/sites_HBLK/firewall/policy/1071741830"
+             }
+           ]
+         }
+
+      .. note::
+
+         - FortiManager confirms the success of the ``move`` operation by
+           returning the ``policyid`` of the moved firewall policy 
+           (``1071741830``)
+
          
 Policies
 --------
