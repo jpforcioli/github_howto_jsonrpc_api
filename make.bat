@@ -8,7 +8,13 @@ if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
 set SOURCEDIR=.
-set BUILDDIR=_build
+
+if "%READTHEDOCS_OUTPUT" == "" (
+	set BUILDDIR=%READTHEDOCS_OUTPUT/html
+) else (
+    set BUILDDIR=_build
+)
+
 
 if "%1" == "" goto help
 
