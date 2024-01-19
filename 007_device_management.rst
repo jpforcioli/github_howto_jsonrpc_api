@@ -1,6 +1,60 @@
 Device Management
 =================
 
+How to rename a managed device?
+-------------------------------
+
+.. warning::
+
+   This section is describing how to change the device name used by 
+   FortiManager.
+
+   Changing the device's hostname is a different topic (even though most of the
+   time, for ease of operations, both are identical).
+
+To rename the ``fgt-741-001`` device to ``fgt-742-001`` in the ``dc_emea`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "update",
+           "params": [
+             {
+               "data": {
+                 "name": "fgt-742-001"
+               },
+               "url": "/dvmdb/adom/dc_emea/device/fgt-741-001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "fgt-742-001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/dc_emea/device/fgt-741-001"
+             }
+           ]
+         }
+
+
 Device status
 -------------
 
