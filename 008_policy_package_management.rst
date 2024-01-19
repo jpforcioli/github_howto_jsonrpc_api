@@ -3564,22 +3564,36 @@ the next step.
 Well, we don't have a match, but at least we can see how the policy lookup was
 done by fortimanager :-)
 
-Operating the firewall policy "Install On" column
+Operating the firewall policy *Install On* column
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
 This is about replacing the default *Installation Targets* value of the
-*Install On* column by one or more managed devices.
+*Install On* column by one or more managed devices or device groups.
 
-It's when the Policy Package is shared with multiple managed devices (i.e.
-*Installation Targets* of the policy package is having multiple managed devices
-or device groups) and some of it policies need to be applied to a subset of
-them.
+.. thumbnail:: images/image_006.png
 
-In the following screenshot, policy package ``pp_branches`` is shared with some
-managed devices:
+To operate the *Install On* column of a firewall policy, recent FortiManager versions offer the following capabilities:
 
-.. image:: images/install_on_001.png
-   :width: 1000
+- You can click the *pen* icon to select specific devices or device groups; you 
+  can only select devices or device groups being part of the Policy Package's 
+  installation targets
+
+- You can right-click and select:
+
+  - *Edit Install On*, and in this case, you can select specific devices or
+    device groups; you can only select devices or device groups being part of 
+    the Policy Package's installation targets
+
+  - *Set Install On To Default*, and in this case all, devices and devices group
+    set in the Policy Package's installation targets will be considered
+
+  - *Set Install On To None*, and in this case, this firewall policy won't   
+    used at all
+
+In the following screenshot, the ``pp_branches`` Policy Package is shared with 
+some managed devices:
+
+.. thumbnail:: images/install_on_001.png
 
 - Policy ID 1 will be installed on all managed devices specified in the
   installation targets list of this policy package (i.e. set to *Default*).
@@ -3589,98 +3603,102 @@ managed devices:
 
 - Policy ID 2 will be installed on device ``branch11`` only.
 
-Let's have a look at how to get the existing values for the *Install On*
-column. 
-We just have to pass the option ``scope member``: 
- 
-**REQUEST:**
 
-.. code-block:: json
+How to get the existing values for the *Install On* column?
+___________________________________________________________
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "get",
-     "params": [
-       {
-         "fields": [
-           "policyid"
-         ],
-         "loadsub": 0,
-         "option": [
-           "scope member"
-         ],
-         "range": [
-           0,
-           3
-         ],
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy"
-       }
-     ],
-     "session": "lUByNtb1XCn91cwdoGG0Oj44dgc1e706e0rK+NrmiiOJVmKQlPQkEgpGrZCmGiFPr8PNK22X6N0BCqF/YvkJQV8OQsYz0Ggt",
-     "verbose": 1
-   }
+You just have to pass the option ``scope member``.
 
-**RESPONSE:**
+To get the first three firewall policies from the ``pp_branches`` Policy Package
+in the ``demo`` ADOM:
 
-.. code-block:: json
+.. tab-set:: 
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": [
-           {
-             "obj seq": 1,
-             "policyid": 1
-           },
-           {
-             "obj flags": 16,
-             "obj seq": 2,
-             "policyid": 2
-           },
-           {
-             "obj flags": 16,
-             "obj seq": 3,
-             "policyid": 3,
-             "scope member": [
-               {
-                 "name": "branch11",
-                 "vdom": "root"
-               }
-             ]
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy"
-       }
-     ]
-   }
+   .. tab-item:: REQUEST
 
-This output shows the fortimanager behavior when it returns policies with
-default, none or specific managed devices set in the column *Install None*. 
+      .. code-block:: json
 
-- There's no ``scope member`` showing up when the policy is having its cell
-  *Install On* set to *Default* (i.e. when it shows up with *Installation
-  Targets*).
+         {
+           "id": 1,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "policyid"
+               ],
+               "loadsub": 0,
+               "option": [
+                 "scope member"
+               ],
+               "range": [
+                 0,
+                 3
+               ],
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-- There is also no ``scope member`` showing up when the policy is having its
-  cell *Install On* set to *None* (i.e. when it shows up as empty).
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json      
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": [
+                 {
+                   "obj seq": 1,
+                   "policyid": 1
+                 },
+                 {
+                   "obj flags": 16,
+                   "obj seq": 2,
+                   "policyid": 2
+                 },
+                 {
+                   "obj flags": 16,
+                   "obj seq": 3,
+                   "policyid": 3,
+                   "scope member": [
+                     {
+                       "name": "branch11",
+                       "vdom": "root"
+                     }
+                   ]
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy"
+             }
+           ]
+         }
+      
+This output shows the fortimanager behavior when it returns firewall policies
+with *Default*, *None* or specific managed devices set in the column *Install 
+On*.
+
+- There's no ``scope member`` returned when the firewall policy is having its
+  cell *Install On* set with *Default*
+
+- There is also no ``scope member`` returned when the firewall policy is having
+  its cell *Install On* set to *None*
 
 - There is a ``scope member`` showing up when the policy is having its cell
   *Install On* set with managed devices and/or device groups.
 
-In that case, when fortimanger returns a policy's detail, and when there is no
-``scope member`` returned, how can we figure out whether we're in the default
-*Installation Targets* situation or the *None* one?
+In that case, when Fortimanger returns a firewal policy's detail, and when
+there is no ``scope member`` returned, how can we figure out whether we're in
+the default *Installation Targets* situation or the *None* one?
 
-This is the trick.
-We have to check for the presence of the ``obj flags`` attribute (see #0305108).
+With FortiManager 6, you have to check for the presence of the ``obj flags`` attribute (see #0305108).
 
-When we're in the default *Installation Targets* case, this is what we should
+When you're in the default *Installation Targets* case, this is what you should
 get:
 
 .. code-block::
@@ -3690,9 +3708,11 @@ get:
    [...]
 
 Here the ``"obj flags": 16`` confirms there's a ``scope member`` but since, it
-is using its default value, it is not showing up. Hence, it's normal to not
-have any ``scope member`` returned.
-We could interprete the above output as:
+is using its default value, it is not showing up. 
+
+Hence, it's normal to not have any ``scope member`` returned.
+
+You could interprete the above output as:
 
 .. code-block::
 
@@ -3700,7 +3720,7 @@ We could interprete the above output as:
    "scope member": null,
    [...]
 
-When we're in the *None* case, this is what we should get:
+When you're in the *None* case, this is what we should get:
 
 .. code-block::
 
@@ -3708,9 +3728,11 @@ When we're in the *None* case, this is what we should get:
    [...]
 
 Here the absence of ``"obj flags": 16`` clearly indicates there is no ``scope
-member`` at all. Hence, it's normal to not have the ``scope member`` nor the
-``obj flags``. 
-We could interprete the above output as:
+member`` at all. 
+
+Hence, it's normal to not have the ``scope member`` nor the ``obj flags``. 
+
+You could interprete the above output as:
 
 .. code-block::
 
@@ -3720,85 +3742,132 @@ We could interprete the above output as:
 
 The empty array clearly shows the ``scope member`` is empty (i.e. *None*).
 
-When we're having managed devices or device groups in the *Instal On* column,
-we should get an output similar to the following:
+You will have to wait for FortiManager 7.0.11/7.2.5/7.4.3 (#0953665) to get a
+more meaningful response.
 
-**RESPONSE:**
+However, it is only working for when you get a specific policy ID:
 
-.. code-block::
+.. tab-set:: 
+   
+   .. tab-item:: REQUEST
 
-   [...]
-   "obj flags: 16,
-   "scope member": [
-     {
-       "name": "branch11",
-       "vdom": "root"
-     }, 
-   ], 
-   [...]
-                      
-Here ``"obj flags": 16`` confirms the presence of a ``scope member``.
-And the presence of the ``scope member`` with some manage devices and/or device
-groups clearly indicates the scope of this policy which is this time not the
-default. 
+      .. code-block:: json
 
-Now that we know how to get the *Install On* value for any situations, let's
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "policyid"
+               ],
+               "loadsub": 0,
+               "option": [
+                 "scope member"
+               ],
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/1"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+.. tab-set:: 
+   
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+        
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "Policy_001",
+                 "obj flags": 16,
+                 "obj seq": 1,
+                 "oid": 6082,
+                 "policyid": 1,
+                 "scope member": []
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/1"
+             }
+           ]
+         }
+
+      .. note::
+
+         - In this case, firewall policy with ``policyid`` ``1`` is having its
+           *Install On* column set to *None*
+
+         - Now an explicit empty ``scope member`` list is returned
+
+How to change the *Install On* column?
+______________________________________
+
+Now that you know how to get the *Install On* value for any situations, let's
 see how to change it. 
-Here we want ``branch11`` to be the unique target for policy ID 2. 
 
-With a fortimanager version lesser than 6.0, the very first time (i.e. when we
+You want the ``branch11`` managed device to be the unique target for policy ID 2.
+
+With FortiManager version lesser than 6.0, the very first time (i.e. when we
 replace the default *Installation Targets* value by a specific managed device),
 we have to use method ``set`` or ``update``: 
 
-**REQUEST:**
+.. tab-set:: 
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1, 
-     "jsonrpc": "1.0", 
-     "method": "set", 
-     "params": [
-       {
-         "data": [
-           {
-             "name": "branch11", 
-             "vdom": "root"
-           }
-         ], 
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
-       }
-     ], 
-     "session": "fAKr4h5KhAdRNNP5lp9V+8xMNnOIKk9DAUVBTKW6/Qf7WX5KnJCdMnUSbhBla+ckk0WeZZP34tOKOHMh6V2g7w==", 
-     "verbose": 1
-   }
+      .. code-block:: json
+      
+         {
+           "id": 1, 
+           "method": "set", 
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "branch11", 
+                   "vdom": "root"
+                 }
+               ], 
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
+             }
+           ], 
+           "session": "{{session}}"
+         }
 
-As you can see, we just need to append the ``scope member`` at the end of the
-main URL to operate the *Install On* column.
+      .. note::
 
-**RESPONSE:**
+         - You just need to append the ``scope member`` at the end of the
+           main URL to operate the *Install On* column
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 1, 
-     "result": [
-       {
-         "status": {
-           "code": 0, 
-           "message": "OK"
-         }, 
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
-       }
-     ]
-   }
+      .. code-block:: json
 
-We can check our policy package with the fortimanager GUI, policy seq #2 (i.e.
-``policyid`` 2) should have ``branch11`` showing up its cell *Install On*.
+         {
+           "id": 1, 
+           "result": [
+             {
+               "status": {
+                 "code": 0, 
+                 "message": "OK"
+               }, 
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
+             }
+           ]
+         }
 
-But if we keep using ``update`` or ``set`` to add additional managed devices,
+You can review your Policy Package with the FortiManager GUI, policy seq #2 (i.e. ``policyid`` 2) should have ``branch11`` showing up in the *Install On* column.
+
+But if you keep using ``update`` or ``set`` to add additional managed devices,
 we're going to overwrite the existing list of managed devices placed in the
-``scope member`` table.   
+``scope member`` table.
 
 So once default *Installation Target* value is replaced by one or multiple
 managed devices (i.e. the ``scope member`` table has been created) we can keep
@@ -3807,276 +3876,274 @@ method ``add``.
 
 Starting with FMG 6.0.0, it is possible to use method ``add`` even when the
 *Install On* column is having its default value (i.e. *Installation Targets*) -
-(internal reference: #0482431). 
+(#0482431).
 
-Now that we have added ``branch11`` in the *Install Column* of policy ID 2,
-let's see how to add additional devices. 
+Now that you have added ``branch11`` in the *Install Column* of policy ID 2, add additional devices. 
 
-We just need to use the ``add`` method with the devices (one or multiple) we
-want to add:  
+You need to use the ``add`` method with the devices (one or multiple) you want to add:
 
-**REQUEST:**
+.. tab-set:: 
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": 1, 
-     "jsonrpc": "1.0", 
-     "method": "add", 
-     "params": [
-       {
-         "data": [
-           {
-             "name": "branch12", 
-             "vdom": "root"
-           }
-         ], 
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
-       }
-     ], 
-     "session": "LhTWrRr+cCWInJIyLjDWZCc4mskjLwHYu08+NBj/zZiWVGMzMZGfoXC58gLhYt+29ER7pzXADrKwN3tjMcVYs5eT7d/0wW88", 
-     "verbose": 1
-   }
+         {
+           "id": 1, 
+           "method": "add", 
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "branch12", 
+                   "vdom": "root"
+                 }
+               ], 
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
+             }
+           ], 
+           "session": "{{session}}"
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": 1, 
-     "result": [
-       {
-         "status": {
-           "code": 0, 
-           "message": "OK"
-         }, 
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
-       }
-     ]
-   }
+         {
+           "id": 1, 
+           "result": [
+             {
+               "status": {
+                 "code": 0, 
+                 "message": "OK"
+               }, 
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
+             }
+           ]
+         }
 
 Policy seq #2 is now having ``branch11`` and ``branch12`` under column *Install
 On*.  
 
 It's possible to add multiple firewalls:
 
-*8REQUEST:**
+.. tab-set:: 
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1, 
-     "jsonrpc": "1.0", 
-     "method": "add", 
-     "params": [
-       {
-         "data": [
-           {
-             "name": "branch13", 
-             "vdom": "root"
-           }, 
-           {
-             "name": "branch14", 
-             "vdom": "root"
-           }
-         ], 
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
-       }
-     ], 
-     "session": "W02P5XGWnufHLJ0zfmfZVDKprCKvCC4t3u2zu1bIeRhpXTGho2wneHk3pGxIe/8RMLK7YNYPgN2c/kCttNTHC4gIvqPLwMj9", 
-     "verbose": 1
-   }
+      .. code-block:: json
 
-**RESPONSE:**
+         {
+           "id": 1, 
+           "method": "add", 
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "branch13", 
+                   "vdom": "root"
+                 }, 
+                 {
+                   "name": "branch14", 
+                   "vdom": "root"
+                 }
+               ], 
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
+             }
+           ], 
+           "session": "{{session}}"
+         }
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 1, 
-     "result": [
-       {
-         "status": {
-           "code": 0, 
-           "message": "OK"
-         }, 
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
-       }
-     ]
-   }
+      .. code-block:: json
+
+         {
+           "id": 1, 
+           "result": [
+             {
+               "status": {
+                 "code": 0, 
+                 "message": "OK"
+               }, 
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
+             }
+           ]
+         }
 
 Policy seq #2 is now having ``branch11``, ``branch12``, ``branch13`` and
 ``branch14`` under column *Install On*.
 
-To delete a firewall from the ``scope member`` table, we can use the method
+To delete a firewall from the ``scope member`` table, you can use the method
 ``delete``: 
 
-**REQUEST:**
+.. tab-set:: 
 
-.. code-block: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1, 
-     "jsonrpc": "1.0", 
-     "method": "delete", 
-     "params": [
-       {
-         "data": [
-           {
-             "name": "branch14", 
-             "vdom": "root"
-           }
-         ], 
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
-       }
-     ], 
-     "session": "OzO+MU6hTsABhLgZBzSMRZMFFCPQq/mIeO/cetPZ4VcVdGMFlgXV/1Liay7asbjvqUZ10jObLk6iXZ+T4pjLCJUgilSPxHPd", 
-     "verbose": 1
-   }
+      .. code-block: json
 
-**RESPONSE:**
+         {
+           "id": 1, 
+           "method": "delete", 
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "branch14", 
+                   "vdom": "root"
+                 }
+               ], 
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
+             }
+           ], 
+           "session": "{{session}}"
+         }
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 1, 
-     "result": [
-       {
-         "status": {
-           "code": 0, 
-           "message": "OK"
-         }, 
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
-       }
-     ]
-   }
+      .. code-block: json
 
+         {
+           "id": 1, 
+           "result": [
+             {
+               "status": {
+                 "code": 0, 
+                 "message": "OK"
+               }, 
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
+             }
+           ]
+         }
+      
 Policy seq #2 is now having ``branch11``, ``branch12`` and ``branch13`` under
 column *Install On*.
 
 It's possible to delete multiple firewalls:
 
-**REQUEST:**
+.. tab-set:: 
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1, 
-     "jsonrpc": "1.0", 
-     "method": "delete", 
-     "params": [
-       {
-         "data": [
-           {
-             "name": "branch12", 
-             "vdom": "root"
-           }, 
-           {
-             "name": "branch13", 
-             "vdom": "root"
-           }
-         ], 
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
-       }
-     ], 
-     "session": "pWyw+cBGRjGmHC2jlYFvruOreVEoEi1z4Nlgl2EAgJaSOALq/BvishKNAlYz8ToXW/2fNE/g6d+a6+T7ycqwarXSOmpPkPeb", 
-     "verbose": 1
-   }
+      .. code-block:: json
 
-**RESPONSE:**
+         {
+           "id": 1, 
+           "method": "delete", 
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "branch12", 
+                   "vdom": "root"
+                 }, 
+                 {
+                   "name": "branch13", 
+                   "vdom": "root"
+                 }
+               ], 
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
+             }
+           ], 
+           "session": "{{session}}"
+         }
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 1, 
-     "result": [
-       {
-         "status": {
-           "code": 0, 
-           "message": "OK"
-         }, 
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
-       }
-     ]
-   }
+      .. code-block:: json
+
+         {
+           "id": 1, 
+           "result": [
+             {
+               "status": {
+                 "code": 0, 
+                 "message": "OK"
+               }, 
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
+             }
+           ]
+         }
 
 Policy seq #2 is now having ``branch11`` under column *Install On*.
 
-To set *Install On* to *None* (i.e. to empty the cell), we can use method
+To set *Install On* to *None* (i.e. to empty the cell), you can use the method
 ``set`` with an empty list: 
 
-**REQUEST:**
+.. tab-set:: 
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1, 
-     "jsonrpc": "1.0", 
-     "method": "set", 
-     "params": [
-       {
-         "data": [
-           {}
-         ], 
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
-       }
-     ], 
-     "session": "MTr3dpjifGekuhBGwTq7/Sx6/ORG9ZfI9G6BfQY1WPWyeJ9Av54AnNYO4IDSCaHwZb68WerKRyGSA/aJnow+Rg==", 
-     "verbose": 1
-   }
+      .. code-block:: json
+      
+         {
+           "id": 1, 
+           "method": "set", 
+           "params": [
+             {
+               "data": [
+                 {}
+               ], 
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
+             }
+           ], 
+           "session": "{{session}}"
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": 1, 
-     "result": [
-       {
-         "status": {
-           "code": 0, 
-           "message": "OK"
-         }, 
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
-       }
-     ]
-   }
+         {
+           "id": 1, 
+           "result": [
+             {
+               "status": {
+                 "code": 0, 
+                 "message": "OK"
+               }, 
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
+             }
+           ]
+         }
 
-To get back the default value of *Install On* (i.e. *Installation Targets*), we
+To get back the default value of *Install On* (i.e. *Installation Targets*), you
 just need to ``unset``: 
 
-**REQUEST:**
+.. tab-set:: 
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1, 
-     "jsonrpc": "1.0", 
-     "method": "unset", 
-     "params": [
-       {
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
-       }
-     ], 
-     "session": "LiPA+1BJr23cxja91X//ZbTFiAxMVKDjrqfd3U/o+e69HXAUk/A61lRB3lD3CWwrGbJS69DdubK9Pmz+Feaf1q9IBfN5Mmkz", 
-     "verbose": 1
-   }
+      .. code-block:: json
 
-**RESPONSE:**
+         {
+           "id": 1, 
+           "method": "unset", 
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
+             }
+           ], 
+           "session": "{{session}}"
+         }
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 1, 
-     "result": [
-       {
-         "status": {
-           "code": 0, 
-           "message": "OK"
-         }, 
-         "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
-       }
-     ]
-   }
+      .. code-block:: json
+
+         {
+           "id": 1, 
+           "result": [
+             {
+               "status": {
+                 "code": 0, 
+                 "message": "OK"
+               }, 
+               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/2/scope member"
+             }
+           ]
+         }
 
 How to get the firewall policies along with used object definitions?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
