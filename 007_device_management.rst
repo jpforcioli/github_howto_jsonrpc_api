@@ -12,7 +12,7 @@ How to rename a managed device?
    Changing the device's hostname is a different topic (even though most of the
    time, for ease of operations, both are identical).
 
-You can use two |json_rpc_u|:
+You can use two endpoints:
 
 - ``/dvmdb/device/<device>``
 - ``/dvmdb/adom/<adom>/device/<device>``
