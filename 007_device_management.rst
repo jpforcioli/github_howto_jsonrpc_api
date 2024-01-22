@@ -12,6 +12,59 @@ How to rename a managed device?
    Changing the device's hostname is a different topic (even though most of the
    time, for ease of operations, both are identical).
 
+You can use two |json_rpc_u|:
+
+- ``/dvmdb/device/<device>``
+- ``/dvmdb/adom/<adom>/device/<device>``
+
+Using /dvmdb/device/<device>
+++++++++++++++++++++++++++++
+
+To rename the ``fgt-741-001`` device to ``fgt-742-001`` in the ``dc_emea`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "name": "fgt-742-001"
+               },
+               "url": "/dvmdb/device/fgt-741-001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "fgt-742-001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device/foobar"
+             }
+           ]
+         }
+
+Using /dvmdb/adom/<adom>/device/<device>
+++++++++++++++++++++++++++++++++++++++++
+
 To rename the ``fgt-741-001`` device to ``fgt-742-001`` in the ``dc_emea`` ADOM:
 
 .. tab-set:: 
@@ -33,6 +86,10 @@ To rename the ``fgt-741-001`` device to ``fgt-742-001`` in the ``dc_emea`` ADOM:
            ],
            "session": "{{session}}"
          }
+
+      .. note::
+
+         - You can also use the ``set`` method
 
    .. tab-item:: RESPONSE
 
