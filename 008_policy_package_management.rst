@@ -2137,51 +2137,51 @@ Policy Blocks
 How to create a Policy Block?
 +++++++++++++++++++++++++++++
 
-**REQUEST:**
+.. tab-set:: 
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
 
-		{
-		  "id": 1,
-		  "jsonrpc": "1.0",
-		  "method": "add",
-		  "params": [
-		    {
-		      "data": {
-		        "name": "ppb_002",
-			        "package settings": {
-			          "central-nat": "disable",
-			          "consolidated-firewall-mode": "disable",
-			          "fwpolicy-implicit-log": "disable",
-			          "fwpolicy6-implicit-log": "disable",
-			          "ngfw-mode": "profile-based"
-			        },
-			      "type": "pkg"
-		      },
-		      "url": "/pm/pblock/adom/DEMO_014/"
-		    }
-		  ],
-		  "session": "L2yCbw1c1T5O74gTgFqMlhV6UODwmingu/CagxiW1oBofqVRAsxFRqBTJvH1pC5ZNIPBVBmhjSUVx/7X6vzo8A==",
-		  "verbose": 1
-		}
-		
-**RESPONSE:**
+         {
+           "id": 1,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "name": "ppb_002",
+         	        "package settings": {
+         	          "central-nat": "disable",
+         	          "consolidated-firewall-mode": "disable",
+         	          "fwpolicy-implicit-log": "disable",
+         	          "fwpolicy6-implicit-log": "disable",
+         	          "ngfw-mode": "profile-based"
+         	        },
+         	      "type": "pkg"
+               },
+               "url": "/pm/pblock/adom/DEMO_014/"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-   {
-	   "id": 1,
-		 "result": [
-		   {
-		     "status": {
-		       "code": 0,
-		       "message": "OK"
-		     },
-		     "url": "/pm/pblock/adom/DEMO_014/"
-		   }
-		 ]
-	 }
+      .. code-block:: json         
 
+         {
+       	   "id": 1,
+       		 "result": [
+       		   {
+       		     "status": {
+       		       "code": 0,
+       		       "message": "OK"
+       		     },
+       		     "url": "/pm/pblock/adom/DEMO_014/"
+       		   }
+       		 ]
+       	 }
+       
 How to add a policy in a Policy Block?
 ++++++++++++++++++++++++++++++++++++++
 
@@ -2508,134 +2508,195 @@ Policies
 How to add a firewall policy?
 +++++++++++++++++++++++++++++
 
-**REQUEST:**
+To add a new firewall policy in the ``dut_fgt_02`` Policy Package from the ``dc_amer`` ADOM:
 
-.. code-block:: json
+.. tab-set:: 
 
-   {
-     "id": 3,
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "action": "accept",
-           "dstaddr": [
-             "host_001",
-             "host_002"
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "action": "accept",
+                 "dstaddr": [
+                   "host_001",
+                   "host_002"
+                 ],
+                 "dstintf": [
+                   "internal1",
+                   "internal2"
+                 ],
+                 "logtraffic": "all",
+                 "schedule": "always",
+                 "service": [
+                   "FTP",
+                   "HTTPS"
+                 ],
+                 "srcaddr": [
+                   "host_003",
+                   "host_004"
+                 ],
+                 "srcintf": [
+                   "internal3",
+                   "internal4"
+                 ],
+                 "status": "enable"
+               },
+               "url": "/pm/config/adom/dc_amer/pkg/dut_fgt_02/firewall/policy"
+             }
            ],
-           "dstintf": [
-             "internal1",
-             "internal2"
+           "session": "{{session}}"
+         }
+
+.. tab-set:: 
+
+   .. tab-item:: RESPONSE      
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "policyid": 2
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/dc_amer/pkg/dut_fgt_02/firewall/policy"
+             }
+           ]
+         }
+      
+      .. note::
+      
+         - FortiManager returns the ``policyid`` of the created policy.
+
+If a specific ``policyid`` is required, and provided it isn't already used, 
+then you can specify it:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+      
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "action": "accept",
+                 "dstaddr": [
+                   "host_001",
+                   "host_002"
+                 ],
+                 "dstintf": [
+                   "internal1",
+                   "internal2"
+                 ],
+                 "logtraffic": "all",
+                 "policyid": 10,
+                 "schedule": "always",
+                 "service": [
+                   "FTP",
+                   "HTTPS"
+                 ],
+                 "srcaddr": [
+                   "host_003",
+                   "host_004"
+                 ],
+                 "srcintf": [
+                   "internal3",
+                   "internal4"
+                 ],
+                 "status": "enable"
+               },
+               "url": "/pm/config/adom/dc_amer/pkg/dut_fgt_02/firewall/policy"
+             }
            ],
-           "logtraffic": "all",
-           "schedule": "always",
-           "service": [
-             "FTP",
-             "HTTPS"
+           "session": "{{session}}"
+         }
+ 
+   .. tab-item:: RESPONSE
+      
+      .. code-block:: json 
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "policyid": 10
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/dc_amer/pkg/dut_fgt_02/firewall/policy"
+             }
+           ]
+         }
+
+How to delete a firewall policy?
+++++++++++++++++++++++++++++++++
+
+TBD.
+
+How to delete multiple firewall policies?
++++++++++++++++++++++++++++++++++++++++++
+
+The below example shows how to delete multiple firewall policies by combining in
+a single API call the ``delete`` and ``filter`` operation:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "pm/config/adom/dc_amer/pkg/dut_fgt_2/firewall/policy",
+               "confirm": 1,
+               "filter": [
+                 "policyid",
+                 "in",
+                 1,2,3,
+               ]
+             }
            ],
-           "srcaddr": [
-             "host_003",
-             "host_004"
-           ],
-           "srcintf": [
-             "internal3",
-             "internal4"
-           ],
-           "status": "enable"
-         },
-         "url": "/pm/config/adom/dc_amer/pkg/dut_fgt_02/firewall/policy"
-       }
-     ],
-     "session": "Q0XfVV3dc2iqsU6nj/1dVX7vRxW+w8V9Jj6iCMCV9bLQxDJVv2Gug1MWcnuzMVX4X+Y1o7nDYAoFh5mZ1xHiXw=="
-   }
+           "session": "{{session}}"
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "policyid": 2
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/dc_amer/pkg/dut_fgt_02/firewall/policy"
-       }
-     ]
-   }
-
-.. note::
-
-   - FortiManager returns the ``policyid`` of the created policy.
-   - If a specific ``policyid`` is required, and provided it isn't already used,
-     you can specify it in the JSON RPC body:
-
-     **REQUEST:**
-
-     .. code-block:: json
-
-        {
-          "id": 3,
-          "method": "add",
-          "params": [
-            {
-              "data": {
-                "action": "accept",
-                "dstaddr": [
-                  "host_001",
-                  "host_002"
-                ],
-                "dstintf": [
-                  "internal1",
-                  "internal2"
-                ],
-                "logtraffic": "all",
-                "policyid": 10,
-                "schedule": "always",
-                "service": [
-                  "FTP",
-                  "HTTPS"
-                ],
-                "srcaddr": [
-                  "host_003",
-                  "host_004"
-                ],
-                "srcintf": [
-                  "internal3",
-                  "internal4"
-                ],
-                "status": "enable"
-              },
-              "url": "/pm/config/adom/dc_amer/pkg/dut_fgt_02/firewall/policy"
-            }
-          ],
-          "session": "XmqiDybPpUMVcdtJaL1RgmRx0YCPLI6UAVdUBXUzF+GUlKMDza31nydZoJCUnkjFLUEfWpgoh4vZ5qZfljUZHw=="
-        }
-
-     **RESPONSE:**
-
-     .. code-block:: json
-
-        {
-          "id": 3,
-          "result": [
-            {
-              "data": {
-                "policyid": 10
-              },
-              "status": {
-                "code": 0,
-                "message": "OK"
-              },
-              "url": "/pm/config/adom/dc_amer/pkg/dut_fgt_02/firewall/policy"
-            }
-          ]
-        }
+         {
+           "result": [
+             {
+               "data": null,
+               "id": 3,
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/dc_amer/pkg/dut_fgt_02/firewall/policy"
+             }
+           ]
+         }
 
 How to update a firewall policy?
 ++++++++++++++++++++++++++++++++
@@ -3974,8 +4035,8 @@ It's possible to add multiple firewalls:
 Policy seq #2 is now having ``branch11``, ``branch12``, ``branch13`` and
 ``branch14`` under column *Install On*.
 
-To delete a firewall from the ``scope member`` table, you can use the method
-``delete``: 
+To delete a specific target from the ``scope member`` table, you can use the 
+method ``delete``:
 
 .. tab-set:: 
 
