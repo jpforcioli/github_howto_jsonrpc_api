@@ -1476,27 +1476,27 @@ interface set to ``any``, section view mode isn't supported.
 Returned attribute ``interface_pair_view`` is ``1`` meaning we can use
 the interface pair view mode in the mentioned policy package.
 
-Other URL are possibles:
+Other FortiManager API endpoints are possible:
 
-.. code-block::
+.. code-block:: text
 
    /pm/config/adom/TEST/pkg/<pkg>/_query/interface_pair_view/firewall/proxy-policy
    /pm/config/adom/TEST/pkg/<pkg>/_query/interface_pair_view/firewall/security-policy
 
-  .. note::
+.. note::
 
-     For policies in policy package block, while the URL is:
+   For policies in Policy Block, while the endpoint is:
 
-     .. code-block::
+   .. code-block:: text
 
-	/pm/config/adom/<adom>/pblock/<pblock>/firewall/policy
+      /pm/config/adom/<adom>/pblock/<pblock>/firewall/policy
 
-     in order to get the interface pair view feasability, we need to
-     use this URL:
+   then you still need to use this endpoint when you want to get the interface
+   pair view feasability:
 
-     .. code-block::
+   .. code-block:: text
 
-	/pm/config/adom/<adom>/pkg/Policy Blocks/<pblock>/_query/interface_pair_view/firewall/policy
+      /pm/config/adom/<adom>/pkg/Policy Blocks/<pblock>/_query/interface_pair_view/firewall/policy
 
 How to clone a Policy Package?
 ++++++++++++++++++++++++++++++
@@ -2131,11 +2131,11 @@ following request:
      ]
    }
 
-Policy Package Blocks
----------------------
+Policy Blocks
+-------------
 
-How to create a Policy Package block?
-+++++++++++++++++++++++++++++++++++++
+How to create a Policy Block?
++++++++++++++++++++++++++++++
 
 **REQUEST:**
 
@@ -2182,8 +2182,8 @@ How to create a Policy Package block?
 		 ]
 	 }
 
-How to add a policy in a policy package block?
-++++++++++++++++++++++++++++++++++++++++++++++
+How to add a policy in a Policy Block?
+++++++++++++++++++++++++++++++++++++++
 
 **REQUEST:**
 
