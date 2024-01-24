@@ -1868,229 +1868,151 @@ Caught in #0414003.
 
 There are two methods:
 
-We can append the *object master* to the ``/dvmdb/device/<device>/``
-URL. We also have to use two additional attributes: ``fields`` and
-``filter`` in an unusual way (especially for the ``filter`` attribute): 
+#. To combine ``object master`` with ``filter``
+#. Use the ``extra info`` option
 
-**REQUEST:**
+How to get the ADOM a device belongs to using object master with filter?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. code:: json
+You can append the *object master* to the ``/dvmdb/device/<device>/``
+endpoint.
 
-	  {
-	    "id": 1,
-	    "jsonrpc": "1.0",
-	    "method": "get",
-	    "params": [
-	      {
-	        "fields": [
-		  "name"
-		],
-		"filter": [
-		  "adom"
-		],
-		"url": "/dvmdb/device/device-001/object master"
-	      }
-	    ],
-	    "session": "eMLfrDKdLf9qP6Iwg+hBg2bjAELl5KhYQGp2Z4o6gL96Q4SGVspka6/8FcXB53SEtv6wpIFt78yPZjpgieJDhg==",
-	    "verbose": 1
-	  }
+But in this case, you also have to use the ``filter`` in an unusual way as shown below.
 
-**RESPONSE**:
+To get the ADOM details the ``fgt-742-001`` belongs to:
 
-.. code:: json
+.. tab-set:: 
 
-	     {
-	       "id": 1,
-	       "result": [
-	         {
-		   "data": [
-		     {
-		       "desc": "",
-		       "flags": "no_vpn_console",
-		       "log_db_retention_hours": 1440,
-		       "log_disk_quota": 0,
-		       "log_disk_quota_alert_thres": 90,
-		       "log_disk_quota_split_ratio": 70,
-		       "log_file_retention_hours": 8760,
-		       "logview_customize": null,
-		       "mig_mr": 0,
-		       "mig_os_ver": "0.0",
-		       "mode": "gms",
-		       "mr": 2,
-		       "name": "ADOM_001",
-		       "obj_customize": null,
-		       "oid": 477,
-		       "os_ver": "6.0",
-		       "restricted_prds": "fos",
-		       "state": 1,
-		       "tab_status": null,
-		       "uuid": "371c53ba-3c4e-51ea-9211-7dd0ccc62c87"
-		     }
-		   ],
-		   "status": {
-		     "code": 0,
-		     "message": "OK"
-		   },
-		   "url": "/dvmdb/device/device-001/object master"
-		 }
-	       ]
+   .. tab-item:: REQUEST
+
+      .. code:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "filter": [
+                 "adom"
+               ],
+               "url": "/dvmdb/device/fgt-742-001/object master"
              }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-Since #0462768, we can use just the option ``extra info`` as shown below:
+   .. tab-item:: RESPONSE
 
-**REQUEST:**
+      .. code-block:: json
+         :emphasize-lines: 21
 
-.. code:: json
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "create_time": 1700207435,
+                   "desc": "",
+                   "flags": "no_vpn_console",
+                   "lock_override": 0,
+                   "log_db_retention_hours": 1440,
+                   "log_disk_quota": 0,
+                   "log_disk_quota_alert_thres": 90,
+                   "log_disk_quota_split_ratio": 70,
+                   "log_file_retention_hours": 8760,
+                   "logview_customize": "",
+                   "mig_mr": 0,
+                   "mig_os_ver": "0.0",
+                   "mode": "gms",
+                   "mr": 4,
+                   "name": "dc_emea",
+                   "obj_customize": "",
+                   "oid": 165,
+                   "os_ver": "7.0",
+                   "restricted_prds": "fos",
+                   "state": 1,
+                   "tab_status": "",
+                   "tz": 2,
+                   "uuid": "210ecfa4-baed-51ee-a551-2efcb4f9a788",
+                   "workspace_mode": 0
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device/fgt-742-001/object master"
+             }
+           ]
+         }
 
-	  {
-	    "id": 1,
-	    "jsonrpc": "1.0",
-	    "method": "get",
-	    "params": [
-	      {
-	        "option": [
-		  "extra info"
-		],
-		"url": "/dvmdb/device/device-001"
-	      }
-	    ],
-	    "session": "7PTu/pN0cv8x+7QbUKLBFZJgAb63mrGDYO3gExp5AghxlL3b9WALF7+RitaIgwAMu957Dpa3U2ycWRLFFOjWjw==",
-	    "verbose": 1
-	  }
+      .. note::
 
-**RESPONSE:**
+         - The ``fgt-742-001`` device belongs to the ``dc_emea`` ADOM
 
-.. code:: json
+How to get the ADOM a device belongs to using the extra info option?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-   {
-     "id": 1,
-     "result": [
-       {
-	 "data": {
-	   "adm_pass": [
-	     "ENC",
-	     "tABPYYTIfeufSpOMlY709+8fQH0XDfQuH1E6nvo/u33jVETdn0eV/9s0q3VnouEeSteg76g9B1YDO1HnMrTBZ91DwTvzHXkFskwmjjRuUA4iapC5yTM+8S1nSaOGzUkFr15/RhS/jLXYw0aNcvfWFdw4RukuNHnLLE9G7c5MxvGxE253"
-	   ],
-	   "adm_usr": "admin",
-	   "app_ver": "",
-	   "av_ver": "",
-	   "beta": -1,
-	   "branch_pt": 1008,
-	   "build": 6051,
-	   "checksum": "",
-	   "conf_status": "unknown",
-	   "conn_mode": "passive",
-	   "conn_status": "UNKNOWN",
-	   "db_status": "unknown",
-	   "desc": "",
-	   "dev_status": "unknown",
-	   "extra info": {
-	     "adom": "ADOM_001"
-	   },
-	   "fap_cnt": 0,
-	   "faz.full_act": 0,
-	   "faz.perm": 15,
-	   "faz.quota": 0,
-	   "faz.used": 0,
-	   "fex_cnt": 0,
-	   "flags": [
-	     "is_model",
-	     "linked_to_model"
-	   ],
-	   "foslic_cpu": 0,
-	   "foslic_dr_site": "disable",
-	   "foslic_inst_time": 0,
-	   "foslic_last_sync": 0,
-	   "foslic_ram": 0,
-	   "foslic_type": "temporary",
-	   "foslic_utm": null,
-	   "fsw_cnt": 0,
-	   "ha_group_id": 0,
-	   "ha_group_name": "",
-	   "ha_mode": "standalone",
-	   "ha_slave": null,
-	   "hdisk_size": 0,
-	   "hostname": "FGT60F0000001001",
-	   "hw_rev_major": 0,
-	   "hw_rev_minor": 0,
-	   "ip": "0.0.0.0",
-	   "ips_ext": 0,
-	   "ips_ver": "",
-	   "last_checked": 0,
-	   "last_resync": 0,
-	   "latitude": "0.0",
-	   "lic_flags": 0,
-	   "lic_region": "",
-	   "location_from": "unset",
-	   "logdisk_size": 0,
-	   "longitude": "0.0",
-	   "maxvdom": 10,
-	   "mgmt.__data[0]": 0,
-	   "mgmt.__data[1]": 0,
-	   "mgmt.__data[2]": 0,
-	   "mgmt.__data[3]": 0,
-	   "mgmt.__data[4]": 0,
-	   "mgmt.__data[5]": 0,
-	   "mgmt.__data[6]": 0,
-	   "mgmt.__data[7]": 0,
-	   "mgmt_id": 1725896256,
-	   "mgmt_if": "",
-	   "mgmt_mode": "fmgfaz",
-	   "mgt_vdom": "root",
-	   "module_sn": "",
-	   "mr": 2,
-	   "name": "device-001",
-	   "node_flags": 4,
-	   "obj ver": -1,
-	   "oid": 479,
-	   "opts": 0,
-	   "os_type": "fos",
-	   "os_ver": "6.0",
-	   "patch": -1,
-	   "platform_str": "FortiGate-60F",
-	   "prefer_img_ver": "",
-	   "psk": "",
-	   "sn": "FGT60F0000001001",
-	   "source": "faz",
-	   "tab_status": "",
-	   "tunnel_cookie": "",
-	   "tunnel_ip": "",
-	   "vdom": [
-	     {
-	       "comments": "",
-	       "devid": "device-001",
-	       "ext_flags": 1,
-	       "extra info": {
-		 "adom": "ADOM_001"
-	       },
-	       "flags": null,
-	       "name": "root",
-	       "node_flags": 4,
-	       "obj ver": -1,
-	       "oid": 3,
-	       "opmode": "nat",
-	       "rtm_prof_id": 0,
-	       "status": null,
-	       "tab_status": null,
-	       "vpn_id": 0
-	     }
-	   ],
-	   "version": 600,
-	   "vm_cpu": 0,
-	   "vm_cpu_limit": 0,
-	   "vm_lic_expire": 0,
-	   "vm_mem": 0,
-	   "vm_mem_limit": 0,
-	   "vm_status": 0
-	 },
-	 "status": {
-	   "code": 0,
-	   "message": "OK"
-	 },
-	 "url": "/dvmdb/device/device-001"
-       }
-     ]
-   }
+Since #0462768, we can use just the option ``extra info`` as shown below.
+
+To get the ADOM details the ``fgt-742-001`` belongs to:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code:: json
+
+         {
+           "id": 4,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "extra info"
+               ],
+               "option": [
+                 "extra info",
+                 "no loadsub"
+               ],
+               "url": "/dvmdb/device/fgt-742-001"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }  
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "result": [
+             {
+               "data": {
+                 "extra info": {
+                   "adom": "dc_emea"
+                 },
+                 "name": "fgt-742-001",
+                 "obj ver": -1,
+                 "oid": 596
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device/fgt-742-001"
+             }
+           ]
+         }
+
+      .. note::
+
+         - The ``fgt-742-001`` device belongs to the ``dc_emea`` ADOM         
 
 How to install device settings against devices?
 -----------------------------------------------
