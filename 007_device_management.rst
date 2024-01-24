@@ -1868,7 +1868,7 @@ Caught in #0414003.
 
 There are two methods:
 
-#. To combine ``object master`` with ``filter``
+#. Combine ``object master`` with ``filter``
 #. Use the ``extra info`` option
 
 How to get the ADOM a device belongs to using object master with filter?
