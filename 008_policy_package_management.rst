@@ -2222,30 +2222,39 @@ How to add a policy in a Policy Block?
 		  ]
 		}
 
-How to insert a policy block in a policy package?
+How to insert a Policy Block in a Policy Package?
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-The following request, insert policy block ``ppb_001`` above policy id
-2 of policy package ``pp.device1``:
+You can use the ``before`` and ``after`` attribute followed by the ``policyid`` 
+of the firewall policy.
 
-**REQUEST**:
+The following request inserts the ``ppb_001`` Policy Block **before** the firewall policy with ``policyid`` ``2`` in the ``pp.device1`` Policy Package
+from the ``DEMO_014`` ADOM:
 
-.. code-block:: json
+.. tab-set:: 
+   
+   .. tab-item:: REQUEST
 
-		{
-		  "id": "0134510c-7ca2-403b-8178-8a88ece59b89",
-		  "method": "add",
-		  "params": [
-		    {
-		      "before": "2",
-		      "data": {
-		        "_policy_block": "ppb_001"
-		      },
-		      "url": "/pm/config/adom/DEMO_014/pkg/pp.device1/firewall/policy"
-		    }
-		  ],
-		  "session": 49476
-		}
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "before": "2",
+               "data": {
+                 "_policy_block": "ppb_001"
+               },
+               "url": "/pm/config/adom/DEMO_014/pkg/pp.device1/firewall/policy"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. warning::
+
+         - The ``policyid`` has to be passed as a string!
 
 How to where used a Policy Block?
 +++++++++++++++++++++++++++++++++
