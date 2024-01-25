@@ -1,30 +1,6 @@
 Policy Package Management
 =========================
 
-Default values
---------------
-
-How to get the default values for a firewall policy?
-++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "get",
-     "params": [
-       {
-         "object template": 1,
-         "url": "/pm/config/adom/DB/pkg/pp.003/firewall/policy/"
-       }
-     ],
-     "session": "HKERCCqx6ximKXlkWN7lxWIgqagVqpj0xXiJtFtYrpiLIL7X3nCuIdlnZw83N+N3JO95oUOOCIwE+emXMuLvcPvKXNHsVYSN",
-     "verbose": 1
-   }
-
 Folders
 -------
 
@@ -2504,6 +2480,34 @@ To move the cloned firewall policy with ``policyid`` ``1071741830`` above the fi
          
 Policies
 --------
+
+How to get the default values for a firewall policy?
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This is when you plan to suggest default values in an application you're developping and where you offer to add a new firewall policy.
+
+You can get the firewall policy table of a Policy Package using the ``object template`` attribute.
+
+To get the default value for a firewall policy in the ``pp.003`` Policy Package from the ``DEMO`` ADOM:
+
+.. tab-set:: 
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "get",
+           "params": [
+             {
+               "object template": 1,
+               "url": "/pm/config/adom/DEMO/pkg/pp.003/firewall/policy/"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
 How to add a firewall policy?
 +++++++++++++++++++++++++++++

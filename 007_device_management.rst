@@ -1877,7 +1877,7 @@ How to get the ADOM a device belongs to using object master with filter?
 You can append the ``object master`` to the ``/dvmdb/device/<device>/``
 endpoint.
 
-But in this case, you also have to use the ``filter`` in an unusual way as shown below.
+But in this case, you also have to use the ``filter`` in an unusual as shown below.
 
 To get the ADOM details the ``fgt-742-001`` belongs to:
 
