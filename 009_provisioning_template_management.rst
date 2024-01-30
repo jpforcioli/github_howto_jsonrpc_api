@@ -5551,7 +5551,7 @@ in ADOM ``root``:
 Template Group
 --------------
 
-How to create a template group?
+How to create a Template Group?
 +++++++++++++++++++++++++++++++
 
 The following example shows how to create a new Template Group named ``template_group_001`` in the ``dc_africa`` ADOM and referencing the following
@@ -5618,7 +5618,7 @@ other templates:
            ]
          }
 
-How to assign a template group to a device group?
+How to assign a Template Group to a Device Group?
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
 Caught in #0751625.
@@ -5662,9 +5662,41 @@ Caught in #0751625.
 How to delete a Template Group?
 -------------------------------
 
-.. code-block:: json
+To delete the ``template_group_001`` from the ``dc_africa`` ADOM:
 
-   {"id":"d46434c5-33e7-487a-b00f-4cefa4c917fd","method":"delete","params":[{"url":"pm/tmplgrp/adom/dc_africa/template_group_001"}]}
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "pm/tmplgrp/adom/dc_africa/template_group_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json       
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "pm/tmplgrp/adom/dc_africa/template_group_001"
+             }
+           ]
+         }
 
 Fabric Authorization Template
 -----------------------------
