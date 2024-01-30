@@ -1,0 +1,2089 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>1. FMG JSON API Introduction &#8212; How to FortiManager API v1.0_20230413_001</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script src="_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/tabs.js?v=3030b3cb"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js?v=ffc8af2d"></script>
+    <script src="_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js?v=12818e64"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '001_fmg_json_api_introduction';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. The option attribute" href="012_option_attribute.html" />
+    <link rel="prev" title="How To FortiManager API?" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+
+
+  <div class="bd-header-announcement container-fluid bd-header-announcement">
+    <div class="bd-header-announcement__content">How to FortiManager API?</div>
+  </div>
+
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fortimanager_api.png" class="logo__image only-light" alt="How to FortiManager API v1.0_20230413_001 - Home"/>
+    <script>document.write(`<img src="_static/fortimanager_api.png" class="logo__image only-dark" alt="How to FortiManager API v1.0_20230413_001 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. FMG JSON API Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="012_option_attribute.html">2. The <em>option</em> attribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002_objects_management.html">3. Objects Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002_security_profiles.html">4. Security Profiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="003_docker_management.html">5. Docker Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="004_sdwan_management.html">6. SD-WAN Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="005_connector_management.html">7. Connector Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007_device_management.html">8. Device Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="008_policy_package_management.html">9. Policy Package Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="009_provisioning_template_management.html">10. Provisioning Template Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_fmg_configuration.html">11. Operating the FortiManager’s own configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="011_alternative_fortimanager_api.html">12. Alternative FortiManager APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="012_cli_script_management.html">13. Script management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="013_adom_management.html">14. ADOM management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="014_fortiguard_management.html">15. FortiGuard Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_qos_management.html">16. QoS management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="016_sys_proxy_json.html">17. Proxying any APIs within FMG JSON API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="017_fmg_operations.html">18. FortiManager operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="018_dbcache.html">19. Using <code class="docutils literal notranslate"><span class="pre">dbcache</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="019_flatui_proxy.html">20. FortiManager GUI API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_vpn_manager.html">21. VPN Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="021_sub_fetch.html">22. Sub fetch operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="022_fmg_cloud.html">23. FortiManager Cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="023_meta_fields.html">24. Meta-fields Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="050_contributors.html">25. Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/001_fmg_json_api_introduction.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>FMG JSON API Introduction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#login-to-fortimanager">1.1. Login to FortiManager</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session-based-authentication">1.1.1. Session based authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#token-based-authentication">1.1.2. Token-based authentication</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logout-from-fortimanager">1.2. Logout from FortiManager</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-device-settings">1.3. Managing Device Settings</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-scope-settings">1.3.1. Global scope settings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vdom-scope-settings">1.3.2. VDOM scope settings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-device-settings">1.4. Installing Device Settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-security-settings">1.5. Managing Security Settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-security-settings">1.6. Installing Security Settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monitoring-a-task">1.7. Monitoring a task</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplexing-requests">1.8. Multiplexing requests</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#same-json-rpc-url">1.8.1. Same JSON RPC URL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-json-rpc-url">1.8.2. Different JSON RPC URL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monitoring-different-elements-in-different-adoms">1.8.3. Monitoring different elements in different ADOMs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-symbolic-human-readable-values">1.9. Working with symbolic (human readable) values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operations-on-tables-objects-and-attributes">1.10. Operations on tables, objects and attributes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-unset-a-specific-attribute">1.10.1. How to unset a specific attribute?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permissions">1.11. Permissions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-normal-fortimanager-administrator">1.11.1. Using a normal FortiManager administrator</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="fmg-json-api-introduction">
+<h1><span class="section-number">1. </span>FMG JSON API Introduction<a class="headerlink" href="#fmg-json-api-introduction" title="Link to this heading">#</a></h1>
+<p class="linemarker linemarker-4">The FortiManager JSON RPC API is based on the JSON RPC standard.</p>
+<p class="linemarker linemarker-6">The same HTTP body structure will be used for all kind of requests (login,
+provisioning, monitoring, operating, logout):</p>
+<ul>
+<li><p class="linemarker linemarker-9">HTTP method and URL will be of the form:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>POST https://&lt;fmg_ip&gt;/jsonrpc
+</pre></div>
+</div>
+</li>
+<li><p class="linemarker linemarker-15">HTTP body will be using the JSON RPC standard format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+  &quot;id&quot;: &lt;id&gt;,
+  &quot;method&quot;: &quot;&lt;method, could be exec, add, set, delete, etc.&gt;&quot;,
+  &quot;params&quot;: [&lt;this is where all the stuff is done],
+  &quot;session&quot;: &lt;session_id&gt;
+}
+</pre></div>
+</div>
+</li>
+</ul>
+<p class="linemarker linemarker-26">In the rest of this document, a request will be always represented with its
+payload (i.e., the HTTP method and URL, since always the same, won’t be
+represented).</p>
+<p class="linemarker linemarker-30">For instance:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-0">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;passwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fortinet&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;admin&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sys/login/user&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="login-to-fortimanager">
+<h2><span class="section-number">1.1. </span>Login to FortiManager<a class="headerlink" href="#login-to-fortimanager" title="Link to this heading">#</a></h2>
+<section id="session-based-authentication">
+<h3><span class="section-number">1.1.1. </span>Session based authentication<a class="headerlink" href="#session-based-authentication" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-61">A login operation is required in order to get a session ID.</p>
+<p class="linemarker linemarker-63">This session ID will then have to be used in all subsequent FortiManager JSON RPC API requests.</p>
+<p class="linemarker linemarker-65">To login, you can use any kind of FortiManager users: locally defined or defined
+on some external LDAP, RADIUS, TACACS servers. 2FA is also supported (but won’t
+be seen in this document).</p>
+<p class="linemarker linemarker-69">The definition of a FortiManager user has to be slightly modified with the
+<code class="docutils literal notranslate"><span class="pre">rpc-permit</span></code> attribute in in order to be used as an FortiManager JSON RPC API user:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>config system admin user
+    edit &lt;user&gt;
+        set rpc-permit read-write
+    next
+end
+</pre></div>
+</div>
+<p class="linemarker linemarker-81">To API login a FortiManager, the JSON RPC <em>url</em> <code class="docutils literal notranslate"><span class="pre">sys/login/user</span></code> with
+JSON RPC <em>method</em> <code class="docutils literal notranslate"><span class="pre">exec</span></code> can be used.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-1" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-1">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;passwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fortinet&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;admin&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sys/login/user&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-110">You can omit the <code class="docutils literal notranslate"><span class="pre">session</span></code> attribute when login in to FortiManager</p></li>
+<li><p class="linemarker linemarker-111">If you prefer to keep it, just set it with the <code class="docutils literal notranslate"><span class="pre">null</span></code> value</p></li>
+</ul>
+</div>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-2">
+RESPONSE</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sys/login/user&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;y5I9dOaJyotAoco6nY3VfUcgTwp7Alk7jib3tX5ECEv4WabzSllv9umEzfAFVJxI4azqZE9xEh3lEWLi1AOYbw==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p class="linemarker linemarker-131">From now on, the returned <code class="docutils literal notranslate"><span class="pre">session</span></code> value should be used in all subsequent
+FortiManager JSON RPC API requests.</p>
+</section>
+<section id="token-based-authentication">
+<h3><span class="section-number">1.1.2. </span>Token-based authentication<a class="headerlink" href="#token-based-authentication" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-137">Starting with FortiManager 7.2.2 (#0809732), it is now possible to use a pre-defined API key or token.</p>
+<p class="linemarker linemarker-139">The API key (or token) is obtained by:</p>
+<ol class="arabic">
+<li><p class="linemarker linemarker-141">Defining an API user in FortiManager GUI or CLI</p>
+<p class="linemarker linemarker-143">As you can see below, an API user is a normal FortiManager user with the
+<code class="docutils literal notranslate"><span class="pre">user_type</span></code> attribute set to <code class="docutils literal notranslate"><span class="pre">api</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>config system admin user
+    edit api_001
+        set user_type api
+        set rpc-permit read-write
+    next
+end
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p class="linemarker linemarker-157">You still have to set the <code class="docutils literal notranslate"><span class="pre">rpc-permit</span></code> attribute if you want this user
+to be able to operate the FortiManager using the FortiManager JSON RPC API.</p>
+</div>
+</li>
+<li><p class="linemarker linemarker-160">Generating the API key using the FortiManager GUI or CLI:</p>
+<p class="linemarker linemarker-162">Use the following FortiManager CLI command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>execute api-user generate-key api_001
+</pre></div>
+</div>
+<p class="linemarker linemarker-168">It will return the API key:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>New API key: 33fzwipq4amujunzgzn46mg1to9p8wbi
+</pre></div>
+</div>
+</li>
+</ol>
+<p class="linemarker linemarker-174">The generated API key is <strong>permanent</strong> (i.e., never expires).</p>
+<p class="linemarker linemarker-176">However, you can renew it whenever you want using the FortiManager GUI or CLI as
+shown above.</p>
+<p class="linemarker linemarker-179">You can now interact with the FortiManager JSON RPC API without issuing an explicit login (or
+logout) operation.</p>
+<p class="linemarker linemarker-182">You just need to insert the API key:</p>
+<ul>
+<li><p class="linemarker linemarker-184">Using the <code class="docutils literal notranslate"><span class="pre">Authorization</span></code> HTTP header with the <em>bearer</em> form:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>POST https://{{fmg_ip}}/jsonrpc HTTP/1.1
+[...]
+Authorization: Bearer 33fzwipq4amujunzgzn46mg1to9p8wbi
+[...]
+</pre></div>
+</div>
+</li>
+<li><p class="linemarker linemarker-193">Using the <code class="docutils literal notranslate"><span class="pre">access_token</span></code> URL query string:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>POST https://fmg_ip}}/jsonrpc?access_token=33fzwipq4amujunzgzn46mg1to9p8wbi
+[...]
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<section id="logout-from-fortimanager">
+<h2><span class="section-number">1.2. </span>Logout from FortiManager<a class="headerlink" href="#logout-from-fortimanager" title="Link to this heading">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p class="linemarker linemarker-205">This is only applicable if a login operation using the session-based
+authentication was used (see <a class="reference internal" href="#session-based-authentication"><span class="std std-ref">Session based authentication</span></a>).</p>
+</div>
+<p class="linemarker linemarker-208">To API logout from a FortiManager, JSON RPC <em>url</em> <code class="docutils literal notranslate"><span class="pre">sys/logout</span></code> with JSON RPC <em>method</em>
+<code class="docutils literal notranslate"><span class="pre">exec</span></code> can be used.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-3">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;jsonrpc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sys/logout&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;y5I9dOaJyotAoco6nY3VfUcgTwp7Alk7jib3tX5ECEv4WabzSllv9umEzfAFVJxI4azqZE9xEh3lEWLi1AOYbw==&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-4">
+RESPONSE</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sys/logout&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="managing-device-settings">
+<h2><span class="section-number">1.3. </span>Managing Device Settings<a class="headerlink" href="#managing-device-settings" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-250">To manage Network &amp; System settings for managed devices - all the operations
+performed under the Device Manager module of FortiManager - the FortiManager JSON RPC API is
+using one of the following JSON RPC url:</p>
+<p class="linemarker linemarker-254">For global scope settings (i.e. <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">global</span></code>)</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/pm/config/device/&lt;device&gt;/global/&lt;cli&gt;
+</pre></div>
+</div>
+<p class="linemarker linemarker-260">For VDOM scope settings (i.e. <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">vdom</span></code>):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/pm/config/device/&lt;device&gt;/vdom/&lt;vdom&gt;/&lt;cli&gt;
+</pre></div>
+</div>
+<section id="global-scope-settings">
+<h3><span class="section-number">1.3.1. </span>Global scope settings<a class="headerlink" href="#global-scope-settings" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-269">The first form (global sco[e settings) applies when you need to configure global
+settings like DNS, SNMP, etc.</p>
+<p class="linemarker linemarker-272">In that case <code class="docutils literal notranslate"><span class="pre">&lt;device&gt;</span></code> refers to the device name as displayed in Device
+Manager under column Device Name.</p>
+<p class="linemarker linemarker-275"><code class="docutils literal notranslate"><span class="pre">&lt;cli&gt;</span></code> refers to the FortiGate CLI without the <code class="docutils literal notranslate"><span class="pre">config</span></code> keyword and where
+spaces are replaced by <code class="docutils literal notranslate"><span class="pre">/</span></code>.</p>
+<p class="linemarker linemarker-278">For instance, to configure the DNS settings (i.e. <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">system</span> <span class="pre">dns</span></code>) of
+managed device <code class="docutils literal notranslate"><span class="pre">FGT1</span></code> the FMG JSON RPC url will be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/pm/config/device/FGT1/global/system/dns
+</pre></div>
+</div>
+<p class="linemarker linemarker-285">We have to use that form even if the managed device isn’t having the VDOM status
+turned on.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p class="linemarker linemarker-290">Even though interfaces (i.e. <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">system</span> <span class="pre">interface</span></code>) are assigned to
+VDOMa, it is required to use the global scope settings form to operate them.</p>
+<p class="linemarker linemarker-293">For instance, to configure interface <code class="docutils literal notranslate"><span class="pre">port1</span></code> (i.e. <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">system</span>
+<span class="pre">interface</span></code> + <code class="docutils literal notranslate"><span class="pre">edit</span> <span class="pre">port1</span></code>) for managed device <code class="docutils literal notranslate"><span class="pre">FGT1</span></code>, the FMG JSON RPC
+url will be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/pm/config/device/FGT1/global/system/interface/port1
+</pre></div>
+</div>
+</div>
+</section>
+<section id="vdom-scope-settings">
+<h3><span class="section-number">1.3.2. </span>VDOM scope settings<a class="headerlink" href="#vdom-scope-settings" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-304">The second form (VDOM scope settings) has to be used when you need to configure
+per-VDOM settings like VPN Phase1/Phase2, Static or Dynamic Routing, etc.</p>
+<p class="linemarker linemarker-307">In that case <code class="docutils literal notranslate"><span class="pre">&lt;device&gt;</span></code> refers to the device name as displayed in Device
+Manager under column Device Name.</p>
+<p class="linemarker linemarker-310"><code class="docutils literal notranslate"><span class="pre">&lt;vdom&gt;</span></code> refers to the VDOM name.</p>
+<p class="linemarker linemarker-312"><code class="docutils literal notranslate"><span class="pre">&lt;cli&gt;</span></code> refers to the FortiGate CLI without the <code class="docutils literal notranslate"><span class="pre">config</span></code> keyword and where
+spaces are replaced by <code class="docutils literal notranslate"><span class="pre">/</span></code>.</p>
+<p class="linemarker linemarker-315">For instance, to manage static routes (i.e. <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">router</span> <span class="pre">static</span></code>) for device
+<code class="docutils literal notranslate"><span class="pre">FGT1</span></code> and its VDOM <code class="docutils literal notranslate"><span class="pre">vd1</span></code>, the FMG JSON RPC url will be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/pm/config/device/FGT1/vdom/vd1/router/static
+</pre></div>
+</div>
+</section>
+</section>
+<section id="installing-device-settings">
+<h2><span class="section-number">1.4. </span>Installing Device Settings<a class="headerlink" href="#installing-device-settings" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-325">FortiManager allows to install pending network and system settings changes only!</p>
+<p class="linemarker linemarker-327">It means that no pending security settings changes (like new/edited objects or
+policies) will be pushed down to managed devices during the Install Device
+Settings operation.</p>
+<p class="linemarker linemarker-331">The main JSON RPC url will be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/securityconsole/install/device
+</pre></div>
+</div>
+<p class="linemarker linemarker-337">The JSON RPC method will be <code class="docutils literal notranslate"><span class="pre">exec</span></code> (i.e. execute)</p>
+<p class="linemarker linemarker-339">Here is an example to install pending network &amp; system settings changes for
+device <code class="docutils literal notranslate"><span class="pre">FG600C-194-77</span></code>, with no VDOM (i.e. default <code class="docutils literal notranslate"><span class="pre">root</span></code> VDOM), from ADOM
+<code class="docutils literal notranslate"><span class="pre">FOOBAR</span></code>:</p>
+<p class="linemarker linemarker-343"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;adom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FOOBAR&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;dev_rev_comments&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A comment&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="s2">&quot;none&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/securityconsole/install/device&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cEeh7eax9AbTauJpEAtapIogYlWT5IQazR1vGvw7QAKsmUy3E7ZJ4FQINA1GMSatBQTOpFZ1fceuH7UqLRYfzMJwUYo9T5/F&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-372"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;task&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2066</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/securityconsole/install/device&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-392">The response contains a task ID (here it is <code class="docutils literal notranslate"><span class="pre">2066</span></code>).</p>
+<p class="linemarker linemarker-394">It is required to monitor the install progress and final status.</p>
+<p class="linemarker linemarker-396">See section <a class="reference internal" href="#monitoring-a-task">Monitoring a task</a>.</p>
+</section>
+<section id="managing-security-settings">
+<h2><span class="section-number">1.5. </span>Managing Security Settings<a class="headerlink" href="#managing-security-settings" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-401">To manage Security objects for managed devices - all the operations performed
+under the Policy &amp; Objects module of FortiManager - the FortiManager JSON RPC API is using the
+following JSON RPC url:</p>
+<p class="linemarker linemarker-405">For objects:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/pm/config/adom/&lt;adom&gt;/obj/&lt;cli&gt;
+</pre></div>
+</div>
+<p class="linemarker linemarker-411">where <code class="docutils literal notranslate"><span class="pre">&lt;adom&gt;</span></code> refers to the ADOM name.</p>
+<p class="linemarker linemarker-413"><code class="docutils literal notranslate"><span class="pre">&lt;cli&gt;</span></code> refers to the FortiGate CLI without the <code class="docutils literal notranslate"><span class="pre">config</span></code> keyword and where
+spaces are replaced by <code class="docutils literal notranslate"><span class="pre">/</span></code>.</p>
+<p class="linemarker linemarker-416">For instance, to manage Firewall Address (i.e. <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">firewall</span> <span class="pre">address</span></code>)
+objects in ADOM <code class="docutils literal notranslate"><span class="pre">ADOM1</span></code> the JSON RPC url will be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/pm/config/adom/ADOM1/obj/firewall/address
+</pre></div>
+</div>
+<p class="linemarker linemarker-423">For policy packages:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/pm/config/adom/&lt;adom&gt;/pkg/&lt;pkg&gt;/firewall/policy
+</pre></div>
+</div>
+<p class="linemarker linemarker-429">where <code class="docutils literal notranslate"><span class="pre">&lt;adom&gt;</span></code> refers to the ADOM name.</p>
+<p class="linemarker linemarker-431"><code class="docutils literal notranslate"><span class="pre">&lt;pkg&gt;</span></code> refers to the policy package name.</p>
+<p class="linemarker linemarker-433">For instance, to manage policy ID <code class="docutils literal notranslate"><span class="pre">11</span></code> (i.e. <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">firewall</span> <span class="pre">policy</span></code> +
+<code class="docutils literal notranslate"><span class="pre">edit</span> <span class="pre">11</span></code>) from policy package <code class="docutils literal notranslate"><span class="pre">PP_001</span></code> in ADOM <code class="docutils literal notranslate"><span class="pre">ADOM1</span></code>, the JSON RPC url
+will be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/pm/config/adom/ADOM1/pkg/PP_001/firewall/policy/11
+</pre></div>
+</div>
+</section>
+<section id="installing-security-settings">
+<h2><span class="section-number">1.6. </span>Installing Security Settings<a class="headerlink" href="#installing-security-settings" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-444">When triggering a policy package installation, FortiManager is installing both:</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-446">Pending device settings (network and system settings changes) (see <a class="reference internal" href="#managing-device-settings">Managing
+Device Settings</a> above)</p></li>
+<li><p class="linemarker linemarker-449">Pending security settings (objects and policy packages changes) (see <a class="reference internal" href="#managing-security-settings">Managing
+Security Settings</a> above)</p></li>
+</ul>
+<p class="linemarker linemarker-452">The JSON RPC url will be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/securityconsole/install/package
+</pre></div>
+</div>
+<p class="linemarker linemarker-458">with JSON RPC method being <code class="docutils literal notranslate"><span class="pre">exec</span></code> (i.e. execute).</p>
+<p class="linemarker linemarker-460">For instance, to install policy package <code class="docutils literal notranslate"><span class="pre">PP_FG600C-194-77</span></code> from ADOM
+<code class="docutils literal notranslate"><span class="pre">FOOBAR</span></code>, on managed device <code class="docutils literal notranslate"><span class="pre">FG600C-194-77</span></code> with no VDOM (i.e. default
+<code class="docutils literal notranslate"><span class="pre">root</span></code> VDOM):</p>
+<p class="linemarker linemarker-464"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;adom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CARWASH&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="s2">&quot;none&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;pkg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PP_FG600C-194-77&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/securityconsole/install/package&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hJdopAeMzkgdJ6uQbfIgz48Eq+aXy8B/IvkNnrUuBbT1ni6eQ8GbrZPlUv6enG1pAXVqwS4tWmkaC13jAa0RnJBxW4xcC6xi&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-493"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;task&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2071</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/securityconsole/install/package&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-513">The response contains a task ID (here it is <code class="docutils literal notranslate"><span class="pre">2071</span></code>).</p>
+<p class="linemarker linemarker-515">It is required to monitor the install progress and final status.</p>
+<p class="linemarker linemarker-517">See section <a class="reference internal" href="#monitoring-a-task">Monitoring a task</a>.</p>
+</section>
+<section id="monitoring-a-task">
+<h2><span class="section-number">1.7. </span>Monitoring a task<a class="headerlink" href="#monitoring-a-task" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-522">For API calls wich could require time, FortiManager prefers to immediately
+return with a task ID.</p>
+<p class="linemarker linemarker-525">This task ID can then be used to monitor the progress of the operation and also
+to get its final status.</p>
+<p class="linemarker linemarker-528">The JSON RPC url will be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/task/task/&lt;id&gt;
+</pre></div>
+</div>
+<p class="linemarker linemarker-534">To monitor a task, the JSON RPC method <code class="docutils literal notranslate"><span class="pre">get</span></code> can be used.</p>
+<p class="linemarker linemarker-536">For instance to monitor task ID <code class="docutils literal notranslate"><span class="pre">2066</span></code>:</p>
+<p class="linemarker linemarker-538"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/task/task/2066&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lfNHxnG2uuGLwjaGiLFPvNSpeKD/0rc4bH0yiGnWK3VGpOPpAmmBY7hib9q3Wig7HGwL/hUMWdRTRYEBY4soYMHpz8ENRiMG&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-554"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;adom&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">364</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;end_tm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1515752051</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;history&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-01-12 02:13:44:start to install dev(FG600C-194-77)&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-01-12 02:13:46:init state: start to get pre-checksum&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-01-12 02:13:53:get pre-checksum state: start get diff(chkout=1)&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-01-12 02:13:53:script done state: start to FGFM install&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-01-12 02:13:55:fgfm install state: prepare to post-checksum&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-01-12 02:14:01:post-checksum state: start verification&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-01-12 02:14:06:install and save finished status=OK&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-01-12 02:13:46:Start copying shared objs to devdb, device(FG600C-194-77), vdomid(root)&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77(root)[copy]&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-01-12 02:13:46:Initiate request to install to real device&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77(root)[copy]&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-01-12 02:13:46:Copy to device done&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77(root)[copy]&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-01-12 02:14:11:Installation to real device done&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77(root)[copy]&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2066</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;line&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;install and save finished status=OK&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;err&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">366</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;done&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Installation to real device done&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;err&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.194.77&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FG600C-194-77(root)[copy]&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">366</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;done&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;num_done&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;num_err&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;num_lines&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;num_warn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;pid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">26153</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;src&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;install device&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;start_tm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1515752024</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;done&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Install Device&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;tot_percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;admin&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/task/task/2066&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-679">FortiManager is returning the whole history (or part of it if in the middle of
+the operation) and most importantly some global attributes that allow to figure
+out whether the task did succeed or not:</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-683"><code class="docutils literal notranslate"><span class="pre">num_lines</span></code>: The number of sub tasks; a task could be composed of multiple
+sub tasks. Here it is 2 meaning the Install Device Settings operation is
+generating two sub tasks</p></li>
+<li><p class="linemarker linemarker-686"><code class="docutils literal notranslate"><span class="pre">tot_percent</span></code>: The progress of all the sub tasks. Here it is 200 because we
+have two sub tasks (2 x 100)</p></li>
+<li><p class="linemarker linemarker-688"><code class="docutils literal notranslate"><span class="pre">num_err</span></code>: The number of failed sub tasks. Here it is 0 meaning that the
+Install Device Settings task did succeed</p></li>
+<li><p class="linemarker linemarker-690"><code class="docutils literal notranslate"><span class="pre">num_warn</span></code>: The number of sub tasks completed with warning</p></li>
+<li><p class="linemarker linemarker-691"><code class="docutils literal notranslate"><span class="pre">percent</span></code>: The global task progress</p></li>
+</ul>
+<p class="linemarker linemarker-693">To monitor a task, it is required to get the task ID multiple times; preferably
+using a loop.</p>
+<p class="linemarker linemarker-696">The loop could stop when <code class="docutils literal notranslate"><span class="pre">percent</span></code> is equal to 100.</p>
+<p class="linemarker linemarker-698">The task is successful when <code class="docutils literal notranslate"><span class="pre">num_err</span></code> is equal to 0.</p>
+</section>
+<section id="multiplexing-requests">
+<h2><span class="section-number">1.8. </span>Multiplexing requests<a class="headerlink" href="#multiplexing-requests" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-703">This is the art of regoupring multiple API operations in a single request.</p>
+<p class="linemarker linemarker-705">The <code class="docutils literal notranslate"><span class="pre">params</span></code> attribute of the JSON RPC payload is a list.</p>
+<p class="linemarker linemarker-707">It is possible to pass multiple elements in this list as shown in the next
+sessions.</p>
+<section id="same-json-rpc-url">
+<h3><span class="section-number">1.8.1. </span>Same JSON RPC URL<a class="headerlink" href="#same-json-rpc-url" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-713">Seen in #0767076.</p>
+<p class="linemarker linemarker-715">You can use the following request to get the webfilter profiles of multiple
+ADOMs:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-5" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-5">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/adom/adom_001/obj/webfilter/profile&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;loadsub&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/adom/adom_002/obj/webfilter/profile&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;loadsub&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/adom/adom_003/obj/webfilter/profile&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;loadsub&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{session_id}}&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="different-json-rpc-url">
+<h3><span class="section-number">1.8.2. </span>Different JSON RPC URL<a class="headerlink" href="#different-json-rpc-url" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-756">To get the list of managed devices and FortiGate ADOMs:</p>
+<p class="linemarker linemarker-758"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;loadsub&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/dvmdb/device&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;restricted_prds&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;==&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;fos&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;loadsub&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/dvmdb/adom&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tCnuMMWQhq0rT4oEROMN5I5v5U+k3Ody1wBvcSHOZ9iyOJRbTlwIlRzTngW7CfLnmZ6Gtd2KpUw6YRqtFeuFwQ==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-789"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fgt_dc1&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">164</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fgt_dc2&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">227</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/dvmdb/device&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;adom_dc1&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;adom_dc2&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">162</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rootp&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/dvmdb/adom&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="monitoring-different-elements-in-different-adoms">
+<h3><span class="section-number">1.8.3. </span>Monitoring different elements in different ADOMs<a class="headerlink" href="#monitoring-different-elements-in-different-adoms" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-844">To get the firewall policy statistics for all managed devices belonging to ADOM
+<code class="docutils literal notranslate"><span class="pre">dc_emea</span></code> along with all available interfaces for all managed managed devices
+belonging to ADOM <code class="docutils literal notranslate"><span class="pre">dc_amer</span></code>:</p>
+<p class="linemarker linemarker-848"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/api/v2/monitor/firewall/policy&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="s2">&quot;/adom/dc_emea/group/All_FortiGate&quot;</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/sys/proxy/json&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/api/v2/monitor/system/available-interfaces?format=name|ipv4_addresses&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="s2">&quot;/adom/dc_amer/group/All_FortiGate&quot;</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/sys/proxy/json&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{session}}&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-880"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1255</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;http_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;policy&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;firewall&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;results&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;active_sessions&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;asic_bytes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;asic_packets&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;bytes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;packets&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;policyid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;software_bytes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;software_packets&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">              </span><span class="p">}</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FGVMMLTM23000162&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v7.2.2&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dut_fgt_03&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">234</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;http_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;policy&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;firewall&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;results&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;1_week_ipv4&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">&quot;bytes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="mi">9073</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">246710</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">117978</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span>
+<span class="w">                  </span><span class="p">],</span>
+<span class="w">                  </span><span class="nt">&quot;hit_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="mi">82</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">2281</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">1092</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span>
+<span class="w">                  </span><span class="p">],</span>
+<span class="w">                  </span><span class="nt">&quot;packets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="mi">83</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">2281</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">1092</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="mi">0</span>
+<span class="w">                  </span><span class="p">]</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;active_sessions&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;bytes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">374481</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;first_used&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1673472304</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;hit_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3465</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;last_used&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1674124082</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;packets&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3466</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;policyid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;active_sessions&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;bytes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;packets&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;policyid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;d5da7da8-81ef-51ed-613b-60e3503a06a1&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;active_sessions&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;bytes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;packets&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;policyid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;b2cfeacc-90f5-51ed-12ba-ca7a5af8e4a7&quot;</span>
+<span class="w">              </span><span class="p">}</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FGVMMLTM22006608&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v7.0.2&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dut_fgt_01&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/sys/proxy/json&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1255</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;http_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;available-interfaces&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;system&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;results&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;any&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ipv4_addresses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;cidr_netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.210.35.104&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;255.255.254.0&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;port1&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ipv4_addresses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;cidr_netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.2.0.1&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;255.255.255.0&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;port2&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;port3&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;port4&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;naf.root&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;l2t.root&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ssl.root&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ipv4_addresses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;cidr_netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.255.1.1&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;255.255.255.0&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fortilink&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;virtual-wan-link&quot;</span>
+<span class="w">              </span><span class="p">}</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;revision&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1674589859.651219&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FGVMMLTM23000178&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v7.2.2&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dut_fgt_04&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1390</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;http_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;available-interfaces&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;system&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;results&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;any&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ipv4_addresses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;cidr_netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.210.35.105&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;255.255.254.0&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;port1&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ipv4_addresses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;cidr_netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;172.18.0.30&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;255.255.255.224&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;port2&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ipv4_addresses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;cidr_netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.3.0.1&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;255.255.255.0&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;port3&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;port4&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;naf.root&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;l2t.root&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ssl.root&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ipv4_addresses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;cidr_netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.255.1.1&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;255.255.255.0&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fortilink&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ipv4_addresses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;cidr_netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;172.16.255.253&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;255.255.255.255&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HUB1-Lo&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;virtual-wan-link&quot;</span>
+<span class="w">              </span><span class="p">}</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;revision&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1674589859.655205&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FGVMMLTM22002644&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v7.2.4&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dut_fgt_05&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1390</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;http_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;available-interfaces&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;system&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;results&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;any&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ipv4_addresses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;cidr_netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.210.35.102&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;255.255.254.0&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;port1&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;naf.root&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;l2t.root&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ssl.root&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ipv4_addresses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;cidr_netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.255.1.1&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;netmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;255.255.255.0&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fortilink&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;virtual-wan-link&quot;</span>
+<span class="w">              </span><span class="p">}</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;revision&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1674589859.656882&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FGVMMLTM22006609&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v7.2.4&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dut_fgt_02&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/sys/proxy/json&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="working-with-symbolic-human-readable-values">
+<h2><span class="section-number">1.9. </span>Working with symbolic (human readable) values<a class="headerlink" href="#working-with-symbolic-human-readable-values" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-1233">FortiManager JSON API can work with both numerical and symbolic or (human
+readable) values.</p>
+<p class="linemarker linemarker-1236">For instance, to create a host firewall address we can specify the type in two
+ways:</p>
+<ul>
+<li><p class="linemarker linemarker-1239">Numerical:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+<li><p class="linemarker linemarker-1245">Symbolic:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ipmask&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p class="linemarker linemarker-1251">The symbolic form is obviously more intuitive and when used, it produces more
+readable and easier to understand code.</p>
+<p class="linemarker linemarker-1254">It works for any provisioning operations made with the FortiManager JSON API
+(<code class="docutils literal notranslate"><span class="pre">method</span></code>: <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, <code class="docutils literal notranslate"><span class="pre">set</span></code>, etc.).</p>
+<p class="linemarker linemarker-1257">However, when retrieving (i.e., <code class="docutils literal notranslate"><span class="pre">method</span></code> is <code class="docutils literal notranslate"><span class="pre">get</span></code>) objects, FortiManager
+returns by default a JSON output with numerical values.</p>
+<p class="linemarker linemarker-1260">With the <code class="docutils literal notranslate"><span class="pre">verbose</span></code> attribute set, you can instruct FortiManager to return
+objects using the symbolic way.</p>
+<p class="linemarker linemarker-1263">The <code class="docutils literal notranslate"><span class="pre">verbose</span></code> attribute can be placed in the JSON RPC request as shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;verbose&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="o">...</span> <span class="p">],</span>
+  <span class="s2">&quot;session&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operations-on-tables-objects-and-attributes">
+<h2><span class="section-number">1.10. </span>Operations on tables, objects and attributes<a class="headerlink" href="#operations-on-tables-objects-and-attributes" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-1278">This section is to explain some important mechanism related to tables, their objects, and their attributes.</p>
+<section id="how-to-unset-a-specific-attribute">
+<h3><span class="section-number">1.10.1. </span>How to unset a specific attribute?<a class="headerlink" href="#how-to-unset-a-specific-attribute" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-1283">The capability to unset a specific attribute was added in FMG 5.4.1 (#0365372).</p>
+<p class="linemarker linemarker-1285">To unset the IP address the <code class="docutils literal notranslate"><span class="pre">dmz</span></code> interface from managed device <code class="docutils literal notranslate"><span class="pre">TEST-FGT</span></code>:</p>
+<p class="linemarker linemarker-1287"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dmz&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;unset attrs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="s2">&quot;ip&quot;</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/device/TEST-FGT/global/system/interface&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;w4KqkMrExJNUibihOZakWE/0j8VCeKGP1MbeG3Pne6ac5m5FBSJuBd20uuocfPHUZJGzYA/N10ZPTjWmPbJ9AA==&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1309"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/device/TEST-FGT/global/system/interface&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1326">Sometimes, it seems just enough to <em>unset</em> an attribute by ommiting it when
+doing the <code class="docutils literal notranslate"><span class="pre">set</span></code> (captured in #891341).</p>
+<p class="linemarker linemarker-1329">In following example, to unset the <code class="docutils literal notranslate"><span class="pre">secondary</span></code> attribute of a System Template,
+you just need to set the System Template without mentioning the attribute:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">REQUEST</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{sess_id}}&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;seq&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;alt-primary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;alt-secondary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;cache-notfound-responses&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;dns-cache-limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;dns-cache-ttl&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1800</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;domain&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;interface&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;interface-select-method&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;ip6-primary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;::&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;ip6-secondary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;::&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;log&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;primary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.199.230&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;protocol&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;retry&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;server-hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;server-select-method&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;source-ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;ssl-certificate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fortinet_Factory&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/adom/SF70/devprof/system_branch_default_78/device/template/widget/dns/action-list&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+<section id="permissions">
+<h2><span class="section-number">1.11. </span>Permissions<a class="headerlink" href="#permissions" title="Link to this heading">#</a></h2>
+<section id="using-a-normal-fortimanager-administrator">
+<h3><span class="section-number">1.11.1. </span>Using a normal FortiManager administrator<a class="headerlink" href="#using-a-normal-fortimanager-administrator" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-1378">A <code class="docutils literal notranslate"><span class="pre">normal</span></code> administrator is a user with attribute
+<code class="docutils literal notranslate"><span class="pre">system.admin.user.user_type</span></code> different than <code class="docutils literal notranslate"><span class="pre">api</span></code>, <code class="docutils literal notranslate"><span class="pre">sso</span></code> or <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p>
+<p class="linemarker linemarker-1381">On the FortiManager side, you have to define an API user and assign it at least
+two things:</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-1384">A permission profile,</p></li>
+<li><p class="linemarker linemarker-1385">A <code class="docutils literal notranslate"><span class="pre">system.admin.user.rpc-permit</span></code> value.</p></li>
+</ul>
+<p class="linemarker linemarker-1387">When <code class="docutils literal notranslate"><span class="pre">rpc-permit</span></code> is <code class="docutils literal notranslate"><span class="pre">none</span></code>, the API user can simply not log in to
+FortiManager:</p>
+<p class="linemarker linemarker-1390"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;devops&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;passwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fortinet&quot;</span>
+<span class="w">             </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/sys/login/user&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1409"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-11</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;No permission for the resource&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/sys/login/user&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1426">When <code class="docutils literal notranslate"><span class="pre">rpc-permit</span></code> is <code class="docutils literal notranslate"><span class="pre">read</span></code>, the API user cannot read-write anything, even
+if associated permission profile allows read-write permission:</p>
+<p class="linemarker linemarker-1429">For instance, the API user associated with permission profile <code class="docutils literal notranslate"><span class="pre">Super_User</span></code> but
+with <code class="docutils literal notranslate"><span class="pre">rpc-permit</span></code> set to <code class="docutils literal notranslate"><span class="pre">read</span></code> can’t create a new firewall address:</p>
+<p class="linemarker linemarker-1432"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;host_1001&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;subnet&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.0.0.2/32&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/dc_amer/obj/firewall/address&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nMMf3m/6Pp28Azuhx/3PT/JinJT74r8zHNZ/a7BV9vKoklrpB4ca66y7uR20KDi31acSTKOSFf4bH1COB6mKDA==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1451"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-11</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;No permission for the resource&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/dc_amer/obj/firewall/address&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">13807</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1469">It is also applicable if the API user attempts to add a firewall object directly
+in the managed device using the <code class="docutils literal notranslate"><span class="pre">sys/proxy/json</span></code>:</p>
+<p class="linemarker linemarker-1472"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;post&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;host_1006&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;subnet&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.0.0.6/32&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/api/v2/cmdb/firewall/address&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="s2">&quot;/adom/dc_amer/device/dut_fgt_03&quot;</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/sys/proxy/json&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TJSY8zbQOyMSVsZxIU4xL5Tj3es06do42OVDi2MVmattWPhxpDhpVIy4C0VbvNwt02Z+SOErU1Nb/2geB18jHg==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1499"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-11</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;No permission for the resource&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/sys/proxy/json&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1516">(Benefit of #0601553)</p>
+<p class="linemarker linemarker-1518">Of course, such user can get (read) object:</p>
+<p class="linemarker linemarker-1520"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;subnet&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;loadsub&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/dc_amer/obj/firewall/address/host_001&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;E3tjmsND1L4zCe5qNw3V6xJAynVK1PYeZ3f1fNPI0Q/rLez1t9qMpSkUNkkScbjrJOPvDKHPUaNf3c7YQNvZig==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1540"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;host_001&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4805</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;subnet&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="s2">&quot;21.103.33.206&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="s2">&quot;255.255.255.255&quot;</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/dc_amer/obj/firewall/address/host_001&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1565">When <code class="docutils literal notranslate"><span class="pre">rpc-permit</span></code> is <code class="docutils literal notranslate"><span class="pre">read-write</span></code>, the API user can read-write what the
+permission profile is allowing him to read-write.</p>
+<p class="linemarker linemarker-1568">For instance, the API user associated with permission profile <code class="docutils literal notranslate"><span class="pre">rw_all</span></code> but
+only for ADOM <code class="docutils literal notranslate"><span class="pre">dc_amer</span></code> can’t create a firewall address in ADOM <code class="docutils literal notranslate"><span class="pre">dc_us</span></code>:</p>
+<p class="linemarker linemarker-1571"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;host_1001&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;subnet&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.0.0.2/32&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/dc_us/obj/firewall/address&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+sdy+ca8+NbZhTXxhjZOgByoZJiqCMhzEwo+9ufQ40z2zTjK/sLhFhxt1+atozzGwJ8wPHGBx50smv5hkekYgg==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1590"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-11</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;No permission for the resource&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/dc_us/obj/firewall/address&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1608">When <code class="docutils literal notranslate"><span class="pre">rpc-permit</span></code> is <code class="docutils literal notranslate"><span class="pre">read-write</span></code>, and the user is also assigned with a
+device group, then the API user can’t read-write a device which doesn’t belong
+to the device group: BUG!!!! (tested with FMG 7.2.3-INTERIM build 1360)</p>
+<p class="linemarker linemarker-1612">In below example, device <code class="docutils literal notranslate"><span class="pre">dut_fgt_03</span></code> doesn’t belong to the device group
+assigned to the API user…</p>
+<p class="linemarker linemarker-1615"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;host_1001&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;subnet&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.0.0.2/32&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/device/dut_fgt_03/vdom/root/firewall/address&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RiMtKVLNZH/zc5nVkZ/Y4XNFXAWCvCBnOXEySrUCNUrsdNJQpDqUrFa+5yYF7e2K1uRFq146GAQ8BKxIoLMvNQ==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1634"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;host_1001&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/device/dut_fgt_03/vdom/root/firewall/address&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1654">Neither if he attempts to read-write directly a managed device which doesn’t
+belong to the assigned device group, using <code class="docutils literal notranslate"><span class="pre">sys/proxy/json</span></code>: BUG!!!! (tested
+with FMG 7.2.3-INTERIM build 1360)</p>
+<p class="linemarker linemarker-1658">In below example, device <code class="docutils literal notranslate"><span class="pre">dut_fgt_03</span></code> doesn’t belong to the device group
+assigned to the API user…</p>
+<p class="linemarker linemarker-1661"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;post&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;host_1007&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;subnet&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.0.0.7/32&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/api/v2/cmdb/firewall/address&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="s2">&quot;/adom/dc_amer/device/dut_fgt_03&quot;</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/sys/proxy/json&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;kOB0O/NuH7JPaTGVKsXCn5jWf8qkfAreEMFx2tElofuDioiKOfL42GJNMVBieEs1eTNe+0ehQY4sEkT4/gZJSQ==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1688"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1396</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;http_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;http_status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;mkey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;host_1007&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;address&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;old_revision&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0105b076d0779621cfe555d34b1f6986&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;firewall&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;revision&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3f2780027733bd7a9ba00b76d7197892&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;revision_changed&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FGVMMLTM23000162&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vdom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v7.2.4&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dut_fgt_03&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/sys/proxy/json&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">How To FortiManager API?</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="012_option_attribute.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>The <em>option</em> attribute</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#login-to-fortimanager">1.1. Login to FortiManager</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session-based-authentication">1.1.1. Session based authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#token-based-authentication">1.1.2. Token-based authentication</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logout-from-fortimanager">1.2. Logout from FortiManager</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-device-settings">1.3. Managing Device Settings</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-scope-settings">1.3.1. Global scope settings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vdom-scope-settings">1.3.2. VDOM scope settings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-device-settings">1.4. Installing Device Settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-security-settings">1.5. Managing Security Settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-security-settings">1.6. Installing Security Settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monitoring-a-task">1.7. Monitoring a task</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplexing-requests">1.8. Multiplexing requests</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#same-json-rpc-url">1.8.1. Same JSON RPC URL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-json-rpc-url">1.8.2. Different JSON RPC URL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monitoring-different-elements-in-different-adoms">1.8.3. Monitoring different elements in different ADOMs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-symbolic-human-readable-values">1.9. Working with symbolic (human readable) values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operations-on-tables-objects-and-attributes">1.10. Operations on tables, objects and attributes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-unset-a-specific-attribute">1.10.1. How to unset a specific attribute?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permissions">1.11. Permissions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-normal-fortimanager-administrator">1.11.1. Using a normal FortiManager administrator</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By NOC/SOC Fortinet CSE Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jean-Pierre Forcioli.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

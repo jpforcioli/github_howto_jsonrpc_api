@@ -1,0 +1,1697 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>4. Security Profiles &#8212; How to FortiManager API v1.0_20230413_001</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script src="_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/tabs.js?v=3030b3cb"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js?v=ffc8af2d"></script>
+    <script src="_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js?v=12818e64"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '002_security_profiles';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5. Docker Management" href="003_docker_management.html" />
+    <link rel="prev" title="3. Objects Management" href="002_objects_management.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+
+
+  <div class="bd-header-announcement container-fluid bd-header-announcement">
+    <div class="bd-header-announcement__content">How to FortiManager API?</div>
+  </div>
+
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fortimanager_api.png" class="logo__image only-light" alt="How to FortiManager API v1.0_20230413_001 - Home"/>
+    <script>document.write(`<img src="_static/fortimanager_api.png" class="logo__image only-dark" alt="How to FortiManager API v1.0_20230413_001 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="001_fmg_json_api_introduction.html">1. FMG JSON API Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="012_option_attribute.html">2. The <em>option</em> attribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002_objects_management.html">3. Objects Management</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Security Profiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="003_docker_management.html">5. Docker Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="004_sdwan_management.html">6. SD-WAN Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="005_connector_management.html">7. Connector Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007_device_management.html">8. Device Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="008_policy_package_management.html">9. Policy Package Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="009_provisioning_template_management.html">10. Provisioning Template Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_fmg_configuration.html">11. Operating the FortiManager’s own configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="011_alternative_fortimanager_api.html">12. Alternative FortiManager APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="012_cli_script_management.html">13. Script management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="013_adom_management.html">14. ADOM management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="014_fortiguard_management.html">15. FortiGuard Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_qos_management.html">16. QoS management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="016_sys_proxy_json.html">17. Proxying any APIs within FMG JSON API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="017_fmg_operations.html">18. FortiManager operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="018_dbcache.html">19. Using <code class="docutils literal notranslate"><span class="pre">dbcache</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="019_flatui_proxy.html">20. FortiManager GUI API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_vpn_manager.html">21. VPN Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="021_sub_fetch.html">22. Sub fetch operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="022_fmg_cloud.html">23. FortiManager Cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="023_meta_fields.html">24. Meta-fields Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="050_contributors.html">25. Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/002_security_profiles.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Security Profiles</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#url-filtering">4.1. URL Filtering</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#webfilter-urlfilter">4.1.1. Webfilter urlfilter</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-new-entry-in-a-webfilter-urlfilter-entries">4.1.1.1. How to add a new entry in a webfilter.urlfilter.entries?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-delete-an-entry-in-a-webfilter-urlfilter-entries">4.1.1.2. How to delete an entry in a webfilter.urlfilter. entries?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#web-rating-overrides">4.1.2. Web rating overrides</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-new-web-rating-override">4.1.2.1. How to add a new web rating override?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#webfilter-profile">4.1.3. Webfilter profile</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-new-filter-in-a-webfilter-profile">4.1.3.1. How to add a new filter in a webfilter profile?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-update-a-single-filter-in-a-webfilter-profile">4.1.3.2. How to update a single filter in a webfilter profile?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-update-a-multiple-categories-in-a-webfilter-profile">4.1.3.3. How to update a multiple categories in a webfilter profile?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-webfilter-categories">4.1.3.4. How to get the webfilter categories?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dnsfilter-domain-filter-object">4.1.4. The dnsfilter domain-filter object</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-empty-the-dnsfilter-domain-filter-entries-table">4.1.4.1. How to empty the <code class="docutils literal notranslate"><span class="pre">dnsfilter.domain-filter.entries</span></code> table?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-control-management">4.2. Application Control Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-list-of-all-applications">4.2.1. How to get the list of all applications?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-list-of-application-categories">4.2.2. How to get the list of Application Categories?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dlp-profile-management">4.3. DLP Profile Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-new-dlp-file-pattern">4.3.1. How to add a new DLP File Pattern?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-dlp-elements-from-fortiguard-db">4.3.2. How to get DLP elements from FortiGuard DB?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-dlp-sensors-from-fortiguard-db">4.3.2.1. How to get DLP sensors from FortiGuard DB?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-dlp-dictionnaries-from-fortiguard-db">4.3.2.2. How to get DLP dictionnaries from FortiGuard DB?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-dlp-data-type-from-fortiguard-db">4.3.2.3. How to get DLP data-type from FortiGuard DB?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ips-profiles-management">4.4. IPS Profiles Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-an-ips-signature-in-an-ips-profile">4.4.1. How to add an IPS signature in an IPS profile?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-list-of-ips-signatures">4.4.2. How to get list of IPS signatures?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-ips-profile-usage">4.4.3. How to get IPS Profile Usage?</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="security-profiles">
+<h1><span class="section-number">4. </span>Security Profiles<a class="headerlink" href="#security-profiles" title="Link to this heading">#</a></h1>
+<section id="url-filtering">
+<h2><span class="section-number">4.1. </span>URL Filtering<a class="headerlink" href="#url-filtering" title="Link to this heading">#</a></h2>
+<section id="webfilter-urlfilter">
+<h3><span class="section-number">4.1.1. </span>Webfilter urlfilter<a class="headerlink" href="#webfilter-urlfilter" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-10">This section is for the <code class="docutils literal notranslate"><span class="pre">webfilter.urlfilter</span></code>  object.</p>
+<section id="how-to-add-a-new-entry-in-a-webfilter-urlfilter-entries">
+<h4><span class="section-number">4.1.1.1. </span>How to add a new entry in a webfilter.urlfilter.entries?<a class="headerlink" href="#how-to-add-a-new-entry-in-a-webfilter-urlfilter-entries" title="Link to this heading">#</a></h4>
+<p class="linemarker linemarker-15">Goal is to add a new entry without overwritting the existing ones.</p>
+<p class="linemarker linemarker-17">To add a new entry <code class="docutils literal notranslate"><span class="pre">www.url-003.com</span></code> in the <code class="docutils literal notranslate"><span class="pre">webfilter.urlfilter</span></code> named
+<code class="docutils literal notranslate"><span class="pre">urlfilter_001</span></code>, with ID <code class="docutils literal notranslate"><span class="pre">1</span></code>, in ADOM <code class="docutils literal notranslate"><span class="pre">dc_emea</span></code>:</p>
+<p class="linemarker linemarker-20"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;www.url-003.com&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/dc_emea/obj/webfilter/urlfilter/1/entries&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GcpTJdkN8A0VwkAQF+zBA70wdh7B+Qe3tZoGil4lR+rQlrUhy0nOjNeoJLKyQb/CgdXmuA8i5omm4WV/dE7cQw==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-40">The <code class="docutils literal notranslate"><span class="pre">webfilter.urlfilter</span></code> <code class="docutils literal notranslate"><span class="pre">urlfilter_001</span></code> cannot be used as master key;
+its ID <code class="docutils literal notranslate"><span class="pre">1</span></code> has to be used instead</p></li>
+</ul>
+</div>
+<p class="linemarker linemarker-43"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/dc_emea/obj/webfilter/urlfilter/1/entries&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-delete-an-entry-in-a-webfilter-urlfilter-entries">
+<h4><span class="section-number">4.1.1.2. </span>How to delete an entry in a webfilter.urlfilter. entries?<a class="headerlink" href="#how-to-delete-an-entry-in-a-webfilter-urlfilter-entries" title="Link to this heading">#</a></h4>
+<p class="linemarker linemarker-66">Goal is to delete an existing entry without overwritting the existing ones.</p>
+<p class="linemarker linemarker-68">To delete entry <code class="docutils literal notranslate"><span class="pre">www.url-003.com</span></code> with ID <code class="docutils literal notranslate"><span class="pre">4</span></code>, in the
+<code class="docutils literal notranslate"><span class="pre">webfilter.urlfilter</span></code> named <code class="docutils literal notranslate"><span class="pre">urlfilter_001</span></code>, with ID <code class="docutils literal notranslate"><span class="pre">1</span></code>, in ADOM
+<code class="docutils literal notranslate"><span class="pre">dc_emea</span></code>:</p>
+<p class="linemarker linemarker-72"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;delete&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/dc_emea/obj/webfilter/urlfilter/1/entries/4&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GcpTJdkN8A0VwkAQF+zBA70wdh7B+Qe3tZoGil4lR+rQlrUhy0nOjNeoJLKyQb/CgdXmuA8i5omm4WV/dE7cQw==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-89">The <code class="docutils literal notranslate"><span class="pre">webfilter.urlfilter</span></code> <code class="docutils literal notranslate"><span class="pre">urlfilter_001</span></code> cannot be used as master key;
+its ID <code class="docutils literal notranslate"><span class="pre">1</span></code> has to be used instead</p></li>
+<li><p class="linemarker linemarker-91">The <code class="docutils literal notranslate"><span class="pre">webfilter.urlfilter.entries</span></code> <code class="docutils literal notranslate"><span class="pre">www.url-003.com</span></code> cannot be used as a
+master key; its ID <code class="docutils literal notranslate"><span class="pre">4</span></code> has to be used instead.</p></li>
+</ul>
+</div>
+<p class="linemarker linemarker-94"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/dc_emea/obj/webfilter/urlfilter/1/entries/3&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="web-rating-overrides">
+<h3><span class="section-number">4.1.2. </span>Web rating overrides<a class="headerlink" href="#web-rating-overrides" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-114">This section is for the <code class="docutils literal notranslate"><span class="pre">webfilter.ftgd-local-rating</span></code> objects.</p>
+<section id="how-to-add-a-new-web-rating-override">
+<h4><span class="section-number">4.1.2.1. </span>How to add a new web rating override?<a class="headerlink" href="#how-to-add-a-new-web-rating-override" title="Link to this heading">#</a></h4>
+<p class="linemarker linemarker-119">To add a new web rating override in ADOM <code class="docutils literal notranslate"><span class="pre">dc_amer</span></code>:</p>
+<p class="linemarker linemarker-121"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test #003&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;rating&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="s2">&quot;96&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;enable&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;www.url-003.com&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/dc_amer/obj/webfilter/ftgd-local-rating&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6vRSrzLBbOj1JB0thRDB1/dzUETGtibb3oohHEPXs+ppbcq99CkWp33QZLWPwd9rmYgeRXYozeXNSLjUIb6pjQ==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-144"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;www.url-003.com&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/dc_amer/obj/webfilter/ftgd-local-rating&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="webfilter-profile">
+<h3><span class="section-number">4.1.3. </span>Webfilter profile<a class="headerlink" href="#webfilter-profile" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-167">This section is for the <code class="docutils literal notranslate"><span class="pre">webfilter.profile</span></code>  object.</p>
+<section id="how-to-add-a-new-filter-in-a-webfilter-profile">
+<h4><span class="section-number">4.1.3.1. </span>How to add a new filter in a webfilter profile?<a class="headerlink" href="#how-to-add-a-new-filter-in-a-webfilter-profile" title="Link to this heading">#</a></h4>
+<p class="linemarker linemarker-172">Following example add a new filter to block category <code class="docutils literal notranslate"><span class="pre">84</span></code> (i.e., <em>Web-based
+Applications</em>) from webfilter profile <code class="docutils literal notranslate"><span class="pre">webfilter_profile_001</span></code> in ADOM
+<code class="docutils literal notranslate"><span class="pre">demo_002</span></code>.</p>
+<p class="linemarker linemarker-176"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;block&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">84</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/demo_002/obj/webfilter/profile/webfilter_profile_001/ftgd-wf/filters&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nRrJXLvH/kZVYQ9pnfTwCw3DrMKJENANTdyPjt8MLDBZC3xyuhoWpa2D7LpF1MVhYv7p9RZWPurYlMfLjPgaAw==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-195"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/demo_002/obj/webfilter/profile/webfilter_profile_001/ftgd-wf/filters&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-217">Response contains the <code class="docutils literal notranslate"><span class="pre">id</span></code> of the created entry.</p></li>
+</ul>
+</div>
+</section>
+<section id="how-to-update-a-single-filter-in-a-webfilter-profile">
+<h4><span class="section-number">4.1.3.2. </span>How to update a single filter in a webfilter profile?<a class="headerlink" href="#how-to-update-a-single-filter-in-a-webfilter-profile" title="Link to this heading">#</a></h4>
+<p class="linemarker linemarker-222">Goal is to just update a single filter from a Web Filter Profile.</p>
+<p class="linemarker linemarker-224">For instance we want to update the filter with category <em>Potentially Liable</em> &gt; <em>Extremist Groups</em> from its default <code class="docutils literal notranslate"><span class="pre">warning</span></code> to <code class="docutils literal notranslate"><span class="pre">block</span></code> in our Web Filter Profile <code class="docutils literal notranslate"><span class="pre">web_filter_profile_001</span></code> located in ADOM <code class="docutils literal notranslate"><span class="pre">root</span></code>:</p>
+<p class="linemarker linemarker-226">Before the change: <code class="docutils literal notranslate"><span class="pre">action</span></code> is <code class="docutils literal notranslate"><span class="pre">warning</span></code></p>
+<p class="linemarker linemarker-228"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters/7&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;YW73rbdh9iDVDVh7EEu27igmT7sYZmHKeIli2wfe1NGwDuI+2OU3R1NwoWuID3JGzyfJEbhdyBJVCglYOVScJw==&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-244"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;warning&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="s2">&quot;12&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;log&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;enable&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3693</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;warn-duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5m&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;warning-prompt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;per-category&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters/7&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-273">The master key is the <code class="docutils literal notranslate"><span class="pre">id</span></code> attribute.</p></li>
+<li><p class="linemarker linemarker-274">Here it is <code class="docutils literal notranslate"><span class="pre">7</span></code> and we used it in the <code class="docutils literal notranslate"><span class="pre">get</span></code> request to obtain the detail of this specific filter only</p></li>
+<li><p class="linemarker linemarker-275">We will need it to perform the change as well.</p></li>
+</ul>
+</div>
+<p class="linemarker linemarker-277">We change the action to <code class="docutils literal notranslate"><span class="pre">block</span></code>:</p>
+<p class="linemarker linemarker-279"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;block&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters/7&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;YW73rbdh9iDVDVh7EEu27igmT7sYZmHKeIli2wfe1NGwDuI+2OU3R1NwoWuID3JGzyfJEbhdyBJVCglYOVScJw==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-297"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters/7&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-317">After the change: action is <code class="docutils literal notranslate"><span class="pre">block</span></code>:</p>
+<p class="linemarker linemarker-319"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters/7&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;YW73rbdh9iDVDVh7EEu27igmT7sYZmHKeIli2wfe1NGwDuI+2OU3R1NwoWuID3JGzyfJEbhdyBJVCglYOVScJw==&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-335"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;block&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="s2">&quot;12&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;log&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;enable&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3693</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters/7&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-update-a-multiple-categories-in-a-webfilter-profile">
+<h4><span class="section-number">4.1.3.3. </span>How to update a multiple categories in a webfilter profile?<a class="headerlink" href="#how-to-update-a-multiple-categories-in-a-webfilter-profile" title="Link to this heading">#</a></h4>
+<p class="linemarker linemarker-364">Goal is to just update multiple categories from a Web Filter Profile.</p>
+<p class="linemarker linemarker-366">For instance we want the categories <em>Potentially Liable</em> &gt; <em>Extremist
+Groups</em> and <em>Potentially Liable</em> &gt; <em>Hacking</em>  with <code class="docutils literal notranslate"><span class="pre">action</span></code> set to <code class="docutils literal notranslate"><span class="pre">block</span></code>
+in our Web Filter Profile <code class="docutils literal notranslate"><span class="pre">web_filter_profile_001</span></code> located in ADOM <code class="docutils literal notranslate"><span class="pre">root</span></code>:</p>
+<p class="linemarker linemarker-370"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;block&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;block&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;loEYHhY8MscMCCWAaiOzV2mPxJjU1gqDwAP+nnYIKEQFx43vth/D3ZQx4Yg5ZlGjQg1qtdHlctROIwLIDg+XBw==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-395"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-get-the-webfilter-categories">
+<h4><span class="section-number">4.1.3.4. </span>How to get the webfilter categories?<a class="headerlink" href="#how-to-get-the-webfilter-categories" title="Link to this heading">#</a></h4>
+<p class="linemarker linemarker-415">Caught in #0227646.</p>
+<p class="linemarker linemarker-417">We can use the <code class="docutils literal notranslate"><span class="pre">datasrc</span></code> option as shown below:</p>
+<p class="linemarker linemarker-419"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;attr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rating&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;option&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;datasrc&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/root/obj/webfilter/ftgd-local-rating&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vivfIFW9y+mdCpWMh70rCuRoH8lcRTbRH2Zju7CpxePlzZddsRRp3ctkHlfY2GGWYBGnls3w77nUeLTt0nIZMA==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-436"><strong>RESPONSE:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;webfilter categories&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;obj description&quot;</span><span class="p">:</span> <span class="s2">&quot;All Categories&quot;</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;g01&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;obj description&quot;</span><span class="p">:</span> <span class="s2">&quot;Potentially Liable&quot;</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;obj description&quot;</span><span class="p">:</span> <span class="s2">&quot;Drug Abuse&quot;</span>
+          <span class="p">},</span>
+          <span class="p">[</span><span class="o">...</span><span class="p">],</span>
+                    <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;g21&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;obj description&quot;</span><span class="p">:</span> <span class="s2">&quot;Unrated&quot;</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;obj description&quot;</span><span class="p">:</span> <span class="s2">&quot;Unrated&quot;</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;g22&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;obj description&quot;</span><span class="p">:</span> <span class="s2">&quot;Local Categories&quot;</span>
+          <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;webfilter ftgd-local-cat&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;desc&quot;</span><span class="p">:</span> <span class="s2">&quot;custom1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">140</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="mi">1</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;desc&quot;</span><span class="p">:</span> <span class="s2">&quot;custom2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">141</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="mi">1</span>
+          <span class="p">}</span>
+        <span class="p">]</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/pm/config/adom/root/obj/webfilter/ftgd-local-rating&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-494">We can also use the <code class="docutils literal notranslate"><span class="pre">get</span> <span class="pre">reserved</span></code> option as shown below:</p>
+<p class="linemarker linemarker-496"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;option&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get reserved&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/root/obj/webfilter/categories&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jkdpxOcqKU/tuzAMPxljkMYY1/swAnbapm8MfdVOF+ME13i40+8v+63DQhX8KHSBK7+v2lqCcNSlSVYlwDzgTw==&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-512"><strong>RESPONSE:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;obj description&quot;</span><span class="p">:</span> <span class="s2">&quot;All Categories&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;g01&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;obj description&quot;</span><span class="p">:</span> <span class="s2">&quot;Potentially Liable&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;obj description&quot;</span><span class="p">:</span> <span class="s2">&quot;Drug Abuse&quot;</span>
+        <span class="p">},</span>
+        <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;g21&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;obj description&quot;</span><span class="p">:</span> <span class="s2">&quot;Unrated&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;obj description&quot;</span><span class="p">:</span> <span class="s2">&quot;Unrated&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;g22&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;obj description&quot;</span><span class="p">:</span> <span class="s2">&quot;Local Categories&quot;</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/pm/config/adom/root/obj/webfilter/categories&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="the-dnsfilter-domain-filter-object">
+<h3><span class="section-number">4.1.4. </span>The dnsfilter domain-filter object<a class="headerlink" href="#the-dnsfilter-domain-filter-object" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-559">The <code class="docutils literal notranslate"><span class="pre">dnsfilter.domain-filter</span></code> used by the <code class="docutils literal notranslate"><span class="pre">dnsfilter.profile</span></code> is the
+counterpart of the <code class="docutils literal notranslate"><span class="pre">webfilter.urlfilter</span></code> used by the <code class="docutils literal notranslate"><span class="pre">webfilter.profile</span></code>.</p>
+<section id="how-to-empty-the-dnsfilter-domain-filter-entries-table">
+<h4><span class="section-number">4.1.4.1. </span>How to empty the <code class="docutils literal notranslate"><span class="pre">dnsfilter.domain-filter.entries</span></code> table?<a class="headerlink" href="#how-to-empty-the-dnsfilter-domain-filter-entries-table" title="Link to this heading">#</a></h4>
+<p class="linemarker linemarker-565">You can use the JSON RPC <em>method</em> <code class="docutils literal notranslate"><span class="pre">update</span></code> or <code class="docutils literal notranslate"><span class="pre">set</span></code> as shown below:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">REQUEST</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">RESPONSE</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;update&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;entries&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/dc_amer/obj/dnsfilter/domain-filter/2&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{ session }}&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/dc_amer/obj/dnsfilter/domain-filter/2&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+</section>
+<section id="application-control-management">
+<h2><span class="section-number">4.2. </span>Application Control Management<a class="headerlink" href="#application-control-management" title="Link to this heading">#</a></h2>
+<section id="how-to-get-the-list-of-all-applications">
+<h3><span class="section-number">4.2.1. </span>How to get the list of all applications?<a class="headerlink" href="#how-to-get-the-list-of-all-applications" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-613">We can use any of those URL</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="k">global</span><span class="o">/</span><span class="n">_application</span><span class="o">/</span><span class="nb">list</span>
+<span class="n">pm</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="k">global</span><span class="o">/</span><span class="n">obj</span><span class="o">/</span><span class="n">_application</span><span class="o">/</span><span class="nb">list</span>
+<span class="n">pm</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">adom</span><span class="o">/&lt;</span><span class="n">adom</span><span class="o">&gt;/</span><span class="n">_application</span><span class="o">/</span><span class="nb">list</span>
+<span class="n">pm</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">adom</span><span class="o">/&lt;</span><span class="n">adom</span><span class="o">&gt;/</span><span class="n">obj</span><span class="o">/</span><span class="n">_application</span><span class="o">/</span><span class="nb">list</span>
+<span class="n">pm</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">device</span><span class="o">/&lt;</span><span class="n">device</span><span class="o">&gt;/</span><span class="k">global</span><span class="o">/</span><span class="n">_application</span><span class="o">/</span><span class="nb">list</span>
+<span class="n">pm</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">device</span><span class="o">/&lt;</span><span class="n">device</span><span class="o">&gt;/</span><span class="n">_application</span><span class="o">/</span><span class="nb">list</span>
+<span class="n">pm</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">device</span><span class="o">/&lt;</span><span class="n">device</span><span class="o">&gt;/</span><span class="n">vdom</span><span class="o">/&lt;</span><span class="n">vdom</span><span class="o">&gt;/</span><span class="n">_application</span><span class="o">/</span><span class="nb">list</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-625">For instance:</p>
+<p class="linemarker linemarker-627"><strong>REQUEST</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;jsonrpc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/CM-LAB-001/_application/list&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NFqDRmsSz8tdxPZ7TPLdPCewoXS8Tz/vvZyOXera6CVntGsNHbElddvtyW/gAdmacfrYsoyaQsAaIktFwQm2dmRfUocs1u4B&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-644"><strong>RESPONSE</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;behavior&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;cat-id&quot;</span><span class="p">:</span> <span class="s2">&quot;21&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;16554&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;language&quot;</span><span class="p">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;126.Mail&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;popularity&quot;</span><span class="p">:</span> <span class="s2">&quot;4.low&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;1.TCP, 9.HTTP, 26.SSL&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;require_ssl_di&quot;</span><span class="p">:</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;risk&quot;</span><span class="p">:</span> <span class="s2">&quot;3.low&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;shaping&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;sub-cat-id&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;sub-category&quot;</span><span class="p">:</span> <span class="s2">&quot;(null)&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;technology&quot;</span><span class="p">:</span> <span class="s2">&quot;1.Browser-Based&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;9.Netease&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="s2">&quot;10&quot;</span>
+        <span class="p">},</span>
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-get-the-list-of-application-categories">
+<h3><span class="section-number">4.2.2. </span>How to get the list of Application Categories?<a class="headerlink" href="#how-to-get-the-list-of-application-categories" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-677">Caught in #0278734.</p>
+<p class="linemarker linemarker-679">We can use either of those URLs:</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-681"><code class="docutils literal notranslate"><span class="pre">pm/config/adom/&lt;adom&gt;/_category/list</span></code></p></li>
+<li><p class="linemarker linemarker-682"><code class="docutils literal notranslate"><span class="pre">pm/config/adom/&lt;adom&gt;/obj/_category/list</span></code></p></li>
+</ul>
+<p class="linemarker linemarker-684">To get some output, the ADOM has to contains a real device.</p>
+<p class="linemarker linemarker-686">If your ADOM doesn’t have yet any real devices or only has Model
+Devices, the output will be null.</p>
+<p class="linemarker linemarker-689"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/adom/ADOM_54_001/obj/_category/list&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xkULr1ot8oq+HnVLlrxVC9KafsiO+ZvtU0Uot+LlueIqDegtqIw9W0lYSF1YkyUgCHLH/PxwnSmCjnfuLPoZrQ==&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-705"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;Botnet\&quot;&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;Business\&quot;&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;Cloud.IT\&quot;&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;Video/Audio\&quot;&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;VoIP\&quot;&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;Web.Client\&quot;&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/adom/ADOM_54_001/_category/list&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-748">Please also consider the new information from #0370036.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">)</span> <span class="n">JSON</span> <span class="n">API</span> <span class="n">changes</span><span class="p">:</span>
+<span class="n">a</span><span class="p">)</span> <span class="n">The</span> <span class="n">following</span> <span class="mi">3</span> <span class="n">JSON</span> <span class="n">API</span><span class="p">:</span>
+<span class="n">firewall</span><span class="o">/</span><span class="n">service</span><span class="o">/</span><span class="n">predefined</span> <span class="p">(</span><span class="n">this</span> <span class="n">one</span> <span class="n">should</span> <span class="n">be</span> <span class="n">deleted</span><span class="p">)</span>
+<span class="n">ips</span><span class="o">/</span><span class="n">sensor</span><span class="o">/</span><span class="n">entries</span><span class="o">/</span><span class="n">protocol</span>
+<span class="n">ips</span><span class="o">/</span><span class="n">sensor</span><span class="o">/</span><span class="n">entries</span><span class="o">/</span><span class="n">application</span>
+<span class="n">Will</span> <span class="n">merge</span> <span class="n">into</span> <span class="n">one</span><span class="p">:</span>
+<span class="n">_data</span><span class="o">/</span><span class="n">reserved</span><span class="o">/&lt;</span><span class="n">mapping_name</span><span class="o">&gt;</span>
+<span class="n">b</span><span class="p">)</span> <span class="n">New</span> <span class="n">category</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">categories</span><span class="p">,</span>
+<span class="n">also</span> <span class="s2">&quot;webfilter/categories&quot;</span><span class="p">,</span> <span class="n">etc</span><span class="o">...</span>
+<span class="n">can</span> <span class="n">be</span> <span class="n">get</span> <span class="n">by</span> <span class="n">the</span> <span class="n">new</span> <span class="n">JSON</span> <span class="n">API</span><span class="p">:</span>
+<span class="n">_data</span><span class="o">/</span><span class="n">reserved</span><span class="o">/</span><span class="n">application</span><span class="o">/</span><span class="n">categories</span>
+<span class="n">_data</span><span class="o">/</span><span class="n">reserved</span><span class="o">/</span><span class="n">webfilter</span><span class="o">/</span><span class="n">categories</span>
+<span class="n">c</span><span class="p">)</span> <span class="n">The</span> <span class="n">old</span> <span class="n">JSON</span> <span class="n">API</span><span class="p">:</span>
+<span class="n">_category</span><span class="o">/</span><span class="nb">list</span>
+<span class="n">will</span> <span class="n">be</span> <span class="n">kept</span> <span class="n">which</span> <span class="n">will</span> <span class="k">return</span> <span class="n">the</span> <span class="n">DB</span> <span class="n">calculated</span> <span class="n">category</span> <span class="nb">list</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dlp-profile-management">
+<h2><span class="section-number">4.3. </span>DLP Profile Management<a class="headerlink" href="#dlp-profile-management" title="Link to this heading">#</a></h2>
+<section id="how-to-add-a-new-dlp-file-pattern">
+<h3><span class="section-number">4.3.1. </span>How to add a new DLP File Pattern?<a class="headerlink" href="#how-to-add-a-new-dlp-file-pattern" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-774">Caught in #594984.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-0">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/adom/root/obj/dlp/filepattern&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;entries&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;file-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;filter-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test&quot;</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{session}}&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-1">
+RESPONSE</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/adom/root/obj/dlp/filepattern&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-to-get-dlp-elements-from-fortiguard-db">
+<h3><span class="section-number">4.3.2. </span>How to get DLP elements from FortiGuard DB?<a class="headerlink" href="#how-to-get-dlp-elements-from-fortiguard-db" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-827">Caught in #0966060.</p>
+<section id="how-to-get-dlp-sensors-from-fortiguard-db">
+<h4><span class="section-number">4.3.2.1. </span>How to get DLP sensors from FortiGuard DB?<a class="headerlink" href="#how-to-get-dlp-sensors-from-fortiguard-db" title="Link to this heading">#</a></h4>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-2">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/adom/root/_fdsdb/dlp/sensor&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{session}}&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-3">
+RESPONSE</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Canadian Health Information Act (HIA) Sensor&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;entries&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[ { \&quot;dictionary\&quot;: \&quot;can-pass-dict\&quot;, \&quot;count\&quot;: 5 }, { \&quot;dictionary\&quot;: \&quot;can-natl_id-sin-dict\&quot;, \&quot;count\&quot;: 5 }, { \&quot;dictionary\&quot;: \&quot;can-phin-dict\&quot;, \&quot;count\&quot;: 5 }, { \&quot;dictionary\&quot;: \&quot;can-health_service-dict\&quot;, \&quot;count\&quot;: 5 } ]&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;eval&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;any&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;can-hia&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Canadian Personal Identifiable Information (PII) Sensor&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;entries&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[ { \&quot;dictionary\&quot;: \&quot;can-dl-dict\&quot;, \&quot;count\&quot;: 5 }, { \&quot;dictionary\&quot;: \&quot;can-natl_id-sin-dict\&quot;, \&quot;count\&quot;: 5 }, { \&quot;dictionary\&quot;: \&quot;can-pass-dict\&quot;, \&quot;count\&quot;: 5 }, { \&quot;dictionary\&quot;: \&quot;can-health_service-dict\&quot;, \&quot;count\&quot;: 5 }, { \&quot;dictionary\&quot;: \&quot;can-bank_account-dict\&quot;, \&quot;count\&quot;: 5 }, { \&quot;dictionary\&quot;: \&quot;can-phin-dict\&quot;, \&quot;count\&quot;: 5 } ]&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;eval&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;any&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;can-pii&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Source Code Sensor&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;entries&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[ { \&quot;dictionary\&quot;: \&quot;source_code-python\&quot;, \&quot;count\&quot;: 5 }, { \&quot;dictionary\&quot;: \&quot;source_code-c\&quot;, \&quot;count\&quot;: 5 }, { \&quot;dictionary\&quot;: \&quot;source_code-java\&quot;, \&quot;count\&quot;: 5 } ]&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;eval&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;any&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source_code&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/adom/root/_fdsdb/dlp/sensor&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.41&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-to-get-dlp-dictionnaries-from-fortiguard-db">
+<h4><span class="section-number">4.3.2.2. </span>How to get DLP dictionnaries from FortiGuard DB?<a class="headerlink" href="#how-to-get-dlp-dictionnaries-from-fortiguard-db" title="Link to this heading">#</a></h4>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-4">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/adom/root/_fdsdb/dlp/dictionary&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{session}}&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-5">
+RESPONSE</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EICAR Test File for DLP&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;entries&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[ { \&quot;type\&quot;: \&quot;keyword\&quot;, \&quot;pattern\&quot;: \&quot;X5O!P%@AP[4\\\\PZX54(P^)7CC)7}$EICAR-STANDARD-DLP-TEST-FILE!$H+H*\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 } ]&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;any&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EICAR-TEST-FILE&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;entries&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[ { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;Social Insurance (Number|Card)\&quot;, \&quot;ignore-case\&quot;: 1, \&quot;repeat\&quot;: 0 }, { \&quot;type\&quot;: \&quot;keyword\&quot;, \&quot;pattern\&quot;: \&quot;sin\&quot;, \&quot;ignore-case\&quot;: 1, \&quot;repeat\&quot;: 0 }, { \&quot;type\&quot;: \&quot;keyword\&quot;, \&quot;pattern\&quot;: \&quot;sic\&quot;, \&quot;ignore-case\&quot;: 1, \&quot;repeat\&quot;: 0 }, { \&quot;type\&quot;: \&quot;keyword\&quot;, \&quot;pattern\&quot;: \&quot;sin#\&quot;, \&quot;ignore-case\&quot;: 1, \&quot;repeat\&quot;: 0 }, { \&quot;type\&quot;: \&quot;keyword\&quot;, \&quot;pattern\&quot;: \&quot;social insurance\&quot;, \&quot;ignore-case\&quot;: 1, \&quot;repeat\&quot;: 0 } ]&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;any&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;can-natl_id-pk&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Canadian SIN Card Number Dictionary&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;entries&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[ { \&quot;type\&quot;: \&quot;can-natl_id-sin\&quot;, \&quot;pattern\&quot;: \&quot;\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;can-natl_id-prox\&quot;, \&quot;pattern\&quot;: \&quot;\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;luhn-algo\&quot;, \&quot;pattern\&quot;: \&quot;\\\\b\\\\d{3}[- ]?\\\\d{3}[- ]?\\\\d{3}\\\\b\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 } ]&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;can-natl_id-sin-dict&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;...&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python Source Code Dictionary&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;entries&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[ { \&quot;type\&quot;: \&quot;keyword\&quot;, \&quot;pattern\&quot;: \&quot;@staticmethod\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^from\\\\s(\\\\w.+)\\\\simport\\\\s\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;lambda\\\\s(.+):\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;:\\\\s*(continue|yield|await)\\\\s\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*class\\\\s(\\\\w+?):$\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*(try|finally)\\\\s*:$\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*except\\\\s*(Exception|\\\\w+Error\\\\sas\\\\s\\\\w+)\\\\s*:$\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^import\\\\s[\\\\w,]+$\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^if\\\\s__name__\\\\s*==\\\\s*[\\\&quot;&#39;]__main__[\\\&quot;&#39;]\\\\s*:$\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*(async\\\\s)?def\\\\s*(\\\\w+?)\\\\(([\\\\w,*\\\\s=\\\&quot;&#39;]*?)\\\\):$\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 } ]&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;any&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source_code-python&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C Source Code Dictionary&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;entries&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[ { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;^\\\\s*(int|void|double|float|char)\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;^\\\\s*(class|struct|interface)\\\\s\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*using\\\\s+(namespace|\\\\w+)\\\\s*(=|::)?\\\\s*[\\\\w*:&lt;&gt;]+;\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*typedef\\\\s+((int|void|float|double|char|short|long)\\\\*{0,2}|(struct|enum|union)\\\\s+)\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*#include\\\\s*[&lt;\\\&quot;][^&gt;\\\&quot;]+[&gt;\\\&quot;]\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*(public|private|protected)\\\\:\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*namespace\\\\s+(.+?)\\\\s*\\\\{\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*#define\\\\s\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*int\\\\s+main\\\\s*\\\\(\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*switch\\\\b\\\\s*\\\\([^)]*\\\\)\\\\s*\\\\{\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*#ifndef\\\\s\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 } ]&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;any&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source_code-c&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Java Source Code Dictionary&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;entries&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[ { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*@(Override|Deprecated|SuppressWarnings|FunctionalInterface|Entity|RequestMapping|Autowired|)\\\\s*$\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*(public\\\\s|private\\\\s|protected\\\\s)?(static\\\\s)?(final\\\\s)?(int(\\\\[\\\\])*|String(\\\\[\\\\])*|Runnable|double|float|long|char|boolean|byte|short)\\\\s(.+?);$\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*(public\\\\s+|private\\\\s+|protected\\\\s+)?((abstract\\\\s+|final\\\\s+|static\\\\s+)?class|(abstract\\\\s+|static\\\\s+)?void|enum|interface)\\\\s+(.+?){\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 }, { \&quot;type\&quot;: \&quot;regex\&quot;, \&quot;pattern\&quot;: \&quot;\\/^\\\\s*(import|package)\\\\s(static\\\\s)?(javax?|com|org)\\\\..*?;\\/m\&quot;, \&quot;ignore-case\&quot;: 0, \&quot;repeat\&quot;: 1 } ]&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;any&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source_code-java&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/adom/root/_fdsdb/dlp/dictionary&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.41&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-to-get-dlp-data-type-from-fortiguard-db">
+<h4><span class="section-number">4.3.2.3. </span>How to get DLP data-type from FortiGuard DB?<a class="headerlink" href="#how-to-get-dlp-data-type-from-fortiguard-db" title="Link to this heading">#</a></h4>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-6">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/adom/root/_fdsdb/dlp/data-type&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{session}}&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-7">
+RESPONSE</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;look-ahead&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;look-back&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-ahead&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-around&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-back&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uk-iban&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\\bGB\\d{2}[A-Z]{4}\\d{6}\\d{8}\\b&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;verify&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;look-ahead&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;look-back&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-ahead&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-around&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-back&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;can-natl_id-sin&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\\b\\d{3}[- ]?\\d{3}[- ]?\\d{3}\\b&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;verify&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\\b(?!0\\d{2}|8\\d{2})\\d{3}([ -]?)?\\d{3}\\1\\d{3}\\b&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;look-ahead&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;look-back&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-ahead&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-around&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-back&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;luhn-algo&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;verify&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;builtin)luhn&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;...&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;France SWIFT Code&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;look-ahead&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;look-back&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-ahead&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-around&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;glb-swift-pk&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-back&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fra-swift&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\\b[A-Z]{4}FR[A-Z0-9]{2}(?:[A-Z0-9]{3})?\\b&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;verify&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Australia SWIFT Code&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;look-ahead&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;look-back&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-ahead&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-around&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;glb-swift-pk&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-back&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;aus-swift&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\\b[A-Z]{4}AU[A-Z0-9]{2}(?:[A-Z0-9]{3})?\\b&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;verify&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;China SWIFT Code&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;look-ahead&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;look-back&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-ahead&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-around&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;glb-swift-pk&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;match-back&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;chn-swift&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\\b[A-Z]{4}CN[A-Z0-9]{2}(?:[A-Z0-9]{3})?\\b&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;verify&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm/config/adom/root/_fdsdb/dlp/data-type&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.41&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="ips-profiles-management">
+<h2><span class="section-number">4.4. </span>IPS Profiles Management<a class="headerlink" href="#ips-profiles-management" title="Link to this heading">#</a></h2>
+<section id="how-to-add-an-ips-signature-in-an-ips-profile">
+<h3><span class="section-number">4.4.1. </span>How to add an IPS signature in an IPS profile?<a class="headerlink" href="#how-to-add-an-ips-signature-in-an-ips-profile" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-1084"><strong>REQUEST:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;jsonrpc&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;exempt-ip&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;log&quot;</span><span class="p">:</span> <span class="s2">&quot;enable&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;log-attack-context&quot;</span><span class="p">:</span> <span class="s2">&quot;disable&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;log-packet&quot;</span><span class="p">:</span> <span class="s2">&quot;disable&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;quarantine&quot;</span><span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rate-count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;rule&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;1002&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/pm/config/adom/root/obj/ips/sensor/ips-sensor-001/entries&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;session&quot;</span><span class="p">:</span> <span class="s2">&quot;OTSxkSZMaLvhsyve32Gq+1mRMAuEA0FAzVxJL1OpzGIOtdPNPNwosmp7hvVD/u+QlkGn+Q5cGfotR4witaxC5Q==&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;verbose&quot;</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1114"><strong>RESPONSE:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/pm/config/adom/root/obj/ips/sensor/ips-sensor-001/entries&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-get-list-of-ips-signatures">
+<h3><span class="section-number">4.4.2. </span>How to get list of IPS signatures?<a class="headerlink" href="#how-to-get-list-of-ips-signatures" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-1137"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;jsonrpc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;option&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;count&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/DEMO/_rule/list&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;oWK0EuXIQ7zRijkfu5sMqh7kN+t9AazlSqqrF9W/TbdkCMzSTyDp/6l/hnKbx8nI7ekpdhrqmveAFGyoxx7wLgKlKO2vxsFW&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-1155"><strong>RESPONSE:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;block&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;application&quot;</span><span class="p">:</span> <span class="s2">&quot;SCADA&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;cve&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;cve_lf&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;database&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;20190121&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="s2">&quot;SCADA&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="s2">&quot;server,client&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;log&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;log-packet&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;10-Strike.LANState.Local.Buffer.Overflow.Exploit&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;os&quot;</span><span class="p">:</span> <span class="s2">&quot;Windows&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rate-count&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rate-duration&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rate-mode&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rate-track&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rev&quot;</span><span class="p">:</span> <span class="s2">&quot;13518&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rule-id&quot;</span><span class="p">:</span> <span class="mi">47306</span><span class="p">,</span>
+          <span class="s2">&quot;service&quot;</span><span class="p">:</span> <span class="s2">&quot;TCP,HTTP,FTP,SMTP,POP3,IMAP,NNTP&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;enable&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;vuln_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Buffer Errors&quot;</span>
+        <span class="p">},</span>
+        <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/pm/config/adom/DEMO/_rule/list&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;15.821&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-get-ips-profile-usage">
+<h3><span class="section-number">4.4.3. </span>How to get IPS Profile Usage?<a class="headerlink" href="#how-to-get-ips-profile-usage" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-1203">Caught in #0955276.</p>
+<p class="linemarker linemarker-1205">From the GUI, this operation is reserved to a <em>restricted</em> administrator (an
+administrator declared in FortiManager and assigned to a permission profile with
+the <code class="docutils literal notranslate"><span class="pre">system.admin.profile.type</span></code> set to <code class="docutils literal notranslate"><span class="pre">restricted</span></code>).</p>
+<p class="linemarker linemarker-1209">But it is actionnable with the FortiManager JSON RPC API as shown below:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-8" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-8">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/adom/root/_objstatus/ips/sensor/&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;f892b8dc-bbf2-444e-a196-b51d4e3686e8&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="002_objects_management.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Objects Management</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="003_docker_management.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Docker Management</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#url-filtering">4.1. URL Filtering</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#webfilter-urlfilter">4.1.1. Webfilter urlfilter</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-new-entry-in-a-webfilter-urlfilter-entries">4.1.1.1. How to add a new entry in a webfilter.urlfilter.entries?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-delete-an-entry-in-a-webfilter-urlfilter-entries">4.1.1.2. How to delete an entry in a webfilter.urlfilter. entries?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#web-rating-overrides">4.1.2. Web rating overrides</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-new-web-rating-override">4.1.2.1. How to add a new web rating override?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#webfilter-profile">4.1.3. Webfilter profile</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-new-filter-in-a-webfilter-profile">4.1.3.1. How to add a new filter in a webfilter profile?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-update-a-single-filter-in-a-webfilter-profile">4.1.3.2. How to update a single filter in a webfilter profile?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-update-a-multiple-categories-in-a-webfilter-profile">4.1.3.3. How to update a multiple categories in a webfilter profile?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-webfilter-categories">4.1.3.4. How to get the webfilter categories?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dnsfilter-domain-filter-object">4.1.4. The dnsfilter domain-filter object</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-empty-the-dnsfilter-domain-filter-entries-table">4.1.4.1. How to empty the <code class="docutils literal notranslate"><span class="pre">dnsfilter.domain-filter.entries</span></code> table?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-control-management">4.2. Application Control Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-list-of-all-applications">4.2.1. How to get the list of all applications?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-list-of-application-categories">4.2.2. How to get the list of Application Categories?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dlp-profile-management">4.3. DLP Profile Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-new-dlp-file-pattern">4.3.1. How to add a new DLP File Pattern?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-dlp-elements-from-fortiguard-db">4.3.2. How to get DLP elements from FortiGuard DB?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-dlp-sensors-from-fortiguard-db">4.3.2.1. How to get DLP sensors from FortiGuard DB?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-dlp-dictionnaries-from-fortiguard-db">4.3.2.2. How to get DLP dictionnaries from FortiGuard DB?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-dlp-data-type-from-fortiguard-db">4.3.2.3. How to get DLP data-type from FortiGuard DB?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ips-profiles-management">4.4. IPS Profiles Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-an-ips-signature-in-an-ips-profile">4.4.1. How to add an IPS signature in an IPS profile?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-list-of-ips-signatures">4.4.2. How to get list of IPS signatures?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-ips-profile-usage">4.4.3. How to get IPS Profile Usage?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By NOC/SOC Fortinet CSE Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jean-Pierre Forcioli.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

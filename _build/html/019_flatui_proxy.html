@@ -1,0 +1,1280 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>20. FortiManager GUI API &#8212; How to FortiManager API v1.0_20230413_001</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script src="_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js?v=ffc8af2d"></script>
+    <script src="_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js?v=12818e64"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '019_flatui_proxy';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="21. VPN Manager" href="020_vpn_manager.html" />
+    <link rel="prev" title="19. Using dbcache" href="018_dbcache.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+
+
+  <div class="bd-header-announcement container-fluid bd-header-announcement">
+    <div class="bd-header-announcement__content">How to FortiManager API?</div>
+  </div>
+
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fortimanager_api.png" class="logo__image only-light" alt="How to FortiManager API v1.0_20230413_001 - Home"/>
+    <script>document.write(`<img src="_static/fortimanager_api.png" class="logo__image only-dark" alt="How to FortiManager API v1.0_20230413_001 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="001_fmg_json_api_introduction.html">1. FMG JSON API Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="012_option_attribute.html">2. The <em>option</em> attribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002_objects_management.html">3. Objects Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002_security_profiles.html">4. Security Profiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="003_docker_management.html">5. Docker Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="004_sdwan_management.html">6. SD-WAN Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="005_connector_management.html">7. Connector Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007_device_management.html">8. Device Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="008_policy_package_management.html">9. Policy Package Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="009_provisioning_template_management.html">10. Provisioning Template Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_fmg_configuration.html">11. Operating the FortiManager’s own configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="011_alternative_fortimanager_api.html">12. Alternative FortiManager APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="012_cli_script_management.html">13. Script management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="013_adom_management.html">14. ADOM management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="014_fortiguard_management.html">15. FortiGuard Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_qos_management.html">16. QoS management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="016_sys_proxy_json.html">17. Proxying any APIs within FMG JSON API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="017_fmg_operations.html">18. FortiManager operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="018_dbcache.html">19. Using <code class="docutils literal notranslate"><span class="pre">dbcache</span></code></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">20. FortiManager GUI API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_vpn_manager.html">21. VPN Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="021_sub_fetch.html">22. Sub fetch operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="022_fmg_cloud.html">23. FortiManager Cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="023_meta_fields.html">24. Meta-fields Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="050_contributors.html">25. Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/019_flatui_proxy.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>FortiManager GUI API</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-fortimanager-gui-api">20.1. Introduction to FortiManager GUI API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-login">20.2. How to Login?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-license-information">20.3. How to get the License Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ndlr-to-we-need-this">20.4. NDLR: to we need this?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-logout">20.5. How to Logout?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-session-information">20.6. How to get session information?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-installation-log-for-a-given-revision">20.7. How to get the installation log for a given revision?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-urls-caught-in-0659916">20.8. Some URLs caught in #0659916</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-perform-a-device-revision-diff">20.9. How to perform a device revision diff?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-factory-default-config-of-a-managed-device">20.10. How to get the factory default config of a managed device?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-operate-the-policy-package-check-operation">20.11. How to operate the policy package check operation?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-operate-a-policy-package-diff-operation">20.12. How to operate a policy package diff operation?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-csv-export-components-from-policy-package">20.13. How to CSV export components from policy package?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trigger-the-csv-export-task">20.13.1. Trigger the CSV export task</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-csv-file">20.13.2. Download the CSV file</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="fortimanager-gui-api">
+<h1><span class="section-number">20. </span>FortiManager GUI API<a class="headerlink" href="#fortimanager-gui-api" title="Link to this heading">#</a></h1>
+<section id="introduction-to-fortimanager-gui-api">
+<h2><span class="section-number">20.1. </span>Introduction to FortiManager GUI API<a class="headerlink" href="#introduction-to-fortimanager-gui-api" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-7">When do you need to use this API?</p>
+<p class="linemarker linemarker-9">Most of the time, it’s when you’re in a situation where the FortiManager JSON RPC API doesn’t offer an <em>endpoint</em> to perform an operation which is supported by the FortiManager GUI.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p class="linemarker linemarker-13">This API isn’t supported and could be modified without prior notifications.</p>
+<p class="linemarker linemarker-15">Only use it when you cannot use the FortiManager JSON RPC API.</p>
+<p class="linemarker linemarker-17">In any cases, please contact your Fortinet technical contact in order to
+double check whether there’s any supported and alternative methods.</p>
+</div>
+</section>
+<section id="how-to-login">
+<h2><span class="section-number">20.2. </span>How to Login?<a class="headerlink" href="#how-to-login" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-23">It’s a two steps process:</p>
+<ol class="arabic">
+<li><p class="linemarker linemarker-25">Use the following request to get (and save) cookies <code class="docutils literal notranslate"><span class="pre">CURRENT_SESSION</span></code> and
+<code class="docutils literal notranslate"><span class="pre">HTTP_CSRF_TOKEN</span></code></p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-0">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>POST https://&lt;fmg_ip&gt;/cgi-bin/module/flatui_auth
+Content-type: application/json
+
+{
+  &quot;url&quot;: &quot;/gui/userauth&quot;,
+  &quot;method&quot;: &quot;login&quot;,
+  &quot;params&quot;: {
+    &quot;username&quot;: &quot;devops&quot;,
+    &quot;secretkey&quot;: &quot;fortinet&quot;,
+    &quot;logintype&quot;: 0
+  }
+}
+</pre></div>
+</div>
+<p class="linemarker linemarker-47">where <code class="docutils literal notranslate"><span class="pre">username</span></code> and <code class="docutils literal notranslate"><span class="pre">secretkey</span></code> are a declared FortiManager administrator and its corresponding password.</p>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-1">
+RESPONSE:</label><div class="sd-tab-content docutils">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HTTP</span><span class="o">/</span><span class="mi">2</span> <span class="mi">200</span>
+<span class="nb">set</span><span class="o">-</span><span class="n">cookie</span><span class="p">:</span> <span class="n">CURRENT_SESSION</span><span class="o">=</span><span class="n">WwuV5bs3Qmi3cXk665Eu9v6UdWjZVA5TLXjy5l2i8K0F7Jj5I17tSxuk</span><span class="o">/</span><span class="n">c9xzpY10XuMEdgzxpRuD1GhS0AC</span><span class="o">+</span><span class="n">w</span><span class="o">==</span><span class="p">;</span> <span class="n">Path</span><span class="o">=/</span><span class="p">;</span> <span class="n">HttpOnly</span><span class="p">;</span> <span class="n">SameSite</span><span class="o">=</span><span class="n">Strict</span><span class="p">;</span> <span class="n">Secure</span><span class="p">;</span> <span class="n">Version</span><span class="o">=</span><span class="mi">1</span>
+<span class="nb">set</span><span class="o">-</span><span class="n">cookie</span><span class="p">:</span> <span class="n">HTTP_CSRF_TOKEN</span><span class="o">=</span><span class="mi">0</span><span class="n">yQEEtY8Q62dbzwKARsEAKLyzEJf9yO</span><span class="p">;</span> <span class="n">Path</span><span class="o">=/</span><span class="p">;</span> <span class="n">Secure</span><span class="p">;</span> <span class="n">Version</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="p">{</span>
+  <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/gui/userauth&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p class="linemarker linemarker-71">You can now keep using those two cookies in your subsequent calls.</p>
+<p class="linemarker linemarker-73">Example with <code class="docutils literal notranslate"><span class="pre">curl</span></code>/<code class="docutils literal notranslate"><span class="pre">jq</span></code>:</p>
+<ul>
+<li><p class="linemarker linemarker-75">The JSON payload <code class="docutils literal notranslate"><span class="pre">login.json</span></code> file:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/gui/userauth&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;login&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;devops&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;secretkey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fortinet&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;logintype&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="linemarker linemarker-80">The <code class="docutils literal notranslate"><span class="pre">curl</span></code>/<code class="docutils literal notranslate"><span class="pre">jq</span></code> command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-k<span class="w"> </span>-s<span class="w"> </span>-c<span class="w"> </span>cookie-jar.txt<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span>https://10.210.35.112/cgi-bin/module/flatui_auth<span class="w"> </span>-d<span class="w"> </span>@login.json
+</pre></div>
+</div>
+</li>
+<li><p class="linemarker linemarker-86">The <code class="docutils literal notranslate"><span class="pre">curl</span></code>/<code class="docutils literal notranslate"><span class="pre">jq</span></code> command output:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/gui/userauth&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="linemarker linemarker-104">The created <code class="docutils literal notranslate"><span class="pre">cookie-jar.txt</span></code> file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Netscape HTTP Cookie File
+# https://curl.se/docs/http-cookies.html
+# This file was generated by libcurl! Edit at your own risk.
+
+10.210.35.112   FALSE   /       TRUE    0       HTTP_CSRF_TOKEN nDbJ1AXyyeVwW6rOgZVTzHcszM8Fb2u
+10.210.35.112   FALSE   /       TRUE    0       selectadom      1
+10.210.35.112   FALSE   /       TRUE    0       remoteauth
+10.210.35.112   FALSE   /       TRUE    0       auth_state
+#HttpOnly_10.210.35.112 FALSE   /       TRUE    0       CURRENT_SESSION w8KxRrvZ6oKDYMZII/jve5hw+BhT6Cejn7qiRR4hgPI30o7AbtmlOWzwTSZY9fmz/7/8l34klFRUPpCSxX6MnPUhL+UrzG2N
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="how-to-get-the-license-information">
+<h2><span class="section-number">20.3. </span>How to get the License Information<a class="headerlink" href="#how-to-get-the-license-information" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-121">This is to get most of the information exposed in the <em>License Information</em> widget of the <em>Dashboard</em> page:</p>
+<a class=""
+               data-lightbox="group-4ceedcf7-fe49-448f-90c5-e3fcb9fdc9c9"
+               href="_images/image_0012.png"
+               title=""
+               data-title=""
+               
+               ><img src="_images/image_0012.png"
+                     class=""
+                     width="50%"
+                     height="50%"
+                     alt=""/>
+                </a><ol class="arabic">
+<li><p class="linemarker linemarker-125">Obtain the URL used by the FortiManager GUI</p>
+<ul>
+<li><p class="linemarker linemarker-127">Open the browser’s developer tool</p></li>
+<li><p class="linemarker linemarker-128">Click the refresh icon as shown below:</p>
+<a class=""
+               data-lightbox="group-e0f77bff-90f9-4f45-a8f2-83b2985e751b"
+               href="_images/image_0021.png"
+               title=""
+               data-title=""
+               
+               ><img src="_images/image_0021.png"
+                     class=""
+                     width="50%"
+                     height="50%"
+                     alt=""/>
+                </a></li>
+<li><p class="linemarker linemarker-132">You can see that used URL is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>GET https://10.210.35.112/cgi-bin/module/flatui/SysDashboard?action=read&amp;type=license
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="linemarker linemarker-139">Use <code class="docutils literal notranslate"><span class="pre">curl</span></code>/<code class="docutils literal notranslate"><span class="pre">jq</span></code></p>
+<ul>
+<li><p class="linemarker linemarker-141">Login to FortiManager (see section <a class="reference internal" href="#how-to-login"><span class="std std-ref">How to Login?</span></a>)</p></li>
+<li><p class="linemarker linemarker-142">The <code class="docutils literal notranslate"><span class="pre">curl</span></code>/<code class="docutils literal notranslate"><span class="pre">jq</span></code> command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>curl -s -k -b cookie-jar.txt -H &quot;XSRF-TOKEN: nDbJ1AXyyeVwW6rOgZVTzHcszM8Fb2u&quot; &#39;https://10.210.35.112/cgi-bin/module/flatui/SysDashboard?action=read&amp;type=license&#39; | jq
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-150">A HTTP header named <code class="docutils literal notranslate"><span class="pre">XSRF-TOKEN</span></code> has been added using the value from the cookie <code class="docutils literal notranslate"><span class="pre">HTTP_CSRF_TOKEN</span></code></p></li>
+</ul>
+</div>
+</li>
+<li><p class="linemarker linemarker-152">The <code class="docutils literal notranslate"><span class="pre">curl</span></code>/<code class="docutils literal notranslate"><span class="pre">jq</span></code> output:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;adom_enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;faz_status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;is_vm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;is_vm_trial_lic&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;valid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;duplicate_license&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;has_vmmeter&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;fortimeter_lic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;max_num_dev&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;current_num_dev&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dev_num_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;fap_cnt&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FortiAPs&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;val&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;fex_cnt&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FortiExtenders&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;val&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;fgt_cnt&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FortiGates/Logging Devices&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;val&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;fsw_cnt&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FortiSwitches&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;val&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;enc_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;max_num_adom&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;max_gb_day&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;used_gb_day&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0#0.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;used_gb_day_history&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Today&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;used&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00 GB&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;is_exceed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Aug 08, 2023&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;used&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00 GB&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;is_exceed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Aug 07, 2023&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;used&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00 GB&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;is_exceed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Aug 06, 2023&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;used&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00 GB&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;is_exceed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Aug 05, 2023&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;used&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00 GB&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;is_exceed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Aug 04, 2023&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;used&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00 GB&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;is_exceed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Aug 03, 2023&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;used&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00 GB&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;is_exceed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;max_disk&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.00 TB&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;used_disk&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0#59.24 GB&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;max_disk_gb&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1024&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;used_disk_gb&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;59.240234&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;en_com_fgd_svr&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;usg&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;usg_has_lic&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;account_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jpforcioli@fortinet.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;company&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fortinet&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;licenses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;ENHN&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;css&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;txt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24x7 Support (Expires 2026-05-25)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;AVEN&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;css&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;warning-red&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;txt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Expired (Expires 2023-04-29)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;warning-red&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;ADOM&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;css&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;txt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Web/Online Support (Expires 2026-05-25)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;SPRT&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;css&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;txt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24x7 Support (Expires 2026-05-25)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;VMLS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;css&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;txt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Web/Online Support (Expires 2026-05-25)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;NIDS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;css&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;warning-red&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;txt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Expired (Expires 2023-04-29)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;warning-red&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;FRVS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;css&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;txt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Web/Online Support (Expires 2026-05-25)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;COMP&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;css&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;txt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24x7 Support (Expires 2026-05-25)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;AVDB&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;css&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;warning-red&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;txt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Expired (Expires 2023-04-29)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;warning-red&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;FMWR&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;css&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;txt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Web/Online Support (Expires 2026-05-25)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="ndlr-to-we-need-this">
+<h2><span class="section-number">20.4. </span>NDLR: to we need this?<a class="headerlink" href="#ndlr-to-we-need-this" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p class="linemarker linemarker-293">Use this request to get (and save) those two returned cookies <code class="docutils literal notranslate"><span class="pre">XSRF-TOKEN</span></code>
+and <code class="docutils literal notranslate"><span class="pre">csrftoken</span></code></p>
+<p class="linemarker linemarker-296"><strong>REQUEST:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GET</span> <span class="n">https</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">fmg_ip</span><span class="o">&gt;/</span><span class="n">p</span><span class="o">/</span><span class="n">app</span><span class="o">/</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-302"><strong>RESPONSE:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">200</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<ol class="arabic" start="2">
+<li><p class="linemarker linemarker-308">Some of the returned cookie values should also be placed in HTTP headers</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="linemarker linemarker-311"><em>Header name</em></p></th>
+<th class="head"><p class="linemarker linemarker-311"><em>Use value from Cookie…</em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="linemarker linemarker-313"><code class="docutils literal notranslate"><span class="pre">X-CSRFToken</span></code></p></td>
+<td><p class="linemarker linemarker-313"><code class="docutils literal notranslate"><span class="pre">csrftoken</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p class="linemarker linemarker-315"><code class="docutils literal notranslate"><span class="pre">X-XSRF-TOKEN</span></code></p></td>
+<td><p class="linemarker linemarker-315"><code class="docutils literal notranslate"><span class="pre">XSRF-TOKEN</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p class="linemarker linemarker-317"><code class="docutils literal notranslate"><span class="pre">XSRF-TOKEN</span></code></p></td>
+<td><p class="linemarker linemarker-317"><code class="docutils literal notranslate"><span class="pre">HTTP_CSRF_TOKEN</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+</section>
+<section id="how-to-logout">
+<h2><span class="section-number">20.5. </span>How to Logout?<a class="headerlink" href="#how-to-logout" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-323">TODO</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>GET /p/logout/ HTTP/1.1
+Host: secops-demo-001.gcp.fortipoc.net:10421
+Connection: keep-alive
+sec-ch-ua: &quot;Google Chrome&quot;;v=&quot;89&quot;, &quot;Chromium&quot;;v=&quot;89&quot;, &quot;;Not A Brand&quot;;v=&quot;99&quot;
+sec-ch-ua-mobile: ?0
+Upgrade-Insecure-Requests: 1
+DNT: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://secops-demo-001.gcp.fortipoc.net:10421/p/app/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9,fr;q=0.8,de;q=0.7
+Cookie: fortipoc-sessionid-861399adef1f6c9ae779378ce8320d44=fq5lm2e4fi0ngp3drcondpllc0tux4di; fortipoc-csrftoken-861399adef1f6c9ae779378ce8320d44=2fojN3ytY00og4E40kevmdGBO1fptafcKEYZUmulDWgAhvKTUjMDMp68GRGELa3P; auth_state=; remoteauth=; csrftoken=fyE2ywyKJ2DlfdJLuL305H4KoVzQrl9MDXQnKYHAAMV9Si0K08ydcV58wZ8YS15D; APSCOOKIE_11350372132394097185=&quot;Era%3D0%26Payload%3D8IcJnfobc13OlgKGuRSwxemnjmn+SbrxQb0VMD2vxbDyrOzP4%2F+9d9JWS7bRwjI4%0Avl7HSlIUF+TOg9Vg5g7m181KDabANtAVnJFFAyXxPj0EbmxaM0jrv8rorwur4P6v%0ASuAO2FiqEa78nCuB7E1OfHxDGA+csTCC4Io+RdU8jFB1Ck6e%2FYo7jgcHCLa+3Dy%2F%0AC1SUPH3RcPniXCZq8Mw7IA%3D%3D%0A%26AuthHash%3DQremxibVWAxsow1l6Z6O2Wqj6w0A%0A&quot;; ccsrftoken_11350372132394097185=&quot;2C2CB38EB8E2C4BF96091217890EEAE&quot;; VDOM_11350372132394097185=root; FILE_DOWNLOADING_11350372132394097185=&quot;1&quot;; APSCOOKIE_11350372132394097187=&quot;Era%3D1%26Payload%3DNQDbvg28bcI5rN6GO8PY3H0o2VTlsrxd0v1yHsS94rbb56IYpss5230QADnw%2FNmg%0AUj4dYt94D4Bo19Vxd+XpuBdqHhah3LnYMcNyzmKcgknwzZPEh1KtM1dZnGTtRPgE%0As45zqPPatEIYIkbMYoDhCzl%2F61BUyPiI5j41vc4oC4PPgvEuWzyjNjxMK7fRbOEd%0Aod7k4%2FpeSoreLKtzQU%2FMEA%3D%3D%0A%26AuthHash%3DYTRdBbhTSA6Ehrbrpg7bxkviF5wA%0A&quot;; ccsrftoken_11350372132394097187=&quot;F4BC2DAF413CC3AAA1B35594892868B2&quot;; ccsrftoken=&quot;F4BC2DAF413CC3AAA1B35594892868B2&quot;; VDOM_11350372132394097187=root; FILE_DOWNLOADING_11350372132394097187=&quot;1&quot;; CENTRAL_MGMT_OVERRIDE_11350372132394097187=1; CURRENT_SESSION=VS6W9ES7yAEunc/H2j9wE3SFGlgF1ZuYxkFIR4u/PS8P3pSfz17KAwtUOv+atzKQV0KBQ+dH+R15LeTh76J7wg==; HTTP_CSRF_TOKEN=JcIFmVQmgfJRcWcuZaDxWzxsbDUDvIr; XSRF-TOKEN=JcIFmVQmgfJRcWcuZaDxWzxsbDUDvIr
+</pre></div>
+</div>
+</section>
+<section id="how-to-get-session-information">
+<h2><span class="section-number">20.6. </span>How to get session information?<a class="headerlink" href="#how-to-get-session-information" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-348">Caught in #0643655.</p>
+<p class="linemarker linemarker-350"><strong>REQUEST:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="mf">10.210.35.200</span><span class="p">:</span><span class="mi">443</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="nb">bin</span><span class="o">/</span><span class="n">module</span><span class="o">/</span><span class="n">flatui_proxy</span>
+
+<span class="p">{</span>
+    <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/gui/sys/session&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-361"><strong>RESPONSE:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;admin_adom&quot;</span><span class="p">:</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;admin_prof&quot;</span><span class="p">:</span> <span class="s2">&quot;Super_User&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;admin_user&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;adom_list&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="s2">&quot;adom_override&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;login_user&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/gui/sys/session&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-get-the-installation-log-for-a-given-revision">
+<h2><span class="section-number">20.7. </span>How to get the installation log for a given revision?<a class="headerlink" href="#how-to-get-the-installation-log-for-a-given-revision" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-389">TODO</p>
+</section>
+<section id="some-urls-caught-in-0659916">
+<h2><span class="section-number">20.8. </span>Some URLs caught in #0659916<a class="headerlink" href="#some-urls-caught-in-0659916" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Fri</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">23</span> <span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mf">38.788</span> <span class="o">========</span> <span class="n">PARAMETERS</span> <span class="n">THAT</span> <span class="n">ARE</span> <span class="n">BEING</span> <span class="n">USED</span> <span class="o">========</span>
+<span class="n">Fri</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">23</span> <span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mf">38.788</span> <span class="n">test</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">json</span>
+<span class="n">Fri</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">23</span> <span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mf">38.788</span> <span class="n">user</span> <span class="o">=</span> <span class="n">qa12</span>
+<span class="n">Fri</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">23</span> <span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mf">38.788</span> <span class="n">password</span> <span class="o">=</span> <span class="o">**********</span>
+<span class="n">Fri</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">23</span> <span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mf">38.788</span> <span class="n">json_url</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="mf">10.2.88.20</span><span class="o">/</span><span class="n">jsonrpc</span>
+<span class="n">Fri</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">23</span> <span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mf">38.788</span> <span class="n">json_web_proxy</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">Fri</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">23</span> <span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mf">38.789</span> <span class="n">json_web_login_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;https://10.2.88.20/cgi-bin/module/flatui_auth&#39;</span><span class="p">,</span> <span class="s1">&#39;https://10.2.88.20/p/app/&#39;</span><span class="p">]</span>
+<span class="n">Fri</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">23</span> <span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mf">38.789</span> <span class="n">json_web_logout_url</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="mf">10.2.88.20</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="nb">bin</span><span class="o">/</span><span class="n">module</span><span class="o">/</span><span class="n">frame</span><span class="o">/</span><span class="n">logout</span>
+<span class="n">Fri</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">23</span> <span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mf">38.789</span> <span class="n">json_web_url</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="mf">10.2.88.20</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="nb">bin</span><span class="o">/</span><span class="n">module</span><span class="o">/</span><span class="n">flatui</span><span class="o">/</span><span class="n">json</span>
+<span class="n">Fri</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">23</span> <span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mf">38.789</span> <span class="n">json_web_fast_url</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="mf">10.2.88.20</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="nb">bin</span><span class="o">/</span><span class="n">module</span><span class="o">/</span><span class="n">forward</span>
+<span class="n">Fri</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">23</span> <span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mf">38.789</span> <span class="n">rest_file_content</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-perform-a-device-revision-diff">
+<h2><span class="section-number">20.9. </span>How to perform a device revision diff?<a class="headerlink" href="#how-to-perform-a-device-revision-diff" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-411">The GUI-based device revision diff is entirely managed by the GUI side.
+The FortiManager GUI API is just used to return two revisions as shown below.
+We ask for a revision diff for device revisions 3 and 4 from device with ID
+434.</p>
+<p class="linemarker linemarker-416"><strong>REQUEST:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="mf">10.210.35.208</span><span class="p">:</span><span class="mi">443</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="nb">bin</span><span class="o">/</span><span class="n">module</span><span class="o">/</span><span class="n">flatui_proxy</span>
+
+<span class="p">{</span>
+    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/gui/adom/dvm/device/revision/diff&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;deviceId&quot;</span><span class="p">:</span> <span class="s2">&quot;434&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;from&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;to&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-434"><strong>RESPONSE:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;version1&quot;</span><span class="p">:</span> <span class="s2">&quot;#config-version=FG100F-6.0[...]&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;version2&quot;</span><span class="p">:</span> <span class="s2">&quot;#config-version=FG100F-6.0[...]&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/gui/adom/dvm/device/revision/diff&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-get-the-factory-default-config-of-a-managed-device">
+<h2><span class="section-number">20.10. </span>How to get the factory default config of a managed device?<a class="headerlink" href="#how-to-get-the-factory-default-config-of-a-managed-device" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-458"><strong>REQUEST</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/gui/adom/dvm/device/revision/content&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get_download&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;deviceId&quot;</span><span class="p">:</span> <span class="s2">&quot;201&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;deviceName&quot;</span><span class="p">:</span> <span class="s2">&quot;dut_fgt1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rev&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;sn&quot;</span><span class="p">:</span> <span class="s2">&quot;FGVMULREDACTED77&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-476"><strong>RESPONSE</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#config-version=FGVMK6-6.00-FW-build1803-000000:opmode=0:vdom=0:user=admin</span>
+<span class="c1">#version=600</span>
+<span class="c1">#build=1803</span>
+<span class="c1">#branch_pt=1803</span>
+<span class="c1">#platform=FORTIGATE-VM64-KVM</span>
+<span class="c1">#serialno=FGVMULREDACTED77</span>
+<span class="c1">#logdisk=1</span>
+<span class="c1">#mgmt.data=00000000000000000000,00000000000000000000,00000000000000000000,00000000000000000000</span>
+<span class="c1">#mgmt.dat2=00000000000000000000,00000000000000000000,00000000000000000000,00000000000000000000</span>
+
+<span class="n">config</span> <span class="n">system</span> <span class="k">global</span>
+<span class="nb">set</span> <span class="n">alias</span> <span class="s2">&quot;FortiGate-VM64-KVM&quot;</span>
+<span class="nb">set</span> <span class="n">hostname</span> <span class="s2">&quot;FortiGate-VM64-KVM&quot;</span>
+<span class="nb">set</span> <span class="n">timezone</span> <span class="mi">04</span>
+<span class="n">end</span>
+<span class="n">config</span> <span class="n">system</span> <span class="n">accprofile</span>
+<span class="n">edit</span> <span class="s2">&quot;prof_admin&quot;</span>
+<span class="nb">set</span> <span class="n">secfabgrp</span> <span class="n">read</span><span class="o">-</span><span class="n">write</span>
+<span class="nb">set</span> <span class="n">ftviewgrp</span> <span class="n">read</span><span class="o">-</span><span class="n">write</span>
+<span class="nb">set</span> <span class="n">authgrp</span> <span class="n">read</span><span class="o">-</span><span class="n">write</span>
+<span class="nb">set</span> <span class="n">sysgrp</span> <span class="n">read</span><span class="o">-</span><span class="n">write</span>
+<span class="nb">set</span> <span class="n">netgrp</span> <span class="n">read</span><span class="o">-</span><span class="n">write</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-operate-the-policy-package-check-operation">
+<h2><span class="section-number">20.11. </span>How to operate the policy package check operation?<a class="headerlink" href="#how-to-operate-the-policy-package-check-operation" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p class="linemarker linemarker-506">Trigger the policy package check operation</p></li>
+</ol>
+<p class="linemarker linemarker-508"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;create&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/gui/adoms/157/pkgs/7494/consistency-checker&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-517">where <code class="docutils literal notranslate"><span class="pre">157</span></code> and <code class="docutils literal notranslate"><span class="pre">7494</span></code> are the ADOM and Policy Package OIDs respectively.</p>
+<p class="linemarker linemarker-519"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;taskId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">365</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/gui/adoms/157/pkgs/7494/consistency-checker&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-539">It is required to wait for task completion.</p>
+<ol class="arabic simple" start="2">
+<li><p class="linemarker linemarker-541">Get the Policy Package check result</p></li>
+</ol>
+<p class="linemarker linemarker-543"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/gui/adoms/157/pkgs/7494/consistency-checker&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-552">In fact this request will alway return the latest Policy Package check report.</p>
+<p class="linemarker linemarker-554"><strong>RESPONSE:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;Mon Apr 19 10:14:35 2021&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;demo&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pkgname&quot;</span><span class="p">:</span> <span class="s2">&quot;ppkg_buggy&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;rec&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;full_shadow_count&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;partial_shadow_count&quot;</span><span class="p">:</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;none policy count&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;none_rec&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                    <span class="s2">&quot;rec&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">[</span><span class="n">REPORT</span> <span class="n">HERE</span><span class="p">]</span>
+                    <span class="p">]</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-operate-a-policy-package-diff-operation">
+<h2><span class="section-number">20.12. </span>How to operate a policy package diff operation?<a class="headerlink" href="#how-to-operate-a-policy-package-diff-operation" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p class="linemarker linemarker-586">Trigger the policy package diff operation</p></li>
+</ol>
+<p class="linemarker linemarker-588"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/gui/adom/installation/pkg/install&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;processPreview&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;pkgOid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3292</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;installDevIds&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;170-0&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-601">where <code class="docutils literal notranslate"><span class="pre">pkgOid</span></code> and <code class="docutils literal notranslate"><span class="pre">installDevIds</span></code> are the policy package and managed
+device OIDs. For the managed device, “170-0” refers to device OID and VDOM OID.</p>
+<p class="linemarker linemarker-604"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;isSchd&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;tid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">369</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/gui/adom/installation/pkg/install&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-627">When we look in task monitor in FortiManager GUI, this action trigger a <em>copy</em>
+operation.</p>
+<p class="linemarker linemarker-630">When the task is complete we have to trigger an install preview operation.</p>
+<ol class="arabic simple" start="2">
+<li><p class="linemarker linemarker-632">Trigger an install preview operation</p></li>
+</ol>
+<p class="linemarker linemarker-634">Here we could use the normal FortiManager JSON RPC API, but we have to remain in the
+same session. This is why we’re using the flatui_proxy to trigger the install
+preview operation.</p>
+</section>
+<section id="how-to-csv-export-components-from-policy-package">
+<h2><span class="section-number">20.13. </span>How to CSV export components from policy package?<a class="headerlink" href="#how-to-csv-export-components-from-policy-package" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-641">By components we mean:</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-643">Firewall policies</p></li>
+<li><p class="linemarker linemarker-644">Global header/footer policies</p></li>
+<li><p class="linemarker linemarker-645">Shaping policies</p></li>
+<li><p class="linemarker linemarker-646">etc.</p></li>
+</ul>
+<p class="linemarker linemarker-648">It’s a two steps process:</p>
+<ol class="arabic simple">
+<li><p class="linemarker linemarker-650">First we need to trigger the export task, mentioning what do we want to CSV
+export</p></li>
+<li><p class="linemarker linemarker-652">Then we need to download the resulting file.</p></li>
+</ol>
+<section id="trigger-the-csv-export-task">
+<h3><span class="section-number">20.13.1. </span>Trigger the CSV export task<a class="headerlink" href="#trigger-the-csv-export-task" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-657">That’s an example:</p>
+<p class="linemarker linemarker-659"><strong>REQUEST</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/gui/adoms/157/pkgs/3292/file-csv&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;create&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;cateId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">181</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="s2">&quot;policyid&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;action&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;name&quot;</span>
+<span class="w">                </span><span class="p">]</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-680">Let’s have a look at the <code class="docutils literal notranslate"><span class="pre">content</span></code> attribute.</p>
+<ul>
+<li><p class="linemarker linemarker-682"><code class="docutils literal notranslate"><span class="pre">cateId</span></code> is the type of the policy we want to export. In this example
+<code class="docutils literal notranslate"><span class="pre">181</span></code> is for the <code class="docutils literal notranslate"><span class="pre">firewall</span> <span class="pre">policy</span></code>.</p>
+<ul>
+<li><p class="linemarker linemarker-685">Should you want to export <code class="docutils literal notranslate"><span class="pre">global</span> <span class="pre">header</span> <span class="pre">policy</span></code> or <code class="docutils literal notranslate"><span class="pre">global</span> <span class="pre">footer</span>
+<span class="pre">policy</span></code> you will have to use <code class="docutils literal notranslate"><span class="pre">1474</span></code> or <code class="docutils literal notranslate"><span class="pre">1476</span></code> respectively.</p></li>
+<li><p class="linemarker linemarker-688">For <code class="docutils literal notranslate"><span class="pre">firewall</span> <span class="pre">shaping-policy</span></code> or <code class="docutils literal notranslate"><span class="pre">firewall</span> <span class="pre">proxy-policy</span></code> you will have
+to use <code class="docutils literal notranslate"><span class="pre">1640</span></code> or <code class="docutils literal notranslate"><span class="pre">1844</span></code> respectively.</p></li>
+<li><p class="linemarker linemarker-691">All of those ID could be obtain by using the commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>execute fmpolicy print-adom-object &lt;adom&gt; ?
+execute fmpolicy print-adom-package &lt;adom&gt; 1 &lt;package&gt; ?
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="linemarker linemarker-698">It is possible to ask for multiple policy types in a single request:</p></li>
+</ul>
+<p class="linemarker linemarker-700"><strong>REQUEST</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/gui/adoms/157/pkgs/3292/file-csv&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;create&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;cateId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">181</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="s2">&quot;policyid&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;action&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;name&quot;</span>
+<span class="w">                </span><span class="p">]</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;cateId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1474</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="s2">&quot;policyid&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;action&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;name&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;comments&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;srcaddr&quot;</span>
+<span class="w">                </span><span class="p">]</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;cateId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1476</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="s2">&quot;policyid&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;action&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;name&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;dstaddr&quot;</span>
+<span class="w">                </span><span class="p">]</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-739">As you can see, we can also be very specific when it comes to declare the fields
+we want to be exported in the CSV output. And the other important information,
+is that the order of the exported fields will be respected.</p>
+<p class="linemarker linemarker-743">For instance, in
+the above request, the FortiManager will export the fields <code class="docutils literal notranslate"><span class="pre">policyid</span></code>, <code class="docutils literal notranslate"><span class="pre">action</span></code>,
+<code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">dstaddr</span></code>, in that order, for <code class="docutils literal notranslate"><span class="pre">global</span> <span class="pre">footer</span> <span class="pre">policy</span></code> (i.e.,
+<code class="docutils literal notranslate"><span class="pre">1476</span></code>).</p>
+<p class="linemarker linemarker-748">Obviously, values <code class="docutils literal notranslate"><span class="pre">157</span></code> and <code class="docutils literal notranslate"><span class="pre">3293</span></code> are the ADOM and Policy Package OID
+respectively.</p>
+<p class="linemarker linemarker-751">In all cases, this is the kind of response you will get:</p>
+<p class="linemarker linemarker-753"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">   </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">     </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="nt">&quot;taskid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a287fb14-0b18-11ec-ae55-02090f000116&quot;</span>
+<span class="w">         </span><span class="p">},</span>
+<span class="w">         </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">             </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">         </span><span class="p">},</span>
+<span class="w">         </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/gui/adoms/157/pkgs/3292/file-csv&quot;</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w">   </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="download-the-csv-file">
+<h3><span class="section-number">20.13.2. </span>Download the CSV file<a class="headerlink" href="#download-the-csv-file" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-776"><strong>REQUEST:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>GET https://secops-demo-001.gcp.fortipoc.net:10421/flatui/api/gui/download?filepath=policypackage-3292.csv&amp;downloadname=ppkg_branches-20210901-120531.csv
+</pre></div>
+</div>
+<p class="linemarker linemarker-782"><strong>RESPONSE:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">policyid</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">scope</span>
+<span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;accept&quot;</span><span class="p">,</span><span class="s2">&quot;ul_egress_traffic&quot;</span><span class="p">,</span><span class="s2">&quot;[All Devices/Groups]&quot;</span>
+<span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;accept&quot;</span><span class="p">,</span><span class="s2">&quot;ol_ingress_traffic&quot;</span><span class="p">,</span><span class="s2">&quot;[All Devices/Groups]&quot;</span>
+<span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="s2">&quot;accept&quot;</span><span class="p">,</span><span class="s2">&quot;ol_egress_traffic&quot;</span><span class="p">,</span><span class="s2">&quot;[All Devices/Groups]&quot;</span>
+<span class="s2">&quot;10001&quot;</span><span class="p">,</span><span class="s2">&quot;accept&quot;</span><span class="p">,</span><span class="s2">&quot;policy_0001&quot;</span><span class="p">,</span><span class="s2">&quot;[All Devices/Groups]&quot;</span>
+<span class="s2">&quot;10002&quot;</span><span class="p">,</span><span class="s2">&quot;accept&quot;</span><span class="p">,</span><span class="s2">&quot;policy_0002&quot;</span><span class="p">,</span><span class="s2">&quot;[All Devices/Groups]&quot;</span>
+<span class="s2">&quot;10003&quot;</span><span class="p">,</span><span class="s2">&quot;accept&quot;</span><span class="p">,</span><span class="s2">&quot;policy_0003&quot;</span><span class="p">,</span><span class="s2">&quot;[All Devices/Groups]&quot;</span>
+<span class="s2">&quot;11001&quot;</span><span class="p">,</span><span class="s2">&quot;deny&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="s2">&quot;[All Devices/Groups]&quot;</span>
+<span class="s2">&quot;10004&quot;</span><span class="p">,</span><span class="s2">&quot;accept&quot;</span><span class="p">,</span><span class="s2">&quot;policy_0004&quot;</span><span class="p">,</span><span class="s2">&quot;[All Devices/Groups]&quot;</span>
+<span class="s2">&quot;10005&quot;</span><span class="p">,</span><span class="s2">&quot;accept&quot;</span><span class="p">,</span><span class="s2">&quot;policy_0005&quot;</span><span class="p">,</span><span class="s2">&quot;[All Devices/Groups]&quot;</span>
+<span class="s2">&quot;10006&quot;</span><span class="p">,</span><span class="s2">&quot;accept&quot;</span><span class="p">,</span><span class="s2">&quot;policy_0006&quot;</span><span class="p">,</span><span class="s2">&quot;[All Devices/Groups]&quot;</span>
+<span class="s2">&quot;10007&quot;</span><span class="p">,</span><span class="s2">&quot;accept&quot;</span><span class="p">,</span><span class="s2">&quot;policy_0007&quot;</span><span class="p">,</span><span class="s2">&quot;[All Devices/Groups]&quot;</span>
+<span class="s2">&quot;10008&quot;</span><span class="p">,</span><span class="s2">&quot;accept&quot;</span><span class="p">,</span><span class="s2">&quot;policy_0008&quot;</span><span class="p">,</span><span class="s2">&quot;[All Devices/Groups]&quot;</span>
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-801">The attribute <code class="docutils literal notranslate"><span class="pre">downloadname</span></code> is optional; if ommited, the CSV file name will
+be from the value of the <code class="docutils literal notranslate"><span class="pre">filepath</span></code> attribute.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="018_dbcache.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>Using <code class="docutils literal notranslate"><span class="pre">dbcache</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="020_vpn_manager.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">21. </span>VPN Manager</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-fortimanager-gui-api">20.1. Introduction to FortiManager GUI API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-login">20.2. How to Login?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-license-information">20.3. How to get the License Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ndlr-to-we-need-this">20.4. NDLR: to we need this?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-logout">20.5. How to Logout?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-session-information">20.6. How to get session information?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-installation-log-for-a-given-revision">20.7. How to get the installation log for a given revision?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-urls-caught-in-0659916">20.8. Some URLs caught in #0659916</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-perform-a-device-revision-diff">20.9. How to perform a device revision diff?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-factory-default-config-of-a-managed-device">20.10. How to get the factory default config of a managed device?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-operate-the-policy-package-check-operation">20.11. How to operate the policy package check operation?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-operate-a-policy-package-diff-operation">20.12. How to operate a policy package diff operation?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-csv-export-components-from-policy-package">20.13. How to CSV export components from policy package?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trigger-the-csv-export-task">20.13.1. Trigger the CSV export task</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-csv-file">20.13.2. Download the CSV file</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By NOC/SOC Fortinet CSE Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jean-Pierre Forcioli.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

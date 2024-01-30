@@ -1,0 +1,1775 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>15. FortiGuard Management &#8212; How to FortiManager API v1.0_20230413_001</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script src="_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js?v=ffc8af2d"></script>
+    <script src="_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js?v=12818e64"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '014_fortiguard_management';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="16. QoS management" href="015_qos_management.html" />
+    <link rel="prev" title="14. ADOM management" href="013_adom_management.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+
+
+  <div class="bd-header-announcement container-fluid bd-header-announcement">
+    <div class="bd-header-announcement__content">How to FortiManager API?</div>
+  </div>
+
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fortimanager_api.png" class="logo__image only-light" alt="How to FortiManager API v1.0_20230413_001 - Home"/>
+    <script>document.write(`<img src="_static/fortimanager_api.png" class="logo__image only-dark" alt="How to FortiManager API v1.0_20230413_001 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="001_fmg_json_api_introduction.html">1. FMG JSON API Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="012_option_attribute.html">2. The <em>option</em> attribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002_objects_management.html">3. Objects Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002_security_profiles.html">4. Security Profiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="003_docker_management.html">5. Docker Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="004_sdwan_management.html">6. SD-WAN Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="005_connector_management.html">7. Connector Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007_device_management.html">8. Device Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="008_policy_package_management.html">9. Policy Package Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="009_provisioning_template_management.html">10. Provisioning Template Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_fmg_configuration.html">11. Operating the FortiManager’s own configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="011_alternative_fortimanager_api.html">12. Alternative FortiManager APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="012_cli_script_management.html">13. Script management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="013_adom_management.html">14. ADOM management</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. FortiGuard Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_qos_management.html">16. QoS management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="016_sys_proxy_json.html">17. Proxying any APIs within FMG JSON API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="017_fmg_operations.html">18. FortiManager operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="018_dbcache.html">19. Using <code class="docutils literal notranslate"><span class="pre">dbcache</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="019_flatui_proxy.html">20. FortiManager GUI API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_vpn_manager.html">21. VPN Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="021_sub_fetch.html">22. Sub fetch operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="022_fmg_cloud.html">23. FortiManager Cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="023_meta_fields.html">24. Meta-fields Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="050_contributors.html">25. Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/014_fortiguard_management.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>FortiGuard Management</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-fmg-fgd-object-versions">15.1. How to get the FMG FGD object versions?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-fmg-upstream-servers-list">15.2. How to get the FMG upstream servers list?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-retrieve-the-page-fortiguard-firmware-images">15.3. How to retrieve the page <em>FortiGuard &gt; Firmware Images</em>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-all-the-contracts-for-managed-devices">15.4. How to get all the contracts for managed devices?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-contracts-for-one-device">15.5. How to get the contracts for one device?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-list-of-fortiguard-objects-downloaded-by-fortimanager">15.6. How to get the list of FortiGuard objects downloaded by FortiManager?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-export-import-fortiguard-objects">15.7. How to export/import FortiGuard objects?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-export-a-fortiguard-object">15.7.1. How to export a FortiGuard Object?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-import-a-fortiguard-object">15.7.2. How to import a FortiGuard Object?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-export-import-entitlement">15.8. How to export/import Entitlement?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-download-a-firmware">15.9. How to download a firmware?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#external-resources">15.10. External Resources</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-new-external-resource-file">15.10.1. How to add a new external resource file?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-fmg-api-for-adding-a-new-external-resource-file">15.10.1.1. Using FortiManager JSON RPC API for adding a new external resource file</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-rest-api-for-adding-a-new-external-resource-file">15.10.1.2. Using REST API for adding a new external resource file</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-delete-an-external-resource-file">15.10.2. How to delete an external resource file?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-fmg-api-for-deleting-a-new-external-resource-file">15.10.2.1. Using FortiManager JSON RPC API for deleting a new external resource file</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-rest-api-for-deleting-a-new-external-resource-file">15.10.2.2. Using REST API for deleting a new external resource file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="fortiguard-management">
+<h1><span class="section-number">15. </span>FortiGuard Management<a class="headerlink" href="#fortiguard-management" title="Link to this heading">#</a></h1>
+<section id="how-to-get-the-fmg-fgd-object-versions">
+<h2><span class="section-number">15.1. </span>How to get the FMG FGD object versions?<a class="headerlink" href="#how-to-get-the-fmg-fgd-object-versions" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-7">This is API which is exposed when debugging the process <code class="docutils literal notranslate"><span class="pre">fdssrv</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>diagnose<span class="w"> </span>debug<span class="w"> </span>application<span class="w"> </span>fdssrv<span class="w"> </span><span class="m">255</span>
+diagnose<span class="w"> </span>debug<span class="w"> </span><span class="nb">enable</span>
+diagnose<span class="w"> </span>debug<span class="w"> </span>timestamp<span class="w"> </span><span class="nb">enable</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-15">and when we execute the FMG CLI command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>execute<span class="w"> </span>fmupdate<span class="w"> </span>fgd-dvber
+</pre></div>
+</div>
+<p class="linemarker linemarker-21"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;jsonrpc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/misc/fgd_db_ver&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gB2yJjbyluZWQ9pBLoCym9DRWxk9o1kPEMDb5GdZSqWNbPVlYxnvHq7ULU2Z90iL0gIuo/F4DbnW/eFc1SXcQA==&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-41"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;as1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Antispam(IP)&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">821269740</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;update_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1618820401</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6738278</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;as2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Antispam(URI)&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;update_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;as4&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Antispam(HASH)&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">28683496</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;update_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1618821361</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5318876</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;av&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AntiVirus Query&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;update_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;av2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Outbreak Prevention&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;update_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;fq&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;File Query&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;update_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;geoip&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GeoIP&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">108984169</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;update_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1617692460</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">131146</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;wf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Webfilter&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7054323572</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;update_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1589577005</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1522738</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/misc/fgd_db_ver&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-get-the-fmg-upstream-servers-list">
+<h2><span class="section-number">15.2. </span>How to get the FMG upstream servers list?<a class="headerlink" href="#how-to-get-the-fmg-upstream-servers-list" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-111">It’s quite easy to expose the FortiManager JSON RPC API endpoints by debugging the <code class="docutils literal notranslate"><span class="pre">fdssrv</span></code>
+process while issuing the FortiManager CLI command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">diagnose</span> <span class="n">fmupdate</span> <span class="n">view</span><span class="o">-</span><span class="n">serverlist</span> <span class="o">&lt;</span><span class="n">fgd</span><span class="o">|</span><span class="n">fds</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-118">To debug the <code class="docutils literal notranslate"><span class="pre">fdssrv</span></code> process:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>diagnose<span class="w"> </span>debug<span class="w"> </span>application<span class="w"> </span>fdssrvd<span class="w"> </span><span class="m">255</span>
+diagnose<span class="w"> </span>debug<span class="w"> </span><span class="nb">enable</span>
+diagnose<span class="w"> </span>debug<span class="w"> </span>timestamp<span class="w"> </span><span class="nb">enable</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-126">Then we can ask for the upstream FDS servers using the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>diagnose<span class="w"> </span>fmupdate<span class="w"> </span>view-serverlist<span class="w"> </span>fds
+</pre></div>
+</div>
+<p class="linemarker linemarker-132">Following output should be displayed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2022</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">22</span> <span class="mi">23</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">12</span> <span class="n">Request</span><span class="p">:</span>
+<span class="mi">2022</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">22</span> <span class="mi">23</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">12</span> <span class="p">{</span> <span class="s2">&quot;client&quot;</span><span class="p">:</span> <span class="s2">&quot;-newcli:22493&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span> <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">[{</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;flags&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="s2">&quot;target start&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;misc\/server_list&quot;</span><span class="p">}],</span> <span class="s2">&quot;root&quot;</span><span class="p">:</span> <span class="s2">&quot;um&quot;</span><span class="p">}</span>
+<span class="mi">2022</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">22</span> <span class="mi">23</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">12</span> <span class="n">Response</span><span class="p">:</span>
+<span class="mi">2022</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">22</span> <span class="mi">23</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">12</span> <span class="p">{</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[{</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;loose_mode&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;public_network&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;server_list&quot;</span><span class="p">:</span> <span class="p">[{</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;208.184.237.67&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span> <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;timezone&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;12.34.97.16&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span> <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;timezone&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">5</span><span class="p">},</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;208.184.237.68&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span> <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;timezone&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span> <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;208.184.237.66&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span> <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;timezone&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">8</span><span class="p">},</span> <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;usfds1.fortinet.com&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span> <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;timezone&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;curr_svr_index&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;service_type&quot;</span><span class="p">:</span> <span class="s2">&quot;fds&quot;</span><span class="p">},</span> <span class="p">{</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;208.184.237.75&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span> <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;timezone&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">8</span><span class="p">},</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;usforticlient.fortinet.net&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span> <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;timezone&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;curr_svr_index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;service_type&quot;</span><span class="p">:</span> <span class="s2">&quot;fct&quot;</span><span class="p">},</span> <span class="p">{</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;65.210.95.253&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span> <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;timezone&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">5</span><span class="p">},</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;usfqsvr.fortinet.net&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span> <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;timezone&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;curr_svr_index&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;service_type&quot;</span><span class="p">:</span> <span class="s2">&quot;geoip&quot;</span><span class="p">}]},</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span><span class="p">},</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;misc\/server_list&quot;</span><span class="p">}]}</span>
+<span class="mi">2022</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">22</span> <span class="mi">23</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">12</span>
+<span class="n">Fortiguard</span> <span class="n">Server</span> <span class="n">Comm</span> <span class="p">:</span> <span class="n">Enabled</span>
+<span class="n">Server</span> <span class="n">Override</span> <span class="n">Mode</span>   <span class="p">:</span> <span class="n">Loose</span>
+<span class="n">FDS</span>   <span class="n">server</span> <span class="nb">list</span>      <span class="p">:</span>
+<span class="n">Index</span>   <span class="n">Address</span>                    <span class="n">Port</span>            <span class="n">TimeZone</span>        <span class="n">Distance</span>        <span class="n">Source</span>
+<span class="o">------------------------------------------------------------------------------------------------------</span>
+ <span class="mi">0</span>      <span class="mf">208.184.237.67</span>             <span class="mi">443</span>             <span class="mi">0</span>               <span class="mi">1</span>               <span class="n">FDNI</span>
+ <span class="mi">1</span>      <span class="mf">12.34.97.16</span>                <span class="mi">443</span>             <span class="o">-</span><span class="mi">5</span>              <span class="mi">6</span>               <span class="n">FDNI</span>
+ <span class="mi">2</span>      <span class="mf">208.184.237.68</span>             <span class="mi">443</span>             <span class="mi">9</span>               <span class="mi">8</span>               <span class="n">FDNI</span>
+<span class="o">*</span><span class="mi">3</span>      <span class="mf">208.184.237.66</span>             <span class="mi">443</span>             <span class="o">-</span><span class="mi">8</span>              <span class="mi">9</span>               <span class="n">FDNI</span>
+ <span class="mi">4</span>      <span class="n">usfds1</span><span class="o">.</span><span class="n">fortinet</span><span class="o">.</span><span class="n">com</span>        <span class="mi">443</span>             <span class="mi">1</span>               <span class="mi">0</span>               <span class="n">DEFAULT</span>
+
+<span class="n">FCT</span>   <span class="n">server</span> <span class="nb">list</span>      <span class="p">:</span>
+<span class="n">Index</span>   <span class="n">Address</span>                    <span class="n">Port</span>            <span class="n">TimeZone</span>        <span class="n">Distance</span>        <span class="n">Source</span>
+<span class="o">------------------------------------------------------------------------------------------------------</span>
+<span class="o">*</span><span class="mi">0</span>      <span class="mf">208.184.237.75</span>             <span class="mi">443</span>             <span class="o">-</span><span class="mi">8</span>              <span class="mi">9</span>               <span class="n">FDNI</span>
+ <span class="mi">1</span>      <span class="n">usforticlient</span><span class="o">.</span><span class="n">fortinet</span><span class="o">.</span><span class="n">net</span> <span class="mi">443</span>             <span class="mi">1</span>               <span class="mi">0</span>               <span class="n">DEFAULT</span>
+
+<span class="n">GEOIP</span> <span class="n">server</span> <span class="nb">list</span>      <span class="p">:</span>
+<span class="n">Index</span>   <span class="n">Address</span>                    <span class="n">Port</span>            <span class="n">TimeZone</span>        <span class="n">Distance</span>        <span class="n">Source</span>
+<span class="o">------------------------------------------------------------------------------------------------------</span>
+ <span class="mi">0</span>      <span class="mf">65.210.95.253</span>              <span class="mi">443</span>             <span class="o">-</span><span class="mi">5</span>              <span class="mi">6</span>               <span class="n">FDNI</span>
+<span class="o">*</span><span class="mi">1</span>      <span class="n">usfqsvr</span><span class="o">.</span><span class="n">fortinet</span><span class="o">.</span><span class="n">net</span>       <span class="mi">443</span>             <span class="mi">1</span>               <span class="mi">0</span>               <span class="n">DEFAULT</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-164">When formatted and cleaned a bit, we can see the following FortiManager JSON RPC API exchange:</p>
+<p class="linemarker linemarker-166"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/misc/server_list&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-183"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;loose_mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;public_network&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;server_list&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;addr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;208.184.237.67&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;distance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;src&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;addr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12.34.97.16&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;distance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;src&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-5</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;addr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;208.184.237.68&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;distance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;src&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;3&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;addr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;208.184.237.66&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;distance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;src&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-8</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;4&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;addr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;usfds1.fortinet.com&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;distance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;src&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;curr_svr_index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;service_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fds&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;addr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;208.184.237.75&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;distance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;src&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-8</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;addr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;usforticlient.fortinet.net&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;distance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;src&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;curr_svr_index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;service_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fct&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;addr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;65.210.95.253&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;distance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;src&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-5</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;addr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;usfqsvr.fortinet.net&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;distance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;src&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;curr_svr_index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;service_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;geoip&quot;</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;misc/server_list&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-284">Using same process, we can easily get the FGD upstream servers:</p>
+<p class="linemarker linemarker-286"><strong>REQUEST</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-292"><strong>RESPONSE</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-retrieve-the-page-fortiguard-firmware-images">
+<h2><span class="section-number">15.3. </span>How to retrieve the page <em>FortiGuard &gt; Firmware Images</em>?<a class="headerlink" href="#how-to-retrieve-the-page-fortiguard-firmware-images" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-301">We have to use the FMG GUI API.</p>
+<p class="linemarker linemarker-303"><strong>REQUEST:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">secops</span><span class="o">-</span><span class="n">master</span><span class="o">.</span><span class="n">gcp</span><span class="o">.</span><span class="n">fortipoc</span><span class="o">.</span><span class="n">net</span><span class="p">:</span><span class="mi">10405</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="nb">bin</span><span class="o">/</span><span class="n">module</span><span class="o">/</span><span class="n">flatui_proxy</span>
+
+<span class="p">{</span>
+    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/gui/adom/um/firmwareimage&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;viewType&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;viewProduct&quot;</span><span class="p">:</span> <span class="s2">&quot;FGT&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;startIndex&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;results&quot;</span><span class="p">:</span> <span class="mi">50000000</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p class="linemarker linemarker-322">When attribute <code class="docutils literal notranslate"><span class="pre">viewType</span></code> is equal to 0, FMG returns firmware for managed
+devices only. Set it to 1 if the goal is to get all possible firmwares.</p>
+</div>
+<p class="linemarker linemarker-325"><strong>RESPONSE:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">200</span>
+
+<span class="p">{</span>
+    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;build&quot;</span><span class="p">:</span> <span class="s2">&quot;01637&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;20-03-30&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;notesKey&quot;</span><span class="p">:</span> <span class="s2">&quot;06004000-VM64-KVM-01579-200330-6.4.0&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;records&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;del&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+                            <span class="s2">&quot;dl&quot;</span><span class="p">:</span> <span class="n">true</span>
+                        <span class="p">},</span>
+                        <span class="s2">&quot;actstatus&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;avail_ver&quot;</span><span class="p">:</span> <span class="s2">&quot;6.4.1 (1637)&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;installedon&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;06004000-FG1K5D-01637--6.4.1&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;FortiGate-1500D&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;pref_ver&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;firm&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;6.4.1 (1637)&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="s2">&quot;FG1K5D&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;product&quot;</span><span class="p">:</span> <span class="s2">&quot;FGT&quot;</span>
+                        <span class="p">},</span>
+                        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Available on FortiGuard Distribution Server&quot;</span>
+                    <span class="p">},</span>
+                    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;del&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+                            <span class="s2">&quot;dl&quot;</span><span class="p">:</span> <span class="n">false</span>
+                        <span class="p">},</span>
+                        <span class="s2">&quot;actstatus&quot;</span><span class="p">:</span> <span class="s2">&quot;Success&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;avail_ver&quot;</span><span class="p">:</span> <span class="s2">&quot;6.4.1 (1637)&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;installedon&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;06004000-VM64-KVM-01579-200330-6.4.0&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;FortiGate-VM64-KVM&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;06004000-VM64-KVM-01579-200330-6.4.0&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;pref_ver&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;firm&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;6.4.0 (1579)&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="s2">&quot;VM64-KVM&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;product&quot;</span><span class="p">:</span> <span class="s2">&quot;FGT&quot;</span>
+                        <span class="p">},</span>
+                        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="s2">&quot;62.06 MB&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Local&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">],</span>
+                <span class="s2">&quot;totalRecords&quot;</span><span class="p">:</span> <span class="mi">4</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/gui/adom/um/firmwareimage&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-get-all-the-contracts-for-managed-devices">
+<h2><span class="section-number">15.4. </span>How to get all the contracts for managed devices?<a class="headerlink" href="#how-to-get-all-the-contracts-for-managed-devices" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-395"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;jsonrpc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/device/list&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PIB+lWxLzyZPVbeDyoUG6HVouT/unO8M8WLS9F59B+tqIKYrfpGlZzKbMfLc095UkT2km1C4SIqQIXODHe7NHA==&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-412"><strong>RESPONSE:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">27</span><span class="p">,</span>
+        <span class="s2">&quot;dev_object&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;account&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;announce_ip&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;announce_port&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;build&quot;</span><span class="p">:</span> <span class="mi">997</span><span class="p">,</span>
+            <span class="s2">&quot;company&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;contract&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;firmware&quot;</span><span class="p">:</span> <span class="s2">&quot;FG1K5D-FW-6.02-997&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;flags&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+            <span class="s2">&quot;industry&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lic_map&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;obj_map&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;os_mr&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;os_type&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;os_ver&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+            <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="s2">&quot;FortiGate-1500D&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;serial&quot;</span><span class="p">:</span> <span class="s2">&quot;FG1K5D0000000001&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;setup_info&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;sync_time&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;uid_active_time&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;umdb_exist&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;userid&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;vmlic_check_time&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;vmlic_reg_time&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;vmlic_status&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;vmlic_uid&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+          <span class="p">},</span>
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;account&quot;</span><span class="p">:</span> <span class="s2">&quot;jpforcioli@fortinet.com&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;announce_ip&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;announce_port&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;build&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;company&quot;</span><span class="p">:</span> <span class="s2">&quot;FORTINET&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;contract&quot;</span><span class="p">:</span> <span class="s2">&quot;Contract=ENHN-1-10-20201113:0:1:1:0*FMWR-1-06-20201113:0:1:1:0*FRVS-1-06-20201113:0:1:1:0*SPRT-1-10-20201113:0:1:1:0|AccountID=jpforcioli@fortinet.com|Industry=Technology|Company=FORTINET|UserID=106728&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;firmware&quot;</span><span class="p">:</span> <span class="s2">&quot;-FW-6.04-0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;flags&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;industry&quot;</span><span class="p">:</span> <span class="s2">&quot;Technology&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lic_map&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;ENHN&quot;</span><span class="p">:</span> <span class="s2">&quot;ENHN-1-10-20201113:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;FMWR&quot;</span><span class="p">:</span> <span class="s2">&quot;FMWR-1-06-20201113:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;FRVS&quot;</span><span class="p">:</span> <span class="s2">&quot;FRVS-1-06-20201113:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;SPRT&quot;</span><span class="p">:</span> <span class="s2">&quot;SPRT-1-10-20201113:0:1:1:0&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;obj_map&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;os_mr&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;os_type&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+            <span class="s2">&quot;os_ver&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+            <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="s2">&quot;FMG-VM64-KVM-FW-6.04-2072&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;serial&quot;</span><span class="p">:</span> <span class="s2">&quot;FMG-VMTM19008969&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;setup_info&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;sync_time&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;uid_active_time&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;umdb_exist&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;userid&quot;</span><span class="p">:</span> <span class="s2">&quot;106728&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;vmlic_check_time&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;vmlic_reg_time&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;vmlic_status&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;vmlic_uid&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+          <span class="p">}</span>
+        <span class="p">]</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/um/device/list&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-496">As indicated by the <code class="docutils literal notranslate"><span class="pre">count</span></code> attribute, 27 entries are returned. It could be a
+longer list. This is why we can apply some filtering options.</p>
+<p class="linemarker linemarker-499">We can filter by serial number:</p>
+<p class="linemarker linemarker-501"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;jsonrpc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FGVMULTM19003483&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/device/list&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;o1H/tZO9kxKkew4t+L4HwgfISg/4Wn8EutV4n7Psda8LvLLSemqOrO7BBQki5dtqL3L9TayVv8/rLkKV5l0mGg==&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-521"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;dev_object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jpforcioli@fortinet.com&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.244.103&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;announce_ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;announce_port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1637</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;company&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FORTINET&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;contract&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Contract=AVDB-1-06-20201114:0:1:1:0*AVEN-1-06-20201114:0:1:1:0*ENHN-1-10-20201114:0:1:1:0*FGSA-1-06-20201114:0:1:1:0*FMWR-1-06-20201114:0:1:1:0*FRVS-1-06-20201114:0:1:1:0*FURL-1-06-20201114:0:1:1:0*ISSS-1-06-20201114:0:1:1:0*NIDS-1-06-20201114:0:1:1:0*SPAM-1-06-20201114:0:1:1:0*SPRT-1-10-20201114:0:1:1:0*ZHVO-1-06-20201114:0:1:1:0|AccountID=jpforcioli@fortinet.com|Industry=Technology|Company=FORTINET|UserID=106728&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;firmware&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FGVMK6-FW-6.04-1637&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;industry&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Technology&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;lic_map&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;AVDB&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AVDB-1-06-20201114:0:1:1:0&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;AVEN&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AVEN-1-06-20201114:0:1:1:0&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;ENHN&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ENHN-1-10-20201114:0:1:1:0&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;FGSA&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FGSA-1-06-20201114:0:1:1:0&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;FMWR&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FMWR-1-06-20201114:0:1:1:0&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;FRVS&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FRVS-1-06-20201114:0:1:1:0&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;FURL&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FURL-1-06-20201114:0:1:1:0&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;ISSS&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ISSS-1-06-20201114:0:1:1:0&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;NIDS&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NIDS-1-06-20201114:0:1:1:0&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;SPAM&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SPAM-1-06-20201114:0:1:1:0&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;SPRT&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SPRT-1-10-20201114:0:1:1:0&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;ZHVO&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ZHVO-1-06-20201114:0:1:1:0&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;obj_map&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;02000000FNSD00000&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;06004000AVDB00201&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5112082</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;06004000AVDB00701&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5112082</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;06004000CIDB00000&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">65637</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;06004000CRDB00000&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">65554</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;06004000FFDB00307&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">459531</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;06004000FFDB00407&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">459531</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;06004000MMDB00101&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5112082</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;06004000MUDB00103&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">131750</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;os_mr&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;os_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;os_ver&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;platform&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FortiGate-VM64-KVM&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FGVMULTM19003483&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;setup_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;sync_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1592572712</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;uid_active_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;umdb_exist&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;userid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;106728&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vmlic_check_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vmlic_reg_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vmlic_status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;vmlic_uid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/device/list&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-594">Or we can filter by operating system type. We can just get the <code class="docutils literal notranslate"><span class="pre">os_type</span></code> value
+reported for a device with an operating system type of interest. For instance,
+in the above output, the <code class="docutils literal notranslate"><span class="pre">os_type</span></code> is 0 and we know this is for a fortios
+operating system. So now we can ask for all the fortios licenses by using this
+call:</p>
+<p class="linemarker linemarker-600"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;jsonrpc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;os_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/device/list&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;KZcQk1T8ZUB2orDkAJVhHHcFnzxuaBlYWHKSxjgMdKqfcN32e7B0wJ3o/zNWBRZKdw18tCrP3Uyo7dXkzUoZfg==&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-620"><strong>RESPONSE:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">26</span><span class="p">,</span>
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-get-the-contracts-for-one-device">
+<h2><span class="section-number">15.5. </span>How to get the contracts for one device?<a class="headerlink" href="#how-to-get-the-contracts-for-one-device" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-635">This information can be exposed by enabling debug on <em>fdssvrd</em> daemon:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">diagnose</span> <span class="n">debug</span> <span class="n">application</span> <span class="n">fdssvrd</span> <span class="mi">255</span>
+<span class="n">diagnose</span> <span class="n">debug</span> <span class="n">timestamp</span> <span class="n">enable</span>
+<span class="n">diagnose</span> <span class="n">debug</span> <span class="n">enable</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-643"><strong>REQUEST</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;flags&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;serial&quot;</span><span class="p">:</span> <span class="s2">&quot;FG100FTK19013195&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/um/misc/dump_contract&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-661"><strong>RESPONSE</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;contract&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;account&quot;</span><span class="p">:</span> <span class="s2">&quot;tiger_sophia@fortinet.com&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.195.159:9443&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;company&quot;</span><span class="p">:</span> <span class="s2">&quot;EMEA Tigers - Fortinet&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;contract_item&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">&quot;AVDB-1-06-20210627:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;AVEN-1-06-20210627:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;COMP-1-20-20210627:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;ENHN-1-20-20210627:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;FMWR-1-06-20210627:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;FRVS-1-06-20210627:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;FURL-1-06-20210627:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;HDWR-1-05-20210627:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;IOTH-1-06-20210627:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;NIDS-1-06-20210627:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;SBCL-1-06-20210627:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;SPAM-1-06-20210627:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;SPRT-1-20-20210627:0:1:1:0&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;ZHVO-1-06-20210627:0:1:1:0&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;rawdata&quot;</span><span class="p">:</span> <span class="s2">&quot;Contract=AVDB-1-06-20210627:0:1:1:0*AVEN-1-06-20210627:0:1:1:0*COMP-1-20-20210627:0:1:1:0*ENHN-1-20-20210627:0:1:1:0*FMWR-1-06-20210627:0:1:1:0*FRVS-1-06-20210627:0:1:1:0*FURL-1-06-20210627:0:1:1:0*HDWR-1-05-20210627:0:1:1:0*IOTH-1-06-20210627:0:1:1:0*NIDS-1-06-20210627:0:1:1:0*SBCL-1-06-20210627:0:1:1:0*SPAM-1-06-20210627:0:1:1:0*SPRT-1-20-20210627:0:1:1:0*ZHVO-1-06-20210627:0:1:1:0|AccountID=tiger_sophia@fortinet.com|Company=EMEA Tigers - Fortinet|UserID=122589&quot;</span><span class="p">,</span> <span class="s2">&quot;serial&quot;</span><span class="p">:</span> <span class="s2">&quot;FG100FTK19013195&quot;</span><span class="p">}],</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;support_level_desc&quot;</span><span class="p">:</span> <span class="s2">&quot;04:Return To Factory*05:Advanced HW*06:Web\/Online*10:8x5*20:24x7*99:Trial&quot;</span><span class="p">,</span> <span class="s2">&quot;support_type_desc&quot;</span><span class="p">:</span> <span class="s2">&quot;AVDB:Advanced Malware Protection*COMP:*ENHN:*FMSS:Mobile Security Service*FMWR:Firmware &amp; General Updates*FRVS:Vulnerability Management*FURL:Web Filtering*HDWR:Hardware*IOTH:IoT Detection*ISSS:Industrial Security Service*NIDS:NGFW*SBCL:FortiSandbox Cloud*SPAM:AntiSpam*SPRT:*VMDB:FortiGuard Vulnerability Management and Compliance*ZHVO:FortiGuard Virus Outbreak Protection Service&quot;</span>
+          <span class="p">},</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;message&quot;</span><span class="p">:</span>
+          <span class="s2">&quot;OK&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/um/misc/dump_contract&quot;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-get-the-list-of-fortiguard-objects-downloaded-by-fortimanager">
+<h2><span class="section-number">15.6. </span>How to get the list of FortiGuard objects downloaded by FortiManager?<a class="headerlink" href="#how-to-get-the-list-of-fortiguard-objects-downloaded-by-fortimanager" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-707">Goal is to produce the same listing as the one available in
+FortiManager GUI  when visiting the <em>FortiGuard &gt; Package Management &gt;
+Receive Status</em> page.</p>
+<p class="linemarker linemarker-711">We need to use the following method and url:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p class="linemarker linemarker-714"><strong>Method</strong></p></td>
+<td><p class="linemarker linemarker-714"><code class="docutils literal notranslate"><span class="pre">get</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p class="linemarker linemarker-716"><strong>URL</strong></p></td>
+<td><p class="linemarker linemarker-716"><code class="docutils literal notranslate"><span class="pre">/um/object/list</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p class="linemarker linemarker-719">We need to specify the Fortinet product of interest by using the
+<code class="docutils literal notranslate"><span class="pre">system</span></code> attribute with one of the following values:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="linemarker linemarker-723"><em>Attribute</em></p></th>
+<th class="head"><p class="linemarker linemarker-723"><em>Product</em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="linemarker linemarker-725"><code class="docutils literal notranslate"><span class="pre">FGT</span></code></p></td>
+<td><p class="linemarker linemarker-725"><code class="docutils literal notranslate"><span class="pre">FortiGate</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p class="linemarker linemarker-727"><code class="docutils literal notranslate"><span class="pre">FML</span></code></p></td>
+<td><p class="linemarker linemarker-727"><code class="docutils literal notranslate"><span class="pre">FortiMail</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p class="linemarker linemarker-729"><code class="docutils literal notranslate"><span class="pre">FAZ</span></code></p></td>
+<td><p class="linemarker linemarker-729"><code class="docutils literal notranslate"><span class="pre">FortiAnalyzer</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p class="linemarker linemarker-731"><code class="docutils literal notranslate"><span class="pre">FWB</span></code></p></td>
+<td><p class="linemarker linemarker-731"><code class="docutils literal notranslate"><span class="pre">FortiWeb</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p class="linemarker linemarker-733"><code class="docutils literal notranslate"><span class="pre">FCT</span></code></p></td>
+<td><p class="linemarker linemarker-733"><code class="docutils literal notranslate"><span class="pre">FortiClient</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p class="linemarker linemarker-736">We also need to specify whether we want to get all objects related to
+a product or only the used objects by setting the attribute
+<code class="docutils literal notranslate"><span class="pre">used_only</span></code> to <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code> respectively.</p>
+<p class="linemarker linemarker-740">The FortiManager JSON API request/response:</p>
+<p class="linemarker linemarker-742"><strong>REQUEST:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;jsonrpc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;system&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FGT&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;used_only&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/object/list&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hdRJAukKyAHEw+I6bZcn0wxxeWWBYDSOU6kq2aYvMgWOQJMBvo+YwdRonWgie93RF/80VgAUcTMNp7nLPIO/FVOCg3J7QFF8&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-763"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;object_list&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                      </span><span class="nt">&quot;05000000IPGE00000&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;latest_verdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2002080500&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;latest_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">131120</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;latest_versize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1080752</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;obj_desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;IP Geo DB&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;obj_used&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;objid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;05000000IPGE00000&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;prefer_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;version_list&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                          </span><span class="nt">&quot;00002.00048&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2002080500&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1080752</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">131120</span>
+<span class="w">                          </span><span class="p">}</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                      </span><span class="p">},</span>
+<span class="w">                      </span><span class="nt">&quot;05004000NIDS02200&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;latest_verdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2003102346&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;latest_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">983833</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;latest_versize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">369848</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;obj_desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;IPS Meta-Data&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;obj_used&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;objid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;05004000NIDS02200&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;prefer_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;version_list&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                          </span><span class="nt">&quot;00015.00793&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2003102346&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">369848</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">983833</span>
+<span class="w">                          </span><span class="p">}</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                      </span><span class="p">},</span>
+<span class="w">                      </span><span class="nt">&quot;05004000NIDS02300&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;latest_verdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2003102346&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;latest_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">983833</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;latest_versize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">78128</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;obj_desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AppCat Meta-Data&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;obj_used&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;objid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;05004000NIDS02300&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;prefer_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;version_list&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                          </span><span class="nt">&quot;00015.00793&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2003102346&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">78128</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">983833</span>
+<span class="w">                          </span><span class="p">}</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                      </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;system&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FGT&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;used_only&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/object/list&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">              </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-export-import-fortiguard-objects">
+<h2><span class="section-number">15.7. </span>How to export/import FortiGuard objects?<a class="headerlink" href="#how-to-export-import-fortiguard-objects" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-837">Caught in #077802 (FortiManager 7.2.2).</p>
+<p class="linemarker linemarker-840">Those export/import operations have been implemented to allow an air-gapped FortiManager to receive FortiGuard Updates in an automated manner.</p>
+<p class="linemarker linemarker-842">For instance, it could be used in this quite common <a class="sd-sphinx-override sd-badge sd-bg-primary sd-bg-text-primary reference external" href="https://en.wikipedia.org/?title=Data_diode&amp;redirect=no"><span>data-diode</span></a> (OT environment) use case:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>INTERNET + FMG1 + DEVOPS ---- [data-diode &gt;&gt;&gt;] ---- FMG2 + managed devices
+</pre></div>
+</div>
+<p class="linemarker linemarker-848">where:</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-850"><code class="docutils literal notranslate"><span class="pre">INTERNET</span></code> is the Internet where are located the public FortiGuard servers</p></li>
+<li><p class="linemarker linemarker-851"><code class="docutils literal notranslate"><span class="pre">FMG1</span></code> is the FortiManager able to get FortiGuard objects from the Internet</p></li>
+<li><p class="linemarker linemarker-852"><code class="docutils literal notranslate"><span class="pre">DEVOPS</span></code> is an external system from where you can trigger some FortiManager JSON RPC API
+operations</p></li>
+<li><p class="linemarker linemarker-854"><code class="docutils literal notranslate"><span class="pre">data-diode</span></code> is a data-diode</p>
+<ul>
+<li><p class="linemarker linemarker-856">In this exemple, traffic can only flow from left to right</p></li>
+</ul>
+</li>
+<li><p class="linemarker linemarker-857"><code class="docutils literal notranslate"><span class="pre">FMG2</span></code> is the air-gapped FortiManager</p>
+<ul>
+<li><p class="linemarker linemarker-859">It can’t get get updates from the public FortiGuard servers</p></li>
+<li><p class="linemarker linemarker-860">It is managing the FortiGate devices</p></li>
+</ul>
+</li>
+</ul>
+<p class="linemarker linemarker-862">In this use case, the <code class="docutils literal notranslate"><span class="pre">DEVOPS</span></code> system can:</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-864">Use the FortiManager JSON RPC API to export FortiGuard objects from <code class="docutils literal notranslate"><span class="pre">FMG1</span></code></p></li>
+<li><p class="linemarker linemarker-865">Use the FortiManager JSON RPC API to import FortiGuard object to <code class="docutils literal notranslate"><span class="pre">FMG2</span></code></p></li>
+</ul>
+<p class="linemarker linemarker-867">Traffic from <code class="docutils literal notranslate"><span class="pre">DEVOPS</span></code> to <code class="docutils literal notranslate"><span class="pre">FMG2</span></code> will be accepted by the <code class="docutils literal notranslate"><span class="pre">data-diode</span></code> since
+going into the right direction; from left to right.</p>
+<section id="how-to-export-a-fortiguard-object">
+<h3><span class="section-number">15.7.1. </span>How to export a FortiGuard Object?<a class="headerlink" href="#how-to-export-a-fortiguard-object" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-873">To export a FortiGuard object, you need to know its <code class="docutils literal notranslate"><span class="pre">objid</span></code>.</p>
+<p class="linemarker linemarker-875">This is what is showing up in the FortiManager GUI when you navigate to
+<em>FortiGuard</em> &gt; <em>Package</em> &gt; <em>Receive Status</em>:</p>
+<a class=""
+               data-lightbox="group-3652739e-24cd-43f5-afa6-44e03b682bfe"
+               href="_images/image_005.png"
+               title=""
+               data-title=""
+               
+               ><img src="_images/image_005.png"
+                     class=""
+                     width="50%"
+                     height="50%"
+                     alt=""/>
+                </a><div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-882">You can also obtain a list of available FortGuard objects via the FortiManager JSON RPC API
+(see section <a class="reference internal" href="#how-to-get-the-list-of-fortiguard-objects-downloaded-by-fortimanager"><span class="std std-ref">How to get the list of FortiGuard objects downloaded by FortiManager?</span></a>).</p></li>
+</ul>
+</div>
+<p class="linemarker linemarker-885">To export <code class="docutils literal notranslate"><span class="pre">06002000NIDS02400</span></code> (<em>Signature Meta Data (IPS Regular)</em>)
+FortiGuard Object:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-0">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;fds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;objid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">              </span><span class="s2">&quot;06002000NIDS02400&quot;</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;base64&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/object/export&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{session}}&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-917">The <code class="docutils literal notranslate"><span class="pre">objid</span></code> attribute is a list; you could pass muliple FortiGuard
+objects</p></li>
+<li><p class="linemarker linemarker-919">The <code class="docutils literal notranslate"><span class="pre">base64</span></code> value for the <code class="docutils literal notranslate"><span class="pre">flags</span></code> attribute is required if you
+want to get the requested FortiGuard objects returned in base64 format in the API response.</p></li>
+<li><p class="linemarker linemarker-921">If the <code class="docutils literal notranslate"><span class="pre">flags</span></code> attribute is omitted, FortiGuard objects will be
+placed in the FortiManager filesystem (in folder
+<code class="docutils literal notranslate"><span class="pre">/var/tmp/um/export</span></code>)</p></li>
+</ul>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-1">
+RESPONSE</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;fds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;base64&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UFVURjA0MDAwMDAwAwAAAHiZEABAAAAAMj[...]&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;taskid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/object/export&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-952">The <code class="docutils literal notranslate"><span class="pre">base64</span></code> attribute contains all the requested FortiGuard
+objects in base64 format</p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="how-to-import-a-fortiguard-object">
+<h3><span class="section-number">15.7.2. </span>How to import a FortiGuard Object?<a class="headerlink" href="#how-to-import-a-fortiguard-object" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-958">To import a FortiGuard object, you need to pass the base64 output you obtain at
+the time your exported it (see section <a class="reference internal" href="#how-to-export-a-fortiguard-object"><span class="std std-ref">How to export a FortiGuard Object?</span></a>):</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-2">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;base64&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UFVURjA0MDAwMDAwAwAAAHiZEABAAAAAMj[...]&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/object/import&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{session}}&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-985">The <code class="docutils literal notranslate"><span class="pre">base64</span></code> attribute is set with the base64 output of one or
+multiple FortiGuard objects</p></li>
+</ul>
+</div>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-3">
+RESPONSE</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;taskid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">59</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/object/import&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p class="linemarker linemarker-1010">If you want to control the effectiveness of the import operation for the
+FortiGuard Object with <code class="docutils literal notranslate"><span class="pre">objid</span></code> <code class="docutils literal notranslate"><span class="pre">06002000NIDS02400</span></code>, you can perform
+the following operation:</p>
+<ol class="arabic">
+<li><p class="linemarker linemarker-1014">Check this FortiGuard object exists using FortiManager CLI</p>
+<p class="linemarker linemarker-1016">Enter:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>diagnose fmupdate list-object fds 06002000/NIDS02400
+</pre></div>
+</div>
+<p class="linemarker linemarker-1022">You should get this output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>06002000/NIDS02400
+06002000/NIDS02400/00026.00713-2401110136
+</pre></div>
+</div>
+</li>
+<li><p class="linemarker linemarker-1029">Export the FortiGuard object to save it in an external system</p>
+<p class="linemarker linemarker-1031">See <a class="reference internal" href="#how-to-export-a-fortiguard-object"><span class="std std-ref">How to export a FortiGuard Object?</span></a></p>
+</li>
+<li><p class="linemarker linemarker-1033">Delete the FortiGuard object using FortiManager CLI</p>
+<p class="linemarker linemarker-1035">Enter:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>fmupdate del-object fds 06002000/NIDS02400
+</pre></div>
+</div>
+<p class="linemarker linemarker-1041">You should get this output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>06002000/NIDS02400
+06002000/NIDS02400/00026.00713-2401110136
+
+This operation will delete all fds 06002000/NIDS02400 objects.
+Do you want to continue? (y/n)
+</pre></div>
+</div>
+<p class="linemarker linemarker-1051">Enter <code class="docutils literal notranslate"><span class="pre">y</span></code> then <span class="sd-sphinx-override sd-badge sd-outline-black sd-text-black">ENTER</span> to confirm the delete
+operation</p>
+</li>
+<li><p class="linemarker linemarker-1054">Check this FortiGuard object does no longer exist using FortiManager CLI</p>
+<p class="linemarker linemarker-1056">Enter:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>diagnose fmupdate list-object fds 06002000/NIDS02400
+</pre></div>
+</div>
+<p class="linemarker linemarker-1062">You should get this output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>no object was found for service &quot;fds&quot; by type &quot;06002000/NIDS02400&quot;.
+Command fail. Return code -9999
+</pre></div>
+</div>
+</li>
+</ol>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p class="linemarker linemarker-1069">Import the FortiGuard Object as described in this section</p></li>
+</ol>
+</div></blockquote>
+<ol class="arabic">
+<li><p class="linemarker linemarker-1071">Check this FortiGuard object is back using FortiManager CLI</p>
+<p class="linemarker linemarker-1073">Enter:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>diagnose fmupdate list-object fds 06002000/NIDS02400
+</pre></div>
+</div>
+<p class="linemarker linemarker-1079">You should get this output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>06002000/NIDS02400
+06002000/NIDS02400/00026.00713-2401110136
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</section>
+</section>
+<section id="how-to-export-import-entitlement">
+<h2><span class="section-number">15.8. </span>How to export/import Entitlement?<a class="headerlink" href="#how-to-export-import-entitlement" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-1089">Caught in #0778029.</p>
+<p class="linemarker linemarker-1091">TBD.</p>
+</section>
+<section id="how-to-download-a-firmware">
+<h2><span class="section-number">15.9. </span>How to download a firmware?<a class="headerlink" href="#how-to-download-a-firmware" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-1096">To download FortiOS firmware 7.0.1 build 0489 for the FortiGate-100F platform:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-4">
+REQUEST (from diagnose debug application fdssvrd 255)</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;62c45383-6ea3-4456-b72b-ceeff85ccfa7&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;keep_session_idle&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exec&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;create_task&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;enable&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;platform&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FortiGate-100F&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7.0.11-b0489-GA&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;target start&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/image/download&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">53840</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-5">
+RESPONSE</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;62c45383-6ea3-4456-b72b-ceeff85ccfa7&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;taskid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1403</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/um/image/download&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="external-resources">
+<h2><span class="section-number">15.10. </span>External Resources<a class="headerlink" href="#external-resources" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-1146">Starting with FortiManager 7.4.1 (#0934664), it is possible to manage
+external resource files hosted by FortiManager.</p>
+<section id="how-to-add-a-new-external-resource-file">
+<h3><span class="section-number">15.10.1. </span>How to add a new external resource file?<a class="headerlink" href="#how-to-add-a-new-external-resource-file" title="Link to this heading">#</a></h3>
+<section id="using-fmg-api-for-adding-a-new-external-resource-file">
+<h4><span class="section-number">15.10.1.1. </span>Using FortiManager JSON RPC API for adding a new external resource file<a class="headerlink" href="#using-fmg-api-for-adding-a-new-external-resource-file" title="Link to this heading">#</a></h4>
+<p class="linemarker linemarker-1155">To add a new external resource file named <code class="docutils literal notranslate"><span class="pre">addresses_003.txt</span></code>:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-6">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/global/_external/resource/addresses_003.txt&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;11.11.11.11\n11.11.11.22\n11.11.11.44\n&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{session}}&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-7">
+RESPONSE</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/global/_external/resource/addresses_003.txt&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-rest-api-for-adding-a-new-external-resource-file">
+<h4><span class="section-number">15.10.1.2. </span>Using REST API for adding a new external resource file<a class="headerlink" href="#using-rest-api-for-adding-a-new-external-resource-file" title="Link to this heading">#</a></h4>
+<p class="linemarker linemarker-1195">To add a new external resource file named <code class="docutils literal notranslate"><span class="pre">addresses_004.txt</span></code>:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-8" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-8">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-sk<span class="w"> </span>-u<span class="w"> </span>devops:fortinet<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="se">\</span>
+https://10.210.35.112/jsonrpc/pm/config/global/_external/resource/addresses_004.txt<span class="w"> </span><span class="se">\</span>
+--data-binary<span class="w"> </span>@addresses_004.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p class="linemarker linemarker-1209">File <code class="docutils literal notranslate"><span class="pre">addresses_004.txt</span></code> is with following content:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>10.0.0.1
+10.0.0.2
+10.0.0.3
+10.0.0.4
+10.0.0.5
+</pre></div>
+</div>
+</div>
+</div>
+<input id="sd-tab-item-9" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-9">
+RESPONSE</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/global/_external/resource/addresses_004.txt&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="how-to-delete-an-external-resource-file">
+<h3><span class="section-number">15.10.2. </span>How to delete an external resource file?<a class="headerlink" href="#how-to-delete-an-external-resource-file" title="Link to this heading">#</a></h3>
+<section id="using-fmg-api-for-deleting-a-new-external-resource-file">
+<h4><span class="section-number">15.10.2.1. </span>Using FortiManager JSON RPC API for deleting a new external resource file<a class="headerlink" href="#using-fmg-api-for-deleting-a-new-external-resource-file" title="Link to this heading">#</a></h4>
+<p class="linemarker linemarker-1241">To delete the external resource file named <code class="docutils literal notranslate"><span class="pre">addresses_003.txt</span></code>:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-10" name="sd-tab-set-5" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-10">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;delete&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/global/_external/resource/addresses_003.txt&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{session}}&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-11" name="sd-tab-set-5" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-11">
+RESPONSE</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/global/_external/resource/addresses_003.txt&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-rest-api-for-deleting-a-new-external-resource-file">
+<h4><span class="section-number">15.10.2.2. </span>Using REST API for deleting a new external resource file<a class="headerlink" href="#using-rest-api-for-deleting-a-new-external-resource-file" title="Link to this heading">#</a></h4>
+<p class="linemarker linemarker-1278">To add a new external resource file named <code class="docutils literal notranslate"><span class="pre">addresses_004.txt</span></code>:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-12" name="sd-tab-set-6" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-12">
+REQUEST</label><div class="sd-tab-content docutils">
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-sk<span class="w"> </span>-u<span class="w"> </span>devops:fortinet<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span><span class="se">\</span>
+https://10.210.35.112/jsonrpc/pm/config/global/_external/resource/addresses_004.txt<span class="w"> </span><span class="se">\</span>
+<span class="p">|</span><span class="w"> </span>jq
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-13" name="sd-tab-set-6" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-13">
+RESPONSE</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/pm/config/global/_external/resource/addresses_004.txt&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="013_adom_management.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>ADOM management</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="015_qos_management.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>QoS management</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-fmg-fgd-object-versions">15.1. How to get the FMG FGD object versions?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-fmg-upstream-servers-list">15.2. How to get the FMG upstream servers list?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-retrieve-the-page-fortiguard-firmware-images">15.3. How to retrieve the page <em>FortiGuard &gt; Firmware Images</em>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-all-the-contracts-for-managed-devices">15.4. How to get all the contracts for managed devices?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-contracts-for-one-device">15.5. How to get the contracts for one device?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-list-of-fortiguard-objects-downloaded-by-fortimanager">15.6. How to get the list of FortiGuard objects downloaded by FortiManager?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-export-import-fortiguard-objects">15.7. How to export/import FortiGuard objects?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-export-a-fortiguard-object">15.7.1. How to export a FortiGuard Object?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-import-a-fortiguard-object">15.7.2. How to import a FortiGuard Object?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-export-import-entitlement">15.8. How to export/import Entitlement?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-download-a-firmware">15.9. How to download a firmware?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#external-resources">15.10. External Resources</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-new-external-resource-file">15.10.1. How to add a new external resource file?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-fmg-api-for-adding-a-new-external-resource-file">15.10.1.1. Using FortiManager JSON RPC API for adding a new external resource file</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-rest-api-for-adding-a-new-external-resource-file">15.10.1.2. Using REST API for adding a new external resource file</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-delete-an-external-resource-file">15.10.2. How to delete an external resource file?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-fmg-api-for-deleting-a-new-external-resource-file">15.10.2.1. Using FortiManager JSON RPC API for deleting a new external resource file</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-rest-api-for-deleting-a-new-external-resource-file">15.10.2.2. Using REST API for deleting a new external resource file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By NOC/SOC Fortinet CSE Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jean-Pierre Forcioli.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,704 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>12. Alternative FortiManager APIs &#8212; How to FortiManager API v1.0_20230413_001</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script src="_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js?v=ffc8af2d"></script>
+    <script src="_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js?v=12818e64"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '011_alternative_fortimanager_api';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="13. Script management" href="012_cli_script_management.html" />
+    <link rel="prev" title="11. Operating the FortiManager’s own configuration" href="010_fmg_configuration.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+
+
+  <div class="bd-header-announcement container-fluid bd-header-announcement">
+    <div class="bd-header-announcement__content">How to FortiManager API?</div>
+  </div>
+
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fortimanager_api.png" class="logo__image only-light" alt="How to FortiManager API v1.0_20230413_001 - Home"/>
+    <script>document.write(`<img src="_static/fortimanager_api.png" class="logo__image only-dark" alt="How to FortiManager API v1.0_20230413_001 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="001_fmg_json_api_introduction.html">1. FMG JSON API Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="012_option_attribute.html">2. The <em>option</em> attribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002_objects_management.html">3. Objects Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002_security_profiles.html">4. Security Profiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="003_docker_management.html">5. Docker Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="004_sdwan_management.html">6. SD-WAN Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="005_connector_management.html">7. Connector Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007_device_management.html">8. Device Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="008_policy_package_management.html">9. Policy Package Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="009_provisioning_template_management.html">10. Provisioning Template Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_fmg_configuration.html">11. Operating the FortiManager’s own configuration</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Alternative FortiManager APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="012_cli_script_management.html">13. Script management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="013_adom_management.html">14. ADOM management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="014_fortiguard_management.html">15. FortiGuard Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_qos_management.html">16. QoS management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="016_sys_proxy_json.html">17. Proxying any APIs within FMG JSON API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="017_fmg_operations.html">18. FortiManager operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="018_dbcache.html">19. Using <code class="docutils literal notranslate"><span class="pre">dbcache</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="019_flatui_proxy.html">20. FortiManager GUI API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_vpn_manager.html">21. VPN Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="021_sub_fetch.html">22. Sub fetch operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="022_fmg_cloud.html">23. FortiManager Cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="023_meta_fields.html">24. Meta-fields Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="050_contributors.html">25. Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/011_alternative_fortimanager_api.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Alternative FortiManager APIs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rest-api">12.1. REST API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-system-status">12.1.1. Getting system status</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-list-of-adoms">12.1.2. Get list of ADOMs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-fortimanager-gui">12.2. Using FortiManager GUI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-requests-python-module">12.3. Using <em>requests</em> python module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-serviceproxy-python-module">12.4. Using <em>ServiceProxy</em> python module</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="alternative-fortimanager-apis">
+<h1><span class="section-number">12. </span>Alternative FortiManager APIs<a class="headerlink" href="#alternative-fortimanager-apis" title="Link to this heading">#</a></h1>
+<section id="rest-api">
+<h2><span class="section-number">12.1. </span>REST API<a class="headerlink" href="#rest-api" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-7">Yes you can use REST API!</p>
+<p class="linemarker linemarker-9">Caught in #0872278.</p>
+<p class="linemarker linemarker-11">Most FortiManager JSON RPC API requests have a REST counterpart.</p>
+<p class="linemarker linemarker-13">For instance:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="linemarker linemarker-16">FortiManager JSON RPC url</p></th>
+<th class="head"><p class="linemarker linemarker-16">HTTP url</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="linemarker linemarker-18"><code class="docutils literal notranslate"><span class="pre">/dvmdb/adom</span></code></p></td>
+<td><p class="linemarker linemarker-18"><code class="docutils literal notranslate"><span class="pre">https://&lt;fmg_ip&gt;/jsonrpc/dvmdb/adom</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p class="linemarker linemarker-20"><code class="docutils literal notranslate"><span class="pre">/pm/config/adom/root/obj/firewall/address/</span></code></p></td>
+<td><p class="linemarker linemarker-20"><code class="docutils literal notranslate"><span class="pre">https://&lt;fmg_ip&gt;/jsonrpc/pm/config/adom/roo/obj/firewall/address</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p class="linemarker linemarker-23">JSON RPC methods are mapped to HTTP methods:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="linemarker linemarker-26">JSON RPC method</p></th>
+<th class="head"><p class="linemarker linemarker-26">HTTP method</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="linemarker linemarker-28"><code class="docutils literal notranslate"><span class="pre">get</span></code></p></td>
+<td><p class="linemarker linemarker-28"><code class="docutils literal notranslate"><span class="pre">GET</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p class="linemarker linemarker-30"><code class="docutils literal notranslate"><span class="pre">put</span></code></p></td>
+<td><p class="linemarker linemarker-30"><code class="docutils literal notranslate"><span class="pre">PUT</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p class="linemarker linemarker-32"><code class="docutils literal notranslate"><span class="pre">exec</span></code></p></td>
+<td><p class="linemarker linemarker-32"><code class="docutils literal notranslate"><span class="pre">POST</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p class="linemarker linemarker-34"><code class="docutils literal notranslate"><span class="pre">update</span></code></p></td>
+<td><p class="linemarker linemarker-34"><code class="docutils literal notranslate"><span class="pre">UPDATE</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p class="linemarker linemarker-36"><code class="docutils literal notranslate"><span class="pre">delete</span></code></p></td>
+<td><p class="linemarker linemarker-36"><code class="docutils literal notranslate"><span class="pre">DELETE</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p class="linemarker linemarker-39">The <code class="docutils literal notranslate"><span class="pre">data</span></code> block used by some FortiManager JSON RPC API requests should be part of the HTTP
+query string!</p>
+<p class="linemarker linemarker-42">If the FortiManager JSON RPC API  cannot be converted with the above instructions, then it’s
+simply not supported for REST API.</p>
+<p class="linemarker linemarker-45">REST API is using HTTP basic authentication; you can use same credentias as
+with the FortiManager JSON RPC API.</p>
+<section id="getting-system-status">
+<h3><span class="section-number">12.1.1. </span>Getting system status<a class="headerlink" href="#getting-system-status" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-51"><strong>REQUEST:</strong></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-s<span class="w"> </span>-k<span class="w"> </span>-u<span class="w"> </span>devops:fortinet<span class="w"> </span>https://10.210.35.112/jsonrpc/sys/status<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</pre></div>
+</div>
+<p class="linemarker linemarker-57"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;Admin Domain Configuration&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Enabled&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;BIOS version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;04000002&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Branch Point&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1317&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Build&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1317&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Current Time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mon Jan 09 22:51:15 CET 2023&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Daylight Time Saving&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;FIPS Mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Disabled&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;HA Mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Stand Alone&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;prod-fmg-722-interim-001&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;License Status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Valid&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Major&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Max Number of Admin Domains&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">105</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Max Number of Device Groups&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Minor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Offline Mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Disabled&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Patch&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Platform Full Name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FortiManager-VM64-KVM&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Platform Type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FMG-VM64-KVM&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Release Version Information&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot; (Interim)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Serial Number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FMVMELTM22000017&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;TZ&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Europe/Brussels&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Time Zone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;(GMT+1:00) Brussels, Copenhagen, Madrid, Paris.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v7.2.2-build1317 230107 (Interim)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;x86-64 Applications&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Yes&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/sys/status&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="get-list-of-adoms">
+<h3><span class="section-number">12.1.2. </span>Get list of ADOMs<a class="headerlink" href="#get-list-of-adoms" title="Link to this heading">#</a></h3>
+<p class="linemarker linemarker-102"><strong>REQUEST:</strong></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-s<span class="w"> </span>-k<span class="w"> </span>-u<span class="w"> </span>devops:fortinet<span class="w"> </span>https://10.210.35.112/jsonrpc/dvmdb/adom/root<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</pre></div>
+</div>
+<p class="linemarker linemarker-109"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;create_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">136</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;log_db_retention_hours&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1440</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;log_disk_quota&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">51200</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;log_disk_quota_alert_thres&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;log_disk_quota_split_ratio&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;log_file_retention_hours&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8760</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;logview_customize&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;mig_mr&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;mig_os_ver&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;mr&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;obj_customize&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;os_ver&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;restricted_prds&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;tab_status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;14d92a26-8dd6-51ed-b0ed-8258bafad045&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;workspace_mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/dvmdb/adom/root&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="using-fortimanager-gui">
+<h2><span class="section-number">12.2. </span>Using FortiManager GUI<a class="headerlink" href="#using-fortimanager-gui" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-152">Caught in #273964.</p>
+<p class="linemarker linemarker-154">It seems to be available only with the new FortiManager flat UI (FortiManager 5.0.0).</p>
+<p class="linemarker linemarker-156">We have to this this special HTTP URL:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>https://FMG_IP/cgi-bin/module/flatui/json?req={&lt;your JSON request&gt;}
+</pre></div>
+</div>
+<p class="linemarker linemarker-162">For instance, to get firewall policy ID 2 from Policy Package <code class="docutils literal notranslate"><span class="pre">default</span></code> located in ADOM <code class="docutils literal notranslate"><span class="pre">ADOM_54_001</span></code>:</p>
+<p class="linemarker linemarker-164"><strong>REQUEST:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>https://192.168.194.62/cgi-bin/module/flatui/json?req={&#39;id&#39;:2,&#39;method&#39;:&#39;get&#39;, &#39;params&#39;:[{&#39;url&#39;:&#39;pm/config/adom/ADOM_54_001/pkg/default/firewall/policy/2&#39;, &#39;data&#39;:{}}]}
+</pre></div>
+</div>
+<p class="linemarker linemarker-170"><strong>RESPONSE:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;_byte&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">789</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;_first_hit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1443701598</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;_global-dst-intf&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;_global-src-intf&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;_global-vpn-tgt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;_hitcount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">377</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;_last_hit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1444003543</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;_pkts&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;auth-path&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;auth-redirect-addr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;auto-asic-offload&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;block-notification&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;captive-portal-exempt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;capture-packet&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;comments&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;diffserv-forward&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;diffserv-reverse&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;diffservcode-forward&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;000000&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;diffservcode-rev&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;000000&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;disclaimer&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;dsri&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;dstaddr&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;HOST_102&quot;</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;dstaddr-negate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;dstintf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;OUT&quot;</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;firewall-session-dirty&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;fixedport&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;fsso&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;global-label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Project #1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inbound&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;ippool&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Project #1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logtraffic&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logtraffic-start&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;match-vip&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Policy_002&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;nat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;natinbound&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;natip&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;natoutbound&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;ntlm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;ntlm-guest&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;obj seq&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;outbound&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;permit-any-host&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;permit-stun-host&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;policyid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;profile-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;redirect-url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;rsso&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;rtp-nat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;scan-botnet-connections&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;schedule&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;always&quot;</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;schedule-timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;send-deny-packet&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;ALL&quot;</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;service-negate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;session-ttl&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;srcaddr&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;HOST_002&quot;</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;srcaddr-negate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;srcintf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;IN&quot;</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;ssl-mirror&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;tcp-mss-receiver&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;tcp-mss-sender&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timeout-send-rst&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;utm-status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;d9a9999e-ad46-51e5-9f9a-e454832135f0&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;vlan-cos-fwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;vlan-cos-rev&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;wanopt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;wanopt-detection&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;wanopt-passive-opt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;wccp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;webcache&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;webcache-https&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;wsso&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm\/config\/adom\/ADOM_54_001\/pkg\/default\/firewall\/policy\/2&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="using-requests-python-module">
+<h2><span class="section-number">12.3. </span>Using <em>requests</em> python module<a class="headerlink" href="#using-requests-python-module" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-180">Caught in #600130.</p>
+<p class="linemarker linemarker-182">The advantage is that we don’t have to:</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-184">Authenticate</p></li>
+<li><p class="linemarker linemarker-185">Provide a session ID</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p class="linemarker linemarker-187">Enter the FortiManager shell and launch python</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fmg<span class="w"> </span><span class="c1"># execute shell</span>
+<span class="c1"># python</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p class="linemarker linemarker-194">Enter the following python excerpt</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://localhost/jsonrpc&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="gp">... </span><span class="p">{</span>
+<span class="gp">... </span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/pm/config/device/FGTv2/vdom/root/system/dhcp/server&quot;</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="go">{&#39;id&#39;: 1, &#39;method&#39;: &#39;get&#39;, &#39;params&#39;: [{&#39;url&#39;:</span>
+<span class="go">&#39;/pm/config/device/FGTv2/vdom/root/system/dhcp/server&#39;}]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="using-serviceproxy-python-module">
+<h2><span class="section-number">12.4. </span>Using <em>ServiceProxy</em> python module<a class="headerlink" href="#using-serviceproxy-python-module" title="Link to this heading">#</a></h2>
+<p class="linemarker linemarker-218">Caught in #602275.</p>
+<ol class="arabic simple">
+<li><p class="linemarker linemarker-220">Enter the FortiManager shell and launch python</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fmg<span class="w"> </span><span class="c1"># execute shell</span>
+<span class="c1"># python</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p class="linemarker linemarker-227">Enter the following python excerpt</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jsonrpc.proxy</span> <span class="kn">import</span> <span class="n">ServiceProxy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">=</span><span class="n">ServiceProxy</span><span class="p">(</span><span class="s2">&quot;http://localhost/jsonrpc&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;dvmdb/adom/INTERNET_FW&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:{</span><span class="s2">&quot;flags&quot;</span><span class="p">:</span><span class="mi">17821</span><span class="p">}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ret</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p class="linemarker linemarker-239">It doesn’t work anymore since FortiManager is using python 3.7.x</p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="010_fmg_configuration.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Operating the FortiManager’s own configuration</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="012_cli_script_management.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Script management</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rest-api">12.1. REST API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-system-status">12.1.1. Getting system status</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-list-of-adoms">12.1.2. Get list of ADOMs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-fortimanager-gui">12.2. Using FortiManager GUI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-requests-python-module">12.3. Using <em>requests</em> python module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-serviceproxy-python-module">12.4. Using <em>ServiceProxy</em> python module</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By NOC/SOC Fortinet CSE Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jean-Pierre Forcioli.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
