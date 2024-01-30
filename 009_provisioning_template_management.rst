@@ -5557,8 +5557,13 @@ How to create a Template Group?
 The following example shows how to create a new Template Group named ``template_group_001`` in the ``dc_africa`` ADOM and referencing the following
 other templates:
 
+
 - The ``cli_template_group_001`` CLI Template Group
+- The ``ap_profile_001`` FortiAP Profile
+- The ``fsw_template_001`` FortiSwitch Template
+- The ``fext_profile_001`` FortiExtender Profile
 - The ``system_template_001`` System Template
+- The ``threat_weight_template_001`` Threat Weight Template
 - The ``ipsec_tunel_template_001`` IPsec Tunnel Template
 - The ``bgp_template_001`` BGP Template
 - The ``static_route_template_001`` Static Route Template
@@ -5578,20 +5583,27 @@ other templates:
                "data": {
                  "name": "template_group_001",
                  "template group setting": {
-                   "cliprofs": [
-                     "cli_template_group_001"
-                   ],
-                   "description": "Template Group Example #001",
-                   "fspprofs": [],
-                   "fxtprofs": [],
-                   "templates": [
-                     "1__system_template_001",
-                     "4-1__ipsec_tunnel_template_001",
-                     "4-1240__bgp_template_001",
-                     "4-2__static_route_template_001",
-                     "5__sdwan_template_001"
-                   ],
-                   "wtpprofs": []
+                     "description": "",
+                     "cliprofs": [
+                         "cli_template_group_001"
+                     ],
+                     "wtpprofs": [
+                         "ap_profile_001"
+                     ],
+                     "fspprofs": [
+                         "fsw_template_001"
+                     ],
+                     "fxtprofs": [
+                         "fext_profile_001"
+                     ],
+                     "templates": [
+                         "1__system_template_001",
+                         "3__threat_weight_template_001",
+                         "4-1__ipsec_tunnel_template_001",
+                         "4-1240__bgp_template_001",
+                         "4-2__static_route_template_001",
+                         "5__sdwan_template_001"
+                     ]
                  },
                  "type": "tmplgrp"
                },
@@ -5617,6 +5629,75 @@ other templates:
              }
            ]
          }
+
+As you can see, some of the used templates can be referenced by just using their
+names. 
+For instance to specify a CLI Template Group (or a CLI Template), you just use
+the name of the CLI Template Group like ``cli_template_group_001``.
+It is the same logic for when you want to reference an FortiAP Profile, a
+FortiSwitch Template or a FortiExtender Profile.
+
+However, in the above example, what's unusual is the way you specify some of
+the used templates in the ``templates`` attribute.
+For instance to specify the ``system_template_001`` System Template, you have 
+to use ``1__system_template_001``.
+
+Here is what you should use to designate such a template:
+
+.. code-block:: text
+
+   <key>-[<sub_key>]__<template_name>
+
+where:
+
+- ``key`` is the identifier of the template type
+
+  For instance ``1`` for a System Template, ``3`` for a Threat Weigth Template, 
+  ``4`` for an IPsec Tunnel Template, a BGP Template and a Static Route  
+  Template, and ``5`` for a SD-WAN Template
+
+- ``sub_key`` is mostly for when the ``key`` value is ``4``; it helps to specify
+  the exact template type
+
+  For instance, ``1`` for IPsec Tunnel Template, ``1240`` for BGP Template and
+  ``2`` for Static Route Template
+
+- ``template_name`` is the template name
+
+The following table give all the possible ``key``, ``sub_key`` collected from
+FortiManager 7.4.2:
+
+.. list-table::
+   :header-rows: 1
+   :widths: auto
+
+   * - ``key``
+     - ``sub_key``
+     - Template Type
+
+   * - ``1``
+     - N/A
+     - System Template
+
+   * - ``3``
+     - N/A
+     - Threat Weight Template
+
+   * - ``4``
+     - ``1``
+     - IPsec Tunnel Template
+
+   * - ``4``
+     - ``2``
+     - Static Route Template
+
+   * - ``4``
+     - ``1240``
+     - BGP Template
+
+   * - ``5``
+     - N/A
+     - SD-WAN Template
 
 How to assign a Template Group to a Device Group?
 +++++++++++++++++++++++++++++++++++++++++++++++++
