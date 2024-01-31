@@ -3681,10 +3681,13 @@ some managed devices:
 How to get the existing values for the *Install On* column?
 ___________________________________________________________
 
-You just have to pass the option ``scope member``.
+You just have to pass the option ``scope member`` when getting the firewall
+policies information.
 
-To get the first three firewall policies from the ``pp_branches`` Policy Package
-in the ``demo`` ADOM:
+It works when getting the firewall policy table.
+
+For instance, to get the first three firewall policies from the ``ppkg_001`` 
+Policy Package in the ``dc_jani`` ADOM:
 
 .. tab-set:: 
 
@@ -3693,12 +3696,14 @@ in the ``demo`` ADOM:
       .. code-block:: json
 
          {
-           "id": 1,
+           "id": 3,
            "method": "get",
            "params": [
              {
                "fields": [
-                 "policyid"
+                 "name",
+                 "policyid",
+                 "comments"
                ],
                "loadsub": 0,
                "option": [
@@ -3708,118 +3713,144 @@ in the ``demo`` ADOM:
                  0,
                  3
                ],
-               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy"
+               "url": "/pm/config/adom/dc_jani/pkg/pkg_001/firewall/policy"
              }
            ],
-           "session": "{{session}}"
+           "session": "{{session}}",
+           "verbose": 1
          }
 
    .. tab-item:: RESPONSE
 
-      .. code-block:: json      
+      .. code-block:: json
 
          {
-           "id": 1,
+           "id": 3,
            "result": [
              {
                "data": [
                  {
+                   "comments": "Install On: dev_003, dev_004",
+                   "name": "Policy_001",
+                   "obj flags": 16,
                    "obj seq": 1,
-                   "policyid": 1
-                 },
-                 {
-                   "obj flags": 16,
-                   "obj seq": 2,
-                   "policyid": 2
-                 },
-                 {
-                   "obj flags": 16,
-                   "obj seq": 3,
-                   "policyid": 3,
+                   "oid": 5916,
+                   "policyid": 1,
                    "scope member": [
                      {
-                       "name": "branch11",
+                       "name": "dev_003",
+                       "vdom": "root"
+                     },
+                     {
+                       "name": "dev_004",
                        "vdom": "root"
                      }
                    ]
+                 },
+                 {
+                   "comments": "Install On: Installation Targets (Default)",
+                   "name": "Policy_002",
+                   "obj seq": 2,
+                   "oid": 5917,
+                   "policyid": 2
+                 },
+                 {
+                   "comments": "Install On: None",
+                   "name": "Policy_003",
+                   "obj seq": 3,
+                   "oid": 5918,
+                   "policyid": 3,
+                   "scope member": []
                  }
                ],
                "status": {
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy"
+               "url": "/pm/config/adom/dc_jani/pkg/pkg_001/firewall/policy"
              }
            ]
          }
       
-This output shows the fortimanager behavior when it returns firewall policies
-with *Default*, *None* or specific managed devices set in the column *Install 
-On*.
-
-- There's no ``scope member`` returned when the firewall policy is having its
-  cell *Install On* set with *Default*
-
-- There is also no ``scope member`` returned when the firewall policy is having
-  its cell *Install On* set to *None*
+This output shows the FortiManager behavior when it returns firewall policies
+with specific devices, the *Default*, or the *None* target in the *Install On* 
+column.
 
 - There is a ``scope member`` showing up when the policy is having its cell
-  *Install On* set with managed devices and/or device groups.
+  *Install On* set with managed devices and/or device groups (see firewall 
+  policy with ``policyid`` ``1``)
 
-In that case, when Fortimanger returns a firewal policy's detail, and when
-there is no ``scope member`` returned, how can we figure out whether we're in
-the default *Installation Targets* situation or the *None* one?
+- There's no ``scope member`` returned when the firewall policy is having its
+  cell *Install On* set with *Default* (see firewall
+  policy with ``policyid`` ``2``)
 
-With FortiManager 6, you have to check for the presence of the ``obj flags`` attribute (see #0305108).
+- There is an empty ``scope member`` returned when the firewall policy is having
+  its cell *Install On* set to *None* (see firewall
+  policy with ``policyid`` ``3``)
 
-When you're in the default *Installation Targets* case, this is what you should
-get:
+.. note:: 
 
-.. code-block::
+   With FortiManager 6, when the *Install On* cell was set with *None*, then the
+   response was not having any ``scope member`` returned.
 
-   [...]
-   "obj flags": 16,
-   [...]
+   In that case, how could you  figure out whether you were in the *Default* 
+   *Installation Targets* situation or the *None* one?
+   
+   You add to check for the presence of the ``obj flags`` attribute (see 
+   #0305108).
+   
+   When you're in the *Default* *Installation Targets* case, this is what you 
+   should get:
+   
+   .. code-block::
+   
+      [...]
+      "obj flags": 16,
+      [...]
+   
+   Here the ``"obj flags": 16`` confirms there's a ``scope member`` but since, 
+   it is using the *Default* value, it is not showing up. 
+   
+   Hence, it's normal not to have any ``scope member`` returned.
+   
+   You could interprete the above output as:
+   
+   .. code-block::
+   
+      [...]
+      "scope member": null,
+      [...]
+   
+   When you're in the *None* case, this is what we should get:
+   
+   .. code-block::
+   
+      [...]
+      [...]
+   
+   Here the absence of ``"obj flags": 16`` clearly indicates there is no ``scope
+   member`` at all. 
+   
+   Hence, it's normal not to have the ``scope member`` nor the ``obj flags``. 
+   
+   You could interprete the above output as:
+   
+   .. code-block::
+   
+      [...]
+      "scope member": [],
+      [...]
+   
+   The empty array clearly shows the ``scope member`` is empty (i.e. *None*).
+   
+   You will have to wait for FortiManager 7.0.11/7.2.5/7.4.3 (#0953665) to get a
+   more meaningful response.
 
-Here the ``"obj flags": 16`` confirms there's a ``scope member`` but since, it
-is using its default value, it is not showing up. 
 
-Hence, it's normal to not have any ``scope member`` returned.
+It also works when getting a specific firewall policy by ``policyid``.
 
-You could interprete the above output as:
-
-.. code-block::
-
-   [...]
-   "scope member": null,
-   [...]
-
-When you're in the *None* case, this is what we should get:
-
-.. code-block::
-
-   [...]
-   [...]
-
-Here the absence of ``"obj flags": 16`` clearly indicates there is no ``scope
-member`` at all. 
-
-Hence, it's normal to not have the ``scope member`` nor the ``obj flags``. 
-
-You could interprete the above output as:
-
-.. code-block::
-
-   [...]
-   "scope member": [],
-   [...]
-
-The empty array clearly shows the ``scope member`` is empty (i.e. *None*).
-
-You will have to wait for FortiManager 7.0.11/7.2.5/7.4.3 (#0953665) to get a
-more meaningful response.
-
-However, it is only working for when you get a specific policy ID:
+For instance, to firewall policy with ``policyid`` 3, from the ``ppkg_001`` 
+Policy Package in the ``dc_jani`` ADOM:
 
 .. tab-set:: 
    
@@ -3834,16 +3865,18 @@ However, it is only working for when you get a specific policy ID:
              {
                "fields": [
                  "name",
-                 "policyid"
+                 "policyid",
+                 "comments"
                ],
                "loadsub": 0,
                "option": [
                  "scope member"
                ],
-               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/1"
+               "url": "/pm/config/adom/dc_jani/pkg/pkg_001/firewall/policy/3"
              }
            ],
-           "session": "{{session}}"
+           "session": "{{session}}",
+           "verbose": 1
          }
 
 .. tab-set:: 
@@ -3851,31 +3884,32 @@ However, it is only working for when you get a specific policy ID:
    .. tab-item:: RESPONSE
 
       .. code-block:: json
-        
+
          {
            "id": 3,
            "result": [
              {
                "data": {
-                 "name": "Policy_001",
+                 "comments": "Install On: None",
+                 "name": "Policy_003",
                  "obj flags": 16,
-                 "obj seq": 1,
-                 "oid": 6082,
-                 "policyid": 1,
+                 "obj seq": 3,
+                 "oid": 5918,
+                 "policyid": 3,
                  "scope member": []
                },
                "status": {
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/pm/config/adom/demo/pkg/pp_branches/firewall/policy/1"
+               "url": "/pm/config/adom/dc_jani/pkg/pkg_001/firewall/policy/3"
              }
            ]
-         }
+         }        
 
       .. note::
 
-         - In this case, firewall policy with ``policyid`` ``1`` is having its
+         - In this case, firewall policy with ``policyid`` ``3`` is having its
            *Install On* column set to *None*
 
          - Now an explicit empty ``scope member`` list is returned
