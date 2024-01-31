@@ -1249,11 +1249,26 @@ How to get IPS Profile Usage?
 
 Caught in #0955276.
 
-From the GUI, this operation is reserved to a *restricted* administrator (an
-administrator declared in FortiManager and assigned to a permission profile with
-the ``system.admin.profile.type`` set to ``restricted``).
+IPS Profile Usage is a tool that let the FortiManager administror know about
+IPS sensor usage.
 
-But it is actionnable with the |fmg_api| as shown below:
+You trigger it using the *More* > *IPS Profile Usages* from the *Intrusion Prevention* page:
+
+.. thumbnail:: images/image_007.png
+
+For each managed device using IPS sensors, You can review the *Installed Timestamp*, the *Modified Timestamp* and most importantly the IPS sensor *Status* (whether it is in sync with the one used by the managed device):abbr:
+
+.. thumbnail:: images/image_008.png
+
+In the above example, the ``default`` IPS sensor was installed on the two 
+``site_1`` and ``site_2`` managed devices at the indicated *Installed 
+Timestamp*.
+The example is also confirming that for the moment, the ``default`` IPS sensor
+is still in sync with the one currently enforced by the two managed devices 
+since the *Status* is green for them.
+
+You can trigger the *IPS Profile Usages* operation using the |fmg_api| as shown 
+below:
 
 .. tab-set::
 
@@ -1262,11 +1277,63 @@ But it is actionnable with the |fmg_api| as shown below:
       .. code-block:: json
 
          {
-             "method": "get",
-             "params": [
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/production/_objstatus/ips/sensor"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
                  {
-                     "url": "/pm/config/adom/root/_objstatus/ips/sensor/"
+                   "device": "site_1",
+                   "objects": [
+                     {
+                       "category": 288,
+                       "copied_timestamp": 1699030383,
+                       "latest_timestamp": 1699030383,
+                       "name": "default",
+                       "status": 0
+                     }
+                   ],
+                   "vdom": "root"
+                 },
+                 {
+                   "device": "site_2",
+                   "objects": [
+                     {
+                       "category": 288,
+                       "copied_timestamp": 1699030383,
+                       "latest_timestamp": 1699030383,
+                       "name": "default",
+                       "status": 0
+                     }
+                   ],
+                   "vdom": "root"
                  }
-             ],
-             "id": "f892b8dc-bbf2-444e-a196-b51d4e3686e8"
-         }        
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/production/_objstatus/ips/sensor"
+             }
+           ]
+         }
+
+      .. note::
+
+         - Value ``0`` for the ``status`` attribute correspond to the green 
+           status
