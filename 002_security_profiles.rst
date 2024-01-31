@@ -1249,8 +1249,8 @@ How to get IPS Profile Usage?
 
 Caught in #0955276.
 
-IPS Profile Usage is a tool that let the FortiManager administror know about
-IPS sensor usage.
+IPS Profile Usage is a tool that lets the FortiManager administror knows about
+global IPS sensor usage.
 
 You trigger it using the *More* > *IPS Profile Usages* from the *Intrusion Prevention* page:
 
