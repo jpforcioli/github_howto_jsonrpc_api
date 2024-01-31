@@ -765,6 +765,53 @@ Please also consider the new information from #0370036.
    _category/list
    will be kept which will return the DB calculated category list.
 
+How to create a new Custom Application Signature?
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+To add a new ``APP_SIG_002`` Custom Application Signature in ``dc_africa`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "comment": null,
+                 "signature": "F-SBID (--app_cat 36; --name \"Front.FP30reg.Chunked.Overflow TEst\"; --protocol tcp; --service HTTP; --flow from_client; --parsed_type HTTP_POST; --pattern \"/vti_bin/_vti_aut/fp30reg.dll\"; --context uri; --no_case; --parsed_type HTTP_CHUNKED; )",
+                 "tag": "APP_SIG_002"
+               },
+               "url": "pm/config/adom/dc_africa/obj/application/custom"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "tag": "APP_SIG_002"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "pm/config/adom/dc_africa/obj/application/custom"
+             }
+           ]
+         }        
+
 DLP Profile Management
 ----------------------
 
