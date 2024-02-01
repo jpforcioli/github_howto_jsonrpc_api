@@ -294,100 +294,239 @@ Using same process, we can easily get the FGD upstream servers:
 .. code-block:: json
 
 
+Firmware Management
+-------------------
 
-How to retrieve the page *FortiGuard > Firmware Images*?
---------------------------------------------------------
+How to get the list of existing firmware images for FortiGate device?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-We have to use the FMG GUI API.
+Is is to get the same list as the one you get when visiting the *FortiGuard* > *Firmware Images*:
 
-**REQUEST:**
+.. thumbnail:: images/image_009.png
 
-.. code-block::
+Following example shows how to get the list of fimware images for the 
+FortiGate-60F platform:
 
-   POST https://secops-master.gcp.fortipoc.net:10405/cgi-bin/module/flatui_proxy
+.. tab-set:: 
 
-   {
-       "url": "/gui/adom/um/firmwareimage",
-       "method": "get",
-       "params": {
-           "viewType": 0,
-           "viewProduct": "FGT",
-           "startIndex": 0,
-           "results": 50000000
-       }
-   }
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "flags": 1,
+                 "platform": "FortiGate-60F",
+                 "product": "FGT"
+               },
+               "url": "/um/image/version/list"
+             }
+           ],
+           "session": "{{session}}",
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: text
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "status": "success",
+                 "version_list": [
+                   {
+                     "fdsid": "FGT60F",
+                     "platform": "FortiGate-60F",
+                     "product": "FGT",
+                     "versions": [
+                       {
+                         "bdate": "2001251225",
+                         "image_type": "NA",
+                         "objid": "06000000FIMG00242-00000.00009-2001251225",
+                         "type": "GA",
+                         "version": "6.0.9-b6665"
+                       },
+                       {
+                         "bdate": "2209090404",
+                         "image_type": "NA",
+                         "objid": "06000000FIMG00242-00000.00015-2209090404",
+                         "type": "GA",
+                         "version": "6.0.15-b6930"
+                       },
+                       {
+                         "SNIP": "SNIP",
+                       }         
+                       {
+                         "bdate": "2306101549",
+                         "image_type": "F",
+                         "objid": "07002000FIMG00242-00002.00005-2306101549",
+                         "type": "GA",
+                         "version": "7.2.5-b1517"
+                       },
+                       {
+                         "bdate": "2210052037",
+                         "image_type": "F",
+                         "objid": "07002000FIMG00242-00002.00002-2210052037",
+                         "type": "GA",
+                         "version": "7.2.2-b1255"
+                       }
+                     ]
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/image/version/list"
+             }
+           ]
+         }
+
+Should you want to get the firmware images for all FortiGate device?
+Just omit the ``platform`` attribute and keep the ``product`` one set with ``FGT``:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "flags": 1,
+                 "product": "FGT"
+               },
+               "url": "/um/image/version/list"
+             }
+           ],
+           "session": "{{session}}",
+         }
+
+You can also get the firmware images for the following procuct:
+
+.. list-table:: 
+   :header-rows: 1
+   :widths: auto
+
+   * - Name
+     - ``product``
+
+   * - FortiGate
+     - ``FGT``
+
+   * - FortiAnalyzer
+     - ``FAZ``
+
+   * - FortiManager
+     - ``FMG``
+
+   * - FortiAP
+     - ``FAP``
+
+   * - FortiExtender
+     - ``FXT``
+
+   * - FortiSwitch
+     - ``FSW``
+
+   * - FortiProxy
+     - ``FPX``
+
+If you omit both the ``platform`` and the ``product`` attributes, then you 
+will the firmware images list for all platforms/products!
 
 .. note::
 
-   When attribute ``viewType`` is equal to 0, FMG returns firmware for managed
-   devices only. Set it to 1 if the goal is to get all possible firmwares.
+   - FortiManager indicates in the output when the firmware image has been 
+     already downloaded:
 
-**RESPONSE:**
+     .. tab-set::
 
-.. code-block::
+        .. tab-item:: RESPONSE
 
-   200
+           .. code-block:: json
 
-   {
-       "result": [
-           {
-               "data": {
-                   "build": "01637",
-                   "date": "20-03-30",
-                   "notesKey": "06004000-VM64-KVM-01579-200330-6.4.0",
-                   "records": [
-                       {
-                           "action": {
-                               "del": false,
-                               "dl": true
-                           },
-                           "actstatus": "",
-                           "avail_ver": "6.4.1 (1637)",
-                           "installedon": "None",
-                           "key": "06004000-FG1K5D-01637--6.4.1",
-                           "model": "FortiGate-1500D",
-                           "pref_ver": {
-                               "firm": "",
-                               "label": "6.4.1 (1637)",
-                               "platform": "FG1K5D",
-                               "product": "FGT"
-                           },
-                           "size": "",
-                           "status": "Available on FortiGuard Distribution Server"
-                       },
-                       [...]
-                       {
-                           "action": {
-                               "del": true,
-                               "dl": false
-                           },
-                           "actstatus": "Success",
-                           "avail_ver": "6.4.1 (1637)",
-                           "installedon": "None",
-                           "key": "06004000-VM64-KVM-01579-200330-6.4.0",
-                           "model": "FortiGate-VM64-KVM",
-                           "notes": "06004000-VM64-KVM-01579-200330-6.4.0",
-                           "pref_ver": {
-                               "firm": "",
-                               "label": "6.4.0 (1579)",
-                               "platform": "VM64-KVM",
-                               "product": "FGT"
-                           },
-                           "size": "62.06 MB",
-                           "status": "Local"
-                       }
-                   ],
-                   "totalRecords": 4
-               },
-               "id": null,
-               "status": {
-                   "code": 0,
-                   "message": ""
-               },
-               "url": "/gui/adom/um/firmwareimage"
-           }
-       ]
-   }   
+              {
+                "bdate": "2304132147",
+                "image_type": "NA",
+                "objid": "06002000FIMG00259-00002.00014-2304132147",
+                "type": "GA",
+                "version": "6.2.14-b1364"
+              },
+              {
+                "bdate": "2312230056",
+                "image_path": "/var/fwm/image/FGT40F_7.4.2_b2571_FORTINET.out",
+                "image_size": 81475306,
+                "image_type": "F",
+                "objid": "07004000FIMG00259-00004.00002-2312230056",
+                "type": "GA",
+                "version": "7.4.2-b2571"
+              },
+
+           .. note::
+
+              In the above response snipet, you can see that build ``6.2.14``  
+              is still in the public FortiGuard servers while the build 
+              ``7.4.2`` has already been download in FortiManager.
+
+How to download a firmware image?
++++++++++++++++++++++++++++++++++
+
+The following example shows hot to download the firmware image for the FortiOS version 7.0.1 build 0489 and the FortiGate-100F platform:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         { 
+           "id": 1,
+           "method": "exec", 
+           "params": [
+             { 
+               "data": { 
+                 "create_task": "enable", 
+                 "platform": "FortiGate-100F", 
+                 "version": "7.0.11-b0489-GA"
+               }, 
+               "url": "/um/image/download"
+             }
+           ], 
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         { 
+           "id": 1,
+           "result": [
+             { 
+               "data": { 
+                 "status": "success", 
+                 "taskid": 1403
+               }, 
+               "status": { 
+                 "code": 0, 
+                 "message": "OK"
+               }, 
+               "url": "/um/image/download"
+             }
+           ]
+         }
 
 How to get all the contracts for managed devices?
 -------------------------------------------------
@@ -1089,56 +1228,6 @@ How to export/import Entitlement?
 Caught in #0778029.
 
 TBD.
-
-How to download a firmware?
----------------------------
-
-To download FortiOS firmware 7.0.1 build 0489 for the FortiGate-100F platform:
-
-.. tab-set::
-
-   .. tab-item:: REQUEST (from diagnose debug application fdssvrd 255)
-
-      .. code-block:: json
-
-         { 
-           "id": "62c45383-6ea3-4456-b72b-ceeff85ccfa7", 
-           "keep_session_idle": 1, 
-           "method": "exec", 
-           "params": [
-             { 
-               "data": { 
-                 "create_task": "enable", 
-                 "platform": "FortiGate-100F", 
-                 "version": "7.0.11-b0489-GA"
-               }, 
-               "target start": 1, 
-               "url": "/um/image/download"
-             }
-           ], 
-           "session": 53840
-         }
-
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-
-         { 
-           "id": "62c45383-6ea3-4456-b72b-ceeff85ccfa7", 
-           "result": [
-             { 
-               "data": { 
-                 "status": "success", 
-                 "taskid": 1403
-               }, 
-               "status": { 
-                 "code": 0, 
-                 "message": "OK"
-               }, 
-               "url": "/um/image/download"
-             }
-           ]
-         }
 
 External Resources
 ------------------
