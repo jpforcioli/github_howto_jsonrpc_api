@@ -578,6 +578,75 @@ Following example is showing how to lock firewall policy with ``policyid`` ``1``
            ]
          }
       
+How to lock an object?
+______________________
+
+To lock an object, you need first to lock a Policy Package (see :ref:`How to 
+lock a Policy Package?`) or a firewall policy (see :ref:`How to lock a firewall 
+policy?`).
+
+The endpoint to lock an object is:
+
+.. code-block:: text
+
+   /dvmdb/adom/{adom}/workspace/obj/{path_to_the_object}
+
+where ``path_to_the_object`` is the usual path used to refer to objects.
+
+For instance:
+
+.. list-table::
+   :header-rows: 1
+   :widths: auto
+
+   * - To lock...
+     - ``path_to_the_object`` is
+
+   * - the ``host_001`` firewall address
+     - ``/firewall/address/host_001``
+
+   * - the ``grp_001`` firewall address
+     - ``/firewall/addrgrp/grp_001``
+
+   * - the ``tcp_8080`` TCP service
+     - ``/firewall/service/custom/tcp_8080``
+
+The following exemple shows how to lock the ``host_001`` firewall address from the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lock/obj/firewall/address/host_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lock/obj/firewall/address/host_001"
+             }
+           ]
+         }
+
 How to lock a device?
 _____________________
 
