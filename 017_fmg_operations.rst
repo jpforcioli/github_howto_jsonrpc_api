@@ -461,41 +461,41 @@ Workspace normal mode
 How to lock an ADOM?
 ++++++++++++++++++++
 
-We lock ADOM ``customer_001``.
+Following example is showing how to lock the ``customer_001`` ADOM:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-                {
-                  "id": 1,
-                  "jsonrpc": "1.0",
-                  "method": "exec",
-                  "params": [
-                    {
-                      "url": "/dvmdb/adom/customer_001/workspace/lock"
-                    }
-                  ],
-                  "session": "rf+4tiPkMG0YMFjknq7drELWbpTYCEAHKA3creDL9JFIogsTqcMdXJ+w3l+fs/2523PEfKGn+VF5n5AbO9LbAw==",
-                  "verbose": 1
-                }
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/customer_001/workspace/lock"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
 
-**RESPONSE:**
+      .. code-block:: json
 
-.. code-block:: json
-
-                {
-                  "id": 1,                
-                  "result": [
-                    {                
-                      "status": {
-                        "code": 0, 
-                        "message": "OK" 
-                      },
-                      "url": "/dvmdb/adom/customer_001/workspace/lock"
-                    }
-                  ]
-                }
+         {
+           "id": 1,                
+           "result": [
+             {                
+               "status": {
+                 "code": 0, 
+                 "message": "OK" 
+               },
+               "url": "/dvmdb/adom/customer_001/workspace/lock"
+             }
+           ]
+         }
                 
 How to lock a firewall policy?
 ++++++++++++++++++++++++++++++
