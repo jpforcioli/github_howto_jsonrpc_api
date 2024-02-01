@@ -458,10 +458,13 @@ We can also use this one:
 Workspace normal mode
 ---------------------
 
-How to lock an ADOM?
-++++++++++++++++++++
+How to lock?
+++++++++++++
 
-Following example is showing how to lock the ``customer_001`` ADOM:
+How to lock an ADOM?
+____________________
+
+Following example is showing how to lock the ``demo`` ADOM:
 
 .. tab-set::
 
@@ -474,7 +477,7 @@ Following example is showing how to lock the ``customer_001`` ADOM:
            "method": "exec",
            "params": [
              {
-               "url": "/dvmdb/adom/customer_001/workspace/lock"
+               "url": "/dvmdb/adom/demo/workspace/lock"
              }
            ],
            "session": "{{session}}"
@@ -492,337 +495,321 @@ Following example is showing how to lock the ``customer_001`` ADOM:
                  "code": 0, 
                  "message": "OK" 
                },
-               "url": "/dvmdb/adom/customer_001/workspace/lock"
+               "url": "/dvmdb/adom/demo/workspace/lock"
              }
            ]
          }
-                
+
+How to lock a Policy Package?
+_____________________________
+
+
 How to lock a firewall policy?
-++++++++++++++++++++++++++++++
+______________________________
 
-**REQUEST:**
+Following example is showing how to lock firewall policy with ``policyid`` ``1`` in the ``ppkg_001`` Policy Package from the ``demo`` ADOM:
 
-.. code-block:: json
+.. tab-set:: 
   
-   {
-     "id": 3,
-     "method": "exec",
-     "params": [
-       {
-         "url": "/dvmdb/adom/db_002/workspace/lock/pkg/ppkg_db_002_dev_001/firewall/policy/1"
-       }
-     ],   
-     "session": "PPQCwpzzle2HkX4ZvZg8/9MEI2E0PZHqY2nAZ4oLZY1PsDtiT2azWHIaZCHTgXzQnckV0TwPiqU16K6aEuurR3I7DZIX/QsK"
-   }
+   .. tab-item:: REQUEST
 
-**RESPONSE:**
+      .. code-block:: json
+  
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lock/pkg/ppkg_001/firewall/policy/1"
+             }
+           ],   
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/adom/db_002/workspace/lock/pkg/ppkg_db_002_dev_001/firewall/policy/1"
-       }
-     ]
-   }
-
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lock/pkg/ppkg_001/firewall/policy/1"
+             }
+           ]
+         }
+      
 How to lock a device?
-+++++++++++++++++++++
+_____________________
 
 Device lock has been introduced in #0544637 (FMG 6.0.5/6.2.0).
 
-We lock device ``demo_005_device_100`` in ADOM ``DEMO_005``.
+The following example show how to tock the ``dev_001`` device from the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set:: 
+   
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lock/dev/dev_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "exec",
-     "params": [
-       {
-         "url": "/dvmdb/adom/DEMO_005/workspace/lock/dev/demo_005_device_100"
-       }
-     ],
-     "session": "K37YSYIvRbc7quzdDHjt8cX3iJCcODowD12itADCzzAcQlWvGeexPjENhrVU6wBS90sTlHijtbe7KagTwt29Rg==",
-     "verbose": 1
-   }
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lock/dev/dev_001"
+             }
+           ]
+         }
 
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/adom/DEMO_005/workspace/lock/dev/demo_005_device_100"
-       }
-     ]
-   }
+How to save?
+++++++++++++
 
 How to save changes in an ADOM?
-+++++++++++++++++++++++++++++++
+_______________________________
 
-It is required to save pending changes when working in workspace normal mode.
-Unsaved changes will be lost after the unlock operation.
+Before unlocking an ADOM, a Policy Package or a firewall policy, a *save* operation is required in order have all pending changes applied to the running 
+ADOM database.
 
-**REQUEST**:
+If you unlock without saving, all changes will be lost.
 
-.. code-block::
+To save changes made in the ``demo`` ADOM:
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "exec",
-     "params": [
-       {
-         "url": "/dvmdb/adom/customer_001/workspace/commit"
-       }
-     ],
-     "session": "eQ4LWFyuevfRgV/O7EJNLW5HmP8mfFMINKU3g2MlIu2iST03DsnlKaO/4rsOGJ8yg3F8Ev7LoejAUKaktk/PyC0ng9YN2yW/",
-     "verbose": 1
-   }
+.. tab-set:: 
 
-**RESPONSE:**
+   .. tab-item:: REQUEST
 
-.. code-block::
+      .. code-block::
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "taskid": 3332,
-         "url": "/dvmdb/adom/ansible_001/workspace/commit"
-       }
-     ]
-   }
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/commit"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-How to unlock an ADOM?
-++++++++++++++++++++++
+   .. tab-item:: RESPONSE
 
-.. note::
+      .. code-block:: 
 
-  If you unlock without a ``commit`` operation unsaved changes will be lost.
-
-**REQUEST:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "exec",
-     "params": [
-       {
-         "url": "/dvmdb/adom/customer_001/workspace/unlock"
-       }
-     ],
-     "session": "eQ4LWFyuevfRgV/O7EJNLW5HmP8mfFMINKU3g2MlIu2iST03DsnlKaO/4rsOGJ8yg3F8Ev7LoejAUKaktk/PyC0ng9YN2yW/",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/adom/ansible_001/workspace/unlock"
-       }
-     ]
-   }  
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "taskid": 3332,
+               "url": "/dvmdb/adom/demo/workspace/commit"
+             }
+           ]
+         }
 
 How to detect unsaved changes?
 ++++++++++++++++++++++++++++++
 
-Before unlocking an ADOM, it is important to make sure there are no unsaved
-changes.
+Before unlocking an ADOM, it is important to save all pending changes.
 
 FortiManager is maintaining a ``dirty`` flag.
+
 When it is ``0``, it means there's no unsaved changes.
-When it is ``1``, it means it is required to save changes before unlocking the
-ADOM.
+
+When it is ``1``, it means it is required to trigger a save operation before 
+unlocking the ADOM.
 
 To understand the process, review the following complete sequence of operations
-performed in ADOM ``dc_us``:
+performed in the ``demo`` ADOM:
 
 #. Lock the ADOM
 
-   **REQUEST:**
+   .. tab-set::
+    
+      .. tab-item:: REQUEST
 
-   .. code-block:: json
+         .. code-block:: json
+      
+            {
+              "id": 3,
+              "method": "exec",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/demo/workspace/lock"
+                }
+              ],
+              "session": "{{session}}"
+            }
 
-      {
-        "id": 3,
-        "method": "exec",
-        "params": [
-          {
-            "url": "/dvmdb/adom/dc_us/workspace/lock"
-          }
-        ],
-        "session": "3Mc/7WhwhGrirpUwelm6j2+8/feb6nVzFapg432D6XULcHoKecpb2O6pbXdSpv5YMwkuyIPr8lumYH9XDZLmcQ=="
-      }
+      .. tab-item:: RESPONSE
 
-   **RESPONSE:**
+         .. code-block:: json
 
-   .. code-block:: json
-          
-      {
-        "id": 3,
-        "result": [
-          {
-            "status": {
-              "code": 0,
-              "message": "OK"
-            },
-            "url": "/dvmdb/adom/dc_us/workspace/lock"
-          }
-        ]
-      }
-
+            {
+              "id": 3,
+              "result": [
+                {
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/workspace/lock"
+                }
+              ]
+            }
+      
 #. Observe the ``dirty`` flag
 
-   **REQUEST:**
+   .. tab-set::
+    
+      .. tab-item:: REQUEST
 
-   .. code-block:: json
-
-      {
-        "id": 4,
-        "method": "get",
-        "params": [
-          {
-            "url": "/dvmdb/adom/dc_us/workspace/dirty"
-          }
-        ],
-        "session": "3Mc/7WhwhGrirpUwelm6j2+8/feb6nVzFapg432D6XULcHoKecpb2O6pbXdSpv5YMwkuyIPr8lumYH9XDZLmcQ==",
-        "verbose": 1
-      }
+         .. code-block:: json
       
-   **RESPONSE:**
+            {
+              "id": 4,
+              "method": "get",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/demo/workspace/dirty"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }
 
-   .. code-block:: json
+      .. tab-item:: RESPONSE
 
-      {
-        "id": 4,
-        "result": [
-          {
-            "data": {
-              "dirty": 0
-            },
-            "status": {
-              "code": 0,
-              "message": "OK"
-            },
-            "url": "/dvmdb/adom/dc_us/workspace/dirty"
-          }
-        ]
-      }
+         .. code-block:: json            
 
-   This is expected: ``dirty`` flag is ``0`` since there's no change yet.
+            {
+              "id": 4,
+              "result": [
+                {
+                  "data": {
+                    "dirty": 0
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/workspace/dirty"
+                }
+              ]
+
+            }
+
+   This is expected: ``dirty`` flag is ``0`` since no change were done yet.
 
 #. Do a change
 
-   Modify the ``comment`` of an existing ``host_001`` firewall address in ADOM
-   ``dc_us``:
+   Modify the ``comment`` of an existing ``host_001`` firewall address in the  
+   ``demo`` ADOM:
    
-   **REQUEST:**
+   .. tab-set::
+    
+      .. tab-item:: REQUEST
 
-   .. code-block:: json
+         .. code-block:: json
+      
+            {
+              "id": 5,
+              "method": "set",
+              "params": [
+                {
+                  "data": {
+                    "comment": "New comment #001"
+                  },
+                  "url": "/pm/config/adom/demo/obj/firewall/address/host_001"
+                }
+              ],
+              "session": "{{session}}"
+            }
 
-      {
-        "id": 5,
-        "method": "set",
-        "params": [
-          {
-            "data": {
-              "comment": "New comment #001"
-            },
-            "url": "/pm/config/adom/dc_us/obj/firewall/address/host_001"
-          }
-        ],
-        "session": "3Mc/7WhwhGrirpUwelm6j2+8/feb6nVzFapg432D6XULcHoKecpb2O6pbXdSpv5YMwkuyIPr8lumYH9XDZLmcQ=="
-      }
+      .. tab-item:: RESPONSE
 
-   **RESPONSE:**
+         .. code-block:: json
 
-   .. code-block:: json
-
-      {
-        "id": 5,
-        "result": [
-          {
-            "data": {
-              "name": "host_001"
-            },
-            "status": {
-              "code": 0,
-              "message": "OK"
-            },
-            "url": "/pm/config/adom/dc_us/obj/firewall/address/host_001"
-          }
-        ]
-      }
-
+            {
+              "id": 5,
+              "result": [
+                {
+                  "data": {
+                    "name": "host_001"
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/pm/config/adom/demo/obj/firewall/address/host_001"
+                }
+              ]
+            }
+      
 #. Observe the ``dirty`` flag
 
-   **REQUEST:**
+   .. tab-set::
 
-   .. code-block:: json
+      .. tab-item:: REQUEST
 
-      {
-        "id": 6,
-        "method": "get",
-        "params": [
-          {
-            "url": "/dvmdb/adom/dc_us/workspace/dirty"
-          }
-        ],
-        "session": "3Mc/7WhwhGrirpUwelm6j2+8/feb6nVzFapg432D6XULcHoKecpb2O6pbXdSpv5YMwkuyIPr8lumYH9XDZLmcQ==",
-        "verbose": 1
-      }
+         .. code-block:: json
       
-   **RESPONSE:**
+            {
+              "id": 6,
+              "method": "get",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/dc_us/workspace/dirty"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }
 
-   .. code-block:: json
+      .. tab-item:: RESPONSE
 
-      {
-        "id": 6,
-        "result": [
-          {
-            "data": {
-              "dirty": 1
-            },
-            "status": {
-              "code": 0,
-              "message": "OK"
-            },
-            "url": "/dvmdb/adom/dc_us/workspace/dirty"
-          }
-        ]
-      }
+         .. code-block:: json      
+
+            {
+              "id": 6,
+              "result": [
+                {
+                  "data": {
+                    "dirty": 1
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/workspace/dirty"
+                }
+              ]
+            }
 
    Now the ``dirty`` flag is ``1``.
 
@@ -830,75 +817,79 @@ performed in ADOM ``dc_us``:
 
 #. Save the change
 
-   **REQUEST:**
+   .. tab-set::
+    
+      .. tab-item:: REQUEST
 
-   .. code-block:: json
+         .. code-block:: json
+      
+            {
+              "id": 7,
+              "method": "exec",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/demo/workspace/commit"
+                }
+              ],
+              "session": "{{session}}"
+            }
 
-      {
-        "id": 7,
-        "method": "exec",
-        "params": [
-          {
-            "url": "/dvmdb/adom/dc_us/workspace/commit"
-          }
-        ],
-        "session": "3Mc/7WhwhGrirpUwelm6j2+8/feb6nVzFapg432D6XULcHoKecpb2O6pbXdSpv5YMwkuyIPr8lumYH9XDZLmcQ=="
-      }
+      .. tab-item:: RESPONSE
 
-   **RESPONSE:**
+         .. code-block:: json
 
-   .. code-block:: json
-
-      {
-        "id": 7,
-        "result": [
-          {
-            "status": {
-              "code": 0,
-              "message": "OK"
-            },
-            "url": "/dvmdb/adom/dc_us/workspace/commit"
-          }
-        ]
-      }
-
+            {
+              "id": 7,
+              "result": [
+                {
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/workspace/commit"
+                }
+              ]
+            }
+      
 #. Observe the ``dirty`` flag
 
-   **REQUEST:**
+   .. tab-set::
 
-   .. code-block:: json
+      .. tab-item:: REQUEST
 
-      {
-        "id": 8,
-        "method": "get",
-        "params": [
-          {
-            "url": "/dvmdb/adom/dc_us/workspace/dirty"
-          }
-        ],
-        "session": "3Mc/7WhwhGrirpUwelm6j2+8/feb6nVzFapg432D6XULcHoKecpb2O6pbXdSpv5YMwkuyIPr8lumYH9XDZLmcQ==",
-        "verbose": 1
-      }
+         .. code-block:: json
+      
+            {
+              "id": 8,
+              "method": "get",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/demo/workspace/dirty"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }
 
-   **RESPONSE:**
+      .. tab-item:: RESPONSE
 
-   .. code-block:: json
-          
-      {
-        "id": 8,
-        "result": [
-          {
-            "data": {
-              "dirty": 0
-            },
-            "status": {
-              "code": 0,
-              "message": "OK"
-            },
-            "url": "/dvmdb/adom/dc_us/workspace/dirty"
-          }
-        ]
-      }
+         .. code-block:: json
+
+            {
+              "id": 8,
+              "result": [
+                {
+                  "data": {
+                    "dirty": 0
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/workspace/dirty"
+                }
+              ]
+            }
 
    Changes were saved in previous operation step.
 
@@ -907,41 +898,94 @@ performed in ADOM ``dc_us``:
 
 #. Unlock the ADOM
 
-   **REQUEST:**
+   See :ref:`How to unlock?`
 
-   .. code-block:: json
+   .. tab-set::
 
-    {
-      "id": 9,
-      "method": "exec",
-      "params": [
-        {
-          "url": "/dvmdb/adom/dc_us/workspace/unlock"
-        }
-      ],
-      "session": "3Mc/7WhwhGrirpUwelm6j2+8/feb6nVzFapg432D6XULcHoKecpb2O6pbXdSpv5YMwkuyIPr8lumYH9XDZLmcQ=="
-    }
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+      
+            {
+              "id": 9,
+              "method": "exec",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/demo/workspace/unlock"
+                }
+              ],
+              "session": "{{session}}"
+            }
     
-   **RESPONSE:**
+      .. tab-item:: RESPONSE
 
-   .. code-block:: json
+         .. code-block:: json
 
-      {
-        "id": 9,
-        "result": [
-          {
-            "status": {
-              "code": 0,
-              "message": "OK"
-            },
-            "url": "/dvmdb/adom/dc_us/workspace/unlock"
-          }
-        ]
-      }
+            {
+              "id": 9,
+              "result": [
+                {
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/workspace/unlock"
+                }
+              ]
+            }
 
 .. note:: 
 
    - You can only get the ``dirty`` flag of your own workspace session
+
+How to unlock?
+++++++++++++++
+
+How to unlock an ADOM?
+______________________
+
+.. warning::
+
+   - If you unlock without a ``commit`` operation then unsaved changes will be 
+     lost
+
+   - See :ref:`How to save?`
+
+The following example shows how to unlock the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block::
+
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/unlock"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block::
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/unlock"
+             }
+           ]
+         }  
 
 Workflow mode
 -------------
