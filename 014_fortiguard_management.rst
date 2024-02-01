@@ -1,113 +1,129 @@
 FortiGuard Management
 =====================
 
-How to get the FMG FGD object versions?
----------------------------------------
+Introduction to FortiGuard Management
+-------------------------------------
 
-This is API which is exposed when debugging the process ``fdssrv``:
+In this section, a lot of API examples have been collected by enabling the
+following debug command in FortiManager console:
 
 .. code-block:: shell
 
    diagnose debug application fdssrv 255
    diagnose debug enable
-   diagnose debug timestamp enable
 
-and when we execute the FMG CLI command:
+and playing with FortiGuard using either the FortiManager GUI or the 
+following FortiManager CLI commands:
 
 .. code-block:: shell
 
+   execute fmupdate <option>
+   diagnose fwmanager <option>
+   
+How to get the FMG FGD object versions?
+---------------------------------------
+
+The below example has been collected by using the following FortiManager CLI:
+
+.. code-block:: text
+
    execute fmupdate fgd-dvber
 
-**REQUEST:**
+with the debug enabled as described in the :ref:`Introduction to FortiGuard
+Management` secion.
 
-.. code-block:: json
+.. tab-set:: 
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "get",
-     "params": [
-       {
-         "data": {
-           "flags": 0
-         },
-         "url": "/um/misc/fgd_db_ver"
-       }
-     ],
-     "session": "gB2yJjbyluZWQ9pBLoCym9DRWxk9o1kPEMDb5GdZSqWNbPVlYxnvHq7ULU2Z90iL0gIuo/F4DbnW/eFc1SXcQA==",
-     "verbose": 1
-   }
+   .. tab-item:: REQUEST
 
-**RESPONSE:**
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "jsonrpc": "1.0",
+           "method": "get",
+           "params": [
+             {
+               "data": {
+                 "flags": 0
+               },
+               "url": "/um/misc/fgd_db_ver"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-.. code-block:: json
+   .. tab-item:: RESPONSE      
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "as1": {
-             "desc": "Antispam(IP)",
-             "size": 821269740,
-             "update_time": 1618820401,
-             "version": 6738278
-           },
-           "as2": {
-             "desc": "Antispam(URI)",
-             "size": 0,
-             "update_time": 0,
-             "version": 0
-           },
-           "as4": {
-             "desc": "Antispam(HASH)",
-             "size": 28683496,
-             "update_time": 1618821361,
-             "version": 5318876
-           },
-           "av": {
-             "desc": "AntiVirus Query",
-             "size": 0,
-             "update_time": 0,
-             "version": 0
-           },
-           "av2": {
-             "desc": "Outbreak Prevention",
-             "size": 0,
-             "update_time": 0,
-             "version": 0
-           },
-           "fq": {
-             "desc": "File Query",
-             "size": 0,
-             "update_time": 0,
-             "version": 0
-           },
-           "geoip": {
-             "desc": "GeoIP",
-             "size": 108984169,
-             "update_time": 1617692460,
-             "version": 131146
-           },
-           "wf": {
-             "desc": "Webfilter",
-             "size": 7054323572,
-             "update_time": 1589577005,
-             "version": 1522738
-           }
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/um/misc/fgd_db_ver"
-       }
-     ]
-   }   
-
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "as1": {
+                   "desc": "Antispam(IP)",
+                   "size": 821269740,
+                   "update_time": 1618820401,
+                   "version": 6738278
+                 },
+                 "as2": {
+                   "desc": "Antispam(URI)",
+                   "size": 0,
+                   "update_time": 0,
+                   "version": 0
+                 },
+                 "as4": {
+                   "desc": "Antispam(HASH)",
+                   "size": 28683496,
+                   "update_time": 1618821361,
+                   "version": 5318876
+                 },
+                 "av": {
+                   "desc": "AntiVirus Query",
+                   "size": 0,
+                   "update_time": 0,
+                   "version": 0
+                 },
+                 "av2": {
+                   "desc": "Outbreak Prevention",
+                   "size": 0,
+                   "update_time": 0,
+                   "version": 0
+                 },
+                 "fq": {
+                   "desc": "File Query",
+                   "size": 0,
+                   "update_time": 0,
+                   "version": 0
+                 },
+                 "geoip": {
+                   "desc": "GeoIP",
+                   "size": 108984169,
+                   "update_time": 1617692460,
+                   "version": 131146
+                 },
+                 "wf": {
+                   "desc": "Webfilter",
+                   "size": 7054323572,
+                   "update_time": 1589577005,
+                   "version": 1522738
+                 }
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/misc/fgd_db_ver"
+             }
+           ]
+         }   
+      
 How to get the FMG upstream servers list?
 -----------------------------------------
-
+      
 It's quite easy to expose the |fmg_api| endpoints by debugging the ``fdssrv``
 process while issuing the FortiManager CLI command:
 
@@ -297,10 +313,10 @@ Using same process, we can easily get the FGD upstream servers:
 Firmware Management
 -------------------
 
-How to get the list of existing firmware images for FortiGate device?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to get the list of firmware images for FortiGate device?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Is is to get the same list as the one you get when visiting the *FortiGuard* > *Firmware Images*:
+It is to get the same list as the one you get when visiting the *FortiGuard* > *Firmware Images*:
 
 .. thumbnail:: images/image_009.png
 
