@@ -503,6 +503,41 @@ Following example is showing how to lock the ``demo`` ADOM:
 How to lock a Policy Package?
 _____________________________
 
+The following example shows how to lock the ``ppkg_001`` Policy Package from the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lock/pkg/ppkg_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lock/pkg/ppkg_001"
+             }
+           ]
+         }
 
 How to lock a firewall policy?
 ______________________________
