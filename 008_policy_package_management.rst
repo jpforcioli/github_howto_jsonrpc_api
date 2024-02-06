@@ -180,6 +180,195 @@ We create policy package ``pp.003`` in adom ``DEMO``:
 
 Starting with FMG 7.0.1 (#708471), the response will also contain the ``pkg oid``.
 
+How to get the list of Policy Package?
+++++++++++++++++++++++++++++++++++++++
+
+Following example shows how to get the list of Policy Packages in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/pkg/adom/demo"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "default",
+                   "obj ver": 13,
+                   "oid": 4971,
+                   "package settings": {
+                     "central-nat": 0,
+                     "consolidated-firewall-mode": 0,
+                     "fwpolicy-implicit-log": 0,
+                     "fwpolicy6-implicit-log": 0,
+                     "hitc-taskid": 0,
+                     "hitc-timestamp": 0,
+                     "ngfw-mode": 0,
+                     "policy-offload-level": 0
+                   },
+                   "type": "pkg"
+                 },
+                 {
+                   "name": "fgt-742-001",
+                   "obj ver": 5,
+                   "oid": 6584,
+                   "package settings": {
+                     "central-nat": 0,
+                     "consolidated-firewall-mode": 0,
+                     "fwpolicy-implicit-log": 0,
+                     "fwpolicy6-implicit-log": 0,
+                     "hitc-taskid": 0,
+                     "hitc-timestamp": 0,
+                     "ngfw-mode": 0,
+                     "policy-offload-level": 0
+                   },
+                   "type": "pkg"
+                 },
+                 {
+                   "name": "ppkg_001",
+                   "obj ver": 6,
+                   "oid": 10850,
+                   "package settings": {
+                     "central-nat": 0,
+                     "consolidated-firewall-mode": 0,
+                     "fwpolicy-implicit-log": 0,
+                     "fwpolicy6-implicit-log": 0,
+                     "hitc-taskid": 0,
+                     "hitc-timestamp": 0,
+                     "ngfw-mode": 0,
+                     "policy-offload-level": 0
+                   },
+                   "scope member": [
+                     {
+                       "name": "dc_emea_dev_001",
+                       "vdom": "root"
+                     },
+                     {
+                       "name": "dc_emea_dev_002",
+                       "vdom": "root"
+                     },
+                     {
+                       "name": "dc_emea_dev_003",
+                       "vdom": "root"
+                     }
+                   ],
+                   "type": "pkg"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/pkg/adom/demo"
+             }
+           ]
+         }
+
+      .. note::
+
+         - You can observe that when the Policy Package is assigned to managed 
+           devices, then FortiManager returns the ``scope member`` attribute
+
+How to get a single Policy Package?
++++++++++++++++++++++++++++++++++++
+
+Following example returns the details of the ``ppkg_001`` Policy Package from 
+the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/pkg/adom/demo/ppkg_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "ppkg_001",
+                 "obj ver": 6,
+                 "oid": 10850,
+                 "package settings": {
+                   "central-nat": 0,
+                   "consolidated-firewall-mode": 0,
+                   "fwpolicy-implicit-log": 0,
+                   "fwpolicy6-implicit-log": 0,
+                   "hitc-taskid": 0,
+                   "hitc-timestamp": 0,
+                   "ngfw-mode": 0,
+                   "policy-offload-level": 0
+                 },
+                 "scope member": [
+                   {
+                     "name": "dc_emea_dev_001",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "dc_emea_dev_002",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "dc_emea_dev_003",
+                     "vdom": "root"
+                   }
+                 ],
+                 "type": "pkg"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/pkg/adom/demo/ppkg_001"
+             }
+           ]
+         }           
+         
+      .. note:: 
+
+         - By default, FortiManager returns the Installation Targets of the 
+           Policy Package via the ``scope member`` attribute
+           
+How to get the Installation Targets of a Policy Package?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+See :ref:`How to get the list of Policy Package?` or :ref:`How to get a single 
+Policy Package?`
+
 How to assign a device to a Policy Package?
 +++++++++++++++++++++++++++++++++++++++++++
 
@@ -224,8 +413,11 @@ We want to assign device ``hub1`` to policy package ``hubs.pp`` in ADOM
      ]
    }
 
+Policy Package Installation
++++++++++++++++++++++++++++
+
 How to install a Policy Package?
-++++++++++++++++++++++++++++++++
+________________________________
 
 To install the ``branches`` Policy Package from ADOM ``demo``:
 
@@ -291,7 +483,7 @@ To install the ``branches`` Policy Package from ADOM ``demo``:
          }
 
 How to install a Policy Package against a device?
-+++++++++++++++++++++++++++++++++++++++++++++++++
+_________________________________________________
 
 It is required to add the ``scope`` attribute:
 
@@ -367,7 +559,7 @@ It is required to add the ``scope`` attribute:
          group or one of its nested device groups.
 
 How to install a Policy Package against a Device Group?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+_______________________________________________________
 
 We have Policy Package ``pp_france`` in foldler ``france`` which is in turn in
 folder ``emea``. 
@@ -480,7 +672,7 @@ If device group ``france`` is in a device group ``emea``, we can just use the fu
 	  }
 
 How to install a policy package located in a folder?
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+____________________________________________________
 
 To install policy package ``pp_corporate`` placed in folder ``/duts/emea``,
 from ADOM ``adom_dut``:
@@ -536,7 +728,7 @@ from ADOM ``adom_dut``:
    }
 
 How to install a policy package against a device's device db only?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+__________________________________________________________________
 
 Why would we need this?
 
@@ -602,7 +794,7 @@ In below example we trigger the copy operation against managed device
    }
 
 How to install a policy package against an offline device?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+__________________________________________________________
 
 This is for when the ADOM is configured with *Auto-Push Policy Packages When
 Device Back Online* enabled:
@@ -751,17 +943,11 @@ It's a three steps process:
         ]
       }
 
-Reinstall policy package
-++++++++++++++++++++++++
-
-This help when it is required to install multiple policy packages against
-different devices with a single API request.
-
 How to install multiple policy packages against multiple devices?
 _________________________________________________________________
 
-It is possible to install multiple policy packages to different devices by
-using the ``reinstall`` operation.
+Using a single API call, it is possible to install multiple policy packages to 
+different devices by using the ``reinstall`` operation.
 
 Below example is installing policy package ``ppkg_hubs`` and ``ppkg_branches``
 against devices ``fgt_00_1`` and ``fgt_01_1`` respectively (in ADOM ``demo``):
@@ -893,7 +1079,6 @@ for all the device group's members. However, should you have two or more
 ``target`` elements in the above API request, then like for the *How to install
 multiple policy packages against multiple devices?* case seen in the previous
 section, FMG will go with a sequential installation for them.
-
 
 How to reinstall multiple policy packages against multiple devices in parallel?
 _______________________________________________________________________________
