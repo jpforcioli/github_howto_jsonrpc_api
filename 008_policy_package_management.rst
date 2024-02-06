@@ -4087,7 +4087,7 @@ method ``delete``:
 
    .. tab-item:: REQUEST
 
-      .. code-block: json
+      .. code-block:: json
 
          {
            "id": 1, 
@@ -4108,7 +4108,7 @@ method ``delete``:
 
    .. tab-item:: RESPONSE
 
-      .. code-block: json
+      .. code-block:: json
 
          {
            "id": 1, 
