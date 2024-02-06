@@ -3849,7 +3849,7 @@ column.
 
 It also works when getting a specific firewall policy by ``policyid``.
 
-For instance, to firewall policy with ``policyid`` 3, from the ``ppkg_001`` 
+For instance, to firewall policy with ``policyid`` ``3``, from the ``ppkg_001`` 
 Policy Package in the ``dc_jani`` ADOM:
 
 .. tab-set:: 
@@ -3879,8 +3879,6 @@ Policy Package in the ``dc_jani`` ADOM:
            "verbose": 1
          }
 
-.. tab-set:: 
-   
    .. tab-item:: RESPONSE
 
       .. code-block:: json
