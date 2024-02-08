@@ -7751,3 +7751,257 @@ To get the VPN tunnel details for the ``i-04-hub-02`` device in the ``production
              }
            ]
          }
+
+How to manage network setting?
+------------------------------
+
+How to add members to an existing System Zone?
+++++++++++++++++++++++++++++++++++++++++++++++
+
+Challenging part is to preserve existing zone members during the ``add`` operation.
+
+Following example show how to add two new interface members to the ``zone_001`` system zone of the ``dev_001/vd_001`` device/vdom:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 "vl_004",
+                 "vl_005"
+               ],
+               "url": "/pm/config/device/dev_001/vdom/vd_001/system/zone/zone_001/interface"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. warning::
+
+         - If you use the ``set`` method, you will lose existing zone members!
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_001/vdom/vd_001/system/zone/zone_001/interface"
+             }
+           ]
+         }        
+
+How to delete members to an existing System Zone?
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Challenging part is to preserve existing zone members during the ``add`` operation.
+
+Following example show how to add two new interface members to the ``zone_001`` system zone of the ``dev_001/vd_001`` device/vdom:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 "vl_004",
+                 "vl_005"
+               ],
+               "url": "/pm/config/device/dev_001/vdom/vd_001/system/zone/zone_001/interface"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. warning::
+
+         - If you use the ``set`` method, you will lose existing zone members!
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_001/vdom/vd_001/system/zone/zone_001/interface"
+             }
+           ]
+         }
+
+How to add router ospf network entries?
++++++++++++++++++++++++++++++++++++++++         
+
+Challenging part is to preserve existing router ospf network entries during
+the ``add`` operation.
+
+Following example show how to add a single router ospf network entry to the 
+the ``dev_001/vd_001`` device/vdom:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "area": "10.116.104.88",
+                 "prefix": [
+                   "10.1.0.0",
+                   "255.255.255.0"
+                 ]
+               },
+               "url": "/pm/config/device/dev_001/vdom/vd_001/router/ospf/network"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "id": 4
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/gwf01-lab-fe/vdom/tb-rem-aci/router/ospf/network"
+             }
+           ]
+         }
+
+      .. note::
+
+         - FortiManager returns the ``id`` of the created router ospf network
+           entry
+
+Following example show how to add multiple router ospf network entries to the
+the ``dev_001/vd_001`` device/vdom:
+
+.. tab-set::
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 {
+                   "area": "10.116.104.88",
+                   "prefix": [
+                     "10.2.0.0",
+                     "255.255.255.0"
+                   ]
+                 },
+                 {
+                   "area": "10.116.104.88",
+                   "prefix": [
+                     "10.3.0.0",
+                     "255.255.255.0"
+                   ]
+                 }
+               ],
+               "url": "/pm/config/device/dev_001/vdom/vd_001/router/ospf/network"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_001/vdom/vd_001/router/ospf/network"
+             }
+           ]
+         }
+
+How to delete a router ospf network entry?
+++++++++++++++++++++++++++++++++++++++++++
+
+Challenging part is to preserve existing router ospf network entries during
+the ``delete`` operation.
+
+Following example show how to delete a single router ospf network entry with ``id`` ``4`` from the ``dev_001/vd_001`` device/vdom:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/config/device/dev_001/vdom/vd_001/router/ospf/network/4"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_001/vdom/vd_001/router/ospf/network/4"
+             }
+           ]
+         }

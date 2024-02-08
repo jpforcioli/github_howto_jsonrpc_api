@@ -1,6 +1,197 @@
 SD-WAN Management
 =================
 
+SD-WAN Monitoring
+-----------------
+
+How to get SD-WAN Monitoring data?
+++++++++++++++++++++++++++++++++++
+
+This is to collect the data that allows FortiManager to produce this per-device
+SD-WAN Monitoring view via the *SD-WAN* widget:
+
+.. thumbnail:: images/image_010.png
+   :title: Per-device SD-WAN Monitoring via the SD-WAN widget (FMG 7.4.
+           3-INTERIM build 2430)
+
+You can get the data directly from the managed FortiGate devices using the 
+FortiOS REST API over the FortiManager API via the ``sys/proxy/json`` endpoint.
+
+But FortiManager is already doing that on a periodic basis and is saving the
+collected data in local Real Time Monitor (RTM) databases in order to provide 
+longer period of monitoring in FortiManager GUI.
+
+The following examples show how to get two SD-WAN Monitoring indicators for the ``dev_001`` device: ``sd-wan-sla-log`` and ``sd-wan-intf-log``.
+
+.. tab-set::
+
+   .. tab-item:: sd-wan-sla-log
+
+      .. tab-set::
+
+         .. tab-item:: REQUEST
+
+            .. code-block:: json
+
+               {
+                 "id": 3,
+                 "method": "get",
+                 "params": [
+                   {
+                     "filter": {
+                       "key": [
+                         [
+                           "name"
+                         ],
+                         [
+                           "interface"
+                         ]
+                       ],
+                       "timestamp": [
+                         [
+                           "start",
+                           "==",
+                           1707250119
+                         ],
+                         [
+                           "end",
+                           "==",
+                           1707253719
+                         ]
+                       ]
+                     },
+                     "url": "/rtm/global/rhistory/monitor/sd-wan-sla-log/device/dev_001"
+                   }
+                 ],
+                 "session": "{{session}}"
+               }
+
+         .. tab-item:: RESPONSE
+
+            .. code-block:: text
+
+               {
+                 "id": 3,
+                 "result": [
+                   {
+                     "data": [
+                       {
+                         "interface": "port1",
+                         "log": [
+                           {
+                             "timestamp": 1707250158,
+                             "value": {
+                               "jitter": 0.1982,
+                               "latency": 6.003067,
+                               "link": "up",
+                               "packetloss": 0.0
+                             }
+                           },
+                           {
+                             "timestamp": 1707250218,
+                             "value": {
+                               "jitter": 0.230633,
+                               "latency": 9.498699,
+                               "link": "up",
+                               "packetloss": 0.0
+                             }
+                           },
+                           {
+                             "timestamp": 1707250278,
+                             "value": {
+                               "jitter": 0.378133,
+                               "latency": 9.459866,
+                               "link": "up",
+                               "packetloss": 0.0
+                             }
+                           },               
+               [...]
+
+   .. tab-item:: sd-wan-intf-log
+
+      .. tab-set:: 
+         
+         .. tab-item:: REQUEST
+
+            .. code-block:: json
+
+               {
+                 "id": 3,
+                 "method": "get",
+                 "params": [
+                   {
+                     "filter": {
+                       "key": [
+                         [
+                           "interface"
+                         ]
+                       ],
+                       "timestamp": [
+                         [
+                           "start",
+                           "==",
+                           1707250119
+                         ],
+                         [
+                           "end",
+                           "==",
+                           1707253719
+                         ]
+                       ]
+                     },
+                     "url": "/rtm/global/rhistory/monitor/sd-wan-intf-log/device/dev_001"
+                   }
+                 ],
+                 "session": "{{session}}"
+               }
+
+         .. tab-item:: RESPONSE
+   
+            .. code-block:: text
+   
+               {
+                 "id": 3,
+                 "result": [
+                   {
+                     "data": [
+                       {
+                         "interface": "HUB1-VPN1",
+                         "log": [
+                           {
+                             "timestamp": 1707250149,
+                             "value": {
+                               "bi_bandwidth": 1318,
+                               "egress_queue": [],
+                               "rx_bandwidth": 659,
+                               "rx_bytes": 88247589,
+                               "tx_bandwidth": 659,
+                               "tx_bytes": 88247420
+                             }
+                           },
+                           {
+                             "timestamp": 1707250209,
+                             "value": {
+                               "bi_bandwidth": 1318,
+                               "egress_queue": [],
+                               "rx_bandwidth": 659,
+                               "rx_bytes": 88252512,
+                               "tx_bandwidth": 659,
+                               "tx_bytes": 88252343
+                             }
+                           },
+                           {
+                             "timestamp": 1707250279,
+                             "value": {
+                               "bi_bandwidth": 1318,
+                               "egress_queue": [],
+                               "rx_bandwidth": 659,
+                               "rx_bytes": 88258306,
+                               "tx_bandwidth": 659,
+                               "tx_bytes": 88258118
+                             }
+                           },            
+               [...]
+   
 SD-WAN Orchestrator API
 -----------------------
 
