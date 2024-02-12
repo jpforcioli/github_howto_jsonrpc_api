@@ -7865,8 +7865,11 @@ in the ``dev_001`` managed device, using a single API request:
            ]
          }
 
+Zones
++++++
+
 How to add members to an existing System Zone?
-++++++++++++++++++++++++++++++++++++++++++++++
+______________________________________________
 
 Challenging part is to preserve existing zone members during the ``add`` operation.
 
@@ -7915,7 +7918,7 @@ Following example show how to add two new interface members to the ``zone_001`` 
          }        
 
 How to delete members to an existing System Zone?
-+++++++++++++++++++++++++++++++++++++++++++++++++
+_________________________________________________
 
 Challenging part is to preserve existing zone members during the ``add`` operation.
 
@@ -7963,8 +7966,11 @@ Following example show how to add two new interface members to the ``zone_001`` 
            ]
          }
 
+Dynamic Routing
++++++++++++++++
+
 How to add router ospf network entries?
-+++++++++++++++++++++++++++++++++++++++         
+_______________________________________
 
 Challenging part is to preserve existing router ospf network entries during
 the ``add`` operation.
@@ -8075,7 +8081,7 @@ the ``dev_001/vd_001`` device/vdom:
          }
 
 How to delete a router ospf network entry?
-++++++++++++++++++++++++++++++++++++++++++
+__________________________________________
 
 Challenging part is to preserve existing router ospf network entries during
 the ``delete`` operation.
