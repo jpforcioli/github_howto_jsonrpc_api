@@ -7814,7 +7814,7 @@ The following example shows how to create a new ``vl_1001`` interface in the ``d
 How to add multiple VLANs?
 __________________________
 
-The following example shows how to create the ``vl_1002`` and ``vl_1003`` VLAN
+The following example shows how to create the ``vl_1002`` and ``vl_1003`` VLANs
 in the ``dev_001`` managed device, using a single API request:
 
 .. tab-set::
