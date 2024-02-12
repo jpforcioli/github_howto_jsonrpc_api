@@ -7755,6 +7755,116 @@ To get the VPN tunnel details for the ``i-04-hub-02`` device in the ``production
 How to manage network setting?
 ------------------------------
 
+VLANs
++++++
+
+How to add a single VLAN?
+_________________________
+
+The following example shows how to create a new ``vl_1001`` interface in the ``dev_001`` managed device:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "interface": "port13",
+                 "name": "vl_1001",
+                 "vdom": "root",
+                 "vlanid": 1001
+               },
+               "url": "/pm/config/device/dev_001/global/system/interface"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "vl_1001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_001/global/system/interface"
+             }
+           ]
+         }
+
+      .. note::
+
+         - FortiManager returns in the ``name`` attribute the newly created 
+           VLAN name
+
+How to add multiple VLANs?
+__________________________
+
+The following example shows how to create the ``vl_1002`` and ``vl_1003`` VLAN
+in the ``dev_001`` managed device, using a single API request:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 {
+                   "interface": "port12",
+                   "name": "vl_1002",
+                   "vdom": "root",
+                   "vlanid": 1002
+                 },
+                 {
+                   "interface": "port13",
+                   "name": "vl_1003",
+                   "vdom": "root",
+                   "vlanid": 1003
+                 }
+               ],
+               "url": "/pm/config/device/dev_001/global/system/interface"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_001/global/system/interface"
+             }
+           ]
+         }
+
 How to add members to an existing System Zone?
 ++++++++++++++++++++++++++++++++++++++++++++++
 
