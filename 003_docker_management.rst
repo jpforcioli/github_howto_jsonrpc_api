@@ -99,7 +99,7 @@ Caught in PMDB #9360
 		]
 	      }
 	    ],
-	    "session": "UziyfXxc977TumiUwFweYI\/otTYh2wy7kn3NV3xf5ZNNxblHaqKLDI+7FkuvJE\/Z9ziiLogiKdrhC2RN6QJszQ=="
+	    "session": "{{session}}"
 	  }
 
 ``docker`` could have following values: ``sdwancontroller``, ``fortiportal``, or ``fortiwlm``.

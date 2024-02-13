@@ -377,10 +377,6 @@ The following example shows how to get the ``os-check-list`` from the ``dev_001`
            ]
          }
          
-.. code-block:: text
-
-   /pm/config/adom/<adom_name>/_data/default_sslvpn_os_check_list
-
 IPseC VPN
 ---------
 
