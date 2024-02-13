@@ -31,7 +31,7 @@ How To FortiManager API?
    017_fmg_operations
    018_dbcache
    019_flatui_proxy
-   020_vpn_manager
+   020_vpn_management
    021_sub_fetch
    022_fmg_cloud
    023_meta_fields
