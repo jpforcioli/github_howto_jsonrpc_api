@@ -2292,6 +2292,121 @@ following request:
      ]
    }
 
+Policy Package Revision
++++++++++++++++++++++++
+
+How to get the list of changes made on a Policy Package?
+________________________________________________________
+
+The following example shows how to get all the changes made on the ``ppkg_001``
+Policy Package from the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_objrev/pkg/ppkg_001/firewall/policy"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "act": 2,
+                   "category": 181,
+                   "config": "{ \"_byte\": 0, \"_first_hit\": 0, \"_first_session\": 0, \"_global-dst-intf\": null, \"_global-label-color\": 0, \"_global-src-intf\": null, \"_global-vpn\": [ ], \"_global-vpn-tgt\": 0, \"_hitcount\": 0, \"_label-color\": 0, \"_last_hit\": 0, \"_last_session\": 0, \"_pkts\": 0, \"_sesscount\": 0, \"action\": 0, \"anti-replay\": 1, \"application-list\": [ ], \"auth-cert\": [ ], \"auth-path\": 0, \"auth-redirect-addr\": null, \"auto-asic-offload\": 1, \"av-profile\": [ ], \"block-notification\": 0, \"captive-portal-exempt\": 0, \"capture-packet\": 0, \"casb-profile\": [ ], \"cgn-eif\": 0, \"cgn-eim\": 0, \"cgn-log-server-grp\": null, \"cgn-resource-quota\": 16, \"cgn-session-quota\": 16777215, \"cifs-profile\": [ ], \"comments\": null, \"custom-log-fields\": [ ], \"decrypted-traffic-mirror\": [ ], \"delay-tcp-npu-session\": 0, \"diameter-filter-profile\": [ ], \"diffserv-copy\": 0, \"diffserv-forward\": 0, \"diffserv-reverse\": 0, \"diffservcode-forward\": \"000000\", \"diffservcode-rev\": \"000000\", \"disclaimer\": 0, \"dlp-profile\": [ ], \"dnsfilter-profile\": [ ], \"dsri\": 0, \"dstaddr\": [ \"all\" ], \"dstaddr-negate\": 0, \"dstaddr6\": [ ], \"dstaddr6-negate\": 0, \"dstintf\": [ \"any\" ], \"dynamic-shaping\": 0, \"email-collect\": 0, \"emailfilter-profile\": [ ], \"fec\": 0, \"file-filter-profile\": [ ], \"firewall-session-dirty\": 0, \"fixedport\": 0, \"fsso-agent-for-ntlm\": [ ], \"fsso-groups\": [ ], \"geoip-anycast\": 0, \"geoip-match\": 0, \"global-label\": null, \"groups\": [ ], \"gtp-profile\": [ ], \"http-policy-redirect\": 0, \"icap-profile\": [ ], \"identity-based-route\": [ ], \"inbound\": 0, \"inspection-mode\": 1, \"internet-service\": 0, \"internet-service-custom\": [ ], \"internet-service-custom-group\": [ ], \"internet-service-group\": [ ], \"internet-service-name\": [ ], \"internet-service-negate\": 0, \"internet-service-src\": 0, \"internet-service-src-custom\": [ ], \"internet-service-src-custom-group\": [ ], \"internet-service-src-group\": [ ], \"internet-service-src-name\": [ ], \"internet-service-src-negate\": 0, \"internet-service6\": 0, \"internet-service6-custom\": [ ], \"internet-service6-custom-group\": [ ], \"internet-service6-group\": [ ], \"internet-service6-name\": [ ], \"internet-service6-negate\": 0, \"internet-service6-src\": 0, \"internet-service6-src-custom\": [ ], \"internet-service6-src-custom-group\": [ ], \"internet-service6-src-group\": [ ], \"internet-service6-src-name\": [ ], \"internet-service6-src-negate\": 0, \"ip-version-type\": \"ipv4\", \"ippool\": 0, \"ips-sensor\": [ ], \"ips-voip-filter\": [ ], \"label\": null, \"logtraffic\": 2, \"logtraffic-start\": 0, \"match-vip\": 1, \"match-vip-only\": 0, \"name\": null, \"nat\": 0, \"nat46\": 0, \"nat64\": 0, \"natinbound\": 0, \"natip\": [ \"0.0.0.0\", \"0.0.0.0\" ], \"natoutbound\": 0, \"network-service-dynamic\": [ ], \"network-service-src-dynamic\": [ ], \"np-acceleration\": 1, \"ntlm\": 0, \"ntlm-enabled-browsers\": [ ], \"ntlm-guest\": 0, \"oid\": 11296, \"outbound\": 1, \"passive-wan-health-measurement\": 0, \"pcp-inbound\": 0, \"pcp-outbound\": 0, \"pcp-poolname\": [ ], \"per-ip-shaper\": [ ], \"permit-any-host\": 0, \"permit-stun-host\": 0, \"pfcp-profile\": [ ], \"policy-behaviour-type\": \"standard\", \"policy-expiry\": 0, \"policy-expiry-date\": \"0000-00-00 00:00:00\", \"policy-expiry-date-utc\": null, \"policy-offload\": 1, \"policyid\": 1, \"poolname\": [ ], \"poolname6\": [ ], \"profile-group\": [ ], \"profile-protocol-options\": [ \"default\" ], \"profile-type\": 0, \"radius-mac-auth-bypass\": 0, \"redirect-url\": null, \"replacemsg-override-group\": [ ], \"reputation-direction\": 2, \"reputation-direction6\": 42, \"reputation-minimum\": 0, \"reputation-minimum6\": 0, \"rtp-addr\": [ ], \"rtp-nat\": 0, \"schedule\": [ \"always\" ], \"schedule-timeout\": 0, \"sctp-filter-profile\": [ ], \"send-deny-packet\": 0, \"service\": [ \"ALL\" ], \"service-negate\": 0, \"session-ttl\": \"0\", \"sgt\": [ ], \"sgt-check\": 0, \"src-vendor-mac\": [ ], \"srcaddr\": [ \"all\" ], \"srcaddr-negate\": 0, \"srcaddr6\": [ ], \"srcaddr6-negate\": 0, \"srcintf\": [ \"any\" ], \"ssh-filter-profile\": [ ], \"ssh-policy-redirect\": 0, \"ssl-ssh-profile\": [ \"no-inspection\" ], \"status\": 1, \"tcp-mss-receiver\": 0, \"tcp-mss-sender\": 0, \"tcp-session-without-syn\": 2, \"tcp-timeout-pid\": [ ], \"timeout-send-rst\": 0, \"tos\": \"0x00\", \"tos-mask\": \"0x00\", \"tos-negate\": 0, \"traffic-shaper\": [ ], \"traffic-shaper-reverse\": [ ], \"udp-timeout-pid\": [ ], \"users\": [ ], \"utm-status\": 0, \"uuid\": \"44d742cc-cef2-51ee-71ef-68f2fe808584\", \"videofilter-profile\": [ ], \"virtual-patch-profile\": [ ], \"vlan-cos-fwd\": 255, \"vlan-cos-rev\": 255, \"vlan-filter\": null, \"voip-profile\": [ ], \"vpn_dst_node\": null, \"vpn_src_node\": null, \"vpntunnel\": [ ], \"waf-profile\": [ ], \"wanopt\": 0, \"wanopt-detection\": 1, \"wanopt-passive-opt\": 0, \"wanopt-peer\": [ ], \"wanopt-profile\": [ ], \"wccp\": 0, \"webcache\": 0, \"webcache-https\": 0, \"webfilter-profile\": [ ], \"webproxy-forward-server\": [ ], \"webproxy-profile\": [ ], \"ztna-device-ownership\": 0, \"ztna-ems-tag\": [ ], \"ztna-ems-tag-secondary\": [ ], \"ztna-geo-tag\": [ ], \"ztna-policy-redirect\": 0, \"ztna-status\": 0, \"ztna-tags-match-logic\": 0 }",
+                   "flags": 0,
+                   "key": "1",
+                   "note": "",
+                   "oid": 0,
+                   "pkg_oid": 11294,
+                   "timestamp": 1708325042,
+                   "user": "admin"
+                 },
+                 {
+                   "act": 3,
+                   "category": 181,
+                   "config": "{ \"_byte\": 0, \"_first_hit\": 0, \"_first_session\": 0, \"_global-dst-intf\": null, \"_global-label-color\": 0, \"_global-src-intf\": null, \"_global-vpn\": [ ], \"_global-vpn-tgt\": 0, \"_hitcount\": 0, \"_label-color\": 0, \"_last_hit\": 0, \"_last_session\": 0, \"_pkts\": 0, \"_sesscount\": 0, \"action\": 1, \"anti-replay\": 1, \"application-list\": [ ], \"auth-cert\": [ ], \"auth-path\": 0, \"auth-redirect-addr\": null, \"auto-asic-offload\": 1, \"av-profile\": [ ], \"block-notification\": 0, \"captive-portal-exempt\": 0, \"capture-packet\": 0, \"casb-profile\": [ ], \"cgn-eif\": 0, \"cgn-eim\": 0, \"cgn-log-server-grp\": null, \"cgn-resource-quota\": 16, \"cgn-session-quota\": 16777215, \"cifs-profile\": [ ], \"comments\": null, \"custom-log-fields\": [ ], \"decrypted-traffic-mirror\": [ ], \"delay-tcp-npu-session\": 0, \"diameter-filter-profile\": [ ], \"diffserv-copy\": 0, \"diffserv-forward\": 0, \"diffserv-reverse\": 0, \"diffservcode-forward\": \"000000\", \"diffservcode-rev\": \"000000\", \"disclaimer\": 0, \"dlp-profile\": [ ], \"dnsfilter-profile\": [ ], \"dsri\": 0, \"dstaddr\": [ \"host_102\" ], \"dstaddr-negate\": 0, \"dstaddr6\": [ ], \"dstaddr6-negate\": 0, \"dstintf\": [ \"wan\" ], \"dynamic-shaping\": 0, \"email-collect\": 0, \"emailfilter-profile\": [ ], \"fec\": 0, \"file-filter-profile\": [ ], \"firewall-session-dirty\": 0, \"fixedport\": 0, \"fsso-agent-for-ntlm\": [ ], \"fsso-groups\": [ ], \"geoip-anycast\": 0, \"geoip-match\": 0, \"global-label\": null, \"groups\": [ ], \"gtp-profile\": [ ], \"http-policy-redirect\": 0, \"icap-profile\": [ ], \"identity-based-route\": [ ], \"inbound\": 0, \"inspection-mode\": 1, \"internet-service\": 0, \"internet-service-custom\": [ ], \"internet-service-custom-group\": [ ], \"internet-service-group\": [ ], \"internet-service-name\": [ ], \"internet-service-negate\": 0, \"internet-service-src\": 0, \"internet-service-src-custom\": [ ], \"internet-service-src-custom-group\": [ ], \"internet-service-src-group\": [ ], \"internet-service-src-name\": [ ], \"internet-service-src-negate\": 0, \"internet-service6\": 0, \"internet-service6-custom\": [ ], \"internet-service6-custom-group\": [ ], \"internet-service6-group\": [ ], \"internet-service6-name\": [ ], \"internet-service6-negate\": 0, \"internet-service6-src\": 0, \"internet-service6-src-custom\": [ ], \"internet-service6-src-custom-group\": [ ], \"internet-service6-src-group\": [ ], \"internet-service6-src-name\": [ ], \"internet-service6-src-negate\": 0, \"ip-version-type\": \"ipv4\", \"ippool\": 0, \"ips-sensor\": [ ], \"ips-voip-filter\": [ ], \"label\": null, \"logtraffic\": 2, \"logtraffic-start\": 0, \"match-vip\": 1, \"match-vip-only\": 0, \"name\": \"\", \"nat\": 0, \"nat46\": 0, \"nat64\": 0, \"natinbound\": 0, \"natip\": [ \"0.0.0.0\", \"0.0.0.0\" ], \"natoutbound\": 0, \"network-service-dynamic\": [ ], \"network-service-src-dynamic\": [ ], \"np-acceleration\": 1, \"ntlm\": 0, \"ntlm-enabled-browsers\": [ ], \"ntlm-guest\": 0, \"oid\": 11298, \"outbound\": 1, \"passive-wan-health-measurement\": 0, \"pcp-inbound\": 0, \"pcp-outbound\": 0, \"pcp-poolname\": [ ], \"per-ip-shaper\": [ ], \"permit-any-host\": 0, \"permit-stun-host\": 0, \"pfcp-profile\": [ ], \"policy-behaviour-type\": \"standard\", \"policy-expiry\": 0, \"policy-expiry-date\": \"0000-00-00 00:00:00\", \"policy-expiry-date-utc\": null, \"policy-offload\": 1, \"policyid\": 3, \"poolname\": [ ], \"poolname6\": [ ], \"profile-group\": [ ], \"profile-protocol-options\": [ \"default\" ], \"profile-type\": 0, \"radius-mac-auth-bypass\": 0, \"redirect-url\": null, \"replacemsg-override-group\": [ ], \"reputation-direction\": 2, \"reputation-direction6\": 42, \"reputation-minimum\": 0, \"reputation-minimum6\": 0, \"rtp-addr\": [ ], \"rtp-nat\": 0, \"schedule\": [ \"always\" ], \"schedule-timeout\": 0, \"sctp-filter-profile\": [ ], \"send-deny-packet\": 0, \"service\": [ \"ALL\" ], \"service-negate\": 0, \"session-ttl\": \"0\", \"sgt\": [ ], \"sgt-check\": 0, \"src-vendor-mac\": [ ], \"srcaddr\": [ \"host_002\", \"host_001\" ], \"srcaddr-negate\": 0, \"srcaddr6\": [ ], \"srcaddr6-negate\": 0, \"srcintf\": [ \"lan\" ], \"ssh-filter-profile\": [ ], \"ssh-policy-redirect\": 0, \"ssl-ssh-profile\": [ \"no-inspection\" ], \"status\": 1, \"tcp-mss-receiver\": 0, \"tcp-mss-sender\": 0, \"tcp-session-without-syn\": 2, \"tcp-timeout-pid\": [ ], \"timeout-send-rst\": 0, \"tos\": \"0x00\", \"tos-mask\": \"0x00\", \"tos-negate\": 0, \"traffic-shaper\": [ ], \"traffic-shaper-reverse\": [ ], \"udp-timeout-pid\": [ ], \"users\": [ ], \"utm-status\": 0, \"uuid\": \"4828b014-cef2-51ee-2ab3-cce3da14bded\", \"videofilter-profile\": [ ], \"virtual-patch-profile\": [ ], \"vlan-cos-fwd\": 255, \"vlan-cos-rev\": 255, \"vlan-filter\": null, \"voip-profile\": [ ], \"vpn_dst_node\": null, \"vpn_src_node\": null, \"vpntunnel\": [ ], \"waf-profile\": [ ], \"wanopt\": 0, \"wanopt-detection\": 1, \"wanopt-passive-opt\": 0, \"wanopt-peer\": [ ], \"wanopt-profile\": [ ], \"wccp\": 0, \"webcache\": 0, \"webcache-https\": 0, \"webfilter-profile\": [ ], \"webproxy-forward-server\": [ ], \"webproxy-profile\": [ ], \"ztna-device-ownership\": 0, \"ztna-ems-tag\": [ ], \"ztna-ems-tag-secondary\": [ ], \"ztna-geo-tag\": [ ], \"ztna-policy-redirect\": 0, \"ztna-status\": 0, \"ztna-tags-match-logic\": 0 }",
+                   "flags": 0,
+                   "key": "3",
+                   "note": "",
+                   "oid": 11298,
+                   "pkg_oid": 11294,
+                   "timestamp": 1708325089,
+                   "user": "admin"
+                 },
+                 {
+                   "act": 1,
+                   "category": 181,
+                   "config": "{ \"_byte\": 0, \"_first_hit\": 0, \"_first_session\": 0, \"_global-label-color\": 0, \"_global-vpn\": [ ], \"_global-vpn-tgt\": 0, \"_hitcount\": 0, \"_label-color\": 0, \"_last_hit\": 0, \"_last_session\": 0, \"_pkts\": 0, \"_sesscount\": 0, \"action\": 0, \"anti-replay\": 1, \"application-list\": [ ], \"auth-cert\": [ ], \"auth-path\": 0, \"auto-asic-offload\": 1, \"av-profile\": [ ], \"block-notification\": 0, \"captive-portal-exempt\": 0, \"capture-packet\": 0, \"casb-profile\": [ ], \"cgn-eif\": 0, \"cgn-eim\": 0, \"cgn-resource-quota\": 16, \"cgn-session-quota\": 16777215, \"cifs-profile\": [ ], \"custom-log-fields\": [ ], \"decrypted-traffic-mirror\": [ ], \"delay-tcp-npu-session\": 0, \"diameter-filter-profile\": [ ], \"diffserv-copy\": 0, \"diffserv-forward\": 0, \"diffserv-reverse\": 0, \"diffservcode-forward\": \"000000\", \"diffservcode-rev\": \"000000\", \"disclaimer\": 0, \"dlp-profile\": [ ], \"dnsfilter-profile\": [ ], \"dsri\": 0, \"dstaddr\": [ \"all\" ], \"dstaddr-negate\": 0, \"dstaddr6\": [ ], \"dstaddr6-negate\": 0, \"dstintf\": [ \"wan\" ], \"dynamic-shaping\": 0, \"email-collect\": 0, \"emailfilter-profile\": [ ], \"fec\": 0, \"file-filter-profile\": [ ], \"firewall-session-dirty\": 0, \"fixedport\": 0, \"fsso-agent-for-ntlm\": [ ], \"fsso-groups\": [ ], \"geoip-anycast\": 0, \"geoip-match\": 0, \"groups\": [ ], \"gtp-profile\": [ ], \"http-policy-redirect\": 0, \"icap-profile\": [ ], \"identity-based-route\": [ ], \"inbound\": 0, \"inspection-mode\": 1, \"internet-service\": 0, \"internet-service-custom\": [ ], \"internet-service-custom-group\": [ ], \"internet-service-group\": [ ], \"internet-service-name\": [ ], \"internet-service-negate\": 0, \"internet-service-src\": 0, \"internet-service-src-custom\": [ ], \"internet-service-src-custom-group\": [ ], \"internet-service-src-group\": [ ], \"internet-service-src-name\": [ ], \"internet-service-src-negate\": 0, \"internet-service6\": 0, \"internet-service6-custom\": [ ], \"internet-service6-custom-group\": [ ], \"internet-service6-group\": [ ], \"internet-service6-name\": [ ], \"internet-service6-negate\": 0, \"internet-service6-src\": 0, \"internet-service6-src-custom\": [ ], \"internet-service6-src-custom-group\": [ ], \"internet-service6-src-group\": [ ], \"internet-service6-src-name\": [ ], \"internet-service6-src-negate\": 0, \"ip-version-type\": \"ipv4\", \"ippool\": 0, \"ips-sensor\": [ ], \"ips-voip-filter\": [ ], \"logtraffic\": 2, \"logtraffic-start\": 0, \"match-vip\": 1, \"match-vip-only\": 0, \"nat\": 0, \"nat46\": 0, \"nat64\": 0, \"natinbound\": 0, \"natip\": [ \"0.0.0.0\", \"0.0.0.0\" ], \"natoutbound\": 0, \"network-service-dynamic\": [ ], \"network-service-src-dynamic\": [ ], \"np-acceleration\": 1, \"ntlm\": 0, \"ntlm-enabled-browsers\": [ ], \"ntlm-guest\": 0, \"oid\": 11307, \"outbound\": 1, \"passive-wan-health-measurement\": 0, \"pcp-inbound\": 0, \"pcp-outbound\": 0, \"pcp-poolname\": [ ], \"per-ip-shaper\": [ ], \"permit-any-host\": 0, \"permit-stun-host\": 0, \"pfcp-profile\": [ ], \"policy-behaviour-type\": \"standard\", \"policy-expiry\": 0, \"policy-expiry-date\": \"0000-00-00 00:00:00\", \"policy-offload\": 1, \"policyid\": 12, \"poolname\": [ ], \"poolname6\": [ ], \"profile-group\": [ ], \"profile-protocol-options\": [ \"default\" ], \"profile-type\": 0, \"radius-mac-auth-bypass\": 0, \"replacemsg-override-group\": [ ], \"reputation-direction\": 2, \"reputation-direction6\": 42, \"reputation-minimum\": 0, \"reputation-minimum6\": 0, \"rtp-addr\": [ ], \"rtp-nat\": 0, \"schedule\": [ \"always\" ], \"schedule-timeout\": 0, \"sctp-filter-profile\": [ ], \"send-deny-packet\": 0, \"service\": [ \"ALL\" ], \"service-negate\": 0, \"session-ttl\": \"0\", \"sgt\": [ ], \"sgt-check\": 0, \"src-vendor-mac\": [ ], \"srcaddr\": [ \"all\" ], \"srcaddr-negate\": 0, \"srcaddr6\": [ ], \"srcaddr6-negate\": 0, \"srcintf\": [ \"lan\" ], \"ssh-filter-profile\": [ ], \"ssh-policy-redirect\": 0, \"ssl-ssh-profile\": [ \"no-inspection\" ], \"status\": 0, \"tcp-mss-receiver\": 0, \"tcp-mss-sender\": 0, \"tcp-session-without-syn\": 2, \"tcp-timeout-pid\": [ ], \"timeout-send-rst\": 0, \"tos\": \"0x00\", \"tos-mask\": \"0x00\", \"tos-negate\": 0, \"traffic-shaper\": [ ], \"traffic-shaper-reverse\": [ ], \"udp-timeout-pid\": [ ], \"users\": [ ], \"utm-status\": 0, \"uuid\": \"a027db5a-cef2-51ee-313e-00ee89b1203e\", \"videofilter-profile\": [ ], \"virtual-patch-profile\": [ ], \"vlan-cos-fwd\": 255, \"vlan-cos-rev\": 255, \"voip-profile\": [ ], \"vpn_dst_node\": null, \"vpn_src_node\": null, \"vpntunnel\": [ ], \"waf-profile\": [ ], \"wanopt\": 0, \"wanopt-detection\": 1, \"wanopt-passive-opt\": 0, \"wanopt-peer\": [ ], \"wanopt-profile\": [ ], \"wccp\": 0, \"webcache\": 0, \"webcache-https\": 0, \"webfilter-profile\": [ ], \"webproxy-forward-server\": [ ], \"webproxy-profile\": [ ], \"ztna-device-ownership\": 0, \"ztna-ems-tag\": [ ], \"ztna-ems-tag-secondary\": [ ], \"ztna-geo-tag\": [ ], \"ztna-policy-redirect\": 0, \"ztna-status\": 0, \"ztna-tags-match-logic\": 0 }",
+                   "flags": 0,
+                   "key": "12",
+                   "note": "",
+                   "oid": 11307,
+                   "pkg_oid": 11294,
+                   "timestamp": 1708325195,
+                   "user": "admin"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_objrev/pkg/ppkg_001/firewall/policy"
+             }
+           ]
+         }
+ 
+     .. note::
+ 
+        - For each change the ``act`` is giving you the nature of the change:
+
+          .. list-table::
+             :header-rows: 1
+             :widths: auto
+
+             * - Value
+               - meaning
+
+             * - ``1``
+               - New policy created
+
+             * - ``2``
+               - Existing policy deleted
+
+             * - ``3``
+               - Existing policy modified
+
+
+        - The ``key`` attribute is the ``policyid``
+        - The ``config`` attribute is a copy of the firewall policy containing
+          the change
+        - FortiManager returns an ordered list of changes; the first item is the
+          first change          
+
+Can we revert a Policy Package from a specific changes?
+_______________________________________________________
+
+You can only revert a firewall policy provided it does exist (see :ref:`How to 
+revert a firewall policy from a past changes?`
+
 Policy Blocks
 -------------
 
@@ -2672,8 +2787,8 @@ To move the cloned firewall policy with ``policyid`` ``1071741830`` above the fi
            (``1071741830``)
 
          
-Policies
---------
+Firewall Policies
+-----------------
 
 How to get the default values for a firewall policy?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -6371,6 +6486,396 @@ Preview of a partial install of an updated policy
     install operation
 
   - Pending static route wasn't installation wasn't part of the preview result
+
+Firewall Policy Revision
+++++++++++++++++++++++++
+
+How to get list of changes mage in a firewall policy?
+_____________________________________________________
+
+Following example shows how to obtain the list of changes made on firewall policy with ``policyid`` ``14`` in the ``ppkg_001`` Policy Package from the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_objrev/pkg/ppkg_001/firewall/policy/14"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "act": 1,
+                   "category": 181,
+                   "config": "{ \"_byte\": 0, \"_first_hit\": 0, \"_first_session\": 0, \"_global-label-color\": 0, \"_global-vpn\": [ ], \"_global-vpn-tgt\": 0, \"_hitcount\": 0, \"_label-color\": 0, \"_last_hit\": 0, \"_last_session\": 0, \"_pkts\": 0, \"_sesscount\": 0, \"action\": 1, \"anti-replay\": 1, \"application-list\": [ ], \"auth-cert\": [ ], \"auth-path\": 0, \"auto-asic-offload\": 1, \"av-profile\": [ ], \"block-notification\": 0, \"captive-portal-exempt\": 0, \"capture-packet\": 0, \"casb-profile\": [ ], \"cgn-eif\": 0, \"cgn-eim\": 0, \"cgn-resource-quota\": 16, \"cgn-session-quota\": 16777215, \"cifs-profile\": [ ], \"custom-log-fields\": [ ], \"decrypted-traffic-mirror\": [ ], \"delay-tcp-npu-session\": 0, \"diameter-filter-profile\": [ ], \"diffserv-copy\": 0, \"diffserv-forward\": 0, \"diffserv-reverse\": 0, \"diffservcode-forward\": \"000000\", \"diffservcode-rev\": \"000000\", \"disclaimer\": 0, \"dlp-profile\": [ ], \"dnsfilter-profile\": [ ], \"dsri\": 0, \"dstaddr\": [ \"all\" ], \"dstaddr-negate\": 0, \"dstaddr6\": [ ], \"dstaddr6-negate\": 0, \"dstintf\": [ \"any\" ], \"dynamic-shaping\": 0, \"email-collect\": 0, \"emailfilter-profile\": [ ], \"fec\": 0, \"file-filter-profile\": [ ], \"firewall-session-dirty\": 0, \"fixedport\": 0, \"fsso-agent-for-ntlm\": [ ], \"fsso-groups\": [ ], \"geoip-anycast\": 0, \"geoip-match\": 0, \"groups\": [ ], \"gtp-profile\": [ ], \"http-policy-redirect\": 0, \"icap-profile\": [ ], \"identity-based-route\": [ ], \"inbound\": 0, \"inspection-mode\": 1, \"internet-service\": 0, \"internet-service-custom\": [ ], \"internet-service-custom-group\": [ ], \"internet-service-group\": [ ], \"internet-service-name\": [ ], \"internet-service-negate\": 0, \"internet-service-src\": 0, \"internet-service-src-custom\": [ ], \"internet-service-src-custom-group\": [ ], \"internet-service-src-group\": [ ], \"internet-service-src-name\": [ ], \"internet-service-src-negate\": 0, \"internet-service6\": 0, \"internet-service6-custom\": [ ], \"internet-service6-custom-group\": [ ], \"internet-service6-group\": [ ], \"internet-service6-name\": [ ], \"internet-service6-negate\": 0, \"internet-service6-src\": 0, \"internet-service6-src-custom\": [ ], \"internet-service6-src-custom-group\": [ ], \"internet-service6-src-group\": [ ], \"internet-service6-src-name\": [ ], \"internet-service6-src-negate\": 0, \"ip-version-type\": \"ipv4\", \"ippool\": 0, \"ips-sensor\": [ ], \"ips-voip-filter\": [ ], \"logtraffic\": 2, \"logtraffic-start\": 0, \"match-vip\": 1, \"match-vip-only\": 0, \"name\": \"Policy_001\", \"nat\": 0, \"nat46\": 0, \"nat64\": 0, \"natinbound\": 0, \"natip\": [ \"0.0.0.0\", \"0.0.0.0\" ], \"natoutbound\": 0, \"network-service-dynamic\": [ ], \"network-service-src-dynamic\": [ ], \"np-acceleration\": 1, \"ntlm\": 0, \"ntlm-enabled-browsers\": [ ], \"ntlm-guest\": 0, \"oid\": 11310, \"outbound\": 1, \"passive-wan-health-measurement\": 0, \"pcp-inbound\": 0, \"pcp-outbound\": 0, \"pcp-poolname\": [ ], \"per-ip-shaper\": [ ], \"permit-any-host\": 0, \"permit-stun-host\": 0, \"pfcp-profile\": [ ], \"policy-behaviour-type\": \"standard\", \"policy-expiry\": 0, \"policy-expiry-date\": \"0000-00-00 00:00:00\", \"policy-offload\": 1, \"policyid\": 14, \"poolname\": [ ], \"poolname6\": [ ], \"profile-group\": [ ], \"profile-protocol-options\": [ \"default\" ], \"profile-type\": 0, \"radius-mac-auth-bypass\": 0, \"replacemsg-override-group\": [ ], \"reputation-direction\": 2, \"reputation-direction6\": 42, \"reputation-minimum\": 0, \"reputation-minimum6\": 0, \"rtp-addr\": [ ], \"rtp-nat\": 0, \"schedule\": [ \"always\" ], \"schedule-timeout\": 0, \"sctp-filter-profile\": [ ], \"send-deny-packet\": 0, \"service\": [ \"ALL\" ], \"service-negate\": 0, \"session-ttl\": \"0\", \"sgt\": [ ], \"sgt-check\": 0, \"src-vendor-mac\": [ ], \"srcaddr\": [ \"all\" ], \"srcaddr-negate\": 0, \"srcaddr6\": [ ], \"srcaddr6-negate\": 0, \"srcintf\": [ \"any\" ], \"ssh-filter-profile\": [ ], \"ssh-policy-redirect\": 0, \"ssl-ssh-profile\": [ \"no-inspection\" ], \"status\": 1, \"tcp-mss-receiver\": 0, \"tcp-mss-sender\": 0, \"tcp-session-without-syn\": 2, \"tcp-timeout-pid\": [ ], \"timeout-send-rst\": 0, \"tos\": \"0x00\", \"tos-mask\": \"0x00\", \"tos-negate\": 0, \"traffic-shaper\": [ ], \"traffic-shaper-reverse\": [ ], \"udp-timeout-pid\": [ ], \"users\": [ ], \"utm-status\": 0, \"uuid\": \"64abdc74-cef8-51ee-c4f6-b99de54c6f1a\", \"videofilter-profile\": [ ], \"virtual-patch-profile\": [ ], \"vlan-cos-fwd\": 255, \"vlan-cos-rev\": 255, \"voip-profile\": [ ], \"vpn_dst_node\": null, \"vpn_src_node\": null, \"vpntunnel\": [ ], \"waf-profile\": [ ], \"wanopt\": 0, \"wanopt-detection\": 1, \"wanopt-passive-opt\": 0, \"wanopt-peer\": [ ], \"wanopt-profile\": [ ], \"wccp\": 0, \"webcache\": 0, \"webcache-https\": 0, \"webfilter-profile\": [ ], \"webproxy-forward-server\": [ ], \"webproxy-profile\": [ ], \"ztna-device-ownership\": 0, \"ztna-ems-tag\": [ ], \"ztna-ems-tag-secondary\": [ ], \"ztna-geo-tag\": [ ], \"ztna-policy-redirect\": 0, \"ztna-status\": 0, \"ztna-tags-match-logic\": 0 }",
+                   "flags": 0,
+                   "key": "14",
+                   "note": "",
+                   "oid": 11310,
+                   "pkg_oid": 11294,
+                   "timestamp": 1708327673,
+                   "user": "admin"
+                 },
+                 {
+                   "act": 3,
+                   "category": 181,
+                   "config": "{ \"_byte\": 0, \"_first_hit\": 0, \"_first_session\": 0, \"_global-dst-intf\": null, \"_global-label-color\": 0, \"_global-src-intf\": null, \"_global-vpn\": [ ], \"_global-vpn-tgt\": 0, \"_hitcount\": 0, \"_label-color\": 0, \"_last_hit\": 0, \"_last_session\": 0, \"_pkts\": 0, \"_sesscount\": 0, \"action\": 1, \"anti-replay\": 1, \"application-list\": [ ], \"auth-cert\": [ ], \"auth-path\": 0, \"auth-redirect-addr\": null, \"auto-asic-offload\": 1, \"av-profile\": [ ], \"block-notification\": 0, \"captive-portal-exempt\": 0, \"capture-packet\": 0, \"casb-profile\": [ ], \"cgn-eif\": 0, \"cgn-eim\": 0, \"cgn-log-server-grp\": null, \"cgn-resource-quota\": 16, \"cgn-session-quota\": 16777215, \"cifs-profile\": [ ], \"comments\": null, \"custom-log-fields\": [ ], \"decrypted-traffic-mirror\": [ ], \"delay-tcp-npu-session\": 0, \"diameter-filter-profile\": [ ], \"diffserv-copy\": 0, \"diffserv-forward\": 0, \"diffserv-reverse\": 0, \"diffservcode-forward\": \"000000\", \"diffservcode-rev\": \"000000\", \"disclaimer\": 0, \"dlp-profile\": [ ], \"dnsfilter-profile\": [ ], \"dsri\": 0, \"dstaddr\": [ \"all\" ], \"dstaddr-negate\": 0, \"dstaddr6\": [ ], \"dstaddr6-negate\": 0, \"dstintf\": [ \"any\" ], \"dynamic-shaping\": 0, \"email-collect\": 0, \"emailfilter-profile\": [ ], \"fec\": 0, \"file-filter-profile\": [ ], \"firewall-session-dirty\": 0, \"fixedport\": 0, \"fsso-agent-for-ntlm\": [ ], \"fsso-groups\": [ ], \"geoip-anycast\": 0, \"geoip-match\": 0, \"global-label\": null, \"groups\": [ ], \"gtp-profile\": [ ], \"http-policy-redirect\": 0, \"icap-profile\": [ ], \"identity-based-route\": [ ], \"inbound\": 0, \"inspection-mode\": 1, \"internet-service\": 0, \"internet-service-custom\": [ ], \"internet-service-custom-group\": [ ], \"internet-service-group\": [ ], \"internet-service-name\": [ ], \"internet-service-negate\": 0, \"internet-service-src\": 0, \"internet-service-src-custom\": [ ], \"internet-service-src-custom-group\": [ ], \"internet-service-src-group\": [ ], \"internet-service-src-name\": [ ], \"internet-service-src-negate\": 0, \"internet-service6\": 0, \"internet-service6-custom\": [ ], \"internet-service6-custom-group\": [ ], \"internet-service6-group\": [ ], \"internet-service6-name\": [ ], \"internet-service6-negate\": 0, \"internet-service6-src\": 0, \"internet-service6-src-custom\": [ ], \"internet-service6-src-custom-group\": [ ], \"internet-service6-src-group\": [ ], \"internet-service6-src-name\": [ ], \"internet-service6-src-negate\": 0, \"ip-version-type\": \"ipv4\", \"ippool\": 0, \"ips-sensor\": [ ], \"ips-voip-filter\": [ ], \"label\": null, \"logtraffic\": 2, \"logtraffic-start\": 0, \"match-vip\": 1, \"match-vip-only\": 0, \"name\": \"Policy_001\", \"nat\": 0, \"nat46\": 0, \"nat64\": 0, \"natinbound\": 0, \"natip\": [ \"0.0.0.0\", \"0.0.0.0\" ], \"natoutbound\": 0, \"network-service-dynamic\": [ ], \"network-service-src-dynamic\": [ ], \"np-acceleration\": 1, \"ntlm\": 0, \"ntlm-enabled-browsers\": [ ], \"ntlm-guest\": 0, \"oid\": 11310, \"outbound\": 1, \"passive-wan-health-measurement\": 0, \"pcp-inbound\": 0, \"pcp-outbound\": 0, \"pcp-poolname\": [ ], \"per-ip-shaper\": [ ], \"permit-any-host\": 0, \"permit-stun-host\": 0, \"pfcp-profile\": [ ], \"policy-behaviour-type\": \"standard\", \"policy-expiry\": 0, \"policy-expiry-date\": \"0000-00-00 00:00:00\", \"policy-expiry-date-utc\": null, \"policy-offload\": 1, \"policyid\": 14, \"poolname\": [ ], \"poolname6\": [ ], \"profile-group\": [ ], \"profile-protocol-options\": [ \"default\" ], \"profile-type\": 0, \"radius-mac-auth-bypass\": 0, \"redirect-url\": null, \"replacemsg-override-group\": [ ], \"reputation-direction\": 2, \"reputation-direction6\": 42, \"reputation-minimum\": 0, \"reputation-minimum6\": 0, \"rtp-addr\": [ ], \"rtp-nat\": 0, \"schedule\": [ \"always\" ], \"schedule-timeout\": 0, \"sctp-filter-profile\": [ ], \"send-deny-packet\": 0, \"service\": [ \"INFO_ADDRESS\" ], \"service-negate\": 0, \"session-ttl\": \"0\", \"sgt\": [ ], \"sgt-check\": 0, \"src-vendor-mac\": [ ], \"srcaddr\": [ \"all\" ], \"srcaddr-negate\": 0, \"srcaddr6\": [ ], \"srcaddr6-negate\": 0, \"srcintf\": [ \"any\" ], \"ssh-filter-profile\": [ ], \"ssh-policy-redirect\": 0, \"ssl-ssh-profile\": [ \"no-inspection\" ], \"status\": 1, \"tcp-mss-receiver\": 0, \"tcp-mss-sender\": 0, \"tcp-session-without-syn\": 2, \"tcp-timeout-pid\": [ ], \"timeout-send-rst\": 0, \"tos\": \"0x00\", \"tos-mask\": \"0x00\", \"tos-negate\": 0, \"traffic-shaper\": [ ], \"traffic-shaper-reverse\": [ ], \"udp-timeout-pid\": [ ], \"users\": [ ], \"utm-status\": 0, \"uuid\": \"64abdc74-cef8-51ee-c4f6-b99de54c6f1a\", \"videofilter-profile\": [ ], \"virtual-patch-profile\": [ ], \"vlan-cos-fwd\": 255, \"vlan-cos-rev\": 255, \"vlan-filter\": null, \"voip-profile\": [ ], \"vpn_dst_node\": null, \"vpn_src_node\": null, \"vpntunnel\": [ ], \"waf-profile\": [ ], \"wanopt\": 0, \"wanopt-detection\": 1, \"wanopt-passive-opt\": 0, \"wanopt-peer\": [ ], \"wanopt-profile\": [ ], \"wccp\": 0, \"webcache\": 0, \"webcache-https\": 0, \"webfilter-profile\": [ ], \"webproxy-forward-server\": [ ], \"webproxy-profile\": [ ], \"ztna-device-ownership\": 0, \"ztna-ems-tag\": [ ], \"ztna-ems-tag-secondary\": [ ], \"ztna-geo-tag\": [ ], \"ztna-policy-redirect\": 0, \"ztna-status\": 0, \"ztna-tags-match-logic\": 0 }",
+                   "flags": 0,
+                   "key": "14",
+                   "note": "",
+                   "oid": 11310,
+                   "pkg_oid": 11294,
+                   "timestamp": 1708327690,
+                   "user": "admin"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_objrev/pkg/ppkg_001/firewall/policy/14"
+             }
+           ]
+         }
+
+     .. note::
+
+        - For each change the ``act`` is giving you the nature of the change:
+
+          .. list-table::
+             :header-rows: 1
+             :widths: auto
+
+             * - Value
+               - meaning
+
+             * - ``1``
+               - New policy created
+
+             * - ``2``
+               - Existing policy deleted
+
+                 .. note::
+
+                    Not sure you will be able to see this one...
+
+             * - ``3``
+               - Existing policy modified
+
+
+        - The ``key`` attribute is the ``policyid``
+        - The ``config`` attribute is a copy of the firewall policy containing
+          the change
+        - FortiManager returns an ordered list of changes; the first item is the
+          first change
+
+How to revert a firewall policy from a past changes?
+____________________________________________________
+
+There's no specific *revert* API endpoint.
+
+It's on you to capture the ``config`` attribute of a past change by looking at the list of changes for a firewall policy (see :ref:`How to get list of changes 
+mage in a firewall policy?`) and then to ``update`` that same firewall policy.
+
+Following example is considering the output from section :ref:`How to get list 
+of changes mage in a firewall policy?`.
+It will revert the firewall policy with the config saved when it was just created:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "method": "update",
+           "params": [
+             {
+               "data": {
+                 "_byte": 0,
+                 "_first_hit": 0,
+                 "_first_session": 0,
+                 "_global-label-color": 0,
+                 "_global-vpn": [],
+                 "_global-vpn-tgt": 0,
+                 "_hitcount": 0,
+                 "_label-color": 0,
+                 "_last_hit": 0,
+                 "_last_session": 0,
+                 "_pkts": 0,
+                 "_sesscount": 0,
+                 "action": 1,
+                 "anti-replay": 1,
+                 "application-list": [],
+                 "auth-cert": [],
+                 "auth-path": 0,
+                 "auto-asic-offload": 1,
+                 "av-profile": [],
+                 "block-notification": 0,
+                 "captive-portal-exempt": 0,
+                 "capture-packet": 0,
+                 "casb-profile": [],
+                 "cgn-eif": 0,
+                 "cgn-eim": 0,
+                 "cgn-resource-quota": 16,
+                 "cgn-session-quota": 16777215,
+                 "cifs-profile": [],
+                 "custom-log-fields": [],
+                 "decrypted-traffic-mirror": [],
+                 "delay-tcp-npu-session": 0,
+                 "diameter-filter-profile": [],
+                 "diffserv-copy": 0,
+                 "diffserv-forward": 0,
+                 "diffserv-reverse": 0,
+                 "diffservcode-forward": "000000",
+                 "diffservcode-rev": "000000",
+                 "disclaimer": 0,
+                 "dlp-profile": [],
+                 "dnsfilter-profile": [],
+                 "dsri": 0,
+                 "dstaddr": [
+                   "all"
+                 ],
+                 "dstaddr-negate": 0,
+                 "dstaddr6": [],
+                 "dstaddr6-negate": 0,
+                 "dstintf": [
+                   "any"
+                 ],
+                 "dynamic-shaping": 0,
+                 "email-collect": 0,
+                 "emailfilter-profile": [],
+                 "fec": 0,
+                 "file-filter-profile": [],
+                 "firewall-session-dirty": 0,
+                 "fixedport": 0,
+                 "fsso-agent-for-ntlm": [],
+                 "fsso-groups": [],
+                 "geoip-anycast": 0,
+                 "geoip-match": 0,
+                 "groups": [],
+                 "gtp-profile": [],
+                 "http-policy-redirect": 0,
+                 "icap-profile": [],
+                 "identity-based-route": [],
+                 "inbound": 0,
+                 "inspection-mode": 1,
+                 "internet-service": 0,
+                 "internet-service-custom": [],
+                 "internet-service-custom-group": [],
+                 "internet-service-group": [],
+                 "internet-service-name": [],
+                 "internet-service-negate": 0,
+                 "internet-service-src": 0,
+                 "internet-service-src-custom": [],
+                 "internet-service-src-custom-group": [],
+                 "internet-service-src-group": [],
+                 "internet-service-src-name": [],
+                 "internet-service-src-negate": 0,
+                 "internet-service6": 0,
+                 "internet-service6-custom": [],
+                 "internet-service6-custom-group": [],
+                 "internet-service6-group": [],
+                 "internet-service6-name": [],
+                 "internet-service6-negate": 0,
+                 "internet-service6-src": 0,
+                 "internet-service6-src-custom": [],
+                 "internet-service6-src-custom-group": [],
+                 "internet-service6-src-group": [],
+                 "internet-service6-src-name": [],
+                 "internet-service6-src-negate": 0,
+                 "ip-version-type": "ipv4",
+                 "ippool": 0,
+                 "ips-sensor": [],
+                 "ips-voip-filter": [],
+                 "logtraffic": 2,
+                 "logtraffic-start": 0,
+                 "match-vip": 1,
+                 "match-vip-only": 0,
+                 "name": "Policy_001",
+                 "nat": 0,
+                 "nat46": 0,
+                 "nat64": 0,
+                 "natinbound": 0,
+                 "natip": [
+                   "0.0.0.0",
+                   "0.0.0.0"
+                 ],
+                 "natoutbound": 0,
+                 "network-service-dynamic": [],
+                 "network-service-src-dynamic": [],
+                 "np-acceleration": 1,
+                 "ntlm": 0,
+                 "ntlm-enabled-browsers": [],
+                 "ntlm-guest": 0,
+                 "outbound": 1,
+                 "passive-wan-health-measurement": 0,
+                 "pcp-inbound": 0,
+                 "pcp-outbound": 0,
+                 "pcp-poolname": [],
+                 "per-ip-shaper": [],
+                 "permit-any-host": 0,
+                 "permit-stun-host": 0,
+                 "pfcp-profile": [],
+                 "policy-behaviour-type": "standard",
+                 "policy-expiry": 0,
+                 "policy-expiry-date": "0000-00-00 00:00:00",
+                 "policy-offload": 1,
+                 "policyid": 14,
+                 "poolname": [],
+                 "poolname6": [],
+                 "profile-group": [],
+                 "profile-protocol-options": [
+                   "default"
+                 ],
+                 "profile-type": 0,
+                 "radius-mac-auth-bypass": 0,
+                 "replacemsg-override-group": [],
+                 "reputation-direction": 2,
+                 "reputation-direction6": 42,
+                 "reputation-minimum": 0,
+                 "reputation-minimum6": 0,
+                 "rtp-addr": [],
+                 "rtp-nat": 0,
+                 "schedule": [
+                   "always"
+                 ],
+                 "schedule-timeout": 0,
+                 "sctp-filter-profile": [],
+                 "send-deny-packet": 0,
+                 "service": [
+                   "ALL"
+                 ],
+                 "service-negate": 0,
+                 "session-ttl": "0",
+                 "sgt": [],
+                 "sgt-check": 0,
+                 "src-vendor-mac": [],
+                 "srcaddr": [
+                   "all"
+                 ],
+                 "srcaddr-negate": 0,
+                 "srcaddr6": [],
+                 "srcaddr6-negate": 0,
+                 "srcintf": [
+                   "any"
+                 ],
+                 "ssh-filter-profile": [],
+                 "ssh-policy-redirect": 0,
+                 "ssl-ssh-profile": [
+                   "no-inspection"
+                 ],
+                 "status": 1,
+                 "tcp-mss-receiver": 0,
+                 "tcp-mss-sender": 0,
+                 "tcp-session-without-syn": 2,
+                 "tcp-timeout-pid": [],
+                 "timeout-send-rst": 0,
+                 "tos": "0x00",
+                 "tos-mask": "0x00",
+                 "tos-negate": 0,
+                 "traffic-shaper": [],
+                 "traffic-shaper-reverse": [],
+                 "udp-timeout-pid": [],
+                 "users": [],
+                 "utm-status": 0,
+                 "uuid": "64abdc74-cef8-51ee-c4f6-b99de54c6f1a",
+                 "videofilter-profile": [],
+                 "virtual-patch-profile": [],
+                 "vlan-cos-fwd": 255,
+                 "vlan-cos-rev": 255,
+                 "voip-profile": [],
+                 "vpn_dst_node": null,
+                 "vpn_src_node": null,
+                 "vpntunnel": [],
+                 "waf-profile": [],
+                 "wanopt": 0,
+                 "wanopt-detection": 1,
+                 "wanopt-passive-opt": 0,
+                 "wanopt-peer": [],
+                 "wanopt-profile": [],
+                 "wccp": 0,
+                 "webcache": 0,
+                 "webcache-https": 0,
+                 "webfilter-profile": [],
+                 "webproxy-forward-server": [],
+                 "webproxy-profile": [],
+                 "ztna-device-ownership": 0,
+                 "ztna-ems-tag": [],
+                 "ztna-ems-tag-secondary": [],
+                 "ztna-geo-tag": [],
+                 "ztna-policy-redirect": 0,
+                 "ztna-status": 0,
+                 "ztna-tags-match-logic": 0
+               },
+               "revision note": "Revert from create time",
+               "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         - Don't use the ``oid`` attribute or you will probably get an error 
+           like:
+
+           .. code-block:: json
+
+              {
+                "id": 4,
+                "result": [
+                  {
+                    "status": {
+                      "code": -10,
+                      "message": "The data is invalid for selected url"
+                    },
+                    "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+                  }
+                ]
+              }
+
+         - As a best practice, think about adding a ``revision note``
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "result": [
+             {
+               "data": {
+                 "policyid": 14
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+             }
+           ]
+         }        
+
 
 Global Policies & objects
 -------------------------
