@@ -4889,7 +4889,8 @@ address from the ``demo`` ADOM:
 
 You can delete multiple per-device mapping entries in a single request.
 
-The following example add per-device mapping entries for the ``dev_003`` and ``dev_002`` devices and their ``root`` VDOM:
+The following example delete per-device mapping entries for the ``dev_003`` and 
+``dev_002`` devices and their ``root`` VDOM:
 
 .. tab-set::
 
