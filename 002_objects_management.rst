@@ -4924,14 +4924,14 @@ The following example delete per-device mapping entries for the ``dev_003`` and
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping/dev_002/root"
+               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping/dev_03/root"
              },
              {
                "status": {
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping/dev_001/root"
+               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping/dev_002/root"
              }
            ]
          }         
