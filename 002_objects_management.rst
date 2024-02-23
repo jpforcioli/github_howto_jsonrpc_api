@@ -4602,3 +4602,286 @@ You can use the usual ``scope``:
         }
      ]
    }
+
+Per-device mapping
+------------------
+
+This is a mechanism where FortiManager can push the same object to multiple
+devices, but with different values.
+
+For instance, you could have the `net_branch_lan` firewall address to represent the internal network of your remote sites and you would like it to be with the 
+``10.0.1.0/24`` for site #1, ``10.0.2.0/24`` for site #2, etc.
+
+The per-device mapping feature isn't available for all objects.
+
+.. note::
+
+   - CLI Template could be use to overcome the lack of per-device mapping 
+     support.
+
+Per-device mapping for firewall.address
++++++++++++++++++++++++++++++++++++++++
+
+How to get per-device mapping info for a firewall address obejct?
+_________________________________________________________________
+
+The following example shows how to get the per-device mapping info for the
+``net_branch_lan`` firewall address from the ``demo`` ADOM:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+        
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         - To get the per-device mapping info, you just need to append the 
+           ``dynamic_mapping`` subtable in the ``url``
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+                 
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "_scope": [
+                     {
+                       "name": "dev_001",
+                       "vdom": "root"
+                     }
+                   ],
+                   "allow-routing": "disable",
+                   "clearpass-spt": "unknown",
+                   "color": 0,
+                   "dirty": "dirty",
+                   "fabric-object": "disable",
+                   "macaddr": [],
+                   "node-ip-only": "disable",
+                   "obj-type": "ip",
+                   "oid": 5584,
+                   "route-tag": 0,
+                   "subnet": [
+                     "10.0.1.0",
+                     "255.255.255.0"
+                   ],
+                   "type": "ipmask",
+                   "unset attrs": [
+                     "associated-interface"
+                   ],
+                   "uuid": "6c108da4-d257-51ee-25be-c01339bbfdb8"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping"
+             }
+           ]
+         }
+
+      .. note::
+
+         - The ``net_branch_lan`` is having a single per-device mapping for the
+           ``dev_001`` device and its ``root`` VDOM
+
+         - When FortiManager will push the ``net_branch_lan`` against the
+           ``dev_001.root`` device, it will use the IP address from the 
+           ``subnet`` block
+
+         - When FortiManager will push the ``net_branch_lan`` against the
+           ``dev_002.root`` device, it will use the IP address from the 
+           ``subnet`` block of the ``net_branch_lan`` object itself, because 
+           there's no per-device mapping for this device.
+
+How to add a per-device mapping to a firewall address object?
+_____________________________________________________________
+
+The following example shows how to add a new per-device mapping entry for the
+``dev_002`` device and its ``root`` VDOM, for the ``net_branch_lan`` firewall
+address from the ``demo`` ADOM:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "_scope": [
+                   {
+                     "name": "dev_002",
+                     "vdom": "root"
+                   }
+                 ],
+                 "subnet": [
+                   "10.0.2.0",
+                   "255.255.255.0"
+                 ]
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "_scope": [
+                   {
+                     "name": "dev_002",
+                     "vdom": "root"
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping"
+             }
+           ]
+         }
+
+      .. note::
+
+         - FortiManager confirms the creation of the new per-device mapping
+           entry returning its ``_scope`` attribute
+
+You can add multiple per-device mapping entries in a single request.
+The following example add per-device mapping entries for the ``dev_003`` and ``dev_004`` devices and their ``root`` VDOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 {
+                   "_scope": [
+                     {
+                       "name": "dev_003",
+                       "vdom": "root"
+                     }
+                   ],
+                   "subnet": [
+                     "10.0.3.0",
+                     "255.255.255.0"
+                   ]
+                 },
+                 {
+                   "_scope": [
+                     {
+                       "name": "dev_004",
+                       "vdom": "root"
+                     }
+                   ],
+                   "subnet": [
+                     "10.0.4.0",
+                     "255.255.255.0"
+                   ]
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping"
+             }
+           ],
+           "session": "{{session}}",
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping"
+             }
+           ]
+         }
+
+      .. note::
+
+         - For multiple per-device mapping entries, FortiManager confirms their 
+           creation with a generic *OK* response
+
+How to delete a per-device mapping from a firewall address object?
+__________________________________________________________________
+
+The following example shows how to delete the per-device mapping entry for the
+``dev_004`` device and its ``root`` VDOM, for the ``net_branch_lan`` firewall
+address from the ``demo`` ADOM:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping/dev_004/root"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping/dev_004/root"
+             }
+           ]
+         }          
