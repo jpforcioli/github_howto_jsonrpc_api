@@ -4778,6 +4778,7 @@ address from the ``demo`` ADOM:
            entry returning its ``_scope`` attribute
 
 You can add multiple per-device mapping entries in a single request.
+
 The following example add per-device mapping entries for the ``dev_003`` and ``dev_004`` devices and their ``root`` VDOM:
 
 .. tab-set::
@@ -4885,3 +4886,51 @@ address from the ``demo`` ADOM:
              }
            ]
          }          
+
+You can delete multiple per-device mapping entries in a single request.
+
+The following example add per-device mapping entries for the ``dev_003`` and ``dev_002`` devices and their ``root`` VDOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping/dev_003/root"
+             },
+             {
+               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping/dev_002/root"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping/dev_002/root"
+             },
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping/dev_001/root"
+             }
+           ]
+         }         

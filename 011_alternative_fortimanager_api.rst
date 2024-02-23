@@ -153,7 +153,7 @@ Caught in #273964.
 
 It seems to be available only with the new FortiManager flat UI (FortiManager 5.0.0).
 
-We have to this this special HTTP URL:
+We have to use this special HTTP URL:
 
 .. code-block::
 
