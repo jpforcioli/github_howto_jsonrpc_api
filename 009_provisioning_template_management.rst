@@ -5548,6 +5548,67 @@ in ADOM ``root``:
      ]
    }
 
+How to create a Static Route Template from an Import from Device operation?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #0976806.
+
+The following example shows how to create the ``static_route_template_001`` by
+importing existing static routes (IPv4 and IPv6 ones) from the existing ``dev_001`` managed device and its ``root`` VDOM.
+
+The ``static_route_template_001`` Static Route Template will be created in the
+``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "clone",
+           "params": [
+             {
+               "data": {
+                 "new url": "/pm/config/adom/demo/template/_router_static/static_route_template_001"
+               },
+               "url": "/pm/config/device/dev_001/vdom/root/router/static"
+             },
+             {
+               "data": {
+                 "new url": "/pm/config/adom/demo/template/_router_static/static_route_template_001"
+               },
+               "url": "/pm/config/device/dev_001/vdom/root/router/static6"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_001/vdom/root/router/static"
+             },
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_001/vdom/root/router/static6"
+             }
+           ]
+         }
+
 Template Group
 --------------
 
