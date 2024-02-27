@@ -4641,7 +4641,7 @@ It is also possible to use the ``filter`` way to get the same result:
 How to get the tunnels of an IPsec Tunnel Template?
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The following example shows how to get the tunnels declared in the 
+The following example shows how to get the tunnel entries in the 
 ``ipsec_tunnel_template_001`` IPsec Tunnel Template in the ``demo`` ADOM:
 
 .. tab-set::
@@ -5533,8 +5533,8 @@ recommended:
          .. literalinclude:: scripts/fmg_ipsec_tunnel_template_tunnel_add.py
             :language: python
 
-How to update an existing tunnel declared in an IPsec Tunnel Interface?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to update an existing tunnel entry in an IPsec Tunnel Interface?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Like for the *add a new tunnel* case (see section :ref:`How to create a new tunnel entry in an IPsec Tunnel Template?`) this is not trivial.
 
