@@ -6142,7 +6142,9 @@ _________________________________________________________________
 
    .. tab-item:: REQUEST
 
-      .. dropdown:: Expand
+      .. dropdown:: Click to see the request
+         :color: primary
+         :icon: chevron-up
 
          .. code-block:: json
 

@@ -1135,7 +1135,9 @@ with the ``cli_script_001`` and ``cli_script_002`` members:
 
          - You have to get the ``oid`` first for each CLI Script member
          
-           .. dropdown:: You can use following |fmg_api| example
+           .. dropdown:: Click to expand
+              :color: info 
+              :icon: chevron-down
 
               .. tab-set::
    

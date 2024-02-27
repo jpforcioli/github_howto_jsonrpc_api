@@ -4401,847 +4401,1923 @@ In ADOOM ``jpf_demo``, we create SD-WAN Template ``branches``:
 IPsec Tunnel Template
 ---------------------
 
-How to get the list of declared IPsec Tunnel Templates?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to get the list of IPsec Tunnel Templates?
+++++++++++++++++++++++++++++++++++++++++++++++
 
-To get the list of IPsec Tunnel Templates declared in ADOM ``adom_72_003``:
+The following example shows how to get the list of existing IPsec Tunnel 
+Template in the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/template/_ipsec/adom/adom_72_003"
-       }
-     ],
-     "session": "zrCcpVLJIPFFjKGZ67qE0PlcOJHJFutKBRWOQyVSIwVrWaiMmq6mDuYu1ddz+OSNTJxh/EuedV0JMibQHZbH9w==",
-     "verbose": 1
-   }
+      .. code-block:: json
 
-**RESPONSE:**
-
-.. code-block:: json
-  
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "name": "IPsec_Fortinet_Recommended",
-             "oid": 4119,
-             "template setting": {
-               "option": "readonly",
-               "stype": "_ipsec",
-               "widgets": [
-                 "_ipsec"
-               ]
-             },
-             "type": "template"
-           },
-           {
-             "name": "BRANCH_IPsec_Recommended",
-             "oid": 4123,
-             "template setting": {
-               "option": "readonly",
-               "stype": "_ipsec",
-               "widgets": [
-                 "_ipsec"
-               ]
-             },
-             "type": "template"
-           },
-           {
-             "name": "HUB_IPsec_Recommended",
-             "oid": 4129,
-             "template setting": {
-               "option": "readonly",
-               "stype": "_ipsec",
-               "widgets": [
-                 "_ipsec"
-               ]
-             },
-             "type": "template"
-           },
-           {
-             "name": "branches",
-             "oid": 4154,
-             "scope member": [
-               {
-                 "name": "adom_72_003_dev_001",
-                 "vdom": "root"
-               }
-             ],
-             "template setting": {
-               "stype": "_ipsec",
-               "widgets": [
-                 "_ipsec"
-               ]
-             },
-             "type": "template"
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/template/_ipsec/adom/adom_72_003"
-       }
-     ]
-   }
-
-.. note:: 
-
-   Default IPsec Tunnel Templates are returned (like the ones whose name is
-   ending with ``Recommended``). 
-
-   The non-default IPsec Tunnel Template ``branches`` is also returned and is
-   assigned to the ``root`` VDOM of the managed device ``adom_72_003_dev_001``.
-
-How to get one specific declared IPsec Tunnel Template?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-To get the IPsec Tunnel Template ``branches`` from ADOM ``adom_72_001``:
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/template/_ipsec/adom/adom_72_003/branches"
-       }
-     ],
-     "session": "GC6GgnBec3+5hd0bZkDsXzZrd/u0+a6iScmcfjBlGy/LMIvHjNpiZ3KEiltp+J6y8SywYGTHQYBiPBlWUOxhsQ==",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "name": "branches",
-           "oid": 4154,
-           "scope member": [
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
              {
-               "name": "adom_72_003_dev_001",
-               "vdom": "root"
+               "url": "/pm/template/_ipsec/adom/demo"
              }
            ],
-           "template setting": {
-             "description": null,
-             "option": null,
-             "stype": "_ipsec",
-             "widgets": [
-               "_ipsec"
-             ]
-           },
-           "type": "template"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/template/_ipsec/adom/adom_72_003/branches"
-       }
-     ]
-   }
+           "session": "{{session}}"
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "IPsec_Fortinet_Recommended",
+                   "oid": 5480,
+                   "template setting": {
+                     "option": "readonly",
+                     "stype": "_ipsec",
+                     "widgets": [
+                       "_ipsec"
+                     ]
+                   },
+                   "type": "template"
+                 },
+                 {
+                   "name": "BRANCH_IPsec_Recommended",
+                   "oid": 5484,
+                   "template setting": {
+                     "option": "readonly",
+                     "stype": "_ipsec",
+                     "widgets": [
+                       "_ipsec"
+                     ]
+                   },
+                   "type": "template"
+                 },
+                 {
+                   "name": "HUB_IPsec_Recommended",
+                   "oid": 5490,
+                   "template setting": {
+                     "option": "readonly",
+                     "stype": "_ipsec",
+                     "widgets": [
+                       "_ipsec"
+                     ]
+                   },
+                   "type": "template"
+                 },
+                 {
+                   "name": "ipsec_tunnel_template_001",
+                   "oid": 5584,
+                   "scope member": [
+                     {
+                       "name": "dev_001",
+                       "vdom": "root"
+                     },
+                     {
+                       "name": "dev_002",
+                       "vdom": "root"
+                     }
+                   ],
+                   "template setting": {
+                     "description": "New IPsec Tunnel Template",
+                     "stype": "_ipsec",
+                     "widgets": [
+                       "_ipsec"
+                     ]
+                   },
+                   "type": "template"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_ipsec/adom/demo"
+             }
+           ]
+         }
+
+      .. note:: 
+      
+         - The ``*_Recommended`` default IPsec Tunnel Templates are returned
+         - When devices are  device groups are assigned to IPsec Tunnel 
+           Template, FortiManager returns the corresponding ``scope member`` 
+           attribute, as shown for the ``ipsec_tunnel_template_001``.
+
+How to get a specific IPsec Tunnel Template?
+++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the ``ipsec_tunnel_template_001`` IPsec Tunnel Template in the ``demo`` ADOM using:
+
+.. tab-set::
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001"
+             }
+           ],
+           "session": "{{session}}"
+           "verbose": 1
+         }
+   
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "ipsec_tunnel_template_001",
+                 "oid": 5584,
+                 "scope member": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "dev_002",
+                     "vdom": "root"
+                   }
+                 ],
+                 "template setting": {
+                   "description": "New IPsec Tunnel Template",
+                   "option": null,
+                   "stype": "_ipsec",
+                   "widgets": [
+                     "_ipsec"
+                   ]
+                 },
+                 "type": "template"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001"
+             }
+           ]
+         }           
+
+It is also possible to use the ``filter`` way to get the same result:
+
+.. tab-set::
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "filter": [
+                 "name",
+                 "==",
+                 "ipsec_tunnel_template_001"
+               ],
+               "url": "/pm/template/_ipsec/adom/demo"
+             }
+           ],
+           "session": "{{session}}"
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json  
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "ipsec_tunnel_template_001",
+                   "oid": 5584,
+                   "scope member": [
+                     {
+                       "name": "dev_001",
+                       "vdom": "root"
+                     },
+                     {
+                       "name": "dev_002",
+                       "vdom": "root"
+                     }
+                   ],
+                   "template setting": {
+                     "description": "New IPsec Tunnel Template",
+                     "stype": "_ipsec",
+                     "widgets": [
+                       "_ipsec"
+                     ]
+                   },
+                   "type": "template"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_ipsec/adom/demo"
+             }
+           ]
+         }               
 
 How to get the tunnels of an IPsec Tunnel Template?
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
-To get the tunnels declared in the IPsec Tunnel Template ``branches`` from the
-ADOM ``adom_72_003``:
+The following example shows how to get the tunnels declared in the 
+``ipsec_tunnel_template_001`` IPsec Tunnel Template in the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/adom/adom_72_003/template/_ipsec/branches/action-list/"
-       }
-     ],
-     "session": "9Z0d+yYFQvb+OL79LTdAYbAik6iTLDMOjxCm809YhaOtvLqJaCnsvcUjCvpmR5KU2Tp5MVNu0EtlE07YjL9a+w==",
-     "verbose": 1
-   }
+      .. code-block:: json
 
-**RESPONSE:**
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/template/_ipsec/ipsec_tunnel_template_001/action-list"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "action": "conf-ipsec-template",
-             "dynamic_mapping": null,
-             "oid": 4160,
-             "seq": 1,
-             "value": {
-               "automatic-routing": "disable",
-               "local-addr-type": "dynamic",
-               "name": "ol_isp1",
-               "nat": "disable",
-               "remote-subnet": [
-                 "0.0.0.0/0.0.0.0"
-               ],
-               "system interface": {
-                 "...",
-               },
-               "vpn ipsec phase1-interface": {
-                 "...",
-                 "remote-gw": "10.0.0.1",
-                 "...",
-               },
-               "vpn ipsec phase2-interface": [
-                 {
-                   "...",
-                 }
-               ]
-             },
-             "var-list": null
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/adom_72_003/template/_ipsec/branches/action-list/"
-       }
-     ]
-   }
-   
-With older FortiManager versions (can't be more precise), it was possible to
-obtain the same result using a different |fmg_api| ``url``. For instance to get
-the tunnel of the IPsec Tunnel Template ``ipsec-tunnel-template-001`` in ADOM
-``LABS``:
+      .. dropdown:: Click to see response
+         :color: secondary
+         :icon: chevron-down
+        
+         .. code-block:: json
 
-**REQUEST**:
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": [
+                    {
+                      "action": "conf-ipsec-template",
+                      "dynamic_mapping": null,
+                      "oid": 5591,
+                      "seq": 1,
+                      "value": {
+                        "automatic-routing": "enable",
+                        "local-addr-type": "dynamic",
+                        "name": "ol_isp1",
+                        "nat": "disable",
+                        "remote-subnet": [
+                          "0.0.0.0/0.0.0.0"
+                        ],
+                        "system interface": {
+                          "ip": "0.0.0.0/0.0.0.0",
+                          "remote-ip": "0.0.0.0/0.0.0.0"
+                        },
+                        "vpn ipsec phase1-interface": {
+                          "acct-verify": "disable",
+                          "add-gw-route": "disable",
+                          "aggregate-member": "disable",
+                          "authmethod": "psk",
+                          "auto-discovery-crossover": "allow",
+                          "auto-discovery-forwarder": "disable",
+                          "auto-discovery-offer-interval": 5,
+                          "auto-discovery-psk": "disable",
+                          "auto-discovery-receiver": "disable",
+                          "auto-discovery-sender": "disable",
+                          "auto-negotiate": "enable",
+                          "backup-gateway": [],
+                          "childless-ike": "disable",
+                          "client-auto-negotiate": "disable",
+                          "client-keep-alive": "disable",
+                          "comments": null,
+                          "dhgrp": [
+                            "14",
+                            "5"
+                          ],
+                          "distance": 15,
+                          "dpd": "on-demand",
+                          "dpd-retrycount": 3,
+                          "dpd-retryinterval": [
+                            20
+                          ],
+                          "eap-cert-auth": "disable",
+                          "eap-exclude-peergrp": [],
+                          "eap-identity": "use-id-payload",
+                          "ems-sn-check": "disable",
+                          "encap-local-gw4": "0.0.0.0",
+                          "encap-local-gw6": "::",
+                          "encap-remote-gw4": "0.0.0.0",
+                          "encap-remote-gw6": "::",
+                          "encapsulation": "none",
+                          "encapsulation-address": "ike",
+                          "enforce-unique-id": "disable",
+                          "esn": "disable",
+                          "exchange-fgt-device-id": "disable",
+                          "exchange-interface-ip": "disable",
+                          "exchange-ip-addr4": "0.0.0.0",
+                          "exchange-ip-addr6": "::",
+                          "fallback-tcp-threshold": 15,
+                          "fec-egress": "disable",
+                          "fec-health-check": [],
+                          "fec-ingress": "disable",
+                          "fec-mapping-profile": [],
+                          "fgsp-sync": "disable",
+                          "fortinet-esp": "disable",
+                          "fragmentation": "enable",
+                          "fragmentation-mtu": 1200,
+                          "group-authentication": "disable",
+                          "group-authentication-secret": [
+                            "ENC",
+                            "vWtqtv0dyV9YmI2AVPGvHksmmGvaIQ0BPKapHEWAaZTomwBa3+cDcSVGHyGAVY73P5v58A1coRE7YJ6Nr9QKTgXTtPpJnTizVaju7iduNiLI6Ip82yHg6eBd6GiwX79JEmm67CA1GCJxisS/Ab7tJH7O8sn4JQby9FeGK9rxMD3zaC2h/g56sbmC74TRrrUj61HE0Q=="
+                          ],
+                          "ha-sync-esp-seqno": "enable",
+                          "idle-timeout": "disable",
+                          "ike-version": "1",
+                          "inbound-dscp-copy": "disable",
+                          "include-local-lan": "disable",
+                          "interface": [
+                            "port1"
+                          ],
+                          "ip-fragmentation": "post-encapsulation",
+                          "ip-version": "4",
+                          "ipsec-tunnel-slot": "auto",
+                          "ipv4-split-exclude": [],
+                          "ipv4-split-include": [],
+                          "ipv6-dns-server1": "::",
+                          "ipv6-dns-server2": "::",
+                          "ipv6-dns-server3": "::",
+                          "ipv6-split-exclude": [],
+                          "ipv6-split-include": [],
+                          "keepalive": 10,
+                          "keylife": 86400,
+                          "kms": [],
+                          "link-cost": 0,
+                          "local-gw": "0.0.0.0",
+                          "localid": "$(local_id)",
+                          "localid-type": "auto",
+                          "mesh-selector-type": "disable",
+                          "mode": "main",
+                          "mode-cfg": "disable",
+                          "monitor": [],
+                          "monitor-hold-down-delay": 0,
+                          "monitor-hold-down-time": "00:00",
+                          "monitor-hold-down-type": "immediate",
+                          "monitor-min": 0,
+                          "name": "ol_isp1",
+                          "nattraversal": "enable",
+                          "negotiate-timeout": 30,
+                          "net-device": "disable",
+                          "npu-offload": "enable",
+                          "oid": 5589,
+                          "packet-redistribution": "disable",
+                          "passive-mode": "disable",
+                          "peertype": "any",
+                          "ppk": "disable",
+                          "ppk-identity": null,
+                          "ppk-secret": [
+                            "ENC",
+                            "NQ700fmIoUlU5b4CTWn/STfnb0a5+oFLyiWrlV3pVKjtPvDcnHl7hANCiors48fMGnpd8ftwf5iKRisHrySywxQ7+Xulrn3vBrfzotfqVZ0uG2kUQ4e6DYSqI25IH9DqvCWy6R1uc6Wv9BqWCPMYM1ZAomfoMId86EsnphUeu1cvNEcPIiKQajAEkr53/2xWKYxhlg=="
+                          ],
+                          "priority": 1,
+                          "proposal": [
+                            "aes128-sha256",
+                            "aes256-sha256"
+                          ],
+                          "psksecret": [
+                            "ENC",
+                            "q5YWHfF1iymMLOiQK4rkHQtQkvvbp4uMNY2F1JBZjm2spZVs4KDygSkZR7ZGYUVgrsg2rFyuOkONSe8hvPf2AqT43a8SCjQxHNJoODllPgHdZE8UOfzlEVWDNgGK25VWe2aa7TVmsPoGED2gVSk1tPcJV92oxcVdUTfYaukumwnXD2kT"
+                          ],
+                          "qkd": "disable",
+                          "qkd-profile": [],
+                          "reauth": "disable",
+                          "rekey": "enable",
+                          "remote-gw": "10.1.0.1",
+                          "rsa-signature-format": "pkcs1",
+                          "rsa-signature-hash-override": "disable",
+                          "save-password": "disable",
+                          "split-include-service": [],
+                          "suite-b": "disable",
+                          "transit-gateway": "disable",
+                          "transport": "udp",
+                          "type": "static",
+                          "vni": 0,
+                          "wizard-type": "custom",
+                          "xauthtype": "disable"
+                        },
+                        "vpn ipsec phase2-interface": []
+                      },
+                      "var-list": null
+                    },
+                    {
+                      "action": "conf-ipsec-template",
+                      "dynamic_mapping": null,
+                      "oid": 5592,
+                      "seq": 2,
+                      "value": {
+                        "automatic-routing": "enable",
+                        "local-addr-type": "dynamic",
+                        "name": "ol_isp2",
+                        "nat": "disable",
+                        "remote-subnet": [
+                          "0.0.0.0/0.0.0.0"
+                        ],
+                        "system interface": {
+                          "ip": "0.0.0.0/0.0.0.0",
+                          "remote-ip": "0.0.0.0/0.0.0.0"
+                        },
+                        "vpn ipsec phase1-interface": {
+                          "acct-verify": "disable",
+                          "add-gw-route": "disable",
+                          "aggregate-member": "disable",
+                          "authmethod": "psk",
+                          "auto-discovery-crossover": "allow",
+                          "auto-discovery-forwarder": "disable",
+                          "auto-discovery-offer-interval": 5,
+                          "auto-discovery-psk": "disable",
+                          "auto-discovery-receiver": "disable",
+                          "auto-discovery-sender": "disable",
+                          "auto-negotiate": "enable",
+                          "backup-gateway": [],
+                          "childless-ike": "disable",
+                          "client-auto-negotiate": "disable",
+                          "client-keep-alive": "disable",
+                          "comments": null,
+                          "dhgrp": [
+                            "14",
+                            "5"
+                          ],
+                          "distance": 15,
+                          "dpd": "on-demand",
+                          "dpd-retrycount": 3,
+                          "dpd-retryinterval": [
+                            20
+                          ],
+                          "eap-cert-auth": "disable",
+                          "eap-exclude-peergrp": [],
+                          "eap-identity": "use-id-payload",
+                          "ems-sn-check": "disable",
+                          "encap-local-gw4": "0.0.0.0",
+                          "encap-local-gw6": "::",
+                          "encap-remote-gw4": "0.0.0.0",
+                          "encap-remote-gw6": "::",
+                          "encapsulation": "none",
+                          "encapsulation-address": "ike",
+                          "enforce-unique-id": "disable",
+                          "esn": "disable",
+                          "exchange-fgt-device-id": "disable",
+                          "exchange-interface-ip": "disable",
+                          "exchange-ip-addr4": "0.0.0.0",
+                          "exchange-ip-addr6": "::",
+                          "fallback-tcp-threshold": 15,
+                          "fec-egress": "disable",
+                          "fec-health-check": [],
+                          "fec-ingress": "disable",
+                          "fec-mapping-profile": [],
+                          "fgsp-sync": "disable",
+                          "fortinet-esp": "disable",
+                          "fragmentation": "enable",
+                          "fragmentation-mtu": 1200,
+                          "group-authentication": "disable",
+                          "group-authentication-secret": [
+                            "ENC",
+                            "vWtqtv0dyV9YmI2AVPGvHksmmGvaIQ0BPKapHEWAaZTomwBa3+cDcSVGHyGAVY73P5v58A1coRE7YJ6Nr9QKTgXTtPpJnTizVaju7iduNiLI6Ip82yHg6eBd6GiwX79JEmm67CA1GCJxisS/Ab7tJH7O8sn4JQby9FeGK9rxMD3zaC2h/g56sbmC74TRrrUj61HE0Q=="
+                          ],
+                          "ha-sync-esp-seqno": "enable",
+                          "idle-timeout": "disable",
+                          "ike-version": "1",
+                          "inbound-dscp-copy": "disable",
+                          "include-local-lan": "disable",
+                          "interface": [
+                            "port2"
+                          ],
+                          "ip-fragmentation": "post-encapsulation",
+                          "ip-version": "4",
+                          "ipsec-tunnel-slot": "auto",
+                          "ipv4-split-exclude": [],
+                          "ipv4-split-include": [],
+                          "ipv6-dns-server1": "::",
+                          "ipv6-dns-server2": "::",
+                          "ipv6-dns-server3": "::",
+                          "ipv6-split-exclude": [],
+                          "ipv6-split-include": [],
+                          "keepalive": 10,
+                          "keylife": 86400,
+                          "kms": [],
+                          "link-cost": 0,
+                          "local-gw": "0.0.0.0",
+                          "localid": "$(local_id)",
+                          "localid-type": "auto",
+                          "mesh-selector-type": "disable",
+                          "mode": "main",
+                          "mode-cfg": "disable",
+                          "monitor": [],
+                          "monitor-hold-down-delay": 0,
+                          "monitor-hold-down-time": "00:00",
+                          "monitor-hold-down-type": "immediate",
+                          "monitor-min": 0,
+                          "name": "ol_isp2",
+                          "nattraversal": "enable",
+                          "negotiate-timeout": 30,
+                          "net-device": "disable",
+                          "npu-offload": "enable",
+                          "oid": 5590,
+                          "packet-redistribution": "disable",
+                          "passive-mode": "disable",
+                          "peertype": "any",
+                          "ppk": "disable",
+                          "ppk-identity": null,
+                          "ppk-secret": [
+                            "ENC",
+                            "NQ700fmIoUlU5b4CTWn/STfnb0a5+oFLyiWrlV3pVKjtPvDcnHl7hANCiors48fMGnpd8ftwf5iKRisHrySywxQ7+Xulrn3vBrfzotfqVZ0uG2kUQ4e6DYSqI25IH9DqvCWy6R1uc6Wv9BqWCPMYM1ZAomfoMId86EsnphUeu1cvNEcPIiKQajAEkr53/2xWKYxhlg=="
+                          ],
+                          "priority": 1,
+                          "proposal": [
+                            "aes128-sha256",
+                            "aes256-sha256"
+                          ],
+                          "psksecret": [
+                            "ENC",
+                            "kWsLpmFEmPg6+O1jkuhgUGWNW14f37YfY6BtY4qEWO8qiJ3zEgXtzK/3YYmj4c9FDyQ7qbV6RQXHJvuY/3Nt4hJGFAslnZxGj6xae6wd4xGpMsID7xeT1gJAsPLAU/tR2S1lnzXtJyvmErqH/zmkrPhhkz/Y0+BtsAfHS4BrY6tR93ds"
+                          ],
+                          "qkd": "disable",
+                          "qkd-profile": [],
+                          "reauth": "disable",
+                          "rekey": "enable",
+                          "remote-gw": "10.2.0.1",
+                          "rsa-signature-format": "pkcs1",
+                          "rsa-signature-hash-override": "disable",
+                          "save-password": "disable",
+                          "split-include-service": [],
+                          "suite-b": "disable",
+                          "transit-gateway": "disable",
+                          "transport": "udp",
+                          "type": "static",
+                          "vni": 0,
+                          "wizard-type": "custom",
+                          "xauthtype": "disable"
+                        },
+                        "vpn ipsec phase2-interface": []
+                      },
+                      "var-list": null
+                    }
+                  ],
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/pm/config/adom/demo/template/_ipsec/ipsec_tunnel_template_001/action-list"
+                }
+              ]
+            }          
 
-.. code-block:: json
+.. note::
 
-   {
-     "id": "9f9b4423-c54f-451c-886c-f61532e90fa6",
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/adom/LABS/template/ipsec-tunnel-template-001/device/template/widget/ipsec/action-list/"
-       }
-     ],
-     "session": 50370
-   }
+   - With older FortiManager versions (can't be more specific), it was possible 
+     to obtain the same result using a different |fmg_api| ``url``
+   - For instance to get the tunnels of the ``ipsec_tunnel_template_001`` IPsec 
+     Tunnel Template in the ``demo`` ADOM, the following API request was used:
+
+     .. tab-set::
+
+        .. tab-item:: REQUEST
+
+           .. code-block:: json
+
+              {
+                "id": 3,
+                "method": "get",
+                "params": [
+                  {
+                    "url": "/pm/config/adom/demo/template/ipsec_tunnel_template_001/device/template/widget/ipsec/action-list/"
+                  }
+                ],
+                "session": "{{session}}"
+              }              
 
 How to get a specific tunnel of an IPsec Tunnel Template?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The master key is the ``seq`` attribute which can be exposed when getting all
-tunnels of an IPsec Tunnel Template (see section `How to get the tunnels of an
-IPsec Tunnel Template?`_).
+The tunnel *master key* is the ``seq`` attribute which can be obtained when getting tunnels of an IPsec Tunnel Template (see section :ref:`How to get the tunnels of an IPsec Tunnel Template?`).
 
-To get the tunnel with ``seq`` ``1`` (i.e., ``ol_isp1``) declared in IPsec
-Tunnel Template ``branches`` from ADOM ``adom_72_003``:
+The following example shows how to get the tunnel with ``ol_isp1`` (``seq`` is ``1``) from the ``ipsec_tunnel_template_001`` in the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/adom/adom_72_003/template/_ipsec/branches/action-list/1"
-       }
-     ],
-     "session": "98UT7na2vCT9XKa5Cwg6IANXQR18uZFs1DrSnz69ZqQdj+ZjiWZn4kEHFoqzDfqkOSE+T7cvPvqjFOtS+cbxeA==",
-     "verbose": 1
-   }
+      .. code-block:: json
 
-**RESPONSE:**
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/template/_ipsec/ipsec_tunnel_template_001/action-list/1"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "action": "conf-ipsec-template",
-           "dynamic_mapping": null,
-           "model": null,
-           "oid": 4164,
-           "seq": 1,
-           "value": {
-             "...",
-             "name": "ol_isp1",
-             "...",
-             "system interface": {
-               "...",
-             },
-             "vpn ipsec phase1-interface": {
-               "...",
-             },
-             "vpn ipsec phase2-interface": [
-               {
-                 "...",
-               }
-             ]
-           },
-           "var-list": null
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/adom_72_003/template/_ipsec/branches/action-list/1"
-       }
-     ]
-   }
+      .. dropdown:: Click to see response
+         :color: secondary
+         :icon: chevron-down
+        
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": {
+                    "action": "conf-ipsec-template",
+                    "dynamic_mapping": null,
+                    "model": null,
+                    "oid": 5591,
+                    "seq": 1,
+                    "value": {
+                      "automatic-routing": "enable",
+                      "local-addr-type": "dynamic",
+                      "name": "ol_isp1",
+                      "nat": "disable",
+                      "remote-subnet": [
+                        "0.0.0.0/0.0.0.0"
+                      ],
+                      "system interface": {
+                        "ip": "0.0.0.0/0.0.0.0",
+                        "remote-ip": "0.0.0.0/0.0.0.0"
+                      },
+                      "vpn ipsec phase1-interface": {
+                        "acct-verify": "disable",
+                        "add-gw-route": "disable",
+                        "aggregate-member": "disable",
+                        "authmethod": "psk",
+                        "auto-discovery-crossover": "allow",
+                        "auto-discovery-forwarder": "disable",
+                        "auto-discovery-offer-interval": 5,
+                        "auto-discovery-psk": "disable",
+                        "auto-discovery-receiver": "disable",
+                        "auto-discovery-sender": "disable",
+                        "auto-negotiate": "enable",
+                        "backup-gateway": [],
+                        "childless-ike": "disable",
+                        "client-auto-negotiate": "disable",
+                        "client-keep-alive": "disable",
+                        "comments": null,
+                        "dhgrp": [
+                          "14",
+                          "5"
+                        ],
+                        "distance": 15,
+                        "dpd": "on-demand",
+                        "dpd-retrycount": 3,
+                        "dpd-retryinterval": [
+                          20
+                        ],
+                        "eap-cert-auth": "disable",
+                        "eap-exclude-peergrp": [],
+                        "eap-identity": "use-id-payload",
+                        "ems-sn-check": "disable",
+                        "encap-local-gw4": "0.0.0.0",
+                        "encap-local-gw6": "::",
+                        "encap-remote-gw4": "0.0.0.0",
+                        "encap-remote-gw6": "::",
+                        "encapsulation": "none",
+                        "encapsulation-address": "ike",
+                        "enforce-unique-id": "disable",
+                        "esn": "disable",
+                        "exchange-fgt-device-id": "disable",
+                        "exchange-interface-ip": "disable",
+                        "exchange-ip-addr4": "0.0.0.0",
+                        "exchange-ip-addr6": "::",
+                        "fallback-tcp-threshold": 15,
+                        "fec-egress": "disable",
+                        "fec-health-check": [],
+                        "fec-ingress": "disable",
+                        "fec-mapping-profile": [],
+                        "fgsp-sync": "disable",
+                        "fortinet-esp": "disable",
+                        "fragmentation": "enable",
+                        "fragmentation-mtu": 1200,
+                        "group-authentication": "disable",
+                        "group-authentication-secret": [
+                          "ENC",
+                          "vWtqtv0dyV9YmI2AVPGvHksmmGvaIQ0BPKapHEWAaZTomwBa3+cDcSVGHyGAVY73P5v58A1coRE7YJ6Nr9QKTgXTtPpJnTizVaju7iduNiLI6Ip82yHg6eBd6GiwX79JEmm67CA1GCJxisS/Ab7tJH7O8sn4JQby9FeGK9rxMD3zaC2h/g56sbmC74TRrrUj61HE0Q=="
+                        ],
+                        "ha-sync-esp-seqno": "enable",
+                        "idle-timeout": "disable",
+                        "ike-version": "1",
+                        "inbound-dscp-copy": "disable",
+                        "include-local-lan": "disable",
+                        "interface": [
+                          "port1"
+                        ],
+                        "ip-fragmentation": "post-encapsulation",
+                        "ip-version": "4",
+                        "ipsec-tunnel-slot": "auto",
+                        "ipv4-split-exclude": [],
+                        "ipv4-split-include": [],
+                        "ipv6-dns-server1": "::",
+                        "ipv6-dns-server2": "::",
+                        "ipv6-dns-server3": "::",
+                        "ipv6-split-exclude": [],
+                        "ipv6-split-include": [],
+                        "keepalive": 10,
+                        "keylife": 86400,
+                        "kms": [],
+                        "link-cost": 0,
+                        "local-gw": "0.0.0.0",
+                        "localid": "$(local_id)",
+                        "localid-type": "auto",
+                        "mesh-selector-type": "disable",
+                        "mode": "main",
+                        "mode-cfg": "disable",
+                        "monitor": [],
+                        "monitor-hold-down-delay": 0,
+                        "monitor-hold-down-time": "00:00",
+                        "monitor-hold-down-type": "immediate",
+                        "monitor-min": 0,
+                        "name": "ol_isp1",
+                        "nattraversal": "enable",
+                        "negotiate-timeout": 30,
+                        "net-device": "disable",
+                        "npu-offload": "enable",
+                        "oid": 5589,
+                        "packet-redistribution": "disable",
+                        "passive-mode": "disable",
+                        "peertype": "any",
+                        "ppk": "disable",
+                        "ppk-identity": null,
+                        "ppk-secret": [
+                          "ENC",
+                          "NQ700fmIoUlU5b4CTWn/STfnb0a5+oFLyiWrlV3pVKjtPvDcnHl7hANCiors48fMGnpd8ftwf5iKRisHrySywxQ7+Xulrn3vBrfzotfqVZ0uG2kUQ4e6DYSqI25IH9DqvCWy6R1uc6Wv9BqWCPMYM1ZAomfoMId86EsnphUeu1cvNEcPIiKQajAEkr53/2xWKYxhlg=="
+                        ],
+                        "priority": 1,
+                        "proposal": [
+                          "aes128-sha256",
+                          "aes256-sha256"
+                        ],
+                        "psksecret": [
+                          "ENC",
+                          "OgEVpeNbadLJfCzF2xboH6jNNhCJxuDgQ6ZH6qjJO6vk9IPOOm/0MAqX8RJrQculrx76SbTZb9uAs21OTZdSGAi9+XAZF5f6AcBA31LcOjUrJZmJ5ESVKuSGQQbgiVrdbZdmrpF64wBnk+K1CglXt0a2c9+N3tYPgIWlCfS0CuroHamN"
+                        ],
+                        "qkd": "disable",
+                        "qkd-profile": [],
+                        "reauth": "disable",
+                        "rekey": "enable",
+                        "remote-gw": "10.1.0.1",
+                        "rsa-signature-format": "pkcs1",
+                        "rsa-signature-hash-override": "disable",
+                        "save-password": "disable",
+                        "split-include-service": [],
+                        "suite-b": "disable",
+                        "transit-gateway": "disable",
+                        "transport": "udp",
+                        "type": "static",
+                        "vni": 0,
+                        "wizard-type": "custom",
+                        "xauthtype": "disable"
+                      },
+                      "vpn ipsec phase2-interface": []
+                    },
+                    "var-list": null
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/pm/config/adom/demo/template/_ipsec/ipsec_tunnel_template_001/action-list/1"
+                }
+              ]
+            }                     
 
 How to create a new IPsec Tunnel Template?
 ++++++++++++++++++++++++++++++++++++++++++
 
-We create an empty IPsec Tunnel Template named ``ipsec-tunnel-template-001`` in
-ADOM ``LABS``:
+The following example shows how to create the ``ipsec_tunnel_template_001`` in ADOM ``demo``.
 
-**REQUEST**:
+The created ``ipsec_tunnel_template_001`` will be empty.
 
-.. code-block::
+.. tab-set::
 
-   {
-     "id": "ebeaa326-1934-44d4-82ed-5ca968bffb91",
-     "method": "set",
-     "params": [
-       {
-         "data": {
-           "name": "ipsec-tunnel-template-001",
-           "scope member": [],
-           "template setting": {
-             "stype": "ipsec",
-             "widgets": [
-               "ipsec"
-             ]
-           },
-           "type": "pkg"
-         },
-         "url": "/pm/template/adom/LABS"
-       }
-     ],
-     "session": 50370
-   }
+   .. tab-item:: REQUEST
 
-How to create a new entry in an existing IPsec Tunnel Template?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      .. code-block:: json
 
-**REQUEST**
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "name": "ipsec_tunnel_template_001",
+                 "template setting": {
+                   "description": "New IPsec Tunnel Template",
+                   "stype": "_ipsec",
+                   "widgets": [
+                     "_ipsec"
+                   ]
+                 },
+                 "type": "template"
+               },
+               "url": "/pm/template/_ipsec/adom/demo"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-.. code-block::
+   .. tab-item:: RESPONSE
 
-   {
-     "id": "01e95c3c-759a-49e6-a03b-09b3d41e3bb6",
-     "method": "set",
-     "params": [
-       {
-         "data": [
-           {
-             "action": "conf-ipsec-template",
-             "model": "all",
-             "value": "{\"local-addr-type\":\"dynamic\",\"automatic-routing\":\"disable\",\"add-route\":\"enable\",\"assign-ip\":\"enable\",\"authmethod\":\"psk\",\"auto-discovery-forwarder\":\"disable\",\"auto-discovery-receiver\":\"disable\",\"auto-discovery-sender\":\"disable\",\"dpd\":\"on-demand\",\"dpd-retrycount\":3,\"dpd-retryinterval\":\"20\",\"idle-timeout\":\"disable\",\"idle-timeoutinterval\":15,\"ike-version\":\"1\",\"interface\":\"wan1\",\"ipv4-end-ip\":\"0.0.0.0\",\"ipv4-netmask\":\"255.255.255.255\",\"ipv4-start-ip\":\"0.0.0.0\",\"keylife\":86400,\"mode-cfg\":\"disable\",\"name\":\"HQ_VPN1\",\"net-device\":\"disable\",\"network-id\":0,\"network-overlay\":\"disable\",\"psksecret\":\"fortinet\",\"remote-gw\":\"10.132.0.11\",\"tunnel-search\":\"selectors\",\"type\":\"static\",\"local-addr\":\"HQ_VPN1\"}",
-             "var-list": [
-               {
-                 "name": "vpn ipsec phase1-interface/tunnel-search",
-                 "override": 0
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
                },
-               {
-                 "name": "vpn ipsec phase1-interface/ipv4-netmask",
-                 "override": 0
+               "url": "/pm/template/_ipsec/adom/demo"
+             }
+           ]
+         }        
+
+How to create a new tunnel entry in an IPsec Tunnel Template?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Considering the amount of possible settings that can be used to configure a 
+tunnel entry within an IPsec Tunnel Template, the following process is 
+recommended:
+
+#. Use FortiManager GUI to create an IPsec Tunnel Template and the desired
+   tunnel entry
+  
+#. Get the tunnel entry from the created IPsec Tunnel Template (see section :ref:`How to get the tunnels of an IPsec Tunnel Template?`).
+
+#. Clean the tunnel entry; you need to remove all the possible `seq` or `oid` 
+   attributes
+
+#. Update the tunnel entry with your desired settings
+
+#. Use the following API request to add it in your existing IPsec Tunnel    
+   Template
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. dropdown:: Click to see request
+         :color: primary
+         :icon: chevron-up
+
+         .. code-block:: json
+
+            {
+              "id": 4,
+              "method": "add",
+              "params": [
+                {
+                  "data": {
+                    "action": "conf-ipsec-template",
+                    "dynamic_mapping": null,
+                    "value": {
+                      "automatic-routing": "enable",
+                      "local-addr-type": "dynamic",
+                      "name": "ol_isp4",
+                      "nat": "disable",
+                      "remote-subnet": [
+                        "0.0.0.0/0.0.0.0"
+                      ],
+                      "system interface": {
+                        "ip": "0.0.0.0/0.0.0.0",
+                        "remote-ip": "0.0.0.0/0.0.0.0"
+                      },
+                      "vpn ipsec phase1-interface": {
+                        "acct-verify": "disable",
+                        "add-gw-route": "disable",
+                        "add-route": "enable",
+                        "aggregate-member": "disable",
+                        "authmethod": "psk",
+                        "auto-discovery-crossover": "allow",
+                        "auto-discovery-forwarder": "disable",
+                        "auto-discovery-offer-interval": 5,
+                        "auto-discovery-psk": "disable",
+                        "auto-discovery-receiver": "disable",
+                        "auto-discovery-sender": "disable",
+                        "auto-negotiate": "enable",
+                        "backup-gateway": [],
+                        "childless-ike": "disable",
+                        "client-auto-negotiate": "disable",
+                        "client-keep-alive": "disable",
+                        "comments": null,
+                        "dhgrp": [
+                          "14",
+                          "5"
+                        ],
+                        "distance": 15,
+                        "dpd": "on-demand",
+                        "dpd-retrycount": 3,
+                        "dpd-retryinterval": [
+                          20
+                        ],
+                        "eap-cert-auth": "disable",
+                        "eap-exclude-peergrp": [],
+                        "eap-identity": "use-id-payload",
+                        "ems-sn-check": "disable",
+                        "encap-local-gw4": "0.0.0.0",
+                        "encap-local-gw6": "::",
+                        "encap-remote-gw4": "0.0.0.0",
+                        "encap-remote-gw6": "::",
+                        "encapsulation": "none",
+                        "encapsulation-address": "ike",
+                        "enforce-unique-id": "disable",
+                        "esn": "disable",
+                        "exchange-fgt-device-id": "disable",
+                        "exchange-interface-ip": "disable",
+                        "exchange-ip-addr4": "0.0.0.0",
+                        "exchange-ip-addr6": "::",
+                        "fallback-tcp-threshold": 15,
+                        "fec-egress": "disable",
+                        "fec-health-check": [],
+                        "fec-ingress": "disable",
+                        "fec-mapping-profile": [],
+                        "fgsp-sync": "disable",
+                        "fortinet-esp": "disable",
+                        "fragmentation": "enable",
+                        "fragmentation-mtu": 1200,
+                        "group-authentication": "disable",
+                        "group-authentication-secret": [
+                          "ENC",
+                          "vWtqtv0dyV9YmI2AVPGvHksmmGvaIQ0BPKapHEWAaZTomwBa3+cDcSVGHyGAVY73P5v58A1coRE7YJ6Nr9QKTgXTtPpJnTizVaju7iduNiLI6Ip82yHg6eBd6GiwX79JEmm67CA1GCJxisS/Ab7tJH7O8sn4JQby9FeGK9rxMD3zaC2h/g56sbmC74TRrrUj61HE0Q=="
+                        ],
+                        "ha-sync-esp-seqno": "enable",
+                        "idle-timeout": "disable",
+                        "ike-version": "1",
+                        "inbound-dscp-copy": "disable",
+                        "include-local-lan": "disable",
+                        "interface": [
+                          "port4"
+                        ],
+                        "ip-fragmentation": "post-encapsulation",
+                        "ip-version": "4",
+                        "ipsec-tunnel-slot": "auto",
+                        "ipv4-dns-server1": "0.0.0.0",
+                        "ipv4-dns-server2": "0.0.0.0",
+                        "ipv4-dns-server3": "0.0.0.0",
+                        "ipv4-split-exclude": [],
+                        "ipv4-split-include": [],
+                        "ipv6-dns-server1": "::",
+                        "ipv6-dns-server2": "::",
+                        "ipv6-dns-server3": "::",
+                        "ipv6-split-exclude": [],
+                        "ipv6-split-include": [],
+                        "keepalive": 10,
+                        "keylife": 86400,
+                        "kms": [],
+                        "link-cost": 0,
+                        "local-gw": "0.0.0.0",
+                        "localid": "$(local_id)",
+                        "localid-type": "auto",
+                        "mesh-selector-type": "disable",
+                        "mode": "main",
+                        "mode-cfg": "enable",
+                        "monitor": [],
+                        "monitor-hold-down-delay": 0,
+                        "monitor-hold-down-time": "00:00",
+                        "monitor-hold-down-type": "immediate",
+                        "monitor-min": 0,
+                        "name": "ol_isp4",
+                        "nattraversal": "enable",
+                        "negotiate-timeout": 30,
+                        "net-device": "enable",
+                        "npu-offload": "enable",
+                        "packet-redistribution": "disable",
+                        "passive-mode": "disable",
+                        "peertype": "any",
+                        "ppk": "disable",
+                        "ppk-identity": null,
+                        "ppk-secret": [
+                          "ENC",
+                          "NQ700fmIoUlU5b4CTWn/STfnb0a5+oFLyiWrlV3pVKjtPvDcnHl7hANCiors48fMGnpd8ftwf5iKRisHrySywxQ7+Xulrn3vBrfzotfqVZ0uG2kUQ4e6DYSqI25IH9DqvCWy6R1uc6Wv9BqWCPMYM1ZAomfoMId86EsnphUeu1cvNEcPIiKQajAEkr53/2xWKYxhlg=="
+                        ],
+                        "priority": 1,
+                        "proposal": [
+                          "3des-sha256",
+                          "aes128-sha256",
+                          "aes256-sha256"
+                        ],
+                        "psksecret": [
+                          "ENC",
+                          "g73TtefcuMRNMr7WN/AMtDoAIL9qSml2e0vC82V07B+g17Z4aZSCaomgx5pqFCfidmkFZ+w+wvA+/WD6tyz536owihc6zYbEBxSxdBGsUa44geMD2Be/o/yDmQZJo7R5UrRtWAweS1qpX+hZBKLt/Z/O0Ytbh72RS5VeRrqwqcz7kv+M"
+                        ],
+                        "qkd": "disable",
+                        "qkd-profile": [],
+                        "reauth": "disable",
+                        "rekey": "enable",
+                        "remote-gw": "10.4.0.1",
+                        "rsa-signature-format": "pkcs1",
+                        "rsa-signature-hash-override": "disable",
+                        "save-password": "disable",
+                        "split-include-service": [],
+                        "suite-b": "disable",
+                        "transit-gateway": "disable",
+                        "transport": "udp",
+                        "type": "static",
+                        "vni": 0,
+                        "wizard-type": "custom",
+                        "xauthtype": "disable"
+                      },
+                      "vpn ipsec phase2-interface": [
+                        {
+                          "add-route": "phase1",
+                          "auto-discovery-forwarder": "phase1",
+                          "auto-discovery-sender": "phase1",
+                          "auto-negotiate": "disable",
+                          "comments": null,
+                          "dhcp-ipsec": "disable",
+                          "diffserv": "disable",
+                          "diffservcode": "000000",
+                          "dst-addr-type": "subnet",
+                          "dst-port": 0,
+                          "dst-subnet": [
+                            "0.0.0.0",
+                            "0.0.0.0"
+                          ],
+                          "encapsulation": "tunnel-mode",
+                          "inbound-dscp-copy": "phase1",
+                          "ipv4-df": "disable",
+                          "keepalive": "enable",
+                          "keylife-type": "seconds",
+                          "keylifeseconds": 40000,
+                          "name": "ol_isp4",
+                          "pfs": "enable",
+                          "phase1name": "ol_isp4",
+                          "proposal": [
+                            "aes128-sha256",
+                            "aes256-sha256",
+                            "aes128-sha1",
+                            "aes256-sha1",
+                            "aes128gcm",
+                            "aes256gcm",
+                            "chacha20poly1305"
+                          ],
+                          "protocol": 0,
+                          "replay": "enable",
+                          "route-overlap": "use-new",
+                          "single-source": "disable",
+                          "src-addr-type": "subnet",
+                          "src-port": 0,
+                          "src-subnet": [
+                            "0.0.0.0",
+                            "0.0.0.0"
+                          ]
+                        }
+                      ]
+                    },
+                    "var-list": null
+                  },
+                  "url": "/pm/config/adom/demo/template/_ipsec/ipsec_tunnel_template_001/action-list"
+                }
+              ],
+              "session": "{{session}}"
+            }
+            
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "result": [
+             {
+               "data": {
+                 "seq": 4
                },
-               {
-                 "name": "vpn ipsec phase1-interface/ipv4-end-ip",
-                 "override": 0
+               "status": {
+                 "code": 0,
+                 "message": "OK"
                },
-               {
-                 "name": "vpn ipsec phase1-interface/ipv4-start-ip",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/ike-version",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/assign-ip",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/network-overlay",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/network-id",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/mode-cfg",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/dpd",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/keylife",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/dpd-retryinterval",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/dpd-retrycount",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/idle-timeoutinterval",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/idle-timeout",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/auto-discovery-forwarder",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/auto-discovery-receiver",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/auto-discovery-sender",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/add-route",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/net-device",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/certificate",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/authmethod",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/psksecret",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/remotegw-ddns",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/remote-gw",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/type",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/interface",
-                 "override": 0
-               },
-               {
-                 "name": "vpn ipsec phase1-interface/name",
-                 "override": 0
-               }
-             ]
-           }
-         ],
-         "target start": 2,
-         "url": "/pm/config/adom/LABS/template/ipsec-tunnel-template-001/device/template/widget/ipsec/action-list/"
-       }
-     ],
-     "session": 50370
-   }
+               "url": "/pm/config/adom/demo/template/_ipsec/ipsec_tunnel_template_001/action-list"
+             }
+           ]
+         }
+
+   .. tab-item:: Example with a python script
+
+      .. dropdown:: Click to see the script
+         :color: primary
+         :icon: chevron-up
+
+         .. literalinclude:: scripts/fmg_ipsec_tunnel_template_tunnel_add.py
+            :language: python
 
 How to update an existing tunnel declared in an IPsec Tunnel Interface?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This is not trivial.
-This method works:
+Like for the *add a new tunnel* case (see section :ref:`How to create a new tunnel entry in an IPsec Tunnel Template?`) this is not trivial.
 
-#. Get a specific tunnel declared in an IPsec Tunnel Interface using the
-   ``seq`` value as a master key (see `How to get a specific tunnel of an IPsec
-   Tunnel Template?`_)
-#. Save the returned ``data`` attribute
-#. Perform the changes in the saved data, more specifically somewhere in the
-   ``value`` attribute.
-#. Send back the modified ``value`` attribute using the ``replace`` method.
+The following process is recommended:
 
-Here is a python script illustrating this method:
+#. Get the tunnel you want to modify using :ref:`How to get a specific tunnel 
+   of an IPsec Tunnel Template?`
 
-.. code-block:: python
+#. Clean the tunnel entry; you need to remove all the possible `seq` or `oid` 
+   attributes   
 
-   # coding: utf-8
-   
-   import json
-   
-   from pyFMG import fortimgr
-   
-   ip = "10.210.35.112"
-   username = "devops"
-   password = "fortinet"
-   
-   with fortimgr.FortiManager(
-       ip,
-       username, 
-       password,
-       verbose=True,
-       disable_request_warnings=True,
-   ) as fmg:
-       
-       adom = "adom_72_003"
-       mkey = "branches"
-       url = f"/pm/config/adom/{adom}/template/_ipsec/{mkey}/action-list/1"
-   
-       # Get the tunnels:
-       response = fmg.get(
-           url,
-       )
-   
-       data = response[1]
-   
-       # Changed the data
-   
-       data["value"]["system interface"] = {
-           "vdom": [
-               "root",
+#. Update the tunnel entry with your desired settings
+
+#. Use the following API request to update the IPsec Tunnel Template with your 
+   updated tunnel entry:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. dropdown:: Click to see request
+         :color: primary
+         :icon: chevron-up
+
+         .. code-block:: json
+
+            {
+              "id": 4,
+              "method": "update",
+              "params": [
+                {
+                  "data": {
+                    "action": "conf-ipsec-template",
+                    "dynamic_mapping": null,
+                    "model": null,
+                    "value": {
+                      "automatic-routing": "enable",
+                      "local-addr-type": "dynamic",
+                      "name": "ol_isp4",
+                      "nat": "disable",
+                      "remote-subnet": [
+                        "0.0.0.0/0.0.0.0"
+                      ],
+                      "system interface": {
+                        "ip": "0.0.0.0/0.0.0.0",
+                        "remote-ip": "0.0.0.0/0.0.0.0"
+                      },
+                      "vpn ipsec phase1-interface": {
+                        "acct-verify": "disable",
+                        "add-gw-route": "disable",
+                        "add-route": "enable",
+                        "aggregate-member": "disable",
+                        "authmethod": "psk",
+                        "auto-discovery-crossover": "allow",
+                        "auto-discovery-forwarder": "disable",
+                        "auto-discovery-offer-interval": 5,
+                        "auto-discovery-psk": "disable",
+                        "auto-discovery-receiver": "disable",
+                        "auto-discovery-sender": "disable",
+                        "auto-negotiate": "enable",
+                        "backup-gateway": [],
+                        "childless-ike": "disable",
+                        "client-auto-negotiate": "disable",
+                        "client-keep-alive": "disable",
+                        "comments": null,
+                        "dhgrp": [
+                          "14",
+                          "5"
+                        ],
+                        "distance": 15,
+                        "dpd": "on-demand",
+                        "dpd-retrycount": 3,
+                        "dpd-retryinterval": [
+                          20
+                        ],
+                        "eap-cert-auth": "disable",
+                        "eap-exclude-peergrp": [],
+                        "eap-identity": "use-id-payload",
+                        "ems-sn-check": "disable",
+                        "encap-local-gw4": "0.0.0.0",
+                        "encap-local-gw6": "::",
+                        "encap-remote-gw4": "0.0.0.0",
+                        "encap-remote-gw6": "::",
+                        "encapsulation": "none",
+                        "encapsulation-address": "ike",
+                        "enforce-unique-id": "disable",
+                        "esn": "disable",
+                        "exchange-fgt-device-id": "disable",
+                        "exchange-interface-ip": "disable",
+                        "exchange-ip-addr4": "0.0.0.0",
+                        "exchange-ip-addr6": "::",
+                        "fallback-tcp-threshold": 15,
+                        "fec-egress": "disable",
+                        "fec-health-check": [],
+                        "fec-ingress": "disable",
+                        "fec-mapping-profile": [],
+                        "fgsp-sync": "disable",
+                        "fortinet-esp": "disable",
+                        "fragmentation": "enable",
+                        "fragmentation-mtu": 1200,
+                        "group-authentication": "disable",
+                        "group-authentication-secret": [
+                          "ENC",
+                          "vWtqtv0dyV9YmI2AVPGvHksmmGvaIQ0BPKapHEWAaZTomwBa3+cDcSVGHyGAVY73P5v58A1coRE7YJ6Nr9QKTgXTtPpJnTizVaju7iduNiLI6Ip82yHg6eBd6GiwX79JEmm67CA1GCJxisS/Ab7tJH7O8sn4JQby9FeGK9rxMD3zaC2h/g56sbmC74TRrrUj61HE0Q=="
+                        ],
+                        "ha-sync-esp-seqno": "enable",
+                        "idle-timeout": "disable",
+                        "ike-version": "1",
+                        "inbound-dscp-copy": "disable",
+                        "include-local-lan": "disable",
+                        "interface": [
+                          "port4"
+                        ],
+                        "ip-fragmentation": "post-encapsulation",
+                        "ip-version": "4",
+                        "ipsec-tunnel-slot": "auto",
+                        "ipv4-dns-server1": "0.0.0.0",
+                        "ipv4-dns-server2": "0.0.0.0",
+                        "ipv4-dns-server3": "0.0.0.0",
+                        "ipv4-split-exclude": [],
+                        "ipv4-split-include": [],
+                        "ipv6-dns-server1": "::",
+                        "ipv6-dns-server2": "::",
+                        "ipv6-dns-server3": "::",
+                        "ipv6-split-exclude": [],
+                        "ipv6-split-include": [],
+                        "keepalive": 10,
+                        "keylife": 86400,
+                        "kms": [],
+                        "link-cost": 0,
+                        "local-gw": "0.0.0.0",
+                        "localid": "$(local_id)",
+                        "localid-type": "auto",
+                        "mesh-selector-type": "disable",
+                        "mode": "main",
+                        "mode-cfg": "enable",
+                        "monitor": [],
+                        "monitor-hold-down-delay": 0,
+                        "monitor-hold-down-time": "00:00",
+                        "monitor-hold-down-type": "immediate",
+                        "monitor-min": 0,
+                        "name": "ol_isp4",
+                        "nattraversal": "enable",
+                        "negotiate-timeout": 30,
+                        "net-device": "enable",
+                        "npu-offload": "enable",
+                        "packet-redistribution": "disable",
+                        "passive-mode": "disable",
+                        "peertype": "any",
+                        "ppk": "disable",
+                        "ppk-identity": null,
+                        "ppk-secret": [
+                          "ENC",
+                          "NQ700fmIoUlU5b4CTWn/STfnb0a5+oFLyiWrlV3pVKjtPvDcnHl7hANCiors48fMGnpd8ftwf5iKRisHrySywxQ7+Xulrn3vBrfzotfqVZ0uG2kUQ4e6DYSqI25IH9DqvCWy6R1uc6Wv9BqWCPMYM1ZAomfoMId86EsnphUeu1cvNEcPIiKQajAEkr53/2xWKYxhlg=="
+                        ],
+                        "priority": 1,
+                        "proposal": [
+                          "3des-sha256",
+                          "aes128-sha256",
+                          "aes256-sha256"
+                        ],
+                        "psksecret": [
+                          "ENC",
+                          "TydeKqgUi6no2Uw0823BDtUEKGJ8bveeYnF89AL1UBxKwEtMRPWDZdCqcUZWvT4fb9WxjxE46IVfensAVliIh+4ClKn3ZG0RWgwIFykUzVEj8WJ8wNUNG7XCcWmwAYrRbUK93VmF4EkAUSAPgRtYGCPLPoa/zDTBK3abOg9iB+rZ0Obi"
+                        ],
+                        "qkd": "disable",
+                        "qkd-profile": [],
+                        "reauth": "disable",
+                        "rekey": "enable",
+                        "remote-gw": "10.6.0.1",
+                        "rsa-signature-format": "pkcs1",
+                        "rsa-signature-hash-override": "disable",
+                        "save-password": "disable",
+                        "split-include-service": [],
+                        "suite-b": "disable",
+                        "transit-gateway": "disable",
+                        "transport": "udp",
+                        "type": "static",
+                        "vni": 0,
+                        "wizard-type": "custom",
+                        "xauthtype": "disable"
+                      },
+                      "vpn ipsec phase2-interface": [
+                        {
+                          "add-route": "phase1",
+                          "auto-discovery-forwarder": "phase1",
+                          "auto-discovery-sender": "phase1",
+                          "auto-negotiate": "disable",
+                          "comments": null,
+                          "dhcp-ipsec": "disable",
+                          "diffserv": "disable",
+                          "diffservcode": "000000",
+                          "dst-addr-type": "subnet",
+                          "dst-port": 0,
+                          "dst-subnet": [
+                            "0.0.0.0",
+                            "0.0.0.0"
+                          ],
+                          "encapsulation": "tunnel-mode",
+                          "inbound-dscp-copy": "phase1",
+                          "ipv4-df": "disable",
+                          "keepalive": "enable",
+                          "keylife-type": "seconds",
+                          "keylifeseconds": 40000,
+                          "name": "ol_isp4",
+                          "pfs": "enable",
+                          "phase1name": [
+                            "ol_isp4"
+                          ],
+                          "proposal": [
+                            "aes128-sha256",
+                            "aes256-sha256",
+                            "aes128-sha1",
+                            "aes256-sha1",
+                            "aes128gcm",
+                            "aes256gcm",
+                            "chacha20poly1305"
+                          ],
+                          "protocol": 0,
+                          "replay": "enable",
+                          "route-overlap": "use-new",
+                          "single-source": "disable",
+                          "src-addr-type": "subnet",
+                          "src-port": 0,
+                          "src-subnet": [
+                            "0.0.0.0",
+                            "0.0.0.0"
+                          ]
+                        }
+                      ]
+                    },
+                    "var-list": null
+                  },
+                  "url": "/pm/config/adom/demo/template/_ipsec/ipsec_tunnel_template_001/action-list/4"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "result": [
+             {
+               "data": {
+                 "seq": 4
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/template/_ipsec/ipsec_tunnel_template_001/action-list/4"
+             }
+           ]
+         }
+
+   .. tab-item:: Example with a python script
+
+      .. dropdown:: Click to see the script
+         :color: primary
+         :icon: chevron-up
+
+         .. literalinclude:: scripts/fmg_ipsec_tunnel_template_tunnel_update.py
+            :language: python         
+    
+How to assign devices to an IPsec Tunnel Template?
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to assign the ``dev_001`` managed device and 
+its ``root`` VDOM to the ``ipsec_tunnel_template_001`` IPsec Tunnel Template
+in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "name": "dev_001",
+                 "vdom": "root"
+               },
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
            ],
-           "type": "tunnel",
-           "remote-ip": "0.0.0.0/0.0.0.0",
-           "interface": "wan",
-       }
-   
-       fmg.debug = True
-       fmg.replace(
-           url,
-           data = {
-               "value": data["value"],
-           }
-       )
-   
-       fmg.debug = False  
-   
-The corresponding |fmg_api| output for the ``replace`` operation:
+           "session": "{{session}}"
+         }
 
-**REQUEST:**:
+   .. tab-item:: RESPONSE
 
-.. code-block:: json 
+      .. code-block:: json
 
-   {
-     "id": 4,
-     "method": "replace",
-     "params": [
-       {
-         "data": {
-           "value": {
-             "automatic-routing": "disable",
-             "local-addr-type": "dynamic",
-             "name": "ol_isp1",
-             "nat": "disable",
-             "remote-subnet": [
-               "0.0.0.0/0.0.0.0"
-             ],
-             "..."
-           }
-         },
-         "url": "/pm/config/adom/adom_72_003/template/_ipsec/branches/action-list/1"
-       }
-     ],
-     "session": "tppv2owiM6f7f1orKUU04q0NpZQicbZF2mS/aMG/NtkisFqo5Cshk52+S1LFaig4wcgJidmllA5qn8lNiZ4I3A=="
-   }
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ]
+         }
 
-**RESPONSE:**
+The following example shows how to assign the ``dev_002`` and ``dev_003`` 
+managed devices and their respective ``root`` VDOMs to the 
+``ipsec_tunnel_template_001`` IPsec Tunnel Template in the ``demo`` ADOM:
 
-.. code-block:: json
+.. tab-set::
 
-   {
-     "id": 4,
-     "result": [
-       {
-         "data": {
-           "seq": 1
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/adom_72_003/template/_ipsec/branches/action-list/1"
-       }
-     ]
-   }        
+   .. tab-item:: REQUEST
 
-How to assign a device to IPsec Tunnel Template?
-++++++++++++++++++++++++++++++++++++++++++++++++
+      .. code-block:: json
 
-We assign device ``site_003`` and its VDOM ``root`` to IPsec Tunnel Template
-``branches`` in ADOM ``root``:
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "dev_002",
+                   "vdom": "root"
+                 },
+                 {
+                   "name": "dev_003",
+                   "vdom": "root"
+                 }
+               ],
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-**REQUEST:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": 4,
-     "method": "add",
-     "params": [
-       {
-         "data": [
-           {
-             "name": "site_003",
-             "vdom": "root"
-           }
-         ],
-         "url": "/pm/template/_ipsec/adom/root/branches/scope member"
-       }
-     ],
-     "session": "f3b0/3s0+v5PzAqaR9viS1kH4FoUHOiQhC+XQDg9k2aOzhin/Hpzafc4bqiw1/DRa+U3pWLm94YqYxItBgd0Zbv+n0Tkwb2Q"
-   }
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ]
+         }
 
-**RESPONSE:**
+How to assign device groups to an IPsec Tunnel Template?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. code-block:: json
+The following example shows how to assign the ``dev_grp_001`` device group 
+to the ``ipsec_tunnel_template_001`` IPsec Tunnel Template in the ``demo``
+ADOM:
 
-   {
-     "id": 4,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/template/_ipsec/adom/root/branches/scope member"
-       }
-     ]
-   }
+.. tab-set::
 
-How to assign a device group to IPsec Tunnel Template?
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "is group": 1,
+                 "name": "dev_grp_001"
+               },
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ]
+         }
+
+The following example shows how to assign the ``dev_grp_002`` and 
+``dev_grp_003`` device groups to the ``ipsec_tunnel_template_001``  IPsec
+Tunnel Template in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 {
+                   "is group": 1,
+                   "name": "dev_grp_002"
+                 },
+                 {
+                   "is group": 1,
+                   "name": "dev_grp_003"
+                 }
+               ],
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ]
+         }
+
+How to unassign devices from an IPsec Tunnel Template?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-We assign device group ``branches`` to IPsec Tunnel Template ``branches`` in
-ADOM ``root``:
+The following example shows how to unassign the ``dev_001`` managed device and 
+its ``root`` VDOM from the ``ipsec_tunnel_template_001`` IPsec Tunnel Template
+in the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "add",
-     "params": [
-       {
-         "data": [
-           {
-             "is group": 1,
-             "name": "branches"
-           }
-         ],
-         "url": "/pm/template/_ipsec/adom/root/branches/scope member"
-       }
-     ],
-     "session": "f3b0/3s0+v5PzAqaR9viS1kH4FoUHOiQhC+XQDg9k2aOzhin/Hpzafc4bqiw1/DRa+U3pWLm94YqYxItBgd0Zbv+n0Tkwb2Q"
-   }
+      .. code-block:: json
 
-**RESPONSE:**
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "data": {
+                 "name": "dev_001",
+                 "vdom": "root"
+               },
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ],
+           "session": "{{session}}"
+         }
+         
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/template/_ipsec/adom/root/branches/scope member"
-       }
-     ]
-   }
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ]
+         }        
+
+The following example shows how to unassign the ``dev_002`` and ``dev_003`` 
+managed devices and their respective ``root`` VDOMs from the 
+``ipsec_tunnel_template_001`` IPsec Tunnel Template in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "dev_002",
+                   "vdom": "root"
+                 },
+                 {
+                   "name": "dev_003",
+                   "vdom": "root"
+                 }
+               ],
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ]
+         }
+
+How to unassign device groups from an IPsec Tunnel Template?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to unassign the ``dev_grp_001`` device group 
+from the ``ipsec_tunnel_template_001`` IPsec Tunnel Template in the ``demo``
+ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "data": {
+                 "is group": 1,
+                 "name": "dev_grp_001"
+               },
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ]
+         }
+
+The following example shows how to unassign the ``dev_grp_002`` and 
+``dev_grp_003`` device groups from the ``ipsec_tunnel_template_001``  IPsec
+Tunnel Template in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "data": [
+                 {
+                   "is group": 1,
+                   "name": "dev_grp_002"
+                 },
+                 {
+                   "is group": 1,
+                   "name": "dev_grp_003"
+                 }
+               ],
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001/scope member"
+             }
+           ]
+         }        
 
 How to delete an IPsec Tunnel Template?
 +++++++++++++++++++++++++++++++++++++++
 
-TO BE DOUBLE-CHECKED...
+The following example shows how to delete the ``ipsec_tunnel_template_001`` in ADOM ``demo``:
 
-**REQUEST**:
+.. tab-set::
 
-.. code-block::
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_ipsec/adom/demo/ipsec_tunnel_template_001"
+             }
+           ]
+         }
+
+Static Route Template
+---------------------
+
+How to update/set a static route template?
+++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #0690603.
+   
+**REQUEST:**
+
+.. code-block:: json
 
    {
-     "id": "1845acc8-8f62-4494-814a-9e9428da1b51",
-       "method": "delete",
+     "client":"gui forward:10270",
+     "id": "df8d1f1b-e13f-443d-9afc-c2d38d098dba",
+     "keep_session_idle": 1,
+     "method": "set",
      "params": [
        {
          "data": [
            {
-             "fapmap setting": {
-               "stype": 1,
-               "widgets": [
-                 "ipsec"
-               ]
-             },
-             "name": "ipsec-tunnel-template-001",
-             "oid": 3255,
-             "scope member": [
+             "action": "conf-static-router",
+             "dynamic_mapping": null,
+             "model": "all",
+             "seq": 1,
+             "value": "{\"comment\":\"\",\"device\":\"port5\",\"distance\":10,\"dst\":[\"0.0.0.0\",\"0.0.0.0\"],\"gateway\":\"172.18.26.1\",\"priority\":0,\"seq-num\":0,\"status\":\"enable\",\"weight\":0}",
+             "var-list": [
                {
-                 "name": "labs_dev_001",
-                 "oid": 831,
-                 "vdom": "root",
-                 "vdom_oid": 3
+                 "name": "router static\/bfd",
+                 "override": 0
+               },
+               {
+                 "name": "router static\/link-monitor-exempt",
+                 "override": 0
+               },
+               {
+                 "name": "router static\/internet-service-custom",
+                 "override": 0
+               },
+               {
+                 "name": "router static\/internet-service",
+                 "override": 0
+               },
+               {
+                 "name": "router static\/dstaddr",
+                 "override": 0
+               },
+               {
+                 "name": "router static\/virtual-wan-link",
+                   "override": 0
+               },
+               {
+                   "name": "router static\/dynamic-gateway",
+                   "override": 0
+               },
+               {
+                   "name": "router static\/blackhole",
+                   "override": 0
+               },
+               {
+                   "name": "router static\/comment",
+                   "override": 0
+               },
+               {
+                   "name": "router static\/priority",
+                   "override": 0
+               },
+               {
+                   "name": "router static\/weight",
+                   "override": 0
+               },
+               {
+                   "name": "router static\/distance",
+                   "override": 0
+               },
+               {
+                   "name": "router static\/gateway",
+                   "override": 0
+               },
+               {
+                   "name": "router static\/status",
+                   "override": 0
+               },
+               {
+                   "name": "router static\/dst",
+                   "override": 0
+               },
+               {
+                   "name": "router static\/device",
+                   "override": 0
+               },
+               {
+                   "name": "router static\/seq-num",
+                   "override": 0
                }
-             ],
-             "type": "template"
+             ] 
            }
          ],
          "target start": 2,
-         "url": "/pm/template/adom/LABS/ipsec-tunnel-template-001"
+         "url": "/pm/config/adom/root/template/test1/device/template/widget/router/action-list/"
        }
      ],
-     "session": 50370
+     "session": 6783
    }
-
-   Static Route Template
-   ---------------------
-
-   How to update/set a static route template?
-   ++++++++++++++++++++++++++++++++++++++++++
-
-   Caught in #0690603.
-   
-   **REQUEST:**
-
-   .. code-block:: json
-
-      {
-          "client":"gui forward:10270",
-          "id": "df8d1f1b-e13f-443d-9afc-c2d38d098dba",
-          "keep_session_idle": 1,
-          "method": "set",
-          "params": [
-            {
-                "data":[
-                  {
-                      "action": "conf-static-router",
-                      "dynamic_mapping": null,
-                      "model": "all",
-                      "seq": 1,
-                      "value": "{\"comment\":\"\",\"device\":\"port5\",\"distance\":10,\"dst\":[\"0.0.0.0\",\"0.0.0.0\"],\"gateway\":\"172.18.26.1\",\"priority\":0,\"seq-num\":0,\"status\":\"enable\",\"weight\":0}",
-                      "var-list": [
-                        {
-                            "name": "router static\/bfd",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/link-monitor-exempt",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/internet-service-custom",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/internet-service",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/dstaddr",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/virtual-wan-link",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/dynamic-gateway",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/blackhole",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/comment",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/priority",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/weight",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/distance",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/gateway",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/status",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/dst",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/device",
-                            "override": 0
-                        },
-                        {
-                            "name": "router static\/seq-num",
-                            "override": 0
-                        }
-                      ] 
-                  }
-                ],
-                "target start": 2,
-                "url": "/pm/config/adom/root/template/test1/device/template/widget/router/action-list/"
-           }
-          ],
-          "session": 6783
-      }
-
-Static Route Template
----------------------
 
 How to get Static Route Templates?
 ++++++++++++++++++++++++++++++++++
