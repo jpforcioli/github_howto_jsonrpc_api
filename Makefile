@@ -30,7 +30,7 @@ commit:
 	git push
 
 rtd: 
-	cp -rv *rst Makefile make.bat README.md datas _images _static conf.py images index.rst .readthedocs.yaml requirements.txt ../github_howto_jsonrpc_api/
+	cp -rv *rst scripts Makefile make.bat README.md datas _images _static conf.py images index.rst .readthedocs.yaml requirements.txt ../github_howto_jsonrpc_api/
 
 livehtml:
 	sphinx-autobuild --port=0 --open-browser "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
