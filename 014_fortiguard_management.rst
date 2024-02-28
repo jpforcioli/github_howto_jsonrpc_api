@@ -994,7 +994,7 @@ Caught in #077802 (FortiManager 7.2.2).
 
 Those export/import operations have been implemented to allow an air-gapped FortiManager to receive FortiGuard Updates in an automated manner.
 
-For instance, it could be used in this quite common :bdg-link-primary:`data-diode <https://en.wikipedia.org/?title=Data_diode&redirect=no>` (OT environment) use case:
+For instance, it could be used in this quite common :bdg-link-primary-line:`data-diode <https://en.wikipedia.org/?title=Data_diode&redirect=no>` (OT environment) use case:
 
 .. code-block:: text
 
@@ -1203,7 +1203,7 @@ Object?`):
          This operation will delete all fds 06002000/NIDS02400 objects.
          Do you want to continue? (y/n)
 
-      Enter ``y`` then :bdg-black-line:`ENTER` to confirm the delete 
+      Enter ``y`` then :bdg-primary-line:`ENTER` to confirm the delete 
       operation
 
    #. Check this FortiGuard object does no longer exist using FortiManager CLI

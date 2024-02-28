@@ -197,6 +197,214 @@ You just need to insert the API key:
      POST https://fmg_ip}}/jsonrpc?access_token=33fzwipq4amujunzgzn46mg1to9p8wbi
      [...]
 
+FortiManager Cloud API authentication
++++++++++++++++++++++++++++++++++++++
+
+Before starting reading this section, there are some pre-requisites:
+
+- Make sure you have an *IAM API User* declared in the FortiCloud account *hosting* your FortiManager Cloud instance
+
+  - See :bdg-link-primary-line:`here <https://docs.fortinet.com/document/forticloud/24.1.0/identity-access-management-iam/282341/adding-an-api-user>`
+
+- Make sure you know the URL of your FortiManager Cloud instance
+
+  - You can easily obtain it when you're connected to it via your browser.
+  
+  - Just take the URL visible in your browser, it should be something like:
+
+    .. code-block:: text
+  
+       https://{account_id}.{region}.fortimanager.forticloud.com
+
+    For instance:
+
+    .. code-block:: text
+
+       https://123456.eu-central-1.fortimanager.forticloud.com
+
+To API authenticate your FortiManager Cloud instance, you need to follow this 
+multi steps process:
+
+.. _Get a FortiCloud Token:
+
+#. Get a FortiCloud Token
+
+   - This step is documented :bdg-link-primary-line:`here <https://docs.fortinet.com/document/fortiauthenticator/6.1.2/rest-api-solution-guide/498666/oauth-server-token-oauth-token>`
+
+   - You will need to build the following JSON payload:
+
+     .. code-block:: json
+
+        {
+          "username": "{IAM API user's apiId}",
+          "password": "{IAM API user's password}",
+          "client_id": "FortiManager",
+          "grant_type": "password"
+        }
+
+   - Based on the above example, create a ``forticloud_token.json`` file using 
+     the information from your IAM API user:
+
+     .. code-block:: json
+
+        {
+          "username": "E8766032-7309-409F-902A-REDACTEDD045",
+          "password": "a6455940eefREDACTED4a458dddcb2c2!1Aa",
+          "client_id": "FortiManager",
+          "grant_type": "password"
+        }
+
+   - To get the FortiCloud Token using the ``curl`` command:
+
+     .. code-block:: shell
+
+        curl -s -k -X POST -H "Content-Type: application/json" \
+          https://customerapiauth.fortinet.com/api/v1/oauth/token/ \
+          -d @forticloud_token.json | jq
+
+     .. note::
+
+        - The ``jq`` command will produce a pretty JSON output
+
+     You should obtain the following output:
+
+     .. code-block:: json
+
+        {
+            "access_token": "srgkxUG9SqqREDACTEDK5qG27tqktk",
+            "expires_in": 3600,
+            "message": "successfully authenticated",
+            "refresh_token": "jie6v6qV62REDACTEDwmL6GEcmZgst",
+            "scope": "read write",
+            "status": "success",
+            "token_type": "Bearer"
+        }
+
+   - Your FortiCloud Token is the value in the ``access_token`` attribute
+
+.. _Obtain a FortiManager API session ID:
+
+#. Obtain a FortiManager API session ID
+
+   - Like with an on-prem FortiManager instance, you need to obtain a 
+     FortiManager API session ID. 
+     
+   - You will follow a slightly modifed Session-based authentication (see 
+     :ref:`Session based authentication`) process described in next step
+
+     .. note::
+
+        FortiManager Cloud doesn't support Token-based authentication (see 
+        :ref:`Token-based authentication`)
+    
+   - The FortiManager Cloud API base URL to be used is also slightly different 
+     than with a normal FortiManager instance. It has the following form:
+
+     .. code-block:: text
+      
+        https://{account_id}.{region}.fortimanager.forticloud.com/p/forticloud_jsonrpc_login/
+
+     For instance:
+
+     .. code-block:: text
+      
+        https://123456.eu-central-1.fortimanager.forticloud.com/p/forticloud_jsonrpc_login/
+
+   - The JSON payload to be used is also different than the usual JSON RPC one 
+     used when login in a normal FortiManager instance:
+
+     - It has the following format:
+
+       .. code-block:: json
+
+          {
+            "access_token": "{access_token}"
+          }
+
+       where ``access_token`` is the FortiCloud Token obtained in previous step 
+       `Get a FortiCloud Token`_
+
+   - Create the `fmg_cloud_login.json` JSON file with following content:
+
+     .. code-block:: json
+
+        {
+          "access_token": "srgkxUG9SqqREDACTEDK5qG27tqktk"
+        }
+
+   - You can now obtain your FortiManager API session ID using the following 
+     ``curl`` command
+
+     .. code-block:: shell
+      
+        curl -s -k -X POST -H "Content-Type: application/json" \
+          https://123456.eu-central-1.fortimanager.forticloud.com/p/forticloud_jsonrpc_login/ \
+          -d @fmg_cloud_login.json --https1.1 | jq
+
+     .. note::
+
+        - Why using ``--https1.1``? Because of #0893680.
+        - The ``jq`` command will produce a pretty JSON output
+
+     You should obtain the following output:
+
+     .. code-block:: json
+
+        {
+          "session": "/cl0oZgKn3trxIIkRJEqV09+0pqk8TwfOVz2x9wB0Vjk5Bgs+ADpIo1aREDACTEDF23qAjP+LaZg6iM19ia85w=="
+        }
+
+#. API the FortiManager Cloud!
+ 
+   - You can now API the FortiManager Cloud using the normal base URL and JSON 
+     payload
+
+   - The base URL form is like:
+
+     .. code-block:: text
+
+        https://{account_id}.{region}.fortimanager.forticloud.com/jsonrpc
+
+     For instance:
+
+     .. code-block:: text
+
+        https://123456.eu-central-1.fortimanager.forticloud.com/jsonrpc      
+
+
+   - The JSON payload is the normal JSON RPC payload
+
+     .. code-block:: json
+
+        {
+            "id": 3,
+            "method": "get",
+            "params": [
+              {
+                "url": "/cli/global/system/status"
+              }
+            ],
+            "session": "{{session}}"
+        }
+
+     where ``session`` is the FortiManager API session ID obtained in        
+     `Obtain a FortiManager API session ID`_
+
+     For instance:
+
+     .. code-block:: json
+
+        {
+            "id": 3,
+            "method": "get",
+            "params": [
+              {
+                "url": "/cli/global/system/status"
+              }
+            ],
+            "session": "/cl0oZgKn3trxIIkRJEqV09+0pqk8TwfOVz2x9wB0Vjk5Bgs+ADpIo1aREDACTEDF23qAjP+LaZg6iM19ia85w=="
+        }
+
 Logout from FortiManager
 ------------------------
 
