@@ -5380,48 +5380,49 @@ Once the task is completed, you can proceed with step 2.
    Here FortiManager will report pending changes coming from corresponding
    device's Device DB. If we want to get all pending changes (ie. the ones from
    the device's Device DB along with the ones in the ADOM DB like the objects &
-   policies) we need to trigger a policy package install preview (See XXX).
+   policies) we need to trigger a policy package install preview (See :ref:`How 
+   to trigger an install preview?`).
 
-**REQUEST:**
+   .. tab-set::
 
-.. code-block:: json
+      .. tab-item:: REQUEST
 
-                {
-                  "id": 1,
-                  "jsonrpc": "1.0",
-                  "method": "exec",
-                  "params": [
-                    {                
-                      "data": {
-                        "adom": "customer_001",
-                        "device": "dut_fgt2"
-                      },
-                      "url": "/securityconsole/preview/result"
-                    }
-                  ],
-                  "session": "F2CA7K6wHYbQngcYWruI1xrAPBMWWdK2V9BgQ1F4eGPyfhscBuFtSLs+wVxNF5Rnbg4B2D37KpJ3mEXVhfn3+A==",
-                  "verbose": 1
+         .. code-block:: json
+
+            {
+              "id": 1,
+              "method": "exec",
+              "params": [
+                {                
+                  "data": {
+                    "adom": "customer_001",
+                    "device": "dut_fgt2"
+                  },
+                  "url": "/securityconsole/preview/result"
                 }
+              ],
+              "session": "{{session}}"
+            }
 
-**RESPONSE:**
+      .. tab-item:: RESPONSE
 
-.. code-block:: json
+         .. code-block:: json            
 
+            {
+              "id": 1,
+              "result": [
                 {
-                  "id": 1,
-                  "result": [
-                    {
-                      "data": {
-                        "message": "config system dhcp server\n    edit 1\n        set status disable\n        set dns-service default\n        set ntp-service default\n        set default-gateway 172.16.2.102\n        set netmask 255.255.255.0\n        set interface \"port3\"\n        config ip-range\n            edit 1\n                set start-ip 172.16.2.1\n                set end-ip 172.16.2.101\n            next\n            edit 2\n                set start-ip 172.16.2.103\n                set end-ip 172.16.2.254\n            next\n        end\n        set timezone-option default\n    next\nend\n"
-                      },
-                      "status": {
-                        "code": 0,
-                        "message": "OK"
-                      },
-                      "url": "/securityconsole/preview/result"
-                    }
-                  ]
+                  "data": {
+                    "message": "config system dhcp server\n    edit 1\n        set status disable\n        set dns-service default\n        set ntp-service default\n        set default-gateway 172.16.2.102\n        set netmask 255.255.255.0\n        set interface \"port3\"\n        config ip-range\n            edit 1\n                set start-ip 172.16.2.1\n                set end-ip 172.16.2.101\n            next\n            edit 2\n                set start-ip 172.16.2.103\n                set end-ip 172.16.2.254\n            next\n        end\n        set timezone-option default\n    next\nend\n"
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/securityconsole/preview/result"
                 }
+              ]
+            }
 
 How to get the platform_id, the platform_name and the ostype from a Serial Number?
 ----------------------------------------------------------------------------------
