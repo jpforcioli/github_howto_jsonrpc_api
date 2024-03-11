@@ -777,25 +777,102 @@ serial number ``FGVMULTM21001111``.
 
 
 
+How to get unauthorized devices?
+--------------------------------
 
+An unauthorized or unregistered device is a device which managed to acquire its FortiManager details which started its FGFM tunnel.
+
+However, on the FortiManager side, such device has been accepted but not yet authorized; it has been moved in the ``root`` ADOM and placed in the special *Unauthorized Devices*  device group.
+
+.. note::
+
+   - the *Unauthorized Devices* device group is only visible when there are
+     unauthorized devices
+
+The following example shows how to get the list of unregistered or unauthorized devices:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "mgmt_mode"
+               ],
+               "filter": [
+                 "mgmt_mode",
+                 "==",
+                 "unreg"
+               ],
+               "loadsub": 0,
+               "url": "/dvmdb/device"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }        
+
+      .. note::
+
+         - As you can see, to get the unauthorized devices, you have to 
+           ``filter`` based on the ``mgmt_mode`` attribute and the ``unreg`` (i.
+           e., *unregistered*) value
+         
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+        {
+          "id": 3,
+          "result": [
+            {
+              "data": [
+                {
+                  "mgmt_mode": "unreg",
+                  "name": "dev_001",
+                  "oid": 34749
+                }
+              ],
+              "status": {
+                "code": 0,
+                "message": "OK"
+              },
+              "url": "/dvmdb/device"
+            }
+          ]
+        }
+
+      .. note::
+
+         - That response shows there's a single unauthorized device named 
+           ``dev_001``
 
 How to promote/authorize a real device?
 ---------------------------------------
 
-``authorize`` is a new wording introduced with recent FMG version. 
+.. note::
 
-With older FMG versions, the ADOM ``root``'s left tree for not yet managed
-devices was named *Unregistered Devices* and the right-click action was
-*Promote*. 
+   - ``authorize`` is a new wording introduced with recent FMG versions
 
-Now left tree name is *Unauthorized Devices*, hence the new *Authorize*
-right-click action.. 
+   - With older FMG versions, the ADOM ``root``'s left tree for not yet managed
+     devices was named *Unregistered Devices* and the right-click action was
+     *Promote*
 
-*Promote* could be consider the same as *Authorize*!
+   - Now left tree name is *Unauthorized Devices*, hence the new *Authorize*
+     right-click action
 
-The main FMG JSPC URL is:
+   - *Promote* could be consider the same as *Authorize*!
 
-.. code-block::
+The main FMG JSON RPC URL is:
+
+.. code-block:: text
   
    /dvm/cmd/add/device
 
@@ -805,129 +882,138 @@ This URL can be used to:
 2. Add a real device (but not yet connected to FMG)
 3. Promote/Authorize a real device (already connected to FMG)
 
-We're now able to *Authorize* one of our pending device using the following
-request:
+You're now able to *Authorize* one of your unauthorized device using the following request.
 
-**REQUEST:**
+It shows how to on-board the ``dev_001`` unauthorized device in the ``demo`` 
+ADOM:
 
-.. code-block:: json
+.. tab-set::
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "adom": "demo",
-           "device": {
-             "adm_pass": "fortinet",
-             "adm_usr": "admin",
-             "device action": "promote_unreg",
-             "name": "fgt_dut1"
-           },
-           "flags": [
-             "create_task"
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "device": {
+                   "adm_pass": "fortinet",
+                   "adm_usr": "admin",
+                   "device action": "promote_unreg",
+                   "name": "dev_001"
+                 },
+                 "flags": [
+                   "create_task"
+                 ]
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+      
+         - ``name`` has to be the device name as show in the GUI (not the 
+           hostname, the device name)
+
+         - ``adm_usr``/ ``adm_pass`` has to be similar to what's is currently 
+           set on your real device
+
+           If device is from factory default configuration (and it retrieved 
+           its FMG IP via some external mechanisms like FortiDeploy/ortiCloud), 
+           it is ``admin`` and no password respectively. 
+
+           If you already set a password to the admin's account, then you have 
+           to reflect this password here.
+
+           If the authorize process gets stuck at 20% it's probably due to an
+           authentication error.
+
+         - ``device action`` is quite meaningful
+
+         - It's always a good practise to create a task; in any cases, the 
+           operation will return only when the device authorization will be 
+           completed 
+
+
+   .. tab-item:: REQUEST
+     
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "device": {
+                   "adm_pass": "fortinet",
+                   "adm_usr": "admin",
+                   "av_ver": "89.01100(2021-09-14 12:26)",
+                   "beta": -1,
+                   "branch_pt": 157,
+                   "build": 157,
+                   "conf_status": 2,
+                   "conn_mode": 1,
+                   "conn_status": 1,
+                   "dev_status": 0,
+                   "faz.perm": 15,
+                   "flags": 2163073,
+                   "hostname": "fgt_dut1",
+                   "ip": "10.210.35.101",
+                   "ips_ver": "6.00741(2015-12-01 02:30)",
+                   "last_checked": 1631652502,
+                   "maxvdom": 1,
+                   "mgmt_id": 810637395,
+                   "mgmt_if": "port1",
+                   "mgmt_mode": 3,
+                   "mr": 0,
+                   "name": "dev_001",
+                   "oid": 1638,
+                   "os_type": 0,
+                   "os_ver": 7,
+                   "patch": 1,
+                   "platform_id": 133,
+                   "platform_str": "FortiGate-VM64-KVM",
+                   "sn": "FGVMSLREDACTED54",
+                   "source": 1,
+                   "tab_status": "<unknown>",
+                   "tunnel_ip": "169.254.0.2",
+                   "vdom": [
+                     {
+                       "devid": 1638,
+                       "ext_flags": 1,
+                       "name": "root",
+                       "oid": 3,
+                       "opmode": 1,
+                       "status": "<unknown>",
+                       "tab_status": "<unknown>"
+                     }
+                   ],
+                   "version": 700,
+                   "vm.lic_type": 17,
+                   "vm_cpu": 4,
+                   "vm_cpu_limit": 32767,
+                   "vm_lic_expire": 0,
+                   "vm_mem": 3962,
+                   "vm_mem_limit": 2147483647,
+                   "vm_status": 3
+                 },
+                 "taskid": 3315
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvm/cmd/add/device"
+             }
            ]
-         },
-         "url": "/dvm/cmd/add/device"
-       }
-     ],
-     "session": "P1qg3kcL9wFA67+yQU5pCqopcRM8TjxYjnaSbbLnq7iLJ93CWxg2SbrwdRTDeax5lTYO5u/DxH0t9SjvgSyaL4gTi0Zv6kDG",
-     "verbose": 1
-   }
-
-.. note::
-
-   - ``name`` has to be the device name as show in the GUI (not the hostname,
-     the device name) 
-   - ``adm_usr``/``adm_pass``` has to be similar to what's is currently set on
-     our real device
-     If device is from factory default connfiguration (and it retrieved its FMG
-     IP via some external mechanisms like FortiDeploy/FortiCloud), it bis
-     ``admin`` and no password respectively. 
-     If you already set a password to the admin's account, then we have to
-     reflect this password here.
-     If the authorize process gets stuck at 20% it's probably due to an
-     authentication error.
-   - ``device action`` is quite meaningful
-   - It's always a good practise to create a task; in any cases, the operation
-     will be bloquant; it will return only when the device authorization will
-     be completed 
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "device": {
-             "adm_pass": "fortinet",
-             "adm_usr": "admin",
-             "av_ver": "89.01100(2021-09-14 12:26)",
-             "beta": -1,
-             "branch_pt": 157,
-             "build": 157,
-             "conf_status": 2,
-             "conn_mode": 1,
-             "conn_status": 1,
-             "dev_status": 0,
-             "faz.perm": 15,
-             "flags": 2163073,
-             "hostname": "fgt_dut1",
-             "ip": "10.210.35.101",
-             "ips_ver": "6.00741(2015-12-01 02:30)",
-             "last_checked": 1631652502,
-             "maxvdom": 1,
-             "mgmt_id": 810637395,
-             "mgmt_if": "port1",
-             "mgmt_mode": 3,
-             "mr": 0,
-             "name": "fgt_dut1",
-             "oid": 1638,
-             "os_type": 0,
-             "os_ver": 7,
-             "patch": 1,
-             "platform_id": 133,
-             "platform_str": "FortiGate-VM64-KVM",
-             "sn": "FGVMSLREDACTED54",
-             "source": 1,
-             "tab_status": "<unknown>",
-             "tunnel_ip": "169.254.0.2",
-             "vdom": [
-               {
-                 "devid": 1638,
-                 "ext_flags": 1,
-                 "name": "root",
-                 "oid": 3,
-                 "opmode": 1,
-                 "status": "<unknown>",
-                 "tab_status": "<unknown>"
-               }
-             ],
-             "version": 700,
-             "vm.lic_type": 17,
-             "vm_cpu": 4,
-             "vm_cpu_limit": 32767,
-             "vm_lic_expire": 0,
-             "vm_mem": 3962,
-             "vm_mem_limit": 2147483647,
-             "vm_status": 3
-           },
-           "taskid": 3315
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvm/cmd/add/device"
-       }
-     ]
-   }
-
+         }
+      
 Model Device
 ------------
 
