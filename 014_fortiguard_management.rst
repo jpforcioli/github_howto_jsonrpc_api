@@ -460,7 +460,7 @@ You can also get the firmware images for the following procuct:
      - ``FPX``
 
 If you omit both the ``platform`` and the ``product`` attributes, then you 
-will the firmware images list for all platforms/products!
+will get the firmware images list for all platforms/products!
 
 .. note::
 
