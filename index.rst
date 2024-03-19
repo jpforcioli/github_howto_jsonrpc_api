@@ -35,6 +35,7 @@ How To FortiManager API?
    021_sub_fetch
    022_fmg_cloud
    023_meta_fields
+   024_csf
    050_contributors
    
 Indices and tables
