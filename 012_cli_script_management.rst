@@ -1,5 +1,5 @@
-Script management
-=================
+CLI Script management
+=====================
 
 A FortiManager CLI script could be defined with different targets:
 
@@ -15,9 +15,10 @@ A FortiManager CLI script could be defined with different targets:
 
 CLI script execution triggers a task.
 
-It is best practise to end for the task completion before ending the FMG JSON
-RPC API session. Especially when the target is ``remote_device``; the task
-takes longer to complete and it requires a valid FMG JSON RPC API session.
+It is best practise to wait for the task completion before ending the FMG JSON
+RPC API session. 
+
+Especially when the target is ``remote_device``; the task takes longer to complete and it requires a valid FMG JSON RPC API session.
 
 All script execution outputs are saved by FortiManager using a log ID. The log
 ID is generated using the following logic:
@@ -40,301 +41,300 @@ ID is generated using the following logic:
    For instance, if created task is ``123`` then corresponding log ID will be
    ``1230``.	  
 
-How to add a script?
---------------------
+How to add a CLI Script?
+------------------------
 
-We add script ``overlays.site_7`` into adom ``demo``. This script target adom db
-content.
+The following example shows how to add the ``script_001`` CLI Script into the ``demo`` ADOM; this CLI script targets Policy Package or ADOM database content:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block::
+      .. code-block::
+      
+         {
+           "id": 1,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "content": "<your content>",
+             	   "desc": "Script to add site_7 to the overlays",
+                 "name": "overlays.site_7",
+                 "target": "adom_database",
+                 "type": "cli"
+               },
+               "url": "/dvmdb/adom/demo/script"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "content": "<your content>",
-     	   "desc": "Script to add site_7 to the overlays",
-           "name": "overlays.site_7",
-           "target": "adom_database",
-           "type": "cli"
-         },
-         "url": "/dvmdb/adom/demo/script"
-       }
-     ],
-     "session": "M9hhF11FuiehMbImEjrhv6jEC9Rq6Mwr145bzby1f3zPRhJdYaiSU0nFfs15hW/NSJTmyacjkRZY0g/FKSPV3A==",
-     "verbose": 1
-   }
+      .. code-block::
 
-**RESPONSE:**
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "name": "script_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/script"
+             }
+           ]
+         }
+      
+How to run a CLI Script against a Policy Package?
+-------------------------------------------------
 
-.. code-block::
+The following example shows how to run the ``script_001`` CLI Script against the ``pkg_001`` Policy Package in the ``demo`` ADOM:
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "name": "overlays.site_7"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/adom/fastweb/script"
-       }
-     ]
-   }
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-How to run a script against a Policy Package?
----------------------------------------------
+      .. code-block:: json
+      
+         {
+      	   "id": 1,
+           "method": "exec",
+      		 "params": [
+      		   {
+      		     "data": {
+      		       "adom": "demo",
+      			     "package": "pkg_001",
+      			     "script": "script_001"
+      		     },
+      		     "url": "/dvmdb/adom/demo/script/execute"
+      		   }
+      		 ],
+      		 "session": "{{session}}"
+      		}
 
-Below is the request to run script ``script-002`` against policy
-package ``default`` in ADOM ``DEMO``:
+   .. tab-item:: RESPONSE
 
-**REQUEST:**
+      .. code-block:: json
 
-.. code-block:: json
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "task": 452
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/script/execute"
+             }
+           ]
+         }
 
-		{
-		  "id": 1,
-		  "jsonrpc": "1.0",
-		  "method": "exec",
-		  "params": [
-		    {
-		      "data": {
-		        "adom": "DEMO",
-			"package": "default",
-			"script": "script-002"
-		      },
-		      "url": "/dvmdb/adom/DEMO/script/execute"
-		    }
-		  ],
-		  "session": "tWy6iKRmT+C2obiyVpAz6c0tSel3RnNroUhqIeko0SLQD0lz1dSJ5iB0XbW4DcTb/w/bFkt6XuLLSz5AkyA9UA==",
-		  "verbose": 1
-		}
+How to run a CLI Script against a device?
+-----------------------------------------
 
-**RESPONSE:**
+The following example shows how to run the ``script_001`` CLI Script against 
+the ``dev_001`` device in the ``demo`` ADOM:
 
-.. code-block:: json
+.. tab-set::
 
-		{
-		  "id": 1,
-		  "result": [
-		    {
-		      "data": {
-		        "task": 452
-		      },
-		      "status": {
-		        "code": 0,
-			"message": "OK"
-		      },
-		      "url": "/dvmdb/adom/DEMO/script/execute"
-		    }
-		  ]
-		}
+   .. tab-item:: REQUEST
 
-How to run a script against a device/vdom?
-------------------------------------------
+      .. code-block:: json
+         
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "global"
+                   }
+                 ],
+                 "script": "script_001"
+               },
+               "url": "/dvmdb/adom/demo/script/execute"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+      .. note:: 
+      
+         - A CLI Script cannot be run against a VDOM scope; this is why we set 
+           the ``vdom`` attribute to ``global``
+         - But why don't you simply omit the ``vdom`` attribute in this case?
+         - Because when you don't specify the ``vdom`` attribute, FortiManager 
+           considers that you're targeting a Device Group
+  
+   .. tab-item:: RESPONSE
 
-**REQUEST:**
+      .. code-block:: json    
 
-.. code-block:: json
+      	 {
+      	   "id": 1,
+      	   "result": [
+      	     {
+      	       "data": {
+      	         "task": 457
+      	       },
+      	       "status": {
+      	         "code": 0,
+      	         "message": "OK"
+      	       },
+      	       "url": "/dvmdb/adom/demo/script/execute"
+      	     }
+      	   ]
+      	 }
+      
+      .. warning:: 
+      
+         - If your CLI Script is with the *Remote FortiGate Directly (via CLI)*
+           target and if you're getting a sucessful API response (as shown 
+           above with the returned task ID), but the task itself fails with an 
+           error message like *Error while reading script from database*, then 
+           please make sure you maintain the API session open during the CLI 
+           script execution (just follow the task progress using a ``get`` on 
+           ``/task/task/{task_id}``)
+      
+You can run a CLI script against multiple devices using a single API call.
 
-		{
-		  "id": 1,
-		  "jsonrpc": "1.0",
-		  "method": "exec",
-		  "params": [
-		    {
-		      "data": {
-		        "adom": "DEMO",
-			"scope": [
-			  {
-			    "name": "peer11",
-			    "vdom": "global"
-			  }
-			],
-			"script": "script-003"
-		      },
-		      "url": "/dvmdb/adom/DEMO/script/execute"
-		    }
-		  ],
-		  "session": "YaFeM8Wmxq0utrb31MuYjdLi+wKYSxs0urm0YmDgjMhCehyWiHI2HMk7jzm4E48WgNJ1iV7lS4Yj3MyWbnfv8Q==",
-		  "verbose": 1
-		}
+The following example shows how to run the ``script_001`` CLI Script against the ``dev_001`` and ``dev_002`` devices in the ``demo`` ADOM:
 
-.. note:: 
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-   - A CLI Script cannot be run against in VDOM scope; this is why we set the
-     ``vdom`` attribute to ``global``.
-   - For instance, if you run a CLI script against each member of a Model HA
-     cluster, using ``root`` VDOM will work for the primary member, but will
-     fail for the secondary members (which is weird; it should fail for all
-     members). This is why we recommend to always use ``global``.
-    
-**RESPONSE:**
+      .. code-block:: json
+      
+      	 {
+      	   "id": 1,
+      		  "method": "exec",
+      		  "params": [
+      		    {
+      		      "data": {
+      		        "adom": "demo",
+            			"scope": [
+            			  {
+      			          "name": "dev_001",
+            			    "vdom": "global"
+            			  },
+      			        {
+      			          "name": "dev_002",
+            			    "vdom": "global"
+             			  }
+            			],
+            			"script": "script_001"
+      		      },
+      		      "url": "/dvmdb/adom/demo/script/execute"
+      		    }
+      		  ],
+      		  "session": "{{session}}"
+      		}
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-		{
-		  "id": 1,
-		  "result": [
-		    {
-		      "data": {
-		        "task": 457
-		      },
-		      "status": {
-		        "code": 0,
-			"message": "OK"
-		      },
-		      "url": "/dvmdb/adom/DEMO/script/execute"
-		    }
-		  ]
-		}
+      .. code-block:: json
 
-.. warning:: 
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "task": 458
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/script/execute"
+             }
+           ]
+         }
 
-   - If your CLI Script is with target *Remote FortiGate Directly (via CLI)* and
-     ...
-   - If you're getting a sucessful API response (as shown above with the
-     returned task ID), but the task itself fails with an error message like
-     *Error while reading script from database*, then please make sure you
-     maintain the API session open during the CLI script execution (just follow
-     the task progress using a ``get``  on ``/task/task/{task_id}``)
+You can run a CLI Script against one or multiple Device Groups.
 
-We can run the script on multiple devices:
+By convention, if a ``scope`` entry only contains a ``name`` and no ``vdom`` attribute, then the ``name`` is considered as a Device Group name.
 
-**REQUEST:**
+The following example shows how to run the ``script_001`` against the ``dev_grp_001`` and ``dev_grp_002`` in the ``demo`` ADOM:
 
-.. code-block:: json
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-		{
-		  "id": 1,
-		  "jsonrpc": "1.0",
-		  "method": "exec",
-		  "params": [
-		    {
-		      "data": {
-		        "adom": "DEMO",
-			"scope": [
-			  {
-			    "name": "peer11",
-			    "vdom": "global"
-			  },
-			  {
-			    "name": "peer12",
-			    "vdom": "global"
-			  }
-			],
-			"script": "script-003"
-		      },
-		      "url": "/dvmdb/adom/DEMO/script/execute"
-		    }
-		  ],
-		  "session": "GvcXK7JTnPnXAJZQT+nTk1GEkAv3VR55rJiSxob0IwaQYIIN/FkiHLeLtjjrcHghoQOtlQbkDcL7U/pU9eYwSg==",
-		  "verbose": 1
-		}
+      .. code-block:: json
 
-**RESPONSE:**
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "scope": [
+                   {
+                     "name": "dev_grp_001"
+                   },
+                   {
+                     "name": "dev_grp_002"
+                   }
+                 ],
+                 "script": "script_001"
+               },
+               "url": "/dvmdb/adom/demo/script/execute"
+             }
+           ],
+           "session": "{{session}}"
+         }      
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-		{
-		  "id": 1,
-		  "result": [
-		    {
-		      "data": {
-		        "task": 458
-		      },
-		      "status": {
-		        "code": 0,
-			"message": "OK"
-		      },
-		      "url": "/dvmdb/adom/DEMO/script/execute"
-		    }
-		  ]
-		}
+      .. code-block:: json      
 
-How to run a script against one or multiple device group(s)?
-------------------------------------------------------------
+         {
+           "id": 1,
+           "result": [
+             {
+      	       "data": {
+        		     "task": 459
+         		   },
+               "status": {
+         	  	   "code": 0,
+      	         "message": "OK"
+      		     },
+      		     "url": "/dvmdb/adom/DEMO/script/execute"
+         	   }
+        	 ]
+         }
+      
+How to run a CLI Script against a Provisioning Template?
+--------------------------------------------------------
 
-By convention, if the ``scope`` entry only contains a ``name``, then
-it is considered a device group.
+You can run a CLI Script against Provisioning Template.
 
-In the below example, we're running script ``script-003`` against two
-device groups ``apac`` and ``amer``.
+This operation is only feasible via the API.
 
-**REQUEST:**
+For instance, you can run a CLI Script against a System Template or a FortiSwitch Template.
 
-.. code-block:: json
-
-		{
-		  "id": 1,
-		  "jsonrpc": "1.0",
-		  "method": "exec",
-		  "params": [
-		    {
-		      "data": {
-		        "adom": "DEMO",
-			"scope": [
-			  {
-			    "name": "apac"
-			  },
-			  {
-			    "name": "amer"
-			  }
-			],
-			"script": "script-003"
-		      },
-		      "url": "/dvmdb/adom/DEMO/script/execute"
-		    }
-		  ],
-		  "session": "PX+BnOklcNAuIwWhF4wc0BLMUr9OQXiHPI46ZHCJzXkrrlSwV5GfxhDJIl6rwPjfVU+NqsDTRg7s1EbQFRgYzA==",
-		  "verbose": 1
-		}
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-	     "data": {
-		   "task": 459
-		 },
-         "status": {
-		   "code": 0,
-	       "message": "OK"
-		 },
-		 "url": "/dvmdb/adom/DEMO/script/execute"
-	   }
-	 ]
-   }
-
-How to run a script against a FortiManager template?
-----------------------------------------------------
-
-For instance a system template, a fortiswitch template, etc.?
+How to run a CLI script against a SD-WAN Template?
+++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Caught in #0209576.
 
-Run a script against a SD-WAN template
-++++++++++++++++++++++++++++++++++++++
+#. Create a CLI Script (target = *Policy & Objects or ADOM Database*)
 
-.. note:: 
-  
-   - Caught in #0209576.
-
-#. Create a CLI Script (target = ADOM Database)
-
-   In this example, I created a script named ``script_001`` with below content: 
+   This is the CLI Script used in this example:
 
    .. code-block:: text
 
@@ -354,44 +354,31 @@ Run a script against a SD-WAN template
           end
       end
 
-#. Find the SD-WAN Template oid
+#. Find the *oid* of the destination SD-WAN Template
 
-   It will be used as the target of the CLI Script execution
+   It will be used as the target of the CLI Script execution.
 
-   .. code-block:: text
-      :emphasize-lines: 8,24
+   Following example shows how to get the *oid* of the ``sdwan_template_001`` 
+   SD-WAN Template in the ``demo`` ADOM:
 
-      # execute fmpolicy print-adom-package dc_amiens ?
-      <policy package/template name>
-      1	Policy Packages
-      5	System Templates
-      8	FortiClient Templates
-      9	Threat Weight Templates
-      10	WTP Packages
-      11	SD-WAN Templates
-      12	FortiSwitch Packages
-      14	FortiExtender Packages
-      18	Firmware Templates
-      20	Template Groups
-      22	All Non-policy Packages
-      23	IPsec Tunnel Templates
-      24	Static Route Templates
-      26	SD-WAN Overlay Templates
-      27	IPS Templates
-      1262	BGP Templates
-      
-      
-      
-      # execute fmpolicy print-adom-package dc_amiens 11 ?
-            ID	<package name>
-          5168	name=test_001, pathname=test_001
+   - Enter following FortiManager CLI command:
+
+     .. code-block:: text
+
+        execute fmpolicy print-adom-package demo 11 ?
+
+   - You should get the following output:
+
+     .. code-block:: text
+
+          ID	<package name>
+        5168	name=sdwan_template_001, pathname=sdwan_template_001
 
    .. note::
 
-      - The ``test_001`` SD-WAN Template is in the ``dc_amiens`` ADOM
-      - The ``test_001`` SD-WAN Template oid is ``5168``
+      - The *oid* of the ``sdwan_template_001`` SD-WAN Template is ``5168``
 
-#. Put the ADOM name, package oid (SD-WAN Template oid) and script name into
+#. Put the ADOM name, package oid (SD-WAN Template oid) and CLI script name into
    your |fmg_api| request:
 
    .. tab-set::
@@ -410,7 +397,7 @@ Run a script against a SD-WAN template
                     "package": 5168,
                     "script": "script_001"
                   },
-                  "url": "/dvmdb/adom/dc_amiens/script/execute"
+                  "url": "/dvmdb/adom/demo/script/execute"
                 }
               ],
               "session": "{{session}}"
@@ -431,7 +418,7 @@ Run a script against a SD-WAN template
                     "code": 0,
                     "message": "OK"
                   },
-                  "url": "/dvmdb/adom/dc_amiens/script/execute"
+                  "url": "/dvmdb/adom/demo/script/execute"
                 }
               ]
             }
@@ -465,12 +452,12 @@ Run a script against a SD-WAN template
       
       ----------------End of Log-------------------------
 
-Run a script against a System Template
-++++++++++++++++++++++++++++++++++++++
+How to run a CLI Script against a System Template?
+++++++++++++++++++++++++++++++++++++++++++++++++++
 
-#. Create a ClI script (target = ADOM Database)
+#. Create a CLI Script (target = *Policy & Objects or ADOM Database*)
 
-   In this example, I created a script named ``system1`` with below content:
+   This is the CLI Script used in this example:
 
    .. code-block:: text
 
@@ -486,29 +473,27 @@ Run a script against a System Template
           set authenticate enable
       end
 
-#. Find the System Template id that you want your script run on
+#. Find the *oid* of the target System Template
 
-   .. code-block:: text
-      :emphasize-lines: 4,14
-   	   
-      fmg # execute fmpolicy print-adom-package 136 ?
-      <policy package/template name>
-      1       Policy Packages
-      5       System Templates
-      8       FortiClient Templates
-      9       Threat Weight Templates
-      10      WTP Packages
-      11      WAN Templates
-      12      FortiSwitch Packages
-      18      All Non-policy Packages
-   
-      fmg # executee fmpolicy print-adom-package 136 5 ?
-      ID        <package name>
-      3059        name=default, pathname=default
-   
+   - Enter the following FortiManager CLI command:
 
-#. Put the ADOM name, package id (template id) and script name into your
-   |fmg_api| request:
+     .. code-block:: text
+    
+        executee fmpolicy print-adom-package demo 5 ?
+
+   - You should get the following output:
+
+     .. code-block:: text
+
+          ID        <package name>
+        3059        name=system_template_001, pathname=system_template_001
+
+     .. note::
+  
+        - The *oid* of the ``system_template_001`` System Template is ``3059``
+
+#. Put the ADOM name, package oid (System Template oid) and CLI Script name 
+   into your |fmg_api| request:
    
    .. tab-set::
 
@@ -522,14 +507,14 @@ Run a script against a System Template
               "params": [
                 {
                   "data": {
-                    "adom": "taj-adom",
+                    "adom": "demo",
                     "package": 3059,
-                    "script": "system1"
+                    "script": "script_001"
                   },
-                  "url": "dvmdb/adom/taj-adom/script/execute"
+                  "url": "dvmdb/adom/demo/script/execute"
                 }
               ],
-              "session": "..."
+              "session": "{{session}}"
             }
 
       .. tab-item:: RESPONSE
@@ -547,7 +532,7 @@ Run a script against a System Template
                     "code": 0,
                     "message": "OK"
                   },
-                  "url": "dvmdb/adom/taj-adom/script/execute"
+                  "url": "dvmdb/adom/demo/script/execute"
                 }
               ]
             }
@@ -570,16 +555,16 @@ Run a script against a System Template
       set password ********
       set authenticate enable
       end
-      Running script(system1) on DB success
+      Running script(script_001) on DB success
    
       ----------------End of Log-------------------------
 
-Run a script against a FortiSwitch System Template
-++++++++++++++++++++++++++++++++++++++++++++++++++
+How to run a CLI Script against a FortiSwitch Template?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-#. Create a ClI script (target = ADOM Database)
+#. Create a CLI Script (target = *Policy & Objects or ADOM Database*)
 
-   In this example, I created a script named ``fsw1`` with below content:
+   This is the CLI Script used in this example:
 
    .. code-block:: text
    
@@ -591,28 +576,28 @@ Run a script against a FortiSwitch System Template
           next
       end
    
-#. Find the FortiSwitch Template id that you want your script run on
+#. Find the *oid* of the target FortiSwitch Template
 
-   .. code-block:: text
-      :emphasize-lines: 9,14
-   
-      fmg # execute fmpolicy print-adom-package 136 ?
-      <policy package/template name>
-      1       Policy Packages
-      5       System Templates
-      8       FortiClient Templates
-      9       Threat Weight Templates
-      10      WTP Packages
-      11      WAN Templates
-      12      FortiSwitch Packages
-      18      All Non-policy Packages
-   
-      fmg # execute fmpolicy print-adom-package 136 12 ?
-      ID        <package name>
-      3714        name=138-3, pathname=138-3
-   
-#. Put the ADOM name, package id (template id) and script name into your
-   |fmg_api| request:
+   - Run the following FortiManager CLI command:
+
+     .. code-block:: text
+      
+        execute fmpolicy print-adom-package demo 12 ?
+
+   - You should get the following output:
+
+     .. code-block:: text
+
+          ID        <package name>
+        3714        name=fsw_template_001, pathname=fsw_template_001
+
+     .. note::
+  
+        - The *oid* of the ``fsw_template_001`` FortiSwitch Template is 
+          ``3714``
+
+#. Put the ADOM name, package oid (FortiSwitch Template oid) and CLI Script 
+   name into your |fmg_api| request:
 
    .. tab-set::
      
@@ -626,14 +611,14 @@ Run a script against a FortiSwitch System Template
               "params": [
                 {
                   "data": {
-                    "adom": "taj-adom",
+                    "adom": "demo",
                     "package": 3714,
-                    "script": "fsw1"
+                    "script": "script_001"
                   },
-                  "url": "dvmdb/adom/taj-adom/script/execute"
+                  "url": "dvmdb/adom/demo/script/execute"
                 }
               ],
-              "session": "..."
+              "session": "{{session}}"
             }
 
       .. tab-item:: RESPONSE
@@ -651,7 +636,7 @@ Run a script against a FortiSwitch System Template
                     "code": 0,
                     "message": "OK"
                   },
-                  "url": "dvmdb/adom/taj-adom/script/execute"
+                  "url": "dvmdb/adom/demo/script/execute"
                 }
               ]
             }
@@ -671,17 +656,17 @@ Run a script against a FortiSwitch System Template
       set template "managed_fsw1"
       next
       end
-      Running script(fsw1) on DB success
+      Running script(script_001) on DB success
    
       ----------------End of Log-------------------------
 
-Run a script against a FortiAP Profile
-++++++++++++++++++++++++++++++++++++++
+How to run a CLI Script against a FortiAP Profile?
+++++++++++++++++++++++++++++++++++++++++++++++++++
 
-#. Create a ClI script (target = ADOM Database)
+#. Create a CLI Script (target = *Policy & Objects or ADOM Database*)
 
-   In this example, I created a script named ``wtp1`` with below content:
-   
+   This is the CLI Script used in this example:
+
    .. code-block:: text
    
       config wireless-controller wtp
@@ -696,30 +681,28 @@ Run a script against a FortiAP Profile
           next
       end
    
-#. Find the FortiAP Profile id that you want your script run on
+#. Find the *oid* of the target FortiAP Profile
 
-   .. code-block:: text
-      :emphasize-lines: 7,14
-   
-      fmg # execute fmpolicy print-adom-package 206 ?
-      <policy package/template name>
-      1       Policy Packages
-      5       System Templates
-      8       FortiClient Templates
-      9       Threat Weight Templates
-      10      WTP Packages
-      11      WAN Templates
-      12      FortiSwitch Packages
-      18      All Non-policy Packages
-   
-      fmgB # execute fmpolicy print-adom-package 206 10 ?
-      ID        <package name>
-      3065        name=293-3, pathname=293-3     
-      3092        name=293-102, pathname=293-102
-      3093        name=293-103, pathname=293-103
-   
-#. Put the ADOM name, package id (template id) and script name into your
-   |fmg_api| request:
+   - Enter the following FortiManager CLI command:
+
+     .. code-block:: text
+     
+        execute fmpolicy print-adom-package demo 10 ?
+
+   - You should get the following output:
+
+     .. code-block:: text
+              
+          ID        <package name>
+        3065        name=fap_template_001, pathname=fap_template_001
+
+     .. note::
+  
+        - The *oid* of the ``fap_template_001`` FortiAP Template is 
+          ``3065``
+
+#. Put the ADOM name, package oid (FortiAP Template oid) and CLI Script name 
+   into your |fmg_api| request:
 
    .. tab-set::
 
@@ -733,14 +716,14 @@ Run a script against a FortiAP Profile
               "params": [
                 {
                   "data": {
-                    "adom": "64-RACHEL-root",
+                    "adom": "demo",
                     "package": 3065,
-                    "script": "wtp1"
+                    "script": "script_001"
                   },
-                  "url": "dvmdb/adom/64-RACHEL-root/script/execute"
+                  "url": "dvmdb/adom/demo/script/execute"
                 }
               ],
-              "session": "..."
+              "session": "{{session}}"
             }
 
       .. tab-item:: RESPONSE
@@ -758,7 +741,7 @@ Run a script against a FortiAP Profile
                     "code": 0,
                     "message": "OK"
                   },
-                  "url": "dvmdb/adom/64-RACHEL-root/script/execute"
+                  "url": "dvmdb/adom/demo/script/execute"
                 }
               ]
             }
@@ -796,303 +779,313 @@ Run a script against a FortiAP Profile
       end
       next
       end
-      Running script(wtp1) on DB success
+      Running script(script_001) on DB success
       
       ----------------End of Log-------------------------
 
-How To get the latest script output executed in a particular ADOM?
-------------------------------------------------------------------
+How To get the latest CLI Script execution output?
+--------------------------------------------------
 
-For a script run against a policy package
-+++++++++++++++++++++++++++++++++++++++++
+For a CLI Script executed against a Policy Package
+++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**REQUEST**:
+The following example shows how to get the latest CLI Script execution output in the ``demo`` ADOM:
 
-.. code-block:: json
+.. tab-set::
 
-		{
-		  "id": 1,
-		  "jsonrpc": "1.0",
-		  "method": "get",
-		  "params": [
-		    {
-		      "url": "/dvmdb/adom/DEMO/script/log/latest"
-		    }
-		  ],
-		  "session": "RoXa5xoGrAlOMnCLC2vx4lprjwC/T97STtm7kevs6cnoVg+e4IBVSlSS1FlgVL3kL7DTtrFHDBocJGLsAQZSWA==",
-		  "verbose": 1
-		}
+   .. tab-item:: REQUEST
 
-**RESPONSE**:
+      .. code-block:: json
+      
+      		{
+      		  "id": 1,
+      		  "method": "get",
+      		  "params": [
+      		    {
+      		      "url": "/dvmdb/adom/demo/script/log/latest"
+      		    }
+      		  ],
+      		  "session": "{{session}}"
+      		}
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-		{
-		  "id": 1,
-		  "result": [
-		    {
-		      "data": {
-		        "content": "\n\nStarting log (Run on database)\n\n config firewall policy\n edit \"2\"\n set _scope \"demo_device1\"-\"root\"\n next\n end\nRunning script(test-001) on DB success\n",
-			"exec_time": "Wed Apr 15 13:48:07 2020",
-			"log_id": 41,
-			"script_name": "test-001"
-		      },
-		      "status": {
-		        "code": 0,
-			"message": "OK"
-		      },
-		      "url": "/dvmdb/adom/DEMO/script/log/latest"
-		    }
-		  ]
-		}
+      .. code-block:: json
 
-For a script run against a specific device
-++++++++++++++++++++++++++++++++++++++++++
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "content": "\n\nStarting log (Run on database)\n\n config firewall policy\n edit \"2\"\n set _scope \"demo_device1\"-\"root\"\n next\n end\nRunning script(test-001) on DB success\n",
+                 "exec_time": "Wed Apr 15 13:48:07 2020",
+                 "log_id": 41,
+                 "script_name": "script_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/script/log/latest"
+             }
+           ]
+         }
+                        
+For a CLI Script executed against a specific device
++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**REQUEST:**
+The following example shows how to get the latest CLI Script execution output for the ``dev_001`` device in the ``demo`` ADOM:
 
-.. code-block:: json
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-		{
-		  "id": 1,
-		  "jsonrpc": "1.0",
-		  "method": "get",
-		  "params": [
-		    {
-		      "url": "/dvmdb/adom/DEMO/script/log/latest/device/demo_device1"
-		    }
-		  ],
-		  "session": "jt7dv3N1X+GNdw9Wy9Vs+pitwFH8DjsV/xy4E2KV/OTE35nltYVmPd/GvGBXGv27E2L/WKvjW5HCx89EXsEVpA==",
-		  "verbose": 1
-		}
+      .. code-block:: json
+      
+      		{
+      		  "id": 1,
+      		  "method": "get",
+      		  "params": [
+      		    {
+      		      "url": "/dvmdb/adom/demo/script/log/latest/device/dev_001"
+      		    }
+      		  ],
+      		  "session": "{{session}}"
+      		}
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
 
-		{
-		  "id": 1,
-		  "result": [
-		    {
-		      "data": {
-		        "content": "\n\nStarting log (Run on database)\n\n config system global\n set hostname demo_device1\n end\nRunning script(test-002) on DB success\n",
-			"exec_time": "Thu Apr 16 07:58:49 2020",
-			"log_id": 71,
-			"script_name": "test-002"
-		      },
-		      "status": {
-		        "code": 0,
-			"message": "OK"
-		      },
-		      "url": "/dvmdb/adom/DEMO/script/log/latest/device/demo_device1"
-		    }
-		  ]
-		}
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "content": "\n\nStarting log (Run on database)\n\n config system global\n set hostname demo_device1\n end\nRunning script(test-002) on DB success\n",
+                 "exec_time": "Thu Apr 16 07:58:49 2020",
+                 "log_id": 71,
+                 "script_name": "script_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/script/log/latest/device/dev_001"
+             }
+           ]
+         }        
 
-How to get the script output of a particular script execution in a particular ADOM?
------------------------------------------------------------------------------------
+How to get a specific CLI Script execution output?
+--------------------------------------------------
 
-1. First you need to get its corresponding ``log_id`` by retrieving a
+#. First you need to get its corresponding ``log_id`` by retrieving a
    summary of the execution list
 
-   - For scripts run against policy packages:
+   - For CLI Scripts run against *Policy Packages*:
 
-     **REQUESTS:**
+     .. tab-set::
 
-     .. code-block:: json
+        .. tab-item:: REQUEST
 
-		     {
-		       "id": 1,
-		       "jsonrpc": "1.0",
-        	       "method": "get",
-		       "params": [
-		         {
-		           "url": "/dvmdb/adom/DEMO/script/log/summary"
-		         }
-		       ],
-		       "session": "Iv3oia2d+q2E5TUG/IsdSFJ175AQMQrD1+4V1TeOejjx48XXOp2fUNY2FMOf0ZmjGK81k5g+CUwImb+02Quasw==",
-		       "verbose": 1
-		     }		   
+           .. code-block:: json
+      
+      		     {
+      		       "id": 1,
+         	       "method": "get",
+      		       "params": [
+      		         {
+      		           "url": "/dvmdb/adom/demo/script/log/summary"
+      		         }
+      		       ],
+      		       "session": "{{session}}",
+      		       "verbose": 1
+      		     }		   
 
-     **RESPONSE:**
+        .. tab-item:: RESPONSE
 
-     .. code-block:: json
+           .. code-block:: json
+      
+              {
+                "id": 1,
+                "result": [
+                  {
+                    "data": [
+                      {
+                        "exec_time": "Wed Apr 15 13:48:07 2020",
+                        "log_id": 41,
+                        "script_name": "script_001",
+                        "seq": 1
+                      },
+                      {
+                        "exec_time": "Wed Apr 15 13:44:50 2020",
+                        "log_id": 31,
+                        "script_name": "script_002",
+                        "seq": 2
+                      }
+                    ],
+                    "status": {
+                      "code": 0,
+                      "message": "OK"
+                    },
+                    "url": "/dvmdb/adom/demo/script/log/summary"
+                  }
+                ]
+              }
 
-		     {
-		       "id": 1,
-		       "result": [
-		         {
-		           "data": [
-			     {
-			       "exec_time": "Wed Apr 15 13:48:07 2020",
-			       "log_id": 41,
-			       "script_name": "test-001",
-			       "seq": 1
-			     },
-			     {
-			       "exec_time": "Wed Apr 15 13:44:50 2020",
-			       "log_id": 31,
-			       "script_name": "50_config.firewall.policy-54-adomdb",
-			       "seq": 2
-			     }
-			   ],
-			   "status": {
-			     "code": 0,
-			     "message": "OK"
-			   },
-			   "url": "/dvmdb/adom/DEMO/script/log/summary"
-		         }
-		       ]
-		     }		   
+   - For CLI Scripts run against a specific device:
 
-   - For scripts run against a specific device:
+     .. tab-set::
 
-     **REQUEST:**
+        .. tab-item:: REQUEST
 
-     .. code-block:: json
+           .. code-block:: json
+      
+      		     {
+      		       "id": 1,
+      		       "method": "get",
+      		       "params": [
+      		         {
+      			         "url": "/dvmdb/adom/demo/script/log/summary/device/dev_001"
+             			 }
+      		       ],
+      		       "session": "{{session}}",
+      		       "verbose": 1
+      		     }
 
-		     {
-		       "id": 1,
-		       "jsonrpc": "1.0",
-		       "method": "get",
-		       "params": [
-		         {
-			   "url": "/dvmdb/adom/DEMO/script/log/summary/device/demo_device1"
-			 }
-		       ],
-		       "session": "P/l8udT6BPTSZPcvy2BQfbK2C0cHsahvevn6ogzOqVnb7r1DmmG6RevKN5uc1ilTyhckBVFStF2V/A/vqcPbiQ==",
-		       "verbose": 1
-		     }
-		     
-     **RESPONSE:**
+        .. tab-item:: RESPONSE		     
 
-     .. code-block:: json
+           .. code-block:: json
 
-		     {
-		       "id": 1,
-		       "result": [
-		         {
-			   "data": [
-			     {
-			       "exec_time": "Thu Apr 16 07:58:49 2020",
-			       "log_id": 71,
-			       "script_name": "test-002",
-			       "seq": 1
-			     }
-			   ],
-			   "status": {
-			     "code": 0,
-			     "message": "OK"
-			   },
-			   "url": "/dvmdb/adom/DEMO/script/log/summary/device/demo_device1"
-			 }
-		       ]
-		     }		     
-
+              {
+                "id": 1,
+                "result": [
+                  {
+                    "data": [
+                      {
+                        "exec_time": "Thu Apr 16 07:58:49 2020",
+                        "log_id": 71,
+                        "script_name": "script_001",
+                        "seq": 1
+                      }
+                    ],
+                    "status": {
+                      "code": 0,
+                      "message": "OK"
+                    },
+                    "url": "/dvmdb/adom/demo/script/log/summary/device/demo_device1"
+                  }
+                ]
+              }
 
    .. note::
 
-      Note that the ``log_id`` will have the following format:
+      Note that the returned ``log_id`` will have the following format:
 
-      - If script executed against DB:
+      - If CLI Script is executed against Device DB or Policy Package:
 
-	.. code-block::
-
-	   log_id = str(task_id) + "1"
-
-      - If script executed against the remote device:
-	
-	.. code-block::
-
-	   log_id = str(task_id) + "0"
-	 
-   2. Now you can retrieve the script output for the selected
-      ``log_id``
-
-      - For a script run against a policy package
-
-	**REQUEST:**
-
-	.. code-block:: json
-
-			{
-			  "id": 1,
-			  "jsonrpc": "1.0",
-			  "method": "get",
-			  "params": [
-			    {
-			      "url": "/dvmdb/adom/DEMO/script/log/output/logid/41"
-			    }
-			  ],
-			  "session": "3jspS4e/z5uVhqGIg0QrLSt1TkZAreTp93vFYOvbUiADH+LKVLAcwaSVrNV6q0yzUZx4MhMRgT91XNrAViwHfQ==",
-			  "verbose": 1
-			}			
-			
-	**RESPONSE:**
-
-	.. code-block:: json
-
-			{
-			  "id": 1,
-			  "result": [
-			    {
-			      "data": {
-			        "content": "\n\nStarting log (Run on database)\n\n config firewall policy\n edit \"2\"\n set _scope \"demo_device1\"-\"root\"\n next\n end\nRunning script(test-001) on DB success\n",
-				"exec_time": "Wed Apr 15 13:48:07 2020",
-				"log_id": 41,
-				"script_name": "test-001"
-			      },
-			      "status": {
-			        "code": 0,
-				"message": "OK"
-			      },
-			      "url": "/dvmdb/adom/DEMO/script/log/output/logid/41"
-			    }
-			  ]
-			}
-
-      - For a script run against a specific device
-
-	**REQUEST:**
-
-	.. code-block:: json
-
-			{
-			  "id": 1,
-			  "jsonrpc": "1.0",
-			  "method": "get",
-			  "params": [
-			    {
-			      "url": "/dvmdb/adom/DEMO/script/log/output/device/demo_device1/logid/71"
-			    }
-			  ],
-			  "session": "Qo8bH+n6sebjQy8VMlHSF3N3myGO8reekbaD6Z5ICeRDGSJkE5sOqORcTawwMX67U6KaK/VUukqw/J77OMLU/A==",
-			  "verbose": 1
-			}
-			
-	**RESPONSE:**
-
-	.. code-block:: json
-
-			{
-			  "id": 1,
-			  "result": [
-			    {
-			      "data": {
-			        "content": "\n\nStarting log (Run on database)\n\n config system global\n set hostname demo_device1\n end\nRunning script(test-002) on DB success\n",
-				"exec_time": "Thu Apr 16 07:58:49 2020",
-				"log_id": 71,
-				"script_name": "test-002"
-			      },
-			      "status": {
-			        "code": 0,
-				"message": "OK"
-			      },
-			      "url": "/dvmdb/adom/DEMO/script/log/output/device/demo_device1/logid/71"
-			    }
-			  ]
-			}
+      	.. code-block::
       
+      	   log_id = str(task_id) + "1"
+
+      - If CLI Script is executed against the remote device:
+	
+      	.. code-block::
+      
+      	   log_id = str(task_id) + "0"
+
+      where ``task_id`` is the task ID returned at the time the CLI Script 
+      execution was triggered.
+	 
+#. Now you can retrieve the CLI Script output using one of the returned 
+   ``log_id``
+
+   - For a CLI Script run against a Policy Package
+
+     .. tab-set::
+
+        .. tab-item:: REQUEST
+
+           .. code-block:: json
+
+              {
+                "id": 1,
+                "method": "get",
+                "params": [
+                  {
+                    "url": "/dvmdb/adom/demo/script/log/output/logid/41"
+                  }
+                ],
+                "session": "{{session}}",
+                "verbose": 1
+              }            
+
+        .. tab-item:: RESPONSE
+
+           .. code-block:: json
+
+              {
+                "id": 1,
+                "result": [
+                  {
+                    "data": {
+                      "content": "\n\nStarting log (Run on database)\n\n config firewall policy\n edit \"2\"\n set _scope \"demo_device1\"-\"root\"\n next\n end\nRunning script(test-001) on DB success\n",
+                      "exec_time": "Wed Apr 15 13:48:07 2020",
+                      "log_id": 41,
+                      "script_name": "script_001"
+                    },
+                    "status": {
+                      "code": 0,
+                      "message": "OK"
+                    },
+                    "url": "/dvmdb/adom/demo/script/log/output/logid/41"
+                  }
+                ]
+              }                
+
+   - For a CLI script run against a specific device
+
+     .. tab-set::
+
+        .. tab-item:: REQUEST
+
+           .. code-block:: json
+
+              {
+                "id": 1,
+                "method": "get",
+                "params": [
+                  {
+                    "url": "/dvmdb/adom/demo/script/log/output/device/dev_001/logid/71"
+                  }
+                ],
+                "session": "{{session}}",
+                "verbose": 1
+              }            
+
+        .. tab-item:: RESPONSE
+
+           .. code-block:: json
+
+              {
+                "id": 1,
+                "result": [
+                  {
+                    "data": {
+                      "content": "\n\nStarting log (Run on database)\n\n config system global\n set hostname demo_device1\n end\nRunning script(test-002) on DB success\n",
+                      "exec_time": "Thu Apr 16 07:58:49 2020",
+                      "log_id": 71,
+                      "script_name": "script_001"
+                    },
+                    "status": {
+                      "code": 0,
+                      "message": "OK"
+                    },
+                    "url": "/dvmdb/adom/demo/script/log/output/device/dev_001/logid/71"
+                  }
+                ]
+              }            
+
 How to create a CLI Script Group?
 ---------------------------------
 
