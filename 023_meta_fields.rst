@@ -256,8 +256,8 @@ How to create a device Meta-fields?
      ]
    }
 
-How to set a device Meta-fields?
---------------------------------
+How to set a device Meta-field?
+-------------------------------
 
 The following example shows how to set a value to the ``mf_001`` Meta-field for 
 the ``dev_001`` device in the ``demo`` ADOM:
@@ -303,4 +303,54 @@ the ``dev_001`` device in the ``demo`` ADOM:
                "url": "/dvmdb/adom/demo/device/dev_001"
              }
            ]
-         }        
+         }
+
+How to set multiple device Meta-field?
+--------------------------------------
+
+The following example shows how to set values to the ``mf_001``, ``mf_002`` and ``mf_003`` Meta-fields for the ``dev_001`` device in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "meta fields": {
+                   "mf_001": "value_001",
+                   "mf_002": "value_002",
+                   "mf_003": "value_003",
+                 }
+               },
+               "url": "/dvmdb/adom/demo/device/dev_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "dev_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/device/dev_001"
+             }
+           ]
+         }          
