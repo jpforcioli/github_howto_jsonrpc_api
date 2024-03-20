@@ -458,8 +458,8 @@ We can also use this one:
 Workspace normal mode
 ---------------------
 
-How to lock?
-++++++++++++
+Locking
++++++++
 
 How to lock an ADOM?
 ____________________
@@ -500,6 +500,9 @@ Following example is showing how to lock the ``demo`` ADOM:
            ]
          }
 
+Policy Package Lock
++++++++++++++++++++
+
 How to lock a Policy Package?
 _____________________________
 
@@ -538,6 +541,9 @@ The following example shows how to lock the ``ppkg_001`` Policy Package from the
              }
            ]
          }
+
+Firewall Policy Lock
+++++++++++++++++++++
 
 How to lock a firewall policy?
 ______________________________
@@ -578,6 +584,9 @@ Following example is showing how to lock firewall policy with ``policyid`` ``1``
            ]
          }
       
+Object Lock
++++++++++++
+
 How to lock an object?
 ______________________
 
@@ -647,6 +656,9 @@ The following exemple shows how to lock the ``host_001`` firewall address from t
            ]
          }
 
+Device Lock
++++++++++++
+
 How to lock a device?
 _____________________
 
@@ -688,11 +700,11 @@ The following example show how to tock the ``dev_001`` device from the ``demo`` 
            ]
          }
 
-How to save?
-++++++++++++
+Comitting changes
++++++++++++++++++
 
-How to save changes in an ADOM?
-_______________________________
+ADOM Commit
+___________
 
 Before unlocking an ADOM, a Policy Package or a firewall policy, a *save* operation is required in order have all pending changes applied to the running 
 ADOM database.
@@ -1002,7 +1014,7 @@ performed in the ``demo`` ADOM:
 
 #. Unlock the ADOM
 
-   See :ref:`How to unlock?`
+   See :ref:`ADOM Unlock`
 
    .. tab-set::
 
@@ -1038,22 +1050,61 @@ performed in the ``demo`` ADOM:
               ]
             }
 
-.. note:: 
+   .. note:: 
+   
+      - You can only get the ``dirty`` flag of your own workspace session
 
-   - You can only get the ``dirty`` flag of your own workspace session
+Device commit
+_____________
 
-How to unlock?
-++++++++++++++
+The following example show how to commit changes made in the ``dev_001`` locked device from the ``demo`` ADOM:
 
-How to unlock an ADOM?
-______________________
+.. tab-set:: 
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/commit/dev/dev_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/commit/dev/dev_001"
+             }
+           ]
+         }
+
+Unlocking
++++++++++
+
+ADOM Unlock
+___________
 
 .. warning::
 
    - If you unlock without a ``commit`` operation then unsaved changes will be 
      lost
 
-   - See :ref:`How to save?`
+   - See :ref:`ADOM Commit`
 
 The following example shows how to unlock the ``demo`` ADOM:
 
@@ -1090,6 +1141,46 @@ The following example shows how to unlock the ``demo`` ADOM:
              }
            ]
          }  
+
+Device Unlock
+_____________
+
+The following example show how to unlock the ``dev_001`` locked device from the ``demo`` ADOM:
+
+.. tab-set:: 
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/unlock/dev/dev_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/unlock/dev/dev_001"
+             }
+           ]
+         }
+
 
 Workflow mode
 -------------
