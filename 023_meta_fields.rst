@@ -112,7 +112,7 @@ We add firewall policy Meta-field ``test_001``:
    }
 
 How to get firewall policy Meta-fields for one firewall policy?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 We get the firewall policy Meta-fields for policy ID ``1`` from policy package
 ``default`` of our ADOM ``adom_dc3``:
@@ -167,7 +167,7 @@ We get the firewall policy Meta-fields for policy ID ``1`` from policy package
    }
 
 How to set firewall policy Meta-fields for one firewall policy?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 We change the value of the firewall policy Meta-fields ``owner`` for policy ID
 ``1`` from policy package ``default`` of our ADOM ``adom_dc3``:
@@ -266,41 +266,41 @@ the ``dev_001`` device in the ``demo`` ADOM:
 
    .. tab-item:: REQUEST
 
-      code-block:: json
+      .. code-block:: json
 
-      {
-        "id": 3,
-        "method": "set",
-        "params": [
-          {
-            "data": {
-              "meta fields": {
-                "mf_001": "value_001"
-              }
-            },
-            "url": "/dvmdb/adom/demo/device/dev_001"
-          }
-        ],
-        "session": "{{session}}"
-      }
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "meta fields": {
+                   "mf_001": "value_001"
+                 }
+               },
+               "url": "/dvmdb/adom/demo/device/dev_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
       
 
    .. tab-item:: RESPONSE
 
-      code-block:: json
+      .. code-block:: json
 
-      {
-        "id": 3,
-        "result": [
-          {
-            "data": {
-              "name": "dev_001"
-            },
-            "status": {
-              "code": 0,
-              "message": "OK"
-            },
-            "url": "/dvmdb/adom/demo/device/dev_001"
-          }
-        ]
-      }        
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "dev_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/device/dev_001"
+             }
+           ]
+         }        
