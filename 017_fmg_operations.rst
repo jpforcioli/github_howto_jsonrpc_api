@@ -461,8 +461,8 @@ Workspace normal mode
 Locking
 +++++++
 
-How to lock an ADOM?
-____________________
+ADOM Lock
+_________
 
 Following example is showing how to lock the ``demo`` ADOM:
 
@@ -501,10 +501,7 @@ Following example is showing how to lock the ``demo`` ADOM:
          }
 
 Policy Package Lock
-+++++++++++++++++++
-
-How to lock a Policy Package?
-_____________________________
+___________________
 
 The following example shows how to lock the ``ppkg_001`` Policy Package from the ``demo`` ADOM:
 
@@ -543,10 +540,7 @@ The following example shows how to lock the ``ppkg_001`` Policy Package from the
          }
 
 Firewall Policy Lock
-++++++++++++++++++++
-
-How to lock a firewall policy?
-______________________________
+____________________
 
 Following example is showing how to lock firewall policy with ``policyid`` ``1`` in the ``ppkg_001`` Policy Package from the ``demo`` ADOM:
 
@@ -585,14 +579,9 @@ Following example is showing how to lock firewall policy with ``policyid`` ``1``
          }
       
 Object Lock
-+++++++++++
+___________
 
-How to lock an object?
-______________________
-
-To lock an object, you need first to lock a Policy Package (see :ref:`How to 
-lock a Policy Package?`) or a firewall policy (see :ref:`How to lock a firewall 
-policy?`).
+To lock an object, you need first to lock a Policy Package (see :ref:`Policy Package Lock`) or a firewall policy (see :ref:`Firewall Policy Lock`).
 
 The endpoint to lock an object is:
 
@@ -657,10 +646,7 @@ The following exemple shows how to lock the ``host_001`` firewall address from t
          }
 
 Device Lock
-+++++++++++
-
-How to lock a device?
-_____________________
+___________
 
 Device lock has been introduced in #0544637 (FMG 6.0.5/6.2.0).
 
