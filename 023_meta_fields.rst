@@ -6,7 +6,7 @@ TODO
 
 Seen in #0450247.
 
-The list of |fmg_api| URLs for meta-fields management:
+The list of |fmg_api| URLs for Meta-fields management:
 
 - ``pm/config/_meta_fields/firewall/address``
 - ``pm/config/_meta_fields/firewall/addrgrp``
@@ -19,10 +19,10 @@ The list of |fmg_api| URLs for meta-fields management:
 - ``dvmdb/_meta_fields/adom``
 - ``cli/global/_meta_fields/system/admin/user``
 
-Firewall Policy meta-fields
+Firewall Policy Meta-fields
 ---------------------------
 
-How to get firewall policy meta-fields?
+How to get firewall policy Meta-fields?
 +++++++++++++++++++++++++++++++++++++++
 
 **REQUEST:**
@@ -69,10 +69,10 @@ How to get firewall policy meta-fields?
      ]
    }
 
-How to add a firewall policy meta-fields?
+How to add a firewall policy Meta-fields?
 +++++++++++++++++++++++++++++++++++++++++
 
-We add firewall policy meta-field ``test_001``:
+We add firewall policy Meta-field ``test_001``:
 
 **REQUEST:**
 
@@ -111,10 +111,10 @@ We add firewall policy meta-field ``test_001``:
      ]
    }
 
-How to get firewall policy metafields for one firewall policy?
+How to get firewall policy Meta-fields for one firewall policy?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-We get the firewall policy metafields for policy ID ``1`` from policy package
+We get the firewall policy Meta-fields for policy ID ``1`` from policy package
 ``default`` of our ADOM ``adom_dc3``:
 
 **REQUEST:**
@@ -166,10 +166,10 @@ We get the firewall policy metafields for policy ID ``1`` from policy package
      ]
    }
 
-How to set firewall policy metafields for one firewall policy?
+How to set firewall policy Meta-fields for one firewall policy?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-We change the value of the firewall policy metafield ``owner`` for policy ID
+We change the value of the firewall policy Meta-fields ``owner`` for policy ID
 ``1`` from policy package ``default`` of our ADOM ``adom_dc3``:
 
 **REQUEST:**
@@ -212,10 +212,10 @@ We change the value of the firewall policy metafield ``owner`` for policy ID
      ]
    }
 
-Device meta-fields
+Device Meta-fields
 ------------------
 
-How to create a device meta-fields?
+How to create a device Meta-fields?
 +++++++++++++++++++++++++++++++++++
 
 **REQUEST:**
@@ -255,3 +255,52 @@ How to create a device meta-fields?
        }
      ]
    }
+
+How to set a device Meta-fields?
+--------------------------------
+
+The following example shows how to set a value to the ``mf_001`` Meta-field for 
+the ``dev_001`` device in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      code-block:: json
+
+      {
+        "id": 3,
+        "method": "set",
+        "params": [
+          {
+            "data": {
+              "meta fields": {
+                "mf_001": "value_001"
+              }
+            },
+            "url": "/dvmdb/adom/demo/device/dev_001"
+          }
+        ],
+        "session": "{{session}}"
+      }
+      
+
+   .. tab-item:: RESPONSE
+
+      code-block:: json
+
+      {
+        "id": 3,
+        "result": [
+          {
+            "data": {
+              "name": "dev_001"
+            },
+            "status": {
+              "code": 0,
+              "message": "OK"
+            },
+            "url": "/dvmdb/adom/demo/device/dev_001"
+          }
+        ]
+      }        
