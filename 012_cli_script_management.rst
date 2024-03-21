@@ -1089,8 +1089,10 @@ How to get a specific CLI Script execution output?
 How to create a CLI Script Group?
 ---------------------------------
 
-To create the ``cli_group_001`` CLI Script Group in the ``dc_emea`` ADOM and
-with the ``cli_script_001`` and ``cli_script_002`` members:
+The following example shows how to create the ``cli_script_grp_001`` CLI Script 
+Group in the ``demo`` ADOM. 
+
+It contains the ``script_001`` and ``script_001`` CLI Script members:
 
 .. tab-set::
 
@@ -1104,21 +1106,21 @@ with the ``cli_script_001`` and ``cli_script_002`` members:
            "params": [
              {
                "data": {
-                 "name": "cli_group_001",
+                 "name": "cli_script_grp_001",
                  "object member": [
                    {
-                     "key": "cli_script_001",
+                     "key": "script_001",
                      "oid": 454
                    },
                    {
-                     "key": "cli_script_002",
+                     "key": "script_002",
                      "oid": 455
                    }
                  ],
                  "target": "device_database",
                  "type": "cligrp"
                },
-               "url": "/dvmdb/adom/dc_emea/script"
+               "url": "/dvmdb/adom/demo/script"
              }
            ],
            "session": "{{session}}"
@@ -1127,6 +1129,7 @@ with the ``cli_script_001`` and ``cli_script_002`` members:
       .. note::
 
          - You have to get the ``oid`` first for each CLI Script member
+         - For instance:
          
            .. dropdown:: Click to expand
               :color: info 
@@ -1150,9 +1153,9 @@ with the ``cli_script_001`` and ``cli_script_002`` members:
                              "filter": [
                                "name",
                                "like",
-                               "cli_script_%"
+                               "script_%"
                              ],
-                             "url": "/dvmdb/adom/dc_emea/script"
+                             "url": "/dvmdb/adom/demo/script"
                            }
                          ],
                          "session": "{{session}}"
@@ -1169,12 +1172,12 @@ with the ``cli_script_001`` and ``cli_script_002`` members:
                            {
                              "data": [
                                {
-                                 "name": "cli_script_001",
+                                 "name": "script_001",
                                  "oid": 454,
                                  "script_schedule": null
                                },
                                {
-                                 "name": "cli_script_002",
+                                 "name": "script_002",
                                  "oid": 455,
                                  "script_schedule": null
                                }
@@ -1183,7 +1186,7 @@ with the ``cli_script_001`` and ``cli_script_002`` members:
                                "code": 0,
                                "message": "OK"
                              },
-                             "url": "/dvmdb/adom/dc_emea/script"
+                             "url": "/dvmdb/adom/demo/script"
                            }
                          ]
                        }
@@ -1197,13 +1200,13 @@ with the ``cli_script_001`` and ``cli_script_002`` members:
            "result": [
              {
                "data": {
-                 "name": "cli_group_001"
+                 "name": "cli_script_grp_001"
                },
                "status": {
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/dvmdb/adom/dc_emea/script"
+               "url": "/dvmdb/adom/demo/script"
              }
            ]
          }
