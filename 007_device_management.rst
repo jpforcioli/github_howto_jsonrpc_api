@@ -584,129 +584,178 @@ Caught in #0607071.
 How to add a real device?
 -------------------------
 
-We add device ``site_5`` with reachable IP address ``172.11.1.6`` in ADOM
-``demo``:
+The following example shows how to add the ``dev_001`` in the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block::
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "adom": "demo",
-           "device": {
-             "adm_pass": "a_password",
-             "adm_usr": "admin",
-             "desc": "Remote site #5",
-             "ip": "172.11.1.6",
-             "mgmt_mode": "fmgfaz",
-             "name": "site_5"
-           },
-           "flags": [
-             "create_task"
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "device": {
+                   "adm_pass": "fortinet",
+                   "adm_usr": "admin",
+                   "ip": "10.210.34.51",
+                   "mgmt_mode": "fmg",
+                   "name": "dev_001"
+                 },
+                 "flags": [
+                   "create_task"
+                 ]
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ],
+           "session": "{{session}}"
+         }        
+
+      .. note::
+      
+         - This API request will be blocking
+
+         - You will get a response only once the device will be added within 
+           FortiManager
+
+         - The ``create_task`` flag is a good practice; FortiManager creates
+           a task that you can refer to in case the add device operation fails
+
+         - To get a non-blocking operation, you can add the ``nonblocking`` 
+           flag:
+
+           .. code-block:: json
+
+              "flags": [
+                "create_task",
+                "nonblocking"
+              ]
+
+           In that case, FortiManager will return immediately while still 
+           creating a task that this time you should monitor to follow its 
+           progress
+         
+         - The ``none`` flag will just do the add device operation, without 
+           creating a task; task will be blocking
+      
+      .. warning:: 
+      
+         - If you use the `nonblocking` flag, then you have to keep the API 
+           session up till the end of the add device operation
+         
+         - The add device operation takes time; if your program logs out right 
+           after the API call, but while the add device operation is still in 
+           progress, then FortiManager will return a message (visible in the 
+           task, provided you used the ``create_task`` flag) similar to:
+      
+           .. code-block:: text
+        
+              Failed to update device information.
+      
+         - It is recommended to combine the ``nonblocking`` with the 
+           ``create_task`` flag in order to monitor the task progress and logs
+           out from the API session only once the add operation is successfully 
+           completed
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "device": {
+                   "adm_pass": "fortinet",
+                   "adm_usr": "admin",
+                   "av_ver": "1.00000(2018-04-09 18:07)",
+                   "beta": -1,
+                   "branch_pt": 523,
+                   "build": 523,
+                   "conn_mode": 1,
+                   "conn_status": 1,
+                   "dev_status": 1,
+                   "flags": 2097169,
+                   "hostname": "dev_001",
+                   "ip": "10.210.34.51",
+                   "ips_ver": "6.00741(2015-12-01 02:30)",
+                   "last_checked": 1711025724,
+                   "maxvdom": 11,
+                   "mgmt.__data[0]": 3870643,
+                   "mgmt.__data[4]": 2105184256,
+                   "mgmt.__data[6]": 1,
+                   "mgmt_mode": 3,
+                   "mgmt_uuid": "1981351328",
+                   "mr": 0,
+                   "name": "dev_111",
+                   "oid": 34835,
+                   "opts": 256,
+                   "os_type": 0,
+                   "os_ver": 7,
+                   "patch": 12,
+                   "platform_id": 159,
+                   "platform_str": "FortiGate-VM64",
+                   "relver_info": "GA",
+                   "sn": "FGVMMLREDACTED33",
+                   "source": 1,
+                   "tab_status": "<unknown>",
+                   "version": 700,
+                   "vm_cpu": 1,
+                   "vm_cpu_limit": 1,
+                   "vm_mem": 2007,
+                   "vm_mem_limit": 2147483647,
+                   "vm_status": 3
+                 },
+                 "taskid": 752
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvm/cmd/add/device"
+             }
            ]
-         },
-         "url": "/dvm/cmd/add/device"
-       }
-     ],
-     "session": "DU0LATu1dYVFlqkrsv2+1eYQg/GuLUNGjTYjtIXgEYisaPa+6jJLvPkdruq3fdyVLjjYFVfPnLbo1zbSi8KFyD6/70MzYH3z",
-     "verbose": 1
-   }
+         }
 
-.. note::
+      .. note::
+      
+         - If you're using the following list of flags:
 
-   The above call will wait till the device gets created. Flag ``create_task``
-   was to ask for a task creation. 
-   
-   We can also ask for the operation to be non-blocking by using flag
-   ``nonblocking``.
+           .. code-block:: json
 
-   Flag ``none`` will just do the add device operation, without creating a task,
-   and will wait till the device gets created.
+              "flags": [
+                "create_task",
+                "nonblocking"
+              ]
 
-.. warning:: 
+           You will get this shorter response:
 
-   If using the `nonblocking` flag, then you have to keep the JSON RPC session
-   up till the end of the add device operation. 
-   
-   The add device operation takes time. If your program stops right after the
-   JSON RPC request, but while the add device operation is still in progress,
-   then FortiManager will return a message similar to:
+           .. code-block:: json
 
-   .. code-block::
+              {
+                "id": 3,
+                "result": [
+                  {
+                    "data": {
+                      "pid": 31637,
+                      "taskid": 754
+                    },
+                    "status": {
+                      "code": 0,
+                      "message": "OK"
+                    },
+                    "url": "/dvm/cmd/add/device"
+                  }
+                ]
+              }            
 
-      Failed to update device information.
 
-   (provided you also used the flag `create_task` :-))
-
-   It is recommended to combine the flag `nonblocking` and the flag
-   `create_task` together. This way, you can monitor the task progress and end
-   the JSON RPC session once the task is completed.
-
-**RESPONSE:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "device": {
-             "adm_pass": "a_password",
-             "adm_usr": "admin",
-             "av_ver": "80.00883(2020-10-05 21:20)",
-             "beta": -1,
-             "branch_pt": 1637,
-             "build": 1637,
-             "conn_mode": 1,
-             "conn_status": 1,
-             "desc": "Remote site #5",
-             "dev_status": 1,
-             "flags": 2162704,
-             "hostname": "fgt6",
-             "ip": "172.11.1.6",
-             "ips_ver": "6.00741(2015-12-01 02:30)",
-             "last_checked": 1601970599,
-             "maxvdom": 10,
-             "mgmt.__data[0]": 2822050,
-             "mgmt.__data[4]": 2108243968,
-             "mgmt.__data[6]": 1,
-             "mgmt_id": 1461533932,
-             "mgmt_mode": 3,
-             "mr": 4,
-             "name": "site_5",
-             "oid": 687,
-             "os_type": 0,
-             "os_ver": 6,
-             "patch": 1,
-             "platform_id": 124,
-             "platform_str": "FortiGate-VM64-KVM",
-             "sn": "FGVM08REDACTED27",
-             "source": 1,
-             "tab_status": "<unknown>",
-             "version": 600,
-             "vm_cpu": 1,
-             "vm_cpu_limit": 8,
-             "vm_mem": 2010,
-             "vm_mem_limit": 2010,
-             "vm_status": 3
-           },
-           "taskid": 314
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvm/cmd/add/device"
-       }
-     ]
-   }
 
 How to change the serial number of a managed device?
 ----------------------------------------------------
@@ -774,8 +823,6 @@ serial number ``FGVMULTM21001111``.
         config system admin setting
         set auto-update disable
         end
-
-
 
 How to get unauthorized devices?
 --------------------------------
