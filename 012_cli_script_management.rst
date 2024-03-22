@@ -1086,6 +1086,19 @@ How to get a specific CLI Script execution output?
                 ]
               }            
 
+#. If you have the feeling that your resulting script output is truncated, then
+   this is normal!
+
+   - By default, FortiManager enforces a per-device limit of 100K:
+
+     .. code-block:: text
+  
+        config system dm
+            set script-logsize 100
+        end
+
+   - You can change the max to up 10000K
+
 How to create a CLI Script Group?
 ---------------------------------
 
