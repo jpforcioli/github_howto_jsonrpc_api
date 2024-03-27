@@ -1337,3 +1337,94 @@ below:
 
          - Value ``0`` for the ``status`` attribute correspond to the green 
            status
+
+Virtual Patching
+----------------
+
+How to get the Virtual Patching Signatures list?
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #0983425.
+
+Following example shows how to get the Virtual Patching Signatures list using 
+the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_fdsdb/rule/otvp"
+             }
+           ],
+           "session": "{{session}}"
+         }        
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json        
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": [
+                 {
+                   "act": "1",
+                   "app": "Other",
+                   "date": "20240215",
+                   "group": "vPatch",
+                   "location": "server",
+                   "name": "OpenSSL.Heartbleed.Attack.",
+                   "os": "All",
+                   "rev": "26735",
+                   "rule-id": 38315,
+                   "service": "TCP",
+                   "sev": "4",
+                   "status": "1"
+                 }, 
+                 {
+                   "act": "0",
+                   "app": "Other",
+                   "date": "20240213",
+                   "group": "vPatch",
+                   "location": "server",
+                   "name": "HTTP.Chunk.Length.Invalid.",
+                   "os": "All",
+                   "rev": "24020",
+                   "rule-id": 39122,
+                   "service": "TCP,HTTP",
+                   "sev": "0",
+                   "status": "0"
+                 },
+                 {"...": "..."},
+                 {
+                   "act": "1",
+                   "app": "PHP_app",
+                   "date": "20240312",
+                   "group": "vPatch",
+                   "location": "server",
+                   "name": "Advantech.R-SeeNet.Options.PHP.Local.File.Inclusion.",
+                   "os": "All",
+                   "rev": "21353",
+                   "rule-id": 10005254,
+                   "service": "TCP,HTTP",
+                   "sev": "4",
+                   "status": "1"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_fdsdb/rule/otvp",
+               "version": "27.748"
+             }
+           ]
+         }
