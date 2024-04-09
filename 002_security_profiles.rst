@@ -1201,7 +1201,7 @@ The following example shows how to get the list of IPS signatures using the ``de
            "verbose": 1
          }
 
-   .. tab-item:: REQUEST
+   .. tab-item:: RESPONSE
 
       .. code-block:: json
 
@@ -1287,12 +1287,11 @@ The following example shows how to get the list of IPS signatures using the ``de
 
      .. code-block:: text
 
-        OID      STATE    PRODUCT OSVER MR  LIC NAME                                             MODE    VPN MANAGEMENT        IPS          ISDB
-        3        enabled  FOS     7.0   4       demo                                             Normal  Policy & Device VPNs  26.740       7.3585
+        OID      STATE    PRODUCT OSVER MR  LIC NAME MODE    VPN MANAGEMENT        IPS     ISDB
+        3        enabled  FOS     7.0   4       demo Normal  Policy & Device VPNs  26.740  7.3585
         ---End ADOM list---
                 
    - In this above output, the IPS package version is given by the ``IPS`` column: ``26.740``
-
 
 How to get IPS Profile Usage?
 +++++++++++++++++++++++++++++
