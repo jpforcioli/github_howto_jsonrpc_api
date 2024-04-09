@@ -2303,7 +2303,7 @@ How to get the Last Modified timestamp?
 _______________________________________
 
 The following example will get the Last Modified timestamp (i.e., ``_modified
-timestamp``) fort he firewall address groups declared in the ``dc_amer`` ADOM:
+timestamp``) for the firewall address groups declared in the ``dc_amer`` ADOM:
 
 .. tab-set:: 
 

@@ -1181,68 +1181,118 @@ How to add an IPS signature in an IPS profile?
 How to get list of IPS signatures?
 ++++++++++++++++++++++++++++++++++
 
-**REQUEST:**
+The following example shows how to get the list of IPS signatures using the ``demo`` ADOM:
 
-.. code-block:: json
+.. tab-set::
 
-		{
-		  "id": 1,
-		  "jsonrpc": "1.0",
-		  "method": "get",
-		  "params": [
-		    {
-		      "option": "count",
-		      "url": "/pm/config/adom/DEMO/_rule/list"
-		    }
-		  ],
-		  "session": "oWK0EuXIQ7zRijkfu5sMqh7kN+t9AazlSqqrF9W/TbdkCMzSTyDp/6l/hnKbx8nI7ekpdhrqmveAFGyoxx7wLgKlKO2vxsFW",
-		  "verbose": 1
-		}
+   .. tab-item:: REQUEST
 
-**RESPONSE:**
+      .. code-block:: json
 
-.. code-block:: 
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_data/reserved/ips/sensor/entries/protocol"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-		{
-		  "id": 1,
-		  "result": [
-		    {
-		      "data": [
-		        {
-			  "action": "block",
-			  "application": "SCADA",
-			  "cve": "",
-			  "cve_lf": "",
-			  "database": 4,
-			  "date": "20190121",
-			  "group": "SCADA",
-			  "location": "server,client",
-			  "log": "",
-			  "log-packet": "",
-			  "name": "10-Strike.LANState.Local.Buffer.Overflow.Exploit",
-			  "os": "Windows",
-			  "rate-count": "",
-			  "rate-duration": "",
-			  "rate-mode": "",
-			  "rate-track": "",
-			  "rev": "13518",
-			  "rule-id": 47306,
-			  "service": "TCP,HTTP,FTP,SMTP,POP3,IMAP,NNTP",
-			  "severity": "medium",
-			  "status": "enable",
-			  "vuln_type": "Buffer Errors"
-			},
-			[...]
-		      ],
-		      "status": {
-		        "code": 0,
-			"message": "OK"
-		      },
-		      "url": "/pm/config/adom/DEMO/_rule/list",
-		      "version": "15.821"
-		    }
-		  ]
-		}	
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "action": "block",
+                   "application": "SCADA",
+                   "cve": "",
+                   "cve_lf": "",
+                   "database": 4,
+                   "date": "20220502",
+                   "group": "SCADA",
+                   "location": "server,client",
+                   "log": "",
+                   "log-packet": "",
+                   "name": "10-Strike.LANState.Local.Buffer.Overflow.Exploit",
+                   "objver": "13.518",
+                   "os": "Windows",
+                   "rate-count": "",
+                   "rate-duration": "",
+                   "rate-mode": "",
+                   "rate-track": "",
+                   "rev": "13518",
+                   "rule-id": 47306,
+                   "service": "TCP,HTTP,FTP,SMTP,POP3,IMAP,NNTP",
+                   "severity": "medium",
+                   "status": "enable",
+                   "vuln_type": "Buffer Errors"
+                 },
+                 {
+                   "...": "..."
+                 },
+                 {
+                   "action": "block",
+                   "application": "Other",
+                   "cve": "202237434",
+                   "cve_lf": "",
+                   "database": 11,
+                   "date": "20221104",
+                   "group": "applications3",
+                   "location": "server,client",
+                   "log": "",
+                   "log-packet": "",
+                   "name": "zlib.Library.inflateGetHeader.Handling.Buffer.Overflow",
+                   "objver": "22.423",
+                   "os": "Windows,Linux,MacOS",
+                   "rate-count": "",
+                   "rate-duration": "",
+                   "rate-mode": "",
+                   "rate-track": "",
+                   "rev": "22423",
+                   "rule-id": 52146,
+                   "service": "TCP,HTTP,FTP,SMTP,POP3,IMAP,NNTP",
+                   "severity": "high",
+                   "status": "enable",
+                   "vuln_type": "Buffer Errors"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/root/_rule/list",
+               "version": "26.740"
+             }
+           ]
+         }        
+
+.. note::
+
+   - The obtained signatures are from the IPS package version indicated in the 
+     output of this command:
+
+     .. code-block:: text
+
+        diagnose dvm adom list demo
+
+   - You should get an output similar to the following one:
+
+     .. code-block:: text
+
+        OID      STATE    PRODUCT OSVER MR  LIC NAME                                             MODE    VPN MANAGEMENT        IPS          ISDB
+        3        enabled  FOS     7.0   4       demo                                             Normal  Policy & Device VPNs  26.740       7.3585
+        ---End ADOM list---
+                
+   - In this above output, the IPS package version is given by the ``IPS`` column: ``26.740``
+
 
 How to get IPS Profile Usage?
 +++++++++++++++++++++++++++++
