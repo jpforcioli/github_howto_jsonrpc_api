@@ -1268,7 +1268,7 @@ The following example shows how to get the list of IPS signatures using the ``de
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/pm/config/adom/root/_rule/list",
+               "url": "/pm/config/adom/demo/_rule/list",
                "version": "26.740"
              }
            ]
@@ -1292,6 +1292,146 @@ The following example shows how to get the list of IPS signatures using the ``de
         ---End ADOM list---
                 
    - In this above output, the IPS package version is given by the ``IPS`` column: ``26.740``
+
+How to get list of IPS protocols?
++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the list of IPS protocols using the 
+``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: text
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_data/reserved/ips/sensor/entries/protocol"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: text
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "_flags": "+H",
+                   "name": "BO"
+                 },
+                 {
+                   "_flags": "+H",
+                   "name": "DCERPC"
+                 },
+                 {
+                   "_flags": "+H",
+                   "name": "DHCP"
+                 },
+                 {
+                   "...": "..."
+                 },
+                 {
+                   "_flags": "+H",
+                   "name": "TELNET"
+                 },
+                 {
+                   "_flags": "+H",
+                   "name": "TFN"
+                 },
+                 {
+                   "_flags": "+H",
+                   "name": "UDP"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_data/reserved/ips/sensor/entries/protocol"
+             }
+           ]
+         }
+
+How to get list of IPS applications?
+++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the list of IPS applications using the 
+``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: text
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_data/reserved/ips/sensor/entries/application"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: text
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "_flags": "+H",
+                   "name": "ASP_app"
+                 },
+                 {
+                   "_flags": "+H",
+                   "name": "Adobe"
+                 },
+                 {
+                   "_flags": "+H",
+                   "name": "Apache"
+                 },
+                 {
+                   "...": "..."
+                 },
+                 {
+                   "_flags": "+H",
+                   "name": "Sun"
+                 },
+                 {
+                   "_flags": "+H",
+                   "name": "Veritas"
+                 },
+                 {
+                   "_flags": "+H",
+                   "name": "Winamp"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_data/reserved/ips/sensor/entries/application"
+             }
+           ]
+         }         
 
 How to get IPS Profile Usage?
 +++++++++++++++++++++++++++++
