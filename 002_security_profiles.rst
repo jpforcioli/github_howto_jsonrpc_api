@@ -1303,7 +1303,7 @@ The following example shows how to get the list of IPS protocols using the
 
    .. tab-item:: REQUEST
 
-      .. code-block:: text
+      .. code-block:: json
 
          {
            "id": 3,
@@ -1319,7 +1319,7 @@ The following example shows how to get the list of IPS protocols using the
 
    .. tab-item:: RESPONSE
 
-      .. code-block:: text
+      .. code-block:: json
 
          {
            "id": 3,
@@ -1373,7 +1373,7 @@ The following example shows how to get the list of IPS applications using the
 
    .. tab-item:: REQUEST
 
-      .. code-block:: text
+      .. code-block:: json
 
          {
            "id": 3,
@@ -1389,7 +1389,7 @@ The following example shows how to get the list of IPS applications using the
 
    .. tab-item:: RESPONSE
 
-      .. code-block:: text
+      .. code-block:: json
 
          {
            "id": 3,
