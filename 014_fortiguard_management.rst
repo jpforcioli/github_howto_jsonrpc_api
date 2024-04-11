@@ -9,7 +9,7 @@ following debug command in FortiManager console:
 
 .. code-block:: shell
 
-   diagnose debug application fdssrv 255
+   diagnose debug application fdssvrd 255
    diagnose debug enable
 
 and playing with FortiGuard using either the FortiManager GUI or the 
@@ -124,14 +124,14 @@ Management` secion.
 How to get the FMG upstream servers list?
 -----------------------------------------
       
-It's quite easy to expose the |fmg_api| endpoints by debugging the ``fdssrv``
+It's quite easy to expose the |fmg_api| endpoints by debugging the ``fdssvrd``
 process while issuing the FortiManager CLI command:
 
 .. code-block::
 
    diagnose fmupdate view-serverlist <fgd|fds>
 
-To debug the ``fdssrv`` process:
+To debug the ``fdssvrd`` process:
 
 .. code-block:: shell
 
