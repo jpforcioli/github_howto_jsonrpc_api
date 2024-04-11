@@ -135,7 +135,7 @@ To debug the ``fdssrv`` process:
 
 .. code-block:: shell
 
-   diagnose debug application fdssrvd 255
+   diagnose debug application fdssvrd 255
    diagnose debug enable
    diagnose debug timestamp enable
 
