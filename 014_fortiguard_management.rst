@@ -544,8 +544,15 @@ The following example shows hot to download the firmware image for the FortiOS v
            ]
          }
 
-How to get all the contracts for managed devices?
--------------------------------------------------
+How to get contracts for managed devices?
+-----------------------------------------
+
+There are multiple ways to obtain more or less the same thing: the list of contracts or entitlements associated with the managed devices.
+
+Using ``/um/device/list``
++++++++++++++++++++++++++
+
+The following example shows how to get the contracts for all managed devices:
 
 .. tab-set::
 
@@ -554,309 +561,229 @@ How to get all the contracts for managed devices?
       .. code-block:: json
 
          {
-           "id": 1,
+           "id": 3,
            "method": "exec",
            "params": [
              {
                "url": "/um/device/list"
              }
            ],
-           "session": "{{session}}",
+           "session": "{{session}}"
          }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block::
+      .. code-block:: json
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "count": 27,
-           "dev_object": [
+         {
+           "id": 3,
+           "result": [
              {
-               "account": "",
-               "address": "0.0.0.0",
-               "announce_ip": "",
-               "announce_port": 0,
-               "build": 997,
-               "company": "",
-               "contract": "",
-               "firmware": "FG1K5D-FW-6.02-997",
-               "flags": 16,
-               "industry": "",
-               "lic_map": {},
-               "obj_map": {},
-               "os_mr": 2,
-               "os_type": 0,
-               "os_ver": 6,
-               "platform": "FortiGate-1500D",
-               "serial": "FG1K5D0000000001",
-               "setup_info": "",
-               "sync_time": 0,
-               "uid_active_time": 0,
-               "umdb_exist": 1,
-               "userid": "",
-               "vmlic_check_time": 0,
-               "vmlic_reg_time": 0,
-               "vmlic_status": "",
-               "vmlic_uid": ""
-             },
-   [...]		  
-             {
-               "account": "jpforcioli@fortinet.com",
-               "address": "",
-               "announce_ip": "",
-               "announce_port": 0,
-               "build": 0,
-               "company": "FORTINET",
-               "contract": "Contract=ENHN-1-10-20201113:0:1:1:0*FMWR-1-06-20201113:0:1:1:0*FRVS-1-06-20201113:0:1:1:0*SPRT-1-10-20201113:0:1:1:0|AccountID=jpforcioli@fortinet.com|Industry=Technology|Company=FORTINET|UserID=106728",
-               "firmware": "-FW-6.04-0",
-               "flags": 0,
-               "industry": "Technology",
-               "lic_map": {
-                 "ENHN": "ENHN-1-10-20201113:0:1:1:0",
-                 "FMWR": "FMWR-1-06-20201113:0:1:1:0",
-                 "FRVS": "FRVS-1-06-20201113:0:1:1:0",
-                 "SPRT": "SPRT-1-10-20201113:0:1:1:0"
+               "data": {
+                 "count": 19,
+                 "dev_object": [ "... LIST IS TOO LONG ..." ]
                },
-               "obj_map": {},
-               "os_mr": 4,
-               "os_type": 9,
-               "os_ver": 6,
-               "platform": "FMG-VM64-KVM-FW-6.04-2072",
-               "serial": "FMG-VMTM19008969",
-               "setup_info": "",
-               "sync_time": 0,
-               "uid_active_time": 0,
-               "umdb_exist": 1,
-               "userid": "106728",
-               "vmlic_check_time": 0,
-               "vmlic_reg_time": 0,
-               "vmlic_status": "",
-               "vmlic_uid": ""
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/device/list"
              }
            ]
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/um/device/list"
-       }
-     ]
-   }
+         }               
 
-As indicated by the ``count`` attribute, 27 entries are returned. It could be a
-longer list. This is why we can apply some filtering options.
+      .. note::
 
-We can filter by serial number:
+         - As indicated by the ``count`` attribute, 19 entries are returned
+         - It could be a longer list
+         - This is why we can use some filtering options like ``serial`` or 
+           ``os_type``
 
-**REQUEST:**
-
-.. code-block:: json
-
-                {
-                  "id": 1,
-                  "jsonrpc": "1.0",
-                  "method": "exec",
-                  "params": [
-                    {
-                      "data": {
-                        "serial": "FGVMULTM19003483"
-                      },
-                      "url": "/um/device/list"
-                    }
-                  ],
-                  "session": "o1H/tZO9kxKkew4t+L4HwgfISg/4Wn8EutV4n7Psda8LvLLSemqOrO7BBQki5dtqL3L9TayVv8/rLkKV5l0mGg==",
-                  "verbose": 1
-                }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-                {
-                  "id": 1,
-                  "result": [
-                    {
-                      "data": {
-                        "count": 1,
-                        "dev_object": [
-                          {
-                            "account": "jpforcioli@fortinet.com",
-                            "address": "192.168.244.103",
-                            "announce_ip": "",
-                            "announce_port": 0,
-                            "build": 1637,
-                            "company": "FORTINET",
-                            "contract": "Contract=AVDB-1-06-20201114:0:1:1:0*AVEN-1-06-20201114:0:1:1:0*ENHN-1-10-20201114:0:1:1:0*FGSA-1-06-20201114:0:1:1:0*FMWR-1-06-20201114:0:1:1:0*FRVS-1-06-20201114:0:1:1:0*FURL-1-06-20201114:0:1:1:0*ISSS-1-06-20201114:0:1:1:0*NIDS-1-06-20201114:0:1:1:0*SPAM-1-06-20201114:0:1:1:0*SPRT-1-10-20201114:0:1:1:0*ZHVO-1-06-20201114:0:1:1:0|AccountID=jpforcioli@fortinet.com|Industry=Technology|Company=FORTINET|UserID=106728",
-                            "firmware": "FGVMK6-FW-6.04-1637",
-                            "flags": 0,
-                            "industry": "Technology",
-                            "lic_map": {
-                              "AVDB": "AVDB-1-06-20201114:0:1:1:0",
-                              "AVEN": "AVEN-1-06-20201114:0:1:1:0",
-                              "ENHN": "ENHN-1-10-20201114:0:1:1:0",
-                              "FGSA": "FGSA-1-06-20201114:0:1:1:0",
-                              "FMWR": "FMWR-1-06-20201114:0:1:1:0",
-                              "FRVS": "FRVS-1-06-20201114:0:1:1:0",
-                              "FURL": "FURL-1-06-20201114:0:1:1:0",
-                              "ISSS": "ISSS-1-06-20201114:0:1:1:0",
-                              "NIDS": "NIDS-1-06-20201114:0:1:1:0",
-                              "SPAM": "SPAM-1-06-20201114:0:1:1:0",
-                              "SPRT": "SPRT-1-10-20201114:0:1:1:0",
-                              "ZHVO": "ZHVO-1-06-20201114:0:1:1:0"
-                            },
-                            "obj_map": {
-                              "02000000FNSD00000": 9,
-                              "06004000AVDB00201": 5112082,
-                              "06004000AVDB00701": 5112082,
-                              "06004000CIDB00000": 65637,
-                              "06004000CRDB00000": 65554,
-                              "06004000FFDB00307": 459531,
-                              "06004000FFDB00407": 459531,
-                              "06004000MMDB00101": 5112082,
-                              "06004000MUDB00103": 131750
-                            },
-                            "os_mr": 4,
-                            "os_type": 0,
-                            "os_ver": 6,
-                            "platform": "FortiGate-VM64-KVM",
-                            "serial": "FGVMULTM19003483",
-                            "setup_info": "",
-                            "sync_time": 1592572712,
-                            "uid_active_time": 0,
-                            "umdb_exist": 1,
-                            "userid": "106728",
-                            "vmlic_check_time": 0,
-                            "vmlic_reg_time": 0,
-                            "vmlic_status": "",
-                            "vmlic_uid": ""
-                          }
-                        ]
-                      },
-                      "status": {
-                        "code": 0,
-                        "message": "OK"
-                      },
-                      "url": "/um/device/list"
-                    }
-                  ]
-                }
-
-Or we can filter by operating system type. We can just get the ``os_type`` value
-reported for a device with an operating system type of interest. For instance,
-in the above output, the ``os_type`` is 0 and we know this is for a fortios
-operating system. So now we can ask for all the fortios licenses by using this
-call: 
-
-**REQUEST:**
-
-.. code-block:: json
-
-                {
-                  "id": 1,
-                  "jsonrpc": "1.0",
-                  "method": "exec",
-                  "params": [
-                    {
-                      "data": {
-                        "os_type": 0
-                      },
-                      "url": "/um/device/list"
-                    }
-                  ],
-                  "session": "KZcQk1T8ZUB2orDkAJVhHHcFnzxuaBlYWHKSxjgMdKqfcN32e7B0wJ3o/zNWBRZKdw18tCrP3Uyo7dXkzUoZfg==",
-                  "verbose": 1
-                }
-
-**RESPONSE:**
-
-.. code-block:: 
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "count": 26,
-   [...]
-
-How to get the contracts for one device?
-----------------------------------------
-
-The following example shows how to get the contracts for the managed device with the ``FG100F0000000001`` Serial Number:
+For instance, the following example shows how to get the contracts for the managed device with the ``FG421F0000000001`` Serial Number:
 
 .. tab-set::
 
    .. tab-item:: REQUEST
 
       .. code-block:: json
-      
-         { 
-           "id": 1, 
-           "method": "exec", 
+
+         {
+           "id": 3,
+           "method": "exec",
            "params": [
-             { 
-               "data": { 
-                 "flags": 0, 
-                 "serial": "FG100F0000000001"
-               }, 
-               "url": "/um/misc/dump_contract"
+             {
+               "data": {
+                 "serial": "FG421F0000000001"
+               },
+               "url": "/um/device/list"
              }
-           ], 
+           ],
+           "session": "{{session}}"
          }
-      
+
    .. tab-item:: RESPONSE
 
-      .. code-block:: json      
+      .. code-block:: json
 
-         { 
-           "id": 1, 
+         {
+           "id": 3,
            "result": [
-             { 
-               "data": { 
-                 "contract": [
-                   { 
-                     "account": "foo@bar.com", 
-                     "address": "192.168.195.159:9443", 
-                     "company": "Bar Inc.", 
-                     "contract_item": [
-                       "AVDB-1-06-20210627:0:1:1:0", 
-                       "AVEN-1-06-20210627:0:1:1:0", 
-                       "COMP-1-20-20210627:0:1:1:0", 
-                       "ENHN-1-20-20210627:0:1:1:0", 
-                       "FMWR-1-06-20210627:0:1:1:0", 
-                       "FRVS-1-06-20210627:0:1:1:0", 
-                       "FURL-1-06-20210627:0:1:1:0", 
-                       "HDWR-1-05-20210627:0:1:1:0", 
-                       "IOTH-1-06-20210627:0:1:1:0", 
-                       "NIDS-1-06-20210627:0:1:1:0", 
-                       "SBCL-1-06-20210627:0:1:1:0", 
-                       "SPAM-1-06-20210627:0:1:1:0", 
-                       "SPRT-1-20-20210627:0:1:1:0", 
-                       "ZHVO-1-06-20210627:0:1:1:0"
-                     ], 
-                     "rawdata": "Contract=AVDB-1-06-20210627:0:1:1:0*AVEN-1-06-20210627:0:1:1:0*COMP-1-20-20210627:0:1:1:0*ENHN-1-20-20210627:0:1:1:0*FMWR-1-06-20210627:0:1:1:0*FRVS-1-06-20210627:0:1:1:0*FURL-1-06-20210627:0:1:1:0*HDWR-1-05-20210627:0:1:1:0*IOTH-1-06-20210627:0:1:1:0*NIDS-1-06-20210627:0:1:1:0*SBCL-1-06-20210627:0:1:1:0*SPAM-1-06-20210627:0:1:1:0*SPRT-1-20-20210627:0:1:1:0*ZHVO-1-06-20210627:0:1:1:0|AccountID=foo@bar.com|Company=Bar Inc.|UserID=111111", "serial": "FG100F0000000001"}], "count": 1, "support_level_desc": "04:Return To Factory*05:Advanced HW*06:Web\/Online*10:8x5*20:24x7*99:Trial", "support_type_desc": "AVDB:Advanced Malware Protection*COMP:*ENHN:*FMSS:Mobile Security Service*FMWR:Firmware & General Updates*FRVS:Vulnerability Management*FURL:Web Filtering*HDWR:Hardware*IOTH:IoT Detection*ISSS:Industrial Security Service*NIDS:NGFW*SBCL:FortiSandbox Cloud*SPAM:AntiSpam*SPRT:*VMDB:FortiGuard Vulnerability Management and Compliance*ZHVO:FortiGuard Virus Outbreak Protection Service"
-                   }, 
-                 "status": { 
-                   "code": 0, 
-                   "message": 
-                   "OK"
-                 }, 
-                 "url": "/um/misc/dump_contract"
-               }
+             {
+               "data": {
+                 "count": 1,
+                 "dev_object": [
+                   {
+                     "account": "foo@bar.com",
+                     "address": "10.82.10.133",
+                     "announce_ip": "",
+                     "announce_port": 0,
+                     "build": 1639,
+                     "company": "Bar Inc.",
+                     "contract": "Contract=AVDB-1-06-20250316:0:1:1:0*AVEN-1-06-20250316:0:1:1:0*COMP-1-20-20250316:0:1:1:0*ENHN-1-20-20250316:0:1:1:0*FMWR-1-06-20250316:0:1:1:0*FRVS-1-06-20250316:0:1:1:0*FURL-1-06-20250316:0:1:1:0*HDWR-1-05-20250316:0:1:1:0*NIDS-1-06-20250316:0:1:1:0*SPAM-1-06-20250316:0:1:1:0*SPRT-1-20-20250316:0:1:1:0*ZHVO-1-06-20250316:0:1:1:0|AccountID=foo@bar.com|Company=Bar Inc.|UserID=123456",
+                     "firmware": "FG421F-FW-7.02-1639",
+                     "flags": 0,
+                     "industry": "",
+                     "lic_map": {
+                       "AVDB": "AVDB-1-06-20250316:0:1:1:0",
+                       "AVEN": "AVEN-1-06-20250316:0:1:1:0",
+                       "COMP": "COMP-1-20-20250316:0:1:1:0",
+                       "ENHN": "ENHN-1-20-20250316:0:1:1:0",
+                       "FMWR": "FMWR-1-06-20250316:0:1:1:0",
+                       "FRVS": "FRVS-1-06-20250316:0:1:1:0",
+                       "FURL": "FURL-1-06-20250316:0:1:1:0",
+                       "HDWR": "HDWR-1-05-20250316:0:1:1:0",
+                       "NIDS": "NIDS-1-06-20250316:0:1:1:0",
+                       "SPAM": "SPAM-1-06-20250316:0:1:1:0",
+                       "SPRT": "SPRT-1-20-20250316:0:1:1:0",
+                       "ZHVO": "ZHVO-1-06-20250316:0:1:1:0"
+                     },
+                     "obj_map": {
+                       "07002000AFDB00100": 65548,
+                       "07002000APDB00105": 1770243,
+                       "07002000AVDB00201": 6032945,
+                       "07002000AVDB00701": 6032945,
+                       "07002000AVDB01901": 146887,
+                       "07002000AVEN03300": 393513,
+                       "07002000CIDB00000": 65702,
+                       "07002000CRDB00000": 65586,
+                       "07002000DBDB00100": 197353,
+                       "07002000FFDB02008": 462412,
+                       "07002000FLDB00201": 6032945,
+                       "07002000FLEN08000": 459088,
+                       "07002000FMWP00105": 1572884,
+                       "07002000ICDB00101": 65579,
+                       "07002000MADB00200": 65749,
+                       "07002000MCDB00100": 66013,
+                       "07002000MMDB00101": 6032945,
+                       "07002000SFAS00000": 262199,
+                       "07002000UWDB00100": 262347
+                     },
+                     "os_mr": 2,
+                     "os_type": 0,
+                     "os_ver": 7,
+                     "platform": "FortiGate-4201F",
+                     "serial": "FG421F0000000001",
+                     "setup_info": "",
+                     "sync_time": 1713886270,
+                     "uid_active_time": 0,
+                     "umdb_exist": 1,
+                     "userid": "814571",
+                     "vmlic_check_time": 0,
+                     "vmlic_reg_time": 0,
+                     "vmlic_status": "",
+                     "vmlic_uid": ""
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/device/list"
              }
            ]
+         }        
+
+      .. note::
+
+         As indicated by the ``count`` attribute, only 1 entry is returned 
+         since you asked for a single device's serial number
+
+Or the following example shows how to get the contracts for all managed 
+FortiGate units (i.e., the ones with the FortiOS operating system type ``os_type`` is 0):
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "os_type": 0,
+               },
+               "url": "/um/device/list"
+             }
+           ],
+           "session": "{{session}}"
          }
 
-How to get the contracts for multiple devices?
-----------------------------------------------
+   .. tab-item:: RESPONSE
 
-Just use the same request as the one described in :ref:`How to get the
-contracts for one device?` but without the ``serial`` attribute.
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "count": 17,
+                 "dev_object": [ "... LIST IS TOO LONG ..." ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/device/list"
+             }
+           ]
+         }   
+
+.. tip:: 
+
+   - Where is the ``0`` value from for the ``os_type``?
+   - It's in the file ``/var/dm/syntax/dvmcmd_syntax.json``
+   - Existing values are:
+
+     .. code-block:: json
+
+        "OS_TYPE_OPTIONS": {
+          "unknown": -1,
+          "fos": 0,
+          "fsw": 1,
+          "foc": 2,
+          "fml": 3,
+          "faz": 4,
+          "fwb": 5,
+          "fch": 6,
+          "fct": 7,
+          "log": 8,
+          "fmg": 9,
+          "fsa": 10,
+          "fdd": 11,
+          "fac": 12,
+          "fpx": 13,
+          "fna": 14
+        }
+   - You cannot use the symbolic form: for instance you can't use ``fos`` 
+     instead of ``0``
+
+Using ``/um/misc/dump_contract``
+++++++++++++++++++++++++++++++++
 
 The following example shows how to get the contracts for all managed devices:
 
@@ -878,50 +805,104 @@ The following example shows how to get the contracts for all managed devices:
              }
            ], 
          }
-      
+
    .. tab-item:: RESPONSE
 
-      .. code-block:: json      
+      .. code-block:: json
 
-         { 
-           "id": 1, 
+         {
+           "id": 3,
            "result": [
-             { 
-               "data": { 
-                 "contract": [
-                   { 
-                     "account": "foo@bar.com", 
-                     "address": "192.168.195.159:9443", 
-                     "company": "Bar Inc.", 
-                     "contract_item": [
-                       "AVDB-1-06-20210627:0:1:1:0", 
-                       "AVEN-1-06-20210627:0:1:1:0", 
-                       "COMP-1-20-20210627:0:1:1:0", 
-                       "ENHN-1-20-20210627:0:1:1:0", 
-                       "FMWR-1-06-20210627:0:1:1:0", 
-                       "FRVS-1-06-20210627:0:1:1:0", 
-                       "FURL-1-06-20210627:0:1:1:0", 
-                       "HDWR-1-05-20210627:0:1:1:0", 
-                       "IOTH-1-06-20210627:0:1:1:0", 
-                       "NIDS-1-06-20210627:0:1:1:0", 
-                       "SBCL-1-06-20210627:0:1:1:0", 
-                       "SPAM-1-06-20210627:0:1:1:0", 
-                       "SPRT-1-20-20210627:0:1:1:0", 
-                       "ZHVO-1-06-20210627:0:1:1:0"
-                     ], 
-                     "rawdata": "Contract=AVDB-1-06-20210627:0:1:1:0*AVEN-1-06-20210627:0:1:1:0*COMP-1-20-20210627:0:1:1:0*ENHN-1-20-20210627:0:1:1:0*FMWR-1-06-20210627:0:1:1:0*FRVS-1-06-20210627:0:1:1:0*FURL-1-06-20210627:0:1:1:0*HDWR-1-05-20210627:0:1:1:0*IOTH-1-06-20210627:0:1:1:0*NIDS-1-06-20210627:0:1:1:0*SBCL-1-06-20210627:0:1:1:0*SPAM-1-06-20210627:0:1:1:0*SPRT-1-20-20210627:0:1:1:0*ZHVO-1-06-20210627:0:1:1:0|AccountID=foo@bar.com|Company=Bar Inc.|UserID=111111", "serial": "FG100F0000000001"}], "count": 1, "support_level_desc": "04:Return To Factory*05:Advanced HW*06:Web\/Online*10:8x5*20:24x7*99:Trial", "support_type_desc": "AVDB:Advanced Malware Protection*COMP:*ENHN:*FMSS:Mobile Security Service*FMWR:Firmware & General Updates*FRVS:Vulnerability Management*FURL:Web Filtering*HDWR:Hardware*IOTH:IoT Detection*ISSS:Industrial Security Service*NIDS:NGFW*SBCL:FortiSandbox Cloud*SPAM:AntiSpam*SPRT:*VMDB:FortiGuard Vulnerability Management and Compliance*ZHVO:FortiGuard Virus Outbreak Protection Service"
-                   }, 
-                 "status": { 
-                   "code": 0, 
-                   "message": 
-                   "OK"
-                 }, 
-                 "url": "/um/misc/dump_contract"
-               }
+             {
+               "data": {
+                 "...": "... LIST IS TOO LONG ..."
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/device/list"
              }
            ]
-         }         
-   
+         }           
+
+The following example shows how to get the contracts for the managed device with the ``FG421F0000000001`` Serial Number:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+      
+         { 
+           "id": 1, 
+           "method": "exec", 
+           "params": [
+             { 
+               "data": { 
+                 "flags": 0, 
+                 "serial": "FG421F0000000001"
+               }, 
+               "url": "/um/misc/dump_contract"
+             }
+           ], 
+         }
+
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "acli": [
+                   "UserID=123456|SerialNumber=FCLDPS0000000001|Contract=FCEP-6-20250411-1-1\r",
+                   "UserID=123456|SerialNumber=FCTEMS8824000001|Contract=FCEM-6-20240507-50-50\r",
+                   "UserID=123456|SerialNumber=FSACLPTM24000001|Contract=FSAP-6-20250411-1-1\r",
+                   "\r",
+                   ""
+                 ],
+                 "contract": [
+                   {
+                     "account": "foo@bar.com",
+                     "address": "10.83.10.133",
+                     "company": "FORTINET",
+                     "contract_item": [
+                       "AVDB-1-06-20250316:0:1:1:0",
+                       "AVEN-1-06-20250316:0:1:1:0",
+                       "COMP-1-20-20250316:0:1:1:0",
+                       "ENHN-1-20-20250316:0:1:1:0",
+                       "FMWR-1-06-20250316:0:1:1:0",
+                       "FRVS-1-06-20250316:0:1:1:0",
+                       "FURL-1-06-20250316:0:1:1:0",
+                       "HDWR-1-05-20250316:0:1:1:0",
+                       "NIDS-1-06-20250316:0:1:1:0",
+                       "SPAM-1-06-20250316:0:1:1:0",
+                       "SPRT-1-20-20250316:0:1:1:0",
+                       "ZHVO-1-06-20250316:0:1:1:0"
+                     ],
+                     "industry": "",
+                     "rawdata": "Contract=AVDB-1-06-20250316:0:1:1:0*AVEN-1-06-20250316:0:1:1:0*COMP-1-20-20250316:0:1:1:0*ENHN-1-20-20250316:0:1:1:0*FMWR-1-06-20250316:0:1:1:0*FRVS-1-06-20250316:0:1:1:0*FURL-1-06-20250316:0:1:1:0*HDWR-1-05-20250316:0:1:1:0*NIDS-1-06-20250316:0:1:1:0*SPAM-1-06-20250316:0:1:1:0*SPRT-1-20-20250316:0:1:1:0*ZHVO-1-06-20250316:0:1:1:0|AccountID=foo@bar.com|Company=Bar Inc.|UserID=123456",
+                     "serial": "FG421F0000000001"
+                   }
+                 ],
+                 "count": 1,
+                 "support_level_desc": "05:Advanced HW*06:Web/Online*10:8x5*20:Premium*99:Trial",
+                 "support_type_desc": "AVDB:Advanced Malware Protection*COMP:*DLDB:DLP*ENHN:*FAIS:FortiGuard AI-based Sandbox Service*FAZC:FortiAnalyzer Cloud Basic*FCSS:FortiConverter Service*FGSA:FortiGuard Attack Surface Security Service*FMGC:FortiManager Cloud*FMWR:Firmware & General Updates*FRVS:Vulnerability Management*FSPA:SPA License*FURL:FortiGuard URL, DNS & Video Filtering Service*HDWR:Hardware*IOTH:IoT Detection*IPMC:IPAM Cloud*ISSS:FortiGuard OT Security Service*NIDS:FortiGuard IPS Service*SBCL:FortiSandbox Cloud*SPAM:AntiSpam*SPRT:*SWNC:SD-WAN Orchestrator*SWNM:FortiGuard SD-WAN Underlay Service*SWNO:SD-WAN Overlay Controller*SWOS:SD-WAN Overlay as a Service*VDOM:VDOM*VMLS:VM license*ZHVO:FortiGuard Virus Outbreak Protection Service"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/misc/dump_contract"
+             }
+           ]
+         }            
+
 How to get the list of FortiGuard objects downloaded by FortiManager?
 ---------------------------------------------------------------------
 
