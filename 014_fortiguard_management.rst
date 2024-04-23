@@ -710,7 +710,7 @@ For instance, the following example shows how to get the contracts for the manag
          since you asked for a single device's serial number
 
 Or the following example shows how to get the contracts for all managed 
-FortiGate units (i.e., the ones with the FortiOS operating system type ``os_type`` is 0):
+FortiGate units (i.e., the ones with the FortiOS operating system type ``os_type`` is ``0``):
 
 .. tab-set::
 
