@@ -547,22 +547,22 @@ The following example shows hot to download the firmware image for the FortiOS v
 How to get all the contracts for managed devices?
 -------------------------------------------------
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-                {
-                  "id": 1,
-                  "jsonrpc": "1.0",
-                  "method": "exec",
-                  "params": [
-                    {
-                      "url": "/um/device/list"
-                    }
-                  ],
-                  "session": "PIB+lWxLzyZPVbeDyoUG6HVouT/unO8M8WLS9F59B+tqIKYrfpGlZzKbMfLc095UkT2km1C4SIqQIXODHe7NHA==",
-                  "verbose": 1
-                }
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/um/device/list"
+             }
+           ],
+           "session": "{{session}}",
+         }
 
 **RESPONSE:**
 
@@ -787,74 +787,140 @@ call:
 How to get the contracts for one device?
 ----------------------------------------
 
-This information can be exposed by enabling debug on *fdssvrd* daemon:
+The following example shows how to get the contracts for the managed device with the ``FG100F0000000001`` Serial Number:
 
-.. code-block::
+.. tab-set::
 
-   diagnose debug application fdssvrd 255
-   diagnose debug timestamp enable
-   diagnose debug enable
+   .. tab-item:: REQUEST
 
-**REQUEST**:
-
-.. code-block:: 
-
-   { 
-     "id": 1, 
-     "method": "exec", 
-     "params": [
-       { 
-         "data": { 
-           "flags": 0, 
-           "serial": "FG100FTK19013195"
-         }, 
-         "url": "/um/misc/dump_contract"
-       }
-     ], 
-   }
-
-**RESPONSE**:
-
-.. code-block::
-
-   { 
-     "id": 1, 
-     "result": [
-       { 
-         "data": { 
-           "contract": [
+      .. code-block:: json
+      
+         { 
+           "id": 1, 
+           "method": "exec", 
+           "params": [
              { 
-               "account": "tiger_sophia@fortinet.com", 
-               "address": "192.168.195.159:9443", 
-               "company": "EMEA Tigers - Fortinet", 
-               "contract_item": [
-                 "AVDB-1-06-20210627:0:1:1:0", 
-                 "AVEN-1-06-20210627:0:1:1:0", 
-                 "COMP-1-20-20210627:0:1:1:0", 
-                 "ENHN-1-20-20210627:0:1:1:0", 
-                 "FMWR-1-06-20210627:0:1:1:0", 
-                 "FRVS-1-06-20210627:0:1:1:0", 
-                 "FURL-1-06-20210627:0:1:1:0", 
-                 "HDWR-1-05-20210627:0:1:1:0", 
-                 "IOTH-1-06-20210627:0:1:1:0", 
-                 "NIDS-1-06-20210627:0:1:1:0", 
-                 "SBCL-1-06-20210627:0:1:1:0", 
-                 "SPAM-1-06-20210627:0:1:1:0", 
-                 "SPRT-1-20-20210627:0:1:1:0", 
-                 "ZHVO-1-06-20210627:0:1:1:0"
-               ], 
-               "rawdata": "Contract=AVDB-1-06-20210627:0:1:1:0*AVEN-1-06-20210627:0:1:1:0*COMP-1-20-20210627:0:1:1:0*ENHN-1-20-20210627:0:1:1:0*FMWR-1-06-20210627:0:1:1:0*FRVS-1-06-20210627:0:1:1:0*FURL-1-06-20210627:0:1:1:0*HDWR-1-05-20210627:0:1:1:0*IOTH-1-06-20210627:0:1:1:0*NIDS-1-06-20210627:0:1:1:0*SBCL-1-06-20210627:0:1:1:0*SPAM-1-06-20210627:0:1:1:0*SPRT-1-20-20210627:0:1:1:0*ZHVO-1-06-20210627:0:1:1:0|AccountID=tiger_sophia@fortinet.com|Company=EMEA Tigers - Fortinet|UserID=122589", "serial": "FG100FTK19013195"}], "count": 1, "support_level_desc": "04:Return To Factory*05:Advanced HW*06:Web\/Online*10:8x5*20:24x7*99:Trial", "support_type_desc": "AVDB:Advanced Malware Protection*COMP:*ENHN:*FMSS:Mobile Security Service*FMWR:Firmware & General Updates*FRVS:Vulnerability Management*FURL:Web Filtering*HDWR:Hardware*IOTH:IoT Detection*ISSS:Industrial Security Service*NIDS:NGFW*SBCL:FortiSandbox Cloud*SPAM:AntiSpam*SPRT:*VMDB:FortiGuard Vulnerability Management and Compliance*ZHVO:FortiGuard Virus Outbreak Protection Service"
-             }, 
-           "status": { 
-             "code": 0, 
-             "message": 
-             "OK"
-           }, 
-           "url": "/um/misc/dump_contract"
+               "data": { 
+                 "flags": 0, 
+                 "serial": "FG100F0000000001"
+               }, 
+               "url": "/um/misc/dump_contract"
+             }
+           ], 
          }
-       }
-     ]
-   }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json      
+
+         { 
+           "id": 1, 
+           "result": [
+             { 
+               "data": { 
+                 "contract": [
+                   { 
+                     "account": "foo@bar.com", 
+                     "address": "192.168.195.159:9443", 
+                     "company": "Bar Inc.", 
+                     "contract_item": [
+                       "AVDB-1-06-20210627:0:1:1:0", 
+                       "AVEN-1-06-20210627:0:1:1:0", 
+                       "COMP-1-20-20210627:0:1:1:0", 
+                       "ENHN-1-20-20210627:0:1:1:0", 
+                       "FMWR-1-06-20210627:0:1:1:0", 
+                       "FRVS-1-06-20210627:0:1:1:0", 
+                       "FURL-1-06-20210627:0:1:1:0", 
+                       "HDWR-1-05-20210627:0:1:1:0", 
+                       "IOTH-1-06-20210627:0:1:1:0", 
+                       "NIDS-1-06-20210627:0:1:1:0", 
+                       "SBCL-1-06-20210627:0:1:1:0", 
+                       "SPAM-1-06-20210627:0:1:1:0", 
+                       "SPRT-1-20-20210627:0:1:1:0", 
+                       "ZHVO-1-06-20210627:0:1:1:0"
+                     ], 
+                     "rawdata": "Contract=AVDB-1-06-20210627:0:1:1:0*AVEN-1-06-20210627:0:1:1:0*COMP-1-20-20210627:0:1:1:0*ENHN-1-20-20210627:0:1:1:0*FMWR-1-06-20210627:0:1:1:0*FRVS-1-06-20210627:0:1:1:0*FURL-1-06-20210627:0:1:1:0*HDWR-1-05-20210627:0:1:1:0*IOTH-1-06-20210627:0:1:1:0*NIDS-1-06-20210627:0:1:1:0*SBCL-1-06-20210627:0:1:1:0*SPAM-1-06-20210627:0:1:1:0*SPRT-1-20-20210627:0:1:1:0*ZHVO-1-06-20210627:0:1:1:0|AccountID=foo@bar.com|Company=Bar Inc.|UserID=111111", "serial": "FG100F0000000001"}], "count": 1, "support_level_desc": "04:Return To Factory*05:Advanced HW*06:Web\/Online*10:8x5*20:24x7*99:Trial", "support_type_desc": "AVDB:Advanced Malware Protection*COMP:*ENHN:*FMSS:Mobile Security Service*FMWR:Firmware & General Updates*FRVS:Vulnerability Management*FURL:Web Filtering*HDWR:Hardware*IOTH:IoT Detection*ISSS:Industrial Security Service*NIDS:NGFW*SBCL:FortiSandbox Cloud*SPAM:AntiSpam*SPRT:*VMDB:FortiGuard Vulnerability Management and Compliance*ZHVO:FortiGuard Virus Outbreak Protection Service"
+                   }, 
+                 "status": { 
+                   "code": 0, 
+                   "message": 
+                   "OK"
+                 }, 
+                 "url": "/um/misc/dump_contract"
+               }
+             }
+           ]
+         }
+
+How to get the contracts for multiple devices?
+----------------------------------------------
+
+Just use the same request as the one described in :ref:`How to get the
+contracts for one device?` but without the ``serial`` attribute.
+
+The following example shows how to get the contracts for all managed devices:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         { 
+           "id": 1, 
+           "method": "exec", 
+           "params": [
+             { 
+               "data": { 
+                 "flags": 0, 
+               }, 
+               "url": "/um/misc/dump_contract"
+             }
+           ], 
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json      
+
+         { 
+           "id": 1, 
+           "result": [
+             { 
+               "data": { 
+                 "contract": [
+                   { 
+                     "account": "foo@bar.com", 
+                     "address": "192.168.195.159:9443", 
+                     "company": "Bar Inc.", 
+                     "contract_item": [
+                       "AVDB-1-06-20210627:0:1:1:0", 
+                       "AVEN-1-06-20210627:0:1:1:0", 
+                       "COMP-1-20-20210627:0:1:1:0", 
+                       "ENHN-1-20-20210627:0:1:1:0", 
+                       "FMWR-1-06-20210627:0:1:1:0", 
+                       "FRVS-1-06-20210627:0:1:1:0", 
+                       "FURL-1-06-20210627:0:1:1:0", 
+                       "HDWR-1-05-20210627:0:1:1:0", 
+                       "IOTH-1-06-20210627:0:1:1:0", 
+                       "NIDS-1-06-20210627:0:1:1:0", 
+                       "SBCL-1-06-20210627:0:1:1:0", 
+                       "SPAM-1-06-20210627:0:1:1:0", 
+                       "SPRT-1-20-20210627:0:1:1:0", 
+                       "ZHVO-1-06-20210627:0:1:1:0"
+                     ], 
+                     "rawdata": "Contract=AVDB-1-06-20210627:0:1:1:0*AVEN-1-06-20210627:0:1:1:0*COMP-1-20-20210627:0:1:1:0*ENHN-1-20-20210627:0:1:1:0*FMWR-1-06-20210627:0:1:1:0*FRVS-1-06-20210627:0:1:1:0*FURL-1-06-20210627:0:1:1:0*HDWR-1-05-20210627:0:1:1:0*IOTH-1-06-20210627:0:1:1:0*NIDS-1-06-20210627:0:1:1:0*SBCL-1-06-20210627:0:1:1:0*SPAM-1-06-20210627:0:1:1:0*SPRT-1-20-20210627:0:1:1:0*ZHVO-1-06-20210627:0:1:1:0|AccountID=foo@bar.com|Company=Bar Inc.|UserID=111111", "serial": "FG100F0000000001"}], "count": 1, "support_level_desc": "04:Return To Factory*05:Advanced HW*06:Web\/Online*10:8x5*20:24x7*99:Trial", "support_type_desc": "AVDB:Advanced Malware Protection*COMP:*ENHN:*FMSS:Mobile Security Service*FMWR:Firmware & General Updates*FRVS:Vulnerability Management*FURL:Web Filtering*HDWR:Hardware*IOTH:IoT Detection*ISSS:Industrial Security Service*NIDS:NGFW*SBCL:FortiSandbox Cloud*SPAM:AntiSpam*SPRT:*VMDB:FortiGuard Vulnerability Management and Compliance*ZHVO:FortiGuard Virus Outbreak Protection Service"
+                   }, 
+                 "status": { 
+                   "code": 0, 
+                   "message": 
+                   "OK"
+                 }, 
+                 "url": "/um/misc/dump_contract"
+               }
+             }
+           ]
+         }         
    
 How to get the list of FortiGuard objects downloaded by FortiManager?
 ---------------------------------------------------------------------
