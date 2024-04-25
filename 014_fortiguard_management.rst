@@ -903,6 +903,164 @@ The following example shows how to get the contracts for the managed device with
            ]
          }            
 
+How to get the package versions for your managed devices?
+---------------------------------------------------------
+
+Here *package* means IPS, AV, Applications, etc. databases that are used by your
+managed devices.
+
+The following example shows how to get the package versions for all your 
+managed devices:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "flags": 0
+               },
+               "url": "/um/device/object"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "count": 19,
+                 "dev_object": [ "... TO LARGE OUTPUT ..." ],
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/device/object"
+             }
+           ]
+         }        
+
+The following example shows how to get the package versions for the managed device with the ``FG421F0000000001`` Serial Number:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "flags": 0,
+                 "serial": "FG421F0000000001"
+               },
+               "url": "/um/device/object"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+         
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "count": 1,
+                 "dev_object": [
+                   {
+                     "exclude_reason": "",
+                     "flags": 0,
+                     "object_version": [
+                       {
+                         "current_version": "00001.00166",
+                         "latest_version": "00001.00166",
+                         "license": "valid",
+                         "license_type": "FMWR",
+                         "obj_desc": "Client ID DB",
+                         "obj_fmgi": {
+                           "ext_desc": "Client ID DB",
+                           "objid": "07002000CIDB00000",
+                           "product": "FortiManager",
+                           "service": "Firmware",
+                           "subtype": "",
+                           "version": "7.2.1+"
+                         },
+                         "objid": "07002000CIDB00000",
+                         "prefer_version": "00000.00000",
+                         "status": "up-to-date"
+                       },
+                       {
+                         "current_version": "00001.00043",
+                         "latest_version": "00001.00043",
+                         "license": "valid",
+                         "license_type": "FMWR",
+                         "obj_desc": "ICDB",
+                         "obj_fmgi": {
+                           "ext_desc": "Object for a list of SaaS Applications.",
+                           "objid": "07002000ICDB00101",
+                           "product": "Inline Casb DataBase",
+                           "service": "FMWR",
+                           "subtype": "",
+                           "version": "7.2"
+                         },
+                         "objid": "07002000ICDB00101",
+                         "prefer_version": "00000.00000",
+                         "status": "up-to-date"
+                       },
+                       {
+                         "current_version": "00004.00055",
+                         "latest_version": "00004.00055",
+                         "license": "valid",
+                         "license_type": "FGSA:FMWR",
+                         "obj_desc": "Security",
+                         "obj_fmgi": {
+                           "ext_desc": "Security",
+                           "objid": "07002000SFAS00000",
+                           "product": "FortiManager",
+                           "service": "Security",
+                           "subtype": "",
+                           "version": "7.2.1+"
+                         },
+                         "objid": "07002000SFAS00000",
+                         "prefer_version": "00000.00000",
+                         "status": "up-to-date"
+                       }
+                     ],
+                     "serial": "FG421F0000000001",
+                     "status": "up-to-date",
+                     "update_time": 1713888672
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/device/object"
+             }
+           ]
+         }
+         
 How to get the list of FortiGuard objects downloaded by FortiManager?
 ---------------------------------------------------------------------
 

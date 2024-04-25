@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'How to FortiManager API?'
-copyright = '2024, Jean-Pierre Forcioli'
-author = 'NOC/SOC Fortinet CSE Team'
+copyright = '2024'
+author = 'Jean-Pierre Forcioli'
 
 # The full version, including alpha/beta/rc tags
 release = '1.0.0'

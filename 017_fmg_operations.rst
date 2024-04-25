@@ -1167,6 +1167,116 @@ The following example show how to unlock the ``dev_001`` locked device from the 
            ]
          }
 
+How to figure out there's a lock?
++++++++++++++++++++++++++++++++++
+
+``lockinfo`` can be used to obtain information about an existing lock.
+
+When ADOM isn't locked
+______________________
+
+The following example shows how to get the lock details for the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ]
+         }
+
+      .. note::
+
+         - When the ADOM isn't lock, nothing special is returned
+
+When ADOM is locked
+___________________
+
+The following example shows how to get the lock details for the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "adom_dirty": 0,
+                   "db_mode": 1,
+                   "dev_oid": 165,
+                   "dirty": 0,
+                   "flags": 0,
+                   "lock_sid": 37154,
+                   "lock_time": 1714077048,
+                   "lock_user": "admin",
+                   "obj_cat": 0,
+                   "obj_oid": 0,
+                   "obj_url": "",
+                   "type": 1,
+                   "wfsid": 0
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ]
+         }
+      .. note::
+
+         - When the ADOM is locked, FortiManager returns multiple information 
+           like the owner of the lock (``lock_user``) and the lock time 
+           (``lock_time``)
 
 Workflow mode
 -------------
