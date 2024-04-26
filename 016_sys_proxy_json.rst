@@ -59,7 +59,7 @@ How to encapsulate FOS REST API call within FMG JSON RPC API?
 
 The FMG JSON RPC API url is:
 
-.. code-block::
+.. code-block:: text
 
    /sys/proxy/json
 
@@ -67,7 +67,7 @@ But let's have a look first at a FMG debug output when from the FMG GUI, we try
 to get the kernel routes from a managed devices. The following FMG CLI
 commands:
 
-.. code-block::
+.. code-block:: shell
 
    diagnose debug service sys 255
    diagnose debug timestamp enable
@@ -75,7 +75,7 @@ commands:
 
 will expose this debug output:
 
-.. code-block::
+.. code-block:: json
  
    {
      "client": "gui json:17054",
@@ -109,7 +109,7 @@ We can observe that:
 
   - For one device:
 
-    .. code-block::
+    .. code-block:: json
              
        "target": [
            "adom/adom_dut/device/fgt_dut1"
@@ -117,7 +117,7 @@ We can observe that:
 
   - For multiple devices:
 
-    .. code-block::
+    .. code-block:: json
              
        "target": [
            "adom/adom_dut/device/fgt_dut1",
@@ -126,7 +126,7 @@ We can observe that:
 
   - For one device group:
 
-    .. code-block::
+    .. code-block:: json
              
        "target": [
            "adom/adom_dut/group/emea_devices"
@@ -149,7 +149,7 @@ We can observe that:
 
   - For multiple device groups:
 
-    .. code-block::
+    .. code-block:: json
              
        "target": [
            "adom/adom_dut/group/emea_devices",
@@ -158,7 +158,7 @@ We can observe that:
 
   - For multiple devices and device groups:
 
-    .. code-block::
+    .. code-block:: json
              
        "target": [
            "adom/adom_dut/group/emea_devices",

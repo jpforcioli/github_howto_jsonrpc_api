@@ -1061,6 +1061,484 @@ The following example shows how to get the package versions for the managed devi
            ]
          }
          
+How to get the license status for managed devices?
+--------------------------------------------------
+
+This is more or less what you're trying to achieve in :ref:`How to get 
+contracts for managed devices?` or in :ref:`How to get the package versions for 
+your managed devices?` by using data collected by the FortiManager.
+
+However, it doesn't seem to giver you the full list of contracts, packages name 
+and versions.
+
+The following example is getting the license status from the managed devices 
+themselves:
+
+.. tab-set::
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "action": "get",
+                 "resource": "/api/v2/monitor/license/status",
+                 "target": [
+                   "adom/demo/group/All_FortiGate"
+                 ]
+               },
+               "url": "sys/proxy/json"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "response": {
+                     "build": 2571,
+                     "http_method": "GET",
+                     "name": "status",
+                     "path": "license",
+                     "results": {
+                       "ai_malware_detection": {
+                         "entitlement": "AVDB",
+                         "expires": 1731283200,
+                         "last_update": 978303600,
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "0.00000"
+                       },
+                       "antispam": {
+                         "entitlement": "SPAM",
+                         "expires": 1731283200,
+                         "status": "licensed",
+                         "type": "live_fortiguard_service"
+                       },
+                       "antivirus": {
+                         "db_status": "db_type_extended",
+                         "engine": {
+                           "last_update": 1698359340,
+                           "version": "7.00021"
+                         },
+                         "entitlement": "AVDB",
+                         "expires": 1731283200,
+                         "last_update": 1523293620,
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "1.00000"
+                       },
+                       "appctrl": {
+                         "entitlement": "FMWR",
+                         "expires": 1731283200,
+                         "last_update": 1448933400,
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "6.00741"
+                       },
+                       "blacklisted_certificates": {
+                         "entitlement": "FURL",
+                         "expires": 1731283200,
+                         "last_update": 1713819991,
+                         "last_update_attempt": 1714168271,
+                         "last_update_method_status": "update_method_sched",
+                         "last_update_result_status": "update_result_no_updates",
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "1.00477"
+                       },
+                       "botnet_domain": {
+                         "entitlement": "AVDB",
+                         "expires": 1731283200,
+                         "last_update": 1714157471,
+                         "last_update_attempt": 1714168271,
+                         "last_update_method_status": "update_method_sched",
+                         "last_update_result_status": "update_result_no_updates",
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "3.00752"
+                       },
+                       "botnet_ip": {
+                         "last_update": 1714164158,
+                         "last_update_attempt": 1714168271,
+                         "last_update_method_status": "update_method_sched",
+                         "last_update_result_status": "update_result_no_updates",
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "7.03667"
+                       },
+                       "data_leak_prevention": {
+                         "entitlement": "DLDB",
+                         "last_update": 978303600,
+                         "last_update_attempt": 1714168271,
+                         "last_update_method_status": "update_method_manual",
+                         "last_update_result_status": "update_result_not_authorized",
+                         "status": "no_license",
+                         "type": "downloaded_fds_object",
+                         "version": "0.00000"
+                       },
+                       "device_os_id": {
+                         "entitlement": "FMWR",
+                         "expires": 1731283200,
+                         "last_update": 1714063871,
+                         "last_update_attempt": 1714168271,
+                         "last_update_method_status": "update_method_sched",
+                         "last_update_result_status": "update_result_no_updates",
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "1.00167"
+                       },
+                       "firmware_updates": {
+                         "entitlement": "FMWR",
+                         "expires": 1731283200,
+                         "status": "licensed",
+                         "type": "live_fortiguard_service"
+                       },
+                       "fortianalyzer_cloud": {
+                         "entitlement": "FAZC",
+                         "expires": 1731283200,
+                         "status": "licensed",
+                         "type": "live_cloud_service"
+                       },
+                       "fortianalyzer_cloud_premium": {
+                         "entitlement": "AFAC",
+                         "status": "no_license",
+                         "type": "live_cloud_service"
+                       },
+                       "forticare": {
+                         "account": "jpforcioli@fortinet.com",
+                         "company": "Fortinet",
+                         "industry": "Technology",
+                         "registration_status": "registered",
+                         "registration_supported": true,
+                         "status": "registered",
+                         "support": {
+                           "enhanced": {
+                             "expires": 1731283200,
+                             "status": "licensed",
+                             "support_level": "Premium"
+                           }
+                         },
+                         "type": "cloud_service_status"
+                       },
+                       "forticloud": {
+                         "status": "cloud_logged_out",
+                         "type": "cloud_service_status"
+                       },
+                       "forticloud_logging": {
+                         "log_retention_days": 7,
+                         "max_bytes": 0,
+                         "status": "free_license",
+                         "type": "live_cloud_service",
+                         "used_bytes": 0
+                       },
+                       "forticloud_sandbox": {
+                         "entitlement": "AVDB",
+                         "expires": 1731283200,
+                         "files_uploaded_daily": 0,
+                         "max_files_daily": 100,
+                         "status": "licensed",
+                         "type": "live_cloud_service"
+                       },
+                       "forticonverter": {
+                         "entitlement": "FCSS",
+                         "expires": 1731283200,
+                         "status": "licensed",
+                         "type": "live_cloud_service"
+                       },
+                       "fortiems_cloud": {
+                         "entitlement": "FCEM",
+                         "expires": 1736899200,
+                         "status": "licensed",
+                         "type": "account_level_live_cloud_service"
+                       },
+                       "fortiguard": {
+                         "connected": true,
+                         "connection_issue": false,
+                         "fortigate_wan_ip": "34.140.239.116",
+                         "has_connected": true,
+                         "last_connection_success": 1714168271,
+                         "next_scheduled_update": 1714169160,
+                         "scheduled_updates_enabled": true,
+                         "server_address": "173.243.141.6:443",
+                         "supported": true,
+                         "type": "cloud_service_status",
+                         "update_server_usa": true
+                       },
+                       "fortiguard_ai_based_sandbox": {
+                         "entitlement": "FAIS",
+                         "status": "no_license",
+                         "type": "live_cloud_service"
+                       },
+                       "fortimanager_cloud": {
+                         "entitlement": "FMGC",
+                         "expires": 1731283200,
+                         "status": "licensed",
+                         "type": "live_cloud_service"
+                       },
+                       "fortimanager_cloud_alci": {
+                         "entitlement": "FMGC",
+                         "expires": 1700697600,
+                         "status": "expired",
+                         "type": "account_level_live_cloud_service"
+                       },
+                       "fortisandbox_cloud": {
+                         "entitlement": "FSAC",
+                         "status": "no_license",
+                         "type": "live_cloud_service"
+                       },
+                       "fortisandbox_cloud_alci": {
+                         "entitlement": "FSAP",
+                         "status": "no_license",
+                         "type": "account_level_live_cloud_service"
+                       },
+                       "fortisase_lan_extension": {
+                         "entitlement": "FSFG",
+                         "status": "no_license",
+                         "type": "live_cloud_service"
+                       },
+                       "fortisase_private_access": {
+                         "entitlement": "FSPA",
+                         "status": "no_license",
+                         "type": "live_cloud_service"
+                       },
+                       "icdb": {
+                         "entitlement": "FMWR",
+                         "expires": 1731283200,
+                         "last_update": 1713806476,
+                         "last_update_attempt": 1714168271,
+                         "last_update_method_status": "update_method_sched",
+                         "last_update_result_status": "update_result_no_updates",
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "1.00043"
+                       },
+                       "industrial_db": {
+                         "entitlement": "ISSS",
+                         "expires": 1731283200,
+                         "last_update": 1448933400,
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "6.00741"
+                       },
+                       "inline_casb": {
+                         "entitlement": "FMWR",
+                         "expires": 1731283200,
+                         "last_update": 1712184731,
+                         "last_update_attempt": 1714168271,
+                         "last_update_method_status": "update_method_sched",
+                         "last_update_result_status": "update_result_no_updates",
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "1.00005"
+                       },
+                       "internet_service_db": {
+                         "last_update": 1714164158,
+                         "last_update_attempt": 1714168271,
+                         "last_update_method_status": "update_method_sched",
+                         "last_update_result_status": "update_result_no_updates",
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "7.03667"
+                       },
+                       "iot_detection": {
+                         "definitions": {
+                           "entitlement": "IOTH",
+                           "expires": 1731283200,
+                           "last_update": 1660753860,
+                           "status": "licensed",
+                           "type": "downloaded_fds_object",
+                           "version": "0.00000"
+                         },
+                         "entitlement": "IOTH",
+                         "expires": 1731283200,
+                         "status": "licensed",
+                         "type": "live_fortiguard_service"
+                       },
+                       "ips": {
+                         "db_status": "db_type_extended",
+                         "engine": {
+                           "last_update": 1701106200,
+                           "version": "7.00524"
+                         },
+                         "entitlement": "NIDS",
+                         "expires": 1731283200,
+                         "last_update": 1448933400,
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "6.00741"
+                       },
+                       "local_in_virtual_patching": {
+                         "entitlement": "FMWR",
+                         "expires": 1731283200,
+                         "last_update": 1713889272,
+                         "last_update_attempt": 1714168271,
+                         "last_update_method_status": "update_method_sched",
+                         "last_update_result_status": "update_result_no_updates",
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "24.00040"
+                       },
+                       "malicious_urls": {
+                         "entitlement": "NIDS",
+                         "expires": 1731283200,
+                         "last_update": 1420070460,
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "1.00001"
+                       },
+                       "mobile_malware": {
+                         "entitlement": "AVDB",
+                         "expires": 1731283200,
+                         "last_update": 978303600,
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "0.00000"
+                       },
+                       "ot_detection": {
+                         "detect_definitions": {
+                           "entitlement": "ISSS",
+                           "expires": 1731283200,
+                           "last_update": 978303600,
+                           "status": "licensed",
+                           "type": "downloaded_fds_object",
+                           "version": "0.00000"
+                         },
+                         "entitlement": "IOTH",
+                         "expires": 1731283200,
+                         "patch_definitions": {
+                           "entitlement": "ISSS",
+                           "expires": 1731283200,
+                           "last_update": 978303600,
+                           "status": "licensed",
+                           "type": "downloaded_fds_object",
+                           "version": "0.00000"
+                         },
+                         "status": "licensed",
+                         "type": "live_fortiguard_service"
+                       },
+                       "outbreak_prevention": {
+                         "entitlement": "ZHVO",
+                         "expires": 1731283200,
+                         "status": "licensed",
+                         "type": "live_fortiguard_service"
+                       },
+                       "outbreak_security_rating": {
+                         "entitlement": "FMWR",
+                         "expires": 1731283200,
+                         "last_update": 1710249207,
+                         "last_update_attempt": 1714168271,
+                         "last_update_method_status": "update_method_sched",
+                         "last_update_result_status": "update_result_no_updates",
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "5.00032"
+                       },
+                       "psirt_security_rating": {
+                         "entitlement": "FMWR",
+                         "expires": 1731283200,
+                         "last_update": 1710249207,
+                         "last_update_attempt": 1714168271,
+                         "last_update_method_status": "update_method_sched",
+                         "last_update_result_status": "update_result_no_updates",
+                         "status": "licensed",
+                         "type": "downloaded_fds_object",
+                         "version": "5.00032"
+                       },
+                       "sdwan_network_monitor": {
+                         "entitlement": "SWNM",
+                         "expires": 1731283200,
+                         "status": "licensed",
+                         "type": "live_fortiguard_service"
+                       },
+                       "sdwan_overlay_aas": {
+                         "entitlement": "SWOS",
+                         "status": "no_license",
+                         "type": "live_cloud_service"
+                       },
+                       "security_rating": {
+                         "entitlement": "FGSA",
+                         "expires": 1731283200,
+                         "status": "licensed",
+                         "type": "functionality_enabling"
+                       },
+                       "sms": {
+                         "max": 0,
+                         "status": "no_license",
+                         "type": "other",
+                         "used": 0
+                       },
+                       "vdom": {
+                         "can_upgrade": true,
+                         "max": 10,
+                         "type": "platform",
+                         "used": 1
+                       },
+                       "vm": {
+                         "closed_network": false,
+                         "cpu_max": 1,
+                         "cpu_used": 1,
+                         "expires": 1731106800,
+                         "is_payg": false,
+                         "license_from_forticare": true,
+                         "license_model": 6,
+                         "license_platform_name": "FGVM01",
+                         "mem_used": 2089811968,
+                         "status": "vm_valid",
+                         "type": "platform",
+                         "valid": true
+                       },
+                       "web_filtering": {
+                         "category_list_version": 10,
+                         "entitlement": "FURL",
+                         "expires": 1731283200,
+                         "running": false,
+                         "status": "licensed",
+                         "type": "live_fortiguard_service"
+                       }
+                     },
+                     "serial": "FG421F0000000001",
+                     "status": "success",
+                     "vdom": "root",
+                     "version": "v7.4.2"
+                   },
+                   "status": {
+                     "code": 0,
+                     "message": "OK"
+                   },
+                   "target": "dev_001"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "sys/proxy/json"
+             }
+           ]
+         }
+
+      .. note::
+
+         - The special ``All_FortiGate`` device group is for all managed devices
+           from the specified ADOM
+
+         - Above output is for one managed device; it means the ``demo`` ADOM 
+           was having only one managed device at the time this request was made
+         
 How to get the list of FortiGuard objects downloaded by FortiManager?
 ---------------------------------------------------------------------
 
