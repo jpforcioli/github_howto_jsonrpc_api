@@ -3011,6 +3011,46 @@ a single API call the ``delete`` and ``filter`` operation:
            ]
          }
 
+How to purge all firewall policies?
++++++++++++++++++++++++++++++++++++
+
+The following example shows you how to purge all firewall policies from the ``ppkg_001`` Policy Package in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "confirm": 1,
+               "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+             }
+           ],
+           "session": "{{session}}"
+         }        
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+             }
+           ]
+         }        
+
 How to update a firewall policy?
 ++++++++++++++++++++++++++++++++
 

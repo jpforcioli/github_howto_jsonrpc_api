@@ -1059,6 +1059,47 @@ from ADOM ``adom_dc2``:
      ]
    }
 
+How to delete all members?
+++++++++++++++++++++++++++
+
+The following example shows how to delete all members from othe ``grp_001`` 
+firewall addrgrp in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "unset",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/firewall/addrgrp/grp_001/member"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/addrgrp/grp_001/member"
+             }
+           ]
+         }
+
+
 Wildcard FQDN
 -------------
 
