@@ -3866,13 +3866,13 @@ where:
 More information about the partial install mechanism are given in section
 :ref:`Partial Install`
 
-How to install an IPS profile?
-______________________________
+How to partial install an IPS profile?
+______________________________________
 
-Using legacy partial install
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Using the Legacy Partial Install API
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-See :ref:`Legacy Partial Install API` for more details about the *legacy partial install*.
+See :ref:`Legacy Partial Install API` for more details about the *Legacy Partial Install API*.
 
 The following example shows how to partial install the ``ips_sensor_001`` IPS 
 profile from the ``demo`` ADOM against the ``dev_001`` and ``dev_002`` managed device and their respective ``root`` VDOM:
@@ -3930,10 +3930,10 @@ profile from the ``demo`` ADOM against the ``dev_001`` and ``dev_002`` managed d
            ]
          }
 
-Using partial install v2
-@@@@@@@@@@@@@@@@@@@@@@@@
+Using the New Partial Install API
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-See :ref:`New Partial Install API` for more details about the *partial install v2*.
+See :ref:`New Partial Install API` for more details about the *New Partial Install API*.
 
 The following example shows how to partial install the ``ips_sensor_001`` IPS 
 profile from the ``demo`` ADOM against the ``dev_001`` and ``dev_002`` managed device and their respective ``root`` VDOM:
