@@ -1062,8 +1062,16 @@ from ADOM ``adom_dc2``:
 How to delete all members?
 ++++++++++++++++++++++++++
 
+.. note::
+
+   - You can delete all members because since FortiOS 7.2.0 (Internal Reference 
+     #0769154), you can operate an empty ``firewall addrgrp`` object
+
+Using the ``unset`` method
+__________________________
+
 The following example shows how to delete all members from othe ``grp_001`` 
-firewall addrgrp in the ``demo`` ADOM:
+firewall addrgrp in the ``demo`` ADOM using the ``unset`` ``method``:
 
 .. tab-set::
 
@@ -1099,7 +1107,54 @@ firewall addrgrp in the ``demo`` ADOM:
            ]
          }
 
+Using the ``unset attrs``
+_________________________
 
+The following example shows how to delete all members from othe ``grp_001`` 
+firewall addrgrp in the ``demo`` ADOM using the ``unset attrs`` described in :ref:`How to unset a specific attribute?`:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "unset attrs": [
+                   "member"
+                 ]
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/addrgrp/grp_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "grp_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/addrgrp/grp_001"
+             }
+           ]
+         }           
+         
 Wildcard FQDN
 -------------
 
