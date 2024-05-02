@@ -1014,71 +1014,69 @@ sequential install. Considering the above example, it will first install policy
 package ``ppkg_hubs`` against device ``"fgt_00_1"`` and then will install
 policy package ``ppkg_branches`` against device ``fgt_01_1``.
 
-How to install reinstall a policy package against a device group?
-_________________________________________________________________
+How to reinstall a policy package against a device group?
+_________________________________________________________
 
-As usual, when we consider a device group, we still have to use the ``scope``
-but time by only using the ``name`` attribute.
+As usual, when you consider a Device Group, you still have to use the ``scope``
+but this time only with the ``name`` attribute (i.e. ``vdom`` attribute should be omitted)
 
-In the following example, we install policy package ``ppkg_branches`` against
-the device group ``branches``:
+The following example shows how to reinstall the ``ppkg_001`` Policy Package from the ``demo``ADOM agains the ``grp_001`` Device Group:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
-     
-   {
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "adom": "{{adom}}",
-           "flags": [
-             "none"
-           ],
-           "extflags": 0,
-           "target": [
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+           
+         {
+           "method": "exec",
+           "params": [
              {
-               "pkg": "ppkg_branches",
-               "scope": [
-                 {
-                   "name": "branches"
-                 }
-               ]
+               "data": {
+                 "adom": "demo",
+                 "flags": [
+                   "none"
+                 ],
+                 "extflags": 0,
+                 "target": [
+                   {
+                     "pkg": "ppkg_001",
+                     "scope": [
+                       {
+                         "name": "grp_001"
+                       }
+                     ]
+                   }
+                 ]
+               },
+               "url": "/securityconsole/reinstall/package"
+             }
+           ],
+           "session": "{{session}}",
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "result": [
+             {
+               "data": {
+                 "task": 4140
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/reinstall/package"
              }
            ]
-         },
-         "url": "/securityconsole/reinstall/package"
-       }
-     ],
-     "session": "{{session_id}}",
-     "verbose": 1
-   }
+         }
 
-**RESPONSE:**
+In this case, FortiManager will proceed with a parallel policy package installation for all the device group's members. 
 
-.. code-block:: json
-
-   {
-     "result": [
-       {
-         "data": {
-           "task": 4140
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/securityconsole/reinstall/package"
-       }
-     ]
-   }
-
-In this case, the FMG will proceed with a parallel policy package installation
-for all the device group's members. However, should you have two or more
-``target`` elements in the above API request, then like for the *How to install
-multiple policy packages against multiple devices?* case seen in the previous
-section, FMG will go with a sequential installation for them.
+However, should you have two or more ``target`` elements in the above API request, then like for the *How to install multiple policy packages against multiple devices?* case seen in the previous section, FortiManager will go with a sequential installation for them.
 
 How to reinstall multiple policy packages against multiple devices in parallel?
 _______________________________________________________________________________
@@ -4989,30 +4987,35 @@ FortiManager's ADOM DB.
 
 The generic request is:
 
-.. code-block:: json
+.. tab-set::
 
-   {
-     "id": 1,
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "adom": "{{adom}}",
-           "scope": [
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
              {
-               "name": "{{device}}",
-               "vdom": "{{vdom}}"
+               "data": {
+                 "adom": "{{adom}}",
+                 "scope": [
+                   {
+                     "name": "{{device}}",
+                     "vdom": "{{vdom}}"
+                   },
+                   {"...", "..."}
+                 ],
+                 "target": [
+                   "{{ target }}"
+                 ]
+               },
+               "url": "/securityconsole/install/objects"
              }
            ],
-           "target": [
-             "{{ target }}"
-           ]
-         },
-         "url": "/securityconsole/install/objects"
-       }
-     ],
-     "session": "{{session_id}}",
-   }
+           "session": "{{session}}",
+         }
 
 where ``{{ target }}`` should be replaced by a |fmg_api| ``url``.
 
@@ -5025,11 +5028,12 @@ The partial installation works as defined below:
   group) and some of the members don't exist on the managed devices, they will
   be automatically installed.
 
-For instance:
+The following example shows the generic REQUEST format to partial install a
+firewall policy:
 
-.. tabs::
+.. tab-set::
   
-   .. tab:: REQUEST
+   .. tab-item:: REQUEST
 
       .. code-block:: json
       
@@ -5053,10 +5057,10 @@ For instance:
                "url": "/securityconsole/install/objects"
              }
            ],
-           "session": "{{session_id}}",
+           "session": "{{session}}",
          }
       
-   .. tab:: RESPONSE
+   .. tab-item:: RESPONSE
 
       .. code-block:: json
            
@@ -5081,7 +5085,6 @@ For instance:
    - New or updated objects belonging to the targeted ``policyid`` object will 
      be automatically added or updated.
 
-
 The rest of this section describes the partial install behavior for different
 cases.
 
@@ -5104,11 +5107,11 @@ cases.
 
 
       Start installing
-      FortiGate-VM64 $ config firewall policy
-      FortiGate-VM64 (policy) $ edit 5
-      FortiGate-VM64 (5) $ set comments "Test #005"
-      FortiGate-VM64 (5) $ next
-      FortiGate-VM64 (policy) $ end
+      dev_001 $ config firewall policy
+      dev_001 (policy) $ edit 5
+      dev_001 (5) $ set comments "Test #005"
+      dev_001 (5) $ next
+      dev_001 (policy) $ end
       
 
       ---> generating verification report
@@ -5123,20 +5126,21 @@ cases.
 
 
       * - Conclusion
-      * - - The updated ``comments`` - only - is sent to the managed device.
+      * - - As expected, the updated ``comments`` - only - is sent to the 
+            managed device
 
 #. Update of the policy's properties + new existing objects
 
    This is the situation before the test:
 
    - One policy package with 100 policies already installed on the managed
-     device. 
+     device
    - The ``comments`` of ``policyid`` ``5`` was modified (new comment is ``Test
-     #006``).
+     #006``)
    - Firewall addresse ``host_105`` already used in some of
      the 99 other policies (hence aleady existing in managed device) have been
-     added in the ``dstaddr`` of ``policyid`` ``5``.
-   - The partial install is performed against the ``policyid`` ``5``.     
+     added in the ``dstaddr`` of ``policyid`` ``5``
+   - The partial install is performed against the ``policyid`` ``5``
 
    This is the installation output we got from FortiManager GUI:
 
@@ -5146,12 +5150,12 @@ cases.
 
 
       Start installing
-      FortiGate-VM64 $ config firewall policy
-      FortiGate-VM64 (policy) $ edit 5
-      FortiGate-VM64 (5) $ set dstaddr "host_004" "host_105"
-      FortiGate-VM64 (5) $ set comments "Test #006"
-      FortiGate-VM64 (5) $ next
-      FortiGate-VM64 (policy) $ end
+      dev_001 $ config firewall policy
+      dev_001 (policy) $ edit 5
+      dev_001 (5) $ set dstaddr "host_004" "host_105"
+      dev_001 (5) $ set comments "Test #006"
+      dev_001 (5) $ next
+      dev_001 (policy) $ end
       
       
       ---> generating verification report
@@ -5165,21 +5169,21 @@ cases.
       :header-rows: 1
 
       * - Conclusion
-      * - - The updated ``comments`` is sent to the managed device.
-      * - - The reference (i.e., name only) of the firewall address ``host_105``
-            is now added in the ``dstaddr``.
+      * - - As expected, the updated ``comments`` is sent to the managed device
+      * - - As expected, the reference (i.e., name only) of the firewall 
+            address ``host_105`` is added in the ``dstaddr``
 
 #. New objects added in firewall policy + other ADOM DB pending changes
 
    This is the situation before the test:
 
    - One policy package with 100 policies already installed on the managed
-     device. 
+     device
    - New firewall address created: ``host_201`` and placed as ``srcaddr`` of
-     ``policyid`` ``5``. 
+     ``policyid`` ``5``
    - Other pending changes in ADOM DB (other policies from same policy package
-     have been modified for instance).
-   - The partial install is performed against the ``policyid`` ``5``.     
+     have been modified for instance)
+   - The partial install is performed against the ``policyid`` ``5``
 
    This is the installation output we got from FortiManager GUI:
 
@@ -5189,18 +5193,18 @@ cases.
       
       
       Start installing
-      FortiGate-VM64 $ config firewall address
-      FortiGate-VM64 (address) $ edit "host_201"
-      FortiGate-VM64 (host_201) $ set uuid edf0802e-dc52-51ec-eead-9a86a08a872a
-      FortiGate-VM64 (host_201) $ set color 17
-      FortiGate-VM64 (host_201) $ set subnet 145.124.204.58 255.255.255.255
-      FortiGate-VM64 (host_201) $ next
-      FortiGate-VM64 (address) $ end
-      FortiGate-VM64 $ config firewall policy
-      FortiGate-VM64 (policy) $ edit 5
-      FortiGate-VM64 (5) $ set srcaddr "host_005" "host_201"
-      FortiGate-VM64 (5) $ next
-      FortiGate-VM64 (policy) $ end
+      dev_001 $ config firewall address
+      dev_001 (address) $ edit "host_201"
+      dev_001 (host_201) $ set uuid edf0802e-dc52-51ec-eead-9a86a08a872a
+      dev_001 (host_201) $ set color 17
+      dev_001 (host_201) $ set subnet 145.124.204.58 255.255.255.255
+      dev_001 (host_201) $ next
+      dev_001 (address) $ end
+      dev_001 $ config firewall policy
+      dev_001 (policy) $ edit 5
+      dev_001 (5) $ set srcaddr "host_005" "host_201"
+      dev_001 (5) $ next
+      dev_001 (policy) $ end
       
 
       ---> generating verification report
@@ -5208,34 +5212,43 @@ cases.
       
       
       install finished
+ 
+   .. list-table::
+      :header-rows: 1
+      :widths: auto
 
-   +--------------------------------------------------------------------+
-   | Conclusions                                                        |
-   +====================================================================+
-   | - FortiManager is really in charge! It detected a new firewall     |
-   |   address had to be installed on the managed device: ``host_201``  |
-   | - Once the new firewall address is installed, it can be referenced |
-   |   and added as ``srcaddr``.                                        |
-   | - **Other pending changes haven't been installed!**                |
-   +--------------------------------------------------------------------+
+      * - Conclusions
+      * - - FortiManager is really in charge! It detected a new firewall 
+            address had to be installed on the managed device: ``host_201``
+          - Once the new firewall address is installed, it can be referenced and
+            added as ``srcaddr``
+          - As expected, other pending changes **haven't** been installed!
 
 #. New more complexe objects added + other ADOM DB pending changes
  
    This is the situation before the test:
 
    - One policy package with 100 policies already installed on the managed
-     device. 
+     device
+
    - New firewall addresses created: ``host_202`` and ``host_203``
-   - New firewall address group created: ``grp_host_20x``. Members are
-     ``host_202`` and ``host_203``.
+
+   - New firewall address group created: ``grp_host_20x``
+     Members are ``host_202`` and ``host_203``
+
    - Firewall address group ``grp_host_20x`` added as ``dstaddr`` of
-     ``policyid`` ``5``.
-   - New IPS profile created: ``ips_profile_001``.
-   - New profile group created: ``profile_group_001``.
-   - IP profile ``ips_profile_001`` and some other UTM profile added in profile
-     group ``profile_group_001``.
-   - Profile group ``profile_group_001`` added in ``policyid`` ``5``.
-   - The partial install is performed against the ``policyid`` ``5``.     
+     ``policyid`` ``5``
+
+   - New IPS profile created: ``ips_profile_001``
+
+   - New profile group created: ``profile_group_001``
+
+   - ``ips_profile_001`` IPS profile and some other UTM profiles added in 
+     the ``profile_group_001`` Profile Group
+
+   - ``profile_group_001`` Profile Group added in ``policyid`` ``5``
+
+   - The partial install is performed against the ``policyid`` ``5``
 
    This is the installation output we got from FortiManager GUI:
 
@@ -5245,49 +5258,49 @@ cases.
       
       
       Start installing
-      FortiGate-VM64 $ config firewall address
-      FortiGate-VM64 (address) $ edit "host_202"
-      FortiGate-VM64 (host_202) $ set uuid 347190b0-dc53-51ec-137e-2a05a016d500
-      FortiGate-VM64 (host_202) $ set color 17
-      FortiGate-VM64 (host_202) $ set subnet 145.124.202.58 255.255.255.255
-      FortiGate-VM64 (host_202) $ next
-      FortiGate-VM64 (address) $ edit "host_203"
-      FortiGate-VM64 (host_203) $ set uuid 3c63b8a2-dc53-51ec-634e-3872e5836416
-      FortiGate-VM64 (host_203) $ set color 17
-      FortiGate-VM64 (host_203) $ set subnet 145.123.202.58 255.255.255.255
-      FortiGate-VM64 (host_203) $ next
-      FortiGate-VM64 (address) $ end
-      FortiGate-VM64 $ config firewall addrgrp
-      FortiGate-VM64 (addrgrp) $ edit "grp_host_20x"
-      FortiGate-VM64 (grp_host_20x) $ set uuid 469eec38-dc53-51ec-4fcc-3e14b47114a4
-      FortiGate-VM64 (grp_host_20x) $ set member "host_202" "host_203"
-      FortiGate-VM64 (grp_host_20x) $ set color 18
-      FortiGate-VM64 (grp_host_20x) $ next
-      FortiGate-VM64 (addrgrp) $ end
-      FortiGate-VM64 $ config ips sensor
-      FortiGate-VM64 (sensor) $ edit "ips_profile_001"
-      FortiGate-VM64 (ips_profile_001) $ set comment "Prevent critical attacks."
-      FortiGate-VM64 (ips_profile_001) $ config entries
-      FortiGate-VM64 (entries) $ edit 1
-      FortiGate-VM64 (1) $ set severity medium high critical
-      FortiGate-VM64 (1) $ next
-      FortiGate-VM64 (entries) $ end
-      FortiGate-VM64 (ips_profile_001) $ next
-      FortiGate-VM64 (sensor) $ end
-      FortiGate-VM64 $ config firewall profile-group
-      FortiGate-VM64 (profile-group) $ edit "profile_group_001"
-      FortiGate-VM64 (profile_group_001) $ set ips-sensor "ips_profile_001"
-      FortiGate-VM64 (profile_group_001) $ set application-list "default"
-      FortiGate-VM64 (profile_group_001) $ next
-      FortiGate-VM64 (profile-group) $ end
-      FortiGate-VM64 $ config firewall policy
-      FortiGate-VM64 (policy) $ edit 5
-      FortiGate-VM64 (5) $ set dstaddr "grp_host_20x" "host_004" "host_105"
-      FortiGate-VM64 (5) $ set utm-status enable
-      FortiGate-VM64 (5) $ set profile-type group
-      FortiGate-VM64 (5) $ set profile-group "profile_group_001"
-      FortiGate-VM64 (5) $ next
-      FortiGate-VM64 (policy) $ end
+      dev_001 $ config firewall address
+      dev_001 (address) $ edit "host_202"
+      dev_001 (host_202) $ set uuid 347190b0-dc53-51ec-137e-2a05a016d500
+      dev_001 (host_202) $ set color 17
+      dev_001 (host_202) $ set subnet 145.124.202.58 255.255.255.255
+      dev_001 (host_202) $ next
+      dev_001 (address) $ edit "host_203"
+      dev_001 (host_203) $ set uuid 3c63b8a2-dc53-51ec-634e-3872e5836416
+      dev_001 (host_203) $ set color 17
+      dev_001 (host_203) $ set subnet 145.123.202.58 255.255.255.255
+      dev_001 (host_203) $ next
+      dev_001 (address) $ end
+      dev_001 $ config firewall addrgrp
+      dev_001 (addrgrp) $ edit "grp_host_20x"
+      dev_001 (grp_host_20x) $ set uuid 469eec38-dc53-51ec-4fcc-3e14b47114a4
+      dev_001 (grp_host_20x) $ set member "host_202" "host_203"
+      dev_001 (grp_host_20x) $ set color 18
+      dev_001 (grp_host_20x) $ next
+      dev_001 (addrgrp) $ end
+      dev_001 $ config ips sensor
+      dev_001 (sensor) $ edit "ips_profile_001"
+      dev_001 (ips_profile_001) $ set comment "Prevent critical attacks."
+      dev_001 (ips_profile_001) $ config entries
+      dev_001 (entries) $ edit 1
+      dev_001 (1) $ set severity medium high critical
+      dev_001 (1) $ next
+      dev_001 (entries) $ end
+      dev_001 (ips_profile_001) $ next
+      dev_001 (sensor) $ end
+      dev_001 $ config firewall profile-group
+      dev_001 (profile-group) $ edit "profile_group_001"
+      dev_001 (profile_group_001) $ set ips-sensor "ips_profile_001"
+      dev_001 (profile_group_001) $ set application-list "default"
+      dev_001 (profile_group_001) $ next
+      dev_001 (profile-group) $ end
+      dev_001 $ config firewall policy
+      dev_001 (policy) $ edit 5
+      dev_001 (5) $ set dstaddr "grp_host_20x" "host_004" "host_105"
+      dev_001 (5) $ set utm-status enable
+      dev_001 (5) $ set profile-type group
+      dev_001 (5) $ set profile-group "profile_group_001"
+      dev_001 (5) $ next
+      dev_001 (policy) $ end
       
       
       ---> generating verification report
@@ -5296,56 +5309,63 @@ cases.
 
       install finished
 
-   +--------------------------------------------------------------------+
-   | Conclusions                                                        |
-   +====================================================================+
-   | - All new objects have been successfully sent to the managed       |
-   |   device.                                                          |
-   | - ``policyid`` ``5`` changes have been sent as expected.           |
-   | - **Other pending changes haven't been installed!**                |
-   +--------------------------------------------------------------------+
+   .. list-table::
+      :header-rows: 1
+      :widths: auto
 
-#. New firewall policy
+      * - Conclusions
+      * - - All new objects have been successfully sent to the managed device
+          - Only ``policyid`` ``5`` changes have been sent as expected
+          - Other pending changes **haven** 't been installed!
+
+
+.. _partial_install_new_firewall_policy:
+
+5. Partial Install New Firewall Policy
 
    This is the situation before the test:
 
    - One policy package with 100 policies already installed on the managed
-     device. 
+     device
+
    - A new firewall policy is created, referencing existing (``host_004`` and
-     ``host_104``) and new object (``host_204``).
-   - The partial install is performed against this new firewall policy.
+     ``host_104``) and new object (``host_204``)
+
+   - This new firewall policy has been placed between firewall policies with
+     ``policyid`` ``5`` and ``6``
+
+   - The partial install is performed against this new firewall policy
 
    This is the installation output we got from FortiManager GUI:
 
    .. code-block:: text
 
-      
       Starting log (Run on device)
       
       
       Start installing
-      FortiGate-VM64 $ config firewall address
-      FortiGate-VM64 (address) $ edit "host_204"
-      FortiGate-VM64 (host_204) $ set uuid dadfea46-dc53-51ec-dee7-d0e7acd6a7da
-      FortiGate-VM64 (host_204) $ set color 17
-      FortiGate-VM64 (host_204) $ set subnet 145.123.202.54 255.255.255.255
-      FortiGate-VM64 (host_204) $ next
-      FortiGate-VM64 (address) $ end
-      FortiGate-VM64 $ config firewall policy
-      FortiGate-VM64 (policy) $ edit 101
-      FortiGate-VM64 (101) $ set uuid ae0d8f6e-dc53-51ec-af49-7683cdf87a8d
-      FortiGate-VM64 (101) $ set action accept
-      FortiGate-VM64 (101) $ set srcintf "port1"
-      FortiGate-VM64 (101) $ set dstintf "port2"
-      FortiGate-VM64 (101) $ set srcaddr "host_104"
-      FortiGate-VM64 (101) $ set dstaddr "host_004" "host_204"
-      FortiGate-VM64 (101) $ set schedule "always"
-      FortiGate-VM64 (101) $ set service "ALL"
-      FortiGate-VM64 (101) $ set logtraffic all
-      FortiGate-VM64 (101) $ set label "Project #1"
-      FortiGate-VM64 (101) $ set global-label "Project #1"
-      FortiGate-VM64 (101) $ next
-      FortiGate-VM64 (policy) $ end
+      dev_001 $ config firewall address
+      dev_001 (address) $ edit "host_204"
+      dev_001 (host_204) $ set uuid dadfea46-dc53-51ec-dee7-d0e7acd6a7da
+      dev_001 (host_204) $ set color 17
+      dev_001 (host_204) $ set subnet 145.123.202.54 255.255.255.255
+      dev_001 (host_204) $ next
+      dev_001 (address) $ end
+      dev_001 $ config firewall policy
+      dev_001 (policy) $ edit 101
+      dev_001 (101) $ set uuid ae0d8f6e-dc53-51ec-af49-7683cdf87a8d
+      dev_001 (101) $ set action accept
+      dev_001 (101) $ set srcintf "port1"
+      dev_001 (101) $ set dstintf "port2"
+      dev_001 (101) $ set srcaddr "host_104"
+      dev_001 (101) $ set dstaddr "host_004" "host_204"
+      dev_001 (101) $ set schedule "always"
+      dev_001 (101) $ set service "ALL"
+      dev_001 (101) $ set logtraffic all
+      dev_001 (101) $ set label "Project #1"
+      dev_001 (101) $ set global-label "Project #1"
+      dev_001 (101) $ next
+      dev_001 (policy) $ end
       
       
       ---> generating verification report
@@ -5354,16 +5374,27 @@ cases.
 
       install finished
 
-   +--------------------------------------------------------------------+
-   | Conclusions                                                        |
-   +====================================================================+
-   | - Partial install also works for new firewall policy.              |
-   +--------------------------------------------------------------------+ 
+   .. list-table::
+      :header-rows: 1
+      :widths: auto
+
+      * - Conclusions
+      * - - Partial install also works for new firewall policy!
 
    .. warning::
 
-      New firewall policy has been pushed to managed device and has been placed
-      at the end of the existing firewall policies! 
+      - New firewall policy has been pushed to managed device and has been 
+        placed at the end of the existing firewall policies!
+      
+      - This is not conform to what has been configured in FortiManager: new 
+        firewall policy should have been placed between firewall policies with 
+        ``policyid`` ``5`` and ``6``!
+
+      - The legacy partial install doesn't support pushing a new firewall 
+        policy at a specific position
+        
+        You have to consider the partial install v2 (see :ref:`New Partial 
+        Install API`).
 
 How to trigger an install preview for a partial install?
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -5529,6 +5560,10 @@ You're also given a task ID that you have to monitor.
 New Partial Install API
 +++++++++++++++++++++++
 
+.. note::
+
+   The new Partial Install API is also named *Partial Install v2*
+
 Introducing the new partial install API
 _______________________________________
 
@@ -5643,28 +5678,32 @@ where:
 
 Example:
 
-.. code-block:: json
+.. tab-set:: 
 
-   {
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "adom": "root",
-           "objects": [
-             ["add", "pkg/default/firewall/policy/8", "before", "1"],
-             ["update", "obj/firewall/address/Addr_1", "", ""],
-             ["delete", "pkg/default/firewall/policy/3", "", ""],
-             ["move", "pkg/default/firewall/policy/6", "after", "3"]
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "root",
+                 "objects": [
+                   ["add", "pkg/default/firewall/policy/8", "before", "1"],
+                   ["update", "obj/firewall/address/Addr_1", "", ""],
+                   ["delete", "pkg/default/firewall/policy/3", "", ""],
+                   ["move", "pkg/default/firewall/policy/6", "after", "3"]
+                 ],
+                 "flags": 0
+               },
+               "url": "securityconsole/install/objects/v2"
+             }
            ],
-           "flags": 0
-         },
-         "url": "securityconsole/install/objects/v2"
-       }
-     ],
-     "session": 52904,
-   }
-
+           "session": 52904,
+         }
+   
 In the above example a partial install (``flags`` is ``0``) is made to:
 
 - Add new firewall policy with ``policyid`` ``8`` before existing firewall
@@ -5708,11 +5747,15 @@ Partial install of a used/updated firewall address
 
   - Update the ``host_111`` firewall address
 
-    - It's already used by the ``FGVM04TM23004347`` policy package
-    - Former IP address was ``162.148.54.193/255.255.255.255``
-    - New IP address is ``1.1.1.1/255.255.255.255``
+    - This object is already used by one of the firewall policy installed in 
+      the ``dev_001`` managed device
 
-  - From Device Manager, add a static route in the ``FGVM04TM23004347`` manage device:
+    - It's former IP address was ``162.148.54.193/255.255.255.255``
+
+    - It's new IP address is ``1.1.1.1/255.255.255.255``
+
+  - In FortiManager GUI, from Device Manager, add a new static route in the 
+    ``dev_001`` managed device:
 
     .. code-block:: text
 
@@ -5724,7 +5767,12 @@ Partial install of a used/updated firewall address
            next
        end
 
-- Trigger partial install
+  .. note::
+
+     - You're now in a situation where you have both ADOM DB (``host_111``) 
+       and Device DB (``dev_001`` ``router.static`` table) pending changes
+
+- Trigger a new partial install
 
   .. tab-set::
       
@@ -5750,7 +5798,7 @@ Partial install of a used/updated firewall address
                    ],
                    "scope": [
                      {
-                       "name": "FGVM04TM23004347",
+                       "name": "dev_001",
                        "vdom": "root"
                      }
                    ]
@@ -5799,11 +5847,11 @@ Partial install of a used/updated firewall address
    
    
      Start installing
-     FGVM04TM23004347 $  config firewall address
-     FGVM04TM23004347 (address) $  edit "host_111"
-     FGVM04TM23004347 (host_111) $  set subnet 1.1.1.1 255.255.255.255
-     FGVM04TM23004347 (host_111) $  next
-     FGVM04TM23004347 (address) $  end
+     dev_001 $  config firewall address
+     dev_001 (address) $  edit "host_111"
+     dev_001 (host_111) $  set subnet 1.1.1.1 255.255.255.255
+     dev_001 (host_111) $  next
+     dev_001 (address) $  end
    
    
      ---> generating verification report
@@ -5816,8 +5864,7 @@ Partial install of a used/updated firewall address
 
   - As expected, FortiManager only installed the selected and updated
     ``host_111`` firewall address
-  - Pending static route wasn't installed against the ``FGVM04TM23004347``
-    managed device
+  - Pending static route wasn't installed against the ``dev_001`` managed device
 
 Partial install of an used/updated firewall policy with new/used/updated firewall addresses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -5835,17 +5882,23 @@ Partial install of an used/updated firewall policy with new/used/updated firewal
            next
        end
 
-  - Navigate to the ``FGVM04TM23004347`` policy package
+  - Navigate to the ``ppkg_001`` policy package
 
   - Edit policy seq #2 (``policyid`` should be ``2`` as well)
 
     - Add ``host_201`` (new object) in the *Source* column
     - Add ``host_006`` (used object) in the *Destination* column
 
-  - The ``FGVM04TM23004347`` managed device still has the static route pointing
-    to ``10.0.1.0/24`` created earlier
+  - The ``dev_001`` managed device still has the static route pointing to ``10.
+    0.1.0/24`` created earlier
 
-- Trigger partial install
+  .. note::
+
+     - You're now in a situation where you have both ADOM DB (``host_201`` 
+       firewall address and  modified ``ppkg_001`` Policy Package) and Device 
+       DB (``dev_001`` ``router.static`` table) pending changes
+
+- Trigger a new partial install
 
   .. tab-set::
     
@@ -5864,14 +5917,14 @@ Partial install of an used/updated firewall policy with new/used/updated firewal
                    "objects": [
                      [
                        "update",
-                       "pkg/FGVM04TM23004347/firewall/policy/2",
+                       "pkg/ppkg_001/firewall/policy/2",
                        "",
                        ""
                      ]
                    ],
                    "scope": [
                      {
-                       "name": "FGVM04TM23004347",
+                       "name": "dev_001",
                        "vdom": "root"
                      }
                    ]
@@ -5943,7 +5996,7 @@ Partial install of an used/updated firewall policy with new/used/updated firewal
   - As expected, FortiManager only installed the selected and updated
     ``policyid`` ``2``
 
-  - Pending static route wasn't installed against the ``FGVM04TM23004347``
+  - Pending static route wasn't installed against the ``dev_001``
     managed device 
     
 Partial install to support install + move policy
@@ -5954,7 +6007,7 @@ firewall policy created within a Policy Package at a specific position in the
 existing list of firewall policies.
 
 However, this new policy was successfully created in the managed device, but at
-the last position.
+the last position. See :ref:`Partial Install New Firewall Policy <partial_install_new_firewall_policy>`.
 
 The new Partial Install API now support to specify the placement details.
 
@@ -5990,7 +6043,7 @@ Partial install of a new policy with new/used/updated firewall addresses
       - Enable *Packet logging*
       - Set *Status* to *Enable*
 
-  - Navigate to the ``FGVM04TM23004347`` policy package
+  - Navigate to the ``ppkg_001`` policy package
 
   - Insert a new firewall policy after policy seq #10 (``policyid`` should be
     ``10`` as well)
@@ -6012,7 +6065,7 @@ Partial install of a new policy with new/used/updated firewall addresses
 
     .. thumbnail:: images//image_001.png
 
-  - The ``FGVM04TM23004347`` managed device still has the static route pointing
+  - The ``dev_001`` managed device still has the static route pointing
     to ``10.0.1.0/24``  created earlier
 
 - Trigger partial install
@@ -6029,19 +6082,19 @@ Partial install of a new policy with new/used/updated firewall addresses
              "params": [
                {
                  "data": {
-                   "adom": "root",
+                   "adom": "demo",
                    "flags": 0,
                    "objects": [
                      [
                        "add",
-                       "pkg/FGVM04TM23004347/firewall/policy/101",
+                       "pkg/ppkg_001/firewall/policy/101",
                        "after",
                        "10"
                      ]
                    ],
                    "scope": [
                      {
-                       "name": "FGVM04TM23004347",
+                       "name": "dev_001",
                        "vdom": "root"
                      }
                    ]
@@ -6085,60 +6138,60 @@ Partial install of a new policy with new/used/updated firewall addresses
    
    
      Start installing
-     FGVM04TM23004347 $  config firewall address
-     FGVM04TM23004347 (address) $  edit "host_003"
-     FGVM04TM23004347 (host_003) $  set subnet 1.1.1.1 255.255.255.255
-     FGVM04TM23004347 (host_003) $  next
-     FGVM04TM23004347 (address) $  edit "host_202"
-     FGVM04TM23004347 (host_202) $  set uuid 4f701070-584a-51ee-a929-d2686f6d80d5
-     FGVM04TM23004347 (host_202) $  set color 30
-     FGVM04TM23004347 (host_202) $  set subnet 22.103.33.206 255.255.255.255
-     FGVM04TM23004347 (host_202) $  next
-     FGVM04TM23004347 (address) $  end
-     FGVM04TM23004347 $  config firewall addrgrp
-     FGVM04TM23004347 (addrgrp) $  edit "grp_001"
-     FGVM04TM23004347 (grp_001) $  set uuid 6dc5814a-584a-51ee-d6c7-da84f06b12a3
-     FGVM04TM23004347 (grp_001) $  set member "host_050" "host_051"
-     FGVM04TM23004347 (grp_001) $  set color 30
-     FGVM04TM23004347 (grp_001) $  next
-     FGVM04TM23004347 (addrgrp) $  end
-     FGVM04TM23004347 $  config ips sensor
-     FGVM04TM23004347 (sensor) $  edit "ips_profile_001"
-     FGVM04TM23004347 (ips_profile_001) $  set comment "Prevent critical attacks."
-     FGVM04TM23004347 (ips_profile_001) $  config entries
-     FGVM04TM23004347 (entries) $  edit 1
-     FGVM04TM23004347 (1) $  set severity medium high critical
-     FGVM04TM23004347 (1) $  next
-     FGVM04TM23004347 (entries) $  edit 2
-     FGVM04TM23004347 (2) $  set status enable
-     FGVM04TM23004347 (2) $  set log-packet enable
-     FGVM04TM23004347 (2) $  next
-     FGVM04TM23004347 (entries) $  end
-     FGVM04TM23004347 (ips_profile_001) $  next
-     FGVM04TM23004347 (sensor) $  end
-     FGVM04TM23004347 $  config firewall policy
-     FGVM04TM23004347 (policy) $  edit 101
-     FGVM04TM23004347 (101) $  set name "Policy_101"
-     FGVM04TM23004347 (101) $  set uuid a045d39a-584a-51ee-4ca0-ca6a56de0f60
-     FGVM04TM23004347 (101) $  set action accept
-     FGVM04TM23004347 (101) $  set srcintf "port2"
-     FGVM04TM23004347 (101) $  set dstintf "port1"
-     FGVM04TM23004347 (101) $  set srcaddr "host_001" "host_202"
-     FGVM04TM23004347 (101) $  set dstaddr "host_003" "grp_001"
-     FGVM04TM23004347 (101) $  set schedule "always"
-     FGVM04TM23004347 (101) $  set service "ALL"
-     FGVM04TM23004347 (101) $  set utm-status enable
-     FGVM04TM23004347 (101) $  set logtraffic all
-     FGVM04TM23004347 (101) $  set label "Project #1"
-     FGVM04TM23004347 (101) $  set global-label "Project #1"
+     dev_001 $  config firewall address
+     dev_001 (address) $  edit "host_003"
+     dev_001 (host_003) $  set subnet 1.1.1.1 255.255.255.255
+     dev_001 (host_003) $  next
+     dev_001 (address) $  edit "host_202"
+     dev_001 (host_202) $  set uuid 4f701070-584a-51ee-a929-d2686f6d80d5
+     dev_001 (host_202) $  set color 30
+     dev_001 (host_202) $  set subnet 22.103.33.206 255.255.255.255
+     dev_001 (host_202) $  next
+     dev_001 (address) $  end
+     dev_001 $  config firewall addrgrp
+     dev_001 (addrgrp) $  edit "grp_001"
+     dev_001 (grp_001) $  set uuid 6dc5814a-584a-51ee-d6c7-da84f06b12a3
+     dev_001 (grp_001) $  set member "host_050" "host_051"
+     dev_001 (grp_001) $  set color 30
+     dev_001 (grp_001) $  next
+     dev_001 (addrgrp) $  end
+     dev_001 $  config ips sensor
+     dev_001 (sensor) $  edit "ips_profile_001"
+     dev_001 (ips_profile_001) $  set comment "Prevent critical attacks."
+     dev_001 (ips_profile_001) $  config entries
+     dev_001 (entries) $  edit 1
+     dev_001 (1) $  set severity medium high critical
+     dev_001 (1) $  next
+     dev_001 (entries) $  edit 2
+     dev_001 (2) $  set status enable
+     dev_001 (2) $  set log-packet enable
+     dev_001 (2) $  next
+     dev_001 (entries) $  end
+     dev_001 (ips_profile_001) $  next
+     dev_001 (sensor) $  end
+     dev_001 $  config firewall policy
+     dev_001 (policy) $  edit 101
+     dev_001 (101) $  set name "Policy_101"
+     dev_001 (101) $  set uuid a045d39a-584a-51ee-4ca0-ca6a56de0f60
+     dev_001 (101) $  set action accept
+     dev_001 (101) $  set srcintf "port2"
+     dev_001 (101) $  set dstintf "port1"
+     dev_001 (101) $  set srcaddr "host_001" "host_202"
+     dev_001 (101) $  set dstaddr "host_003" "grp_001"
+     dev_001 (101) $  set schedule "always"
+     dev_001 (101) $  set service "ALL"
+     dev_001 (101) $  set utm-status enable
+     dev_001 (101) $  set logtraffic all
+     dev_001 (101) $  set label "Project #1"
+     dev_001 (101) $  set global-label "Project #1"
      node_check_object fail! for global-label Project #1
    
      value parse error before 'Project #1'
      Command fail. Return code -7
-     FGVM04TM23004347 (101) $  set ips-sensor "ips_profile_001"
-     FGVM04TM23004347 (101) $  next
-     FGVM04TM23004347 (policy) $  move 101 after 10
-     FGVM04TM23004347 (policy) $  end
+     dev_001 (101) $  set ips-sensor "ips_profile_001"
+     dev_001 (101) $  next
+     dev_001 (policy) $  move 101 after 10
+     dev_001 (policy) $  end
    
    
      ---> generating verification report
@@ -6156,7 +6209,7 @@ Partial install of a new policy with new/used/updated firewall addresses
 
     .. thumbnail:: images/image_002.png
 
-  - Pending static route wasn't installed against the ``FGVM04TM23004347``
+  - Pending static route wasn't installed against the ``dev_001``
     managed device
 
 Partial install of a deleted firewall policy
@@ -6164,11 +6217,11 @@ Partial install of a deleted firewall policy
 
 - Preparation
 
-  - Navigate to the ``FGVM04TM23004347`` policy package
+  - Navigate to the ``ppkg_001`` policy package
 
   - Delete firewall policy seq #11 (``policyid`` should be ``101``)
 
-  - The ``FGVM04TM23004347`` managed device still has the static route pointing
+  - The ``dev_001`` managed device still has the static route pointing
     to ``10.0.1.0/24``  created earlier
 
 - Trigger partial install
@@ -6185,19 +6238,19 @@ Partial install of a deleted firewall policy
              "params": [
                {
                  "data": {
-                   "adom": "root",
+                   "adom": "demo",
                    "flags": 0,
                    "objects": [
                      [
                        "delete",
-                       "pkg/FGVM04TM23004347/firewall/policy/101",
+                       "pkg/ppkg_001/firewall/policy/101",
                        "",
                        ""
                      ]
                    ],
                    "scope": [
                      {
-                       "name": "FGVM04TM23004347",
+                       "name": "dev_001",
                        "vdom": "root"
                      }
                    ]
@@ -6243,9 +6296,9 @@ Partial install of a deleted firewall policy
    
    
      Start installing
-     FGVM04TM23004347 $  config firewall policy
-     FGVM04TM23004347 (policy) $  delete 101
-     FGVM04TM23004347 (policy) $  end
+     dev_001 $  config firewall policy
+     dev_001 (policy) $  delete 101
+     dev_001 (policy) $  end
    
    
      ---> generating verification report
@@ -6264,7 +6317,7 @@ Partial install of a deleted firewall policy
 
     They will be removed during a normal Policy Package install
 
-  - Pending static route wasn't installed against the ``FGVM04TM23004347``
+  - Pending static route wasn't installed against the ``dev_001``
     managed device
 
 Partial install of an updated policy
@@ -6281,12 +6334,12 @@ Goal is the observe the partial install behavior: will it delete the unused
 
 - Preparation
 
-  - Navigate to the ``FGVM04TM23004347`` policy package
+  - Navigate to the ``ppkg_001`` policy package
 
   - Remove the ``host_201`` firewall address from the *Source* column of  policy
     seq #2 (``policyid`` should be ``2``)
 
-  - The ``FGVM04TM23004347`` managed device still has the static route pointing
+  - The ``dev_001`` managed device still has the static route pointing
     to ``10.0.1.0/24``  created earlier
 
 - Trigger partial install
@@ -6303,19 +6356,19 @@ Goal is the observe the partial install behavior: will it delete the unused
              "params": [
                {
                  "data": {
-                   "adom": "root",
+                   "adom": "demo",
                    "flags": 0,
                    "objects": [
                      [
                        "update",
-                       "pkg/FGVM04TM23004347/firewall/policy/2",
+                       "pkg/ppkg_001/firewall/policy/2",
                        "",
                        ""
                      ]
                    ],
                    "scope": [
                      {
-                       "name": "FGVM04TM23004347",
+                       "name": "dev_001",
                        "vdom": "root"
                      }
                    ]
@@ -6361,11 +6414,11 @@ Goal is the observe the partial install behavior: will it delete the unused
    
    
      Start installing
-     FGVM04TM23004347 $  config firewall policy
-     FGVM04TM23004347 (policy) $  edit 2
-     FGVM04TM23004347 (2) $  set srcaddr "host_002"
-     FGVM04TM23004347 (2) $  next
-     FGVM04TM23004347 (policy) $  end
+     dev_001 $  config firewall policy
+     dev_001 (policy) $  edit 2
+     dev_001 (2) $  set srcaddr "host_002"
+     dev_001 (2) $  next
+     dev_001 (policy) $  end
    
    
      ---> generating verification report
@@ -6383,7 +6436,7 @@ Goal is the observe the partial install behavior: will it delete the unused
 
     It will be removed during a normal Policy Package install
 
-  - Pending static route wasn't installed against the ``FGVM04TM23004347``
+  - Pending static route wasn't installed against the ``dev_001``
     managed device
 
 Add support to preview partial install
@@ -6401,14 +6454,14 @@ Preview of a partial install of an updated policy
   - Create the ``grp_004`` firewall address group with ``host_056`` and
     ``host_57`` address group
 
-  - Navigate to the ``FGVM04TM23004347`` policy package
+  - Navigate to the ``ppkg_001`` policy package
 
   - Edit policy seq #6 (``policyid`` should be ``6``)
     - Add back the ``host_201`` firewall address in the *Source* column
     - Add the ``grp_004`` firewall address group in the *Destination* column
     - Add the ``ips_profile_004`` IPS profile
 
-  - The ``FGVM04TM23004347`` managed device still has the static route pointing
+  - The ``dev_001`` managed device still has the static route pointing
     to ``10.0.1.0/24``  created earlier
 
 - Trigger partial install with the preview option
@@ -6427,19 +6480,19 @@ Preview of a partial install of an updated policy
                "params": [
                  {
                    "data": {
-                     "adom": "root",
+                     "adom": "demo",
                      "flags": 2,
                      "objects": [
                        [
                          "update",
-                         "pkg/FGVM04TM23004347/firewall/policy/6",
+                         "pkg/ppkg_001/firewall/policy/6",
                          "",
                          ""
                        ]
                      ],
                      "scope": [
                        {
-                         "name": "FGVM04TM23004347",
+                         "name": "dev_001",
                          "vdom": "root"
                        }
                      ]
@@ -6491,8 +6544,8 @@ Preview of a partial install of an updated policy
                "params": [
                  {
                    "data": {
-                     "adom": "root",
-                     "device": "FGVM04TM23004347"
+                     "adom": "demo",
+                     "device": "dev_001"
                    },
                    "url": "/securityconsole/preview/result"
                  }

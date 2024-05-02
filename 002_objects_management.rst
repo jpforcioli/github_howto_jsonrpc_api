@@ -3808,111 +3808,203 @@ Caught in #0636807.
 Partial installation
 ++++++++++++++++++++
 
-Caught in #0225600
+Caught in #0225600.
 
 This is the template to install any objects:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json 
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "adom": "<adom>",
-           "scope": [
+      .. code-block:: json 
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
              {
-               "name": "<device>",
-               "vdom": "<vdom>"
+               "data": {
+                 "adom": "{{adom}}>",
+                 "scope": [
+                   {
+                     "name": "{{device}}",
+                     "vdom": "{{vdom}}"
+                   },
+                   {"...", "..."}
+                 ],
+                 "target": [
+                   "{{target}}"
+                 ]
+               },
+               "url": "/securityconsole/install/objects"
              }
            ],
-           "target": [
-             "<target>"
-           ]
-         },
-         "url": "/securityconsole/install/objects"
-       }
-     ],
-     "session": "<session>",
-     "verbose": 1
-   }
+           "session": "{{session}}",
+         }
 
 where:
 
-  - ``scope`` could be omitted, in that case FortiManager will manage to find
-    the devices/vdoms which are using the target object
-  - ``target`` is the target object using the usual format. 
+- ``scope`` could be omitted, in that case FortiManager will manage to find the 
+  devices/vdoms which are using the target object
+
+- ``target`` is the target object to be install
+
+  You declare a target using the usual format.
   
-    For instance:
+  For instance:
 
-    .. code-block::
+  .. code-block::
 
-       # For any objects
-	     /pm/config/adom/<adom>/obj/<fortios cli>
+     # For any objects
+     /pm/config/adom/<adom>/obj/<fortios cli>
 	   
-       # For a firewall policyid
-       /pm/config/adom/<adom>/pkg/<pkg>/firewall/policy/<policyid>
+     # For a firewall policyid
+     /pm/config/adom/<adom>/pkg/<pkg>/firewall/policy/<policyid>
 
-       etc.
+     etc.
 
 More information about the partial install mechanism are given in section
-:ref:`How to partial install a firewall policy?`
+:ref:`Partial Install`
 
 How to install an IPS profile?
 ______________________________
 
-**REQUEST:**
+Using legacy partial install
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.. code-block::
+See :ref:`Legacy Partial Install API` for more details about the *legacy partial install*.
 
-  {
-    "id": 1,
-    "jsonrpc": "1.0",
-    "method": "exec",
-    "params": [
-      {
-        "data": {
-          "adom": "DB",
-          "scope": [
-            {
-              "name": "db_device_001",
-              "vdom": "root"
-            }
-          ],
-          "target": [
-            "/pm/config/adom/DB/obj/ips/sensor/default"
-          ]
-        },
-        "url": "/securityconsole/install/objects"
-      }
-    ],
-    "session": "UL99hbC5leFkPBCul7AHaTygc3QNRToVxAJM2MOigSIkKn5M2UGZfHk9bu45/gPg3lI95flogbLWgUxju23MCg==",
-    "verbose": 1
-  }
+The following example shows how to partial install the ``ips_sensor_001`` IPS 
+profile from the ``demo`` ADOM against the ``dev_001`` and ``dev_002`` managed device and their respective ``root`` VDOM:
 
-**RESPONSE:**
+.. tab-set::
 
-.. code-block::
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "task": 441
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/securityconsole/install/objects"
-       }
-     ]
-   }
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "dev_002",
+                     "vdom": "root"
+                   }                   
+                 ],
+                 "target": [
+                   "/pm/config/adom/demo/obj/ips/sensor/ips_sensor_001"
+                 ]
+               },
+               "url": "/securityconsole/install/objects"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "task": 441
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/install/objects"
+             }
+           ]
+         }
+
+Using partial install v2
+@@@@@@@@@@@@@@@@@@@@@@@@
+
+See :ref:`New Partial Install API` for more details about the *partial install v2*.
+
+The following example shows how to partial install the ``ips_sensor_001`` IPS 
+profile from the ``demo`` ADOM against the ``dev_001`` and ``dev_002`` managed device and their respective ``root`` VDOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "flags": 0,
+                 "objects": [
+                   [
+                     "update",
+                     "obj/ips/sensor/ips_sensor_001",
+                     "",
+                     ""
+                   ]
+                 ],
+                 "scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "dev_002",
+                     "vdom": "root"
+                   }
+                 ]
+               },
+               "url": "/securityconsole/install/objects/v2"
+             }
+           ],
+           "session": "{{session}}"
+         }
+         
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 948
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/install/objects/v2"
+             }
+           ]
+         }
+
+      .. note::
+
+         - It is important to wait for the end of the returned task ID before 
+           closing the API session
+
+         - If you close the API session before, the task will fail
+
+        
 
 How to check for a duplicate object name?
 +++++++++++++++++++++++++++++++++++++++++
