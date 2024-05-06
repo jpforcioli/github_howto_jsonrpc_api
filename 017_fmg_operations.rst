@@ -1079,6 +1079,64 @@ The following example show how to commit changes made in the ``dev_001`` locked 
            ]
          }
 
+Per-ADOM workspace mode
++++++++++++++++++++++++
+
+How to figure out whether an ADOM is with or without workspace mode?
+____________________________________________________________________
+
+The following example shows how to figure out whether the ``demo`` ADOM is with
+workspace mode enable or disable:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "workspace_mode"
+               ],
+               "loadsub": 0,
+               "url": "/dvmdb/adom/demo"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "demo",
+                 "oid": 311,
+                 "workspace_mode": 0
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo"
+             }
+           ]
+         }  
+
+      .. note::
+
+         - ``0`` means workspace mode is not enabled
+         - ``1`` means workspace mode is enabled      
+
 Unlocking
 +++++++++
 
