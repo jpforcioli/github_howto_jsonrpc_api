@@ -7014,241 +7014,373 @@ How to create a global policy package?
      ]
    }
 
-How to add ADOMs as global policy package member?
+How to add ADOMs as Global Policy Package targets?
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to add the ``demo_001`` and ``demo_002`` ADOMs as *targets* of the ``g_ppkg_001`` Global Policy Package:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "demo_001"
+                 },
+                 {
+                   "name": "demo_002"
+                 }
+               ],
+               "url": "/pm/pkg/global/g_pppk_001/scope member"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/pkg/global/g_ppkg_001/scope member"
+             }
+           ]
+         }
+
+      .. note::
+
+         - Existing list of target ADOMs won't be overwritten
+         - If there was the ``demo_003`` ADOM as target before this ``add`` 
+           operation, then the definitive list of targets will be the 
+           ``demo_001``, ``demo_002`` and ``demo_003`` ADOMs
+
+
+How to get ADOMs from the Global Policy Package targets?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the ADOM targets of the ``g_ppkg_001`` Global Policy Package:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/pkg/global/g_ppkg_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "g_ppkg_001",
+                 "obj ver": 0,
+                 "oid": 5623,
+                 "package settings": {
+                   "central-nat": 0,
+                   "consolidated-firewall-mode": 0,
+                   "fwpolicy-implicit-log": 0,
+                   "fwpolicy6-implicit-log": 0,
+                   "hitc-taskid": 0,
+                   "hitc-timestamp": 0,
+                   "ngfw-mode": 0,
+                   "policy-offload-level": 0
+                 },
+                 "scope member": [
+                   {
+                     "name": "demo_001"
+                   },
+                   {
+                     "name": "demo_002"
+                   },
+                   {
+                     "name": "demo_003"
+                   }
+                 ],
+                 "type": "pkg"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/pkg/global/g_ppkg_001"
+             }
+           ]
+         }
+
+How to delete ADOMs from the Global Policy Package targets?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to delete the ``demo_001`` and ``demo_002`` ADOMs *targets* of the ``g_ppkg_001`` Global Policy Package:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "demo_001"
+                 },
+                 {
+                   "name": "demo_002"
+                 }
+               ],
+               "url": "/pm/pkg/global/g_ppkg_001/scope member"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/pkg/global/g_ppkg_001/scope member"
+             }
+           ]
+         }
+
+      .. note::
+
+         - Existing list of target ADOMs won't be overwritten
+         - If there was the ``demo_001``, ``demo_002`` and ``demo_003`` ADOMs 
+           as target before this ``delete`` operation, then the definitive list 
+           of targets will be the ``demo_001`` ADOM
+
+How to trigger an assign Global Policy Package?
++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to trigger an assign operation of the 
+``g_ppkg_001`` Global Policy Package against the ``demo_001`` and ``demo_002`` ADOMs:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "flags": [
+                   "none"
+                 ],
+                 "pkg": "g_ppkg_001",
+                 "target": [
+                   {
+                     "adom": "demo_001"
+                   },
+                   {
+                     "adom": "demo_002"
+                   }
+                 ]
+               },
+               "url": "/securityconsole/assign/package"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+      .. note::
+
+         - ``none`` is the default *flag* to copy global policies and its 
+           **used** objects only
+         - Use flag ``cp_all_objs`` if you want to copy policies and all 
+           objects, even the unused ones
+
+      .. tip::
+         - Should you want to trigger an **assign** followed by an **install**, 
+           just add the flag ``copy_assigned_pkg``, for instance:
+
+           .. code-block::
+
+              "flags": ["cp_all_obs", "copy_assigned_pkg"],
+
+           will copy policies and all objects to target ADOMs, and will also
+           trigger a policy package install.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 201
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/assign/package"
+             }
+           ]
+         }
+
+      .. note::
+
+         - As usual, when a task is returned, you have to monitor it by getting
+           ``task/task/<task_id>``
+
+How to trigger an assign global policy package with exclusion?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Consider that the ``demo`` ADOM is with three Policy Packages: ``ppkg_001`` to ``ppkg_003``.
+
+The following example shows how to trigger an assign operation of the ``g_ppkg_001`` Global Policy against the ``demo`` ADOM but only for its ``ppkg_001`` Policy Package:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block::
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "flags": [
+                   "none"
+                 ],
+                 "pkg": "g_ppkg_001",
+                 "target": [
+                   {
+                     "adom": "demo",
+                     "excluded": "enable",
+                     "pkg": [
+                       "ppkg_002",
+                       "ppkg_003"
+                     ]
+                   }
+                 ]
+               },
+               "url": "/securityconsole/assign/package"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block::      
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "task": 13
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/assign/package"
+             }
+           ]
+         }
+
+How to trigger an unassign Global Policy Package?
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-**REQUEST:**:
+The following example shows how to trigger an unassign operation for the ``g_ppkg_001`` Global Policy Package and the ``demo`` ADOM, one of its current targets:
 
-.. code-block:: json
+.. tab-set::
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "add",
-     "params": [
-       {
-         "data": [
-           {
-             "name": "root"
-           },
-           {
-             "name": "demo"
-           }
-         ],
-         "url": "/pm/pkg/global/g_pp.001/scope member"
-       }
-     ],
-     "session": "5gzzbF4O0gZxQDEzOf2+gPP3OfLArrFejNS/GowTxgm7tIw7j94G4Oqw+M67nniHjCDedFi5aOU/535BuBNIYkjagTEFB5Zt",
-     "verbose": 1
-   }
-   
-**RESPONSE:**
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block::
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/pkg/global/g_pp.001/scope member"
-       }
-     ]
-   }
-
-How to assign a global policy package?
-++++++++++++++++++++++++++++++++++++++
-
-We assign global policy package `g_pp_001` to ADOMs ``DEMO_001`` and ``DEMO_002``.
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "flags": [
-             "none"
-           ],
-           "pkg": "g_pp_001",
-           "target": [
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
              {
-               "adom": "DEMO_001"
-             },
-             {
-               "adom": "DEMO_002"
+               "data": {
+                 "flags": [
+                   "unassign"
+                 ],
+                 "pkg": "g_ppkg_001",
+                 "target": [
+                   {
+                     "adom": "demo"
+                   }
+                 ]
+               },
+               "url": "/securityconsole/assign/package"
              }
-           ]
-         },
-         "url": "/securityconsole/assign/package"
-       }
-     ],
-     "session": "0FvxOQFGYfgsa8yMcKfAOWl4biEWZemqp/nJ45Bu/iILsCFH1DTk+nozi9XskdJhg9kiZ9jXJOmsD4S0n67H/Q==",
-     "verbose": 1
-   }
-
-.. note::
-
-   ``none`` is the default *flag* to copy global policies and its **used** objects
-   only. Use flag ``cp_all_objs`` if you want copy policies and all objects even
-   the unsed ones.
-
-   Should you want to assign and install, just add the flag
-   ``copy_assigned_pkg``, for instance:
-
-   .. code-block::
-
-      "flags": ["cp_all_obs", "copy_assigned_pkg"],
-
-   will copy policies and all objects to destination ADOMs, and will also
-   trigger a policy package install.
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "task": 201
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/securityconsole/assign/package"
-       }
-     ]
-   }
-
-As usual, when a task is returned, you have to monitor it by getting
-``task/task/<task_id>``.
-
-How to assign a global policy package with exclusion?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-We have policy packages ``default``, ``pp.001`` and ``pp.002`` in adom ``DEMO``.
-
-We want the global policy package ``gpp.001`` to be assigned to policy package
-``DEMO/pp.001`` only. It means we need to exclude policy package
-``DEMO/default`` and ``DEMO/pp.002``:
-
-**REQUEST**:
-
-.. code-block::
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "flags": [
-             "none"
            ],
-           "pkg": "gpp.001",
-           "target": [
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block::
+
+         {
+           "id": 1,
+           "result": [
              {
-               "adom": "DEMO",
-               "excluded": "enable",
-               "pkg": [
-                 "default",
-                 "pp.002"
-               ]
-             }
+               "data": {
+                 "task": 14
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/assign/package"
+            }
            ]
-         },
-         "url": "/securityconsole/assign/package"
-       }
-     ],
-     "session": "PfMrFElESOyXfF0yO7gj3E4mh4quskrC2N6VPxrVlGGXhekASYfybyiQvhYOcII3OQ/Zjr9NIUU9xJhQ3aEV1wTxBCPbl8BY",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "task": 13
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/securityconsole/assign/package"
-       }
-     ]
-   }
-
-How to unassign a global policy package?
-++++++++++++++++++++++++++++++++++++++++
-
-We want to unassign global policy package ``gpp.001`` from adom ``DEMO``,
-whatever the policy package it was assigned to:
-
-**REQUEST:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "flags": [
-             "unassign"
-           ],
-           "pkg": "gpp.001",
-           "target": [
-             {
-               "adom": "DEMO"
-             }
-           ]
-         },
-         "url": "/securityconsole/assign/package"
-       }
-     ],
-     "session": "OuKnOw1gO191qBD9twaKgruy4gOj7TVy7cWlWYD6z+96lDRv7fpeVrHDytJ/axQznfjyBPGVlf4KMuoh1t9zrDjRkwH5+M/S",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "task": 14
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/securityconsole/assign/package"
-      }
-     ]
-   }
+         }
 
 How to get ADOM options?
 ------------------------
