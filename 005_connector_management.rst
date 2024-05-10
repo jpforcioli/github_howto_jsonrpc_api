@@ -830,5 +830,108 @@ How to define External Resources hosted in FortiManager?
 
 See section :ref:`External Resources`.
 
+How to get resolved IP addresses for an IP Address Threat Feed?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the resolved IP addresses for the 
+``malicicous_ip`` IP Address Thread Feed defined in the ``demo`` ADOM and from 
+the perspective of the ``dev_001`` managed device:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "action": "get",
+                 "resource": "/api/v2/monitor/system/external-resource/entry-list?count=0&mkey=malicious_ip&vdom=root",
+                 "target": [
+                   "adom/demo/device/dev_001"
+                 ]
+               },
+               "url": "/sys/proxy/json"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "response": {
+                     "action": "entry-list",
+                     "build": 2571,
+                     "http_method": "GET",
+                     "name": "external-resource",
+                     "path": "system",
+                     "results": {
+                       "conn_attempt_time": 1715356114,
+                       "entries": [
+                         {
+                           "entry": "192.168.2.100",
+                           "valid": true
+                         },
+                         {
+                           "entry": "172.200.1.4/16",
+                           "valid": true
+                         },
+                         {
+                           "entry": "172.16.1.2/24",
+                           "valid": true
+                         },
+                         {
+                           "entry": "172.16.8.1-172.16.8.100",
+                           "valid": true
+                         },
+                         {
+                           "entry": "2001:0db8::eade:27ff:fe04:9a01/120",
+                           "valid": true
+                         },
+                         {
+                           "entry": "2001:0db8::eade:27ff:fe04:aa01-2001:0db8::eade:27ff:fe04:ab01",
+                           "valid": true
+                         }
+                       ],
+                       "http_status_code": 304,
+                       "invalid_count": 0,
+                       "last_content_update_time": 1715355563,
+                       "overflow": false,
+                       "resource_file_status": "downloaded",
+                       "status": "success",
+                       "valid_count": 6
+                     },
+                     "serial": "FGVMMLREDACTED40",
+                     "status": "success",
+                     "vdom": "root",
+                     "version": "v7.4.2"
+                   },
+                   "status": {
+                     "code": 0,
+                     "message": "OK"
+                   },
+                   "target": "dev_001"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/sys/proxy/json"
+             }
+           ]
+         }
 
 
