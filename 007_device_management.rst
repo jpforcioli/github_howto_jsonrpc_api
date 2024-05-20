@@ -2948,13 +2948,75 @@ We enable VDOM on device ``peer34``.
 		  ]
 		}
 
-How to create a NAT VDOM?
-+++++++++++++++++++++++++
+How to add a NAT VDOM?
+++++++++++++++++++++++
+
+Using ``/dvmdb/device`` endpoint
+________________________________
 
 1. Create the VDOM
 
-   Create a new VDOM named ``vd_004`` on device ``peer34`` located in the
-   ``DEMO`` ADOM:
+   The following example shows how to add the ``vd_001`` VDOM to the 
+   ``dev_001`` managed device:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "method": "add",
+              "params": [
+                {
+                  "data": {
+                    "comments": "VDOM #001",
+                    "name": "vd_001",
+                    "opmode": "nat",
+                    "vdom_type": "traffic"
+                  },
+                  "url": "/dvmdb/device/dev_001/vdom"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json            
+            
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": {
+                    "name": "vd_001"
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/device/dev_001/vdom"
+                }
+              ]
+            }
+
+         .. note::
+
+            - The ``vd_001`` VDOM gets created in the ADOM where is located the 
+              *management* VDOM (usually `root`) of the ``dev_001`` managed 
+              device
+
+2. If you need to move the newly created VDOM in a different ADOM, see :ref:`How to assign a VDOM to an ADOM?`
+
+Using ``/dvmdb/adom`` endpoint
+______________________________
+
+1. Create the VDOM
+
+   The following example shows how to add the ``vd_001`` VDOM in the 
+   ``dev_001`` managed device from the ``demo`` ADOM:
 
    .. tab-set::
     
@@ -2963,16 +3025,15 @@ How to create a NAT VDOM?
          .. code-block:: json
 
             {
-              "id": 1,
-              "jsonrpc": "1.0",
+              "id": 3,
               "method": "add",
               "params": [
                 {
                   "data": {
-                    "name": "vd_004",
+                    "name": "vd_001",
                     "opmode": "nat"
                   },
-                  "url": "/dvmdb/adom/DEMO/device/peer34/vdom"
+                  "url": "/dvmdb/adom/demo/device/dev_001/vdom"
                 }
               ],
               "session": "{{session}}"
@@ -2983,24 +3044,32 @@ How to create a NAT VDOM?
          .. code-block:: json
       
            {
-             "id": 1,
+             "id": 3,
              "result": [
                {
                  "data": {
-                   "name": "vd_004"
+                   "name": "vd_001"
                  },
                  "status": {
                    "code": 0,
                    "message": "OK"
                  },
-                 "url": "/dvmdb/adom/DEMO/device/peer34/vdom"
+                 "url": "/dvmdb/adom/demo/device/vd_001/vdom"
                }
              ]
            }
+
+   .. note::
+
+      - Using the ``/dvmdb/adom`` endpoint, the VDOM gets created and placed in
+        the destination ADOM with a single API request! (see 
+        :ref:`Using \`\`/dvmdb/device\`\` endpoint` - two API requests are 
+        required)
       
 2. Add a new interface in the newly created VDOM
 
-   We create VLAN interface ``internal.1002``.
+   The following example shows how to create the ``vl_1001`` VLAN interface in 
+   the ``vd_001`` VDOM of the ``dev_001`` managed device:
 
    .. tab-set::
   
@@ -3009,21 +3078,21 @@ How to create a NAT VDOM?
          .. code-block:: json
       
             {
-              "id": 1,
+              "id": 3,
               "method": "add",
               "params": [
                 {
                   "data": {
-                    "interface": "dmz",
+                    "interface": "port1",
                     "ip": [
                       "10.2.0.99",
                       "255.255.255.0"
                     ],
-                    "name": "internal.1002",
-                    "vdom": "vd_004",
-                    "vlanid": 1002
+                    "name": "vl_1001",
+                    "vdom": "vd_001",
+                    "vlanid": 1001
                   },
-                  "url": "/pm/config/device/peer34/global/system/interface"
+                  "url": "/pm/config/device/dev_001/global/system/interface"
                 }
               ],
               "session": "{{session}}"
@@ -3031,7 +3100,7 @@ How to create a NAT VDOM?
 
          .. note::
 
-            - Note that the ``url`` attribute needs to reference the *global*
+            - Note that the ``url`` attribute needs to reference the ``global``
               scope
 
       .. tab-item:: RESPONSE
@@ -3039,26 +3108,27 @@ How to create a NAT VDOM?
          .. code-block:: json
       
             {
-              "id": 1,
+              "id": 3,
               "result": [
                 {
                   "data": {
-                    "name": "internal.1002"
+                    "name": "vl_1001"
                   },
                   "status": {
                     "code": 0,
                     "message": "OK"
                   },
-                  "url": "/pm/config/device/peer34/global/system/interface"
+                  "url": "/pm/config/device/dev_001/global/system/interface"
                 }
               ]
             }
          
-   If you want to assign an existing interface, just change its VDOM. 
+3. If you want to assign an existing interface, just change its VDOM
 
-   In the following example, the ``internal.1001`` VLAN interface already exists.
+   In the following example, the ``vl_1002`` VLAN interface already exists in 
+   the ``root`` VDOM of the ``dev_001`` managed device.
 
-   The following request moves it in the ``vd_004`` VDOM:
+   The following request moves it in the ``vd_001`` VDOM:
       
    .. tab-set::
   
@@ -3067,14 +3137,14 @@ How to create a NAT VDOM?
          .. code-block:: json
 
             {
-              "id": 1,
+              "id": 3,
               "method": "set",
               "params": [
                 {
                   "data": {
-                    "vdom": "vd_004"
+                    "vdom": "vd_001"
                   },
-                  "url": "/pm/config/device/peer34/global/system/interface/internal.1001"
+                  "url": "/pm/config/device/dev_001/global/system/interface/vl_1002"
                 }
               ],
               "session": "{{session}}"
@@ -3085,17 +3155,17 @@ How to create a NAT VDOM?
          .. code-block:: json
 
             {
-              "id": 1,
+              "id": 3,
               "result": [
                 {
                   "data": {
-                    "name": "internal.1001"
+                    "name": "vl_1002"
                   },
                   "status": {
                     "code": 0,  
                     "message": "OK"
                   },
-                  "url": "/pm/config/device/peer34/global/system/interface/internal.1001"
+                  "url": "/pm/config/device/dev_001/global/system/interface/vl_1002"
                 }
               ]
             }
@@ -3103,8 +3173,7 @@ How to create a NAT VDOM?
 How to assign a VDOM to an ADOM?
 ++++++++++++++++++++++++++++++++
 
-To assign the ``vd_003`` from the ``tenant_10_dev_009`` device to the
-``tenant_13`` ADOM:
+The following example how to assign the ``vd_001`` VDOM in the ``dev_001`` managed device to the ``root`` ADOM:
 
 .. tab-set::
 
@@ -3113,34 +3182,33 @@ To assign the ``vd_003`` from the ``tenant_10_dev_009`` device to the
       .. code-block:: json
 
          {
-           "id": 197,
+           "id": 3,
            "method": "set",
            "params": [
              {
                "data": {
-                 "name": "tenant_10_dev_009",
-                 "vdom": "vd_003"
+                 "name": "dev_001",
+                 "vdom": "vd_001"
                },
-               "url": "/dvmdb/adom/tenant_13/object member"
+               "url": "/dvmdb/adom/root/object member"
              }
            ],
            "session": "{{session}}"
          }
-
 
    .. tab-item:: RESPONSE
 
       .. code-block:: json
 
          {
-           "id": 197,
+           "id": 3,
            "result": [
              {
                "status": {
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/dvmdb/adom/tenant_13/object member"
+               "url": "/dvmdb/adom/root/object member"
              }
            ]
          }
