@@ -5512,16 +5512,16 @@ It is possible to *target* multiple device or device groups from different ADOMs
     "adom/demo5/group/All_FortiGate"
   ]
   
-How to get an install preview?
-------------------------------
+How to get an Install Preview for a single device?
+--------------------------------------------------
 
 It's a two steps process:
 
-1. Trigger an install device preview operation
-2. Collect the install device preview output
+1. Trigger an install preview operation
+2. Collect the install preview output
 
-Step #1: Trigger an install device preview operation
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+Step #1: Trigger an install review operation
+++++++++++++++++++++++++++++++++++++++++++++
 
 Following example shows how to trigger an install device preview operation for
 the ``dev_001`` device in the ``demo`` ADOM:
@@ -5576,10 +5576,10 @@ the ``dev_001`` device in the ``demo`` ADOM:
       .. note::
         
          - You have to track the progress of the returned task id ``71``
-         - Once the task is completed, you can proceed with step 2
+         - Once the task is completed, you can proceed with next step
 
-Step #2: Collect the install device preview output
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Step #2: Collect the install preview output
++++++++++++++++++++++++++++++++++++++++++++
 
 .. note::
 
@@ -5633,6 +5633,150 @@ The following example shows how to obtain the Install Preview output for the ``d
              }
            ]
          }
+
+How to get an Install Preview for multiple devices?
+---------------------------------------------------
+
+Starting with FortiManager 7.4.4/7.6.0 (#1027482), it is possible to trigger an
+Install Preview operation for multiple devices.
+
+The per-device Install Preview tasks will be done in parellel.
+
+It's still a two steps process:
+
+1. Trigger the install preview operation, this time by specifying multiple 
+   target devices
+
+2. Collect the install preview output, again by specifying multiple target 
+   devices
+
+Step #1: Trigger an install preview for multiple devices
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Following example shows how to trigger an install device preview operation for
+the ``dev_001``, ``dev_002`` and ``dev_003`` devices in the ``demo`` ADOM:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "dev_002",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "dev_003",
+                     "vdom": "root"
+                   }
+                 ]
+               },
+               "url": "/securityconsole/install/preview"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 1056
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/install/preview"
+             }
+           ]
+         }
+        
+      .. note::
+         - You have to track the progress of the returned task id ``1056``
+         - Once the task is completed, you can proceed with next step
+
+Step #2: Collect the install device preview output
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to obtain the Install Preview output for the ``dev_001``, ``dev_002`` and ``dev_003`` devices in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "dc_emea",
+                 "scope": [
+                   {
+                     "name": "fgt-728-001",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "fgt-742-003",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "fgt-743-001",
+                     "vdom": "root"
+                   }
+                 ]
+               },
+               "url": "/securityconsole/preview/result"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json            
+
+         {
+           "id": 4,
+           "result": [
+             {
+               "data": {
+                 "message": "[{ \"name\": \"fgt-728-001\", \"oid\": 34872, \"result\": \"=== Preview result ===\\nconfig system interface\\n    edit \\\"port2\\\"\\n        set allowaccess https ping ssh http\\n        set alias \\\"ul_isp1\\\"\\n    next\\nend\\n\"}, { \"name\": \"fgt-742-003\", \"oid\": 35009, \"result\": \"=== Preview result ===\\nconfig system global\\n    set admin-https-ssl-versions tlsv1-1 tlsv1-2 tlsv1-3\\n    set admin-console-timeout 300\\n    set admin-scp enable\\nend\\nconfig system csf\\n    unset fixed-key\\nend\\n\"}, { \"name\": \"fgt-743-001\", \"oid\": 35145, \"result\": \"=== Preview result ===\\nconfig system global\\n    set admin-scp enable\\n    set switch-controller enable\\nend\\nconfig system acme\\n    set interface \\\"port3\\\"\\nend\\nconfig system csf\\n    unset fixed-key\\nend\\n\"}]"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/preview/result"
+             }
+           ]
+         }
+
+      .. note::
+
+         - The Install Preview ouput for multiple devices is placed in  
+           ``message`` attribute.
 
 How to get the platform_id, the platform_name and the ostype from a Serial Number?
 ----------------------------------------------------------------------------------
