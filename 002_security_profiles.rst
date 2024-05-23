@@ -1194,10 +1194,10 @@ The following example shows how to get the list of IPS signatures using the ``de
            "method": "get",
            "params": [
              {
-               "url": "/pm/config/adom/demo/_data/reserved/ips/sensor/entries/protocol"
+               "url": "/pm/config/adom/demo/_rule/list"
              }
            ],
-           "session": "{{session}}",
+           "session": "{{session}}"
            "verbose": 1
          }
 
