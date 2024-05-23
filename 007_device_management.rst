@@ -5523,8 +5523,7 @@ It's a two steps process:
 Step #1: Trigger an install review operation
 ++++++++++++++++++++++++++++++++++++++++++++
 
-Following example shows how to trigger an install device preview operation for
-the ``dev_001`` device in the ``demo`` ADOM:
+The following example shows how to trigger an install device preview operation for the ``dev_001`` device in the ``demo`` ADOM:
 
 .. tab-set::
   
@@ -5653,8 +5652,7 @@ It's still a two steps process:
 Step #1: Trigger an install preview for multiple devices
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Following example shows how to trigger an install device preview operation for
-the ``dev_001``, ``dev_002`` and ``dev_003`` devices in the ``demo`` ADOM:
+The following example shows how to trigger an install device preview operation for the ``dev_001``, ``dev_002`` and ``dev_003`` devices in the ``demo`` ADOM:
 
 .. tab-set::
   
@@ -5669,6 +5667,7 @@ the ``dev_001``, ``dev_002`` and ``dev_003`` devices in the ``demo`` ADOM:
              {
                "data": {
                  "adom": "demo",
+                 "flags": ["none"],
                  "scope": [
                    {
                      "name": "dev_001",
@@ -5689,6 +5688,36 @@ the ``dev_001``, ``dev_002`` and ``dev_003`` devices in the ``demo`` ADOM:
            ],
            "session": "{{session}}"
          }
+
+      .. note::
+
+         - Attribute ``flags`` could be ``none`` or ``json``
+         - It determines the nature of the output produced in the preview 
+           report
+         - ``none`` means CLI format
+         - ``json`` means JSON format
+
+      .. warning::
+         
+         - There is a bug (#0713778) where using:
+   
+           .. code-block:: json
+
+              "flags": "json"
+
+           or:
+
+           .. code-block::
+
+              "flags": ["json"]
+
+           doesn't work: the preview report is still CLI based.
+
+           The solution is to use this form:
+
+           .. code-block::
+
+              "flags": 1
 
    .. tab-item:: RESPONSE
 
@@ -5711,6 +5740,7 @@ the ``dev_001``, ``dev_002`` and ``dev_003`` devices in the ``demo`` ADOM:
          }
         
       .. note::
+
          - You have to track the progress of the returned task id ``1056``
          - Once the task is completed, you can proceed with next step
 
@@ -5731,18 +5761,18 @@ The following example shows how to obtain the Install Preview output for the ``d
            "params": [
              {
                "data": {
-                 "adom": "dc_emea",
+                 "adom": "demo",
                  "scope": [
                    {
-                     "name": "fgt-728-001",
+                     "name": "dev_001",
                      "vdom": "root"
                    },
                    {
-                     "name": "fgt-742-003",
+                     "name": "dev_002",
                      "vdom": "root"
                    },
                    {
-                     "name": "fgt-743-001",
+                     "name": "dev_003",
                      "vdom": "root"
                    }
                  ]
@@ -5762,7 +5792,7 @@ The following example shows how to obtain the Install Preview output for the ``d
            "result": [
              {
                "data": {
-                 "message": "[{ \"name\": \"fgt-728-001\", \"oid\": 34872, \"result\": \"=== Preview result ===\\nconfig system interface\\n    edit \\\"port2\\\"\\n        set allowaccess https ping ssh http\\n        set alias \\\"ul_isp1\\\"\\n    next\\nend\\n\"}, { \"name\": \"fgt-742-003\", \"oid\": 35009, \"result\": \"=== Preview result ===\\nconfig system global\\n    set admin-https-ssl-versions tlsv1-1 tlsv1-2 tlsv1-3\\n    set admin-console-timeout 300\\n    set admin-scp enable\\nend\\nconfig system csf\\n    unset fixed-key\\nend\\n\"}, { \"name\": \"fgt-743-001\", \"oid\": 35145, \"result\": \"=== Preview result ===\\nconfig system global\\n    set admin-scp enable\\n    set switch-controller enable\\nend\\nconfig system acme\\n    set interface \\\"port3\\\"\\nend\\nconfig system csf\\n    unset fixed-key\\nend\\n\"}]"
+                 "message": "[{ \"name\": \"dev_001\", \"oid\": 34872, \"result\": \"=== Preview result ===\\nconfig system interface\\n    edit \\\"port2\\\"\\n        set allowaccess https ping ssh http\\n        set alias \\\"ul_isp1\\\"\\n    next\\nend\\n\"}, { \"name\": \"dev_002\", \"oid\": 35009, \"result\": \"=== Preview result ===\\nconfig system global\\n    set admin-https-ssl-versions tlsv1-1 tlsv1-2 tlsv1-3\\n    set admin-console-timeout 300\\n    set admin-scp enable\\nend\\nconfig system csf\\n    unset fixed-key\\nend\\n\"}, { \"name\": \"dev_003\", \"oid\": 35145, \"result\": \"=== Preview result ===\\nconfig system global\\n    set admin-scp enable\\n    set switch-controller enable\\nend\\nconfig system acme\\n    set interface \\\"port3\\\"\\nend\\nconfig system csf\\n    unset fixed-key\\nend\\n\"}]"
                },
                "status": {
                  "code": 0,

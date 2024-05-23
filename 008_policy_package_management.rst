@@ -1700,251 +1700,516 @@ How to clone a Policy Package?
                   ]
                 }
 
-How to trigger an install preview?
-++++++++++++++++++++++++++++++++++
+How to trigger an install preview for a single device?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-When you install a policy package, the FortiManager UI lets you select an
+When you install a Policy Package, the FortiManager UI lets you select an
 *Install Preview* action in order to review the CLI that will be pushed down to
 the managed devices.
 
-We explain here how to operate this *Install Preview* action by using the API.
+This section describes how to operate this *Install Preview* action by using the API.
 
 It's a four steps process:
 
-1. We have to start a policy package install process in preview mode
-2. We have to ask for the preview generation
-3. We need to collect the preview output
-4. We need to cancel the install policy package process
+1. Trigger the Policy Package Install in preview mode
+2. Trigger the Install Preview 
+3. Collect the Install Preview output
+4. Cancel the Policy Package install process
 
-5. We have to start a policy package install process in preview mode
+Step #1: Trigger the Policy Package Install in preview mode
+___________________________________________________________
 
-**REQUEST:**
+The following example shows how to trigger the install of the ``ppkg_001`` Policy Package against the ``dev_001`` device in the ``demo`` ADOM:
 
-.. code-block:: json
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-                {
-                  "id": 1,
-                  "jsonrpc": "1.0",
-                  "method": "exec",
-                  "params": [
-                    {
-                      "data": {
-                        "adom": "customer_001",
-                        "adom_rev_comments": "Test [1]",
-                        "adom_rev_name": "Revision [1]",
-                        "flags": [
-                          "preview"
-                        ],
-                        "pkg": "pp.dut_fgt2",
-                        "scope": [
-                          {
-                            "name": "dut_fgt2",
-                            "vdom": "root"
-                          }
-                        ]
-                      },
-                      "url": "/securityconsole/install/package"
-                    }
-                  ],
-                  "session": "TFWLZCzMyiukI25p2kEmmrv7TO9wHkLHWph8rouoG1TCYeojlUx6OVXqn0wyZ1mymYdRfH2n7JvNEJWONzm1Jg==",
-                  "verbose": 1
-                }
+      .. code-block:: json
 
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "adom_rev_comments": "Test [1]",
+                 "adom_rev_name": "Revision [1]",
+                 "flags": [
+                   "preview"
+                 ],
+                 "pkg": "ppkg_001",
+                 "scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   }
+                 ]
+               },
+               "url": "/securityconsole/install/package"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
 
-                {
-                  "id": 1,
-                  "result": [
-                    {                
-                      "data": {
-                        "task": 69
-                      },
-                      "status": {
-                        "code": 0,
-                        "message": "OK"
-                      },
-                      "url": "/securityconsole/install/package"
-                    }
-                  ]
-                }
+         {
+           "id": 1,
+           "result": [
+             {                
+               "data": {
+                 "task": 69
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/install/package"
+             }
+           ]
+         }
 
-Here you have to track the progress of the returned task id ``69`` (you can *get
-/task/task/69*)
+      .. note::
+        
+         - You have to track the progress of the returned task id ``69``
+         - Once the task is completed, you can proceed with next step
 
-Once the task is completed, you can proceed with step 2.
+Step #2: Trigger the Install Preview 
+____________________________________
 
-2. We have to ask for the preview generation
+The following example shows how to trigger an install device preview operation for the ``dev_001`` device in the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json 
+      .. code-block:: json
 
-                {
-                  "id": 1,
-                  "jsonrpc": "1.0",
-                  "method": "exec",
-                  "params": [
-                    {
-                      "data": {
-                        "adom": "customer_001",
-                        "device": "dut_fgt2",
-                        "flags": [
-                          "none"
-                        ],
-                        "vdoms": [
-                          "root"
-                        ]
-                      },
-                      "url": "/securityconsole/install/preview"
-                    }
-                  ],
-                  "session": "6a5HWsj6o0L5da8oTZB26wapTtrMlsQxmNt24mWeL/80VRqy5OdbM6kntlkrX7L3rsw9rbRK1rqZvLlfXTCIKw==",
-                  "verbose": 1
-                }
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "device": "dev_001",
+                 "flags": [
+                   "none"
+                 ],
+                 "vdoms": [
+                   "root"
+                 ]
+               },
+               "url": "/securityconsole/install/preview"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-.. note::
+      .. note::
 
-   Attribute ``flags`` could be ``none`` or ``json``.
-   It determines the nature of the output produced in the preview report: CLI
-   based when it is ``none`` and obviously JSON based when it is ``json``.
+         - Attribute ``flags`` could be ``none`` or ``json``
+         - It determines the nature of the output produced in the preview 
+           report
+         - ``none`` means CLI format
+         - ``json`` means JSON format
 
-   There is a bug (#0713778) where using:
+      .. warning::
+         
+         - There is a bug (#0713778) where using:
    
-   .. code-block::
+           .. code-block:: json
 
-      "flags": "json"
+              "flags": "json"
 
-   or:
+           or:
 
-   .. code-block::
+           .. code-block::
 
-      "flags": ["json"]
+              "flags": ["json"]
 
-   doesn't work: the preview report is still CLI based.
+           doesn't work: the preview report is still CLI based.
 
-   The solution is to use this form:
+           The solution is to use this form:
 
-   .. code-block::
+           .. code-block::
 
-      "flags": 1
+              "flags": 1
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json 
+      .. code-block:: json
 
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "task": 70
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/install/preview"
+             }
+           ]
+         }
+
+      .. note::
+        
+         - You have to track the progress of the returned task id ``70``
+         - Once the task is completed, you can proceed with next step
+
+Step #3: Collect the Install Preview output
+___________________________________________
+
+The following example shows how to obtain the Install Preview output for the ``dev_001`` device in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+             
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "device": "dev_001"
+               },
+               "url": "/securityconsole/preview/result"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "result": [                
+             {
+               "data": {                
+                 "message": "config system dns\n    set primary 8.8.8.8\n    unset secondary\nend\nconfig firewall address\n    edit \"host_001\"\n        set uuid 09ce3330-b06e-51ea-6497-48f76b1e8626\n        set color 3\n        set subnet 10.0.0.1 255.255.255.255\n    next\nend\nconfig system dhcp server\n    edit 1\n        set status disable\n        set dns-service default\n        set ntp-service default\n        set default-gateway 172.16.2.102\n        set netmask 255.255.255.0\n        set interface \"port3\"\n        config ip-range\n            edit 1\n                set start-ip 172.16.2.1\n                set end-ip 172.16.2.101\n            next\n            edit 2\n                set start-ip 172.16.2.103\n                set end-ip 172.16.2.254\n            next\n        end\n        set timezone-option default\n    next\nend\nconfig firewall policy\n    edit 1\n        set srcaddr \"host_001\"\n    next\nend\n"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/preview/result"
+             }
+           ]
+         }
+
+      .. note::
+
+         - In the output returned by the ``message`` attribute, FortiManager 
+           reported pending changes coming from ADOM DB (objects & policies) 
+           but also from Device DB
+           
+         - When you trigger an install preview for a device only, it will only 
+           expose the pending changes coming from the corresponding device's 
+           Device DB (see :ref:`How to get an Install Preview for a single 
+           device?`)
+
+Step #4: Cancel the Policy Package install process
+__________________________________________________
+
+The following example shows how to cancel a Policy Package Installation:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo"
+               },
+               "url": "/securityconsole/package/cancel/install"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/package/cancel/install"
+             }
+           ]
+         }
+
+How to trigger an install preview for multiple devices?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Starting with FortiManager 7.4.4/7.6.0 (#1027482), it is possible to trigger an
+Install Preview operation for multiple devices.
+
+The per-device Install Preview tasks will be done in parellel.
+
+It's a three steps process:
+
+#. Trigger the Policy Package Install in preview mode, this time by specifying
+   multple devices
+#. Trigger the Install Preview, again by specifying multiple target
+   devices
+#. Collect the Install Preview output, again by specifying multiple target
+   devices
+
+Step #1: Trigger the Policy Package Install in preview mode for multiple devices
+________________________________________________________________________________
+
+The following example shows how to trigger the install of the ``ppkg_001`` Policy Package against the ``dev_001``, ``dev_002`` and ``dev_003`` devices in 
+the ``demo`` ADOM:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "flags": [
+                   "preview",
+                 ],
+                 "pkg": "ppkg_001",
+                 "scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "dev_002",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "dev_003",
+                     "vdom": "root"
+                   }
+                 ]
+               },
+               "url": "/securityconsole/install/package"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 1062
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/install/package"
+             }
+           ]
+         }    
+
+      .. note::
+
+         - You have to track the progress of the returned task id ``1062``
+         - Once the task is completed, you can proceed with next step             
+
+Step #2: Trigger an install preview for multiple devices
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to trigger an install device preview operation for the ``dev_001``, ``dev_002`` and ``dev_003`` devices in the ``demo`` ADOM:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "flags": ["none"],
+                 "scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "dev_002",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "dev_003",
+                     "vdom": "root"
+                   }
+                 ]
+               },
+               "url": "/securityconsole/install/preview"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         - Attribute ``flags`` could be ``none`` or ``json``
+         - It determines the nature of the output produced in the preview 
+           report
+         - ``none`` means CLI format
+         - ``json`` means JSON format
+
+      .. warning::
+         
+         - There is a bug (#0713778) where using:
+   
+           .. code-block:: json
+
+              "flags": "json"
+
+           or:
+
+           .. code-block::
+
+              "flags": ["json"]
+
+           doesn't work: the preview report is still CLI based.
+
+           The solution is to use this form:
+
+           .. code-block::
+
+              "flags": 1
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 1063
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/install/preview"
+             }
+           ]
+         }
+        
+      .. note::
+
+         - You have to track the progress of the returned task id ``1063``
+         - Once the task is completed, you can proceed with next step
+
+Step #2: Collect the install device preview output
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to obtain the Install Preview output for the ``dev_001``, ``dev_002`` and ``dev_003`` devices in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "dev_002",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "dev_003",
+                     "vdom": "root"
+                   }
+                 ]
+               },
+               "url": "/securityconsole/preview/result"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. dropdown:: Click to expand
+
+         .. code-block:: json            
+
+            {
+              "id": 5,
+              "result": [
                 {
-                  "id": 1,
-                  "result": [
-                    {
-                      "data": {
-                        "task": 70
-                      },
-                      "status": {
-                        "code": 0,
-                        "message": "OK"
-                      },
-                      "url": "/securityconsole/install/preview"
-                    }
-                  ]
+                  "data": {
+                    "message": "[{ \"name\": \"fgt_001\", \"oid\": 34872, \"result\": \"=== Preview result ===\\n{ \\\"result\\\": [{ \\\"data\\\": [{ \\\"data\\\": [{ \\\"category\\\": 8, \\\"data\\\": [{ \\\"aggregate-type\\\": 0, \\\"algorithm\\\": 2, \\\"alias\\\": { \\\"n\\\": \\\"ul_isp1\\\"}, \\\"allowaccess\\\": { \\\"n\\\": 23, \\\"o\\\": 0}, \\\"ap-discover\\\": 1, \\\"arpforward\\\": 1, \\\"atm-protocol\\\": 0, \\\"auth-cert\\\": [], \\\"auth-type\\\": 4, \\\"auto-auth-extension-device\\\": 0, \\\"bandwidth-measure-time\\\": 0, \\\"bfd\\\": 0, \\\"bfd-desired-min-tx\\\": 250, \\\"bfd-detect-mult\\\": 3, \\\"bfd-required-min-rx\\\": 250, \\\"broadcast-forward\\\": 0, \\\"captive-portal\\\": 0, \\\"color\\\": 0, \\\"dedicated-to\\\": 0, \\\"defaultgw\\\": 1, \\\"description\\\": \\\"\\\", \\\"device-identification\\\": 0, \\\"device-user-identification\\\": 1, \\\"dhcp-classless-route-addition\\\": 0, \\\"dhcp-relay-agent-option\\\": 1, \\\"dhcp-relay-interface\\\": [], \\\"dhcp-relay-interface-select-method\\\": 0, \\\"dhcp-relay-ip\\\": [], \\\"dhcp-relay-link-selection\\\": \\\"0.0.0.0\\\", \\\"dhcp-relay-request-all-server\\\": 0, \\\"dhcp-relay-service\\\": 0, \\\"dhcp-relay-type\\\": 0, \\\"dhcp-renew-time\\\": 0, \\\"diff_flag\\\": 2, \\\"disc-retry-timeout\\\": 1, \\\"disconnect-threshold\\\": 0, \\\"distance\\\": 5, \\\"dns-server-override\\\": 1, \\\"dns-server-protocol\\\": 1, \\\"drop-fragment\\\": 0, \\\"drop-overlapped-fragment\\\": 0, \\\"eap-ca-cert\\\": [], \\\"eap-method\\\": 0, \\\"eap-password\\\": \\\"******\\\", \\\"eap-supplicant\\\": 0, \\\"eap-user-cert\\\": [], \\\"egress-cos\\\": 0, \\\"egress-shaping-profile\\\": [], \\\"estimated-downstream-bandwidth\\\": 0, \\\"estimated-upstream-bandwidth\\\": 0, \\\"explicit-ftp-proxy\\\": 0, \\\"explicit-web-proxy\\\": 0, \\\"external\\\": 0, \\\"fail-action-on-extender\\\": 0, \\\"fail-alert-interfaces\\\": [], \\\"fail-alert-method\\\": 1, \\\"fail-detect\\\": 0, \\\"fail-detect-option\\\": 2, \\\"fortilink\\\": 0, \\\"fortilink-neighbor-detect\\\": 1, \\\"fortilink-split-interface\\\": 1, \\\"forward-domain\\\": 0, \\\"gateway-address\\\": \\\"0.0.0.0\\\", \\\"gi-gk\\\": 0, \\\"gwaddr\\\": \\\"0.0.0.0\\\", \\\"icmp-accept-redirect\\\": 1, \\\"icmp-send-redirect\\\": 1, \\\"ident-accept\\\": 0, \\\"idle-timeout\\\": 0, \\\"ike-saml-server\\\": [], \\\"inbandwidth\\\": 0, \\\"ingress-cos\\\": 0, \\\"ingress-shaping-profile\\\": [], \\\"ingress-spillover-threshold\\\": 0, \\\"interconnect-profile\\\": 1, \\\"interface\\\": [], \\\"internal\\\": 0, \\\"ip\\\": [\\\"0.0.0.0\\\", \\\"0.0.0.0\\\"], \\\"ip-managed-by-fortiipam\\\": 0, \\\"ipmac\\\": 0, \\\"ips-sniffer-mode\\\": 0, \\\"ipunnumbered\\\": \\\"0.0.0.0\\\", \\\"l2forward\\\": 0, \\\"l2tp-client\\\": 0, \\\"lacp-ha-secondary\\\": 1, \\\"lacp-ha-slave\\\": 1, \\\"lacp-mode\\\": 2, \\\"lacp-speed\\\": 0, \\\"lcp-echo-interval\\\": 5, \\\"lcp-max-echo-fails\\\": 3, \\\"link-up-delay\\\": 50, \\\"lldp-network-policy\\\": [], \\\"lldp-reception\\\": 3, \\\"lldp-transmission\\\": 2, \\\"managed-subnetwork-size\\\": 256, \\\"management-ip\\\": [\\\"0.0.0.0\\\", \\\"0.0.0.0\\\"], \\\"measured-downstream-bandwidth\\\": 0, \\\"measured-upstream-bandwidth\\\": 0, \\\"member\\\": [], \\\"min-links\\\": 1, \\\"min-links-down\\\": 0, \\\"mode\\\": 0, \\\"monitor-bandwidth\\\": 0, \\\"mtu\\\": 1500, \\\"mtu-override\\\": 0, \\\"mux-type\\\": 0, \\\"name\\\": \\\"port2\\\", \\\"ndiscforward\\\": 1, \\\"netbios-forward\\\": 0, \\\"netflow-sampler\\\": 0, \\\"np-qos-profile\\\": 0, \\\"outbandwidth\\\": 0, \\\"padt-retry-timeout\\\": 1, \\\"password\\\": \\\"******\\\", \\\"phy-mode\\\": 0, \\\"poe\\\": 1, \\\"polling-interval\\\": 20, \\\"pppoe-unnumbered-negotiate\\\": 1, \\\"pptp-auth-type\\\": 4, \\\"pptp-client\\\": 0, \\\"pptp-password\\\": \\\"******\\\", \\\"pptp-server-ip\\\": \\\"0.0.0.0\\\", \\\"pptp-timeout\\\": 0, \\\"preserve-session-route\\\": 0, \\\"priority\\\": 1, \\\"priority-override\\\": 1, \\\"proxy-captive-portal\\\": 0, \\\"pvc-atm-qos\\\": 1, \\\"pvc-chan\\\": 0, \\\"pvc-crc\\\": 2, \\\"pvc-pcr\\\": 0, \\\"pvc-scr\\\": 0, \\\"pvc-vlan-id\\\": 7, \\\"pvc-vlan-rx-id\\\": 7, \\\"pvc-vlan-rx-op\\\": 1, \\\"pvc-vlan-tx-id\\\": 7, \\\"pvc-vlan-tx-op\\\": 3, \\\"reachable-time\\\": 30000, \\\"remote-ip\\\": [\\\"0.0.0.0\\\", \\\"0.0.0.0\\\"], \\\"replacemsg-override-group\\\": [], \\\"retransmission\\\": 1, \\\"ring-rx\\\": 0, \\\"ring-tx\\\": 0, \\\"role\\\": 3, \\\"sample-direction\\\": 3, \\\"sample-rate\\\": 2000, \\\"secondary-IP\\\": 0, \\\"security-8021x-dynamic-vlan-id\\\": 0, \\\"security-8021x-mode\\\": 0, \\\"security-exempt-list\\\": [], \\\"security-groups\\\": [], \\\"security-mac-auth-bypass\\\": 0, \\\"security-mode\\\": 1, \\\"sflow-sampler\\\": 0, \\\"sfp-dsl\\\": 0, \\\"sfp-dsl-adsl-fallback\\\": 0, \\\"sfp-dsl-autodetect\\\": 1, \\\"sfp-dsl-mac\\\": \\\"00:00:00:00:00:00\\\", \\\"snmp-index\\\": 107, \\\"speed\\\": 1, \\\"spillover-threshold\\\": 0, \\\"src-check\\\": 1, \\\"status\\\": 1, \\\"stp\\\": 0, \\\"stp-ha-secondary\\\": 2, \\\"stpforward\\\": 0, \\\"stpforward-mode\\\": 0, \\\"subst\\\": 0, \\\"substitute-dst-mac\\\": \\\"00:00:00:00:00:00\\\", \\\"sw-algorithm\\\": 3, \\\"swc-first-create\\\": 0, \\\"switch-controller-access-vlan\\\": 0, \\\"switch-controller-arp-inspection\\\": 0, \\\"switch-controller-dhcp-snooping\\\": 0, \\\"switch-controller-dhcp-snooping-option82\\\": 0, \\\"switch-controller-dhcp-snooping-verify-mac\\\": 0, \\\"switch-controller-dynamic\\\": [], \\\"switch-controller-feature\\\": 0, \\\"switch-controller-igmp-snooping\\\": 0, \\\"switch-controller-igmp-snooping-fast-leave\\\": 0, \\\"switch-controller-igmp-snooping-proxy\\\": 0, \\\"switch-controller-iot-scanning\\\": 0, \\\"switch-controller-learning-limit\\\": 0, \\\"switch-controller-mgmt-vlan\\\": 4094, \\\"switch-controller-nac\\\": [], \\\"switch-controller-netflow-collect\\\": 0, \\\"switch-controller-rspan-mode\\\": 0, \\\"switch-controller-source-ip\\\": 1, \\\"switch-controller-traffic-policy\\\": [], \\\"system-id\\\": \\\"00:00:00:00:00:00\\\", \\\"system-id-type\\\": 1, \\\"tc-mode\\\": 0, \\\"tcp-mss\\\": 0, \\\"timestamp\\\": 1716507207, \\\"trunk\\\": 0, \\\"trust-ip-1\\\": [\\\"0.0.0.0\\\", \\\"0.0.0.0\\\"], \\\"trust-ip-2\\\": [\\\"0.0.0.0\\\", \\\"0.0.0.0\\\"], \\\"trust-ip-3\\\": [\\\"0.0.0.0\\\", \\\"0.0.0.0\\\"], \\\"trust-ip6-1\\\": \\\"::\\\\\\/0\\\", \\\"trust-ip6-2\\\": \\\"::\\\\\\/0\\\", \\\"trust-ip6-3\\\": \\\"::\\\\\\/0\\\", \\\"type\\\": 0, \\\"user\\\": \\\"devops\\\", \\\"vci\\\": 35, \\\"vdom\\\": [\\\"\\\\\\\"root\\\\\\\"\\\"], \\\"vectoring\\\": 1, \\\"vlan-protocol\\\": 0, \\\"vlanforward\\\": 0, \\\"vlanid\\\": 0, \\\"vpi\\\": 0, \\\"vrf\\\": 0, \\\"vrrp-virtual-mac\\\": 0, \\\"wccp\\\": 0, \\\"weight\\\": 0, \\\"wifi-5g-threshold\\\": \\\"-78\\\", \\\"wifi-acl\\\": 0, \\\"wifi-ap-band\\\": 0, \\\"wifi-auth\\\": 0, \\\"wifi-auto-connect\\\": 1, \\\"wifi-auto-save\\\": 0, \\\"wifi-broadcast-ssid\\\": 1, \\\"wifi-dns-server1\\\": \\\"0.0.0.0\\\", \\\"wifi-dns-server2\\\": \\\"0.0.0.0\\\", \\\"wifi-encrypt\\\": 1, \\\"wifi-fragment-threshold\\\": 2346, \\\"wifi-gateway\\\": \\\"0.0.0.0\\\", \\\"wifi-key\\\": \\\"******\\\", \\\"wifi-keyindex\\\": 1, \\\"wifi-mac-filter\\\": 0, \\\"wifi-passphrase\\\": \\\"******\\\", \\\"wifi-radius-server\\\": [], \\\"wifi-rts-threshold\\\": 2346, \\\"wifi-security\\\": 9, \\\"wifi-ssid\\\": \\\"fortinet\\\", \\\"wins-ip\\\": \\\"0.0.0.0\\\"}]}], \\\"diff_flag\\\": 2, \\\"vdom\\\": \\\"global\\\"}, { \\\"data\\\": [{ \\\"category\\\": 2223, \\\"data\\\": [{ \\\"cos-queue\\\": 0, \\\"description\\\": \\\"Rate control for quarantined traffic\\\", \\\"diff_flag\\\": 3, \\\"guaranteed-bandwidth\\\": 163840, \\\"guaranteed-burst\\\": 8192, \\\"id\\\": 1, \\\"maximum-burst\\\": 163840, \\\"name\\\": \\\"quarantine\\\", \\\"policer-status\\\": 1, \\\"timestamp\\\": 1716507207, \\\"type\\\": 1, \\\"user\\\": \\\"devops\\\"}, { \\\"cos-queue\\\": 0, \\\"description\\\": \\\"Rate control for sniffer mirrored traffic\\\", \\\"diff_flag\\\": 3, \\\"guaranteed-bandwidth\\\": 50000, \\\"guaranteed-burst\\\": 8192, \\\"id\\\": 2, \\\"maximum-burst\\\": 163840, \\\"name\\\": \\\"sniffer\\\", \\\"policer-status\\\": 1, \\\"timestamp\\\": 1716507207, \\\"type\\\": 1, \\\"user\\\": \\\"devops\\\"}]}, { \\\"category\\\": 140, \\\"data\\\": [{ \\\"associated-interface\\\": [\\\"any\\\"], \\\"clearpass-spt\\\": 0, \\\"color\\\": 0, \\\"diff_flag\\\": 3, \\\"dirty\\\": 2, \\\"fabric-object\\\": 0, \\\"list\\\": null, \\\"name\\\": \\\"EMS_ALL_UNKNOWN_CLIENTS\\\", \\\"node-ip-only\\\": 0, \\\"obj-type\\\": 9, \\\"sub-type\\\": 3, \\\"tagging\\\": null, \\\"timestamp\\\": 1716507207, \\\"type\\\": 15, \\\"user\\\": \\\"devops\\\", \\\"uuid\\\": \\\"9012e90a-7a9a-51ee-b72b-f422d629c203\\\"}, { \\\"associated-interface\\\": [\\\"any\\\"], \\\"clearpass-spt\\\": 0, \\\"color\\\": 0, \\\"diff_flag\\\": 3, \\\"dirty\\\": 2, \\\"fabric-object\\\": 0, \\\"list\\\": null, \\\"name\\\": \\\"EMS_ALL_UNMANAGEABLE_CLIENTS\\\", \\\"node-ip-only\\\": 0, \\\"obj-type\\\": 9, \\\"sub-type\\\": 3, \\\"tagging\\\": null, \\\"timestamp\\\": 1716507207, \\\"type\\\": 15, \\\"user\\\": \\\"devops\\\", \\\"uuid\\\": \\\"9012d71c-7a9a-51ee-9809-c8aa6b444624\\\"}]}, { \\\"category\\\": 1563, \\\"data\\\": [{ \\\"allowlist\\\": 0, \\\"block-blocklisted-certificates\\\": 1, \\\"caname\\\": [\\\"Fortinet_CA_SSL\\\"], \\\"comment\\\": \\\"Read-only profile that does no inspection.\\\", \\\"diff_flag\\\": 2, \\\"mapi-over-https\\\": 0, \\\"name\\\": \\\"no-inspection\\\", \\\"rpc-over-https\\\": 0, \\\"server-cert\\\": [], \\\"server-cert-mode\\\": 0, \\\"ssl-anomaly-log\\\": 1, \\\"ssl-exemption-ip-rating\\\": 1, \\\"ssl-exemption-log\\\": 0, \\\"ssl-handshake-log\\\": 0, \\\"ssl-negotiation-log\\\": { \\\"n\\\": 1, \\\"o\\\": 0}, \\\"ssl-server-cert-log\\\": 0, \\\"supported-alpn\\\": 3, \\\"timestamp\\\": 1716507207, \\\"untrusted-caname\\\": [\\\"Fortinet_CA_Untrusted\\\"], \\\"use-ssl-server\\\": 0, \\\"user\\\": \\\"devops\\\"}]}, { \\\"category\\\": 181, \\\"data\\\": [{ \\\"action\\\": 1, \\\"anti-replay\\\": 1, \\\"application-list\\\": [], \\\"auth-cert\\\": [], \\\"auth-path\\\": 0, \\\"auto-asic-offload\\\": 1, \\\"av-profile\\\": [\\\"\\\\\\\"av_profile_001\\\\\\\"\\\"], \\\"block-notification\\\": 0, \\\"captive-portal-exempt\\\": 0, \\\"capture-packet\\\": 0, \\\"cgn-eif\\\": 0, \\\"cgn-eim\\\": 0, \\\"cgn-resource-quota\\\": 16, \\\"cgn-session-quota\\\": 16777215, \\\"cifs-profile\\\": [], \\\"comments\\\": { \\\"n\\\": \\\"Test #003\\\", \\\"o\\\": \\\"Test #001\\\"}, \\\"custom-log-fields\\\": [], \\\"decrypted-traffic-mirror\\\": [], \\\"delay-tcp-npu-session\\\": 0, \\\"diff_flag\\\": 2, \\\"diffserv-copy\\\": 0, \\\"diffserv-forward\\\": 0, \\\"diffserv-reverse\\\": 0, \\\"diffservcode-forward\\\": \\\"000000\\\", \\\"diffservcode-rev\\\": \\\"000000\\\", \\\"disclaimer\\\": 0, \\\"dlp-profile\\\": [], \\\"dnsfilter-profile\\\": [], \\\"dsri\\\": 0, \\\"dstaddr\\\": [\\\"\\\\\\\"host_101\\\\\\\"\\\"], \\\"dstaddr-negate\\\": 0, \\\"dstaddr6\\\": [], \\\"dstaddr6-negate\\\": 0, \\\"dstintf\\\": [\\\"\\\\\\\"port1\\\\\\\"\\\"], \\\"dynamic-shaping\\\": 0, \\\"email-collect\\\": 0, \\\"emailfilter-profile\\\": [], \\\"fec\\\": 0, \\\"file-filter-profile\\\": [], \\\"firewall-session-dirty\\\": 0, \\\"fixedport\\\": 0, \\\"fsso-agent-for-ntlm\\\": [], \\\"fsso-groups\\\": [], \\\"geoip-anycast\\\": 0, \\\"geoip-match\\\": 0, \\\"global-label\\\": \\\"Project #1\\\", \\\"groups\\\": [], \\\"gtp-profile\\\": [], \\\"http-policy-redirect\\\": 0, \\\"icap-profile\\\": [], \\\"identity-based-route\\\": [], \\\"inbound\\\": 0, \\\"inspection-mode\\\": 1, \\\"internet-service\\\": 0, \\\"internet-service-custom\\\": [], \\\"internet-service-custom-group\\\": [], \\\"internet-service-group\\\": [], \\\"internet-service-name\\\": [], \\\"internet-service-negate\\\": 0, \\\"internet-service-src\\\": 0, \\\"internet-service-src-custom\\\": [], \\\"internet-service-src-custom-group\\\": [], \\\"internet-service-src-group\\\": [], \\\"internet-service-src-name\\\": [], \\\"internet-service-src-negate\\\": 0, \\\"internet-service6\\\": 0, \\\"internet-service6-custom\\\": [], \\\"internet-service6-custom-group\\\": [], \\\"internet-service6-group\\\": [], \\\"internet-service6-name\\\": [], \\\"internet-service6-negate\\\": 0, \\\"internet-service6-src\\\": 0, \\\"internet-service6-src-custom\\\": [], \\\"internet-service6-src-custom-group\\\": [], \\\"internet-service6-src-group\\\": [], \\\"internet-service6-src-name\\\": [], \\\"internet-service6-src-negate\\\": 0, \\\"ip-version-type\\\": \\\"ipv4\\\", \\\"ippool\\\": 0, \\\"ips-sensor\\\": [], \\\"ips-voip-filter\\\": [], \\\"label\\\": \\\"Project #1\\\", \\\"logtraffic\\\": 2, \\\"logtraffic-start\\\": 0, \\\"match-vip\\\": 1, \\\"match-vip-only\\\": 0, \\\"name\\\": \\\"Policy_001\\\", \\\"nat\\\": 0, \\\"nat46\\\": 0, \\\"nat64\\\": 0, \\\"natinbound\\\": 0, \\\"natip\\\": [\\\"0.0.0.0\\\", \\\"0.0.0.0\\\"], \\\"natoutbound\\\": 0, \\\"network-service-dynamic\\\": [], \\\"network-service-src-dynamic\\\": [], \\\"np-acceleration\\\": 1, \\\"ntlm\\\": 0, \\\"ntlm-enabled-browsers\\\": [], \\\"ntlm-guest\\\": 0, \\\"obj seq\\\": 0, \\\"outbound\\\": 1, \\\"passive-wan-health-measurement\\\": 0, \\\"per-ip-shaper\\\": [], \\\"permit-any-host\\\": 0, \\\"permit-stun-host\\\": 0, \\\"pfcp-profile\\\": [], \\\"policy-behaviour-type\\\": \\\"standard\\\", \\\"policy-expiry\\\": 0, \\\"policy-expiry-date\\\": [\\\"0000-00-00\\\", \\\"00:00:00\\\"], \\\"policy-offload\\\": 1, \\\"policyid\\\": 1, \\\"poolname\\\": [], \\\"poolname6\\\": [], \\\"profile-group\\\": [], \\\"profile-protocol-options\\\": [\\\"default\\\"], \\\"profile-type\\\": 0, \\\"radius-mac-auth-bypass\\\": 0, \\\"replacemsg-override-group\\\": [], \\\"reputation-direction\\\": 2, \\\"reputation-direction6\\\": 42, \\\"reputation-minimum\\\": 0, \\\"reputation-minimum6\\\": 0, \\\"rtp-addr\\\": [], \\\"rtp-nat\\\": 0, \\\"schedule\\\": [\\\"\\\\\\\"always\\\\\\\"\\\"], \\\"schedule-timeout\\\": 0, \\\"sctp-filter-profile\\\": [], \\\"send-deny-packet\\\": 0, \\\"service\\\": [\\\"\\\\\\\"ALL\\\\\\\"\\\"], \\\"service-negate\\\": 0, \\\"session-ttl\\\": \\\"0\\\", \\\"sgt\\\": [], \\\"sgt-check\\\": 0, \\\"src-vendor-mac\\\": [], \\\"srcaddr\\\": [\\\"\\\\\\\"host_001\\\\\\\"\\\"], \\\"srcaddr-negate\\\": 0, \\\"srcaddr6\\\": [], \\\"srcaddr6-negate\\\": 0, \\\"srcintf\\\": [\\\"\\\\\\\"port2\\\\\\\"\\\"], \\\"ssh-filter-profile\\\": [], \\\"ssh-policy-redirect\\\": 0, \\\"ssl-ssh-profile\\\": [\\\"no-inspection\\\"], \\\"status\\\": 1, \\\"tcp-mss-receiver\\\": 0, \\\"tcp-mss-sender\\\": 0, \\\"tcp-session-without-syn\\\": 2, \\\"tcp-timeout-pid\\\": [], \\\"timeout-send-rst\\\": 0, \\\"timestamp\\\": 1716507207, \\\"tos\\\": \\\"0x00\\\", \\\"tos-mask\\\": \\\"0x00\\\", \\\"tos-negate\\\": 0, \\\"traffic-shaper\\\": [], \\\"traffic-shaper-reverse\\\": [], \\\"udp-timeout-pid\\\": [], \\\"user\\\": \\\"devops\\\", \\\"users\\\": [], \\\"utm-status\\\": 1, \\\"uuid\\\": \\\"0f84c644-cab0-51ee-57fd-17a89439cf9d\\\", \\\"videofilter-profile\\\": [], \\\"vlan-cos-fwd\\\": 255, \\\"vlan-cos-rev\\\": 255, \\\"voip-profile\\\": [], \\\"vpntunnel\\\": [], \\\"waf-profile\\\": [], \\\"wanopt\\\": 0, \\\"wanopt-detection\\\": 1, \\\"wanopt-passive-opt\\\": 0, \\\"wanopt-peer\\\": [], \\\"wanopt-profile\\\": [], \\\"wccp\\\": 0, \\\"webcache\\\": 0, \\\"webcache-https\\\": 0, \\\"webfilter-profile\\\": [], \\\"webproxy-forward-server\\\": [], \\\"webproxy-profile\\\": [], \\\"ztna-device-ownership\\\": 0, \\\"ztna-ems-tag\\\": [], \\\"ztna-geo-tag\\\": [], \\\"ztna-policy-redirect\\\": 0, \\\"ztna-status\\\": 0, \\\"ztna-tags-match-logic\\\": 0}]}], \\\"diff_flag\\\": 2, \\\"vdom\\\": \\\"root\\\"}]}]}\"}, { \"name\": \"fgt_002\", \"oid\": 35009, \"result\": \"=== Preview result ===\\n{ \\\"result\\\": [{ \\\"data\\\": [{ \\\"data\\\": [{ \\\"category\\\": 2223, \\\"data\\\": [{ \\\"cos-queue\\\": 0, \\\"description\\\": \\\"Rate control for quarantined traffic\\\", \\\"diff_flag\\\": 3, \\\"guaranteed-bandwidth\\\": 163840, \\\"guaranteed-burst\\\": 8192, \\\"id\\\": 1, \\\"maximum-burst\\\": 163840, \\\"name\\\": \\\"quarantine\\\", \\\"policer-status\\\": 1, \\\"timestamp\\\": 1716507209, \\\"type\\\": 1, \\\"user\\\": \\\"devops\\\"}, { \\\"cos-queue\\\": 0, \\\"description\\\": \\\"Rate control for sniffer mirrored traffic\\\", \\\"diff_flag\\\": 3, \\\"guaranteed-bandwidth\\\": 50000, \\\"guaranteed-burst\\\": 8192, \\\"id\\\": 2, \\\"maximum-burst\\\": 163840, \\\"name\\\": \\\"sniffer\\\", \\\"policer-status\\\": 1, \\\"timestamp\\\": 1716507209, \\\"type\\\": 1, \\\"user\\\": \\\"devops\\\"}]}, { \\\"category\\\": 140, \\\"data\\\": [{ \\\"associated-interface\\\": [\\\"any\\\"], \\\"clearpass-spt\\\": 0, \\\"color\\\": 0, \\\"diff_flag\\\": 3, \\\"dirty\\\": 2, \\\"fabric-object\\\": 0, \\\"list\\\": null, \\\"name\\\": \\\"EMS_ALL_UNKNOWN_CLIENTS\\\", \\\"node-ip-only\\\": 0, \\\"obj-type\\\": 9, \\\"route-tag\\\": 0, \\\"sub-type\\\": 3, \\\"tagging\\\": null, \\\"timestamp\\\": 1716507209, \\\"type\\\": 15, \\\"user\\\": \\\"devops\\\", \\\"uuid\\\": \\\"d5770b1e-c984-51ee-6b42-10ce7f9a3166\\\"}, { \\\"associated-interface\\\": [\\\"any\\\"], \\\"clearpass-spt\\\": 0, \\\"color\\\": 0, \\\"diff_flag\\\": 3, \\\"dirty\\\": 2, \\\"fabric-object\\\": 0, \\\"list\\\": null, \\\"name\\\": \\\"EMS_ALL_UNMANAGEABLE_CLIENTS\\\", \\\"node-ip-only\\\": 0, \\\"obj-type\\\": 9, \\\"route-tag\\\": 0, \\\"sub-type\\\": 3, \\\"tagging\\\": null, \\\"timestamp\\\": 1716507209, \\\"type\\\": 15, \\\"user\\\": \\\"devops\\\", \\\"uuid\\\": \\\"d57711ea-c984-51ee-f38d-edcd3007fe0c\\\"}]}, { \\\"category\\\": 181, \\\"data\\\": [{ \\\"action\\\": 1, \\\"anti-replay\\\": 1, \\\"application-list\\\": [], \\\"auth-cert\\\": [], \\\"auth-path\\\": 0, \\\"auto-asic-offload\\\": 1, \\\"av-profile\\\": [\\\"\\\\\\\"av_profile_001\\\\\\\"\\\"], \\\"block-notification\\\": 0, \\\"captive-portal-exempt\\\": 0, \\\"capture-packet\\\": 0, \\\"casb-profile\\\": [], \\\"cgn-eif\\\": 0, \\\"cgn-eim\\\": 0, \\\"cgn-resource-quota\\\": 16, \\\"cgn-session-quota\\\": 16777215, \\\"cifs-profile\\\": [], \\\"comments\\\": { \\\"n\\\": \\\"Test #003\\\", \\\"o\\\": \\\"Test #001\\\"}, \\\"custom-log-fields\\\": [], \\\"decrypted-traffic-mirror\\\": [], \\\"delay-tcp-npu-session\\\": 0, \\\"diameter-filter-profile\\\": [], \\\"diff_flag\\\": 2, \\\"diffserv-copy\\\": 0, \\\"diffserv-forward\\\": 0, \\\"diffserv-reverse\\\": 0, \\\"diffservcode-forward\\\": \\\"000000\\\", \\\"diffservcode-rev\\\": \\\"000000\\\", \\\"disclaimer\\\": 0, \\\"dlp-profile\\\": [], \\\"dnsfilter-profile\\\": [], \\\"dsri\\\": 0, \\\"dstaddr\\\": [\\\"\\\\\\\"host_101\\\\\\\"\\\"], \\\"dstaddr-negate\\\": 0, \\\"dstaddr6\\\": [], \\\"dstaddr6-negate\\\": 0, \\\"dstintf\\\": [\\\"\\\\\\\"port1\\\\\\\"\\\"], \\\"dynamic-shaping\\\": 0, \\\"email-collect\\\": 0, \\\"emailfilter-profile\\\": [], \\\"fec\\\": 0, \\\"file-filter-profile\\\": [], \\\"firewall-session-dirty\\\": 0, \\\"fixedport\\\": 0, \\\"fsso-agent-for-ntlm\\\": [], \\\"fsso-groups\\\": [], \\\"geoip-anycast\\\": 0, \\\"geoip-match\\\": 0, \\\"global-label\\\": \\\"Project #1\\\", \\\"groups\\\": [], \\\"gtp-profile\\\": [], \\\"http-policy-redirect\\\": 0, \\\"icap-profile\\\": [], \\\"identity-based-route\\\": [], \\\"inbound\\\": 0, \\\"inspection-mode\\\": 1, \\\"internet-service\\\": 0, \\\"internet-service-custom\\\": [], \\\"internet-service-custom-group\\\": [], \\\"internet-service-group\\\": [], \\\"internet-service-name\\\": [], \\\"internet-service-negate\\\": 0, \\\"internet-service-src\\\": 0, \\\"internet-service-src-custom\\\": [], \\\"internet-service-src-custom-group\\\": [], \\\"internet-service-src-group\\\": [], \\\"internet-service-src-name\\\": [], \\\"internet-service-src-negate\\\": 0, \\\"internet-service6\\\": 0, \\\"internet-service6-custom\\\": [], \\\"internet-service6-custom-group\\\": [], \\\"internet-service6-group\\\": [], \\\"internet-service6-name\\\": [], \\\"internet-service6-negate\\\": 0, \\\"internet-service6-src\\\": 0, \\\"internet-service6-src-custom\\\": [], \\\"internet-service6-src-custom-group\\\": [], \\\"internet-service6-src-group\\\": [], \\\"internet-service6-src-name\\\": [], \\\"internet-service6-src-negate\\\": 0, \\\"ip-version-type\\\": \\\"ipv4\\\", \\\"ippool\\\": 0, \\\"ips-sensor\\\": [], \\\"ips-voip-filter\\\": [], \\\"label\\\": \\\"Project #1\\\", \\\"logtraffic\\\": 2, \\\"logtraffic-start\\\": 0, \\\"match-vip\\\": 1, \\\"match-vip-only\\\": 0, \\\"name\\\": \\\"Policy_001\\\", \\\"nat\\\": 0, \\\"nat46\\\": 0, \\\"nat64\\\": 0, \\\"natinbound\\\": 0, \\\"natip\\\": [\\\"0.0.0.0\\\", \\\"0.0.0.0\\\"], \\\"natoutbound\\\": 0, \\\"network-service-dynamic\\\": [], \\\"network-service-src-dynamic\\\": [], \\\"np-acceleration\\\": 1, \\\"ntlm\\\": 0, \\\"ntlm-enabled-browsers\\\": [], \\\"ntlm-guest\\\": 0, \\\"obj seq\\\": 0, \\\"outbound\\\": 1, \\\"passive-wan-health-measurement\\\": 0, \\\"pcp-inbound\\\": 0, \\\"pcp-outbound\\\": 0, \\\"pcp-poolname\\\": [], \\\"per-ip-shaper\\\": [], \\\"permit-any-host\\\": 0, \\\"permit-stun-host\\\": 0, \\\"pfcp-profile\\\": [], \\\"policy-behaviour-type\\\": \\\"standard\\\", \\\"policy-expiry\\\": 0, \\\"policy-expiry-date\\\": [\\\"0000-00-00\\\", \\\"00:00:00\\\"], \\\"policy-offload\\\": 1, \\\"policyid\\\": 1, \\\"poolname\\\": [], \\\"poolname6\\\": [], \\\"port-preserve\\\": 1, \\\"profile-group\\\": [], \\\"profile-protocol-options\\\": [\\\"default\\\"], \\\"profile-type\\\": 0, \\\"radius-mac-auth-bypass\\\": 0, \\\"replacemsg-override-group\\\": [], \\\"reputation-direction\\\": 2, \\\"reputation-direction6\\\": 42, \\\"reputation-minimum\\\": 0, \\\"reputation-minimum6\\\": 0, \\\"rtp-addr\\\": [], \\\"rtp-nat\\\": 0, \\\"schedule\\\": [\\\"\\\\\\\"always\\\\\\\"\\\"], \\\"schedule-timeout\\\": 0, \\\"sctp-filter-profile\\\": [], \\\"send-deny-packet\\\": 0, \\\"service\\\": [\\\"\\\\\\\"ALL\\\\\\\"\\\"], \\\"service-negate\\\": 0, \\\"session-ttl\\\": \\\"0\\\", \\\"sgt\\\": [], \\\"sgt-check\\\": 0, \\\"src-vendor-mac\\\": [], \\\"srcaddr\\\": [\\\"\\\\\\\"host_001\\\\\\\"\\\"], \\\"srcaddr-negate\\\": 0, \\\"srcaddr6\\\": [], \\\"srcaddr6-negate\\\": 0, \\\"srcintf\\\": [\\\"\\\\\\\"port2\\\\\\\"\\\"], \\\"ssh-filter-profile\\\": [], \\\"ssh-policy-redirect\\\": 0, \\\"ssl-ssh-profile\\\": [\\\"no-inspection\\\"], \\\"status\\\": 1, \\\"tcp-mss-receiver\\\": 0, \\\"tcp-mss-sender\\\": 0, \\\"tcp-session-without-syn\\\": 2, \\\"tcp-timeout-pid\\\": [], \\\"timeout-send-rst\\\": 0, \\\"timestamp\\\": 1716507210, \\\"tos\\\": \\\"0x00\\\", \\\"tos-mask\\\": \\\"0x00\\\", \\\"tos-negate\\\": 0, \\\"traffic-shaper\\\": [], \\\"traffic-shaper-reverse\\\": [], \\\"udp-timeout-pid\\\": [], \\\"user\\\": \\\"devops\\\", \\\"users\\\": [], \\\"utm-status\\\": 1, \\\"uuid\\\": \\\"0f84c644-cab0-51ee-57fd-17a89439cf9d\\\", \\\"videofilter-profile\\\": [], \\\"virtual-patch-profile\\\": [], \\\"vlan-cos-fwd\\\": 255, \\\"vlan-cos-rev\\\": 255, \\\"voip-profile\\\": [], \\\"vpntunnel\\\": [], \\\"waf-profile\\\": [], \\\"wanopt\\\": 0, \\\"wanopt-detection\\\": 1, \\\"wanopt-passive-opt\\\": 0, \\\"wanopt-peer\\\": [], \\\"wanopt-profile\\\": [], \\\"wccp\\\": 0, \\\"webcache\\\": 0, \\\"webcache-https\\\": 0, \\\"webfilter-profile\\\": [], \\\"webproxy-forward-server\\\": [], \\\"webproxy-profile\\\": [], \\\"ztna-device-ownership\\\": 0, \\\"ztna-ems-tag\\\": [], \\\"ztna-ems-tag-secondary\\\": [], \\\"ztna-geo-tag\\\": [], \\\"ztna-policy-redirect\\\": 0, \\\"ztna-status\\\": 0, \\\"ztna-tags-match-logic\\\": 0}]}], \\\"diff_flag\\\": 2, \\\"vdom\\\": \\\"root\\\"}]}]}\"}, { \"name\": \"dev_003\", \"oid\": 35145, \"result\": \"=== Preview result ===\\n{ \\\"result\\\": [{ \\\"data\\\": [{ \\\"data\\\": [{ \\\"category\\\": 2223, \\\"data\\\": [{ \\\"cos-queue\\\": 0, \\\"description\\\": \\\"Rate control for quarantined traffic\\\", \\\"diff_flag\\\": 3, \\\"guaranteed-bandwidth\\\": 163840, \\\"guaranteed-burst\\\": 8192, \\\"id\\\": 1, \\\"maximum-burst\\\": 163840, \\\"name\\\": \\\"quarantine\\\", \\\"policer-status\\\": 1, \\\"timestamp\\\": 1716507208, \\\"type\\\": 1, \\\"user\\\": \\\"devops\\\"}, { \\\"cos-queue\\\": 0, \\\"description\\\": \\\"Rate control for sniffer mirrored traffic\\\", \\\"diff_flag\\\": 3, \\\"guaranteed-bandwidth\\\": 50000, \\\"guaranteed-burst\\\": 8192, \\\"id\\\": 2, \\\"maximum-burst\\\": 163840, \\\"name\\\": \\\"sniffer\\\", \\\"policer-status\\\": 1, \\\"timestamp\\\": 1716507208, \\\"type\\\": 1, \\\"user\\\": \\\"devops\\\"}]}, { \\\"category\\\": 140, \\\"data\\\": [{ \\\"associated-interface\\\": [\\\"any\\\"], \\\"clearpass-spt\\\": 0, \\\"color\\\": 0, \\\"diff_flag\\\": 3, \\\"dirty\\\": 2, \\\"fabric-object\\\": 0, \\\"list\\\": null, \\\"name\\\": \\\"EMS_ALL_UNKNOWN_CLIENTS\\\", \\\"node-ip-only\\\": 0, \\\"obj-type\\\": 9, \\\"route-tag\\\": 0, \\\"sub-type\\\": 3, \\\"tagging\\\": null, \\\"timestamp\\\": 1716507208, \\\"type\\\": 15, \\\"user\\\": \\\"devops\\\", \\\"uuid\\\": \\\"1cc03850-0211-51ef-8b32-de8d14b976f2\\\"}, { \\\"associated-interface\\\": [\\\"any\\\"], \\\"clearpass-spt\\\": 0, \\\"color\\\": 0, \\\"diff_flag\\\": 3, \\\"dirty\\\": 2, \\\"fabric-object\\\": 0, \\\"list\\\": null, \\\"name\\\": \\\"EMS_ALL_UNMANAGEABLE_CLIENTS\\\", \\\"node-ip-only\\\": 0, \\\"obj-type\\\": 9, \\\"route-tag\\\": 0, \\\"sub-type\\\": 3, \\\"tagging\\\": null, \\\"timestamp\\\": 1716507208, \\\"type\\\": 15, \\\"user\\\": \\\"devops\\\", \\\"uuid\\\": \\\"1cc07a18-0211-51ef-35ca-7644b7d6b20d\\\"}]}, { \\\"category\\\": 181, \\\"data\\\": [{ \\\"action\\\": 1, \\\"anti-replay\\\": 1, \\\"application-list\\\": [], \\\"auth-cert\\\": [], \\\"auth-path\\\": 0, \\\"auto-asic-offload\\\": 1, \\\"av-profile\\\": [\\\"\\\\\\\"av_profile_001\\\\\\\"\\\"], \\\"block-notification\\\": 0, \\\"captive-portal-exempt\\\": 0, \\\"capture-packet\\\": 0, \\\"casb-profile\\\": [], \\\"cgn-eif\\\": 0, \\\"cgn-eim\\\": 0, \\\"cgn-resource-quota\\\": 16, \\\"cgn-session-quota\\\": 16777215, \\\"cifs-profile\\\": [], \\\"comments\\\": { \\\"n\\\": \\\"Test #003\\\", \\\"o\\\": \\\"Test #001\\\"}, \\\"custom-log-fields\\\": [], \\\"decrypted-traffic-mirror\\\": [], \\\"delay-tcp-npu-session\\\": 0, \\\"diameter-filter-profile\\\": [], \\\"diff_flag\\\": 2, \\\"diffserv-copy\\\": 0, \\\"diffserv-forward\\\": 0, \\\"diffserv-reverse\\\": 0, \\\"diffservcode-forward\\\": \\\"000000\\\", \\\"diffservcode-rev\\\": \\\"000000\\\", \\\"disclaimer\\\": 0, \\\"dlp-profile\\\": [], \\\"dnsfilter-profile\\\": [], \\\"dsri\\\": 0, \\\"dstaddr\\\": [\\\"\\\\\\\"host_101\\\\\\\"\\\"], \\\"dstaddr-negate\\\": 0, \\\"dstaddr6\\\": [], \\\"dstaddr6-negate\\\": 0, \\\"dstintf\\\": [\\\"\\\\\\\"port1\\\\\\\"\\\"], \\\"dynamic-shaping\\\": 0, \\\"email-collect\\\": 0, \\\"emailfilter-profile\\\": [], \\\"fec\\\": 0, \\\"file-filter-profile\\\": [], \\\"firewall-session-dirty\\\": 0, \\\"fixedport\\\": 0, \\\"fsso-agent-for-ntlm\\\": [], \\\"fsso-groups\\\": [], \\\"geoip-anycast\\\": 0, \\\"geoip-match\\\": 0, \\\"global-label\\\": \\\"Project #1\\\", \\\"groups\\\": [], \\\"gtp-profile\\\": [], \\\"http-policy-redirect\\\": 0, \\\"icap-profile\\\": [], \\\"identity-based-route\\\": [], \\\"inbound\\\": 0, \\\"inspection-mode\\\": 1, \\\"internet-service\\\": 0, \\\"internet-service-custom\\\": [], \\\"internet-service-custom-group\\\": [], \\\"internet-service-group\\\": [], \\\"internet-service-name\\\": [], \\\"internet-service-negate\\\": 0, \\\"internet-service-src\\\": 0, \\\"internet-service-src-custom\\\": [], \\\"internet-service-src-custom-group\\\": [], \\\"internet-service-src-group\\\": [], \\\"internet-service-src-name\\\": [], \\\"internet-service-src-negate\\\": 0, \\\"internet-service6\\\": 0, \\\"internet-service6-custom\\\": [], \\\"internet-service6-custom-group\\\": [], \\\"internet-service6-group\\\": [], \\\"internet-service6-name\\\": [], \\\"internet-service6-negate\\\": 0, \\\"internet-service6-src\\\": 0, \\\"internet-service6-src-custom\\\": [], \\\"internet-service6-src-custom-group\\\": [], \\\"internet-service6-src-group\\\": [], \\\"internet-service6-src-name\\\": [], \\\"internet-service6-src-negate\\\": 0, \\\"ip-version-type\\\": \\\"ipv4\\\", \\\"ippool\\\": 0, \\\"ips-sensor\\\": [], \\\"ips-voip-filter\\\": [], \\\"label\\\": \\\"Project #1\\\", \\\"logtraffic\\\": 2, \\\"logtraffic-start\\\": 0, \\\"match-vip\\\": 1, \\\"match-vip-only\\\": 0, \\\"name\\\": \\\"Policy_001\\\", \\\"nat\\\": 0, \\\"nat46\\\": 0, \\\"nat64\\\": 0, \\\"natinbound\\\": 0, \\\"natip\\\": [\\\"0.0.0.0\\\", \\\"0.0.0.0\\\"], \\\"natoutbound\\\": 0, \\\"network-service-dynamic\\\": [], \\\"network-service-src-dynamic\\\": [], \\\"np-acceleration\\\": 1, \\\"ntlm\\\": 0, \\\"ntlm-enabled-browsers\\\": [], \\\"ntlm-guest\\\": 0, \\\"obj seq\\\": 0, \\\"outbound\\\": 1, \\\"passive-wan-health-measurement\\\": 0, \\\"pcp-inbound\\\": 0, \\\"pcp-outbound\\\": 0, \\\"pcp-poolname\\\": [], \\\"per-ip-shaper\\\": [], \\\"permit-any-host\\\": 0, \\\"permit-stun-host\\\": 0, \\\"pfcp-profile\\\": [], \\\"policy-behaviour-type\\\": \\\"standard\\\", \\\"policy-expiry\\\": 0, \\\"policy-expiry-date\\\": [\\\"0000-00-00\\\", \\\"00:00:00\\\"], \\\"policy-offload\\\": 1, \\\"policyid\\\": 1, \\\"poolname\\\": [], \\\"poolname6\\\": [], \\\"port-preserve\\\": 1, \\\"profile-group\\\": [], \\\"profile-protocol-options\\\": [\\\"default\\\"], \\\"profile-type\\\": 0, \\\"radius-mac-auth-bypass\\\": 0, \\\"replacemsg-override-group\\\": [], \\\"reputation-direction\\\": 2, \\\"reputation-direction6\\\": 42, \\\"reputation-minimum\\\": 0, \\\"reputation-minimum6\\\": 0, \\\"rtp-addr\\\": [], \\\"rtp-nat\\\": 0, \\\"schedule\\\": [\\\"\\\\\\\"always\\\\\\\"\\\"], \\\"schedule-timeout\\\": 0, \\\"sctp-filter-profile\\\": [], \\\"send-deny-packet\\\": 0, \\\"service\\\": [\\\"\\\\\\\"ALL\\\\\\\"\\\"], \\\"service-negate\\\": 0, \\\"session-ttl\\\": \\\"0\\\", \\\"sgt\\\": [], \\\"sgt-check\\\": 0, \\\"src-vendor-mac\\\": [], \\\"srcaddr\\\": [\\\"\\\\\\\"host_001\\\\\\\"\\\"], \\\"srcaddr-negate\\\": 0, \\\"srcaddr6\\\": [], \\\"srcaddr6-negate\\\": 0, \\\"srcintf\\\": [\\\"\\\\\\\"port2\\\\\\\"\\\"], \\\"ssh-filter-profile\\\": [], \\\"ssh-policy-redirect\\\": 0, \\\"ssl-ssh-profile\\\": [\\\"no-inspection\\\"], \\\"status\\\": 1, \\\"tcp-mss-receiver\\\": 0, \\\"tcp-mss-sender\\\": 0, \\\"tcp-session-without-syn\\\": 2, \\\"tcp-timeout-pid\\\": [], \\\"timeout-send-rst\\\": 0, \\\"timestamp\\\": 1716507209, \\\"tos\\\": \\\"0x00\\\", \\\"tos-mask\\\": \\\"0x00\\\", \\\"tos-negate\\\": 0, \\\"traffic-shaper\\\": [], \\\"traffic-shaper-reverse\\\": [], \\\"udp-timeout-pid\\\": [], \\\"user\\\": \\\"devops\\\", \\\"users\\\": [], \\\"utm-status\\\": 1, \\\"uuid\\\": \\\"0f84c644-cab0-51ee-57fd-17a89439cf9d\\\", \\\"videofilter-profile\\\": [], \\\"virtual-patch-profile\\\": [], \\\"vlan-cos-fwd\\\": 255, \\\"vlan-cos-rev\\\": 255, \\\"voip-profile\\\": [], \\\"vpntunnel\\\": [], \\\"waf-profile\\\": [], \\\"wanopt\\\": 0, \\\"wanopt-detection\\\": 1, \\\"wanopt-passive-opt\\\": 0, \\\"wanopt-peer\\\": [], \\\"wanopt-profile\\\": [], \\\"wccp\\\": 0, \\\"webcache\\\": 0, \\\"webcache-https\\\": 0, \\\"webfilter-profile\\\": [], \\\"webproxy-forward-server\\\": [], \\\"webproxy-profile\\\": [], \\\"ztna-device-ownership\\\": 0, \\\"ztna-ems-tag\\\": [], \\\"ztna-ems-tag-secondary\\\": [], \\\"ztna-geo-tag\\\": [], \\\"ztna-policy-redirect\\\": 0, \\\"ztna-status\\\": 0, \\\"ztna-tags-match-logic\\\": 0}]}], \\\"diff_flag\\\": 2, \\\"vdom\\\": \\\"root\\\"}]}]}\"}]"
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/securityconsole/preview/result"
                 }
+              ]
+            }
 
-Here you have to track the progress of the returned task id ``70`` (you can *get
-/task/task/70*)
+      .. note::
 
-Once the task is completed, you can proceed with step 3.
-
-3. We need to collect the preview output
-
-**REQUEST:**
-
-.. code-block:: json
-                
-                {
-                  "id": 1,
-                  "jsonrpc": "1.0",
-                  "method": "exec",
-                  "params": [
-                    {
-                      "data": {
-                        "adom": "customer_001",
-                        "device": "dut_fgt2"
-                      },
-                      "url": "/securityconsole/preview/result"
-                    }
-                  ],
-                  "session": "6a5HWsj6o0L5da8oTZB26wapTtrMlsQxmNt24mWeL/80VRqy5OdbM6kntlkrX7L3rsw9rbRK1rqZvLlfXTCIKw==",
-                  "verbose": 1
-                }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-                {
-                  "id": 1,
-                  "result": [                
-                    {
-                      "data": {                
-                        "message": "config system dns\n    set primary 8.8.8.8\n    unset secondary\nend\nconfig firewall address\n    edit \"host_001\"\n        set uuid 09ce3330-b06e-51ea-6497-48f76b1e8626\n        set color 3\n        set subnet 10.0.0.1 255.255.255.255\n    next\nend\nconfig system dhcp server\n    edit 1\n        set status disable\n        set dns-service default\n        set ntp-service default\n        set default-gateway 172.16.2.102\n        set netmask 255.255.255.0\n        set interface \"port3\"\n        config ip-range\n            edit 1\n                set start-ip 172.16.2.1\n                set end-ip 172.16.2.101\n            next\n            edit 2\n                set start-ip 172.16.2.103\n                set end-ip 172.16.2.254\n            next\n        end\n        set timezone-option default\n    next\nend\nconfig firewall policy\n    edit 1\n        set srcaddr \"host_001\"\n    next\nend\n"
-                      },
-                      "status": {
-                        "code": 0,
-                        "message": "OK"
-                      },
-                      "url": "/securityconsole/preview/result"
-                    }
-                  ]
-                }
-
-.. note::
-
-   Here FortiManager will report pending changes coming from ADOM DB (objects &
-   policies) but also from Device DB (when you trigger an install preview for a
-   device only, it will only expose the pending changes coming from the
-   corresponding device's Device DB.
-
-4. We need to cancel the install policy package process
-
-**REQUEST:**
-
-.. code-block:: json
-
-                {
-                  "id": 1,
-                  "jsonrpc": "1.0",
-                  "method": "exec",
-                  "params": [
-                    {
-                      "data": {
-                        "adom": "customer_001"
-                      },
-                      "url": "/securityconsole/package/cancel/install"
-                    }
-                  ],
-                  "session": "6a5HWsj6o0L5da8oTZB26wapTtrMlsQxmNt24mWeL/80VRqy5OdbM6kntlkrX7L3rsw9rbRK1rqZvLlfXTCIKw==",
-                  "verbose": 1
-                }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-                {
-                  "id": 1,
-                  "result": [
-                    {
-                      "status": {
-                        "code": 0,
-                        "message": "OK"
-                      },
-                      "url": "/securityconsole/package/cancel/install"
-                    }
-                  ]
-                }
-
+         - The Install Preview ouput for multiple devices is placed in  
+           ``message`` attribute.
 
 How to get the Policy Package hitcount?
 +++++++++++++++++++++++++++++++++++++++
