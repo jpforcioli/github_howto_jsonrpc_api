@@ -7781,6 +7781,360 @@ you can use a VDOM scope ``obj`` as shown below:
 Device Blueprint
 ----------------
 
+How to get the list of Device Blueprints?
++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the list of existing Device Blueprints 
+for the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/fmg/device/blueprint"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "auth-template": [],
+                   "cliprofs": [],
+                   "dev-group": [],
+                   "enforce-device-config": "disable",
+                   "folder-oid": 0,
+                   "ha-config": "disable",
+                   "ha-monitor": [],
+                   "ha-password": [
+                     "ENC",
+                     "9sp8aU/kUgb39T5Tbw4s//dM6kmjNAf46TQqL2f8B2r2obQxwCNqK9yCY7N/uMjZy3nIy4d5MhfW2GA3j6/+EMa7424QCerQNOVM7ns0qFUBgTiDLB0N/g6XsQmUhgEu1SnjQ5U7eLsjhm6KkVkPy5FMb7o4lWg4Idt20xUztThtuwnM"
+                   ],
+                   "linked-to-model": "enable",
+                   "name": "dbp_001",
+                   "oid": 11602,
+                   "platform": "FortiGate-VM64-KVM",
+                   "prerun-cliprof": [],
+                   "prov-type": "none",
+                   "templates": []
+                 },
+                 {
+                   "auth-template": [],
+                   "cliprofs": [],
+                   "dev-group": [],
+                   "enforce-device-config": "disable",
+                   "folder-oid": 0,
+                   "ha-config": "disable",
+                   "ha-monitor": [],
+                   "ha-password": [
+                     "ENC",
+                     "IJDCud/NtjOTp/Yp4X3/0qfOC/XYZ/2hme3NtNCf7LxPVMpbJwAwtVqcc5GXZjAEkOjh3a43a+1sCh2RhuFKO0hbts/4fMEenM+J8w3sHd6h3jk3o24+kNYjcVMIf480rVSJIIrIMr5jvaj58s7Koz1n9tiLDSGuK3/AU/v8cswYXpNM"
+                   ],
+                   "linked-to-model": "enable",
+                   "name": "dpb_002",
+                   "oid": 11601,
+                   "platform": "FortiGate-VM64-KVM",
+                   "prerun-cliprof": [],
+                   "prov-type": "none",
+                   "templates": []
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/dc_france/obj/fmg/device/blueprint"
+             }
+           ]
+         }        
+
+
+How to add a Device Blueprint?
+++++++++++++++++++++++++++++++
+
+The following example shows how to add the ``dbp_001``  Device Blueprint in the 
+``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "auth-template": [
+                   "fat_001"
+                 ],
+                 "dev-group": [
+                   "dev_grp_sites"
+                 ],
+                 "enforce-device-config": "enable",
+                 "ha-config": "enable",
+                 "ha-hbdev": [
+                   "a",
+                   "0"
+                 ],
+                 "ha-monitor": [
+                   "lan",
+                   "wan"
+                 ],
+                 "ha-password": "fortinet",
+                 "linked-to-model": "enable",
+                 "name": "dbp_001",
+                 "pkg": "ppkg_001",
+                 "platform": "FortiGate-40F",
+                 "prefer-img-ver": "7.4.3-b2573",
+                 "prerun-cliprof": [
+                   "pre_run_cli_t_001"
+                 ],
+                 "prov-type": "template-group",
+                 "template-group": "t_grp_001"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/device/blueprint"
+             }
+           ],
+           "session": "{{session}}"
+         }
+         
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "dbp_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/device/blueprint"
+             }
+           ]
+         }
+
+How to add multiple Device Blueprint?
++++++++++++++++++++++++++++++++++++++
+
+You can also add multiple existing Device Blueprint using a single API call.
+
+For instance, the following example shows how to add the ``dbp_002`` and
+``dbp_003`` Device Blueprint in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 {
+                   "auth-template": [
+                     "fat_001"
+                   ],
+                   "dev-group": [
+                     "dev_grp_sites"
+                   ],
+                   "enforce-device-config": "enable",
+                   "ha-config": "enable",
+                   "ha-hbdev": [
+                     "a",
+                     "0"
+                   ],
+                   "ha-monitor": [
+                     "lan",
+                     "wan"
+                   ],
+                   "ha-password": "fortinet",
+                   "linked-to-model": "enable",
+                   "name": "dbp_002",
+                   "pkg": "ppkg_001",
+                   "platform": "FortiGate-40F",
+                   "prefer-img-ver": "7.4.3-b2573",
+                   "prerun-cliprof": [
+                     "pre_run_cli_t_001"
+                   ],
+                   "prov-type": "template-group",
+                   "template-group": "t_grp_001"
+                 },
+                 {
+                   "auth-template": [
+                     "fat_001"
+                   ],
+                   "dev-group": [
+                     "dev_grp_sites"
+                   ],
+                   "enforce-device-config": "enable",
+                   "ha-config": "enable",
+                   "ha-hbdev": [
+                     "a",
+                     "0"
+                   ],
+                   "ha-monitor": [
+                     "lan",
+                     "wan"
+                   ],
+                   "ha-password": "fortinet",
+                   "linked-to-model": "enable",
+                   "name": "dbp_003",
+                   "pkg": "ppkg_001",
+                   "platform": "FortiGate-40F",
+                   "prefer-img-ver": "7.4.3-b2573",
+                   "prerun-cliprof": [
+                     "pre_run_cli_t_001"
+                   ],
+                   "prov-type": "template-group",
+                   "template-group": "t_grp_001"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/fmg/device/blueprint"
+             }
+           ],
+           "session": "{{session}}"
+         }        
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/device/blueprint"
+             }
+           ]
+         }
+
+How to delete a Device Blueprint?
++++++++++++++++++++++++++++++++++
+
+The following example shows how to delete the ``dbp_001`` Device Blueprint from the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/fmg/device/blueprint/dbp_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/device/blueprint/dbp_001"
+             }
+           ]
+         }
+
+How to delete multiple Device Blueprint?
+++++++++++++++++++++++++++++++++++++++++
+
+You can also delete multiple existing Device Blueprint provided they match the specified filter.
+
+For instance, the following example shows how to delete all Device Blueprint
+declared for the ``FortiGate-VM64-KVM`` FortiGate plateform in the ``demo``
+ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "confirm": 1,
+               "filter": [
+                 "platform",
+                 "==",
+                 "FortiGate-VM64-KVM"
+               ],
+               "url": "/pm/config/adom/dc_france/obj/fmg/device/blueprint"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+         
+         - The ``filter`` attribute is used to match all Device Blueprint 
+            declared for the ``FortiGate-VM64-KVM`` FortiGate platform
+
+         - The ``confirm`` attribute is required with this kind of *delete* 
+           operation (see :ref:`How to delete multiple objects?`)
+         
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/device/blueprint"
+             }
+           ]
+         }
+      
 How to get the list of metadata used by a Device Blueprint?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
