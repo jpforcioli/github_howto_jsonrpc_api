@@ -5588,7 +5588,7 @@ Step #2: Collect the install preview output
    - If you want to get all pending changes (ie. the ones from the device's 
      Device DB along with the ones in the ADOM DB like the objects & policies), 
      then you need to trigger a Policy Package Install preview (See :ref:`How 
-     to trigger an install preview?`).
+     to get an Install Preview for a single device?`)
 
 The following example shows how to obtain the Install Preview output for the ``dev_001`` device in the ``demo`` ADOM:
 
@@ -7786,88 +7786,92 @@ How to get the list of metadata used by a Device Blueprint?
 
 Caught in #0947563.
 
+The following example shows how to get the metadata related to ``dbp_001`` and ``dbp_002`` Device Blueprint in the ``demo`` ADOM:
+
 .. tab-set::
 
-   .. tab-item:: OPTION #1
+   .. tab-item:: REQUEST
 
       .. code-block:: json
 
          {
-             "method": "get",
-             "params": [
-                 {
-                     "url": "/pm/config/adom/TestBlueprint/_meta/reference",
-                     "data": {
-                         "pkg list": [
-                             {
-                                 "oid": 5201
-                             }
-                         ]
-                     }
-                 }
-             ]
-         }        
-
-   .. tab-item:: OPTION #2 (Recommended)
-  
-      .. tab-set::
-
-         .. tab-item:: REQUEST
-
-            .. code-block:: json
-
-               {
-                 "id": 3,
-                 "method": "get",
-                 "params": [
-                   {
-                     "data": {
-                       "name": [
-                         "sites_test",
-                         "test_remy"
-                       ]
-                     },
-                     "url": "/pm/config/adom/dc_emea/_blueprint/info"
-                   }
-                 ],
-                 "session": "{{session}}",
-                 "verbose": 1
-               }
-
-         .. tab-item:: RESPONSE
-
-            .. code-block:: json
-
-               {
-                 "id": 3,
-                 "result": [
-                   {
-                     "data": [
-                       {
-                         "name": "sites_test",
-                         "platform": "FortiGate-40F",
-                         "variables": [
-                           "hostname"
-                         ]
-                       },
-                       {
-                         "name": "test_remy",
-                         "platform": "FortiGate-40F",
-                         "variables": [
-                           "ul_isp1",
-                           "ul_isp2"
-                         ]
-                       }
-                     ],
-                     "status": {
-                       "code": 0,
-                       "message": "OK"
-                     },
-                     "url": "/pm/config/adom/dc_emea/_blueprint/info"
-                   }
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "data": {
+                 "name": [
+                   "dbp_001",
+                   "dbp_002"
                  ]
-               }              
+               },
+               "url": "/pm/config/adom/demo/_blueprint/info"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "dbp_001",
+                   "platform": "FortiGate-40F",
+                   "variables": [
+                     "hostname"
+                   ]
+                 },
+                 {
+                   "name": "dbp_002",
+                   "platform": "FortiGate-80F",
+                   "variables": [
+                     "ul_isp1",
+                     "ul_isp2"
+                   ]
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_blueprint/info"
+             }
+           ]
+         }              
+
+.. note::
+
+   - TBD: need to check what is this one doing...
+
+     .. tab-set::
+  
+        .. tab-item:: REQUEST
+  
+           .. code-block:: json
+     
+              {
+                  "method": "get",
+                  "params": [
+                      {
+                          "url": "/pm/config/adom/dbp_001/_meta/reference",
+                          "data": {
+                              "pkg list": [
+                                  {
+                                      "oid": 5201
+                                  }
+                              ]
+                          }
+                      }
+                  ]
+              }        
+  
 VPN Monitor
 -----------
 
@@ -8507,4 +8511,39 @@ Following example show how to delete a single router ospf network entry with ``i
                "url": "/pm/config/device/dev_001/vdom/vd_001/router/ospf/network/4"
              }
            ]
+         }
+
+FortiGate with internal modems
+------------------------------
+
+How to get LTE modem status?
+++++++++++++++++++++++++++++
+
+Caught in #0983359.
+
+The following example shows how to list the status of all LTE modems for a
+specific device (using the ``filter`` attribute) managed device in the ``demo``
+ADOM:
+
+.. tab-set:;
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+             "id": 3,
+             "method": "get",
+             "params": [
+                 {
+                     "url": "pm/config/adom/demo/obj/dynamic/lte-modem",
+                     "filter": [
+                         [
+                             "dev-oid",
+                             "==",
+                             "162"
+                         ]
+                     ]
+                 }
+             ]
          }
