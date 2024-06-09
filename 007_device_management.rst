@@ -581,6 +581,318 @@ Caught in #0607071.
 		  ]
 		}
 
+How to get the list of devices?
+-------------------------------
+
+You can ask for the list of all managed devices using the following API endpoint:
+
+.. code-block:: text
+
+   /dvmdb/device
+
+Alternatively, you can ask for the list of managed devices in a specific ADOM
+using the following endpoint:
+
+.. code-block:: text
+
+   /dvmdb/adom/{{adom}}/device
+
+A third form that allows to get list of managed devices per ADOM can be used by combining the following endpoint with the ``expand member`` attribute:
+
+.. code-block:: text
+
+   /dvmdb/adom
+
+How to get all managed devices?
++++++++++++++++++++++++++++++++
+
+The following example shows how to get all managed devices:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "sn"
+               ],
+               "loadsub": 0,
+               "url": "/dvmdb/device"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         - The ``loadsub`` and ``fields`` attributes have been used to reduce 
+           the volume of the returned data
+
+         - ``"loadsub": 0`` will prevent to return sub-tables (like the 
+           ``vdom`` table)
+
+         - The ``fields`` attribute instructs FortiManager to only return the 
+           ``name`` and the ``sn`` information for each managed device
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "dev_001",
+                   "oid": 36012,
+                   "sn": "FGVMMLTM00000001"
+                 },
+                 {
+                   "name": "dev_002",
+                   "oid": 36013,
+                   "sn": "FGVMMLTM00000002"
+                 },                 
+                 {
+                   "name": "dev_003",
+                   "oid": 36014,
+                   "sn": "FGVMMLTM00000003"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device"
+             }
+           ]
+         }   
+
+      .. note::
+
+         - This FortiManager manages three devices: ``dev_001``, ``dev_002`` 
+           and ``dev_003``
+         - You don't have the ADOM information exposed in the output
+         - You can try without the ``fields`` attribute, you won't see the ADOM
+           information 
+
+How to get managed devices for a specific ADOM?
++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get managed devices for the ``demo_001`` 
+ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "sn"
+               ],
+               "option": [
+                 "no loadsub"
+               ],
+               "url": "/dvmdb/adom/demo_001/device"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         - The ``no loadsub`` option and ``fields`` attributes have been used 
+           to reduce the volume of the returned data
+
+         - ``"no loadsub`` will prevent to return sub-tables (like the ``vdom`` 
+           table)
+
+         - The ``fields`` attribute instructs FortiManager to only return the 
+           ``name`` and the ``sn`` information for each managed device
+                  
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "dev_001",
+                   "oid": 36012,
+                   "sn": "FGVMMLTM00000001"
+                 },
+                 {
+                   "name": "dev_002",
+                   "oid": 36013,
+                   "sn": "FGVMMLTM00000002"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo_001/device"
+             }
+           ]
+         }
+
+      .. note::
+
+         - The ``demo_001`` ADOM manages two devices: ``dev_001`` and  
+           ``dev_002``
+
+How to get list of managed devices for all ADOMs?
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Section :ref:`How to get all managed devices?` described how to get all managed 
+devices, but it was lacking the ADOM information.
+
+Section :ref:`How to get managed devices for a specific ADOM?` described how to get managed devices for a specific ADOM, but it was not for all ADOMs.
+
+What if you want to get the list of all managed devices and also expose the ADOM information?
+
+The following example shows how to get the list of managed devices for all ADOMs using the ``expand member`` mechanism:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "expand member": [
+                 {
+                   "fields": [
+                     "name",
+                     "sn"
+                   ],
+                   "url": "device"
+                 }
+               ],
+               "fields": [
+                 "name",
+               ],
+               "filter": [
+                 "restricted_prds",
+                 "==",
+                 "fos"
+               ],               
+               "option": [
+                 "no loadsub"
+               ],
+               "url": "/dvmdb/adom/"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         - The ``no loadsub`` option, ``fields`` and ``filter`` attributes have 
+           been used to reduce the volume of the returned data
+
+         - ``"no loadsub`` will prevent to return sub-tables (like the ``vdom`` 
+           table)
+
+         - There are two ``fields`` attributes!
+         - The first one is for the ``/dvmdb/adom`` context and will only 
+           return the ADOM name
+         - The second one is within the ``expand member`` block and is for the 
+           ``/dvm/adom/{{adom}}/device`` context (look at the ``url`` attribute 
+           also in the ``expand member`` block).
+
+           It will only return the ``name`` and the ``sn`` of the returned 
+           managed devices.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "expand member": {
+                     "device": [
+                       {
+                         "name": "dev_001",
+                         "oid": 36012,
+                         "sn": "FGVMMLTM00000001"                
+                       },
+                       {
+                         "name": "dev_002",
+                         "oid": 36013,
+                         "sn": "FGVMMLTM00000002"
+                       }              
+                     ]
+                   },
+                   "name": "demo_001",
+                   "oid": 204
+                 },
+                 {
+                   "expand member": {
+                     "device": [
+                       {
+                         "name": "dev_003",
+                         "oid": 36014,
+                         "sn": "FGVMMLTM00000003"
+                       }
+                     ]
+                   },
+                   "name": "demo_002",
+                   "oid": 311
+                 },
+                 {
+                   "name": "root",
+                   "oid": 3
+                 },
+                 {
+                   "name": "rootp",
+                   "oid": 10
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/"
+             }
+           ]
+         }
+
+      .. note::
+
+         - The ``demo_001`` ADOM manages two devices: ``dev_001`` and  
+           ``dev_002``
+
+         - The ``demo_002`` ADOM manages two devices: ``dev_003``
+
 How to add a real device?
 -------------------------
 
@@ -8005,7 +8317,7 @@ For instance, the following example shows how to add the ``dbp_002`` and
                    ],
                    "ha-password": "fortinet",
                    "linked-to-model": "enable",
-                   "name": "dbp_003",
+                   "name": "dbp_004",
                    "pkg": "ppkg_001",
                    "platform": "FortiGate-40F",
                    "prefer-img-ver": "7.4.3-b2573",
