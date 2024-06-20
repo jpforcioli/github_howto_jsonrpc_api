@@ -164,394 +164,1311 @@ To add a new web rating override in ADOM ``dc_amer``:
 Webfilter profile
 +++++++++++++++++
 
-This section is for the ``webfilter.profile``  object.
+This section is for operating the ``webfilter profile`` object.
 
 How to add a new filter in a webfilter profile?
 _______________________________________________
 
-Following example add a new filter to block category ``84`` (i.e., *Web-based
-Applications*) from webfilter profile ``webfilter_profile_001`` in ADOM
-``demo_002``.  
+*filter* wording is used because of the CLI syntax used to add a new category and its corresponding action. You have to update a table named ``filters`` as 
+shown below:
 
-**REQUEST:**
+.. code-block:: text
+   :caption: CLI syntax for a webfilter profile filter
+   :emphasize-lines: 4-9
 
-.. code-block:: json
+   config webfilter profile
+       edit <wfp_name>
+           config ftgd-wf
+               config filters
+                   edit <filter>
+                       set category <id>
+                       set action <action>
+                   next
+               end
+           end
+       next
+   end
 
-   {
-     "id": 3,
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "action": "block",
-           "category": 84
-         },
-         "url": "/pm/config/adom/demo_002/obj/webfilter/profile/webfilter_profile_001/ftgd-wf/filters"
-       }
-     ],
-     "session": "nRrJXLvH/kZVYQ9pnfTwCw3DrMKJENANTdyPjt8MLDBZC3xyuhoWpa2D7LpF1MVhYv7p9RZWPurYlMfLjPgaAw=="
-   }
+The following example shows how to add the ``wfp_001`` webfilter profile in the 
+``demo`` ADOM. It will block web traffic to URLs categorized as *Web-based 
+Applications* (i.e. category ID is ``84``):
 
-**RESPONSE:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "id": 26
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/demo_002/obj/webfilter/profile/webfilter_profile_001/ftgd-wf/filters"
-       }
-     ]
-   }
+      .. code-block:: json
 
-.. note::
-
-  - Response contains the ``id`` of the created entry.
-
-How to update a single filter in a webfilter profile?
-_____________________________________________________
-
-Goal is to just update a single filter from a Web Filter Profile.
-
-For instance we want to update the filter with category *Potentially Liable* > *Extremist Groups* from its default ``warning`` to ``block`` in our Web Filter Profile ``web_filter_profile_001`` located in ADOM ``root``:
-
-Before the change: ``action`` is ``warning``
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters/7"
-       }
-     ],
-     "session": "YW73rbdh9iDVDVh7EEu27igmT7sYZmHKeIli2wfe1NGwDuI+2OU3R1NwoWuID3JGzyfJEbhdyBJVCglYOVScJw==",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "action": "warning",
-           "category": [
-             "12"
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "action": "block",
+                 "category": 84
+               },
+               "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters"
+             }
            ],
-           "id": 7,
-           "log": "enable",
-           "oid": 3693,
-           "warn-duration": "5m",
-           "warning-prompt": "per-category"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters/7"
-       }
-     ]
-   }
+           "session": "{{session}}"
+         }
 
-.. note:: 
-  - The master key is the ``id`` attribute.
-  - Here it is ``7`` and we used it in the ``get`` request to obtain the detail of this specific filter only
-  - We will need it to perform the change as well.
+      .. note::
 
-We change the action to ``block``:
+         - See section :ref:`How to get the webfilter categories?` for how to 
+           get the category ID used in the attribute ``category``
 
-**REQUEST:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": 4,
-     "method": "set",
-     "params": [
-       {
-         "data": {
-           "action": "block"
-         },
-         "url": "/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters/7"
-       }
-     ],
-     "session": "YW73rbdh9iDVDVh7EEu27igmT7sYZmHKeIli2wfe1NGwDuI+2OU3R1NwoWuID3JGzyfJEbhdyBJVCglYOVScJw=="
-   }
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "id": 26
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters"
+             }
+           ]
+         }
 
-**RESPONSE:**
+      .. note::
+      
+        - Response contains the ``id`` of the created entry
+      
+      .. warning::
+      
+        - You can't use same ``category`` value in a different filter entry
 
-.. code-block:: json
+   .. tab-item:: pyFMG
 
-   {
-     "id": 4,
-     "result": [
-       {
-         "data": {
-           "id": 7
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters/7"
-       }
-     ]
-   }
+      .. code-block:: python
 
-After the change: action is ``block``:
+         """
+         Create a new ftgd-wf.filter in an existing webfilter profile
+         """
+         
+         from pyFMG.fortimgr import FortiManager
+         
+         IP = "10.210.34.120"
+         USERNAME = "devops"
+         PASSWORD = "fortinet"
+         
+         with FortiManager(
+             IP,
+             USERNAME,
+             PASSWORD,
+             disable_request_warnings=True,
+         ) as fmg:
+         
+             ADOM = "demo"
+             MKEY = "wfp_001"
+             url = f"/pm/config/adom/{ADOM}/obj/webfilter/profile/{MKEY}/ftgd-wf/filters"
+         
+             data = {
+                 "category": 84,
+                 "action": "block"
+             } 
+         
+             fmg.debug = True
+             fmg.add(url, data=data)
+             fmg.debug = False        
 
-**REQUEST:**
 
-.. code-block:: json
+How to get existing filters in a webfilter profile?
+___________________________________________________
 
-   {
-     "id": 5,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters/7"
-       }
-     ],
-     "session": "YW73rbdh9iDVDVh7EEu27igmT7sYZmHKeIli2wfe1NGwDuI+2OU3R1NwoWuID3JGzyfJEbhdyBJVCglYOVScJw==",
-     "verbose": 1
-   }
+The following example shows how to get the configured filters for the ``wfp_001`` in the ``demo`` ADOM:
 
-**RESPONSE:**
+.. tab-set::
 
-.. code-block:: json
-  
-   {
-     "id": 5,
-     "result": [
-       {
-         "data": {
-           "action": "block",
-           "category": [
-             "12"
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters"
+             }
            ],
-           "id": 7,
-           "log": "enable",
-           "oid": 3693
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters/7"
-       }
-     ]
-   }
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-How to update a multiple categories in a webfilter profile?
-___________________________________________________________
+   .. tab-item:: RESPONSE
 
-Goal is to just update multiple categories from a Web Filter Profile.
+      .. code-block:: json
 
-For instance we want the categories *Potentially Liable* > *Extremist
-Groups* and *Potentially Liable* > *Hacking*  with ``action`` set to ``block``
-in our Web Filter Profile ``web_filter_profile_001`` located in ADOM ``root``:
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "action": "monitor",
+                   "category": [
+                     "1"
+                   ],
+                   "id": 1,
+                   "log": "enable",
+                   "oid": 6639
+                 },
+                 {
+                   "action": "warning",
+                   "category": [
+                     "2"
+                   ],
+                   "id": 2,
+                   "log": "enable",
+                   "oid": 6640,
+                   "warn-duration": "5m",
+                   "warning-prompt": "per-category"
+                 },
+                 {"...", "..."},
+                 {
+                   "action": "block",
+                   "category": [
+                     "99"
+                   ],
+                   "id": 33,
+                   "log": "enable",
+                   "oid": 6671
+                 },
+                 {
+                   "action": "block",
+                   "category": [
+                     "84"
+                   ],
+                   "id": 34,
+                   "log": "enable",
+                   "oid": 6672
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters"
+             }
+           ]
+         }
 
-**REQUEST:**
+   .. tab-item:: pyFMG
 
-.. code-block:: json
+      .. code-block:: python
 
-   {
-     "id": 3,
-     "method": "set",
-     "params": [
-       {
-         "data": [
-           {
-             "action": "block",
-             "id": 7
-           },
-           {
-             "action": "block",
-             "id": 25
-           }
-         ],
-         "url": "/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters"
-       }
-     ],
-     "session": "loEYHhY8MscMCCWAaiOzV2mPxJjU1gqDwAP+nnYIKEQFx43vth/D3ZQx4Yg5ZlGjQg1qtdHlctROIwLIDg+XBw=="
-   }
+         """
+         Get configured filters in a webfilter profile
+         """
+         
+         from pyFMG.fortimgr import FortiManager
+         
+         IP = "10.210.34.120"
+         USERNAME = "devops"
+         PASSWORD = "fortinet"
+         
+         with FortiManager(
+             IP,
+             USERNAME,
+             PASSWORD,
+             disable_request_warnings=True,
+             verbose=True,
+         ) as fmg:
+         
+             ADOM = "demo"
+             MKEY = "wfp_001"
+             url = f"/pm/config/adom/{ADOM}/obj/webfilter/profile/{MKEY}/ftgd-wf/filters"
+         
+             fmg.debug = True
+             fmg.get(url)
+             fmg.debug = False
+ 
+In the above example, the information you're getting from the existing filters isn't very meaningful: ``action`` is quite explicit, but you don't get the symbolic name associated with the returned ``category``...
 
-**RESPONSE:**
+The following example shows how to obtain a more meaningful output by leveraging the ``expand datasrc`` mechaism:
 
-.. code-block:: json
-  
-   {
-     "id": 3,
-     "result": [
-       {
-         "status": {
-           "code": 0,  
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/obj/webfilter/profile/web_filter_profile_001/ftgd-wf/filters"
-       }
-     ]
-   }
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "expand datasrc": [
+                 {
+                   "datasrc": [
+                     {
+                       "obj type": "webfilter categories"
+                     }
+                   ],
+                   "name": "category"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }        
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "action": "monitor",
+                   "category": [
+                     {
+                       "id": "1",
+                       "obj description": "Drug Abuse",
+                       "obj type": "webfilter categories",
+                       "oid": 0
+                     }
+                   ],
+                   "id": 1,
+                   "log": "enable",
+                   "oid": 6639
+                 },
+                 {
+                   "action": "warning",
+                   "category": [
+                     {
+                       "id": "2",
+                       "obj description": "Alternative Beliefs",
+                       "obj type": "webfilter categories",
+                       "oid": 0
+                     }
+                   ],
+                   "id": 2,
+                   "log": "enable",
+                   "oid": 6640,
+                   "warn-duration": "5m",
+                   "warning-prompt": "per-category"
+                 },
+                 {"...", "..."},
+                 {
+                   "action": "block",
+                   "category": [
+                     {
+                       "id": "84",
+                       "obj description": "Web-based Applications",
+                       "obj type": "webfilter categories",
+                       "oid": 0
+                     }
+                   ],
+                   "id": 34,
+                   "log": "enable",
+                   "oid": 6672
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters"
+             }
+           ]
+         }        
+
+   .. tab-item:: pyFMG
+
+      .. code-block:: python
+
+         """
+         Get configured filters in a webfilter profile showing categories
+         symbolic names
+         """
+         
+         from pyFMG.fortimgr import FortiManager
+         
+         IP = "10.210.34.120"
+         USERNAME = "devops"
+         PASSWORD = "fortinet"
+         
+         with FortiManager(
+             IP,
+             USERNAME,
+             PASSWORD,
+             disable_request_warnings=True,
+             verbose=True,
+         ) as fmg:
+         
+             ADOM = "demo"
+             MKEY = "wfp_001"
+             url = f"/pm/config/adom/{ADOM}/obj/webfilter/profile/{MKEY}/ftgd-wf/filters"
+         
+             params = [
+                 {
+                     "expand datasrc": [
+                         {
+                             "datasrc": [
+                                 {
+                                     "obj type": "webfilter categories",
+                                 },
+                             ],
+                             "name": "category",
+                         }
+                     ],
+                     "url": url,
+                 }
+             ]
+         
+             fmg.debug = True
+             fmg.free_form(
+                 "get",
+                 data=params,
+             )
+             fmg.debug = False
+
+How to update an existing filter in a webfilter profile?
+________________________________________________________
+
+Goal is to change the ``action`` attribute value of an webfilter profile filter.
+
+The following example shows how to update the ``action``, for the *Potentially 
+Unwanted Program* category, from ``block`` to ``warning`` in the ``wfp_001`` 
+webfilter profile of the ``demo`` ADOM:
+
+Current ``action`` is ``block``:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "expand datasrc": [
+                 {
+                   "datasrc": [
+                     {
+                       "obj type": "webfilter categories"
+                     }
+                   ],
+                   "name": "category"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters/33"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         - How do you know that you have to use the ``33`` ID for the filter 
+           entry?  See ref:`How to get existing filters in a webfilter profile?`
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "action": "block",
+                 "category": [
+                   {
+                     "id": "99",
+                     "obj description": "Potentially Unwanted Program",
+                     "obj type": "webfilter categories",
+                     "oid": 0
+                   }
+                 ],
+                 "id": 33,
+                 "log": "enable",
+                 "oid": 6671
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters/33"
+             }
+           ]
+         }        
+
+   .. tab-item:: pyFMG
+
+      .. code-block:: python
+
+         """
+         Get a specific filter entry in a webfilter profile
+         """
+         
+         from pyFMG.fortimgr import FortiManager
+         
+         IP = "10.210.34.120"
+         USERNAME = "devops"
+         PASSWORD = "fortinet"
+         
+         with FortiManager(
+             IP,
+             USERNAME,
+             PASSWORD,
+             disable_request_warnings=True,
+             verbose=True,
+         ) as fmg:
+         
+             ADOM = "demo"
+             MKEY = "wfp_001"
+             url = f"/pm/config/adom/{ADOM}/obj/webfilter/profile/{MKEY}/ftgd-wf/filters/33"
+         
+             params = [
+                 {
+                     "expand datasrc": [
+                         {
+                             "datasrc": [
+                                 {
+                                     "obj type": "webfilter categories",
+                                 }
+                             ],
+                             "name": "category",
+                         }
+                     ],
+                     "url": url,
+                 }
+             ]
+         
+             fmg.debug = True
+             fmg.free_form(
+                 "get",
+                 data=params,
+             )
+             fmg.debug = False
+                     
+
+Change it to ``warning``:
+
+.. tab-set::
+
+    .. tab-item:: REQUEST
+
+       .. code-block:: json
+
+          {
+            "id": 3,
+            "method": "set",
+            "params": [
+              {
+                "data": {
+                  "action": "warning"
+                },
+                "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters/33"
+              }
+            ],
+            "session": "{{session}}"
+          }
+
+    .. tab-item:: RESPONSE
+
+       .. code-block:: json
+
+          {
+            "id": 3,
+            "result": [
+              {
+                "data": {
+                  "id": 33
+                },
+                "status": {
+                  "code": 0,
+                  "message": "OK"
+                },
+                "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters/33"
+              }
+            ]
+          }
+
+    .. tab-item:: pyFMG
+
+       .. code-block:: python
+
+          """
+          Update an existing filter in a webfilter profile
+          """
+          
+          from pyFMG.fortimgr import FortiManager
+          
+          IP = "10.210.34.120"
+          USERNAME = "devops"
+          PASSWORD = "fortinet"
+          
+          with FortiManager(
+              IP,
+              USERNAME,
+              PASSWORD,
+              disable_request_warnings=True,
+              verbose=True,
+          ) as fmg:
+          
+              ADOM = "demo"
+              MKEY = "wfp_001"
+              url = f"/pm/config/adom/{ADOM}/obj/webfilter/profile/{MKEY}/ftgd-wf/filters/33"
+          
+              fmg.debug = True
+              fmg.set(
+                  url,
+                  action="warning"
+              )
+              fmg.debug = False
+          
+          
+After the change, ``action`` is ``warning``:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "expand datasrc": [
+                 {
+                   "datasrc": [
+                     {
+                       "obj type": "webfilter categories"
+                     }
+                   ],
+                   "name": "category"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters/33"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "action": "warning",
+                 "category": [
+                   {
+                     "id": "99",
+                     "obj description": "Potentially Unwanted Program",
+                     "obj type": "webfilter categories",
+                     "oid": 0
+                   }
+                 ],
+                 "id": 33,
+                 "log": "enable",
+                 "oid": 6671,
+                 "warn-duration": "5m",
+                 "warning-prompt": "per-category"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters/33"
+             }
+           ]
+         }
+
+How to update multiple filters in a webfilter profile?
+______________________________________________________
+
+Goal is to change the ``action`` attribute values of multiple webfilter profile filters.
+
+The following example shows how to set the ``action``, for the *Potentially 
+Unwanted Program* and *Web-based Applications* categories, to ``monitor`` in the ``wfp_001`` webfilter profile of the ``demo`` ADOM:
+
+Current ``action`` are ``warning`` and ``block`` respectively:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "expand datasrc": [
+                 {
+                   "datasrc": [
+                     {
+                       "obj type": "webfilter categories"
+                     }
+                   ],
+                   "name": "category"
+                 }
+               ],
+               "filter": [
+                 "id",
+                 "in",
+                 33,
+                 34
+               ],
+               "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "action": "warning",
+                   "category": [
+                     {
+                       "id": "99",
+                       "obj description": "Potentially Unwanted Program",
+                       "obj type": "webfilter categories",
+                       "oid": 0
+                     }
+                   ],
+                   "id": 33,
+                   "log": "enable",
+                   "oid": 6671,
+                   "warn-duration": "5m",
+                   "warning-prompt": "per-category"
+                 },
+                 {
+                   "action": "block",
+                   "category": [
+                     {
+                       "id": "84",
+                       "obj description": "Web-based Applications",
+                       "obj type": "webfilter categories",
+                       "oid": 0
+                     }
+                   ],
+                   "id": 34,
+                   "log": "enable",
+                   "oid": 6672
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters"
+             }
+           ]
+         }
+
+   .. tab-item:: pyFMG
+
+      .. code-block:: python
+
+         """
+         Get configured filters in a webfilter profile
+         """
+         
+         from pyFMG.fortimgr import FortiManager
+         
+         IP = "10.210.34.120"
+         USERNAME = "devops"
+         PASSWORD = "fortinet"
+         
+         with FortiManager(
+             IP,
+             USERNAME,
+             PASSWORD,
+             disable_request_warnings=True,
+             verbose=True,
+         ) as fmg:
+         
+             ADOM = "demo"
+             MKEY = "wfp_001"
+             url = f"/pm/config/adom/{ADOM}/obj/webfilter/profile/{MKEY}/ftgd-wf/filters"
+         
+             params = [
+                 {
+                     "expand datasrc": [
+                         {
+                             "datasrc": [
+                                 {
+                                     "obj type": "webfilter categories",
+                                 },
+                             ],
+                             "name": "category",
+                         }
+                     ],
+                     "url": url,
+                     "filter": [
+                         "id",
+                         "in",
+                         33, 
+                         34,
+                     ]
+                 }
+             ]
+         
+             fmg.debug = True
+             fmg.free_form(
+                 "get",
+                 data=params,
+             )
+             fmg.debug = False
+
+Change them to ``warning``:
+
+.. tab-set::
+
+    .. tab-item:: REQUEST
+
+       .. code-block:: json
+
+          {
+            "id": 3,
+            "method": "set",
+            "params": [
+              {
+                "data": [
+                  {
+                    "action": "monitor",
+                    "id": 33
+                  },
+                  {
+                    "action": "monitor",
+                    "id": 34
+                  }
+                ],
+                "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters"
+              }
+            ],
+            "session": "{{session}}"
+          }
+
+    .. tab-item:: RESPONSE
+
+       .. code-block:: json
+
+          {
+            "id": 3,
+            "result": [
+              {
+                "status": {
+                  "code": 0,
+                  "message": "OK"
+                },
+                "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters"
+              }
+            ]
+          }
+
+    .. tab-item:: pyFMG
+
+       .. code-block:: python
+
+          """
+          Update configured filters in a webfilter profile
+          """
+          
+          from pyFMG.fortimgr import FortiManager
+          
+          IP = "10.210.34.120"
+          USERNAME = "devops"
+          PASSWORD = "fortinet"
+          
+          with FortiManager(
+              IP,
+              USERNAME,
+              PASSWORD,
+              disable_request_warnings=True,
+              verbose=True,
+          ) as fmg:
+          
+              ADOM = "demo"
+              MKEY = "wfp_001"
+              url = f"/pm/config/adom/{ADOM}/obj/webfilter/profile/{MKEY}/ftgd-wf/filters"
+          
+              data = [
+                  {
+                      "id": 33,  
+                      "action": "monitor",
+                  },
+                  {
+                      "id": 34,  
+                      "action": "monitor",            
+                  },
+              ]
+          
+              fmg.debug = True
+              fmg.set(
+                  url,
+                  data=data
+              )
+              fmg.debug = False
+          
+After the change, ``action`` is ``monitor`` for both filter entries:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "expand datasrc": [
+                 {
+                   "datasrc": [
+                     {
+                       "obj type": "webfilter categories"
+                     }
+                   ],
+                   "name": "category"
+                 }
+               ],
+               "filter": [
+                 "id",
+                 "in",
+                 33,
+                 34
+               ],
+               "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+   
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json   
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "action": "monitor",
+                   "category": [
+                     {
+                       "id": "99",
+                       "obj description": "Potentially Unwanted Program",
+                       "obj type": "webfilter categories",
+                       "oid": 0
+                     }
+                   ],
+                   "id": 33,
+                   "log": "enable",
+                   "oid": 6671
+                 },
+                 {
+                   "action": "monitor",
+                   "category": [
+                     {
+                       "id": "84",
+                       "obj description": "Web-based Applications",
+                       "obj type": "webfilter categories",
+                       "oid": 0
+                     }
+                   ],
+                   "id": 34,
+                   "log": "enable",
+                   "oid": 6672
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/webfilter/profile/wfp_001/ftgd-wf/filters"
+             }
+           ]
+         }
 
 How to get the webfilter categories?
 ____________________________________
 
 Caught in #0227646.
 
-We can use the ``datasrc`` option as shown below:
+It is about describing how to obtain a category ID along with its corresponding symbolic name.
 
-**REQUEST:**
+The following example shows how to get the categories ID along with their symbolic names, by combining the ``datasrc`` option with the ``attr`` attribute:
 
-.. code-block:: json
+.. tab-set::
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "attr": "rating",
-         "option": "datasrc",
-         "url": "/pm/config/adom/root/obj/webfilter/ftgd-local-rating"
-       }
-     ],
-     "session": "vivfIFW9y+mdCpWMh70rCuRoH8lcRTbRH2Zju7CpxePlzZddsRRp3ctkHlfY2GGWYBGnls3w77nUeLTt0nIZMA=="
-   }
+   .. tab-item:: REQUEST
 
-**RESPONSE:**
+      .. code-block:: json
 
-.. code-block:: 
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "webfilter categories": [
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
              {
-               "id": "all",
-               "obj description": "All Categories"
-             },
-             {
-               "id": "g01",
-               "obj description": "Potentially Liable"
-             },
-             {
-               "id": "1",
-               "obj description": "Drug Abuse"
-             },
-             [...],
-                       {
-               "id": "g21",
-               "obj description": "Unrated"
-             },
-             {
-               "id": "0",
-               "obj description": "Unrated"
-             },
-             {
-               "id": "g22",
-               "obj description": "Local Categories"
+               "attr": "rating",
+               "option": "datasrc",
+               "url": "/pm/config/adom/demo/obj/webfilter/ftgd-local-rating"
              }
            ],
-           "webfilter ftgd-local-cat": [
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
              {
-               "desc": "custom1",
-               "id": 140,
-               "status": 1
-             },
-             {
-               "desc": "custom2",
-               "id": 141,
-               "status": 1
+               "data": {
+                 "webfilter categories": [
+                   {
+                     "id": "all",
+                     "obj description": "All Categories"
+                   },
+                   {
+                     "id": "g01",
+                     "obj description": "Potentially Liable"
+                   },
+                   {
+                     "id": "1",
+                     "obj description": "Drug Abuse"
+                   },
+                   {"...", "..."},
+                   },
+                   {
+                     "id": "0",
+                     "obj description": "Unrated"
+                   },
+                   {
+                     "id": "g22",
+                     "obj description": "Local Categories"
+                   }
+                 ],
+                 "webfilter ftgd-local-cat": [
+                   {
+                     "desc": "custom1",
+                     "id": 140,
+                     "status": 1
+                   },
+                   {
+                     "desc": "custom2",
+                     "id": 141,
+                     "status": 1
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/root/obj/webfilter/ftgd-local-rating"
              }
            ]
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/obj/webfilter/ftgd-local-rating"
-       }
-     ]
-   }   
+         }   
+      
+   .. tab-item:: pyFMG
 
-We can also use the ``get reserved`` option as shown below:
+      .. code-block:: python
+  
+         """
+         Get categories ID along with their symbolic names.
+         """
+         
+         from pyFMG.fortimgr import FortiManager
+         
+         IP = "10.210.34.120"
+         USERNAME = "devops"
+         PASSWORD = "fortinet"
+         
+         with FortiManager(
+             IP,
+             USERNAME,
+             PASSWORD,
+             disable_request_warnings=True,
+             verbose=True,
+         ) as fmg:
+         
+             ADOM = "demo"
+             url = f"/pm/config/adom/{ADOM}/obj/webfilter/ftgd-local-rating"
+         
+             params = [
+                 {
+                     "attr": "rating",
+                     "option": "datasrc",
+                      "url": url,
+                 }
+             ]
+         
+             fmg.debug = True
+             fmg.free_form(
+                 "get",
+                 data=params,
+             )
+             fmg.debug = False
 
-**REQUEST:**
+You could leverage the ``datasrc`` option and the ``attr`` attribute for all ``url`` leading to a configuration element referencing a category ID.
 
-.. code-block:: json
+The following example will produce a similar output but with a different ``url`` and ``attr`` values:
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "option": "get reserved",
-         "url": "/pm/config/adom/root/obj/webfilter/categories"
-       }
-     ],
-     "session": "jkdpxOcqKU/tuzAMPxljkMYY1/swAnbapm8MfdVOF+ME13i40+8v+63DQhX8KHSBK7+v2lqCcNSlSVYlwDzgTw=="
-   }
+.. tab-set:: 
 
-**RESPONSE:**
+   .. tab-item:: REQUEST
 
-.. code-block:: 
+      .. code-block:: json
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "id": "all",
-             "obj description": "All Categories"
-           },
-           {
-             "id": "g01",
-             "obj description": "Potentially Liable"
-           },
-           {
-             "id": "1",
-             "obj description": "Drug Abuse"
-           },
-           [...]
-           {
-             "id": "g21",
-             "obj description": "Unrated"
-           },
-           {
-             "id": "0",
-             "obj description": "Unrated"
-           },
-           {
-             "id": "g22",
-             "obj description": "Local Categories"
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/obj/webfilter/categories"
-       }
-     ]
-   }
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "attr": "ftgd-wf/filters/category",
+               "option": "datasrc",
+               "url": "/pm/config/adom/demo/obj/webfilter/profile"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "webfilter categories": [
+                   {
+                     "id": "all",
+                     "obj description": "All Categories",
+                     "oid": 0
+                   },
+                   {
+                     "id": "g01",
+                     "obj description": "Potentially Liable",
+                     "oid": 0
+                   },
+                   {
+                     "id": "1",
+                     "obj description": "Drug Abuse",
+                     "oid": 0
+                   },
+                   {"...", "..."},
+                   {
+                     "id": "0",
+                     "obj description": "Unrated",
+                     "oid": 0
+                   },
+                   {
+                     "id": "g22",
+                     "obj description": "Local Categories",
+                     "oid": 0
+                   }
+                 ],
+                 "webfilter ftgd-local-cat": [
+                   {
+                     "desc": "custom1",
+                     "id": 140,
+                     "oid": 3716,
+                     "status": "enable"
+                   },
+                   {
+                     "desc": "custom2",
+                     "id": 141,
+                     "oid": 3717,
+                     "status": "enable"
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/webfilter/profile"
+             }
+           ]
+         }
+
+   .. tab-item:: pyFMG
+
+      .. code-block:: python
+
+         """
+         Get categories ID along with their symbolic names.
+         """
+         
+         from pyFMG.fortimgr import FortiManager
+         
+         IP = "10.210.34.120"
+         USERNAME = "devops"
+         PASSWORD = "fortinet"
+         
+         with FortiManager(
+             IP,
+             USERNAME,
+             PASSWORD,
+             disable_request_warnings=True,
+             verbose=True,
+         ) as fmg:
+         
+             ADOM = "demo"
+             url = f"/pm/config/adom/{ADOM}/obj/webfilter/profile"
+         
+             params = [
+                 {
+                     "attr": "ftgd-wf/filters/category",
+                     "option": "datasrc",
+                      "url": url,
+                 }
+             ]
+         
+             fmg.debug = True
+             fmg.free_form(
+                 "get",
+                 data=params,
+             )
+             fmg.debug = False
+
+
+There is a second alternative which consists in using the ``get reserved`` option as shown below:
+      
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "option": "get reserved",
+               "url": "/pm/config/adom/demo/obj/webfilter/categories"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json      
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "id": "all",
+                   "obj description": "All Categories"
+                 },
+                 {
+                   "id": "g01",
+                   "obj description": "Potentially Liable"
+                 },
+                 {
+                   "id": "1",
+                   "obj description": "Drug Abuse"
+                 },
+                 {"...": "..."},
+                 {
+                   "id": "g21",
+                   "obj description": "Unrated"
+                 },
+                 {
+                   "id": "0",
+                   "obj description": "Unrated"
+                 },
+                 {
+                   "id": "g22",
+                   "obj description": "Local Categories"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/root/obj/webfilter/categories"
+             }
+           ]
+         }
+
+   .. tab-item:: pyFMG
+
+      .. code-block:: python
+
+         """
+         Get categories ID along with their symbolic names.
+         """
+         
+         from pyFMG.fortimgr import FortiManager
+         
+         IP = "10.210.34.120"
+         USERNAME = "devops"
+         PASSWORD = "fortinet"
+         
+         with FortiManager(
+             IP,
+             USERNAME,
+             PASSWORD,
+             disable_request_warnings=True,
+             verbose=True,
+         ) as fmg:
+         
+             ADOM = "demo"
+             url = f"/pm/config/adom/{ADOM}/obj/webfilter/categories"
+         
+             fmg.debug = True
+             fmg.get(
+                 url,
+                 option="get reserved"
+             )
+             fmg.debug = False
+
 
 The dnsfilter domain-filter object
 ++++++++++++++++++++++++++++++++++

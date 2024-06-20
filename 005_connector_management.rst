@@ -934,4 +934,22 @@ the perspective of the ``dev_001`` managed device:
            ]
          }
 
+SASE Connector
+--------------
+
+TODO:
+
+.. code-block:: text
+
+   # Get SASE Controller status
+   Request [gui forward:23891:9aed47df-a7fd-4c2f-acdf-65c35e4756c4]:
+   { "client": "gui forward:23891", "id": "9aed47df-a7fd-4c2f-acdf-65c35e4756c4", "keep_session_idle": 1, "method": "get", "params": [{ "scope member": { "name": "FFSASEREDACTED67", "vdom": "root"}, "target start": 2, "url": "pm\/config\/adom\/root\/obj\/fmg\/sase-manager\/status"}], "session": 3761}
+   Response [gui forward:23891:9aed47df-a7fd-4c2f-acdf-65c35e4756c4]:
+   { "id": "9aed47df-a7fd-4c2f-acdf-65c35e4756c4", "result": [{ "data": { "forticlient-ver": "7.0.11", "forticloud-id": 1705791, "license-type": 0, "oid": 8283, "spa-hubs": 0}, "status": { "code": 0, "message": "OK"}, "url": "pm\/config\/adom\/root\/obj\/fmg\/sase-manager\/status"}]}
+
+   # Get SASE Controller settings
+   Request [gui forward:23894:0b253ff9-cfee-44e2-a066-fef040565032]:
+   { "client": "gui forward:23894", "id": "0b253ff9-cfee-44e2-a066-fef040565032", "keep_session_idle": 1, "method": "get", "params": [{ "object template": 0, "option": ["get used", "get flags", "get devobj mapping", "get meta", "loadsub"], "scope member": { "name": "FFSASEREDACTED67", "vdom": "root"}, "target start": 2, "url": "pm\/config\/adom\/root\/obj\/fmg\/sase-manager\/settings"}], "session": 3761}
+   Response [gui forward:23894:0b253ff9-cfee-44e2-a066-fef040565032]:
+   { "id": "0b253ff9-cfee-44e2-a066-fef040565032", "result": [{ "data": {   "address": ["BaaS_Backup_Clients_FAL", "ACE_Tacacs_Clients", "Bad_IPs_Group", "sase-BSA_Host_List", "AKLHYDRA1"], "oid": 8282, "profile-group": ["CMI Mandated", "DOE Mandated", "sase-security-group"], "sync-address": 5, "sync-profile-group": 5, "sync-user": 5, "user": ["sase-servers-group", "sase-groups", "sase-user2", "sase-user1", "sase-ldap-server", "sase-radius-server"]}, "status": { "code": 0, "message": "OK"}, "url": "pm\/config\/adom\/root\/obj\/fmg\/sase-manager\/settings"}]}
 

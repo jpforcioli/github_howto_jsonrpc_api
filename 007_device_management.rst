@@ -9213,3 +9213,106 @@ ADOM:
                  }
              ]
          }
+
+SASE Controller
+---------------
+
+The SASE controller is like a normal device.
+
+The following example shows how to get your existing managed SASE controller:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "sn",
+                 "os_type"
+               ],
+               "filter": [
+                 "os_type",
+                 "==",
+                 "fss"
+               ],               
+               "loadsub": 0,
+               "url": "/dvmdb/device"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json     
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "FFSASEREDACTED67",
+                   "oid": 202,
+                   "os_type": "fss",
+                   "sn": "FFSASEREDACTED67"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device"
+             }
+           ]
+         }            
+
+This example shows how to rename it to ``fss_001``:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "name": "fss_001"
+               },
+               "url": "/dvmdb/device/FFSASEREDACTED67"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+         
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "fss_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device/FFSASEREDACTED67"
+             }
+           ]
+         }
