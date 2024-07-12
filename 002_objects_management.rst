@@ -47,208 +47,219 @@ fields.
 How to add a metadata?
 ++++++++++++++++++++++
 
-We add metadata ``site_id`` with default value ``0`` in ADOM ``root``:
+The following example shows how to add the ``md_001`` metadata in the ``demo`` ADOM, using ``0`` as default value:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "name": "site_id",
-           "value": "0"
-         },
-         "url": "/pm/config/adom/root/obj/fmg/variable"
-       }
-     ],
-     "session": "uY6pkBTKxePxylSULcalT0qJWJ2Wpot75EMoQurXIk1lInRrfOpUw2/Ry6L2H/AGeKyr75k6i5x4xSeg4qN/Gg=="
-   }
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "name": "md_001",
+                 "value": "0"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+      .. warning::
+    
+         - The ``value`` attribute has to be set with a ``string``!
 
-.. warning::
+   .. tab-item:: RESPONSE
 
-   - The ``value`` attribute has to be set with a ``string``.
+      .. code-block:: json
 
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "name": "site_id"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/obj/fmg/variable"
-       }
-     ]
-   }
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "md_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable"
+             }
+           ]
+         }
 
 How to delete a metadata?
 +++++++++++++++++++++++++
 
-We delete metadata ``site_id`` from ADOM ``root``:
+The following example shows how to delete the ``md_001`` metadata in the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "delete",
-     "params": [
-       {
-         "url": "/pm/config/adom/root/obj/fmg/variable/site_id"
-       }
-     ],
-     "session": "VhmbOYvjWhsmSXtHHkp1298dkvfaAt7cUQbUBLKqpTfN4/oqntbOLxtQvYnIhvtTdm9Xa8mlv+U5NxVKDJvd9Q=="
-   }
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json      
   
-   {
-     "id": 3,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/obj/fmg/variable/site_id"
-       }
-     ]
-   }
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001"
+             }
+           ]
+         }
 
 How to assign a metadata to devices?
 ++++++++++++++++++++++++++++++++++++
 
-#. For a single device:
+For a single device
+___________________
 
-   - We add a per-device mapping to metadata ``site_id`` for device
-     ``site_001`` in ADOM ``root``. The value will be ``1``.
 
-     **REQUEST:**
- 
-     .. code-block:: json
-   
-        {
-          "id": 3,
-          "method": "add",
-          "params": [
-            {
-              "data": [
-                {
-                  "_scope": [
-                    {
-                      "name": "site_001",
-                      "vdom": "global"
-                    }
-                  ],
-                  "value": "1"
-                }
-              ],
-              "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping"
-            }
-          ],
-          "session": "1UFghhT0KF8dDRHAhCfP87MqAVZOwfDpOFyo1wLKLhYWfrNaMZPnkvcAKtmZUw6a9CHYVTRblay/iQjddRTrNg=="
-        }
-   
-     .. warning::
+The following example shows how to add a per-device mapping to the ``md_001`` 
+metadata for the ``dev_001`` device in the ``demo`` ADOM; its value will be 
+``1``.
 
-        - The ``value`` attribute has to be set with a ``string``.
-
-     **RESPONSE:**
-   
-     .. code-block:: json
-   
-        {
-          "id": 3,
-          "result": [
-            {
-              "data": {
-                "_scope": null
-              },
-              "status": {
-                "code": 0,
-                "message": "OK"
-              },
-              "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping"
-            }
-          ]
-        }
- 
-#. For multiple devices
-
-   - We add per-device mapping to metadata ``site_id`` for devices ``site_002``
-     and ``site_003``, and their respective VDOM ``root`` for both, in ADOM
-     ``root``. New values will be ``2`` and ``3`` respectively:
-
-     **REQUEST:** 
+.. tab-set:: 
   
-     .. code-block:: json
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+    
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 {
+                   "_scope": [
+                     {
+                       "name": "dev_001",
+                       "vdom": "global"
+                     }
+                   ],
+                   "value": "1"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001/dynamic_mapping"
+             }
+           ],
+           "session": "{{session}}"
+         }
+    
+      .. warning::
+ 
+         - The ``value`` attribute has to be set with a ``string``!
+
+   .. tab-item:: RESPONSE
+ 
+      .. code-block:: json      
+   
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "_scope": null
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001/dynamic_mapping"
+             }
+           ]
+         }
+ 
+For multiple devices
+____________________
+
+The following example shows how to add per-device mapping to the ``md_001`` 
+metadata for the ``dev_001`` and ``dev_002`` devices in the ``demo`` ADOM; its value will be ``1`` and ``2`` respectively:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
   
-        {
-          "id": 3,
-          "method": "add",
-          "params": [
-            {
-              "data": [
-                {
-                  "_scope": [
-                    {
-                      "name": "site_002",
-                      "vdom": "root"
-                    }
-                  ],
-                  "value": "2"
-                },
-                {
-                  "_scope": [
-                    {
-                      "name": "site_003",
-                      "vdom": "root"
-                    }
-                  ],
-                  "value": "3"
-                }
-              ],
-              "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping"
-            }
-          ],
-          "session": "3xU3/QYJvng9a91JN0Ivzi0XY6RPyvrYxtfa4xPjJTKwvVQQAs0VG9aTjf6ozgqEYcCMF7xvhRKe27J43btpEQ=="
-        }
-
-     .. warning::
-
-        - The ``value`` attribute has to be set with a ``string``.
-
-     **RESPONSE:**
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 {
+                   "_scope": [
+                     {
+                       "name": "dev_001",
+                       "vdom": "global"
+                     }
+                   ],
+                   "value": "1"
+                 },
+                 {
+                   "_scope": [
+                     {
+                       "name": "dev_002",
+                       "vdom": "global"
+                     }
+                   ],
+                   "value": "2"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/fmg/variable/site_id/dynamic_mapping"
+             }
+           ],
+           "session": "{{session}}"
+         }
+ 
+      .. warning::
+ 
+         - The ``value`` attribute has to be set with a ``string``!
+ 
+   .. tab-item:: RESPONSE
         
-     .. code-block:: json
-          
-        {
-          "id": 3,
-          "result": [
-            {
-              "status": {
-                "code": 0,
-                "message": "OK"
-              },
-              "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping"
-            }
-          ]
-        }
-
+      .. code-block:: json
+            
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001/dynamic_mapping"
+             }
+           ]
+         }
+  
 How to assign metadatas at Model Device creation time?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -484,173 +495,274 @@ It can be exposed by using the following FortiManager CLI debug command:
 How to unassign a metadata?
 +++++++++++++++++++++++++++
 
-- We delete per-device mapping for device ``site_001`` in ADOM ``root``
+The following example shows how to delete per-device mapping of the ``md_001`` metadata for the ``dev_001`` device in the ``demo`` ADOM:
 
-  **REQUEST:**
+.. tab-set::
 
-  .. code-block:: json
+   .. tab-item:: REQUEST
 
-     {
-       "id": 3,
-       "method": "delete",
-       "params": [
-         {
-           "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping/site_001/global"
-         }
-       ],
-       "session": "DeDg35oRLquI5LoY6jegKxzO30MuvijlQofAK7GSsVE2aHhdemGk7qmscZp9FlvFPsadu3fO9nyfhYf9asv4sA=="
-     }
-
-  **RESPONSE:**
-
-  .. code-block:: json
+      .. code-block:: json
     
-     {
-       "id": 3,
-       "result": [
          {
-           "status": {
-             "code": 0,
-             "message": "OK"
-           },
-           "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping/site_001/global"
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001/dynamic_mapping/dev_001/global"
+             }
+           ],
+           "session": "{{session}}"
          }
-       ]
-     }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json    
+    
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001/dynamic_mapping/dev_001/global"
+             }
+           ]
+         }
 
 How to replace assigned device with another one?
 ++++++++++++++++++++++++++++++++++++++++++++++++
 
-In ADOM ``root``, we have a metadata ``site_id`` assigned to device
-``site_003`` scope ``global`` with value ``3``:
+The ``demo`` ADOM has the ``md_001`` metadata assigned to the ``dev_001`` device
+``site_003`` with value ``3``:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping/site_003/global"
-       }
-     ],
-     "session": "lSwBO+josIsWGTLgfPunWDUhI1yhnYXmsOexJszAjOrZgrAwcgSHmaLUcz8kgcwa+DTFdiPmJPQd6p6uhbDBRA=="
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "_scope": [
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
              {
-               "name": "site_003",
-               "vdom": "global"
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001/dynamic_mapping/dev_001/global"
              }
            ],
-           "oid": 3989,
-           "value": "3"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping/site_003/global"
-       }
-     ]
-   }
+           "session": "{{session}}"
+         }
 
-We replace devicee ``site_003`` scope ``global`` with device ``site_002`` vdom
-``root``. Both ``value`` and ``oid`` shouldn't be modified:
+   .. tab-item:: RESPONSE
 
-**REQUEST:**
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "_scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "global"
+                   }
+                 ],
+                 "oid": 3989,
+                 "value": "3"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001/dynamic_mapping/dev_001/global"
+             }
+           ]
+         }
 
-.. code-block:: json
+The following example shows how to replace this per-device mapping with a new one for the ``dev_002`` device:
 
-   {
-     "id": 3,
-     "method": "set",
-     "params": [
-       {
-         "data": [
-           {
-             "name": "site_002",
-             "vdom": "root"
-           }
-         ],
-         "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping/site_003/global/_scope"
-       }
-     ],
-     "session": "Wx30e3o21dbA577ZQC4uEWr2FxdYJNycLfL2JGZ8oa9x7p7/0W+catuBCyXJB6Rq3Y0vDQSWr4UIOpig3Q6TUzawM01Jsanb"
-   }
+.. tab-set::
 
-**RESPONSE:**
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "dev_002",
+                   "vdom": "global"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001/dynamic_mapping/dev_001/global/_scope"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping/site_003/global/_scope"
-       }
-     ]
-   }
+   .. tab-item:: RESPONSE
 
-We can double check: both ``value`` and ``oid`` are still with same value as
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001/dynamic_mapping/dev_001/global/_scope"
+             }
+           ]
+         }
+
+You can double check: both ``value`` and ``oid`` are still with same value as
 before the replace operation:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping/site_002/root"
-       }
-     ],
-     "session": "GDbXiJQeLFHJn353tBpV8dTv0j/YBBHvjN/diKqSn6SNkY9H2HUy+5tResAiNQgLGOGX2HXMaUwLJJQ57t0Jwg=="
-   }
-
-**RESPONSE:**
-
-.. code-block:: json 
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "_scope": [
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
              {
-               "name": "site_002",
-               "vdom": "root"
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001/dynamic_mapping/dev_002/root"
              }
            ],
-           "oid": 3989,
-           "value": "3"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping/site_002/root"
-       }
-     ]
-   }
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json 
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "_scope": [
+                   {
+                     "name": "dev_002",
+                     "vdom": "global"
+                   }
+                 ],
+                 "oid": 3989,
+                 "value": "3"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001/dynamic_mapping/dev_002/root"
+             }
+           ]
+         }
+
+How to get the metadata values for a specific device?
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get all the metadata values for the ``dev_001`` device in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name"
+               ],
+               "sub fetch": {
+                 "dynamic_mapping": {
+                   "fields": [
+                     "value"
+                   ],
+                   "scope member": [
+                     {
+                       "name": "dev_001",
+                       "vdom": "global"
+                     }
+                   ],
+                   "subfetch count": [
+                     "==",
+                     1
+                   ]
+                 }
+               },
+               "subfetch filter": 1,
+               "url": "/pm/config/adom/demo/obj/fmg/variable"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "dynamic_mapping": [
+                     {
+                       "_scope": [
+                         {
+                           "name": "dev_001",
+                           "vdom": "global"
+                         }
+                       ],
+                       "oid": 5453,
+                       "value": "001_003"
+                     }
+                   ],
+                   "name": "md_001",
+                   "oid": 5450
+                 },
+                 {
+                   "dynamic_mapping": [
+                     {
+                       "_scope": [
+                         {
+                           "name": "dev_001",
+                           "vdom": "global"
+                         }
+                       ],
+                       "oid": 5457,
+                       "value": "002_003"
+                     }
+                   ],
+                   "name": "md_002",
+                   "oid": 5454
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable"
+             }
+           ]
+         }
 
 How to get the value of a metadata for a specific device/vdom?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
