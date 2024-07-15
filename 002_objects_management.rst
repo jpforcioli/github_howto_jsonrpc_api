@@ -1315,11 +1315,14 @@ To add wilcard FQDN ``*.foobar.*`` to ADOM ``adom_70_001``:
      ]
    }
 
+Objects Operations
+------------------
+
 Objects default values
-----------------------
+++++++++++++++++++++++
 
 How to get the default values for a firewall address?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+_____________________________________________________
 
 **REQUEST:**
 
@@ -1341,7 +1344,7 @@ How to get the default values for a firewall address?
 
 
 How to bulk add objects?
-------------------------
+++++++++++++++++++++++++
 
 You have two methods:
 
@@ -1349,7 +1352,7 @@ You have two methods:
 - ``data`` multi-plexing
 
 ``params`` multi-plexing
-++++++++++++++++++++++++
+________________________
 
 **REQUEST:**
 
@@ -1437,7 +1440,7 @@ You have two methods:
 
 
 ``data`` multi-plexing
-++++++++++++++++++++++
+______________________
 
 **REQUEST:**
 
@@ -1496,6 +1499,70 @@ You have two methods:
      ]
    }
 
+How to get CLI configuration of a new object?
++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #1051789.
+
+This is a new feature from FortiManager 7.6.0.
+
+The following example shows how to get the CLI configuration for the ``host_001`` firewall address which is going to be created in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "color": 4,
+                 "name": "host_001",
+                 "subnet": "10.0.0.1/32"
+               },
+               "option": [
+                 "cli config"
+               ],
+               "url": "/pm/config/adom/demo/obj/firewall/address"
+             }
+           ],
+           "session": "{{seession}}"
+         }
+        
+      .. note::
+
+         - The ``cli config`` is asking FortiManager to just generate the CLI
+           configuration that could have been used to create this object
+         
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "cli config": "config firewall address\nedit \"host_001\"\nset uuid 01dc1d34-4275-51ef-365b-135128a140a9\nset color 4\nset subnet 10.0.0.1 255.255.255.255\n\nnext\nend\n"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/address"
+             }
+           ]
+         }
+
+      .. note::
+
+         - The ``host_001`` isn't created!
+         - FortiManager just returned its CLI configuration
+         
 Normalized Interfaces
 ---------------------
 
