@@ -3421,390 +3421,406 @@ To delete the ``fext_001`` FortiExtender device from the ``dc_emea`` ADOM:
 CLI Template
 ------------
 
-How to add a cli template?
+How to add a Cli Template?
 ++++++++++++++++++++++++++
-We add cli template ``001_cli_template`` in ADOM ``adom_dut``:
 
-**REQUEST:**
+The following example shows how to add the ``cli_t_001`` CLI Template in the
+``demo`` ADOM:
 
-.. code-block::
+.. tab-set::
+   
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1,
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "name": "001_cli_template",
-           "script": "config system global\nset hostname branch_$(site_id)\nend"
-         },
-         "url": "/pm/config/adom/adom_dut/obj/cli/template"
-       }
-     ],
-     "session": ""{{session}}",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block::
-
-  {
-    "id": 1,
-    "result": [
-      {
-        "data": {
-          "name": "001_cli_template"
-        },
-        "status": {
-          "code": 0,
-          "message": "OK"
-        },
-        "url": "/pm/config/adom/adom_dut/obj/cli/template"
-      }
-    ]
-  }
-
-How to delete a cli template?
-+++++++++++++++++++++++++++++
-
-We delete cli template ``005_cli_template`` from ADOM ``adom_dut``:
-
-**REQUEST:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "delete",
-     "params": [
-       {
-         "url": "/pm/config/adom/adom_dut/obj/cli/template/005_cli_template"
-       }
-     ],
-     "session": "7RR3zyNa51ehGh5vkejo8zeqYuCNO3/DliyYAjrGd+Ytdd5jHD9pu4o17pXvt2TtWASZBhJxlTtxZbVw6uBFvw==",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/adom_dut/obj/cli/template/005_cli_template"
-       }
-     ]
-   }
-
-How to add a cli template group ?
-+++++++++++++++++++++++++++++++++
-
-We add cli template group ``001_cli_template_group`` in ADOM ``adom_dut`` and
-with a two cli template members ``001_cli_template`` and ``002_cli_template``:
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "member": [
-             "001_cli_template",
-             "002_cli_template"
-           ],
-           "name": "001_cli_template_group"
-         },
-         "url": "/pm/config/adom/adom_dut/obj/cli/template-group"
-       }
-     ],
-     "session": "M/9TkWeX+6HmdPF7d51EkT2+/eTVQAqIyNdgPrdkfoBApi/g3ReNXzcDrBpuDbtJ0OJza+Zja2dExCglF9rxYQ==",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "name": "001_cli_template_group"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/adom_dut/obj/cli/template-group"
-       }
-     ]
-   }
-
-How to add a cli template in an cli template group?
-+++++++++++++++++++++++++++++++++++++++++++++++++++
-
-We add cli templates ``003_cli_template`` and ``004_cli_template`` to the cli
-template group ``001_cli_template_group`` in ADOM ``adom_dut``:
-
-**REQUEST**:
-
-.. code-block::
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "add",
-     "params": [
-       {
-         "data": [
-           "003_cli_template",
-           "004_cli_template"
-         ],
-         "url": "/pm/config/adom/adom_dut/obj/cli/template-group/001_cli_template_group/member"
-       }
-     ],
-     "session": "e7++sagQwrojdzHdmjWzzLwBa2bmCWxrFUXbxIqzOCCh8idncLvsA+wsAOlFs5pp45lrQoooRayUFE07GFHwfQ==",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/adom_dut/obj/cli/template-group/001_cli_template_group/member"
-       }
-     ]
-   }
-
-How to delete a cli template group?
-+++++++++++++++++++++++++++++++++++
-
-We delete cli template group ``001_cli_template_group`` from ADOM
-``adom_dut``:
-
-**REQUEST:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "delete",
-     "params": [
-       {
-         "url": "/pm/config/adom/adom_dut/obj/cli/template-group/001_cli_template_group"
-       }
-     ],
-     "session": "OSNbLm35oUYLRoWwhdZ1Wbhp/1tpXWEimxLaZULCnSyIZGQxmJ9/JusfomklwA3UvIKJtXqUf/eTJGCJlyd+Dw==",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/adom_dut/obj/cli/template-group/001_cli_template_group"
-       }
-     ]
-   }
-
-How to get the list of assigned devices for a cli template?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "get",
-     "params": [
-       {
-         "option": [
-           "scope member"
-         ],
-         "url": "/pm/config/adom/DEMO/obj/cli/template/cli.template.005.router.bgp"
-       }
-     ],
-     "session": "OzznUZjuf542CtWPlOuzOxFCmUp++ayZFMy8YQOxpcTzTebnlp3zMEFdaI5tWBPHjMRWZAtAU+Q/mWAPI+B1LA==",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "description": null,
-           "modification-time": "1585299880555",
-           "name": "cli.template.005.router.bgp",
-           "obj flags": 16,
-           "scope member": [
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "add",
+           "params": [
              {
-               "name": "branch2_fgt",
-               "vdom": "vd_001"
+               "data": {
+                 "name": "cli_t_001",
+                 "script": "config system global\nset hostname branch_$(site_id)\nend",
+                 "type": "cli",
+               },
+               "url": "/pm/config/adom/demo/obj/cli/template"
              }
            ],
-           "script": "config router route-map\nedit \"NO_SLA\"\nconfig rule\nedit 1\nset set-community \"65000:2\"\nnext\nend\nnext\nedit \"SLA\"\nconfig rule\nedit 1\nset set-community \"65000:1\"\nnext\nend\nnext\nend\n\nconfig router bgp\nset as 65000\nset router-id 0.0.$(region_id).$(branch_id)\nset keepalive-timer 5\nset holdtime-timer 15\nset ibgp-multipath enable\nset network-import-check disable\nset additional-path enable\nset scan-time 20\nset graceful-restart enable\nconfig neighbor\nedit 10.0.$(region_id)1.1\nset soft-reconfiguration enable\nset remote-as 65000\nset route-map-out \"NO_SLA\"\nset route-map-out-preferable \"SLA\"\nset additional-path both\nset connect-timer 5\nnext\nedit 10.0.$(region_id)2.1\nset soft-reconfiguration enable\nset remote-as 65000\nset route-map-out \"NO_SLA\"\nset route-map-out-preferable \"SLA\"\nset additional-path both\nset connect-timer 5\nnext\nend\nconfig network\nedit 1\nset prefix 10.3.$(region_id)$(branch_id).0 255.255.255.0\nnext\nedit 2\nset prefix 169.254.$(region_id)$(branch_id).1 255.255.255.255\nnext\nedit 3\nset prefix 10.4.$(region_id)$(branch_id).0 255.255.255.0\nnext\nend\nend"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/DEMO/obj/cli/template/cli.template.005.router.bgp"
-       }
-     ]
-   }
+           "session": "{{session}}",
+         }
 
-How to get the list of assigned devices for a cli template group?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      .. note::
 
-We get the list of assigned devices or device groups for CLI Template Group
-``branches`` in ADOM ``demo_001``:
+         - ``type`` could be ``cli`` or ``jinja``
 
-**REQUEST:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json      
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "fields": [
-           "name"
-         ],
-         "option": [
-           "scope member"
-         ],
-         "url": "/pm/config/adom/demo_001/obj/cli/template-group/branches"
-       }
-     ],
-     "session": "PLWvfSfwODuu0etx59Ypv/mD1E6EzywAtuTJimnMQ1PFryZHf/wyWMmyyoMqAHNVUhCqyJrQ9Ps1D0mxS4IUCg=="
-   }
-   
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "name": "branches",
-           "obj flags": 16,
-           "oid": 3725,
-           "scope member": [
+         {
+           "id": 1,
+           "result": [
              {
-               "name": "demo_001_dev_001",
-               "vdom": "root"
-             },
-             {
-               "name": "branches"
+               "data": {
+                 "name": "cli_t_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/cli/template"
              }
            ]
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/demo_001/obj/cli/template-group/branches"
-       }
-     ]
-   }
+         }
 
-The CLI Template Group ``branches`` is having two assigned elements:
+How to delete a CLI Template?
++++++++++++++++++++++++++++++
 
-- Device ``demo_001_dev_001`` (and its native ``root`` VDOM)
-- Device group ``branches``
+The following example shows how to delete the ``cli_t_001`` CLI Template from the ``demo`` ADOM:
 
-How to assign a Cli Template to a device?
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/cli/template/cli_t_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/cli/template/cli_t_001"
+             }
+           ]
+         }
+      
+How to add a CLI Template Group ?
++++++++++++++++++++++++++++++++++
+
+The following example shows how to add the ``cli_t_g_001`` CLI Template Group 
+in the ``demo`` ADOM  which contains the ``cli_t_001`` and ``cli_t_002`` CLI Templates:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "member": [
+                   "cli_t_001",
+                   "cli_t_002"
+                 ],
+                 "name": "cli_t_g_001"
+               },
+               "url": "/pm/config/adom/demo/obj/cli/template-group"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json      
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "name": "cli_t_g_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/cli/template-group"
+             }
+           ]
+         }
+
+How to add a CLI Template in an CLI Template Group?
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to add the ``cli_t_003`` and ``cli_t_003`` CLI Templates into the ``cli_t_g_001`` in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 "cli_t_003",
+                 "cli_t_004"
+               ],
+               "url": "/pm/config/adom/demo/obj/cli/template-group/cli_t_g_001/member"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/cli/template-group/cli_t_g_001/member"
+             }
+           ]
+         }
+
+How to delete a CLI Template Group?
++++++++++++++++++++++++++++++++++++
+
+The followinge example shows how to delete the ``cli_t_g_001`` CLI Template Group from the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/cli/template-group/cli_t_g_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/cli/template-group/cli_t_g_001"
+             }
+           ]
+         }
+
+How to get the list of assigned devices for a CLI Template?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the list of assigned devices for the ``cli_t_001`` CLI Template in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name"
+               ],
+               "option": [
+                 "scope member",
+                 "extra option",
+                 "no loadsub"
+               ],
+               "url": "/pm/config/adom/demo/obj/cli/template/cli_t_001"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "cli_t_001",
+                 "obj flags": 16,
+                 "oid": 5993,
+                 "scope member": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/cli/template/cli_t_001"
+             }
+           ]
+         }
+
+      .. note::
+
+         - The ``cli_t_001`` CLI Template is currently assigned to the 
+           ``dev_001`` managed device
+         
+How to get the list of assigned devices for a CLI Template Group?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the list of assigned devices for the ``cli_t_g_001`` CLI Template Group in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name"
+               ],
+               "option": [
+                 "scope member"
+               ],
+               "url": "/pm/config/adom/demo/obj/cli/template-group/cli_t_g_001"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "cli_t_g_001",
+                 "obj flags": 16,
+                 "oid": 3725,
+                 "scope member": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/cli/template-group/cli_t_g_001"
+             }
+           ]
+         }
+      
+      .. note::
+        
+         - The ``cli_t_g_001`` CLI Template Group is currently assigned to the 
+           ``dev_001`` managed device
+           
+How to assign a CLI Template to a device?
 +++++++++++++++++++++++++++++++++++++++++
 
 This section is applicable to CLI Templates and Pre-Run CLI Templates.
 
-Following request will assign cli template ``cli.template.005.router.bgp`` to
-two of the ``branch2_fgt``'s vdoms.
+The following example shows how to assign the ``cli_t_001`` CLI Template to 
+``dev_001`` and ``dev_002`` managed devices in the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "add",
-     "params": [
-       {
-         "data": [
-           {
-             "name": "branch2_fgt",
-             "vdom": "vd_001"
-           },
-           {
-             "name": "branch2_fgt",
-             "vdom": "vd_002"
-           }
-         ],
-         "url": "/pm/config/adom/DEMO/obj/cli/template/cli.template.005.router.bgp/scope member"
-       }
-     ],
-     "session": "tcOpRF2jaIJ3BAORWKscwn1syZQhqzpPOdMj5okCSg4+pJd0jrYdEWNzXG9rHj/iMNYDLMIfQI3NrpKbb3aS7Q==",
-     "verbose": 1
-   }
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "dev_001",
+                   "vdom": "root"
+                 },
+                 {
+                   "name": "dev_002",
+                   "vdom": "root"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/cli/template/cli_t_001/scope member"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/DEMO/obj/cli/template/cli.template.005.router.bgp/scope member"
-       }
-     ]
-   }
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/cli/template/cli_t_001/scope member"
+             }
+           ]
+         }
 
 How to assign a Pre-Run CLI Template to a device?
 +++++++++++++++++++++++++++++++++++++++++++++++++
