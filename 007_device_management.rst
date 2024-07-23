@@ -2756,10 +2756,110 @@ You can now observe your FortiManager GUI, you should have a new Model Device li
 
 .. thumbnail:: images/image_012.png
 
-
 .. warning::
 
    - This seems to work only starting with FortiManager 7.6.0
+
+
+How to add a SD-WAN Model Device?
++++++++++++++++++++++++++++++++++
+
+It's a new feature from FortiManager 7.6.0.
+
+It is now possible to flag a managed device as a *SD-WAN* device and have it
+moved in a a new *SD-WAN Manager* page where all SD-WAN Central Management
+operations have been consolidated.
+
+You can add a SD-WAN Model Device using the ``sdwan_management`` flag.
+
+The following example shows how to add the ``dev_001`` SD-WAN Model Device into
+the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "device": {
+                   "device action": "add_model",
+                   "flags": [
+                     "sdwan_management"
+                   ],
+                   "mgmt_mode": "fmg",
+                   "mr": 2,
+                   "name": "dev_001",
+                   "os_type": "fos",
+                   "os_ver": "7.0",
+                   "platform_str": "FortiGate-40F",
+                   "psk": "FGT40F2100000004"
+                 },
+                 "flags": [
+                   "create_task"
+                 ]
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "device": {
+                   "beta": -1,
+                   "branch_pt": 1628,
+                   "build": 1628,
+                   "conn_mode": 1,
+                   "dev_status": 1,
+                   "flags": 2199090626560,
+                   "hostname": "FortiGate-40F",
+                   "maxvdom": 10,
+                   "mgmt_mode": 3,
+                   "mgmt_uuid": "26bf3002-48bd-51ef-bfd6-94907540de43",
+                   "mr": 2,
+                   "name": "dev_001",
+                   "oid": 36578,
+                   "os_type": 0,
+                   "os_ver": 7,
+                   "patch": -1,
+                   "platform_id": 8,
+                   "platform_str": "FortiGate-40F",
+                   "psk": "FGT40F2100000004",
+                   "source": 1,
+                   "tab_status": "<unknown>",
+                   "version": 700
+                 },
+                 "taskid": 1374
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ]
+         }        
+
+.. note::
+
+   - You could also have envisaged to enable the *Managed by SD-WAN Manager* 
+     option in a Device Blueprint and to add your Model Device by referencing 
+     this Device Blueprint!
 
 How to enable the auto-link flag on a Model Device?
 +++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2984,6 +3084,8 @@ However, in the backend that's still two separate actions:
 How to get the list of Model Devices?
 +++++++++++++++++++++++++++++++++++++
 
+You will see that is not as simple as it seems.
+
 First, get your list of managed devices using:
 
 .. tab-set::
@@ -3060,7 +3162,11 @@ First, get your list of managed devices using:
            "id": 1
          }
 
-      You can observe that sometimes the returned ``flags`` attribute is a list of keywords like ``has_hdd``, ``is_model``, ``linked_to_model``, etc.
+      .. note::
+        
+         - You can observe that sometimes the returned ``flags`` attribute is a 
+           list of keywords like ``has_hdd``, ``is_model``, 
+           ``linked_to_model``, etc.
 
 If you are asked to retrieve the list of Model Devices only, you could be attempted to use a request with the ``filter`` attribute:
 
@@ -3112,14 +3218,21 @@ If you are asked to retrieve the list of Model Devices only, you could be attemp
            ]
          }
 
-      As you can see it doesn't work.
+      .. note::
+        
+         - As you can see it doesn't work.
 
-      It's because the ``flags`` attribute isn't a table but an integer where flags are combined all together using bitwise AND operations.
+         - It's because the ``flags`` attribute isn't a table but an integer 
+           where flags are combined all together using bitwise AND operations.
 
       .. note:: 
       
-         - Because the ``verbose`` attribute is specified in the ``get`` request, FortiManager is nice enough to returne the ``flags`` attribute as a list
-         - But as you can see it is creating confusion for when it is required to filter its content
+         - Because the ``verbose`` attribute is specified in the ``get`` 
+           request, FortiManager is nice enough to returne the ``flags`` 
+           attribute as a list
+
+         - But as you can see it is creating confusion for when it is required 
+           to filter its content
       
 To get all Model Devices, you have to use the bitwise AND operator in the ``filter`` as shown below:
 
@@ -3158,13 +3271,15 @@ To get all Model Devices, you have to use the bitwise AND operator in the ``filt
 
          - Where is this ``262176`` value from?
 
-           This is the integer version of the ``is_model`` symbolic name plus ``32``!
+           This is the integer version of the ``is_model`` symbolic name plus 
+           ``32``!
 
            .. warning::
 
               Don't forget to add ``32``!
 
-         - You can get the integer version of the ``is_model`` symbolic from the FortiManager CLI:
+         - You can get the integer version of the ``is_model`` symbolic from 
+           the FortiManager CLI:
 
            Enter the shell:
 
@@ -3172,7 +3287,8 @@ To get all Model Devices, you have to use the bitwise AND operator in the ``filt
 
               execute shell
 
-           Then get the integer version of the ``is_model`` symbolic name using those commands:
+           Then get the integer version of the ``is_model`` symbolic name using 
+           those commands:
 
            .. code-block:: shell
 
@@ -3224,13 +3340,16 @@ To get all Model Devices, you have to use the bitwise AND operator in the ``filt
            "id": 1
          }
 
-      Now you can see that FortiManager only returns the Model Devices: the devices where ``is_model`` keyword is used in the ``flags`` attribute.
+      Now you can see that FortiManager only returns the Model Devices: the 
+      devices where ``is_model`` keyword is used in the ``flags`` attribute.
 
 .. note:: 
 
    You understand that you could also combine more device capabilities.
 
-   For intance if you want all Model Devices (symbolic name ``is_model``, numerical value ``262144``) with a log disk (symbolic name ``has_hdd``, numerical value ``1``), you can use following ``filter`` attribute:
+   For intance if you want all Model Devices (symbolic name ``is_model``, 
+   numerical value ``262144``) with a log disk (symbolic name ``has_hdd``, 
+   numerical value ``1``), you can use following ``filter`` attribute:
 
    .. code-block:: json
 
@@ -3241,7 +3360,8 @@ To get all Model Devices, you have to use the bitwise AND operator in the ``filt
         262177,
       ]
 
-   where ``262177`` is the sum of the numerical values for ``is_model``, ``has_hdd`` + ``32``!
+   where ``262177`` is the sum of the numerical values for ``is_model``, 
+   ``has_hdd`` + ``32``!
 
    You can also use this more complex form:
 
@@ -3267,6 +3387,12 @@ To get all Model Devices, you have to use the bitwise AND operator in the ``filt
 
    - ``262176`` is the sum of the numerical values for ``is_model`` + ``32``!
    - ``33`` is the sum of the numerical values for ``has_hdd`` + ``32``!
+
+.. note::
+
+   - You could also have envisaged to reference your Pre-RUN CLI Template in a
+     Device Blueprint and to add your Model Device by referencing this Device
+     Blueprint!
       
 How to get the ADOM a device belongs to?
 ----------------------------------------
