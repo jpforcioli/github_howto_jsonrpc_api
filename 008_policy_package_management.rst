@@ -2145,7 +2145,7 @@ The following example shows how to trigger an install device preview operation f
          - You have to track the progress of the returned task id ``1063``
          - Once the task is completed, you can proceed with next step
 
-Step #2: Collect the install device preview output
+Step #3: Collect the install device preview output
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The following example shows how to obtain the Install Preview output for the ``dev_001``, ``dev_002`` and ``dev_003`` devices in the ``demo`` ADOM:

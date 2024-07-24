@@ -734,10 +734,90 @@ To save changes made in the ``demo`` ADOM:
            ]
          }
 
-How to detect unsaved changes?
-++++++++++++++++++++++++++++++
+Device commit
+_____________
 
-Before unlocking an ADOM, it is important to save all pending changes.
+The following example shows how to commit changes made to the locked ``dev_001`` device from the ``demo`` ADOM:
+
+.. tab-set:: 
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/commit/dev/dev_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/commit/dev/dev_001"
+             }
+           ]
+         }
+
+Policy Package Commit
+_____________________
+
+The following example shows how to commit changes made to the locked ``ppkg_001`` Policy Package from the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 9,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/commit/pkg/ppkg_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 9,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/commit/pkg/ppkg_001"
+             }
+           ]
+         }
+
+How to detect unsaved changes?
+______________________________
+
+How do you know when a save operation is required?
+
+It is important to answer that question otherwise you may lose all of your unsaved changes when unlocking your resource.
 
 FortiManager is maintaining a ``dirty`` flag.
 
@@ -913,9 +993,71 @@ performed in the ``demo`` ADOM:
               ]
             }
 
-   Now the ``dirty`` flag is ``1``.
+         Now the ``dirty`` flag is ``1``.
 
-   It indicates there are unsaved changes!
+         It indicates there are unsaved changes!
+
+   You could have use the ``lockinfo`` to observe the *dirty* status (see 
+   :ref:`How to figure out there is a lock?`).
+
+   For instance:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 6,
+              "method": "get",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/demo/workspace/lockinfo"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+            :emphasize-lines: 7,10
+
+            {
+              "id": 6,
+              "result": [
+                {
+                  "data": [
+                    {
+                      "adom_dirty": 1,
+                      "db_mode": 1,
+                      "dev_oid": 399,
+                      "dirty": 1,
+                      "flags": 1,
+                      "lock_sid": 31952,
+                      "lock_time": 1721801037,
+                      "lock_user": "devops",
+                      "obj_cat": 0,
+                      "obj_oid": 0,
+                      "obj_url": "",
+                      "type": 1,
+                      "wfsid": 0
+                    }
+                  ],
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/workspace/lockinfo"
+                }
+              ]
+            }
+   
+         You can see that the ``adom_dirty`` attribute is ``1``.
+
+         There's also another ``dirty`` flag with value ``1``.
 
 #. Save the change
 
@@ -1040,10 +1182,60 @@ performed in the ``demo`` ADOM:
    
       - You can only get the ``dirty`` flag of your own workspace session
 
-Device commit
+Unlocking
++++++++++
+
+ADOM Unlock
+___________
+
+.. warning::
+
+   - If you unlock without a ``commit`` operation then unsaved changes will be 
+     lost
+
+   - See :ref:`ADOM Commit`
+
+The following example shows how to unlock the locked ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block::
+
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/unlock"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block::
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/unlock"
+             }
+           ]
+         }  
+
+Device Unlock
 _____________
 
-The following example show how to commit changes made in the ``dev_001`` locked device from the ``demo`` ADOM:
+The following example shows how to unlock the locked ``dev_001`` device from 
+the ``demo`` ADOM:
 
 .. tab-set:: 
    
@@ -1056,7 +1248,7 @@ The following example show how to commit changes made in the ``dev_001`` locked 
            "method": "exec",
            "params": [
              {
-               "url": "/dvmdb/adom/demo/workspace/commit/dev/dev_001"
+               "url": "/dvmdb/adom/demo/workspace/unlock/dev/dev_001"
              }
            ],
            "session": "{{session}}"
@@ -1074,10 +1266,283 @@ The following example show how to commit changes made in the ``dev_001`` locked 
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/dvmdb/adom/demo/workspace/commit/dev/dev_001"
+               "url": "/dvmdb/adom/demo/workspace/unlock/dev/dev_001"
              }
            ]
          }
+
+Policy Package Unlock
+_____________________
+
+The following example shows how to unlock the locked ``ppkg_001`` Policy 
+Package from the ``demo`` ADOM:
+
+.. tab-set:: 
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 12,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/unlock/pkg/ppkg_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 12,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/unlock/pkg/ppkg_001"
+             }
+           ]
+         }
+
+How to figure out there is a lock?
+++++++++++++++++++++++++++++++++++
+
+``lockinfo`` can be used to obtain information about an existing lock.
+
+ADOM lockinfo
+_____________
+
+When ADOM isn't locked
+@@@@@@@@@@@@@@@@@@@@@@
+
+The following example shows how to get the lock details for the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ]
+         }
+
+      .. note::
+
+         - When the ADOM isn't locked, nothing special is returned
+
+When ADOM is locked
+@@@@@@@@@@@@@@@@@@@
+
+The following example shows how to get the lock details for the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "adom_dirty": 0,
+                   "db_mode": 1,
+                   "dev_oid": 399,
+                   "dirty": 0,
+                   "flags": 0,
+                   "lock_sid": 37154,
+                   "lock_time": 1714077048,
+                   "lock_user": "devops",
+                   "obj_cat": 0,
+                   "obj_oid": 0,
+                   "obj_url": "",
+                   "type": 1,
+                   "wfsid": 0
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ]
+         }
+      .. note::
+
+         - When the ADOM is locked, FortiManager returns multiple information 
+           like the owner of the lock (``lock_user``) and the lock time 
+           (``lock_time``)
+
+Policy Package lockinfo
+_______________________
+
+When Policy Package isn't locked
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+The following example shows how to get the lock details for the ``ppkg_001`` Policy Package in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ]
+         }
+
+      .. note::
+
+         - When the ADOM isn't locked, nothing special is returned
+
+When Policy Package is locked
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+The following example shows how to get the lock details for the ``ppkg_001`` Policy Package in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 5,
+           "method": "get",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lockinfo/pkg/ppkg_001"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+         
+         {
+           "id": 5,
+           "result": [
+             {
+               "data": [
+                 {
+                   "db_mode": 1,
+                   "dev_oid": 399,
+                   "dirty": 0,
+                   "flags": 0,
+                   "lock_sid": 39089,
+                   "lock_time": 1721802745,
+                   "lock_user": "devops",
+                   "obj_cat": 0,
+                   "obj_oid": 6079,
+                   "obj_url": "ppkg_001",
+                   "type": 2,
+                   "wfsid": 0
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/dc_emea/workspace/lockinfo/pkg/ppkg_001"
+             }
+           ]
+         }
+
+      .. note::
+
+         - When the Policy Package is locked, FortiManager returns multiple 
+           information like the owner of the lock (``lock_user``), the lock 
+           time (``lock_time``) and the locked resource (``obj_url``).
+
+         - The ``adom_dirty`` flag (see :ref:`ADOM lockinfo`) isn't visible, 
+           since you're getting the ``lockinfo`` for a Policy Package
+        
+         - However, the ``dirty`` attribute is visible - ``1`` means there are
+           pending changes in this Policy Package; ``0`` means there's no such 
+           pending changes.
+
+         - ``dev_oid`` is the ID of the ``demo`` ADOM
+         - ``obj_oid`` is the ID of the ``ppkg_001`` Policy Package
 
 Per-ADOM workspace mode
 +++++++++++++++++++++++
@@ -1136,205 +1601,6 @@ workspace mode enable or disable:
 
          - ``0`` means workspace mode is not enabled
          - ``1`` means workspace mode is enabled      
-
-Unlocking
-+++++++++
-
-ADOM Unlock
-___________
-
-.. warning::
-
-   - If you unlock without a ``commit`` operation then unsaved changes will be 
-     lost
-
-   - See :ref:`ADOM Commit`
-
-The following example shows how to unlock the ``demo`` ADOM:
-
-.. tab-set:: 
-
-   .. tab-item:: REQUEST
-
-      .. code-block::
-
-         {
-           "id": 1,
-           "method": "exec",
-           "params": [
-             {
-               "url": "/dvmdb/adom/demo/workspace/unlock"
-             }
-           ],
-           "session": "{{session}}"
-         }
-
-   .. tab-item:: RESPONSE
-
-      .. code-block::
-
-         {
-           "id": 1,
-           "result": [
-             {
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "/dvmdb/adom/demo/workspace/unlock"
-             }
-           ]
-         }  
-
-Device Unlock
-_____________
-
-The following example show how to unlock the ``dev_001`` locked device from the ``demo`` ADOM:
-
-.. tab-set:: 
-   
-   .. tab-item:: REQUEST
-
-      .. code-block:: json
-      
-         {
-           "id": 1,
-           "method": "exec",
-           "params": [
-             {
-               "url": "/dvmdb/adom/demo/workspace/unlock/dev/dev_001"
-             }
-           ],
-           "session": "{{session}}"
-         }
-      
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-      
-         {
-           "id": 1,
-           "result": [
-             {
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "/dvmdb/adom/demo/workspace/unlock/dev/dev_001"
-             }
-           ]
-         }
-
-How to figure out there's a lock?
-+++++++++++++++++++++++++++++++++
-
-``lockinfo`` can be used to obtain information about an existing lock.
-
-When ADOM isn't locked
-______________________
-
-The following example shows how to get the lock details for the ``demo`` ADOM:
-
-.. tab-set::
-
-   .. tab-item:: REQUEST
-
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "method": "get",
-           "params": [
-             {
-               "url": "/dvmdb/adom/demo/workspace/lockinfo"
-             }
-           ],
-           "session": "{{session}}",
-           "verbose": 1
-         }
-
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "result": [
-             {
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "/dvmdb/adom/demo/workspace/lockinfo"
-             }
-           ]
-         }
-
-      .. note::
-
-         - When the ADOM isn't lock, nothing special is returned
-
-When ADOM is locked
-___________________
-
-The following example shows how to get the lock details for the ``demo`` ADOM:
-
-.. tab-set::
-
-   .. tab-item:: REQUEST
-
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "method": "get",
-           "params": [
-             {
-               "url": "/dvmdb/adom/demo/workspace/lockinfo"
-             }
-           ],
-           "session": "{{session}}",
-           "verbose": 1
-         }
-
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "result": [
-             {
-               "data": [
-                 {
-                   "adom_dirty": 0,
-                   "db_mode": 1,
-                   "dev_oid": 165,
-                   "dirty": 0,
-                   "flags": 0,
-                   "lock_sid": 37154,
-                   "lock_time": 1714077048,
-                   "lock_user": "admin",
-                   "obj_cat": 0,
-                   "obj_oid": 0,
-                   "obj_url": "",
-                   "type": 1,
-                   "wfsid": 0
-                 }
-               ],
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "/dvmdb/adom/demo/workspace/lockinfo"
-             }
-           ]
-         }
-      .. note::
-
-         - When the ADOM is locked, FortiManager returns multiple information 
-           like the owner of the lock (``lock_user``) and the lock time 
-           (``lock_time``)
 
 Workflow mode
 -------------
