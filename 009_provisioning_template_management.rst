@@ -2977,8 +2977,7 @@ FortiExtender
 How to add a Model FortiExtender?
 +++++++++++++++++++++++++++++++++
 
-To add a new Model FortiExtender in ``dev_002`` managed device in ``dc_Kl``
-ADOM:
+The following example shows how to add the ``fext_001`` Model FortiExtender in the ``dev_001`` managed device in the ``demo`` ADOM:
 
 .. tab-set::
 
@@ -2992,9 +2991,9 @@ ADOM:
            "params": [
              {
                "data": {
-                 "name": "fext_002",
-                 "ext-name": "fext_002",
-                 "id": "FX212F0000000002",
+                 "name": "fext_001",
+                 "ext-name": "fext_001",
+                 "id": "FX212F0000000001",
                  "extension-type": 1,
                  "profile": "fext_branches",
                  "_is_model": true,
@@ -3003,11 +3002,11 @@ ADOM:
                },
                "scope member": [
                  {
-                   "name": "dev_002",
+                   "name": "dev_001",
                    "vdom": "root"
                  }
                ],
-               "url": "pm/config/adom/dc_kl/obj/extension-controller/extender"
+               "url": "pm/config/adom/demo/obj/extension-controller/extender"
              }
            ],
            "session": "{{session}}"
@@ -3021,13 +3020,13 @@ ADOM:
            "result": [
              {
                "data": {
-                 "name": "fext_002"
+                 "name": "fext_001"
                },
                "status": {
                  "code": 0,
                  "message": "OK"
                },
-               "url": "pm/config/adom/dc_kl/obj/extension-controller/extender"
+               "url": "pm/config/adom/demo/obj/extension-controller/extender"
              }
            ],
            "id": "1"
@@ -3036,7 +3035,7 @@ ADOM:
 How to get the list of FortiExtender devices for one ADOM?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-To get the list of FortiExtender devices for one ADOM and its managed devices or device groups, you can use the following request:
+The following example shows how to get the managed FortiExtender devices from managed FortiGate devices or device groups:
 
 .. tab-set::
 
@@ -3049,7 +3048,7 @@ To get the list of FortiExtender devices for one ADOM and its managed devices or
              "method": "get",
              "params": [
                  {
-                     "url": "pm/config/adom/dc_amiens/obj/extension-controller/extender",
+                     "url": "pm/config/adom/demo/obj/extension-controller/extender",
                      "scope member": [
                          {
                              "name": "{device name}",
@@ -3067,7 +3066,7 @@ To get the list of FortiExtender devices for one ADOM and its managed devices or
          }
 
 To avoid passing specific ``scope member`` elements, you can use the 
-pre-defined ``All_FortiGate`` device group to get all the FortiExtender devices for the specifid ADOM:
+pre-defined ``All_FortiGate`` device group to get all the FortiExtender devices for the specified ADOM:
 
 .. tab-set:: 
 
@@ -3085,7 +3084,7 @@ pre-defined ``All_FortiGate`` device group to get all the FortiExtender devices 
                    "name": "All_FortiGate"
                  }
                ],
-               "url": "pm/config/adom/dc_amiens/obj/extension-controller/extender"
+               "url": "pm/config/adom/demo/obj/extension-controller/extender"
              }
            ],
            "session": "{session}",
