@@ -1506,43 +1506,120 @@ use the following ``clone`` operation:
 
          - The returned ``version`` is the version of the created ADOM Revision
 
+ADOM Upgrade
+------------
+
 How to upgrade an ADOM?
------------------------
++++++++++++++++++++++++
 
-From #0764328.
+Caught in #0764328.
 
-**REQUEST:**
+The following example shows how to upgrade the `demo` ADOM.
 
-.. code-block:: json
+.. tab-set::
 
-   {  
-     "id": 16,
-     "method": "exec",
-     "params": [
-       {
-         "url": "/pm/config/adom/ADOM_62_to_64/_upgrade"
-       }
-     ],
-     "session": "...",
-     "verbose": 1
-   }
+   .. tab-item:: REQUEST
 
-**RESPONSE:**   
+      .. code-block:: json
+      
+         {  
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_upgrade"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 16,
-     "result": [
-       {
-         "data": {
-           "task": 97
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/ADOM_62_to_64/_upgrade"
-       }
-     ]
-   }
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 97
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_upgrade"
+             }
+           ]
+         }
+
+      .. note::
+         
+         - The ADOM will be upgraded to its next supported Maintenance Release
+         - If ADOM version is 7.0, then it will be upgraded to 7.2
+         - If ADOM version is 7.2, then it will be upgraded to 7.4, etc.
+
+How to check whether an ADOM upgrade is ongoing?
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #1050287.
+
+The following example shows how to check whether the `root` and `demo` ADOMs are
+being ADOM upgraded:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "data": {
+                 "scope member": [
+                   {
+                     "name": "root"
+                   },
+                   {
+                     "name": "demo"
+                   }
+                 ]
+               },
+               "url": "/dvmdb/_upgrade"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "message": "no upgrade is being processed",
+                   "oid": 3,
+                   "status": 0
+                 },
+                 {
+                   "message": "no upgrade is being processed",
+                   "oid": 204,
+                   "status": 0
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/_upgrade"
+             }
+           ]
+         }            
