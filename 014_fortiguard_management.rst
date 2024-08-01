@@ -916,12 +916,12 @@ The following example shows how to get the contracts for the managed device with
    If you decompose the string value for the ``support_level_desc``, it reads 
    as follows:
    
-   - `05: Advanced HW`
-   - `06: Web Online`
-   - `10: 8x5`
-   - `20: Premium`
-   - `55: Premium service`
-   - `99: Trial`
+   - ``05: Advanced HW``
+   - ``06: Web Online``
+   - ``10: 8x5``
+   - ``20: Premium``
+   - ``55: Premium service``
+   - ``99: Trial``
   
    So ``99`` seems to be for *Trial*, for instance.
    
@@ -980,9 +980,9 @@ The following example shows how to get the contracts for the managed device with
    As you can observe from this output, you should have three expired trial for 
    this device:
    
-   - `"AVDB-1-[Trial]-20231027:0:1:1:0"`
-   - `"AVEN-1-[Trial]-20231027:0:1:1:0"`
-   - `"NIDS-1-[Trial]-20231027:0:1:1:0"`
+   - ``"AVDB-1-[Trial]-20231027:0:1:1:0"``
+   - ``"AVEN-1-[Trial]-20231027:0:1:1:0"``
+   - ``"NIDS-1-[Trial]-20231027:0:1:1:0"``
    
    It's easy to decode the expiry date: *October, 27th 2023*.
    
