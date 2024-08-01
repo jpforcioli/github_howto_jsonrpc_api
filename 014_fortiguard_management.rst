@@ -903,6 +903,93 @@ The following example shows how to get the contracts for the managed device with
            ]
          }            
 
+To interpret this output, you can refer to the following note (made with a different but similar output):
+
+.. note::
+  
+   If you look carefuly at the end of the response you're getting this:
+
+   .. code-block:: json
+
+      "support_level_desc": "05:Advanced HW*06:Web/Online*10:8x5*20:Premium*55:Premium service*99:Trial",
+
+   If you decompose the string value for the `support_level_desc`, it reads as 
+   follows:
+
+   - `05: Advanced HW`
+   - `06: Web Online`
+   - `10: 8x5`
+   - `20: Premium`
+   - `55: Premium service`
+   - `99: Trial`
+
+   So `99` seems to be for *Trial*.
+
+   Now, if you look at the output for the `FTSV04REDACTED5719` device:
+
+   .. code-block:: json
+
+      {
+        "account": "foo@bar.com",
+        "address": "10.150.10.160",
+        "company": "Fortinet UK Limited",
+        "contract_item": [
+          "ATTC-1-06-20241102:0:1:1:0",
+          "AVDB-1-99-20231027:0:1:1:0",
+          "AVEN-1-99-20231027:0:1:1:0",
+          "COMP-1-20-20241102:0:1:1:0",
+          "ENHN-1-20-20241102:0:1:1:0",
+          "FMWR-1-06-20241102:0:1:1:0",
+          "FRVS-1-06-20241102:0:1:1:0",
+          "FTMS-1-06-20241102:0:1:1:0",
+          "FTSS-1-55-20241102:0:1:1:0",
+          "NIDS-1-99-20231027:0:1:1:0",
+          "SPRT-1-20-20241102:0:1:1:0"
+        ],
+        "industry": "Technology",
+        "rawdata": "Contract=ATTC-1-06-20241102:0:1:1:0*AVDB-1-99-20231027:0:1:1:0*AVEN-1-99-20231027:0:1:1:0*COMP-1-20-20241102:0:1:1:0*ENHN-1-20-20241102:0:1:1:0*FMWR-1-06-20241102:0:1:1:0*FRVS-1-06-20241102:0:1:1:0*FTMS-1-06-20241102:0:1:1:0*FTSS-1-55-20241102:0:1:1:0*NIDS-1-99-20231027:0:1:1:0*SPRT-1-20-20241102:0:1:1:0|AccountID=foo@bar.com|Industry=Technology|Company=Fortinet UK Limited|UserID=123456",
+        "serial": "FTSV04REDACTED19"
+      }
+
+   You could replace it like this:
+
+   .. code-block:: json
+
+      {
+        "account": "foo@com.com",
+        "address": "10.150.10.160",
+        "company": "Fortinet UK Limited",
+        "contract_item": [
+          "ATTC-1-[Web Online]-20241102:0:1:1:0",
+          "AVDB-1-[Trial]-20231027:0:1:1:0",
+          "AVEN-1-[Trial]-20231027:0:1:1:0",
+          "COMP-1-[Premium]-20241102:0:1:1:0",
+          "ENHN-1-[Premium]-20241102:0:1:1:0",
+          "FMWR-1-[Web Online]-20241102:0:1:1:0",
+          "FRVS-1-[Web Online]-20241102:0:1:1:0",
+          "FTMS-1-[Web Online]-20241102:0:1:1:0",
+          "FTSS-1-[Premium service]-20241102:0:1:1:0",
+          "NIDS-1-[Trial]-20231027:0:1:1:0",
+          "SPRT-1-[Premium]-20241102:0:1:1:0"
+        ],
+        "industry": "Technology",
+        "rawdata": "Contract=ATTC-1-06-20241102:0:1:1:0*AVDB-1-99-20231027:0:1:1:0*AVEN-1-99-20231027:0:1:1:0*COMP-1-20-20241102:0:1:1:0*ENHN-1-20-20241102:0:1:1:0*FMWR-1-06-20241102:0:1:1:0*FRVS-1-06-20241102:0:1:1:0*FTMS-1-06-20241102:0:1:1:0*FTSS-1-55-20241102:0:1:1:0*NIDS-1-99-20231027:0:1:1:0*SPRT-1-20-20241102:0:1:1:0|AccountID=foo@bar.com|Industry=Technology|Company=Fortinet UK Limited|UserID=123456",
+        "serial": "FTSV04REDACTED19"
+      }
+
+   As you can observe from this output, you should have three expired trial for 
+   this device:
+
+   - `"AVDB-1-[Trial]-20231027:0:1:1:0"`
+   - `"AVEN-1-[Trial]-20231027:0:1:1:0"`
+   - `"NIDS-1-[Trial]-20231027:0:1:1:0"`
+
+   It's easy to decode the expiry date: October, 27th 2023.
+
+   And by the way, you can decode the 4-letter codes (for instance `ATTC` or 
+   `AVDB`) using the string values returned by the `support_type_desc` 
+   attribute.
+
 How to get the package versions for your managed devices?
 ---------------------------------------------------------
 
