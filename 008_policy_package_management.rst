@@ -3752,40 +3752,90 @@ But we can also force a specific ``policyid`` if required:
 How to insert a section title for a firewall policy?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**REQUEST**:
+The following example shows how to insert a section title for the firewall
+policy with ``policyid`` ``1`` in the ``ppkg_001`` Policy Package from the
+``demo`` ADOM:
 
-.. code-block:: json
+.. tab-set::
 
-   {
-     "id": 1,
-     "method": "set",
-     "params": [
-       {
-         "data": {
-           "name": "Project #001"
-         },
-         "url": "pm/config/adom/DEMO_014/pkg\/pp.device1/firewall/policy/4/section value"
-       }
-     ],
-     "session": 12841
-   }
-		
-**RESPONSE**:
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "name": "Project #001",
+                 "_global-label-color": 22
+               },
+               "url": "pm/config/adom/demo/pkg/ppkg_001/firewall/policy/1/section value"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "pm/config/adom/DEMO_014/pkg/pp.device1/firewall/policy/4/section value"
-       }
-     ]
-   }
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json		
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "pm/config/adom/demo/pkg/ppkg_001/firewall/policy/1/section value"
+             }
+           ]
+         }
+
+You can also use this more traditional method:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "_global-label-color": 22,
+                 "global-label": "Project #001"
+               },
+               "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy/1"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json		
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "policyid": 1
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy/1"
+             }
+           ]
+         }      
 
 How to get the section title of a policy?
 +++++++++++++++++++++++++++++++++++++++++
