@@ -1,6 +1,147 @@
 FortiManager operations
 =======================
 
+Certificates
+------------
+
+How to get certificates?
+++++++++++++++++++++++++
+
+You can get any of the following FMG API endpoints:
+
+.. code-block:: text
+
+   /cli/global/system/certificate/ca
+   /cli/global/system/certificate/local
+   /cli/global/system/certificate/crl
+   /cli/global/system/certificate/remote
+
+The following example shows how to get the ``Fortinet_CA`` CA certificate:
+
+.. tab-set::
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/cli/global/system/certificate/ca/Fortinet_CA"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "ca": [
+                   "\"-----BEGIN CERTIFICATE-----\nMIIKLDCCBhSgAwIBAgIBADANBgkqhkiG9w0BAQsFADCBpTELMAkGA1UEBhMCVVMx\nEzARBgNVBAgTCkNhbGlmb3JuaWExEjAQBgNVBAcTCVN1bm55dmFsZTERMA8GA1UE\nChMIRm9ydGluZXQxHjAcBgNVBAsTFUNlcnRpZmljYXRlIEF1dGhvcml0eTEVMBMG\nA1UEAxMMZm9ydGluZXQtY2EyMSMwIQYJKoZIhvcNAQkBFhRzdXBwb3J0QGZvcnRp\nbmV0LmNvbTAgFw0xNjA2MDYyMDI3MzlaGA8yMDU2MDUyNzIwMjczOVowgaUxCzAJ\nBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRIwEAYDVQQHEwlTdW5ueXZh\nbGUxETAPBgNVBAoTCEZvcnRpbmV0MR4wHAYDVQQLExVDZXJ0aWZpY2F0ZSBBdXRo\nb3JpdHkxFTATBgNVBAMTDGZvcnRpbmV0LWNhMjEjMCEGCSqGSIb3DQEJARYUc3Vw\ncG9ydEBmb3J0aW5ldC5jb20wggQiMA0GCSqGSIb3DQEBAQUAA4IEDwAwggQKAoIE\nAQC9YkiEs7iwMQVeJuZyV5hYi8RGwE5N8X8I8jLo1BI/r/HD/RbbtmPBkyWVgPpa\nRQnAgnupxy06qJcWNrinZBxZyqKJrqke2RIBstV3lfoevSP7pmjF2raDZqL7EaDG\nkvRzaLyei5pifzcBzpoY8TpBk6upDD2pjkU60MqgWY/0Eo7SsiTKAukWvEqK3mL0\nK05+UNcEYzboWi0tIMBgXIYgIDDmYvOqUbDnPFYRTZQ6eltSFWrU+TvR4wEhBcwg\nDxlFQHY02Ee9UxEav4Ej02KzdjDKq3ZKMHaczGLiam4N/5TwtLG5+7il2TZ309Uf\n4Tjr5aWvEKMvHNTI4/hLDd+DsUs43qf0yD8HQ4kzpkyEEzdfXxPjbt6UNX7Dlz2T\nDQXvcqESs27kRxcEQ3gmVeL3cyDC4R4G3DhyBQQxNi22rROOX5DRMNC0TIrLslld\nRBMZfDbSUOrLZobfuOE4bMDHGz7pzJWxqkfBI/GoO9G4ZMFxC5JYr2/3lzod5K4P\nlGRyWUJ9vax2JIeF5DM/UgfBdqhZetTXLKnKCOxT85cseAeYT335vlHNo/YVnYg5\nLFfCpqAJMJYjFz9EG6oOBXeT34GHwtXOxpaib1uYqM6REzhiqSRLvwYdlQtXM7Tn\nse4HqiYATflFv5ZUj4087YrG0ok6zjQaIleqbeLLciMpYIvUxcsrMM/BHPwZH/xE\nWx4uau7oTdeSZQOj9okUYWPCf2Id5f9aOpHoGbwn5Y7FvE+y1VmQNw46UpBYLFJO\nhWtE2ZCx2sIDbH6sfQnPTG2gUqDkATHdZv5gLnFVQ2PRdL0465WCnrjIZHdJ7Isy\nk/QfubQCWKnM4aPJmsxQl9I38BkxVAZk9Txgw0i/9HjD9FPO3b9K2+te0oifxPav\nHqGfLKsU6TQE0GAJvsq3cYhGrqRUeD3fUTsmFypXw51Pr/Ka7O29Zt1kVZkf65J4\n1xH+XxkTp594ffr47EP80j44jsILa8M66CBV9MpCYoNJSZz0Q6TZkSEfSnwO0Dek\nuPmRwuVEcR18iCzpdhkqAIc+kalZbTJTsCBbZ1QNPxyEAzmjPLGFbQ00fH2o1nnW\nik4V4vtPgUCjJYomroF4U6I9J3FAtTnwejTiLMd4NMdbTibQQcM6706VnKvR7Z11\nKMKDlCLEzoVaPnAItg1bVnsK6uwHDisAc1bfysTR7DRUPDI7b69CptrEqN+Gljnp\nfJT+rhus/0RjUFVd/Z+2tGeLUVB+SYqaZgrWHhklaB1TKE38u8i4o6/V8sbCCUrJ\nad/nWvVY4lNYsxTrZbeAv+BPRy9SJMp7fWownkx8anhis5uVbR/w/nmJZK8TJ8RZ\n7Z9v2duLk/T8vUOcpfAKnSS5AgMBAAGjYzBhMB0GA1UdDgQWBBSjMa+jSO6h4l+x\n8v3W+0FIUBs6dTAfBgNVHSMEGDAWgBSjMa+jSO6h4l+x8v3W+0FIUBs6dTAPBgNV\nHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBhjANBgkqhkiG9w0BAQsFAAOCBAEA\nPXG+lVec2WJGOZmb66q3isr/92spI8HvTUBp6nF8vbLmVgfWsctSKzF27+HhSkX1\nxPhdmoBHVFASwfgcqdrLdDBOqb8Nm07iVYElPdiufTq3NzI2wIS5m8egAagILGQ+\nV3IwGay67kUrH4MMwLqB3vR9YbNEAS/xq89RUZkPe9t5nvYm1WfXCkzLT3Poz8I8\n0nP+FZGkBEz+pg05/rPfujU0DwQsIqds5IQBzmd4TcQm12UVxkBM9z4NEAZiII5a\nKeo0vRbBnmaflBNUxeRaiPyLSncvlSNxUv5Q1rL4jUaDE4Ybqif1QQzB05jwLZbt\nzUB7vppn0VSEBwnbaWwcVAtcBExY8YwJEEuhhZ7beYjQQ7TE4Jf1mwHD28nPT+B0\n1DntS6+q+fIMG/4UzmF936sB8XicVGcscLmvGMtOoGTiCtXX9J1/E9+Qeb7Isu/W\njzQXXllgQTuK3F0K/M58eM4GjXSOY2KuLHclC+1jEusHKvXfwAYuIFLYm/mTlVAs\npqIRmg0ZFDhea6t1hu7U7G0JNMyPhS9DA7RpiTUUCbMJdAHGPIt9b+j/ggrI1t0N\n1EHpKvViulIoHxH/wtQUEAkEYXH9Y011KF9mqeXP6w1pz1j3QERzxqmmslWB7jO7\nKNcw0OjSlDQX5IkQ4py1IQj8jBuwzTZIuRSWnGDUZx6MeGd9JWcZeg/osMbBD2dc\nNiUg84Zc2sZbN2+ma1br/YjcFVRfjjWG8JRo3Y4WevLeClJJCTD/3zb9pd9imPhQ\npS3M5vqEHlO4V6RVmCyugEWamEkdAc6LRBxcvs0V1328JQ0X9edJjn0FTPoY788w\n2rY4akEPViJ9Ew2N3ZgG5ELxI5jrgd7AStdagwAj5ykIAHcQAPi2oz0ADl8YAgTM\n2yJj5GiEkADU8s3Cyhf6Qf6WPWWiRVmYtlCwXjp+bUl5Sgiy+dZaPv6GwXTKPsoc\n3vAHdh2/Md0Jtv8ZqM6RgBHTMrewkkh7u7kjGjCFKS1VVtZ4lhDRZbTOEKdjYbQe\nvGAieiYwArAFXBFyqMN6vQq8B/oZwmCPXuUL+y7vMvRsM8YXgy/vnJ6+B8NBwfEj\nI6PFB1wur2zO/42AUBhndEIRX/k4I07WbX+Rwn+zKfVuic2v9mVv2R9oc95qV4NQ\njvk1EYUQvZ+H4BYAX8CxhU/SmLfaZOi/ysV/WD5J1IxZCd5qLNkmLwiWyoFwcCzO\n18jp/3AG//GRZurh6xKUqylNUFGkTxHUI72lTDQKLBBYo0M16ij1JCZIz03Uno2A\nIhTNSJ8pkXDrWBXUcQb26GWPyeQ4jSXTSgqWuaXM0PsMEqVg3hbJhGa1p2wFXiHg\nx+nkkKoLQHPUczTwYRxQUQ==\n-----END CERTIFICATE-----\""
+                 ],
+                 "comment": "Default CA certificate",
+                 "name": "Fortinet_CA"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/cli/global/system/certificate/ca/Fortinet_CA"
+             }
+           ]
+         }
+
+How to get certificates in a human-readable form?
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+You can use the ``get certinfo`` option.
+
+The following example shows how to get the ``Fortinet_CA`` CA certificate in a human-readable form:
+
+.. tab-set::
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "option": [
+                 "get certinfo"
+               ],
+               "url": "/cli/global/system/certificate/ca/Fortinet_CA"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "ca": {
+                   "Extension": [
+                     {
+                       "Content": "A3:31:AF:A3:48:EE:A1:E2:5F:B1:F2:FD:D6:FB:41:48:50:1B:3A:75",
+                       "Critical": "no",
+                       "Name": "X509v3 Subject Key Identifier"
+                     },
+                     {
+                       "Content": "A3:31:AF:A3:48:EE:A1:E2:5F:B1:F2:FD:D6:FB:41:48:50:1B:3A:75",
+                       "Critical": "no",
+                       "Name": "X509v3 Authority Key Identifier"
+                     },
+                     {
+                       "Content": "CA:TRUE",
+                       "Critical": "yes",
+                       "Name": "X509v3 Basic Constraints"
+                     },
+                     {
+                       "Content": "Digital Signature, Certificate Sign, CRL Sign",
+                       "Critical": "yes",
+                       "Name": "X509v3 Key Usage"
+                     }
+                   ],
+                   "Fingerprint": "86:40:5C:F4:C2:A6:0B:96:82:9E:5F:E7:4F:D9:51:22",
+                   "Issuer": "C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, CN = fortinet-ca2, emailAddress = support@fortinet.com",
+                   "Root CA": "Yes",
+                   "SN": "00 ",
+                   "Status": 0,
+                   "Subject": "C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, CN = fortinet-ca2, emailAddress = support@fortinet.com",
+                   "Valid from": "2016-06-06 20:27:39  GMT",
+                   "Valid to": "2056-05-27 20:27:39  GMT",
+                   "Version": 3
+                 },
+                 "comment": "Default CA certificate",
+                 "name": "Fortinet_CA"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/cli/global/system/certificate/ca/Fortinet_CA"
+             }
+           ]
+         }
+
 How to get the FortiManager System HA Status?
 ---------------------------------------------
 
