@@ -5193,8 +5193,8 @@ To set the Device VDOM metafields for VDOM ``cust_002`` from device
      ]   
    }
 
-How to get default settings for a particular type of device?
-------------------------------------------------------------
+How to get default config for a particular type of device?
+----------------------------------------------------------
 
 Caught in #0613941, #0953698 and #1026855.
 
@@ -5209,11 +5209,11 @@ Few FMG JSON API URLs are given:
 
    - Note the distinction between global and per-vdom settings.
    - `devicetemplate` is like a temporary Device DB db that could be used to 
-     serve syntax for a specific FortiGate platform + version (definition from 
-     #1026855)
+     serve default config for a specific FortiGate platform + version 
+     (definition from #1026855)
 
 The following example shows another simpler example to get the ``system.
-global`` 6.2 syntax for the FortiGate-1000D platform:
+global`` default config for the FortiGate-1000D platform with 6.2 firmware:
 
 .. tab-set::
 
