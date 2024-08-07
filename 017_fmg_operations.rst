@@ -63,6 +63,8 @@ The following example shows how to get the ``Fortinet_CA`` CA certificate:
 How to get certificates in a human-readable form?
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
+Caught in #1031557.
+
 You can use the ``get certinfo`` option.
 
 The following example shows how to get the ``Fortinet_CA`` CA certificate in a human-readable form:

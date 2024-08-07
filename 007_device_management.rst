@@ -5196,64 +5196,69 @@ To set the Device VDOM metafields for VDOM ``cust_002`` from device
 How to get default settings for a particular type of device?
 ------------------------------------------------------------
 
-Caught in #0613941 & #0953698.
+Caught in #0613941, #0953698 and #1026855.
 
 Few FMG JSON API URLs are given:
 
 .. code-block::
 
-   "url": "pm/config/devicetemplate/FortiGate-1000D/version/600/mr/2/global/system/interface"
-   "url": "pm/config/devicetemplate/FortiGate-1000D/version/600/mr/2/vdom/root/firewall/address"
+   "url": "pm/config/devicetemplate/{platform}/version/{ver}/mr/{mr}/global/system/interface"
+   "url": "pm/config/devicetemplate/{platform}/version/{ver}/mr/{mr}/vdom/root/firewall/address"
 
 .. note::
 
-   Note the distinction between global and per-vdom settings.
+   - Note the distinction between global and per-vdom settings.
+   - `devicetemplate` is like a temporary Device DB db that could be used to 
+     serve syntax for a specific FortiGate platform + version (definition from 
+     #1026855)
 
-Another simpler example to get the ``system.global`` default settings:
+The following example shows another simpler example to get the ``system.
+global`` 6.2 syntax for the FortiGate-1000D platform:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-		{
-		  "id": 1,
-		  "jsonrpc": "1.0",
-		  "method": "get",
-		  "params": [
-		    {
-		      "url": "/pm/config/devicetemplate/FortiGate-1000D/version/600/mr/2/global/system/global"
-		    }
-		  ],
-		  "session": "96aYn/jiPj0YdYoJP6oKzgM5/ChcffAfCvX4q5A3nTpNGXJF33tOkXH8oeWQgmQuyFsZiZdMx3SSg7tDceYDTw==",
-		  "verbose": 1
-		}
+      .. code-block:: json
+      
+      		{
+      		  "id": 3,
+      		  "method": "get",
+      		  "params": [
+      		    {
+      		      "url": "/pm/config/devicetemplate/FortiGate-1000D/version/600/mr/2/global/system/global"
+      		    }
+      		  ],
+      		  "session": "{{session}}"
+      		  "verbose": 1,
+      		}
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: 
+      .. code-block:: json
 
-		{
-		  "id": 1,
-		  "result": [
-		    {
-		      "data": {
-		        "admin-concurrent": "enable",
-			      "admin-console-timeout": 0,
-			      "admin-hsts-max-age": 15552000,
-			      "admin-https-pki-required": "disable",
-			      "admin-https-redirect": "enable",
-      			"admin-https-ssl-versions": [
-			        "tlsv1-1",
-			        "tlsv1-2",
-			        "tlsv1-3"
-			      ],
-		        "admin-lockout-duration": 60,
-		        "admin-lockout-threshold": 3,
-		        "admin-login-max": 100,
-		        [...]
-		    }
-      ]
-		}
+      		{
+      		  "id": 3,
+      		  "result": [
+      		    {
+      		      "data": {
+      		        "admin-concurrent": "enable",
+      			      "admin-console-timeout": 0,
+      			      "admin-hsts-max-age": 15552000,
+      			      "admin-https-pki-required": "disable",
+      			      "admin-https-redirect": "enable",
+            			"admin-https-ssl-versions": [
+      			        "tlsv1-1",
+      			        "tlsv1-2",
+      			        "tlsv1-3"
+      			      ],
+      		        "admin-lockout-duration": 60,
+      		        "admin-lockout-threshold": 3,
+      		        "admin-login-max": 100,
+      		        [...]
+      		    }
+            ]
+      		}
 
 How to get the policy package status when getting list of devices?
 ------------------------------------------------------------------
