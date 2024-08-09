@@ -1399,6 +1399,68 @@ URL is:
 
    /pm/config/adom/<adom>/_devprof/import
 
+How to get the list of interface actions?
++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the list of interface actions in a the ``st_001`` in the ``demo`` ADOM:
+
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+     
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/devprof/st_001/device/template/widget/interface/action-list"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+     
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "action": "conf-intf",
+                   "dynamic_mapping": null,
+                   "model": "all",
+                   "oid": 18356,
+                   "seq": 1,
+                   "value": {
+                     "allowaccess": [
+                       "ping",
+                       "snmp",
+                       "http",
+                       "probe-response",
+                       "dnp",
+                       "ftm"
+                     ],
+                     "name": "$(ul_isp1)"
+                   },
+                   "var-list": null
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/devprof/st_001/device/template/widget/interface/action-list"
+             }
+           ]
+         }
+
 FortiAP Management
 ------------------
 
