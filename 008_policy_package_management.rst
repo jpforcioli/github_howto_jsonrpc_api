@@ -2949,10 +2949,10 @@ from the ``DEMO_014`` ADOM:
 How to where used a Policy Block?
 +++++++++++++++++++++++++++++++++
 
-This is for when you want to get the list of Policy Packages (and relative ``policyid`` the Policy Packages' firewall policies) referencing the given
+This is for when you want to get the list of Policy Packages (and relative ``policyid`` of the Policy Packages' firewall policies) referencing the given
 Policy Block.
 
-For instance, to where used the ``sites_HBLK`` Policy Block from the ``dc_emea``
+For instance, to where used the ``pblk_001`` Policy Block from the ``demo``
 ADOM:
 
 .. tab-set:: 
@@ -2969,7 +2969,7 @@ ADOM:
                "option": [
                  "where_used"
                ],
-               "url": "/pm/pblock/adom/dc_emea/sites_HBLK"
+               "url": "/pm/pblock/adom/demo/pblk_001"
              }
            ],
            "session": "{{session}}"
@@ -2984,7 +2984,7 @@ ADOM:
            "result": [
              {
                "data": {
-                 "name": "sites_HBLK",
+                 "name": "pblk_001",
                  "oid": 5276,
                  "package settings": {
                    "central-nat": 0,
@@ -3022,7 +3022,7 @@ ADOM:
                        }
                      ],
                      "root": {
-                       "name": "dc_emea",
+                       "name": "demo",
                        "oid": 165
                      }
                    }
@@ -3032,14 +3032,14 @@ ADOM:
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/pm/pblock/adom/dc_emea/sites_HBLK"
+               "url": "/pm/pblock/adom/demo/pblk_001"
              }
            ]
          }
 		  
       .. note::
 
-         - The response indicates that the `sites_HBLK` Policy Block is used in
+         - The response indicates that the `pblk_001` Policy Block is used in
            the ``ppkg_001`` and ``ppkg_002`` Policy Packages 
          - The relative ``policyid`` is given by the ``mkey`` attribute
          - It is ``110`` in the ``ppkg_001`` Policy Package and ``3`` in the

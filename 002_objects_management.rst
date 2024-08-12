@@ -2107,10 +2107,10 @@ service object:
      "method": "get",
      "params": [
        {
-         "url": "/pm/config/adom/root/_fdsdb/internet-service/city"
+         "url": "/pm/config/adom/demo/_fdsdb/internet-service/city"
        }
      ],
-     "session": "bRq2VA27Gi9fNaR3QpUn0yOhSiAqYDJwCvoz2GE3Mdiml2cBOfV7C/b4kCfMz5ObnBiM52DeJwUhnvGuLrNRzg==",
+     "session": "{{session}}",
      "verbose": 1
    }
 
@@ -2170,57 +2170,153 @@ service object:
 How to get the list of the Internet Service objects?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in #0622870.
+The following example shows how to get the list of Internet Service objects 
+from the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+      		{
+      		  "id": 3,
+      		  "method": "get",
+      		  "params": [
+      		    {
+      		      "url": "pm/config/adom/demo/_fdsdb/internet-service",
+      		    }
+      		  ],
+            "session": "{{session}}",
+            "verbose": 1
+      		}
+  
+   .. tab-item:: RESPONSE
 
-		{
-		  "id": "22a9fecf-7838-4795-a838-1633321197c2",
-		  "method": "get",
-		  "params": [
-		    {
-		      "url": "pm/config/adom/root/_fdsdb/internet-service",
-		      "option": [
-		        "get used",
-			"get flags",
-			"get devobj mapping",
-			"get meta",
-			"extra info",
-			"no loadsub",
-			"get reserved"
-		      ]
-		    }
-		  ]
-		}
+      .. code-block:: json
 
-and
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "database": 0,
+                   "direction": 2,
+                   "entry_count": 0,
+                   "fosver": 15,
+                   "icon-id": 0,
+                   "id": 65536,
+                   "name": "Google-Other",
+                   "objver": "00007.00026",
+                   "reputation": 0,
+                   "sld-id": 0
+                 },
+                 {
+                   "database": 0,
+                   "direction": 1,
+                   "entry_count": 0,
+                   "fosver": 15,
+                   "icon-id": 0,
+                   "id": 65537,
+                   "name": "Google-Web",
+                   "objver": "00007.00026",
+                   "reputation": 0,
+                   "sld-id": 0
+                 },
+                 {
+                   "database": 0,
+                   "direction": 1,
+                   "entry_count": 0,
+                   "fosver": 15,
+                   "icon-id": 0,
+                   "id": 65538,
+                   "name": "Google-ICMP",
+                   "objver": "00007.00026",
+                   "reputation": 0,
+                   "sld-id": 0
+                 },
+                 {
+                   "...": "..."
+                 },
+                 {
+                   "database": 0,
+                   "direction": 0,
+                   "entry_count": 0,
+                   "fosver": 15,
+                   "icon-id": 0,
+                   "id": 17760605,
+                   "name": "Ahrefs-AhrefsBot",
+                   "objver": "00007.03771",
+                   "reputation": 0,
+                   "sld-id": 0
+                 },
+                 {
+                   "database": 0,
+                   "direction": 0,
+                   "entry_count": 0,
+                   "fosver": 15,
+                   "icon-id": 0,
+                   "id": 17826142,
+                   "name": "Semrush-SemrushBot",
+                   "objver": "00007.03771",
+                   "reputation": 0,
+                   "sld-id": 0
+                 },
+                 {
+                   "database": 0,
+                   "direction": 1,
+                   "entry_count": 0,
+                   "fosver": 12,
+                   "icon-id": 0,
+                   "id": 17891679,
+                   "name": "Zero.Networks-Zero.Networks",
+                   "objver": "00007.03781",
+                   "reputation": 0,
+                   "sld-id": 0
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_fdsdb/internet-service",
+               "version": "7.3783"
+             }
+           ]
+         }        
 
-**REQUEST:**
+.. note::
 
-.. code-block:: json
+   - Following method is only working with old FortiManager 6.4.X
 
-		{
-		  "id": "99a913f3-0177-463c-b3ce-04eabf9c0100",
-		  "method": "get",
-		  "params": [
-		    {
-		      "url": "pm/config/adom/640/obj/firewall/internet-service-name",
-		      "option": [
-		        "get used",
-			"get flags",
-			"get devobj mapping",
-			"get meta",
-			"extra info",
-			"no loadsub"
-		      ]
-		    }
-		  ]
-		}
+     Caught in Mantis #0622870.
 
-But according to the #0622870, it is better to consider the method explained in
-section [TODO] (datasrc).
+     .. tab-set::
+
+        .. tab-item:: REQUEST
+
+           .. code-block:: json
+           
+           		{
+           		  "id": 3,
+           		  "method": "get",
+           		  "params": [
+           		    {
+           		      "url": "pm/config/adom/demo/obj/firewall/internet-service-name",
+           		      "option": [
+           		        "get used",
+           			      "get flags",
+           			      "get devobj mapping",
+           			      "get meta",
+           			      "extra info",
+           			      "no loadsub"
+           		      ]
+           		    }
+           		  ]
+           		}
+
+     But according to the #0622870, it is better to consider the ``datasrc``  method explained in section [TODO] (datasrc).
 
 Operations on objects
 ---------------------
