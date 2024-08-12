@@ -2223,8 +2223,8 @@ maintain several utilization information like the Last Used, First Use, Packets,
 
 Getting the hitcount details is an *on demand* action that requires two steps.
 
-For instance, to get the policy hitcount for firewall policies in the
-``ppkg_001`` Policy Package of the ``demo`` ADOM:
+The following example shows how to get the policy hitcount information for the
+firewall policies in the ``ppkg_001`` Policy Package of the ``demo`` ADOM:
 
 - **Step #1: Trigger the hitcount refresh**
 
@@ -2272,7 +2272,110 @@ For instance, to get the policy hitcount for firewall policies in the
          - You need to remember the returned ``taskid`` value for the next
            step 
 
-- **Step #2 - Collect the result**
+- **Step #2: Monitor the task!**
+
+  - As usual, when FortiManager returns a ``taskid``, you have to monitor the 
+    task and wait for its successfull completion
+
+    .. tab-set::
+
+       .. tab-item:: REQUEST
+
+          .. code-block:: json
+
+             {
+               "id": 7,
+               "method": "get",
+               "params": [
+                 {
+                   "url": "/task/task/217"
+                 }
+               ],
+               "session": "{{session}}",
+               "verbose": 1
+             }
+
+       .. tab-item:: RESPONSE
+
+          .. code-block:: json
+
+             {
+               "id": 7,
+               "result": [
+                 {
+                   "data": {
+                     "adom": 32718,
+                     "end_tm": 1723443374,
+                     "flags": 0,
+                     "id": 1496,
+                     "line": [
+                       {
+                         "detail": "update adom hitcount succeed",
+                         "end_tm": 1723443374,
+                         "err": 0,
+                         "history": [
+                           {
+                             "detail": "2024-08-12 08:16:06:",
+                             "name": "retrieve hitcount for adom/package (demo/ppkg_001)",
+                             "percent": 0,
+                             "state": 0,
+                             "vdom": null
+                           },
+                           {
+                             "detail": "2024-08-12 08:16:08:start to update adom hitcount",
+                             "name": "retrieve hitcount for adom/package (demo/ppkg_001)",
+                             "percent": 1,
+                             "state": 1,
+                             "vdom": null
+                           },
+                           {
+                             "detail": "2024-08-12 08:16:14:update adom hitcount in progress",
+                             "name": "retrieve hitcount for adom/package (demo/ppkg_001)",
+                             "percent": 90,
+                             "state": 1,
+                             "vdom": null
+                           },
+                           {
+                             "detail": "2024-08-12 08:16:14:update adom hitcount succeed",
+                             "name": "retrieve hitcount for adom/package (demo/ppkg_001)",
+                             "percent": 100,
+                             "state": 4,
+                             "vdom": null
+                           }
+                         ],
+                         "ip": "",
+                         "name": "retrieve hitcount for adom/package (demo/ppkg_001)",
+                         "oid": 0,
+                         "percent": 100,
+                         "poid": 0,
+                         "start_tm": 1723443366,
+                         "state": "done",
+                         "vdom": ""
+                       }
+                     ],
+                     "num_done": 1,
+                     "num_err": 0,
+                     "num_lines": 1,
+                     "num_warn": 0,
+                     "percent": 100,
+                     "pid": 0,
+                     "src": "device manager",
+                     "start_tm": 1723443366,
+                     "state": "done",
+                     "title": "get hitcount for policy package ppkg_001",
+                     "tot_percent": 100,
+                     "user": "devops"
+                   },
+                   "status": {
+                     "code": 0,
+                     "message": "OK"
+                   },
+                   "url": "/task/task/217"
+                 }
+               ]
+             }                                
+
+- **Step #3 - Collect the result**
 
   .. tab-set::
     
@@ -2374,11 +2477,35 @@ For instance, to get the policy hitcount for firewall policies in the
                    "code": 0,
                    "message": "OK"
                  },
-                 "taskid": 541,
+                 "taskid": 217,
                  "url": "/sys/task/result"
                }
              ]
            }
+
+        .. note::
+
+           - If you're getting the following response:
+
+             .. code-block:: json
+
+                {
+                  "id": 4,
+                  "result": [
+                    {
+                      "status": {
+                        "code": -10,
+                        "message": "The data is invalid for selected url"
+                      },
+                      "taskid": 217,
+                      "url": "/sys/task/result"
+                    }
+                  ]
+                }
+
+             then it probably means the task is still on-going.
+              
+           - Please proceed with step #2!
 
 Starting with FortiManager 7.4.1, the Last Used (i.e, ``_last_hit`` attribute) 
 can be maintained as it is in FortiManager side, even if it gets reset on the
