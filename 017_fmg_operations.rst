@@ -1,11 +1,11 @@
 FortiManager operations
 =======================
 
-Certificates
-------------
+FortiManager Certificates
+-------------------------
 
-How to get certificates?
-++++++++++++++++++++++++
+How to get FortiManager certificates?
++++++++++++++++++++++++++++++++++++++
 
 You can get any of the following FMG API endpoints:
 
@@ -60,8 +60,8 @@ The following example shows how to get the ``Fortinet_CA`` CA certificate:
            ]
          }
 
-How to get certificates in a human-readable form?
-+++++++++++++++++++++++++++++++++++++++++++++++++
+How to get FortiManager certificates in a human-readable form?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Caught in #1031557.
 

@@ -5255,7 +5255,7 @@ global`` default config for the FortiGate-1000D platform with 6.2 firmware:
       		        "admin-lockout-duration": 60,
       		        "admin-lockout-threshold": 3,
       		        "admin-login-max": 100,
-      		        [...]
+      		        "...": "..."
       		    }
             ]
       		}
