@@ -2864,4 +2864,44 @@ _______________
              }
            ],
            "id": "{{ session }}"
-         }         
+         }
+
+Task Management
+---------------
+
+How to delete a task?
++++++++++++++++++++++
+
+Deleting a task could be used to delete a completed task or cancelling/stopping a running task.
+
+The following example shows how to delete the ``11111`` task:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+              {
+                "url": "/task/task/11111"
+              }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "status": {
+             "code": 0,
+             "message": "OK"
+           },
+           "url": "/task/task/11111"
+         }            
+
