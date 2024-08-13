@@ -276,7 +276,225 @@ I'm in the ``dc_amer`` ADOM, but I want to clone the ``root`` ADOM to a new
              }
            ]
          }  
-  
+
+ADOM deletion
+-------------
+
+How to where used an ADOM?
+++++++++++++++++++++++++++
+
+You can delete an ADOM if it is having managed devices, device groups or is assigned with FortiManager administrators or Global objects and policy packages.
+
+The *where used* operation allows to identify all the objects referencing the 
+ADOM you want to delete.
+
+The following example shows how to where used the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/where used"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "cmdb": [
+                   {
+                     "attr": "adom",
+                     "category": 18,
+                     "last use": 1,
+                     "mapping_name": "system admin user",
+                     "mattr": "userid",
+                     "mkey": "admin_001"
+                   }
+                 ],
+                 "dvmdb": [
+                   {
+                     "attr": "object member",
+                     "category": 2,
+                     "last use": 0,
+                     "mapping_name": "device_group",
+                     "mattr": "name",
+                     "mkey": "dev_grp_001"
+                   },
+                   {
+                     "attr": "object member",
+                     "category": 2,
+                     "last use": 0,
+                     "mapping_name": "device_group",
+                     "mattr": "name",
+                     "mkey": "dev_grp_002"
+                   },
+                   {
+                     "attr": "object member",
+                     "category": 2,
+                     "last use": 0,
+                     "mapping_name": "device_group",
+                     "mattr": "name",
+                     "mkey": "dev_grp_003"
+                   },
+                   {
+                     "attr": "object member",
+                     "category": 0,
+                     "last use": 0,
+                     "mapping_name": "device",
+                     "mattr": "name",
+                     "mkey": "dev_001"
+                   },
+                   {
+                     "attr": "object member",
+                     "category": 0,
+                     "last use": 0,
+                     "mapping_name": "device",
+                     "mattr": "name",
+                     "mkey": "dev_002"
+                   },
+                   {
+                     "attr": "object member",
+                     "category": 0,
+                     "last use": 0,
+                     "mapping_name": "device",
+                     "mattr": "name",
+                     "mkey": "dev_003"
+                   }
+                 ],
+                 "provider": [
+                   {
+                     "attr": "assignment",
+                     "category": 0,
+                     "last use": 0,
+                     "mapping_name": "policy",
+                     "mattr": "name",
+                     "mkey": "g_ppkg_001"
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/where used"
+             }
+           ]
+         }
+
+      .. note::
+
+         - The ``demo`` ADOM is referenced by:
+
+           - The ``admin_001`` FortiManager administrator
+
+           - The ``dev_grp_001``, ``dev_grp_002`` and ``dev_grp_002`` device 
+             groups
+
+           - The ``dev_001``, ``dev_002`` and ``dev_003`` managed devices
+
+           - The ``g_ppkg_001`` Global Policy Package
+
+      .. warning::
+
+         - To delete this ADOM, you will need to, at least,  delete the 
+           ``dev_001``, ``dev_002`` and ``dev_003`` managed devices
+
+How to delete an ADOM?
+++++++++++++++++++++++
+
+Forced ADOM deletion
+____________________
+
+This applies when your ADOM is still referenced by objects, and you don't have time or inclination to remove those references. 
+
+Refer to the section :ref:`How to where used an ADOM?` to identify which objects are referencing your ADOM.
+
+To delete an ADOM, even using the forced method, you must first  delete its managed devices!
+
+Otherwise you'll receive a response like:
+
+.. tab-set::
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": -20063,
+                 "message": "Unable to delete because one or more devices in Device Manager"
+               },
+               "url": "/dvmdb/adom/demo"
+             }
+           ]
+         }
+
+The following example shows how to delete an ADOM using the forced method:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "confirm": 1,
+               "option": "force",
+               "url": "/dvmdb/adom/demo"
+             }
+           ],
+           "session": "{{session}}"
+         }
+         
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo"
+             }
+           ]
+         }    
+
+.. note::
+
+   - The forced deletion will:
+
+     - Delete FortiManager administrators referencing the deleted ADOM
+     - Will delete all device groups which were still within the deleted ADOM
+     - Will remove the ADOM from the Global Policy Packages's list of assigned 
+       ADOMs
+
 How to move a device/VDOM in a new ADOM?
 ----------------------------------------
 
