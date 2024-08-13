@@ -139,7 +139,6 @@ How to assign a metadata to devices?
 For a single device
 ___________________
 
-
 The following example shows how to add a per-device mapping to the ``md_001`` 
 metadata for the ``dev_001`` device in the ``demo`` ADOM; its value will be 
 ``1``.
@@ -767,275 +766,415 @@ The following example shows how to get all the metadata values for the ``dev_001
 How to get the value of a metadata for a specific device/vdom?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-We get the value of metadata ``site_id`` for device ``site_001`` and its global
-scope from ADOM ``root``:
+The following example shows how to get the value of the ``var_001`` metadata 
+for the ``dev_001`` mnanaged device and its global scope, from the ``demo`` 
+ADOM:
 
-**REQUEST:**
+.. tab-set:: 
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping/site_001/global"
-       }
-     ],
-     "session": "iQ+NZu8QXUBKYgM9xUrzqCoHKx3l5SpClqociYCkl/b8GQNN2x9YReV6BsmIMiqgJs3rLpyvNjcBzu021YPh7A==",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "_scope": [
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
              {
-               "name": "site_001",
-               "vdom": "global"
+               "url": "/pm/config/adom/demo/obj/fmg/variable/var_001/dynamic_mapping/dev_001/global"
              }
            ],
-           "oid": 3934,
-           "value": "1"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping/site_001/global"
-       }
-     ]
-   }
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-We get the value of metadata ``site_id`` for device ``site_002`` and its VDOM
-``root`` from ADOM ``root``:
+   .. tab-item:: RESPONSE
 
-**REQUEST:**
+      .. code-block:: json
 
-.. code-block:: json
-
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping/site_002/root"
-       }
-     ],
-     "session": "iQ+NZu8QXUDbEN3utJr/yA3FEKeC10AoEByuOehZ/eQhLjBl0boh2U9MCh8eI78aNTOIV+3SbjGXg+D0MkSgXQ==",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "_scope": [
+         {
+           "id": 3,
+           "result": [
              {
-               "name": "site_002",
-               "vdom": "root"
+               "data": {
+                 "_scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "global"
+                   }
+                 ],
+                 "oid": 3934,
+                 "value": "1"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/var_001/dynamic_mapping/dev_001/global"
+             }
+           ]
+         }
+
+The following example shows how to the value of the ``var_001`` metadata for the ``dev_002`` managed device and, this time, its ``root`` VDOM, from the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/fmg/variable/var_001/dynamic_mapping/dev_002/root"
              }
            ],
-           "oid": 3745,
-           "value": "2"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/obj/fmg/variable/site_id/dynamic_mapping/site_002/root"
-       }
-     ]
-   }   
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json      
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "_scope": [
+                   {
+                     "name": "dev_002",
+                     "vdom": "root"
+                   }
+                 ],
+                 "oid": 3745,
+                 "value": "2"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/var_001/dynamic_mapping/dev_002/root"
+             }
+           ]
+         }   
 
 How to set multiple metadatas for one device?
 +++++++++++++++++++++++++++++++++++++++++++++
 
 It is possible to use a single |fmg_api| request.
 
-The following example set the ``var_01`` and ``var_02`` metadata variables from
-the ``dc_amer`` ADOM for the ``dev_02`` managed device:
+The following example set the ``var_001`` and ``var_002`` metadata variables from the ``demo`` ADOM for the ``dev_001`` managed device:
 
-**REQUEST:**
+.. tab-set::
+   
+   .. tab-item:: REQUEST
 
-.. code-block:: json
-
-   {
-     "id": 3,
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "_scope": [
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
              {
-               "name": "dev_02",
-               "vdom": "global"
+               "data": {
+                 "_scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "global"
+                   }
+                 ],
+                 "value": "var_001_dev_001"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/var_001/dynamic_mapping"
+             },
+             {
+               "data": {
+                 "_scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "global"
+                   }
+                 ],
+                 "value": "var_002_dev_001"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/var_002/dynamic_mapping"
              }
            ],
-           "value": "var_01_dev_02"
-         },
-         "url": "/pm/config/adom/dc_amer/obj/fmg/variable/var_01/dynamic_mapping"
-       },
-       {
-         "data": {
-           "_scope": [
-             {
-               "name": "dev_02",
-               "vdom": "global"
-             }
-           ],
-           "value": "var_02_dev_02"
-         },
-         "url": "/pm/config/adom/dc_amer/obj/fmg/variable/var_02/dynamic_mapping"
-       }
-     ],
-     "session": "tVbqoJKblP/y6kd7B81wXl0qgg/40nzI5Rh4ggoUVaE8b0KT0+xw/gd3/MzcufezS749zd+L7MVIMQDxqNR/rg=="
-   }
+           "session": "{{session}}"
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "_scope": [
+         {
+           "id": 3,
+           "result": [
              {
-               "name": "dev_02",
-               "vdom": "global"
-             }
-           ]
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/dc_amer/obj/fmg/variable/var_01/dynamic_mapping"
-       },
-       {
-         "data": {
-           "_scope": [
+               "data": {
+                 "_scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "global"
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/var_001/dynamic_mapping"
+             },
              {
-               "name": "dev_02",
-               "vdom": "global"
+               "data": {
+                 "_scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "global"
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/var_002/dynamic_mapping"
              }
            ]
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/dc_amer/obj/fmg/variable/var_02/dynamic_mapping"
-       }
-     ]
-   }
-
-.. note::
-
-   - Of course, existing per-device mappings for the ``var_01`` and ``var_02``
-     metadata variables are preserved.
+         }
+      
+      .. note::
+      
+         - Of course, existing per-device mappings for the ``var_001`` and 
+           ``var_002`` metadata variables are preserved.
 
 How to assign a global metadata?
 ++++++++++++++++++++++++++++++++
 
 Global ADOM is having the global metadata ``g_hostname``.
 
-To assign it to ADOM ``root``, ``adom_70_001`` and ``adom_72_001``:
+The following example shows how to assign the `g_hostname` global metadata to the ``root``, ``adom_001`` and ``adom_002`` ADOMs:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "adom": "global",
-           "category": 3200,
-           "flags": "none",
-           "objs": [
-             "g_hostname"
-           ],
-           "scope": [
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
              {
-               "adom": "root"
-             },
-             {
-               "adom": "adom_70_001"
-             },
-             {
-               "adom": "adom_72_001"
+               "data": {
+                 "adom": "global",
+                 "category": 3200,
+                 "flags": "none",
+                 "objs": [
+                   "g_hostname"
+                 ],
+                 "scope": [
+                   {
+                     "adom": "root"
+                   },
+                   {
+                     "adom": "adom_001"
+                   },
+                   {
+                     "adom": "adom_002"
+                   }
+                 ],
+                 "target": [
+                   {
+                     "adom": "root"
+                   },
+                   {
+                     "adom": "adom_001"
+                   },
+                   {
+                     "adom": "adom_002"
+                   }
+                 ]
+               },
+               "url": "/securityconsole/assign/objs"
              }
            ],
-           "target": [
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         - The ``category`` attribute is the number of the table ``fmg 
+           variable``.
+
+         - You can get this number by issuing following command:
+
+           .. code-block:: text
+
+              execute fmpolicy print-adom-object Global ?
+
+           In the output, you will see this line:
+
+           .. code-block:: text
+
+              [...]
+              3200	"fmg variable"
+              [...]
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+  
+         {
+           "id": 3,
+           "result": [
              {
-               "adom": "root"
-             },
-             {
-               "adom": "adom_70_001"
-             },
-             {
-               "adom": "adom_72_001"
+               "data": {
+                 "task": 54
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/assign/objs"
              }
            ]
-         },
-         "url": "/securityconsole/assign/objs"
-       }
-     ],
-     "session": "tshDOEgzpF26vjcMeyDha3MSpwg570lSrbKirRk1wkdLIToAZOgkWOw6xlIhawjUoMKkOZNAS49AQqiRWMzdtyZHSQg1POJs"
-   }
+         }
 
-where ``category`` is the number of the table ``fmg variable``.
+How to Export/Import metadatas?
++++++++++++++++++++++++++++++++
 
-You can get this number by issuing following command:
+The FortiManager GUI allows you to export and import metadatas in either CSV or 
+JSON format.
+
+However, the CSV export/import process still relies on JSON format:
+
+- During CSV export, FortiManager first generates the data in JSON format, then 
+  it converts it to CSV before saving the file to your disk
+
+- During CSV import, FortiManager reads your CSV file, converts it to JSON 
+  format, and then adds the metadatas to the ADOM database
+
+Direct CSV export/import cannot be performed via the FortiManager API. You will need to handle the conversion between CSV and JSON formats manually for both the export and import operations.
+
+In the two next sections, you will export/import the following CSV file:
 
 .. code-block:: text
 
-   execute fmpolicy print-adom-object Global ?
+   variable_name,default_value,description,device,VDOM,mapped_value
+   var_001,1,Variable #001,dev_001,,1_1
+   var_001,1,Variable #001,dev_002,root,1_2
+   var_002,2,Variable #002,,,
 
-In the output, you will see this line:
+Where in the case of the import operation:
 
-.. code-block:: text
+- Metadata ``var_001`` will be created with ``1`` as default value and will 
+  have two per-device mappings:
 
-   [...]
-   3200	"fmg variable"
-   [...]
+- `1_1` value will be set to the *global* scope of the ``dev_001`` device 
+  because the ``vdom`` value is empty
 
+- However, `1_2` value will be set to the ``root`` VDOM of the ``dev_002`` 
+  device
 
-**RESPONSE:**
+- Metadata ``var_002`` will be created with ``2`` as default value
 
-.. code-block:: json
-  
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "task": 54
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/securityconsole/assign/objs"
-       }
-     ]
-   }
+Export
+______
+
+The following example shows how to export in JSON format all your metadatas for the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_fmgvar/export"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "data": "{ \"adom\": \"demo\", \"variables\": [ { \"name\": \"var_001\", \"description\": \"Variable #001\", \"value\": \"1\", \"mapping\": [ { \"device\": \"dev_001\", \"vdom\": \"\", \"value\": \"1_1\" }, { \"device\": \"dev_002\", \"vdom\": \"root\", \"value\": \"1_2\" } ] }, { \"name\": \"var_002\", \"description\": \"Variable #002\", \"value\": \"2\" } ] }"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_fmgvar/export"
+             }
+           ]
+         }
+
+      .. note::
+
+         - the returned ``data`` attribute (the second one) is a 
+           string!
+
+Import
+______
+
+Caught in #1032303.
+
+The following example shows how to import metadatas in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json    
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": "{'adom': 'dc_jani', 'variables': [{'name': 'var_001', 'description': 'Variable #001', 'value': '1', 'mapping': [{'value': '1_1', 'device': 'dev_001', 'vdom': ''}, {'value': '1_2', 'device': 'dev_002', 'vdom': 'root'}]}, {'name': 'var_002', 'description': 'Variable #002', 'value': '2'}]}",
+               "url": "/pm/config/adom/demo/_fmgvar/import"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         - the ``data`` attribute has to be a string!
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_fmgvar/import"
+             }
+           ]
+         }
 
 Firewall Address
 ----------------
