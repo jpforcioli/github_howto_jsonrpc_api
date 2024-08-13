@@ -2444,6 +2444,405 @@ below:
          - Value ``0`` for the ``status`` attribute correspond to the green 
            status
 
+Global IPS sensor
++++++++++++++++++
+
+The Global IPS Sensor allows you to create baseline IPS sensors composed of header and footer IPS rules.
+
+In the FortiManager GUI, you can find it under *Policy & Objects* > Header/Footer IPS.
+
+.. note::
+
+   - The Global IPS sensor defining header/footer IPS rules has nothing to do 
+     with the normal Global IPS sensor that you can find under *Policy & 
+     Objects* > *Security Profile* > *Intrusion Prevention*
+
+How to create a Global IPS sensor
+_________________________________
+
+The following example shows how to add the ``g_ips_sensor_001`` Global IPS sensor made of one header and one footer rules in the Global ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         { 
+           "id": 3,
+           "method": "add", 
+           "params": [
+             { 
+               "data": { 
+                 "block-malicious-url": 0, 
+                 "entries": [
+                   { 
+                     "action": 5, 
+                     "application": ["all"], 
+                     "default-action": 34, 
+                     "default-status": 34, 
+                     "exempt-ip": [], 
+                     "last-modified": null, 
+                     "location": ["all"], 
+                     "log": true, 
+                     "log-attack-context": 0, 
+                     "log-packet": 0, 
+                     "os": ["all"], 
+                     "position": "header",
+                     "protocol": ["all"], 
+                     "quarantine": 0, 
+                     "quarantine-expiry": "5m", 
+                     "quarantine-log": 1, 
+                     "rate-count": 0, 
+                     "rate-duration": 60, 
+                     "rate-mode": 9, 
+                     "rate-track": 0, 
+                     "severity": ["all"], 
+                     "status": 3
+                   }, 
+                   { 
+                     "action": 5, 
+                     "application": ["all"], 
+                     "default-action": 34, 
+                     "default-status": 34, 
+                     "exempt-ip": [], 
+                     "last-modified": null,
+                     "location": ["all"], 
+                     "log": true, 
+                     "log-attack-context": 0, 
+                     "log-packet": 0, 
+                     "os": ["all"], 
+                     "position": "footer", 
+                     "protocol": ["all"], 
+                     "quarantine": 0, 
+                     "quarantine-expiry": "5m", 
+                     "quarantine-log": 1, 
+                     "rate-count": 0, 
+                     "rate-duration": 60, 
+                     "rate-mode": 9, 
+                     "rate-track": 0, 
+                     "severity": ["all"], 
+                     "status": 3
+                   }
+                 ], 
+                 "extended-log": 0, 
+                 "name": "g_ips_sensor_001",
+                 "scan-botnet-connections": 0
+               }, 
+               "url": "/pm/config/global/obj/global/ips/sensor"
+             }
+           ], 
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         - The ``entries`` attribute contains the IPS header and footer rules
+         - The ``position`` attribute determines whether the IPS rule is in the 
+           header (value is ``header``) of footer (``footer``) rule block
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         { 
+           "id": 3,
+           "data": { 
+             "name": "g_ips_sensor_001"
+           }, 
+           "status": { 
+             "code": 0, 
+             "message": "OK"
+           }, 
+           "url": "/pm/config/global/obj/global/ips/sensor"
+         }
+
+How to delete a Global IPS sensor?
+__________________________________
+
+The following example shows how to delete the ``g_ips_sensor_001`` Global IPS 
+sensor from the Global ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/config/global/obj/global/ips/sensor/g_ips_sensor_001",
+             }
+           ]
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "data": null,
+           "id": 3,
+           "status": {
+             "code": 0,
+             "message": "OK"
+           },
+           "url": "/pm/config/global/obj/global/ips/sensor/g_ips_sensor_001"
+         }
+
+How to add ADOMs to a Global IPS sensor?
+________________________________________
+
+The following example shows how to add the ``demo_001`` and ``demo_002`` to the 
+``g_ips_sensor_001`` Global IPS sensor in the Global ADOM:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "demo_001"
+                 },
+                 {
+                   "name": "demo_002"
+                 }
+               ],
+               "url": "/pm/config/global/obj/global/ips/sensor/g_ips_sensor_001/scope member"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/global/obj/global/ips/sensor/g_ips_sensor_001/scope member"
+             }
+           ]
+         }
+
+How to delete ADOMs from a Global IPS sensor?
+_____________________________________________
+
+The following example shows how to delete the ``demo_001`` and ``demo_002`` 
+from the ``g_ips_sensor_001`` Global IPS sensor in the Global ADOM:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "demo_001"
+                 },
+                 {
+                   "name": "demo_002"
+                 }
+               ],
+               "url": "/pm/config/global/obj/global/ips/sensor/g_ips_sensor_001/scope member"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/global/obj/global/ips/sensor/g_ips_sensor_001/scope member"
+             }
+           ]
+         }
+
+How to assign a Global IPS sensor?
+__________________________________
+
+The following example shows how to assign the ``g_ips_sensor_001`` Global IPS sensor to the ``demo_001`` and ``demo_002`` ADOMs:
+
+.. tab-set::
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "global",
+                 "category": 1908,
+                 "flags": "none",
+                 "objs": [
+                   "g_ips_sensor_001"
+                 ],
+                 "target": [
+                   {
+                     "adom": "demo_001"
+                   },
+                   {
+                     "adom": "demo_002"
+                   }
+                 ]
+               },
+               "url": "/securityconsole/assign/objs"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         - The ``category`` attribute is the number of the table ``global ips 
+           sensor``
+
+         - You can get this number by issuing following command:
+
+           .. code-block:: text
+
+              execute fmpolicy print-adom-object Global ?
+
+           In the output, you will see this line:
+
+           .. code-block:: text
+
+              [...]
+              1908	"global ips sensor"
+              [...]         
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 1558
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/assign/objs"
+             }
+           ]
+         }
+
+How to unassign a Global IPS sensor?
+____________________________________
+
+The following example shows how to unassign the ``g_ips_sensor_001`` Global IPS sensor from the ``demo_001`` and ``demo_002`` ADOMs:
+
+.. tab-set::
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "global",
+                 "category": 1908,
+                 "flags": "unassign",
+                 "objs": [
+                   "g_ips_sensor_001"
+                 ],
+                 "target": [
+                   {
+                     "adom": "demo_001"
+                   },
+                   {
+                     "adom": "demo_002"
+                   }
+                 ]
+               },
+               "url": "/securityconsole/assign/objs"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         - The ``category`` attribute is the number of the table ``global ips 
+           sensor``
+
+         - You can get this number by issuing following command:
+
+           .. code-block:: text
+
+              execute fmpolicy print-adom-object Global ?
+
+           In the output, you will see this line:
+
+           .. code-block:: text
+
+              [...]
+              1908	"global ips sensor"
+              [...]         
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 1562
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/assign/objs"
+             }
+           ]
+         }         
+
 Virtual Patching
 ----------------
 
