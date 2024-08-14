@@ -14,6 +14,8 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+import time
+
 
 # -- Project information -----------------------------------------------------
 
@@ -85,8 +87,8 @@ html_theme_options = {
     "navigation_with_keys": False,
 }
 
-version = "1.0_20230413_001"
-html_title = f"How to FortiManager API v{version}"
+version = time.ctime()
+html_title = f"How to FortiManager API - {version}"
 
 rst_prolog = """
 .. |bulb| unicode:: U+1F4A1
