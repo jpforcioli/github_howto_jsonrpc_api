@@ -2207,6 +2207,46 @@ This new IPS rule will be inserted after the IPS rule with ID ``1``:
            ]
          }        
 
+How to delete an IPS rule from an IPS sensor?
++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to delete the IPS rule with ID ``5`` from the
+``ips_sensor_001`` in the ``demo`` ADOM:
+
+.. tab-set:: 
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/ips/sensor/ips_sensor_001/entries/5"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/ips/sensor/ips_sensor_001/entries/5"
+             }
+           ]
+         }
+
 How to get list of IPS signatures?
 ++++++++++++++++++++++++++++++++++
 
