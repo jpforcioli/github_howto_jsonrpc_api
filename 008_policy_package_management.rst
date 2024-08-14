@@ -3707,11 +3707,10 @@ To insert a new firewall policy after the firewall policy with ``policyid``
 Using the ``before`` and ``after`` attributes
 _____________________________________________
 
-A new way of placing a new firewall policy has been observed.
+A new way of placing a firewall policy has been observed.
 
 It consists in adding attribute ``before`` or ``after`` placed outside of the 
 ``data`` block.
-
 
 To insert a new firewall policy before the firewall policy with ``policyid`` 
 ``3`` in the ``pp.001`` Policy Package from the ``DEMO`` ADOM:

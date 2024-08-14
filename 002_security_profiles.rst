@@ -2122,6 +2122,91 @@ IPS sensor in the ``demo`` ADOM:
            ]
          }
 
+How to insert an IPS rule in an IPS sensor?
++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to insert a new IPS rule in the
+``ips_sensor_001`` IPS sensor in the ``demo`` ADOM. 
+
+This new IPS rule will be inserted after the IPS rule with ID ``1``:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "action": "default",
+                 "application": [
+                   "all"
+                 ],
+                 "cve": [],
+                 "default-action": "all",
+                 "default-status": "all",
+                 "exempt-ip": null,
+                 "last-modified": [],
+                 "location": [
+                   "all"
+                 ],
+                 "log": "enable",
+                 "log-attack-context": "enable",
+                 "log-packet": "enable",
+                 "object position": [
+                   "after",
+                   "1"
+                 ],
+                 "os": [
+                   "all"
+                 ],
+                 "protocol": [
+                   "HTTP",
+                   "FTP"
+                 ],
+                 "quarantine": "none",
+                 "rule": [],
+                 "severity": [
+                   "high"
+                 ],
+                 "status": "default",
+                 "vuln-type": []
+               },
+               "url": "/pm/config/adom/demo/obj/ips/sensor/ips_sensor_001/entries"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         - ``object position`` mechanism seen in :ref:`How to insert a policy?`
+           is used to insert the new IPS rule
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "id": 6
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/ips/sensor/ips_sensor_001/entries"
+             }
+           ]
+         }        
+
 How to get list of IPS signatures?
 ++++++++++++++++++++++++++++++++++
 
