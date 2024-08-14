@@ -2039,66 +2039,94 @@ ____________________________________________
          }        
 
 
-IPS Profiles Management
------------------------
+IPS Sensors Management
+----------------------
 
-How to add an IPS signature in an IPS profile?
-++++++++++++++++++++++++++++++++++++++++++++++
+How to add an IPS rule in an IPS sensor?
+++++++++++++++++++++++++++++++++++++++++
 
-**REQUEST:**
+The following example shows how to add a new IPS rule in the ``ips_sensor_001``
+IPS sensor in the ``demo`` ADOM:
 
-.. code-block::
+.. tab-set::
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "action": "default",
-           "exempt-ip": null,
-           "log": "enable",
-           "log-attack-context": "disable",
-           "log-packet": "disable",
-           "quarantine": "none",
-           "rate-count": 0,
-           "rule": [
-             "1002"
+   .. tab-item:: REQUEST
+
+      .. code-block::
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "action": "default",
+                 "application": [
+                   "all"
+                 ],
+                 "cve": [],
+                 "default-action": "all",
+                 "default-status": "all",
+                 "exempt-ip": null,
+                 "last-modified": [],
+                 "location": [
+                   "all"
+                 ],
+                 "log": "disable",
+                 "log-attack-context": "disable",
+                 "log-packet": "disable",
+                 "os": [
+                   "all"
+                 ],
+                 "protocol": [
+                   "all"
+                 ],
+                 "quarantine": "none",
+                 "rule": [],
+                 "severity": [
+                   "info"
+                 ],
+                 "status": "default",
+                 "vuln-type": []
+               },
+               "url": "/pm/config/adom/demo/obj/ips/sensor/ips_sensor_001/entries"
+             }
            ],
-           "status": "default"
-         },
-         "url": "/pm/config/adom/root/obj/ips/sensor/ips-sensor-001/entries"
-       }
-     ],
-     "session": "OTSxkSZMaLvhsyve32Gq+1mRMAuEA0FAzVxJL1OpzGIOtdPNPNwosmp7hvVD/u+QlkGn+Q5cGfotR4witaxC5Q==",
-     "verbose": 1
-   }
+           "session": "{{session}}"
+         }
 
-**RESPONSE:**
+      .. note::
 
-.. code-block::
+         - Using the ``add`` preserves the existing items in the ``entries`` 
+           sub-table
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "id": 2
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/obj/ips/sensor/ips-sensor-001/entries"
-       }
-     ]
-   }
-   
+         - New item is added at the end of the list of existing items
+
+   .. tab-item:: RESPONSE
+
+      .. code-block::
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "id": 3
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/ips/sensor/ips_sensor_001/entries"
+             }
+           ]
+         }
+
 How to get list of IPS signatures?
 ++++++++++++++++++++++++++++++++++
 
-The following example shows how to get the list of IPS signatures using the ``demo`` ADOM:
+The following example shows how to get the list of IPS signatures available in
+the ``demo`` ADOM:
 
 .. tab-set::
 
