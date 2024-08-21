@@ -2085,7 +2085,7 @@ This is useful for instance, when we want to get the FortiAP status.
          "url": "pm/config/adom/demo/obj/wireless-controller/wtp"
        }
      ],
-     "session": "8w0K16UkSdVqQvZXRoYCFu1FQG6PE04iLMDbZB7qUneIZSp1d16F4hQGrHxzkA7RnuhoM4/xVEkRzgZz6yKlVw==",
+     "session": "{{session}}",
      "verbose": 1
    }
 
@@ -2125,16 +2125,16 @@ VDOM).
 
 We can also use device groups:
 
-.. code-block::
+.. code-block:: json
 
    "scope member": [
-       {
-           "name": "device_group_01"
-       },
-       {
-           "name": "device_group_02"
-       }
-   }
+     {
+       "name": "device_group_01"
+     },
+     {
+       "name": "device_group_02"
+     }
+   ]
 
 We can specify the default all devices group:
 
@@ -2214,6 +2214,175 @@ How to rename a managed FAP?
        }
      ]
    }
+
+How to get FortiAP status?
+++++++++++++++++++++++++++
+
+Caught in #1058875.
+
+The following example shows how get the status for all of the FortiAP device
+controlled by the ``dev_001`` managed device and its ``root`` VDOM, in the
+``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+        
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "scope member": [
+                 {
+                   "name": "dev_001",
+                   "vdom": "root"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/_controller/status/fap"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         - The ``scope member`` attribute could also contains device groups,
+           just omit the ``vdom`` attribute
+
+         - For instance:
+
+           .. code-block:: json
+
+               "scope member": [
+                 {
+                   "name": "dev_grp_001"
+                 },
+                 {
+                   "name": "dev_grp_002"
+                 }
+               ]
+
+         - It could also be the ``All_FortiGate`` special device group if you
+           want the FortiAP status for all managed devices in the specified 
+           ADOM:
+
+           .. code-block:: json
+
+               "scope member": [
+                 {
+                   "name": "All_FortiGate"
+                 }
+               ]           
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "data": "{ \"wtp_id\": \"FP433G0000000001\", \"name\": \"fap_002\", \"wtp_mode\": \"normal\", \"location\": \"\", \"admin\": \"authorized\", \"connection_state\": \"Disconnected\", \"data_chan_sec\": \"clear-text\", \"mesh_mode\": \"ethernet\", \"client_count\": 0, \"mgmt_vdom\": \"root\", \"mgmt_vlanid\": 0, \"local_ip\": \"0.0.0.0\", \"board_mac\": \"00:00:00:00:00:00\", \"image_download_progress\": 0, \"mesh_hop_count\": 0, \"lldp_enable\": true, \"last_failure\": \"N\\/A\", \"last_failure_code\": 0, \"led_blink\": false, \"radio\": [ { \"mode\": \"AP\", \"country_name\": \"--\", \"country_code\": 0, \"client_count\": 0, \"base_bssid\": \"00:00:00:00:00:00\", \"max_vaps\": 8, \"oper_chan\": 0, \"oper_txpower\": 0, \"override_band\": false, \"override_channel\": false, \"override_txpower\": false, \"override_vaps\": false, \"radio_type\": \"unknown\", \"channel_utilization\": true, \"channel_utilization_percent\": 0, \"channel_utilization_timestamp\": 0, \"health\": { \"channel_utilization\": { \"severity\": \"good\", \"value\": 0 }, \"client_count\": { \"severity\": \"good\", \"value\": 0 }, \"infra_interfering_ssids\": { \"severity\": \"good\", \"value\": 0 }, \"interfering_ssids\": { \"severity\": \"good\", \"value\": 0 }, \"overall\": { \"severity\": \"good\", \"value\": 0 } }, \"detected_rogue_aps\": 0, \"detected_rogue_infra_aps\": 0, \"radio_id\": 1, \"vap-all\": \"tunnel\" }, { \"mode\": \"AP\", \"country_name\": \"--\", \"country_code\": 0, \"client_count\": 0, \"base_bssid\": \"00:00:00:00:00:00\", \"max_vaps\": 8, \"oper_chan\": 0, \"oper_txpower\": 0, \"override_band\": false, \"override_channel\": false, \"override_txpower\": false, \"override_vaps\": false, \"radio_type\": \"unknown\", \"channel_utilization\": true, \"channel_utilization_percent\": 0, \"channel_utilization_timestamp\": 0, \"health\": { \"channel_utilization\": { \"severity\": \"good\", \"value\": 0 }, \"client_count\": { \"severity\": \"good\", \"value\": 0 }, \"infra_interfering_ssids\": { \"severity\": \"good\", \"value\": 0 }, \"interfering_ssids\": { \"severity\": \"good\", \"value\": 0 }, \"overall\": { \"severity\": \"good\", \"value\": 0 } }, \"detected_rogue_aps\": 0, \"detected_rogue_infra_aps\": 0, \"radio_id\": 2, \"vap-all\": \"tunnel\" }, { \"mode\": \"AP\", \"country_name\": \"--\", \"country_code\": 0, \"client_count\": 0, \"base_bssid\": \"00:00:00:00:00:00\", \"max_vaps\": 8, \"oper_chan\": 0, \"oper_txpower\": 0, \"override_band\": false, \"override_channel\": false, \"override_txpower\": false, \"override_vaps\": false, \"radio_type\": \"unknown\", \"channel_utilization\": true, \"channel_utilization_percent\": 0, \"channel_utilization_timestamp\": 0, \"health\": { \"channel_utilization\": { \"severity\": \"good\", \"value\": 0 }, \"client_count\": { \"severity\": \"good\", \"value\": 0 }, \"infra_interfering_ssids\": { \"severity\": \"good\", \"value\": 0 }, \"interfering_ssids\": { \"severity\": \"good\", \"value\": 0 }, \"overall\": { \"severity\": \"good\", \"value\": 0 } }, \"detected_rogue_aps\": 0, \"detected_rogue_infra_aps\": 0, \"radio_id\": 3, \"vap-all\": \"tunnel\" }, { \"mode\": \"Virtual Lan AP\", \"radio_type\": \"unknown\", \"radio_id\": 4 }, { \"mode\": \"Not Exist\", \"radio_type\": \"unknown\", \"radio_id\": 5 } ] }",
+                   "dev": "dev_001",
+                   "sn": "FP433G0000000001",
+                   "type": "fap",
+                   "vdom": "root"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/_controller/status/fap"
+             }
+           ]
+         }
+
+      .. note::
+
+         - The returned ``data`` is a string!
+
+      .. note:: 
+      
+         - FortiManager isn't getting the real time status of the controlled
+           FortiAP using the FortiOS REST API; the data seems to come
+           immediately from the latest *FortiAP* polling made by FortiManager
+
+         - Should you want to trigger a refresh of the FortiAP status before,
+           just see section :ref:`How to refresh the FortiAP status?`
+
+How to refresh the FortiAP status?
+++++++++++++++++++++++++++++++++++     
+
+.. warning::
+
+   This API is depreciated or not published (hence not officially supported).
+
+The following example shows how to refresh the status of the FortiAP devices
+controlled by the device with OID ``35009`` in the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "ctype": "wtp",
+                 "device": [
+                   35009
+                 ],
+                 "options": [
+                   "savedb",
+                   "resync",
+                   "create-task"
+                 ],
+                 "resync": 1
+               },
+               "url": "/deployment/get/controller/status"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         - The ``device`` attribute is a list; it could contains multiple 
+           OIDs of managed devices
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 1609
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/deployment/get/controller/status"
+             }
+           ]
+         }
+
+The goal isn't to obtain the FortiAP status (see section :ref:`How to get
+FortiAP status?`).
+
+The goal is to get and save the FortiAP status *somewhere* in FortiManager to
+have the information available when needed.
 
 FortiSwitch Management
 ----------------------
