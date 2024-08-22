@@ -2563,6 +2563,27 @@ FortiManager backup could be trigger with this simple API:
 This is generating a non encrypted protected archive named
 ``fmg_backup_001.dat``.
 
+.. warning::
+
+   - Starting with FortiManager 7.0.11, 7.2.5 and 7.4.2 (#0959025), it is no 
+     longer possible to generate a non encrypted backup file.
+
+   - If you debug FortiManager using following command:
+
+     .. code-block:: text
+
+        diagnose debug service sys 255
+        diagnose debug enable
+
+     You should see the following error output:
+
+     .. code-block:: text
+        :emphasize-lines: 3
+
+        Request [/usr/local/apache2/bin/httpd:27987:30]: { "__from_rest": 1, "client": "\/usr\/local\/apache2\/bin\/httpd:27987", "id": 30, "method": "get", "params": [{ "target start": 1, "url": "\/sys\/backup"}], "session": "nJEOlg5gbzoTtHmxpeKGxww9bab06XRLGXWJd7UjRNmREC4zl2OJ326racvBw0Qo3dZFjRddWNBj0nRksTX6fQ==", "src": "172.26.128.5"}
+        Chkperm Response [/usr/local/apache2/bin/httpd:27987:30]: { "id": 30, "result": [{ "status": { "code": 0, "message": "OK"}, "url": "\/sys\/backup"}], "session": 2534}
+        Response [/usr/local/apache2/bin/httpd:27987:30]: { "id": 30, "result": { "status": { "code": -10, "message": "Backup password must be set"}}}
+
 Should you want to encrypt your backup file:
 
 .. code-block:: shell
@@ -2571,7 +2592,6 @@ Should you want to encrypt your backup file:
 
 In this case, resulting backup file ``fmg_backup_002.dat`` will be encrypted
 with password ``abc123``.
-
 
 Using FortiManager JSON RPC API
 _______________________________
@@ -2628,27 +2648,31 @@ The following example shows how to backup your FortiManager system to an externa
            FortiManger backup file, from the ``tmp`` folder of your
            ``10.210.35.207`` FTP server
 
+.. warning::
+
+   - Starting with FortiManager 7.0.11, 7.2.5 and 7.4.2 (#0959025), it is no 
+     longer possible to generate a non encrypted backup file.
+
 How to restore the FortiManager?
 ++++++++++++++++++++++++++++++++
 
 Using REST API to restore the FortiManager
 __________________________________________
 
-FMG/FAZ restore could be triggered with this one:
+FortiManager restore operation could be triggered:
 
-- With the non-encrypted file:
+- For the non-encrypted backup file:
 
   .. code-block:: shell
 
      curl --silent --user devops:fortinet --insecure --data-binary @fmg_backup_001.dat https://10.210.35.112/jsonrpc/sys/restore
 
-- With the encrypted backup file:
+- For the encrypted backup file:
 
   .. code-block:: shell
   
      curl --silent --user devops:fortinet --insecure --data-binary @fmg_backup_002.dat https://10.210.35.112/jsonrpc/sys/restore?passwd=abc123
      
-
 Using |fmg_api| to restore FortiManager
 _______________________________________
 
