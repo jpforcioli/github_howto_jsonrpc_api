@@ -2573,51 +2573,60 @@ In this case, resulting backup file ``fmg_backup_002.dat`` will be encrypted
 with password ``abc123``.
 
 
-Using |fmg_api|
-_______________
+Using FortiManager JSON RPC API
+_______________________________
 
-Starting with FortiManager 7.2.3 (#0875702).
+Starting with FortiManager 7.2.3 (#0875702), it is possible to use the
+FortiManager JSON RPC API to trigger a backup operation.
 
-To backup to an external FTP server; backup file will be encrypted:
+The following example shows how to backup your FortiManager system to an external FTP server; backup file will be encrypted:
 
-**REQUEST:**
+.. tab-set:: 
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "filename": "tmp/fmg_backup_3.dat",
-           "passwd": "fortinet",
-           "port": 21,
-           "server": "10.210.35.207",
-           "service": "ftp",
-           "username": "tiger",
-           "userpasswd": "fortinet"
-         },
-         "url": "/sys/backup"
-       }
-     ],
-     "session": "33dYaeEVQm7SljnJGTSGPTvbE+bPws/PTlvJdPMYcW44I4oU6ZDJlLDHzriAC2CG3yD5yem0FodxkBpPAvulxw=="
-   }
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "filename": "tmp/fmg_backup.dat",
+                 "passwd": "fortinet",
+                 "port": 21,
+                 "server": "10.210.35.207",
+                 "service": "ftp",
+                 "username": "tiger",
+                 "userpasswd": "fortinet"
+               },
+               "url": "/sys/backup"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json         
 
-   {
-     "id": 3,
-     "result": {
-       "status": {
-         "code": 0,
-         "message": "OK"
-       },
-       "taskid": 837
-     }
-   }
+         {
+           "id": 3,
+           "result": {
+             "status": {
+               "code": 0,
+               "message": "OK"
+             },
+             "taskid": 837
+           }
+         }
+
+      .. note::
+
+         - Once the task is completed, you can get your ``fmg_backup.dat`` 
+           FortiManger backup file, from the ``tmp`` folder of your
+           ``10.210.35.207`` FTP server
 
 How to restore the FortiManager?
 ++++++++++++++++++++++++++++++++
