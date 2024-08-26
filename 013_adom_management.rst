@@ -1841,3 +1841,2393 @@ being ADOM upgraded:
              }
            ]
          }            
+
+ADOM Workspace Mode
+-------------------
+
+Locking
++++++++
+
+ADOM Lock
+_________
+
+Following example is showing how to lock the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lock"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 1,                
+           "result": [
+             {                
+               "status": {
+                 "code": 0, 
+                 "message": "OK" 
+               },
+               "url": "/dvmdb/adom/demo/workspace/lock"
+             }
+           ]
+         }
+
+Policy Package Lock
+___________________
+
+The following example shows how to lock the ``ppkg_001`` Policy Package from the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lock/pkg/ppkg_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lock/pkg/ppkg_001"
+             }
+           ]
+         }
+
+Firewall Policy Lock
+____________________
+
+Following example is showing how to lock firewall policy with ``policyid`` ``1`` in the ``ppkg_001`` Policy Package from the ``demo`` ADOM:
+
+.. tab-set:: 
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+  
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lock/pkg/ppkg_001/firewall/policy/1"
+             }
+           ],   
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lock/pkg/ppkg_001/firewall/policy/1"
+             }
+           ]
+         }
+      
+Object Lock
+___________
+
+To lock an object, you need first to lock a Policy Package (see :ref:`Policy Package Lock`) or a firewall policy (see :ref:`Firewall Policy Lock`).
+
+The endpoint to lock an object is:
+
+.. code-block:: text
+
+   /dvmdb/adom/{adom}/workspace/obj/{path_to_the_object}
+
+where ``path_to_the_object`` is the usual path used to refer to objects.
+
+For instance:
+
+.. list-table::
+   :header-rows: 1
+   :widths: auto
+
+   * - To lock...
+     - ``path_to_the_object`` is
+
+   * - the ``host_001`` firewall address
+     - ``/firewall/address/host_001``
+
+   * - the ``grp_001`` firewall address
+     - ``/firewall/addrgrp/grp_001``
+
+   * - the ``tcp_8080`` TCP service
+     - ``/firewall/service/custom/tcp_8080``
+
+The following exemple shows how to lock the ``host_001`` firewall address from the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lock/obj/firewall/address/host_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lock/obj/firewall/address/host_001"
+             }
+           ]
+         }
+
+Device Lock
+___________
+
+Device lock has been introduced in #0544637 (FMG 6.0.5/6.2.0).
+
+The following example show how to tock the ``dev_001`` device from the ``demo`` ADOM:
+
+.. tab-set:: 
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lock/dev/dev_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lock/dev/dev_001"
+             }
+           ]
+         }
+
+Comitting changes
++++++++++++++++++
+
+ADOM Commit
+___________
+
+Before unlocking an ADOM, a Policy Package or a firewall policy, a *save* operation is required in order have all pending changes applied to the running 
+ADOM database.
+
+If you unlock without saving, all changes will be lost.
+
+To save changes made in the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block::
+
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/commit"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: 
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "taskid": 3332,
+               "url": "/dvmdb/adom/demo/workspace/commit"
+             }
+           ]
+         }
+
+Device commit
+_____________
+
+The following example shows how to commit changes made to the locked ``dev_001`` device from the ``demo`` ADOM:
+
+.. tab-set:: 
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/commit/dev/dev_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/commit/dev/dev_001"
+             }
+           ]
+         }
+
+Policy Package Commit
+_____________________
+
+The following example shows how to commit changes made to the locked ``ppkg_001`` Policy Package from the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 9,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/commit/pkg/ppkg_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 9,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/commit/pkg/ppkg_001"
+             }
+           ]
+         }
+
+How to detect unsaved changes?
+______________________________
+
+How do you know when a save operation is required?
+
+It is important to answer that question otherwise you may lose all of your unsaved changes when unlocking your resource.
+
+FortiManager is maintaining a ``dirty`` flag.
+
+When it is ``0``, it means there's no unsaved changes.
+
+When it is ``1``, it means it is required to trigger a save operation before 
+unlocking the ADOM.
+
+To understand the process, review the following complete sequence of operations
+performed in the ``demo`` ADOM:
+
+#. Lock the ADOM
+
+   .. tab-set::
+    
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+      
+            {
+              "id": 3,
+              "method": "exec",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/demo/workspace/lock"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "result": [
+                {
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/workspace/lock"
+                }
+              ]
+            }
+      
+#. Observe the ``dirty`` flag
+
+   .. tab-set::
+    
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+      
+            {
+              "id": 4,
+              "method": "get",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/demo/workspace/dirty"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json            
+
+            {
+              "id": 4,
+              "result": [
+                {
+                  "data": {
+                    "dirty": 0
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/workspace/dirty"
+                }
+              ]
+
+            }
+
+   This is expected: ``dirty`` flag is ``0`` since no change were done yet.
+
+#. Do a change
+
+   Modify the ``comment`` of an existing ``host_001`` firewall address in the  
+   ``demo`` ADOM:
+   
+   .. tab-set::
+    
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+      
+            {
+              "id": 5,
+              "method": "set",
+              "params": [
+                {
+                  "data": {
+                    "comment": "New comment #001"
+                  },
+                  "url": "/pm/config/adom/demo/obj/firewall/address/host_001"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 5,
+              "result": [
+                {
+                  "data": {
+                    "name": "host_001"
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/pm/config/adom/demo/obj/firewall/address/host_001"
+                }
+              ]
+            }
+      
+#. Observe the ``dirty`` flag
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+      
+            {
+              "id": 6,
+              "method": "get",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/dc_us/workspace/dirty"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json      
+
+            {
+              "id": 6,
+              "result": [
+                {
+                  "data": {
+                    "dirty": 1
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/workspace/dirty"
+                }
+              ]
+            }
+
+         Now the ``dirty`` flag is ``1``.
+
+         It indicates there are unsaved changes!
+
+   You could have use the ``lockinfo`` to observe the *dirty* status (see 
+   :ref:`How to figure out there is a lock?`).
+
+   For instance:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 6,
+              "method": "get",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/demo/workspace/lockinfo"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+            :emphasize-lines: 7,10
+
+            {
+              "id": 6,
+              "result": [
+                {
+                  "data": [
+                    {
+                      "adom_dirty": 1,
+                      "db_mode": 1,
+                      "dev_oid": 399,
+                      "dirty": 1,
+                      "flags": 1,
+                      "lock_sid": 31952,
+                      "lock_time": 1721801037,
+                      "lock_user": "devops",
+                      "obj_cat": 0,
+                      "obj_oid": 0,
+                      "obj_url": "",
+                      "type": 1,
+                      "wfsid": 0
+                    }
+                  ],
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/workspace/lockinfo"
+                }
+              ]
+            }
+   
+         You can see that the ``adom_dirty`` attribute is ``1``.
+
+         There's also another ``dirty`` flag with value ``1``.
+
+#. Save the change
+
+   .. tab-set::
+    
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+      
+            {
+              "id": 7,
+              "method": "exec",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/demo/workspace/commit"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 7,
+              "result": [
+                {
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/workspace/commit"
+                }
+              ]
+            }
+      
+#. Observe the ``dirty`` flag
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+      
+            {
+              "id": 8,
+              "method": "get",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/demo/workspace/dirty"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 8,
+              "result": [
+                {
+                  "data": {
+                    "dirty": 0
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/workspace/dirty"
+                }
+              ]
+            }
+
+   Changes were saved in previous operation step.
+
+   The ``dirty`` flag is back to ``0`` to indicate there's no unsaved change
+   anymore.
+
+#. Unlock the ADOM
+
+   See :ref:`ADOM Unlock`
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+      
+            {
+              "id": 9,
+              "method": "exec",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/demo/workspace/unlock"
+                }
+              ],
+              "session": "{{session}}"
+            }
+    
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 9,
+              "result": [
+                {
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/workspace/unlock"
+                }
+              ]
+            }
+
+   .. note:: 
+   
+      - You can only get the ``dirty`` flag of your own workspace session
+
+Unlocking
++++++++++
+
+ADOM Unlock
+___________
+
+.. warning::
+
+   - If you unlock without a ``commit`` operation then unsaved changes will be 
+     lost
+
+   - See :ref:`ADOM Commit`
+
+The following example shows how to unlock the locked ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block::
+
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/unlock"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block::
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/unlock"
+             }
+           ]
+         }  
+
+Device Unlock
+_____________
+
+The following example shows how to unlock the locked ``dev_001`` device from 
+the ``demo`` ADOM:
+
+.. tab-set:: 
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/unlock/dev/dev_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/unlock/dev/dev_001"
+             }
+           ]
+         }
+
+Policy Package Unlock
+_____________________
+
+The following example shows how to unlock the locked ``ppkg_001`` Policy 
+Package from the ``demo`` ADOM:
+
+.. tab-set:: 
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 12,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/unlock/pkg/ppkg_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 12,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/unlock/pkg/ppkg_001"
+             }
+           ]
+         }
+
+How to figure out there is a lock?
+++++++++++++++++++++++++++++++++++
+
+``lockinfo`` can be used to obtain information about an existing lock.
+
+ADOM lockinfo
+_____________
+
+When ADOM isn't locked
+@@@@@@@@@@@@@@@@@@@@@@
+
+The following example shows how to get the lock details for the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ]
+         }
+
+      .. note::
+
+         - When the ADOM isn't locked, nothing special is returned
+
+When ADOM is locked
+@@@@@@@@@@@@@@@@@@@
+
+The following example shows how to get the lock details for the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "adom_dirty": 0,
+                   "db_mode": 1,
+                   "dev_oid": 399,
+                   "dirty": 0,
+                   "flags": 0,
+                   "lock_sid": 37154,
+                   "lock_time": 1714077048,
+                   "lock_user": "devops",
+                   "obj_cat": 0,
+                   "obj_oid": 0,
+                   "obj_url": "",
+                   "type": 1,
+                   "wfsid": 0
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ]
+         }
+      .. note::
+
+         - When the ADOM is locked, FortiManager returns multiple information 
+           like the owner of the lock (``lock_user``) and the lock time 
+           (``lock_time``)
+
+Policy Package lockinfo
+_______________________
+
+When Policy Package isn't locked
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+The following example shows how to get the lock details for the ``ppkg_001`` Policy Package in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lockinfo"
+             }
+           ]
+         }
+
+      .. note::
+
+         - When the ADOM isn't locked, nothing special is returned
+
+When Policy Package is locked
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+The following example shows how to get the lock details for the ``ppkg_001`` Policy Package in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 5,
+           "method": "get",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lockinfo/pkg/ppkg_001"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+         
+         {
+           "id": 5,
+           "result": [
+             {
+               "data": [
+                 {
+                   "db_mode": 1,
+                   "dev_oid": 399,
+                   "dirty": 0,
+                   "flags": 0,
+                   "lock_sid": 39089,
+                   "lock_time": 1721802745,
+                   "lock_user": "devops",
+                   "obj_cat": 0,
+                   "obj_oid": 6079,
+                   "obj_url": "ppkg_001",
+                   "type": 2,
+                   "wfsid": 0
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/dc_emea/workspace/lockinfo/pkg/ppkg_001"
+             }
+           ]
+         }
+
+      .. note::
+
+         - When the Policy Package is locked, FortiManager returns multiple 
+           information like the owner of the lock (``lock_user``), the lock 
+           time (``lock_time``) and the locked resource (``obj_url``).
+
+         - The ``adom_dirty`` flag (see :ref:`ADOM lockinfo`) isn't visible, 
+           since you're getting the ``lockinfo`` for a Policy Package
+        
+         - However, the ``dirty`` attribute is visible - ``1`` means there are
+           pending changes in this Policy Package; ``0`` means there's no such 
+           pending changes.
+
+         - ``dev_oid`` is the ID of the ``demo`` ADOM
+         - ``obj_oid`` is the ID of the ``ppkg_001`` Policy Package
+
+Per-ADOM workspace mode
++++++++++++++++++++++++
+
+How to figure out whether an ADOM is with or without workspace mode?
+____________________________________________________________________
+
+The following example shows how to figure out whether the ``demo`` ADOM is with
+workspace mode enable or disable:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "workspace_mode"
+               ],
+               "loadsub": 0,
+               "url": "/dvmdb/adom/demo"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "demo",
+                 "oid": 311,
+                 "workspace_mode": 0
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo"
+             }
+           ]
+         }  
+
+      .. note::
+
+         - ``0`` means workspace mode is not enabled
+         - ``1`` means workspace mode is enabled      
+
+ADOM Workflow Mode
+------------------
+
+The operations required to perform a change when FortiManager operates in workflow mode are described here.
+
+For additional API details, use the FortiManager GUI and observe the output
+produced by the following FortiManager CLI debug commands:
+
+.. code-block:: text
+
+   diagnose debug service dvmdb 255
+   diagnose debug enable
+   diagnose debug timestamp enable
+
+How to lock an adom in workflow mode?
++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to lock the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/workspace/lock"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/workspace/lock"
+             }
+           ]
+         }
+
+How to create a workflow session?
++++++++++++++++++++++++++++++++++
+
+We want to start a new session.
+
+**REQUEST:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "jsonrpc": "1.0",
+     "method": "exec",
+     "params": [
+       {
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/start"
+       }
+     ],
+     "session": "M1CzeItUayZBbsftqkyBXetQJTKB1nm7X7+/QknqiLR9vbCuIkLW/qSDK/TwtCDuarPbEXc1taOnLzOzg0rD4dX5qqYOrmOB",
+     "verbose": 1
+   }
+
+**RESPONSE:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "result": [
+       {
+         "data": {
+           "new_session": 1,
+           "sessionid": 1
+         },
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/start"
+       }
+     ]
+   }
+
+.. note::
+
+   - ``new_session``: ``1`` indicates it's a new session, ``0`` indicates it's
+     an existing session (we can re-enter an existing session provided it hasn't
+     been submitted yet).
+
+     To start an existing session, we just have to use same method as above but
+     with this url:
+
+     .. code-block::
+
+        /dvmdb/adom/ZTP_SINGLE/workflow/start/<session_id>
+
+   - ``session_id`` will have to be used to reference that specific session for
+     other workflow operations (for instance to save or approve it).
+
+How to get existing sessions?
++++++++++++++++++++++++++++++
+
+It could be required to get the list of existing sessions to perform additional
+workspace workflow operations on them.
+
+To get the list of sessions:
+
+**REQUEST:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "jsonrpc": "1.0",
+     "method": "get",
+     "params": [
+       {
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow"
+       }
+     ],
+     "session": "3AyIKOdJl27+OoZj8TJsHMqBovc4x031AuPFIl1r7pl616x/ewMTaqEmmEMwWow9O4Q45tRP+Dfv85e+WIyAXGL01M0xfw/c",
+     "verbose": 1
+   }
+
+**RESPONSE:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "result": [
+       {
+         "data": [
+           {
+             "audit_time": "",
+             "audit_user": "",
+             "create_time": "2020-07-22 18:37:38",
+             "create_user": "devops",
+             "desc": "Workflow session",
+             "flags": 1,
+             "name": "Workflow session",
+             "oid": 616,
+             "revid": 0,
+             "sessionid": 1,
+             "state": 1,
+             "submit_time": "",
+             "submit_user": "",
+             "wflog": null
+           }
+         ],
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow"
+       }
+     ]
+   }
+
+We can use the returned ``sessionid`` to perform other workspace workflow mode
+operation on that particular session.
+
+How to save changes made in a session?
+++++++++++++++++++++++++++++++++++++++
+
+We assume that some changes have been made.
+We now want to save them.
+
+**REQUEST:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "jsonrpc": "1.0",
+     "method": "exec",
+     "params": [
+       {
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/save/1"
+       }
+     ],
+     "session": "MOhyT02bbKOCrqqwt0X2OH3G27LifDHr/5AZ3cwg2ySRYvAi2jHZZl9veO61BgM1Inbu/mHsBuBDEIK1fK4zH/ZovswIBCCO",
+     "verbose": 1
+   }
+
+**RESPONSE:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "result": [
+       {
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/save/1"
+       }
+     ]
+   }
+
+How to discard saved changes?
++++++++++++++++++++++++++++++
+
+We're in a situation where we have an existing session with some saved changes
+and our session is still not submitted.
+
+We want to discard the changes.
+
+**REQUEST:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "jsonrpc": "1.0",
+     "method": "exec",
+     "params": [
+       {
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/discard/1"
+       }
+     ],
+     "session": "nkv/vQ8R9/zwnrP/Vp+f+LzjzsspQUe0a2u9LS74BgCScsQOekgPhJEJ3So/D5zCCGHvwSdfdINiR36P4fi0QV2BR9QVnkD8",
+     "verbose": 1
+   }
+
+**RESPONSE:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "result": [
+       {
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/discard/1"
+       }
+     ]
+   }
+
+.. note::
+
+   Session ``1`` still exists in the system. Hence it is possible to re-open it
+   and perform new changes.
+
+How to submit a session?
+++++++++++++++++++++++++
+
+We submit a session when we want the saved changes to be approved.
+
+**REQUEST:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "jsonrpc": "1.0",
+     "method": "exec",
+     "params": [
+       {
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/submit/1",
+         "workflow": {
+           "desc": "We have finished our changes.",
+           "fmgip": "10.210.35.200",
+           "no_diff": 0
+         }
+       }
+     ],
+     "session": "eaXr97ungqgR31ecapTPnt5hiDhqmegidS1668ZxEsgEJjgnR/yAdGzoBOVg7ndaAnWcsozbd9rCczPvf42cYJ8U8jckwCMJ",
+     "verbose": 1
+   }
+
+**RESPONSE:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "result": [
+       {
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/submit/1"
+       }
+     ]
+   }
+
+.. note::
+
+   It is no longer possible to add extra changes to a submitted session. If we
+   try to start a submitted session, a brand new session will be created.
+
+How to delete a session?
+++++++++++++++++++++++++
+
+This operation can only be performed by an approver.
+If we receive this error:
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "result": [
+       {
+         "status": {
+           "code": -20020,
+           "message": "No permission"
+         },
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/drop/1"
+       }
+     ]
+   }
+
+it is probably because our API session has been created with the credentials of a
+non approver user.
+
+We want to delete session 1.
+
+**REQUEST:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "jsonrpc": "1.0",
+     "method": "exec",
+     "params": [
+       {
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/drop/1"
+       }
+     ],
+     "session": "avGakSAPiuvAfqvIIaYMFjEIOz2GymtIzFYMGJNuR05mxgYUgGyS1ILDuJOg/QTOP5An32HahKIEnh2hySXw7Lbf+JLxdIK4",
+     "verbose": 1
+   }
+
+**RESPONSE:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "result": [
+       {
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/drop/1"
+       }
+     ]
+   }
+
+Deleting a non approved session will also delete all other sessions made on top
+of this one (which are by essence also not approved).
+
+How to reject a session?
+++++++++++++++++++++++++
+
+This operation can only be performed by an approver.
+A rejected session could be repaired.
+
+**REQUEST:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "jsonrpc": "1.0",
+     "method": "exec",
+     "params": [
+       {
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/reject/1",
+         "workflow": {
+           "desc": "Wrong changes. Please repair",
+           "user": "admin"
+         }
+       }
+     ],
+     "session": "NMTPFix6qkkKFJ7bDLFpjhVMSMcPfJKv61aH928174/xMOro+aZYBAg6zdJxxTmMnDglPxp81mKqwQd4nCv6DQ==",
+     "verbose": 1
+   }
+
+**RESPONSE:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "result": [
+       {
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/reject/1"
+       }
+     ]
+   }
+
+How to repair a rejected session?
++++++++++++++++++++++++++++++++++
+
+Repairing a rejected session consists just in creating a new session.
+
+**REQUEST:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "jsonrpc": "1.0",
+     "method": "exec",
+     "params": [
+       {
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/repair/1"
+       }
+     ],
+     "session": "sai90w4hlWdSWOzn5sqVHmhxWPRFTtZ2R08pyW352avvqGxc1C167nkGNtjvHXEJ6XAT4sCnfCkHWeZRC/cLtw==",
+     "verbose": 1
+   }
+
+**RESPONSE:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "result": [
+       {
+         "data": {
+           "sessionid": 2
+         },
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/repair/1"
+       }
+     ]
+   }
+
+How to approve a submitted session?
++++++++++++++++++++++++++++++++++++
+
+This operation can only be performed by an approver.
+Once approved, a submitted session can't be deleted anymore.
+
+**REQUEST:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "jsonrpc": "1.0",
+     "method": "exec",
+     "params": [
+       {
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/approve/2",
+         "workflow": {
+           "desc": "Good!. I approve.",
+           "user": "admin"
+         }
+       }
+     ],
+     "session": "FfBwDLjz5g23TIiAXg6OI6d3Re7qrERN+EaojGzRg5eN0ArKUflPs6YZabrKaGT++y87fDPGuXuFRI3stlfQKcj4/HTmIwyP",
+     "verbose": 1
+   }
+
+**RESPONSE:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "result": [
+       {
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "/dvmdb/adom/ZTP_SINGLE/workflow/approve/2"
+       }
+     ]
+   }
+
+How to unlock an adom in workflow mode?
++++++++++++++++++++++++++++++++++++++++
+
+When we no longer need to perform any workflow mode operations we have to
+release the ADOM since it could be needed by another administrator.
+
+We unlock adom ``ZTP_SINGLE``.
+
+**REQUEST:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "jsonrpc": "1.0",
+     "method": "exec",
+     "params": [
+       {
+         "url": "/dvmdb/adom/ZTP_SINGLE/workspace/unlock"
+       }
+     ],
+     "session": "X8ccl04rmuhRIdZo/VgArjUwWQylAmUYcbRG5h1xz49yBW0j/fCH6M6PbkPJAt726osTNIFg++gEivQi1isIqx5l6tlZd57r",
+     "verbose": 1
+   }
+
+**RESPONSE:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "result": [
+       {
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "/dvmdb/adom/ZTP_SINGLE/workspace/unlock"
+       }
+     ]
+   }
+
+How to trigger a workflow session diff?
++++++++++++++++++++++++++++++++++++++++
+
+Sometimes, it's necessary to capture the session diff either before or after
+approving it.
+
+For example, some enterprise customers require all changes to be captured in
+their corporate CMS, rather than being stored solely in FortiManager.
+
+This section explains how to trigger a workflow session diff.
+
+As you will see, it involves a multi-step process:
+
+1. List your sessions
+
+   This steps allows you to retrieve the session ID needed for the diff 
+   operation.
+
+2. Trigger the session diff operation
+
+3. Monitor the session diff operation
+
+   Using the returned token, monitor the operation and obtain an overall 
+   summary.
+
+4. Collect the session diff output
+
+   Retrieve the session diff output in either JSON or CLI format for all
+   detected changes, such as changes to firewall policies, firewall addresses,
+   etc.
+   
+
+The following section demonstrates capturing the session diff for the pending  ``SR #003`` session:
+
+.. thumbnail:: images/adom_management/image_001.png
+
+Workflow Mode - List your sessions
+__________________________________
+
+The following example shows how to get the list of workflow sessions for the
+``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "loadsub": 0,
+               "sortings": [
+                 {
+                   "revid": -1
+                 }
+               ],
+               "url": "/dvmdb/adom/demo/workflow"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         - The ``sortings`` attribute is used to obtain a session list ordered
+           by descendent ``revid``
+
+         - The first item in the list represents the most recent session created
+           by the FortiManager administrator
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "audit_time": "",
+                   "audit_user": "",
+                   "create_time": "1724672125",
+                   "create_user": "admin",
+                   "desc": "Workflow session",
+                   "flags": 0,
+                   "name": "SR #003",
+                   "oid": 189,
+                   "revid": 4,
+                   "sessionid": 3,
+                   "state": 2,
+                   "submit_time": "1724672166",
+                   "submit_user": "admin"
+                 },
+                 {
+                   "audit_time": "1724672318",
+                   "audit_user": "admin",
+                   "create_time": "1724671974",
+                   "create_user": "admin",
+                   "desc": "Workflow session",
+                   "flags": 0,
+                   "name": "SR #002",
+                   "oid": 183,
+                   "revid": 3,
+                   "sessionid": 2,
+                   "state": 3,
+                   "submit_time": "1724671988",
+                   "submit_user": "admin"
+                 },
+                 {
+                   "audit_time": "1724672299",
+                   "audit_user": "admin",
+                   "create_time": "1724671895",
+                   "create_user": "admin",
+                   "desc": "Workflow session",
+                   "flags": 0,
+                   "name": "SR #001",
+                   "oid": 176,
+                   "revid": 2,
+                   "sessionid": 1,
+                   "state": 3,
+                   "submit_time": "1724671916",
+                   "submit_user": "admin"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo_001/workflow"
+             }
+           ]
+         }
+
+Workspace Mode - Trigger the session diff operation
+___________________________________________________
+
+In the previous section (:ref:`Workflow Mode - List your sessions`) you obtained
+the list of workflow sessions ordered by descendent `revid`.
+
+In this section, you will request the changes made in the most recent workflow
+session with ``revid`` ``4``.
+
+The following examples shows how to trigger the session diff operation for the
+session with ``revid`` ``4`` in the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "dst": "/adom/demo/revision/3",
+                 "flags": 16,
+                 "src": "/adom/demo/revision/4"
+               },
+               "url": "/cache/diff/start"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         - The ``flags`` attribute with its ``16`` value is required if you 
+           want to obtain the session diff output in CLI format (caught in
+           #0893188)
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+         :emphasize-lines: 5    
+         
+           "id": 4,
+           "result": [
+             {
+               "data": {
+                 "token": "TDXIV3JsxW3sBy9BCgRXe4DGRPPH9zi3thtl5QMesqs="
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/cache/diff/start"
+             }
+           ]
+         }
+
+      .. note::
+
+         - You now have to consider the value of the returned ``token`` 
+           attribute
+
+Workflow Mode - Monitor the session diff operation
+__________________________________________________
+
+Using the value of the returned ``token`` attribute (see :ref:`Workspace Mode -
+Trigger the session diff operation`) monitor the session diff operation and obtain an overall summary.
+
+The following example shows how to monitor the session diff operation and how to
+obtain an overall summary for a specific token value:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 5,
+           "method": "exec",
+           "params": [
+             {
+               "token": "TDXIV3JsxW3sBy9BCgRXe4DGRPPH9zi3thtl5QMesqs=",
+               "url": "/cache/diff/get/summary"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+         :emphasize-lines: 21
+
+         {
+           "id": 8,
+           "result": [
+             {
+               "data": {
+                 "obj": {
+                   "added": 1,
+                   "summary": [
+                     {
+                       "added": [
+                         {
+                           "name": "host_001",
+                           "timestamp": 1724672145,
+                           "user": "admin"
+                         }
+                       ],
+                       "category": 140
+                     }
+                   ]
+                 },
+                 "percent": 100,
+                 "pkg": {
+                   "changed": 1,
+                   "summary": [
+                     {
+                       "category": 0,
+                       "changed": [
+                         {
+                           "name": "ppkg_001",
+                           "percent": 100,
+                           "timestamp": 1724672160,
+                           "user": "admin"
+                         }
+                       ]
+                     }
+                   ]
+                 }
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/cache/diff/get/summary"
+             }
+           ]
+         }
+         
+      .. note::
+
+         - If the value of the returned ``percent`` attribute isn't equal to
+           `100`, you must continue making same request using the same
+           token value
+
+         - In this output, you know that the ``host_001`` firewall address
+           object (``obj``) was added (``added``) and that the ``ppkg_001``
+           Policy Package (``pkg``) was updated (``changed``) but no further
+           details are available
+
+         - The value ``140`` for the ``category`` attribute, in the ``obj``
+           section is the number of the table ``firewall address``
+
+           - You can get this number by issuing following command:
+
+             .. code-block:: text
+
+                execute fmpolicy print-adom-object demo ?
+
+             In the output, you will see this line:
+
+             .. code-block:: text
+
+                [...]
+                140	"firewall address"
+                [...]           
+
+For the ``ppkg_001`` Policy Package case, you can optionnally ask for further
+details using the following API request:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 9,
+           "method": "exec",
+           "params": [
+             {
+               "token": "TDXIV3JsxW3sBy9BCgRXe4DGRPPH9zi3thtl5QMesqs=",
+               "url": "/cache/diff/get/summary/pkg/ppkg_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 9,
+           "result": [
+             {
+               "data": {
+                 "obj": {
+                   "changed": 1,
+                   "summary": [
+                     {
+                       "category": 181,
+                       "changed": [
+                         {
+                           "name": 1,
+                           "obj seq": 0,
+                           "timestamp": 1724672160,
+                           "user": "admin"
+                         }
+                       ],
+                       "size": 1
+                     },
+                     {
+                       "category": 1103,
+                       "size": 1
+                     }
+                   ]
+                 },
+                 "percent": 100
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/cache/diff/get/summary/pkg/ppkg_001"
+             }
+           ]
+         }
+      
+      .. note::
+
+         - If the value of the returned ``percent`` attribute isn't equal to
+           `100`, you must continue making same request using the same
+           token value
+
+         - In this output, you know that the policy with policy ID ``1``
+           (``name``) was updated (``changed``)
+
+         - The value ``181`` for the ``category`` attribute, in the ``obj``
+           section is the number of the table ``firewall policy``
+
+           - You can get this number by issuing following command:
+
+             .. code-block:: text
+
+                execute fmpolicy print-adom-package demo 1 <ppkg_id> ?
+
+             In the output, you will see this line:
+
+             .. code-block:: text
+
+                [...]
+                181	"firewall policy"
+                [...]           
+
+         
+Workflow Mode - Collect the session diff output
+_______________________________________________
+
+Retrieve the session diff output in either JSON or CLI format for all detected
+changes, such as changes to firewall policies, firewall addresses, etc.
+
+In the previous section, you obtained a summary of the session diff operation,
+which indicated that the ``host_001`` firewall address object was
+added and that the ``ppkg_001`` Policy Package was updated but no further
+details were available.
+
+In this section, you will retrieve the details of those specific changes, either
+in JSON or CLI format.
+
+Get details about the updated firewall address:
+
+.. tab-set::
+
+   .. tab-item:: JSON format
+
+      .. tab-set::
+
+         .. tab-item:: REQUEST
+
+            .. code-block:: json
+
+               {
+                 "id": 10,
+                 "method": "exec",
+                 "params": [
+                   {
+                     "token": "TDXIV3JsxW3sBy9BCgRXe4DGRPPH9zi3thtl5QMesqs=",
+                     "url": "/cache/diff/get/detail/obj/all objs"
+                   }
+                 ],
+                 "session": "{{session}}"
+               }            
+
+         .. tab-item:: RESPONSE
+
+            .. code-block:: json
+
+               {
+                 "id": 10,
+                 "result": [
+                   {
+                     "data": [
+                       {
+                         "category": 140,
+                         "data": [
+                           {
+                             "_image-base64": null,
+                             "allow-routing": 0,
+                             "associated-interface": [
+                               "\"any\""
+                             ],
+                             "clearpass-spt": 0,
+                             "color": 20,
+                             "comment": null,
+                             "diff_flag": 1,
+                             "dirty": 1,
+                             "dynamic_mapping": null,
+                             "fabric-object": 0,
+                             "hw-model": null,
+                             "hw-vendor": null,
+                             "list": null,
+                             "name": "host_001",
+                             "node-ip-only": 0,
+                             "obj-tag": null,
+                             "obj-type": 9,
+                             "organization": null,
+                             "os": null,
+                             "policy-group": null,
+                             "route-tag": 0,
+                             "subnet": [
+                               "10.0.0.1",
+                               "255.255.255.255"
+                             ],
+                             "subnet-name": null,
+                             "sw-version": null,
+                             "tag-detection-level": null,
+                             "tag-type": null,
+                             "tagging": null,
+                             "timestamp": 1724672145,
+                             "type": 0,
+                             "user": "admin",
+                             "uuid": "553bd7e4-639f-51ef-9fc2-a05f1ed8b6fe"
+                           }
+                         ]
+                       }
+                     ],
+                     "status": {
+                       "code": 0,
+                       "message": "OK"
+                     },
+                     "url": "/cache/diff/get/detail/obj/all objs"
+                   }
+                 ]
+               }              
+
+   .. tab-item:: CLI format
+
+      .. tab-set::
+
+         .. tab-item:: REQUEST
+
+            .. code-block:: json
+
+               {
+                 "id": 11,
+                 "method": "exec",
+                 "params": [
+                   {
+                     "token": "TDXIV3JsxW3sBy9BCgRXe4DGRPPH9zi3thtl5QMesqs=",
+                     "url": "/cache/diff/get/cli/obj"
+                   }
+                 ],
+                 "session": "{{session}}"
+               }              
+
+         .. tab-item:: RESPONSE
+
+            .. code-block:: json
+
+               {
+                 "id": 11,
+                 "result": [
+                   {
+                     "data": {
+                       "percent": 100,
+                       "script": "config firewall address\nedit \"host_001\"\nset uuid 553bd7e4-639f-51ef-9fc2-a05f1ed8b6fe\nset color 20\nset subnet 10.0.0.1 255.255.255.255\nnext\nend\n"
+                     },
+                     "status": {
+                       "code": 0,
+                       "message": "OK"
+                     },
+                     "url": "/cache/diff/get/cli/obj"
+                   }
+                 ]
+               }                        
+
+Get details about the updated firewall policy:
+
+.. tab-set::
+
+   .. tab-item:: JSON format
+
+      .. tab-set::
+
+         .. tab-item:: REQUEST
+
+            .. code-block:: json
+
+               {
+                 "id": 12,
+                 "method": "exec",
+                 "params": [
+                   {
+                     "token": "TDXIV3JsxW3sBy9BCgRXe4DGRPPH9zi3thtl5QMesqs=",
+                     "url": "/cache/diff/get/detail/pkg/ppkg_001/firewall/policy"
+                   }
+                 ],
+                 "session": "{{session}}"
+               }
+
+         .. tab-item:: RESPONSE
+
+            .. code-block:: json                                  
+
+               {
+                 "id": 12,
+                 "result": [
+                   {
+                     "data": [
+                       {
+                         "_global-dst-intf": null,
+                         "_global-label-color": 0,
+                         "_global-src-intf": null,
+                         "...",
+                         "srcaddr": {
+                           "n": [
+                             "\"host_001\""
+                           ],
+                           "o": [
+                             "\"all\""
+                           ]
+                         },
+                         "...",
+                         "ztna-policy-redirect": 0,
+                         "ztna-status": 0,
+                         "ztna-tags-match-logic": 0
+                       }
+                     ],
+                     "status": {
+                       "code": 0,
+                       "message": "OK"
+                     },
+                     "url": "/cache/diff/get/detail/pkg/ppkg_001/firewall/policy"
+                   }
+                 ]
+               }
+
+            .. note::
+
+               - Look at the ``srcaddr`` attribute; it shows old value (``o``,
+                 it was ``all``) and the new value (``n``, it is ``host_001``)
+
+   .. tab-item:: CLI format
+
+      .. tab-set::
+
+         .. tab-item:: REQUEST
+
+            .. code-block:: json
+
+               {
+                 "id": 13,
+                 "method": "exec",
+                 "params": [
+                   {
+                     "token": "TDXIV3JsxW3sBy9BCgRXe4DGRPPH9zi3thtl5QMesqs=",
+                     "url": "/cache/diff/get/cli/pkg/ppkg_001"
+                   }
+                 ],
+                 "session": "{{session}}"
+               }
+
+         .. tab-item:: RESPONSE
+
+            .. code-block:: json                                  
+
+               {
+                 "id": 13,
+                 "result": [
+                   {
+                     "data": {
+                       "percent": 100,
+                       "script": "config firewall policy\nedit 1\nset srcaddr \"host_001\"\nnext\nend\n"
+                     },
+                     "status": {
+                       "code": 0,
+                       "message": "OK"
+                     },
+                     "url": "/cache/diff/get/cli/pkg/ppkg_001"
+                   }
+                 ]
+               }
+
+How to keep the session idle?
+-----------------------------
+
+Caught in #0643153.
+
+Sometimes, we need to perform some actions but we don't want to reset the
+idle_timeout timer. This is making sense from the GUI where some background
+requests shouldn't reset the connected user idle_timeout (otherwise he will stay
+connected forever).
+
+FMG API comes with the attribute *keep_session_idle*. When set, the idle_timeout
+timer won't be reset by the API call.
+
+For instance:
+
+**REQUEST:**
+
+.. code-block:: json
+
+                {
+                  "id": 1,
+                  "method": "get",
+                  "params": [
+                    {
+                      "fields": [
+                        "name",
+                        "flags"
+                      ],
+                      "filter": [
+                        "name",
+                        "in",
+                        "dut_fgt1"
+                      ],
+                      "keep_session_idle": 1,
+                      "sub fetch": {
+                        "vdom": {
+                          "fields": [
+                            "name",
+                            "flags",
+                            "status"
+                          ]
+                        }
+                      },
+                      "url": "/dvmdb/device"
+                    }
+                  ],
+                  "session": 19874,
+                  "verbose": 1
+                }
