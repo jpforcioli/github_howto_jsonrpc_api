@@ -566,20 +566,25 @@ How to get the full device database syntax?
 
 Caught in #0607071.
 
-**REQUEST:**
+The following example shows how to get the full device database syntax for the
+``dev_001`` manage device:
 
-.. code-block:: json
+.. tab-set:: 
 
-		{
-		  "id": 1,
-		  "method": "get",
-		  "params": [
-		    {
-		      "url": "pm/config/device/d1/global/_syntax/cli_only"
-		      "option": "syntax"
-		    }
-		  ]
-		}
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+      	 {
+      	   "id": 1,
+      		 "method": "get",
+      		 "params": [
+      		   {
+      		     "url": "/pm/config/device/dev_001/global/_syntax/cli_only"
+      		     "option": "syntax"
+      		   }
+      		 ]
+      	 }
 
 How to get the list of devices?
 -------------------------------
