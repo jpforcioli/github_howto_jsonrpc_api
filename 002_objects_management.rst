@@ -5299,4 +5299,69 @@ The following example delete per-device mapping entries for the ``dev_003`` and
                "url": "/pm/config/adom/demo/obj/firewall/address/net_branch_lan/dynamic_mapping/dev_002/root"
              }
            ]
-         }         
+         }
+
+Replacement Message Group
+-------------------------
+
+How to get the default Replacement Message Groups?
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #1040582.
+
+The following example shows how to get the default Replacement Message Group for
+the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 2,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/_system/replacemsg"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 2,
+           "result": [
+             {
+               "data": [
+                 {
+                   "carrier": 0,
+                   "groups": [
+                     "default",
+                     "utm"
+                   ],
+                   "msg-types": [
+                     {
+                       "_disp_desc": "admin_post_admin-disclaimer-text_desc",
+                       "_disp_name": "admin_post_admin-disclaimer-text",
+                       "...": "..."
+                     },
+                     "...",
+                   ],
+                   "...": "...",
+                 },
+                 "..."
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/dc_emea/obj/_system/replacemsg"
+             }
+           ]
+         }      
