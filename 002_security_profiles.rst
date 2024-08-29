@@ -2996,6 +2996,92 @@ The following example shows how to unassign the ``g_ips_sensor_001`` Global IPS 
            ]
          }         
 
+How to get the assign status for Global IPS sensors?
+____________________________________________________
+
+Caught in #1051174.
+
+This is to get the information exposed in the following screenshot:
+
+.. thumbnail:: images/security_profiles/image_001.png
+
+The screenshot above shows two global IPS sensor, ``g_ips_sensor_001`` and
+``g_ips_sensor_002``, along with their *assignement* status.
+
+You can see that:
+
+- The ``g_ips_sensor_001`` global IPS sensor isn't assigned to the ``dc_amer``
+  ADOM; its status is *Never installed*
+- The ``g_ips_sensor_001`` global IPS sensor is assigned to the ``dc_africa``
+  ADOM but it has pending changes; its status is *Modified*
+- The ``g_ips_sensor_002`` has been assigned to its ``dc_emea`` ADOM; its status
+  is *Synced*
+
+The following example shows how to get the same information using the
+FortiManager API:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 2,
+           "method": "get",
+           "params": [
+             {
+               "stype": "gl_ips_sensor",
+               "type": "template",
+               "url": "/pm/config/global/_package/status"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 2,
+           "result": [
+             {
+               "data": [
+                 {
+                   "adom": "dc_africa",
+                   "pkg": "g_ips_sensor_001",
+                   "status": "modified",
+                   "stype": "gl_ips_sensor",
+                   "type": "template"
+                 },
+                 {
+                   "adom": "dc_emea",
+                   "pkg": "g_ips_sensor_002",
+                   "status": "installed",
+                   "stype": "gl_ips_sensor",
+                   "type": "template"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/global/_package/status"
+             }
+           ]
+         }
+
+      .. note::
+
+         - You can see that FortiManager doesn't return details for the global
+           IPS sensors which aren't assigned
+
+         - In this output above, FortiManager didn't return anything about the
+           ``dc_amer`` ADOM since its global IPS sensor isn't assigned yet
+
+
 Virtual Patching
 ----------------
 
