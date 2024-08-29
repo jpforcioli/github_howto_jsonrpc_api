@@ -5213,9 +5213,9 @@ Few FMG JSON API URLs are given:
 .. note::
 
    - Note the distinction between global and per-vdom settings.
-   - `devicetemplate` is like a temporary Device DB db that could be used to 
-     serve default config for a specific FortiGate platform + version 
-     (definition from #1026855)
+   - `devicetemplate` is like a temporary Device DB db that could be 
+     used to serve default config for a specific FortiGate platform + 
+     version (definition is from #1026855)
 
 The following example shows another simpler example to get the ``system.
 global`` default config for the FortiGate-1000D platform with 6.2 firmware:
