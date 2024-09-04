@@ -711,7 +711,8 @@ This is generating a non encrypted protected archive named
    - Starting with FortiManager 7.0.11, 7.2.5 and 7.4.2 (#0959025), it is no 
      longer possible to generate a non encrypted backup file.
 
-   - If you debug FortiManager using following command:
+   - Starting with FortiManager 7.2.6, 7.4.4 and 7.6.1 (#1049364), if you debug 
+     FortiManager using following command:
 
      .. code-block:: text
 
@@ -725,7 +726,21 @@ This is generating a non encrypted protected archive named
 
         Request [/usr/local/apache2/bin/httpd:27987:30]: { "__from_rest": 1, "client": "\/usr\/local\/apache2\/bin\/httpd:27987", "id": 30, "method": "get", "params": [{ "target start": 1, "url": "\/sys\/backup"}], "session": "nJEOlg5gbzoTtHmxpeKGxww9bab06XRLGXWJd7UjRNmREC4zl2OJ326racvBw0Qo3dZFjRddWNBj0nRksTX6fQ==", "src": "172.26.128.5"}
         Chkperm Response [/usr/local/apache2/bin/httpd:27987:30]: { "id": 30, "result": [{ "status": { "code": 0, "message": "OK"}, "url": "\/sys\/backup"}], "session": 2534}
-        Response [/usr/local/apache2/bin/httpd:27987:30]: { "id": 30, "result": { "status": { "code": -10, "message": "Backup password must be set"}}}
+        Response [/usr/local/apache2/bin/httpd:27987:30]: { "id": 30, "result":
+        { "status": { "code": -10, "message": "Backup password must be set"}}}
+        
+     With a previous version, you should see a different error message.
+     For instance with FortiManager 7.4.2/7.4.3:
+
+     .. code-block:: text
+
+        Request [/usr/local/apache2/bin/httpd:16351:483]:
+{ "__from_rest": 1, "client": "\/usr\/local\/apache2\/bin\/httpd:16351", "id": 483, "method": "get", "params": [{ "target start": 1, "url": "\/sys\/backup"}], "session": "N8UFAhji78TkDBMYRcDBPbsHF94iwoTxCYyI2woGWD6YQ3vqx5e\/kmhsVzApTfMvWY7tES2Mt\/Sq0O164+UEaQ==", "src": "172.26.128.5"}
+        Chkperm Response [/usr/local/apache2/bin/httpd:16351:483]:
+{ "id": 483, "result": [{ "status": { "code": 0, "message": "OK"}, "url": "\/sys\/backup"}], "session": 49192}
+        Response [/usr/local/apache2/bin/httpd:16351:483]:
+{ "id": 483, "result": { "status": { "code": -1, "message": "runtime error 0:
+invalid value"}}}
 
 Should you want to encrypt your backup file:
 
