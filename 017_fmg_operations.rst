@@ -889,9 +889,10 @@ The following example shows how to upgrade your FortiManager unit:
 .. tab-set:: 
 
    .. tab-item:: REQUEST
+ 
+      .. code-block:: shell
 
-      curl --silent --user devops:fortinet --header "Content-Type: application/octet-stream" --insecure --data-binary '@Downloads/FMG_VM64-v7-build3372-FORTINET.out' https://10.210.34.120/jsonrpc/sys/upgrade
-
+         curl --silent --user devops:fortinet --header "Content-Type: application/octet-stream" --insecure --data-binary '@Downloads/FMG_VM64-v7-build3372-FORTINET.out' https://10.210.34.120/jsonrpc/sys/upgrade
 
    .. tab-item:: RESPONSE
 
