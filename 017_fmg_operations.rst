@@ -734,8 +734,8 @@ This is generating a non encrypted protected archive named
 
         Request [/usr/local/apache2/bin/httpd:16351:483]: { "__from_rest": 1, "client": "\/usr\/local\/apache2\/bin\/httpd:16351", "id": 483, "method": "get", "params": [{ "target start": 1, "url": "\/sys\/backup"}], "session": "N8UFAhji78TkDBMYRcDBPbsHF94iwoTxCYyI2woGWD6YQ3vqx5e\/kmhsVzApTfMvWY7tES2Mt\/Sq0O164+UEaQ==", "src": "172.26.128.5"}
         Chkperm Response [/usr/local/apache2/bin/httpd:16351:483]: { "id": 483, "result": [{ "status": { "code": 0, "message": "OK"}, "url": "\/sys\/backup"}], "session": 49192}
-        Response [/usr/local/apache2/bin/httpd:16351:483]: { "id": 483, "result": { "status": { "code": -1, "message": "runtime error 0:
-invalid value"}}}
+        Response [/usr/local/apache2/bin/httpd:16351:483]: { "id": 483, "result": { "status": { "code": -1, "message": "runtime error 0: invalid
+        value"}}}
 
 Should you want to encrypt your backup file:
 
@@ -881,7 +881,30 @@ How to upgrade the FortiManager?
 
 Caught in #0600185.
 
+Using REST API to upgrade your FortiManager unit
+________________________________________________
 
+The following example shows how to upgrade your FortiManager unit:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      curl --silent --user devops:fortinet --header "Content-Type: application/octet-stream" --insecure --data-binary '@Downloads/FMG_VM64-v7-build3372-FORTINET.out' https://10.210.34.120/jsonrpc/sys/upgrade
+
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         { 
+           "result": { 
+             "status": { 
+               "code": 0, 
+               "message": "OK" 
+             } 
+           } 
+         }
 
 How to get CPU, Memory and Disk usage of FortiManager?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
