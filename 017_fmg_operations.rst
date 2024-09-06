@@ -653,15 +653,16 @@ How to reboot FortiManager?
 
 Caught in #621300.
 
-.. tabs::
+The followinge example shows how to reboot your FortiManager unit:
 
-   .. tab:: REQUEST
+.. tab-set::
+
+   .. tab-item:: REQUEST
 
       .. code-block:: json
       
       		{
       		  "id": 1,
-      		  "jsonrpc": "1.0",
       		  "method": "exec",
       		  "params": [
       		    {
@@ -669,13 +670,10 @@ Caught in #621300.
                 "message": "We're rebooting!"
       		    }
       		  ],
-      		  "session": "85cKXer0wv9g/YjLuGqgo2JeEDlUW+u0SAPEx6zkt+ToV2CpnbwOj5PDmYj2uKAN7KX0R3ATVk+D9OFsNq2mi44n1901XU4d",
-      		  "verbose": 1
+      		  "session": "{{session}}"
       		}
 
-.. tabs::
-
-   .. tab:: REQUEST
+   .. tab-item:: RESPONSE
 
       .. code-block:: json
       
@@ -689,10 +687,10 @@ Caught in #621300.
       		  }
       		}
 
-Backup, restore, upgrade and reboot have been caught in #0600185
-
 How to backup the FortiManager?
 +++++++++++++++++++++++++++++++
+
+Caught in #621300.
 
 Using REST API
 ______________
@@ -814,6 +812,8 @@ The following example shows how to backup your FortiManager system to an externa
 How to restore the FortiManager?
 ++++++++++++++++++++++++++++++++
 
+Caught in #621300.
+
 Using REST API to restore the FortiManager
 __________________________________________
 
@@ -840,47 +840,51 @@ It is possible to restore a FortiManager system using the |fmg_api| form,
 provided the FortiManager backup file has been uploaded in an external FTP, SCP
 or SFTP server:
 
-**REQUEST:**
+.. tab-set:: 
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "filename": "tmp/fmg_backup.dat",
+                 "port": 21,
+                 "server": "10.210.35.207",
+                 "service": "ftp",
+                 "username": "tiger",
+                 "userpasswd": "fortinet"
+               },
+               "url": "/sys/restore"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-   {
-     "id": 3,
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "filename": "tmp/fmg_backup.dat",
-           "port": 21,
-           "server": "10.210.35.207",
-           "service": "ftp",
-           "username": "tiger",
-           "userpasswd": "fortinet"
-         },
-         "url": "/sys/restore"
-       }
-     ],
-     "session": "DHWAgr6Qk/iHPJOyl7s44pvfPogWiJokZf637NWDNBL1m8js1cA+3F+j2zvjLTvKnlzPaLNknVFUVc6O9RNEOpjhOAAYPD6p"
-   }
+   .. tab-item:: RESPONSE
 
-**RESPONSE:**
+      .. code-block:: json      
 
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": {
-       "status": {
-         "code": 0,
-         "message": "OK"
-       }
-     }
-   }
+         {
+           "id": 3,
+           "result": {
+             "status": {
+               "code": 0,
+               "message": "OK"
+             }
+           }
+         }
    
 How to upgrade the FortiManager?
 ++++++++++++++++++++++++++++++++
 
-Todo based on NFR #0600185
+Caught in #0600185.
+
+
 
 How to get CPU, Memory and Disk usage of FortiManager?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
