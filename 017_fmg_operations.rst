@@ -666,7 +666,7 @@ The followinge example shows how to reboot your FortiManager unit:
       		  "method": "exec",
       		  "params": [
       		    {
-      		      "url": "/sys/reboot",
+                "url": "/sys/reboot",
                 "message": "We're rebooting!"
       		    }
       		  ],
@@ -732,12 +732,9 @@ This is generating a non encrypted protected archive named
 
      .. code-block:: text
 
-        Request [/usr/local/apache2/bin/httpd:16351:483]:
-{ "__from_rest": 1, "client": "\/usr\/local\/apache2\/bin\/httpd:16351", "id": 483, "method": "get", "params": [{ "target start": 1, "url": "\/sys\/backup"}], "session": "N8UFAhji78TkDBMYRcDBPbsHF94iwoTxCYyI2woGWD6YQ3vqx5e\/kmhsVzApTfMvWY7tES2Mt\/Sq0O164+UEaQ==", "src": "172.26.128.5"}
-        Chkperm Response [/usr/local/apache2/bin/httpd:16351:483]:
-{ "id": 483, "result": [{ "status": { "code": 0, "message": "OK"}, "url": "\/sys\/backup"}], "session": 49192}
-        Response [/usr/local/apache2/bin/httpd:16351:483]:
-{ "id": 483, "result": { "status": { "code": -1, "message": "runtime error 0:
+        Request [/usr/local/apache2/bin/httpd:16351:483]: { "__from_rest": 1, "client": "\/usr\/local\/apache2\/bin\/httpd:16351", "id": 483, "method": "get", "params": [{ "target start": 1, "url": "\/sys\/backup"}], "session": "N8UFAhji78TkDBMYRcDBPbsHF94iwoTxCYyI2woGWD6YQ3vqx5e\/kmhsVzApTfMvWY7tES2Mt\/Sq0O164+UEaQ==", "src": "172.26.128.5"}
+        Chkperm Response [/usr/local/apache2/bin/httpd:16351:483]: { "id": 483, "result": [{ "status": { "code": 0, "message": "OK"}, "url": "\/sys\/backup"}], "session": 49192}
+        Response [/usr/local/apache2/bin/httpd:16351:483]: { "id": 483, "result": { "status": { "code": -1, "message": "runtime error 0:
 invalid value"}}}
 
 Should you want to encrypt your backup file:
