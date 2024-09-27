@@ -2503,6 +2503,34 @@ commands`` system to set some metadatas:
              "id": 8
          }
 
+As you can see in the example above, setting metadata, especially for a
+cluster, can be complex.
+
+Starting with FortiManager 7.4.5/7.6.1 (#1043367), a new ``metadata`` attribute
+is available, simplifying the process, as shown below:
+
+.. code-block:: json
+
+   {
+     "meta variables": {
+       "var_001": "val_001", 
+       "var_002": "val_002",
+       "var_003": {
+         "FGT40F0000000001": "val_003_001",
+         "FGT40F0000000001": "val_003_002",
+         "FGT40F0000000001": "val_003_003"
+       }
+     }
+   }
+
+Explanation:
+
+- The ``var_001`` metadata is applied to all cluster members (in this case, 3
+  members) with the value ``val_001``
+- Similarly, ``var_002`` metadata is applied to all members with ``val_002``
+- The ``var_003`` metadata is unique for each cluster member, identified by
+  their serial numbers
+
 How to create a Model Device and add in in a group with a single request?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
