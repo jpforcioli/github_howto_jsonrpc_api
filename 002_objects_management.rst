@@ -1641,9 +1641,7 @@ ______________________
 How to get CLI configuration of a new object?
 +++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in #1051789.
-
-This is a new feature from FortiManager 7.6.0.
+This is a new feature from FortiManager 7.6.0 (#0954842).
 
 The following example shows how to get the CLI configuration for the ``host_001`` firewall address which is going to be created in the ``demo`` ADOM:
 
@@ -1701,6 +1699,27 @@ The following example shows how to get the CLI configuration for the ``host_001`
 
          - The ``host_001`` isn't created!
          - FortiManager just returned its CLI configuration
+         - ``cli config`` option work also with the ``update`` method or more
+           recently, starting with FortiManager 7.6.1 with the ``get`` method
+           (caught in #1072681)
+
+           In the case of the ``get`` method, the ``cli config`` option can be
+           used when getting an object or a sub-table of an object. But it can't
+           be used when getting a table.
+
+           Combining the ``cli config`` option with the ``get`` method is giving
+           an API way of obtaining the same result as the FortiManager CLI
+           commands:
+           
+           .. code-block:: text
+
+              execute fmpolicy print-adom-object <...>
+
+           or 
+
+           .. code-block:: text
+
+              execute fmpolicy print-device-object <...>
          
 Normalized Interfaces
 ---------------------
