@@ -1701,7 +1701,7 @@ The following example shows how to get the CLI configuration for the ``host_001`
          - FortiManager just returned its CLI configuration
          - ``cli config`` option work also with the ``update`` method or more
            recently, starting with FortiManager 7.6.1 with the ``get`` method
-           (caught in #1072681)
+           (caught in #1057509)
 
            In the case of the ``get`` method, the ``cli config`` option can be
            used when getting an object or a sub-table of an object. But it can't
