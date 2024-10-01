@@ -5226,305 +5226,1364 @@ But you don't get what's behind objects ``object1`` and ``object2``.
 Should you want to get object definitions at the time you get the firewall
 policies, just use the ``expand datasrc`` as shown below:
 
-**REQUEST:**
+.. tab-set:: 
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "get",
-     "params": [
-       {
-         "expand datasrc": [
-           {
-             "datasrc": [
-               {
-                 "fields": [
-                   "name",
-                   "subnet",
-                   "comment",
-                   "color"
-                 ],
-                 "obj type": "firewall address"
-               }
-             ],
-             "name": "srcaddr"
-           },
-           {
-             "datasrc": [
-               {
-                 "fields": [
-                   "name",
-                   "subnet",
-                   "comment",
-                   "color"
-                 ],
-                 "obj type": "firewall address"
-               }
-             ],
-             "name": "dstaddr"
-           },
-           {
-             "datasrc": [
-               {
-                 "fields": [
-                   "name",
-                   "subnet",
-                   "comment",
-                   "color"
-                 ],
-                 "obj type": "firewall address"
-               }
-             ],
-             "name": "dstaddr"
-           },
-           {
-             "datasrc": [
-               {
-                 "fields": [
-                   "name",
-                   "description",
-                   "wildcar",
-                   "wildcard-intf",
-                   "default-mapping",
-                   "defmap-intf",
-                   "color"
-                 ],
-                 "obj type": "dynamic interface"
-               }
-             ],
-             "name": "srcintf"
-           },
-           {
-             "datasrc": [
-               {
-                 "fields": [
-                   "name",
-                   "description",
-                   "wildcar",
-                   "wildcard-intf",
-                   "default-mapping",
-                   "defmap-intf",
-                   "color"
-                 ],
-                 "obj type": "dynamic interface"
-               }
-             ],
-             "name": "dstintf"
-           },
-           {
-             "datasrc": [
-               {
-                 "fields": [
-                   "name",
-                   "tcp-portrange",
-                   "color",
-                   "comment"
-                 ],
-                 "obj type": "firewall service custom"
-               }
-             ],
-             "name": "service"
-           },
-           {
-             "datasrc": [
-               {
-                 "fields": [
-                   "name",
-                   "day",
-                   "color"
-                 ],
-                 "obj type": "firewall schedule recurring"
-               }
-             ],
-             "name": "schedule"
-           },
-           {
-             "datasrc": [
-               {
-                 "obj type": "ips sensor"
-               }
-             ],
-             "name": "ips-sensor"
-           },
-           {
-             "datasrc": [
-               {
-                 "obj type": "webfilter profile"
-               }
-             ],
-             "name": "webfilter-profile"
-           }
-         ],
-         "fields": [
-           "name",
-           "policyid",
-           "srcintf",
-           "dstintf",
-           "srcaddr",
-           "dstaddr",
-           "service",
-           "action",
-           "schedule",
-           "utm-status",
-           "logtraffic-start",
-           "webfilter-profile",
-           "ips-sensor",
-           "global-label",
-           "comments"
-         ],
-         "loadsub": 0,
-         "range": null,
-         "url": "/pm/config/adom/deutsche_bank_benchmark/pkg/ppkg_001/firewall/policy/"
-       }
-     ],
-     "session": "qk4LfxNkgZuewjwk7mp4Vt4e+f2OJR3Bvo/xdj73PN5pul8AZq7a58qp4LJ+DwvJHIvT1r17SAoGYjKyTueJGw==",
-     "verbose": 1
-   }
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "get",
+           "params": [
+             {
+               "expand datasrc": [
+                 {
+                   "datasrc": [
+                     {
+                       "fields": [
+                         "name",
+                         "subnet",
+                         "comment",
+                         "color"
+                       ],
+                       "obj type": "firewall address"
+                     }
+                   ],
+                   "name": "srcaddr"
+                 },
+                 {
+                   "datasrc": [
+                     {
+                       "fields": [
+                         "name",
+                         "subnet",
+                         "comment",
+                         "color"
+                       ],
+                       "obj type": "firewall address"
+                     }
+                   ],
+                   "name": "dstaddr"
+                 },
+                 {
+                   "datasrc": [
+                     {
+                       "fields": [
+                         "name",
+                         "description",
+                         "wildcar",
+                         "wildcard-intf",
+                         "default-mapping",
+                         "defmap-intf",
+                         "color"
+                       ],
+                       "obj type": "dynamic interface"
+                     }
+                   ],
+                   "name": "srcintf"
+                 },
+                 {
+                   "datasrc": [
+                     {
+                       "fields": [
+                         "name",
+                         "description",
+                         "wildcar",
+                         "wildcard-intf",
+                         "default-mapping",
+                         "defmap-intf",
+                         "color"
+                       ],
+                       "obj type": "dynamic interface"
+                     }
+                   ],
+                   "name": "dstintf"
+                 },
+                 {
+                   "datasrc": [
+                     {
+                       "fields": [
+                         "name",
+                         "tcp-portrange",
+                         "color",
+                         "comment"
+                       ],
+                       "obj type": "firewall service custom"
+                     }
+                   ],
+                   "name": "service"
+                 },
+                 {
+                   "datasrc": [
+                     {
+                       "fields": [
+                         "name",
+                         "day",
+                         "color"
+                       ],
+                       "obj type": "firewall schedule recurring"
+                     }
+                   ],
+                   "name": "schedule"
+                 },
+                 {
+                   "datasrc": [
+                     {
+                       "obj type": "ips sensor"
+                     }
+                   ],
+                   "name": "ips-sensor"
+                 },
+                 {
+                   "datasrc": [
+                     {
+                       "obj type": "webfilter profile"
+                     }
+                   ],
+                   "name": "webfilter-profile"
+                 }
+               ],
+               "fields": [
+                 "name",
+                 "policyid",
+                 "srcintf",
+                 "dstintf",
+                 "srcaddr",
+                 "dstaddr",
+                 "service",
+                 "action",
+                 "schedule",
+                 "utm-status",
+                 "logtraffic-start",
+                 "webfilter-profile",
+                 "ips-sensor",
+                 "global-label",
+                 "comments"
+               ],
+               "loadsub": 0,
+               "range": null,
+               "url": "/pm/config/adom/deutsche_bank_benchmark/pkg/ppkg_001/firewall/policy/"
+             }
+           ],
+           "session": "qk4LfxNkgZuewjwk7mp4Vt4e+f2OJR3Bvo/xdj73PN5pul8AZq7a58qp4LJ+DwvJHIvT1r17SAoGYjKyTueJGw==",
+           "verbose": 1
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block::
+      .. code-block:: json
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": [
-           {
-             "action": "accept",
-             "comments": "Created with FMG API",
-             "dstaddr": [
-               {
-                 "color": 28,
-                 "comment": "Created with FMG API",
-                 "name": "tc_004_dst_000001",
-                 "obj type": "firewall address",
-                 "subnet": [
-                   "10.0.0.1",
-                   "255.255.255.255"
-                 ]
-               }
-             ],
-             "dstintf": [
-               {
-                 "color": 16,
-                 "default-mapping": "enable",
-                 "defmap-intf": "wan",
-                 "description": "Created with FortiManager Ansible",
-                 "name": "wan",
-                 "obj type": "dynamic interface",
-                 "wildcard-intf": "wan"
-               }
-             ],
-             "global-label": "Project #1",
-             "ips-sensor": [
-               {
-                 "_baseline": [],
-                 "block-malicious-url": "disable",
-                 "comment": "Prevent critical attacks.",
-                 "extended-log": "disable",
-                 "name": "default",
-                 "obj type": "ips sensor",
-                 "replacemsg-group": [],
-                 "scan-botnet-connections": "disable"
-               }
-             ],
-             "logtraffic-start": "enable",
-             "name": "Policy_000001",
-             "obj seq": 1,
-             "policyid": 1,
-             "schedule": [
-               {
-                 "color": 0,
-                 "day": [
-                   "sunday",
-                   "monday",
-                   "tuesday",
-                   "wednesday",
-                   "thursday",
-                   "friday",
-                   "saturday"
-                 ],
-                 "name": "always",
-                 "obj type": "firewall schedule recurring"
-               }
-             ],
-             "service": [
-               {
-                 "color": 0,
-                 "comment": null,
-                 "name": "ALL",
-                 "obj seq": 1,
-                 "obj type": "firewall service custom",
-                 "tcp-portrange": [],
-                 "unset attrs": [
-                   "icmptype",
-                   "icmpcode"
-                 ]
-               }
-             ],
-             "srcaddr": [
-               {
-                 "color": 18,
-                 "comment": "Created with FMG API",
-                 "name": "tc_004_src_000001",
-                 "obj type": "firewall address",
-                 "subnet": [
-                   "10.0.0.1",
-                   "255.255.255.255"
-                 ]
-               }
-             ],
-             "srcintf": [
-               {
-                 "color": 6,
-                 "default-mapping": "enable",
-                 "defmap-intf": "lan",
-                 "description": "Created with FortiManager Ansible",
-                 "name": "lan",
-                 "obj type": "dynamic interface",
-                 "wildcard-intf": "lan"
-               }
-             ],
-             "utm-status": "enable",
-             "webfilter-profile": [
-               {
-                 "comment": "Default web filtering.",
-                 "extended-log": "disable",
-                 "https-replacemsg": "enable",
-                 "log-all-url": "disable",
-                 "name": "default",
-                 "obj type": "webfilter profile",
-                 "options": null,
-                 "ovrd-perm": null,
-                 "post-action": "normal",
-                 "replacemsg-group": [],
-                 "web-content-log": "enable",
-                 "web-extended-all-action-log": "disable",
-                 "web-filter-activex-log": "enable",
-                 "web-filter-applet-log": "enable",
-                 "web-filter-command-block-log": "enable",
-                 "web-filter-cookie-log": "enable",
-                 "web-filter-cookie-removal-log": "enable",
-                 "web-filter-js-log": "enable",
-                 "web-filter-jscript-log": "enable",
-                 "web-filter-referer-log": "enable",
-                 "web-filter-unknown-log": "enable",
-                 "web-filter-vbs-log": "enable",
-                 "web-ftgd-err-log": "enable",
-                 "web-ftgd-quota-usage": "enable",
-                 "web-invalid-domain-log": "enable",
-                 "web-url-log": "enable",
-                 "wisp": "disable",
-                 "wisp-algorithm": "auto-learning",
-                 "wisp-servers": [],
-                 "youtube-channel-status": "disable"
-               }
-             ]
-           },
-   [...]
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": [
+                 {
+                   "action": "accept",
+                   "comments": "Created with FMG API",
+                   "dstaddr": [
+                     {
+                       "color": 28,
+                       "comment": "Created with FMG API",
+                       "name": "tc_004_dst_000001",
+                       "obj type": "firewall address",
+                       "subnet": [
+                         "10.0.0.1",
+                         "255.255.255.255"
+                       ]
+                     }
+                   ],
+                   "dstintf": [
+                     {
+                       "color": 16,
+                       "default-mapping": "enable",
+                       "defmap-intf": "wan",
+                       "description": "Created with FortiManager Ansible",
+                       "name": "wan",
+                       "obj type": "dynamic interface",
+                       "wildcard-intf": "wan"
+                     }
+                   ],
+                   "global-label": "Project #1",
+                   "ips-sensor": [
+                     {
+                       "_baseline": [],
+                       "block-malicious-url": "disable",
+                       "comment": "Prevent critical attacks.",
+                       "extended-log": "disable",
+                       "name": "default",
+                       "obj type": "ips sensor",
+                       "replacemsg-group": [],
+                       "scan-botnet-connections": "disable"
+                     }
+                   ],
+                   "logtraffic-start": "enable",
+                   "name": "Policy_000001",
+                   "obj seq": 1,
+                   "policyid": 1,
+                   "schedule": [
+                     {
+                       "color": 0,
+                       "day": [
+                         "sunday",
+                         "monday",
+                         "tuesday",
+                         "wednesday",
+                         "thursday",
+                         "friday",
+                         "saturday"
+                       ],
+                       "name": "always",
+                       "obj type": "firewall schedule recurring"
+                     }
+                   ],
+                   "service": [
+                     {
+                       "color": 0,
+                       "comment": null,
+                       "name": "ALL",
+                       "obj seq": 1,
+                       "obj type": "firewall service custom",
+                       "tcp-portrange": [],
+                       "unset attrs": [
+                         "icmptype",
+                         "icmpcode"
+                       ]
+                     }
+                   ],
+                   "srcaddr": [
+                     {
+                       "color": 18,
+                       "comment": "Created with FMG API",
+                       "name": "tc_004_src_000001",
+                       "obj type": "firewall address",
+                       "subnet": [
+                         "10.0.0.1",
+                         "255.255.255.255"
+                       ]
+                     }
+                   ],
+                   "srcintf": [
+                     {
+                       "color": 6,
+                       "default-mapping": "enable",
+                       "defmap-intf": "lan",
+                       "description": "Created with FortiManager Ansible",
+                       "name": "lan",
+                       "obj type": "dynamic interface",
+                       "wildcard-intf": "lan"
+                     }
+                   ],
+                   "utm-status": "enable",
+                   "webfilter-profile": [
+                     {
+                       "comment": "Default web filtering.",
+                       "extended-log": "disable",
+                       "https-replacemsg": "enable",
+                       "log-all-url": "disable",
+                       "name": "default",
+                       "obj type": "webfilter profile",
+                       "options": null,
+                       "ovrd-perm": null,
+                       "post-action": "normal",
+                       "replacemsg-group": [],
+                       "web-content-log": "enable",
+                       "web-extended-all-action-log": "disable",
+                       "web-filter-activex-log": "enable",
+                       "web-filter-applet-log": "enable",
+                       "web-filter-command-block-log": "enable",
+                       "web-filter-cookie-log": "enable",
+                       "web-filter-cookie-removal-log": "enable",
+                       "web-filter-js-log": "enable",
+                       "web-filter-jscript-log": "enable",
+                       "web-filter-referer-log": "enable",
+                       "web-filter-unknown-log": "enable",
+                       "web-filter-vbs-log": "enable",
+                       "web-ftgd-err-log": "enable",
+                       "web-ftgd-quota-usage": "enable",
+                       "web-invalid-domain-log": "enable",
+                       "web-url-log": "enable",
+                       "wisp": "disable",
+                       "wisp-algorithm": "auto-learning",
+                       "wisp-servers": [],
+                       "youtube-channel-status": "disable"
+                     }
+                   ]
+                 },
+         [...]
+
+As you can see, it’s quite a tedious process because you need to specify not 
+only all the fields (like ``srcaddr``, ``dstaddr``, ``srcintf``, etc.) you want
+details for but also all the expected object types (like ``firewall address``,
+``firewall addrgrp``, etc.) you require details on.
+
+Starting with FortiManager 7.6.1 you can just get the firewall policy with the
+``get referred object map`` option (#1072681) as shown in the following example:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "option": [
+                 "get referred object map"
+               ],
+               "url": "/pm/config/adom/demo/pkg/pkg_001/firewall/policy/1"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }            
+
+   .. tab-item:: RESPONSE
+
+      .. dropdown:: Long output
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": {
+                    "_byte": 0,
+                    "_first_hit": 0,
+                    "_first_session": 0,
+                    "_global-dst-intf": null,
+                    "_global-label-color": 2,
+                    "_global-src-intf": null,
+                    "_global-vpn": [],
+                    "_global-vpn-tgt": null,
+                    "_hitcount": 0,
+                    "_label-color": 0,
+                    "_last_hit": 0,
+                    "_last_session": 0,
+                    "_pkts": 0,
+                    "_sesscount": 0,
+                    "action": "accept",
+                    "anti-replay": "enable",
+                    "application-list": [
+                      "default"
+                    ],
+                    "auto-asic-offload": "enable",
+                    "av-profile": [],
+                    "block-notification": "disable",
+                    "captive-portal-exempt": "disable",
+                    "capture-packet": "disable",
+                    "cgn-resource-quota": 16,
+                    "cgn-session-quota": 16777215,
+                    "cgn-sw-eif-ctrl": "disable",
+                    "custom-log-fields": [],
+                    "delay-tcp-npu-session": "disable",
+                    "diameter-filter-profile": [],
+                    "diffserv-copy": "disable",
+                    "diffserv-forward": "disable",
+                    "diffserv-reverse": "disable",
+                    "disclaimer": "disable",
+                    "dlp-profile": [],
+                    "dnsfilter-profile": [],
+                    "dsri": "disable",
+                    "dstaddr": [
+                      "host_101",
+                      "grp_ab"
+                    ],
+                    "dstaddr-negate": "disable",
+                    "dstaddr6": [],
+                    "dstaddr6-negate": "disable",
+                    "dstintf": [
+                      "wan"
+                    ],
+                    "dynamic-shaping": "disable",
+                    "email-collect": "disable",
+                    "emailfilter-profile": [],
+                    "fec": "disable",
+                    "file-filter-profile": [],
+                    "fsso-agent-for-ntlm": [],
+                    "fsso-groups": [],
+                    "geoip-anycast": "disable",
+                    "geoip-match": "physical-location",
+                    "global-label": "Project #1",
+                    "groups": [],
+                    "internet-service": "disable",
+                    "internet-service-src": "disable",
+                    "internet-service-src-name": [],
+                    "internet-service6": "disable",
+                    "internet-service6-src": "disable",
+                    "ip-version-type": "ipv4",
+                    "ips-sensor": [],
+                    "ips-voip-filter": [],
+                    "label": "Project #1",
+                    "log-http-transaction": "disable",
+                    "logtraffic": "all",
+                    "logtraffic-start": "disable",
+                    "match-vip": "enable",
+                    "match-vip-only": "disable",
+                    "name": "Policy_001",
+                    "nat": "disable",
+                    "nat46": "disable",
+                    "nat64": "disable",
+                    "natip": [
+                      "0.0.0.0",
+                      "0.0.0.0"
+                    ],
+                    "np-acceleration": "enable",
+                    "obj seq": 1,
+                    "oid": 5829,
+                    "passive-wan-health-measurement": "disable",
+                    "pcp-inbound": "disable",
+                    "pcp-outbound": "disable",
+                    "pcp-poolname": [],
+                    "per-ip-shaper": [],
+                    "permit-any-host": "disable",
+                    "policy-behaviour-type": "standard",
+                    "policy-expiry": "disable",
+                    "policy-expiry-date": "0000-00-00 00:00:00",
+                    "policy-expiry-date-utc": null,
+                    "policyid": 1,
+                    "port-preserve": "enable",
+                    "profile-protocol-options": [
+                      "default"
+                    ],
+                    "profile-type": "single",
+                    "radius-ip-auth-bypass": "disable",
+                    "radius-mac-auth-bypass": "disable",
+                    "referred object map": {
+                      "application/list": [
+                        {
+                          "app-replacemsg": "enable",
+                          "comment": "Monitor all applications.",
+                          "control-default-network-services": "disable",
+                          "deep-app-inspection": "enable",
+                          "default-network-services": null,
+                          "enforce-default-app-port": "disable",
+                          "entries": [
+                            {
+                              "action": "pass",
+                              "application": [],
+                              "behavior": [
+                                "all"
+                              ],
+                              "category": [],
+                              "exclusion": [],
+                              "id": 1,
+                              "log": "enable",
+                              "log-packet": "disable",
+                              "obj seq": 1,
+                              "oid": 3564,
+                              "parameters": null,
+                              "per-ip-shaper": [],
+                              "popularity": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5"
+                              ],
+                              "protocols": [
+                                "all"
+                              ],
+                              "quarantine": "none",
+                              "quarantine-expiry": "5m",
+                              "quarantine-log": "enable",
+                              "rate-count": 0,
+                              "rate-duration": 60,
+                              "rate-mode": "continuous",
+                              "rate-track": "none",
+                              "risk": [],
+                              "session-ttl": 0,
+                              "shaper": [],
+                              "shaper-reverse": [],
+                              "technology": [
+                                "all"
+                              ],
+                              "vendor": [
+                                "all"
+                              ]
+                            }
+                          ],
+                          "extended-log": "disable",
+                          "force-inclusion-ssl-di-sigs": "disable",
+                          "name": "default",
+                          "oid": 3563,
+                          "options": "allow-dns",
+                          "other-application-action": "pass",
+                          "other-application-log": "disable",
+                          "p2p-block-list": null,
+                          "replacemsg-group": [],
+                          "unknown-application-action": "pass",
+                          "unknown-application-log": "disable"
+                        }
+                      ],
+                      "dynamic/certificate/local": [
+                        {
+                          "description": null,
+                          "dynamic_mapping": null,
+                          "name": "Fortinet_CA_SSL",
+                          "oid": 5344
+                        },
+                        {
+                          "description": null,
+                          "dynamic_mapping": null,
+                          "name": "Fortinet_CA_Untrusted",
+                          "oid": 5345
+                        }
+                      ],
+                      "dynamic/interface": [
+                        {
+                          "color": 0,
+                          "default-mapping": "enable",
+                          "defmap-intf": "port2",
+                          "defmap-intrazone-deny": null,
+                          "defmap-zonemember": [],
+                          "description": "added by creating adom",
+                          "dynamic_mapping": null,
+                          "egress-shaping-profile": [],
+                          "ingress-shaping-profile": [],
+                          "name": "lan",
+                          "oid": 3129,
+                          "platform_mapping": [
+                            {
+                              "egress-shaping-profile": [],
+                              "intf-zone": "lan",
+                              "name": "FortiGateRugged-70F",
+                              "oid": 3130
+                            },
+                            {
+                              "egress-shaping-profile": [],
+                              "intf-zone": "lan",
+                              "name": "FortiGateRugged-70F-3G4G",
+                              "oid": 3141
+                            }
+                          ],
+                          "single-intf": "enable",
+                          "wildcard": "disable",
+                          "wildcard-intf": null,
+                          "zone-only": "disable"
+                        },
+                        {
+                          "color": 0,
+                          "default-mapping": "enable",
+                          "defmap-intf": "port1",
+                          "defmap-intrazone-deny": "disable",
+                          "defmap-zonemember": [],
+                          "description": "added by creating adom",
+                          "dynamic_mapping": null,
+                          "egress-shaping-profile": [],
+                          "ingress-shaping-profile": [],
+                          "name": "wan",
+                          "oid": 112,
+                          "platform_mapping": [
+                            {
+                              "egress-shaping-profile": [],
+                              "intf-zone": "wan",
+                              "intrazone-deny": "disable",
+                              "name": "FortiGate-40F",
+                              "oid": 113
+                            },
+                            {
+                              "egress-shaping-profile": [],
+                              "intf-zone": "wan",
+                              "intrazone-deny": "disable",
+                              "name": "FortiGate-40F-3G4G",
+                              "oid": 121
+                            },
+                            {
+                              "egress-shaping-profile": [],
+                              "intf-zone": "wan",
+                              "intrazone-deny": "disable",
+                              "name": "FortiWiFi-40F",
+                              "oid": 3147
+                            },
+                            {
+                              "egress-shaping-profile": [],
+                              "intf-zone": "wan",
+                              "intrazone-deny": "disable",
+                              "name": "FortiWiFi-40F-3G4G",
+                              "oid": 3154
+                            }
+                          ],
+                          "single-intf": "enable",
+                          "wildcard": "disable",
+                          "wildcard-intf": null,
+                          "zone-only": "disable"
+                        }
+                      ],
+                      "firewall/address": [
+                        {
+                          "_image-base64": null,
+                          "allow-routing": "disable",
+                          "associated-interface": [
+                            "any"
+                          ],
+                          "clearpass-spt": "unknown",
+                          "color": 9,
+                          "comment": null,
+                          "dirty": "dirty",
+                          "dynamic_mapping": null,
+                          "fabric-object": "disable",
+                          "hw-model": null,
+                          "hw-vendor": null,
+                          "list": null,
+                          "name": "host_001",
+                          "node-ip-only": "disable",
+                          "obj-tag": null,
+                          "obj-type": "ip",
+                          "oid": 5527,
+                          "organization": null,
+                          "os": null,
+                          "policy-group": null,
+                          "route-tag": 0,
+                          "subnet": [
+                            "21.103.33.206",
+                            "255.255.255.255"
+                          ],
+                          "subnet-name": null,
+                          "sw-version": null,
+                          "tag-detection-level": null,
+                          "tag-type": null,
+                          "tagging": null,
+                          "type": "ipmask",
+                          "uuid": "9ca639b8-771c-51ef-6788-2dfe06e592df"
+                        },
+                        {
+                          "_image-base64": null,
+                          "allow-routing": "disable",
+                          "associated-interface": [
+                            "any"
+                          ],
+                          "clearpass-spt": "unknown",
+                          "color": 7,
+                          "comment": "This is a change",
+                          "dirty": "dirty",
+                          "dynamic_mapping": null,
+                          "fabric-object": "disable",
+                          "hw-model": null,
+                          "hw-vendor": null,
+                          "list": null,
+                          "name": "host_002",
+                          "node-ip-only": "disable",
+                          "obj-tag": null,
+                          "obj-type": "ip",
+                          "oid": 5528,
+                          "organization": null,
+                          "os": null,
+                          "policy-group": null,
+                          "route-tag": 0,
+                          "subnet": [
+                            "157.112.175.196",
+                            "255.255.255.255"
+                          ],
+                          "subnet-name": null,
+                          "sw-version": null,
+                          "tag-detection-level": null,
+                          "tag-type": null,
+                          "tagging": null,
+                          "type": "ipmask",
+                          "uuid": "9caa2802-771c-51ef-60cd-54a46be4666b"
+                        },
+                        {
+                          "_image-base64": null,
+                          "allow-routing": "disable",
+                          "associated-interface": [
+                            "any"
+                          ],
+                          "clearpass-spt": "unknown",
+                          "color": 32,
+                          "comment": null,
+                          "dirty": "dirty",
+                          "dynamic_mapping": null,
+                          "fabric-object": "disable",
+                          "hw-model": null,
+                          "hw-vendor": null,
+                          "list": null,
+                          "name": "host_003",
+                          "node-ip-only": "disable",
+                          "obj-tag": null,
+                          "obj-type": "ip",
+                          "oid": 5529,
+                          "organization": null,
+                          "os": null,
+                          "policy-group": null,
+                          "route-tag": 0,
+                          "subnet": [
+                            "47.61.8.231",
+                            "255.255.255.255"
+                          ],
+                          "subnet-name": null,
+                          "sw-version": null,
+                          "tag-detection-level": null,
+                          "tag-type": null,
+                          "tagging": null,
+                          "type": "ipmask",
+                          "uuid": "9caab40c-771c-51ef-ab7f-99d5fe4018ff"
+                        },
+                        {
+                          "_image-base64": null,
+                          "allow-routing": "disable",
+                          "associated-interface": [
+                            "any"
+                          ],
+                          "clearpass-spt": "unknown",
+                          "color": 9,
+                          "comment": null,
+                          "dirty": "dirty",
+                          "dynamic_mapping": null,
+                          "fabric-object": "disable",
+                          "hw-model": null,
+                          "hw-vendor": null,
+                          "list": null,
+                          "name": "host_004",
+                          "node-ip-only": "disable",
+                          "obj-tag": null,
+                          "obj-type": "ip",
+                          "oid": 5530,
+                          "organization": null,
+                          "os": null,
+                          "policy-group": null,
+                          "route-tag": 0,
+                          "subnet": [
+                            "120.63.87.108",
+                            "255.255.255.255"
+                          ],
+                          "subnet-name": null,
+                          "sw-version": null,
+                          "tag-detection-level": null,
+                          "tag-type": null,
+                          "tagging": null,
+                          "type": "ipmask",
+                          "uuid": "9caafeee-771c-51ef-6502-25519b568d79"
+                        },
+                        {
+                          "_image-base64": null,
+                          "allow-routing": "disable",
+                          "associated-interface": [
+                            "any"
+                          ],
+                          "clearpass-spt": "unknown",
+                          "color": 2,
+                          "comment": null,
+                          "dirty": "dirty",
+                          "dynamic_mapping": null,
+                          "fabric-object": "disable",
+                          "hw-model": null,
+                          "hw-vendor": null,
+                          "list": null,
+                          "name": "host_005",
+                          "node-ip-only": "disable",
+                          "obj-tag": null,
+                          "obj-type": "ip",
+                          "oid": 5531,
+                          "organization": null,
+                          "os": null,
+                          "policy-group": null,
+                          "route-tag": 0,
+                          "subnet": [
+                            "110.128.128.181",
+                            "255.255.255.255"
+                          ],
+                          "subnet-name": null,
+                          "sw-version": null,
+                          "tag-detection-level": null,
+                          "tag-type": null,
+                          "tagging": null,
+                          "type": "ipmask",
+                          "uuid": "9cab354e-771c-51ef-6c0a-f737f60ca843"
+                        },
+                        {
+                          "_image-base64": null,
+                          "allow-routing": "disable",
+                          "associated-interface": [
+                            "any"
+                          ],
+                          "clearpass-spt": "unknown",
+                          "color": 5,
+                          "comment": null,
+                          "dirty": "dirty",
+                          "dynamic_mapping": null,
+                          "fabric-object": "disable",
+                          "hw-model": null,
+                          "hw-vendor": null,
+                          "list": null,
+                          "name": "host_006",
+                          "node-ip-only": "disable",
+                          "obj-tag": null,
+                          "obj-type": "ip",
+                          "oid": 5532,
+                          "organization": null,
+                          "os": null,
+                          "policy-group": null,
+                          "route-tag": 0,
+                          "subnet": [
+                            "8.97.206.227",
+                            "255.255.255.255"
+                          ],
+                          "subnet-name": null,
+                          "sw-version": null,
+                          "tag-detection-level": null,
+                          "tag-type": null,
+                          "tagging": null,
+                          "type": "ipmask",
+                          "uuid": "9cab6726-771c-51ef-37c1-57fcd757d248"
+                        },
+                        {
+                          "_image-base64": null,
+                          "allow-routing": "disable",
+                          "associated-interface": [
+                            "any"
+                          ],
+                          "clearpass-spt": "unknown",
+                          "color": 2,
+                          "comment": null,
+                          "dirty": "dirty",
+                          "dynamic_mapping": null,
+                          "fabric-object": "disable",
+                          "hw-model": null,
+                          "hw-vendor": null,
+                          "list": null,
+                          "name": "host_101",
+                          "node-ip-only": "disable",
+                          "obj-tag": null,
+                          "obj-type": "ip",
+                          "oid": 5627,
+                          "organization": null,
+                          "os": null,
+                          "policy-group": null,
+                          "route-tag": 0,
+                          "subnet": [
+                            "88.240.225.7",
+                            "255.255.255.255"
+                          ],
+                          "subnet-name": null,
+                          "sw-version": null,
+                          "tag-detection-level": null,
+                          "tag-type": null,
+                          "tagging": null,
+                          "type": "ipmask",
+                          "uuid": "9cbddae6-771c-51ef-7053-502bbf80d022"
+                        }
+                      ],
+                      "firewall/addrgrp": [
+                        {
+                          "_image-base64": null,
+                          "allow-routing": "disable",
+                          "category": "default",
+                          "color": 0,
+                          "comment": null,
+                          "dynamic_mapping": null,
+                          "exclude": "disable",
+                          "exclude-member": [],
+                          "fabric-object": "disable",
+                          "member": [
+                            "host_001",
+                            "host_002",
+                            "host_003"
+                          ],
+                          "name": "grp_a",
+                          "oid": 6075,
+                          "tagging": null,
+                          "type": "default",
+                          "uuid": "ad10d1fa-803b-51ef-fea9-e2358ffbff9f"
+                        },
+                        {
+                          "_image-base64": null,
+                          "allow-routing": "disable",
+                          "category": "default",
+                          "color": 0,
+                          "comment": null,
+                          "dynamic_mapping": null,
+                          "exclude": "disable",
+                          "exclude-member": [],
+                          "fabric-object": "disable",
+                          "member": [
+                            "grp_b",
+                            "grp_a"
+                          ],
+                          "name": "grp_ab",
+                          "oid": 6077,
+                          "tagging": null,
+                          "type": "default",
+                          "uuid": "c610450a-803b-51ef-56b9-f5ee2b3929d4"
+                        },
+                        {
+                          "_image-base64": null,
+                          "allow-routing": "disable",
+                          "category": "default",
+                          "color": 0,
+                          "comment": null,
+                          "dynamic_mapping": null,
+                          "exclude": "disable",
+                          "exclude-member": [],
+                          "fabric-object": "disable",
+                          "member": [
+                            "host_004",
+                            "host_005",
+                            "host_006"
+                          ],
+                          "name": "grp_b",
+                          "oid": 6076,
+                          "tagging": null,
+                          "type": "default",
+                          "uuid": "bbee4090-803b-51ef-4714-ef244f0d9bdf"
+                        }
+                      ],
+                      "firewall/profile-protocol-options": [
+                        {
+                          "cifs": {
+                            "domain-controller": [],
+                            "oid": 4335,
+                            "oversize-limit": 10,
+                            "ports": [
+                              445
+                            ],
+                            "scan-bzip2": "enable",
+                            "server-credential-type": "none",
+                            "server-keytab": null,
+                            "status": "enable",
+                            "tcp-window-maximum": 8388608,
+                            "tcp-window-minimum": 131072,
+                            "tcp-window-size": 262144,
+                            "tcp-window-type": "auto-tuning",
+                            "uncompressed-nest-limit": 12,
+                            "uncompressed-oversize-limit": 10
+                          },
+                          "comment": "All default services.",
+                          "dns": {
+                            "oid": 4333,
+                            "ports": [
+                              53
+                            ],
+                            "status": "enable"
+                          },
+                          "ftp": {
+                            "comfort-amount": 1,
+                            "comfort-interval": 10,
+                            "explicit-ftp-tls": "disable",
+                            "inspect-all": "disable",
+                            "oid": 4327,
+                            "options": "splice",
+                            "oversize-limit": 10,
+                            "ports": [
+                              21
+                            ],
+                            "scan-bzip2": "enable",
+                            "ssl-offloaded": "no",
+                            "status": "enable",
+                            "stream-based-uncompressed-limit": 0,
+                            "tcp-window-maximum": 8388608,
+                            "tcp-window-minimum": 131072,
+                            "tcp-window-size": 262144,
+                            "tcp-window-type": "auto-tuning",
+                            "uncompressed-nest-limit": 12,
+                            "uncompressed-oversize-limit": 10
+                          },
+                          "http": {
+                            "address-ip-rating": "enable",
+                            "block-page-status-code": 403,
+                            "comfort-amount": 1,
+                            "comfort-interval": 10,
+                            "domain-fronting": "block",
+                            "h2c": "disable",
+                            "inspect-all": "disable",
+                            "oid": 4326,
+                            "oversize-limit": 10,
+                            "ports": [
+                              80
+                            ],
+                            "proxy-after-tcp-handshake": "disable",
+                            "range-block": "disable",
+                            "retry-count": 0,
+                            "scan-bzip2": "enable",
+                            "ssl-offloaded": "no",
+                            "status": "enable",
+                            "stream-based-uncompressed-limit": 0,
+                            "streaming-content-bypass": "enable",
+                            "strip-x-forwarded-for": "disable",
+                            "switching-protocols": "bypass",
+                            "tcp-window-maximum": 8388608,
+                            "tcp-window-minimum": 131072,
+                            "tcp-window-size": 262144,
+                            "tcp-window-type": "auto-tuning",
+                            "tunnel-non-http": "enable",
+                            "uncompressed-nest-limit": 12,
+                            "uncompressed-oversize-limit": 10,
+                            "unknown-content-encoding": "block",
+                            "unknown-http-version": "reject",
+                            "unset attrs": [
+                              "options",
+                              "post-lang"
+                            ],
+                            "verify-dns-for-policy-matching": "enable"
+                          },
+                          "imap": {
+                            "inspect-all": "disable",
+                            "oid": 4328,
+                            "options": "fragmail",
+                            "oversize-limit": 10,
+                            "ports": [
+                              143
+                            ],
+                            "proxy-after-tcp-handshake": "disable",
+                            "scan-bzip2": "enable",
+                            "ssl-offloaded": "no",
+                            "status": "enable",
+                            "uncompressed-nest-limit": 12,
+                            "uncompressed-oversize-limit": 10
+                          },
+                          "mail-signature": {
+                            "oid": 4332,
+                            "status": "disable"
+                          },
+                          "mapi": {
+                            "oid": 4334,
+                            "options": "fragmail",
+                            "oversize-limit": 10,
+                            "ports": [
+                              135
+                            ],
+                            "scan-bzip2": "enable",
+                            "status": "enable",
+                            "uncompressed-nest-limit": 12,
+                            "uncompressed-oversize-limit": 10
+                          },
+                          "name": "default",
+                          "nntp": {
+                            "inspect-all": "disable",
+                            "oid": 4331,
+                            "options": "splice",
+                            "oversize-limit": 10,
+                            "ports": [
+                              119
+                            ],
+                            "proxy-after-tcp-handshake": "disable",
+                            "scan-bzip2": "enable",
+                            "status": "enable",
+                            "uncompressed-nest-limit": 12,
+                            "uncompressed-oversize-limit": 10
+                          },
+                          "oid": 4325,
+                          "oversize-log": "disable",
+                          "pop3": {
+                            "inspect-all": "disable",
+                            "oid": 4329,
+                            "options": "fragmail",
+                            "oversize-limit": 10,
+                            "ports": [
+                              110
+                            ],
+                            "proxy-after-tcp-handshake": "disable",
+                            "scan-bzip2": "enable",
+                            "ssl-offloaded": "no",
+                            "status": "enable",
+                            "uncompressed-nest-limit": 12,
+                            "uncompressed-oversize-limit": 10
+                          },
+                          "replacemsg-group": [],
+                          "rpc-over-http": "disable",
+                          "smtp": {
+                            "inspect-all": "disable",
+                            "oid": 4330,
+                            "options": [
+                              "fragmail",
+                              "splice"
+                            ],
+                            "oversize-limit": 10,
+                            "ports": [
+                              25
+                            ],
+                            "proxy-after-tcp-handshake": "disable",
+                            "scan-bzip2": "enable",
+                            "server-busy": "disable",
+                            "ssl-offloaded": "no",
+                            "status": "enable",
+                            "uncompressed-nest-limit": 12,
+                            "uncompressed-oversize-limit": 10
+                          },
+                          "ssh": {
+                            "comfort-amount": 1,
+                            "comfort-interval": 10,
+                            "oid": 4336,
+                            "oversize-limit": 10,
+                            "scan-bzip2": "enable",
+                            "ssl-offloaded": "no",
+                            "stream-based-uncompressed-limit": 0,
+                            "tcp-window-maximum": 8388608,
+                            "tcp-window-minimum": 131072,
+                            "tcp-window-size": 262144,
+                            "tcp-window-type": "auto-tuning",
+                            "uncompressed-nest-limit": 12,
+                            "uncompressed-oversize-limit": 10
+                          },
+                          "switching-protocols-log": "disable"
+                        }
+                      ],
+                      "firewall/schedule/recurring": [
+                        {
+                          "color": 0,
+                          "day": [
+                            "sunday",
+                            "monday",
+                            "tuesday",
+                            "wednesday",
+                            "thursday",
+                            "friday",
+                            "saturday"
+                          ],
+                          "end": "00:00",
+                          "fabric-object": "disable",
+                          "name": "always",
+                          "oid": 4322,
+                          "start": "00:00",
+                          "uuid": "10473272-770f-51ef-2dfd-8afbe74b9071"
+                        }
+                      ],
+                      "firewall/service/category": [
+                        {
+                          "comment": "General services.",
+                          "fabric-object": "disable",
+                          "name": "General",
+                          "obj seq": 1,
+                          "oid": 3427,
+                          "uuid": "10262ca8-770f-51ef-dba0-5a20b3c513ae"
+                        }
+                      ],
+                      "firewall/service/custom": [
+                        {
+                          "app-category": [],
+                          "app-service-type": "disable",
+                          "application": [],
+                          "category": [
+                            "General"
+                          ],
+                          "color": 0,
+                          "comment": null,
+                          "fabric-object": "disable",
+                          "fqdn": null,
+                          "helper": "auto",
+                          "iprange": "0.0.0.0",
+                          "name": "ALL",
+                          "obj seq": 1,
+                          "oid": 3437,
+                          "protocol": "IP",
+                          "protocol-number": 0,
+                          "proxy": "disable",
+                          "tcp-rst-timer": 0,
+                          "udp-portrange": [],
+                          "uuid": "102762da-770f-51ef-b08b-bc9b7d703b20"
+                        }
+                      ],
+                      "firewall/ssl-ssh-profile": [
+                        {
+                          "allowlist": "disable",
+                          "block-blocklisted-certificates": "enable",
+                          "caname": [
+                            "Fortinet_CA_SSL"
+                          ],
+                          "comment": "Read-only profile that does no inspection.",
+                          "dot": {
+                            "cert-validation-failure": "block",
+                            "cert-validation-timeout": "allow",
+                            "client-certificate": "bypass",
+                            "expired-server-cert": "block",
+                            "oid": 4436,
+                            "proxy-after-tcp-handshake": "disable",
+                            "quic": "inspect",
+                            "revoked-server-cert": "block",
+                            "sni-server-cert-check": "enable",
+                            "status": "disable",
+                            "unsupported-ssl-cipher": "allow",
+                            "unsupported-ssl-negotiation": "allow",
+                            "unsupported-ssl-version": "block",
+                            "untrusted-server-cert": "allow"
+                          },
+                          "ech-outer-sni": null,
+                          "ftps": {
+                            "cert-validation-failure": "block",
+                            "cert-validation-timeout": "allow",
+                            "client-certificate": "bypass",
+                            "expired-server-cert": "block",
+                            "min-allowed-ssl-version": "tls-1.1",
+                            "oid": 4431,
+                            "revoked-server-cert": "block",
+                            "sni-server-cert-check": "enable",
+                            "status": "disable",
+                            "unsupported-ssl-cipher": "allow",
+                            "unsupported-ssl-negotiation": "allow",
+                            "unsupported-ssl-version": "block",
+                            "untrusted-server-cert": "allow"
+                          },
+                          "https": {
+                            "cert-probe-failure": "allow",
+                            "cert-validation-failure": "block",
+                            "cert-validation-timeout": "allow",
+                            "client-certificate": "bypass",
+                            "encrypted-client-hello": "block",
+                            "expired-server-cert": "block",
+                            "min-allowed-ssl-version": "tls-1.1",
+                            "oid": 4430,
+                            "proxy-after-tcp-handshake": "disable",
+                            "quic": "bypass",
+                            "revoked-server-cert": "block",
+                            "sni-server-cert-check": "enable",
+                            "status": "disable",
+                            "unsupported-ssl-cipher": "allow",
+                            "unsupported-ssl-negotiation": "allow",
+                            "unsupported-ssl-version": "block",
+                            "untrusted-server-cert": "allow"
+                          },
+                          "imaps": {
+                            "cert-validation-failure": "block",
+                            "cert-validation-timeout": "allow",
+                            "client-certificate": "inspect",
+                            "expired-server-cert": "block",
+                            "oid": 4432,
+                            "proxy-after-tcp-handshake": "disable",
+                            "revoked-server-cert": "block",
+                            "sni-server-cert-check": "enable",
+                            "status": "disable",
+                            "unsupported-ssl-cipher": "allow",
+                            "unsupported-ssl-negotiation": "allow",
+                            "unsupported-ssl-version": "block",
+                            "untrusted-server-cert": "allow"
+                          },
+                          "name": "no-inspection",
+                          "oid": 4428,
+                          "pop3s": {
+                            "cert-validation-failure": "block",
+                            "cert-validation-timeout": "allow",
+                            "client-certificate": "inspect",
+                            "expired-server-cert": "block",
+                            "oid": 4433,
+                            "proxy-after-tcp-handshake": "disable",
+                            "revoked-server-cert": "block",
+                            "sni-server-cert-check": "enable",
+                            "status": "disable",
+                            "unsupported-ssl-cipher": "allow",
+                            "unsupported-ssl-negotiation": "allow",
+                            "unsupported-ssl-version": "block",
+                            "untrusted-server-cert": "allow"
+                          },
+                          "smtps": {
+                            "cert-validation-failure": "block",
+                            "cert-validation-timeout": "allow",
+                            "client-certificate": "inspect",
+                            "expired-server-cert": "block",
+                            "oid": 4434,
+                            "proxy-after-tcp-handshake": "disable",
+                            "revoked-server-cert": "block",
+                            "sni-server-cert-check": "enable",
+                            "status": "disable",
+                            "unsupported-ssl-cipher": "allow",
+                            "unsupported-ssl-negotiation": "allow",
+                            "unsupported-ssl-version": "block",
+                            "untrusted-server-cert": "allow"
+                          },
+                          "ssh": {
+                            "inspect-all": "disable",
+                            "oid": 4435,
+                            "ports": [
+                              22
+                            ],
+                            "proxy-after-tcp-handshake": "disable",
+                            "ssh-algorithm": "compatible",
+                            "ssh-tun-policy-check": "disable",
+                            "status": "disable",
+                            "unsupported-version": "bypass"
+                          },
+                          "ssl": {
+                            "cert-probe-failure": "allow",
+                            "client-certificate": "bypass",
+                            "encrypted-client-hello": "block",
+                            "inspect-all": "disable",
+                            "min-allowed-ssl-version": "tls-1.1",
+                            "oid": 4429,
+                            "unsupported-ssl-cipher": "allow",
+                            "unsupported-ssl-negotiation": "allow",
+                            "unsupported-ssl-version": "block"
+                          },
+                          "ssl-anomaly-log": "enable",
+                          "ssl-exempt": null,
+                          "ssl-exemption-ip-rating": "enable",
+                          "ssl-exemption-log": "disable",
+                          "ssl-handshake-log": "disable",
+                          "ssl-negotiation-log": "enable",
+                          "ssl-server": null,
+                          "ssl-server-cert-log": "disable",
+                          "supported-alpn": "all"
+                        }
+                      ]
+                    },
+                    "replacemsg-override-group": [],
+                    "reputation-minimum": 0,
+                    "reputation-minimum6": 0,
+                    "rtp-nat": "disable",
+                    "schedule": [
+                      "always"
+                    ],
+                    "schedule-timeout": "disable",
+                    "sctp-filter-profile": [],
+                    "service": [
+                      "ALL"
+                    ],
+                    "service-negate": "disable",
+                    "session-ttl": "0",
+                    "sgt": [],
+                    "sgt-check": "disable",
+                    "src-vendor-mac": [],
+                    "srcaddr": [
+                      "host_001"
+                    ],
+                    "srcaddr-negate": "disable",
+                    "srcaddr6": [],
+                    "srcaddr6-negate": "disable",
+                    "srcintf": [
+                      "lan"
+                    ],
+                    "ssl-ssh-profile": [
+                      "no-inspection"
+                    ],
+                    "status": "enable",
+                    "tcp-mss-receiver": 0,
+                    "tcp-mss-sender": 0,
+                    "tcp-session-without-syn": "disable",
+                    "timeout-send-rst": "disable",
+                    "tos": "0x00",
+                    "tos-mask": "0x00",
+                    "tos-negate": "disable",
+                    "traffic-shaper": [],
+                    "traffic-shaper-reverse": [],
+                    "users": [],
+                    "utm-status": "enable",
+                    "uuid": "3be6bd5c-771f-51ef-6b7a-ba0ec27ac141",
+                    "virtual-patch-profile": [],
+                    "vlan-cos-fwd": 255,
+                    "vlan-cos-rev": 255,
+                    "vlan-filter": null,
+                    "voip-profile": [],
+                    "vpn_dst_node": null,
+                    "vpn_src_node": null,
+                    "wccp": "disable",
+                    "webcache-https": "disable",
+                    "webfilter-profile": []
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/pm/config/adom/demo/pkg/pkg_001/firewall/policy/1"
+                }
+              ]
+            }
+
+      .. note::
+
+         - Look for the ``referrer object map`` sub-table.
 
 Partial Install
 +++++++++++++++
