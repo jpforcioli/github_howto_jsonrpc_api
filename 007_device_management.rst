@@ -2894,6 +2894,104 @@ the ``demo`` ADOM:
      option in a Device Blueprint and to add your Model Device by referencing 
      this Device Blueprint!
 
+How to add a list of Model Device?
+++++++++++++++++++++++++++++++++++
+
+The following example shows how to add a list of Model Devices in the ``demo``
+ADOM. It showcases using a Device Blueprint and the new ``meta variables`` block
+(see :ref:`How to add a Model HA Cluster with Device Blueprint and Metadata?`) used to initialize the ``metadata``.
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "add-dev-list": [
+                   {
+                     "device action": "add_model",
+                     "device blueprint": "dbp_001",
+                     "meta variables": {
+                       "var_001": "val_001_dev_001",
+                       "var_002": "val_002_dev_001",
+                       "var_003": "val_003_dev_001"
+                     },
+                     "mgmt_mode": "fmg",
+                     "mr": 4,
+                     "name": "dev_001",
+                     "os_type": "fos",
+                     "os_ver": "7.0",
+                     "sn": "FGT40F0000000001"
+                   },
+                   {
+                     "device action": "add_model",
+                     "device blueprint": "dpb_001",
+                     "meta variables": {
+                       "var_001": "val_001_dev_002",
+                       "var_002": "val_002_dev_002",
+                       "var_003": "val_003_dev_002"
+                     },
+                     "mgmt_mode": "fmg",
+                     "mr": 4,
+                     "name": "dev_002",
+                     "os_type": "fos",
+                     "os_ver": "7.0",
+                     "sn": "FGT40F0000000002"
+                   },
+                   {
+                     "device action": "add_model",
+                     "device blueprint": "dbp_001",
+                     "meta variables": {
+                       "var_001": "val_001_dev_003",
+                       "var_002": "val_002_dev_003",
+                       "var_003": "val_003_dev_003"
+                     },
+                     "mgmt_mode": "fmg",
+                     "mr": 4,
+                     "name": "dev_003",
+                     "os_type": "fos",
+                     "os_ver": "7.0",
+                     "sn": "FGT40F0000000003"
+                   }
+                 ],
+                 "adom": "demo",
+                 "flags": [
+                   "create_task"
+                 ]
+               },
+               "url": "/dvm/cmd/add/dev-list"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json      
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "taskid": 1956
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvm/cmd/add/dev-list"
+             }
+           ]
+         }
+         
 How to enable the auto-link flag on a Model Device?
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 

@@ -5372,7 +5372,7 @@ policies, just use the ``expand datasrc`` as shown below:
 
    .. tab-item:: RESPONSE
 
-      .. code-block:: json
+      .. code-block::
 
          {
            "id": 1,
