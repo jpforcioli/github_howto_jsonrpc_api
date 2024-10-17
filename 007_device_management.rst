@@ -4380,8 +4380,11 @@ in the ``demo`` ADOM:
            ]
          }
 
+Devce Meta Fields
+-----------------
+
 How to get specific device meta fields?
----------------------------------------
++++++++++++++++++++++++++++++++++++++++
 
 Caught in #1068409.
 
@@ -4539,8 +4542,9 @@ all meta fields will be returned:
            ]
          }
 
-If you want to get specific meta fields for one device use the workaround consists in using the ``filter`` attribute while you keep getting
-the entire list of device as shown below:
+If you want to get specific meta fields for one device, then use the workaround
+consists in using the ``filter`` attribute while you keep getting the entire
+list of device as shown below: 
 
 .. tab-set::
 
@@ -4605,61 +4609,66 @@ the entire list of device as shown below:
          }
 
 How to set device's meta fields?
---------------------------------
+++++++++++++++++++++++++++++++++
 
-**REQUEST:**
+The following example shows how to set some  meta fields for the ``dev_001``
+device:
 
-.. code-block:: json
+.. tab-set::
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "set",
-     "params": [
-       {
-         "data": {
-           "meta fields": {
-             "branch_id": "2",
-             "branch_latitude": "48.892449",
-             "branch_longitude": "2.240228",
-             "branch_mgmt_ip": "192.168.0.120",
-             "branch_tz": "28",
-             "region_id": "18"
-           }
-         },
-         "url": "/dvmdb/device/branch2_fgt"
-       }
-     ],
-     "session": "jykn9N/VfDy1fvapET/zbqByuThTpyFQAsqpfD3ViXf93fabHKZpxiRjfcY8jL07eYpTkoyZuc6TVMgfCy/L9g==",
-     "verbose": 1
-   }
+   .. tab-item:: REQUEST
 
-.. note::
+      .. code-block:: json
 
-   - Don't use integer for the metafield.
+         {
+           "id": 1,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "meta fields": {
+                   "branch_id": "2",
+                   "branch_latitude": "48.892449",
+                   "branch_longitude": "2.240228",
+                   "branch_mgmt_ip": "192.168.0.120",
+                   "branch_tz": "28",
+                   "region_id": "18"
+                 }
+               },
+               "url": "/dvmdb/device/dev_001"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+      
+      .. note::
+
+         - Don't use integer for setting a meta field. All meta fields are 
+           strings!
    
-     For instance, for the ``branch_id`` meta field we have used a string
-     ``"2"`` instead of an integer ``2``.
+         - For instance, for the ``branch_id`` meta field, the ``"2"`` has been
+           used instead of the more intuitive ``2`` integer.
    
-**RESPONSE:**
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json   
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "name": "branch2_fgt"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/device/branch2_fgt"
-       }
-     ]
-   }
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "name": "dev_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device/dev_001"
+             }
+           ]
+         }
 
 VDOM operations
 ---------------
