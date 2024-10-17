@@ -20,6 +20,7 @@ filelock==3.13.1
 html5lib==1.1
 idna==3.6
 imagesize==1.4.1
+install==1.3.5
 Jinja2==3.1.3
 livereload==2.6.3
 lsprotocol==2023.0.0
@@ -35,6 +36,7 @@ pyspellchecker==0.8.0
 requests==2.31.0
 ruamel.yaml==0.18.5
 ruamel.yaml.clib==0.2.8
+setuptools==69.5.1
 six==1.16.0
 snowballstemmer==2.2.0
 soupsieve==2.5
