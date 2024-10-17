@@ -4258,124 +4258,351 @@ To delete such a device, just use an empty ``adom`` value:
      ]
    }
 
-How to get device's meta fields?
---------------------------------
+How to get device meta fields?
+------------------------------
 
-Meta fields are not returned when getting the list of devices or when getting the properties of a specific device.
+Meta fields are not returned when getting the list of devices or when getting the details of a specific device.
 
-We have to add the option ``get meta``.
-We can also use the ``fields`` parameter to only return the now exposed ``meta
-fields`` (and other fields we would like to be in the output).
+You have to add the option ``get meta``.
 
-The option works when getting list of devices:
+You can also use the ``fields`` parameter to only return the now exposed ``meta
+fields``.
 
-**REQUEST:**
+The following example shows how to get the meta fields for all devices managed
+in the ``demo`` ADOM:
 
-.. code-block:: json
+.. tab-set::
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "get",
-     "params": [
-       {
-         "fields": [
-           "name",
-           "meta fields"
-         ],
-         "loadsub": 0,
-         "option": [
-           "get meta"
-         ],
-         "url": "/dvmdb/adom/SDWAN/device"
-       }
-     ],
-     "session": "WWea7FR1N3iXssdeNZdUO/6m2AR1LmEaz8jaJmBwTm8BhmiySKNylqqsc2vrDNP1TMruRxX1fC6E4DxuFJTXKg==",
-     "verbose": 1
-   }
+   .. tab-item:: REQUEST
 
-**RESPONSE:**
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "meta fields"
+               ],
+               "loadsub": 0,
+               "option": [
+                 "get meta"
+               ],
+               "url": "/dvmdb/adom/demo/device"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-		{
-		  "id": 1,
-		  "result": [
-		    {
-		      "data": [
-		        {
-			  "meta fields": {
-			    "Address": "",
-			    "Company/Organization": "",
-			    "Contact Email": "",
-			    "Contact Phone Number": "",
-			    "branch_id": "",
-			    "branch_latitude": "",
-			    "branch_longitude": "",
-			    "branch_timezone": "",
-			    "lan_netmask": "",
-			    "lan_network": ""
-			  },
-			  "name": "device-001",
-			  "oid": 1152
-			},
-			{
-			  "meta fields": {
-			    "Address": "",
-			    "Company/Organization": "",
-			    "Contact Email": "",
-			    "Contact Phone Number": "",
-			    "branch_id": "1",
-			    "branch_latitude": "48.85",
-			    "branch_longitude": "2.34",
-			    "branch_timezone": "28",
-			    "lan_netmask": "",
-			    "lan_network": ""
-			  },
-			  "name": "fgt-branch1",
-			  "oid": 1117
-			},
-			{
-			  "meta fields": {
-			    "Address": "",
-			    "Company/Organization": "",
-			    "Contact Email": "",
-			    "Contact Phone Number": "",
-			    "branch_id": "2",
-			    "branch_latitude": "40.71",
-			    "branch_longitude": "-74.00",
-			    "branch_timezone": "12",
-			    "lan_netmask": "",
-			    "lan_network": ""
-			  },
-			  "name": "fgt-branch2",
-			  "oid": 1144
-			},
-			{
-			  "meta fields": {
-			    "Address": "",
-			    "Company/Organization": "",
-			    "Contact Email": "",
-			    "Contact Phone Number": "",
-			    "branch_id": "",
-			    "branch_latitude": "",
-			    "branch_longitude": "",
-			    "branch_timezone": "",
-			    "lan_netmask": "",
-			    "lan_network": ""
-			  },
-			  "name": "fgt-hub",
-			  "oid": 1111
-			}
-		      ],
-		      "status": {
-		        "code": 0,
-		        "message": "OK"
-		      },
-		      "url": "/dvmdb/adom/SDWAN/device"
-		    }
-		  ]
-		}
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": [
+                 {
+         	  "meta fields": {
+         	    "Address": "",
+         	    "Company/Organization": "",
+         	    "Contact Email": "",
+         	    "Contact Phone Number": "",
+         	    "branch_id": "",
+         	    "branch_latitude": "",
+         	    "branch_longitude": "",
+         	    "branch_timezone": "",
+         	    "lan_netmask": "",
+         	    "lan_network": ""
+         	  },
+         	  "name": "dev_001",
+         	  "oid": 1152
+         	},
+         	{
+         	  "meta fields": {
+         	    "Address": "",
+         	    "Company/Organization": "",
+         	    "Contact Email": "",
+         	    "Contact Phone Number": "",
+         	    "branch_id": "1",
+         	    "branch_latitude": "48.85",
+         	    "branch_longitude": "2.34",
+         	    "branch_timezone": "28",
+         	    "lan_netmask": "",
+         	    "lan_network": ""
+         	  },
+         	  "name": "dev_002",
+         	  "oid": 1117
+         	},
+         	{
+         	  "meta fields": {
+         	    "Address": "",
+         	    "Company/Organization": "",
+         	    "Contact Email": "",
+         	    "Contact Phone Number": "",
+         	    "branch_id": "2",
+         	    "branch_latitude": "40.71",
+         	    "branch_longitude": "-74.00",
+         	    "branch_timezone": "12",
+         	    "lan_netmask": "",
+         	    "lan_network": ""
+         	  },
+         	  "name": "dev_003",
+         	  "oid": 1144
+         	},
+         	{
+         	  "meta fields": {
+         	    "Address": "",
+         	    "Company/Organization": "",
+         	    "Contact Email": "",
+         	    "Contact Phone Number": "",
+         	    "branch_id": "",
+         	    "branch_latitude": "",
+         	    "branch_longitude": "",
+         	    "branch_timezone": "",
+         	    "lan_netmask": "",
+         	    "lan_network": ""
+         	  },
+         	  "name": "dev_004",
+         	  "oid": 1111
+         	}
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/device"
+             }
+           ]
+         }
+
+How to get specific device meta fields?
+---------------------------------------
+
+Caught in #1068409.
+
+As you can see in :ref:`How to get device meta fields?`, the list of meta fields
+could be a bit large and if you're also having a large list of devices, it could
+take time to obtain your response.
+
+To optimize the overlall process, you can ask for specific meta fields.
+
+The following example shows how to get the ``mf_001`` and ``mf_002`` meta fields
+for all devices managed in the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "meta fields"
+               ],
+               "loadsub": 0,
+               "meta fields": [
+                 "mf_001",
+                 "mf_002"
+               ],
+               "option": [
+                 "get meta"
+               ],
+               "url": "/dvmdb/adom/demo/device"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "meta fields": {
+                     "mf_001": "",
+                     "mf_002": ""
+                   },
+                   "name": "dev_001",
+                   "oid": 1152
+                 },
+                 {
+                   "meta fields": {
+                     "mf_001": "",
+                     "mf_002": ""
+                   },
+                   "name": "dev_002",
+                   "oid": 1117
+                 },
+                 {
+                   "meta fields": {
+                     "mf_001": "",
+                     "mf_002": ""
+                   },
+                   "name": "dev_003",
+                   "oid": 1144
+                 },
+                 {
+                   "meta fields": {
+                     "mf_001": "",
+                     "mf_002": ""
+                   },
+                   "name": "dev_004",
+                   "oid": 1111
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/device"
+             }
+           ]
+         }
+
+This ``meta fields`` attribute isn't enforced when you want to get specific meta
+fields for a specific device. For instance, if you try the following example, to
+get specific meta fields for the ``dev_001`` device in the ``demo`` ADOM, then
+all meta fields will be returned: 
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "meta fields"
+               ],
+               "loadsub": 0,
+               "meta fields": [
+                 "mf_001",
+                 "mf_002"
+               ],
+               "option": [
+                 "get meta"
+               ],
+               "url": "/dvmdb/adom/demo/device/dev_001"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "meta fields": {
+                   "Address": "",
+                   "Company/Organization": "",
+                   "Contact Email": "",
+                   "Contact Phone Number": "",
+                   "mf_001": "val_001",
+                   "mf_002": "val_002"
+                 },
+                 "name": "dev_001",
+                 "oid": 1152
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/device/dev_001"
+             }
+           ]
+         }
+
+If you want to get specific meta fields for one device use the workaround consists in using the ``filter`` attribute while you keep getting
+the entire list of device as shown below:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "meta fields"
+               ],
+               "filter": [
+                 "name",
+                 "==",
+                 "dev_001"
+               ],
+               "loadsub": 0,
+               "meta fields": [
+                 "mf_001",
+                 "mf_002"
+               ],
+               "option": [
+                 "get meta"
+               ],
+               "url": "/dvmdb/adom/demo/device"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "meta fields": {
+                     "mf_001": "val_001",
+                     "mf_002": "val_002"
+                   },
+                   "name": "dev_001",
+                   "oid": 1152
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/device"
+             }
+           ]
+         }
 
 How to set device's meta fields?
 --------------------------------
@@ -5094,8 +5321,8 @@ Caught in #0617663.
 
 TODO
 
-How to get the Device VDOM metafields for all VDOMs of a device?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to get the Device VDOM meta fields for all VDOMs of a device?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 We have to use the option ``get meta``.
 
@@ -5167,8 +5394,8 @@ in ADOM ``root``:
      ]
    }
 
-How to get the Device VDOM metafields for a single VDOM?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to get the Device VDOM meta fields for a single VDOM?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 We have to use the option ``get meta``.
 
@@ -9626,6 +9853,12 @@ Following example show how to delete a single router ospf network entry with ``i
              }
            ]
          }
+
+Create FortiOS API users
+------------------------
+
+This is for creating FortiOS API users from the FortiManager.
+
 
 FortiGate with internal modems
 ------------------------------
