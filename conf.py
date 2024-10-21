@@ -64,7 +64,7 @@ html_theme = "sphinx_book_theme"
 # Configuration for the sphinxcontrib.images extension
 images_config = {
     "backend": "LightBox2",
-    "default_show_title": True,
+#    "default_show_title": True,
     "default_image_width": "50%",
     "default_image_height": "50%",
 }
