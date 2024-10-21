@@ -4231,3 +4231,291 @@ For instance:
                   "session": 19874,
                   "verbose": 1
                 }
+
+ADOM Backup Mode
+----------------
+
+It is possible to centrally manage certain objects used in your managed devices’
+firewall policies, even when they are within an ADOM in backup mode.
+
+Similar to a normal ADOM, you define objects in FortiManager, making them
+available to all your managed devices. The key difference is that in a backup
+mode ADOM, there is no install capability. The synchronization process must be
+triggered from the FortiGate GUI. This process is documented here: :bdg-link-primary-line:`Importing objects to backup ADOMs
+<https://docs.fortinet.com/document/fortimanager/7.6.0/administration-guide/729689/importing-objects-to-backup-adoms>`
+
+If you need to automate this process, first, obtain an ADOM checksum for your
+managed device. If the checksum differs from the previous one, it indicates that
+new objects need to be reviewed. Once identified, you can retrieve their CLI or
+JSON syntax to update the managed device.
+
+How to get the ADOM checksum for a managed device?
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The checksum is used to track ADOM objects that can be synchronized with managed
+devices. When you add or update objects in an ADOM, a new checksum will be
+generated. 
+
+Here’s an example of how to get the ADOM checksum for the VDOM ``root`` of a
+managed device with the serial number ``FGVMUL0000000001``:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/devrpc/sharedobj/checksum/FGVMUL0000000001/root"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "checksum": "a3df1f4c75a8311cde9e7834e7927182"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/devrpc/sharedobj/checksum/FGVMUL0000000001/root"
+             }
+           ]
+         }
+
+How to review the ADOM objects?
++++++++++++++++++++++++++++++++
+
+You need to review the ADOM objects whenever a new ADOM checksum is generate
+(see :ref:`How to get the ADOM checksum for a managed device?`).
+
+The following example shows how to review the ADOM objects for the VDOM ``root``
+of a managed device with the serial number ``FGVMUL0000000001``:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/devrpc/sharedobj/summary/FGVMUL0000000001/root"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "checksum": "a3df1f4c75a8311cde9e7834e7927182",
+                 "conflict object": 75,
+                 "local object": 2,
+                 "missing object": 2,
+                 "percent": 100,
+                 "pid": 24480,
+                 "summary": [
+                   {
+                     "category": "firewall address",
+                     "local object": [
+                       {
+                         "mkey": "tun_01_remote_subnet_1"
+                       },
+                       {
+                         "mkey": "tun_01_remote_gateway"
+                       }
+                     ],
+                     "missing object": [
+                       {
+                         "mkey": "RFC1918-192"
+                       },
+                       {
+                         "mkey": "metadata-server"
+                       }
+                     ]
+                   },
+                   {
+                     "category": "firewall service custom",
+                     "conflict object": [
+                       {
+                         "mkey": "ALL_TCP"
+                       },
+                       {
+                         "mkey": "ALL_UDP"
+                       },
+                       {
+                         "mkey": "GTP"
+                       },
+                       {"TRUNCARED": "TRUNCATED"},
+                       {
+                         "mkey": "LDAP_UDP"
+                       },
+                       {
+                         "mkey": "SMB"
+                       },
+                       {
+                         "mkey": "NONE"
+                       }
+                     ]
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/devrpc/sharedobj/summary/FGVMMLTM22002640/root"
+             }
+           ]
+         }
+
+      .. note::
+
+         - Usually, you review the objects returned in the ``missing object``
+           block as these are the ones you're trying to make available in
+           your managed device's object list.
+
+         - Objects listed in the ``missing object`` block exist in the ADOM in
+           backup mode, but are not present in the managed device specified in
+           the request.
+
+How to get the details of ADOM objects?
++++++++++++++++++++++++++++++++++++++++
+
+Typically, you review the details of ADOM objects listed in the ``missing
+object`` block when you checking your ADOM objects (see
+:ref:`How to review the ADOM objects?`). You need these details because you're
+likely need to create similar objects on your manage FortiGate.
+
+The following example shows how to get the detail of the firewall address
+``RFC1918-192`` for the ``root`` VDOM of the managed device with serial number
+``FGVMUL0000000001``:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/devrpc/sharedobj/detail/FGVMUL0000000001/root/firewall/address/RFC1918-192"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "json": {
+                   "allow-routing": "disable",
+                   "associated-interface": [
+                     "any"
+                   ],
+                   "clearpass-spt": "unknown",
+                   "color": 0,
+                   "dirty": "dirty",
+                   "fabric-object": "disable",
+                   "name": "RFC1918-192",
+                   "node-ip-only": "disable",
+                   "obj-type": "ip",
+                   "route-tag": 0,
+                   "subnet": [
+                     "192.168.0.0",
+                     "255.255.0.0"
+                   ],
+                   "type": "ipmask",
+                   "uuid": "f5258644-8d23-51ef-e3ca-3902e80d9667"
+                 },
+                 "mkey": "RFC1918-192",
+                 "object status": "missing object",
+                 "script": "config firewall address\nedit \"RFC1918-192\"\nset uuid f5258644-8d23-51ef-e3ca-3902e80d9667\nset subnet 192.168.0.0 255.255.0.0\nnext\nend\n"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/devrpc/sharedobj/detail/FGVMUL0000000001/root/firewall/address/RFC1918-192"
+             }
+           ]
+         }
+
+
+      .. note::
+
+         - Two blocks are returned: the ``json`` and ``script`` blocks
+         - You can ask FortiManager to return either one of them using the
+           option ``json`` or ``script``:
+
+           .. tab-set::
+            
+              .. tab-item:: ``json`` option
+
+                 .. code-block:: json
+           
+                    {
+                      "id": 3,
+                      "method": "get",
+                      "params": [
+                        {
+                          "url": "/devrpc/sharedobj/detail/FGVMUL0000000001/root/firewall/address/RFC1918-192",
+                          "option": "json"
+                        }
+                      ],
+                      "session": "{{session}}",
+                      "verbose": 1
+                    }
+
+              .. tab-item:: ``script`` option
+
+                 .. code-block:: json
+           
+                    {
+                      "id": 3,
+                      "method": "get",
+                      "params": [
+                        {
+                          "url": "/devrpc/sharedobj/detail/FGVMUL0000000001/root/firewall/address/RFC1918-192",
+                          "option": "script"
+                        }
+                      ],
+                      "session": "{{session}}",
+                      "verbose": 1
+                    }                    
