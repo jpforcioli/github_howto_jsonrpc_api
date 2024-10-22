@@ -316,7 +316,7 @@ How to get the FortiManager license?
                "data": {
                  "contract": [
                    {
-                     "account": "jpforcioli@fortinet.com",
+                     "account": "foo@bar.com",
                      "company": "Fortinet",
                      "contract_item": [
                        "ADOM-1-06-20260525:0:5000:5000:0",
@@ -331,8 +331,8 @@ How to get the FortiManager license?
                        "VMLS-1-06-20260525:0:5000:5000:0"
                      ],
                      "industry": "Technology",
-                     "rawdata": "Contract=ADOM-1-06-20260525:0:5000:5000:0*AVDB-1-99-20221001:0:1:1:0*AVEN-1-99-20221001:0:1:1:0*COMP-1-20-20260525:0:1:1:0*ENHN-1-20-20260525:0:1:1:0*FMWR-1-06-20260525:0:1:1:0*FRVS-1-06-20260525:0:1:1:0*NIDS-1-99-20221001:0:1:1:0*SPRT-1-20-20260525:0:1:1:0*VMLS-1-06-20260525:0:5000:5000:0|AccountID=jpforcioli@fortinet.com|Industry=Technology|Company=Fortinet|UserID=106728",
-                     "serial": "FMVMMLTM22123079"
+                     "rawdata": "Contract=ADOM-1-06-20260525:0:5000:5000:0*AVDB-1-99-20221001:0:1:1:0*AVEN-1-99-20221001:0:1:1:0*COMP-1-20-20260525:0:1:1:0*ENHN-1-20-20260525:0:1:1:0*FMWR-1-06-20260525:0:1:1:0*FRVS-1-06-20260525:0:1:1:0*NIDS-1-99-20221001:0:1:1:0*SPRT-1-20-20260525:0:1:1:0*VMLS-1-06-20260525:0:5000:5000:0|AccountID=foo@bar.com|Industry=Technology|Company=Fortinet|UserID=106728",
+                     "serial": "FMVMMLREDACTED79"
                    }
                  ],
                  "count": 1
@@ -507,7 +507,6 @@ How to create Device Meta fields?
 
    {
      "id": 1,
-     "jsonrpc": "1.0",
      "method": "set",
      "params": [
        {
@@ -520,8 +519,7 @@ How to create Device Meta fields?
          "url": "/dvmdb/_meta_fields/device"
        }
      ],
-     "session": "+iLuqr601/V0Yd3hCt405kHSd0gnFbDrsv6EcLd7WoG1IJE+edzYsPDLVDXkwgEh8GVvvEScpoCQwZkdicjpfA==",
-     "verbose": 1
+     "session": "{{session}}"
    }
 
 **RESPONSE:**

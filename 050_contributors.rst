@@ -1,6 +1,6 @@
 Contributors
 ============
 
-#. Jean-Pierre Forcioli, `jpforcioli@fortinet.com`
-#. Laurent Venet, `lvenet@fortinet.com`
+#. Jean-Pierre Forcioli, Fortinet Inc.
+#. Laurent Venet, Fortinet Inc.
    - Import/Export of FortiGuard Objects (:ref:`How to export/import FortiGuard objects?`)

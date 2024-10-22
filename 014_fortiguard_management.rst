@@ -1306,7 +1306,7 @@ themselves:
                          "type": "live_cloud_service"
                        },
                        "forticare": {
-                         "account": "jpforcioli@fortinet.com",
+                         "account": "foo@bar.com",
                          "company": "Fortinet",
                          "industry": "Technology",
                          "registration_status": "registered",

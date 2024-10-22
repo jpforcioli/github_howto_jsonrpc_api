@@ -617,7 +617,7 @@ Following |fmg_api| call will return all firewall address from the ``dc_emea`` A
                      {
                        "_scope": [
                          {
-                           "name": "jpforcioli-fgt-741-001",
+                           "name": "fgt_001",
                            "vdom": "root"
                          }
                        ],

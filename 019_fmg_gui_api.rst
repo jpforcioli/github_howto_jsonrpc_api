@@ -279,7 +279,7 @@ This is to get most of the information exposed in the *License Information* widg
             "en_com_fgd_svr": 1,
             "usg": 1,
             "usg_has_lic": 0,
-            "account_id": "jpforcioli@fortinet.com",
+            "account_id": "foo@bar.com",
             "company": "Fortinet",
             "licenses": {
               "ENHN": {

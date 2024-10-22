@@ -450,22 +450,20 @@ To import a certificate with a password protected private key:
 
    {
      "id": 1,
-     "jsonrpc": "1.0",
      "method": "add",
      "params": [
        {
          "data": {
            "certificate": "-----BEGIN CERTIFICATE-----\nMIID[...]KNs=\n-----END CERTIFICATE-----\n",
            "comment": "Created via FMG JSON RPC API",
-           "name": "aforcioli",
+           "name": "cert_001",
            "password": "fortinet",
            "private-key": "-----BEGIN ENCRYPTED PRIVATE KEY-----\nMII[...]Amo+g==\n-----END ENCRYPTED PRIVATE KEY-----\n"
          },
          "url": "/cli/global/system/certificate/local"
        }
      ],
-     "session": "U/btBBYaG0g/4exRq11ud68C3cORzFUrBdLRjoUkCJBUeMkX1SoFvRLJ/QnrkkU6prYtLALy0GdOtXLJhDlJGg==",
-     "verbose": 1
+     "session": "{{session}}"
    }
 
 **RESPONSE**:
@@ -477,7 +475,7 @@ To import a certificate with a password protected private key:
      "result": [
        {
          "data": {
-           "name": "aforcioli"
+           "name": "cert_001"
          },
          "status": {
            "code": 0,
@@ -496,21 +494,19 @@ To import a certificate with a non-protected private key:
 
    {
      "id": 1,
-     "jsonrpc": "1.0",
      "method": "add",
      "params": [
        {
          "data": {
            "certificate": "-----BEGIN CERTIFICATE-----\nMIID[...]70A==\n-----END CERTIFICATE-----\n",
            "comment": "Created via FMG JSON RPC API",
-           "name": "jpforcioli",
+           "name": "cert_002",
            "private-key": "-----BEGIN RSA PRIVATE KEY-----\nMII[...]Adg==\n-----END RSA PRIVATE KEY-----\n"
          },
          "url": "/cli/global/system/certificate/local"
        }
      ],
-     "session": "fM/2ULXnAilnUH4wjG+Xs9dz2RUg1BIkYeOJ2eFOwzW51pW+5jHbJooStLHVWo5Trg9hC/Xzl1UQ3OwellQatQ==",
-     "verbose": 1
+     "session": "{{session}}"
    }
 
 **RESPONSE:**
@@ -522,7 +518,7 @@ To import a certificate with a non-protected private key:
      "result": [
        {
          "data": {
-           "name": "jpforcioli"
+           "name": "cert_002"
          },
          "status": {
            "code": 0,
