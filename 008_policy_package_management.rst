@@ -2366,6 +2366,8 @@ The following example shows how to obtain the Install Preview output for the ``d
    .. tab-item:: RESPONSE
 
       .. dropdown:: Click to expand
+         :color: primary
+         :icon: chevron-up
 
          .. code-block:: json            
 
@@ -5544,7 +5546,9 @@ Starting with FortiManager 7.6.1 you can just get the firewall policy with the
 
    .. tab-item:: RESPONSE
 
-      .. dropdown:: Long output
+      .. dropdown:: Click to expand
+         :color: primary
+         :icon: chevron-up        
 
          .. code-block:: json
 

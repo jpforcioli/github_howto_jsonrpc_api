@@ -2142,7 +2142,7 @@ commands`` system to set some metadatas:
 
    .. tab-item:: REQUEST
 
-      .. dropdown:: Click to see the request
+      .. dropdown:: Click to expand
          :color: primary
          :icon: chevron-up
 

@@ -4910,9 +4910,9 @@ The following example shows how to get the tunnel entries in the
 
    .. tab-item:: RESPONSE
 
-      .. dropdown:: Click to see response
-         :color: secondary
-         :icon: chevron-down
+      .. dropdown:: Click to expand
+         :color: primary
+         :icon: chevron-up    
         
          .. code-block:: json
 
@@ -5286,9 +5286,9 @@ The following example shows how to get the tunnel with ``ol_isp1`` (``seq`` is `
 
    .. tab-item:: RESPONSE
 
-      .. dropdown:: Click to see response
-         :color: secondary
-         :icon: chevron-down
+      .. dropdown:: Click to expand
+         :color: primary
+         :icon: chevron-up    
         
          .. code-block:: json
 
@@ -5534,7 +5534,7 @@ recommended:
 
    .. tab-item:: REQUEST
 
-      .. dropdown:: Click to see request
+      .. dropdown:: Click to expand
          :color: primary
          :icon: chevron-up
 
@@ -5772,10 +5772,10 @@ recommended:
 
    .. tab-item:: Example with a python script
 
-      .. dropdown:: Click to see the script
+      .. dropdown:: Click to expand
          :color: primary
-         :icon: chevron-up
-
+         :icon: chevron-up    
+         
          .. literalinclude:: scripts/fmg_ipsec_tunnel_template_tunnel_add.py
             :language: python
 
@@ -5801,7 +5801,7 @@ The following process is recommended:
 
    .. tab-item:: REQUEST
 
-      .. dropdown:: Click to see request
+      .. dropdown:: Click to expand
          :color: primary
          :icon: chevron-up
 
@@ -6042,7 +6042,7 @@ The following process is recommended:
 
    .. tab-item:: Example with a python script
 
-      .. dropdown:: Click to see the script
+      .. dropdown:: Click to expand
          :color: primary
          :icon: chevron-up
 

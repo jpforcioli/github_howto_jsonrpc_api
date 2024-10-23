@@ -1145,8 +1145,8 @@ It contains the ``script_001`` and ``script_001`` CLI Script members:
          - For instance:
          
            .. dropdown:: Click to expand
-              :color: info 
-              :icon: chevron-down
+              :color: primary
+              :icon: chevron-up
 
               .. tab-set::
    
