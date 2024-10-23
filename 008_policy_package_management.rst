@@ -3361,6 +3361,267 @@ To move the cloned firewall policy with ``policyid`` ``1071741830`` above the fi
 Firewall Policies
 -----------------
 
+How to get a firewall policy based on its position?
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+When you get a table like the firewall policy table, FortiManager is returning a
+list. Then, like with every lists, to get a specific list element you have to
+use an index. Considering the index of the first element in a list is ``0``, to
+get the *Nth* element you need to use the  `N- 1` index.
+
+This section shows how you can use the ``range`` attribute which is working as
+explained below:
+
+.. card:
+
+   *For a range of [a, n], the output will contain n elements, starting from 
+   the ath matching result.*
+
+How to get the first firewall policy?
+_____________________________________
+
+The following example shows how to get the 1st firewall policy from the
+``ppkg_001`` Policy Package in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "policyid",
+                 "name"
+               ],
+               "loadsub": 0,
+               "range": [
+                 0,
+                 1
+               ],
+               "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         - ``0`` in the ``range`` attribute means you're asking for the first
+           element of the returned list. Then the ``1`` means you're asking for 
+           only 1 element.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "Policy_0019",
+                   "obj seq": 1,
+                   "oid": 5667,
+                   "policyid": 9
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+             }
+           ]
+         }
+
+      .. note::
+
+         - ``policyid`` aren't telling you the policy position. As you can see
+           in the response above, the first policy is with a ``policyid`` of 9
+
+How to get the nth firewall policy?
+___________________________________
+
+The following example shows how to get the 5th firewall policy from the
+``ppkg_001`` Policy Package in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "policyid",
+                 "name"
+               ],
+               "loadsub": 0,
+               "range": [
+                 4,
+                 1
+               ],
+               "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         - ``4`` in the ``range`` attribute means you're asking for the 5th
+           element of the returned list (don't forget that the first element
+           index is ``0``). Then the ``1`` means you're asking for only 1 
+           element.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "Policy_005",
+                   "obj seq": 5,
+                   "oid": 5689,
+                   "policyid": 22
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+             }
+           ]
+         }
+
+How to get the last firewall policy?
+____________________________________
+
+First you need to get the total number of firewall policies. The following
+example shows how to get the number of firewall policy from the ``ppkg_001``
+Policy Package in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "option": [
+                 "count"
+               ],
+               "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": 18,
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+             }
+           ]
+         }
+
+In the example above, you have 18 firewall policy. It means that the last policy
+is having the index ``17``.
+
+The following example shows how to get the 17th firewall policy (hence the last)
+from the ``ppkg_001`` Policy Package in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "policyid",
+                 "name"
+               ],
+               "loadsub": 0,
+               "range": [
+                 17,
+                 1
+               ],
+               "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         - ``4`` in the ``range`` attribute means you're asking for the 5th
+           element of the returned list (don't forget that the first element
+           index is ``0``). Then the ``1`` means you're asking for only 1 
+           element.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "Policy_018",
+                   "obj seq": 18,
+                   "oid": 5699,
+                   "policyid": 32
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+             }
+           ]
+         }
+
 How to get the default values for a firewall policy?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
