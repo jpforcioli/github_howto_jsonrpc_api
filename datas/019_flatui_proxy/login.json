@@ -1,0 +1,9 @@
+{
+    "url": "/gui/userauth",
+    "method": "login",
+    "params": {
+        "username": "devops",
+        "secretkey": "fortinet",
+        "logintype": 0
+    }
+}
