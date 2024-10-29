@@ -2450,43 +2450,54 @@ FortiSwitch Manager and its corresponding Device DB:
            ]
         }
 
-You can also use the following recommended alternative because it
-follows the FortiManager GUI logic:
+Add a Model FortiSwitch with FortiManager 7.4+
+______________________________________________
+
+You can also use the following recommended alternative because it follows the 
+FortiManager GUI logic.
+
+The following example shows how to add a Model FortiSwtich named ``fsw_001``
+that is assigned to the ``fsw_template_001`` FortiSwitch Templte, for the
+``dev_001`` managed device in the ``demo`` ADOM:
 
 .. tab-set::
 
    .. tab-item:: REQUEST
 
       .. code-block:: json
-      
+
          {
            "id": 3,
            "method": "add",
            "params": [
              {
                "data": {
-                 "name": "fsw_site_9",
-                 "platform": "FortiSwitch-108D-VM",
-                 "switch-id": "S108DVRC8W1KH102",
+                 "is-model": 1,
+                 "platform": "FortiSwitch-108F-FPOE",
+                 "sn": "S108FFTV21021101",
+                 "state": 2,
+                 "switch-id": "fsw_001",
+                 "template": "fsw_template_001",
                  "vlan-interface": "fortilink"
                },
                "scope member": [
                  {
-                   "name": "fgt_site_9",
+                   "name": "dev_001",
                    "vdom": "root"
                  }
                ],
-               "url": "/pm/config/adom/adom_dc3/obj/fsp/managed-switch"
+               "url": "/pm/config/adom/demo/obj/fsp/managed-switch"
              }
            ],
            "session": "{{session}}"
          }
-      
+
       .. warning::
 
-         - If you use the FortiManager CLI to debug what the FortiManager GUI is
-           doing when you add a new FortiSwitch from the FortiSwitch Manager
-           page, you will get a |fmg_api| request similar to the following one:
+         - If you use the FortiManager CLI/GUI to debug what the FortiManager
+           GUI is doing when you add a new FortiSwitch from the FortiSwitch
+           Manager page, you will get a |fmg_api| request similar to the
+           following one: 
 
            .. code-block:: json
 
@@ -2500,19 +2511,20 @@ follows the FortiManager GUI logic:
                     "data": {
                       "fsw-wan1-admin": 2,
                       "fsw-wan1-peer": "fortilink",
-                      "name": "fsw_004",
+                      "name": "fsw_001",
                       "platform": "FortiSwitch-108F-FPOE",
                       "state": 2,
-                      "switch-id": "S108FF0000000004",
+                      "switch-id": "S108FFTV21021101",
+                      "template": "fsw_template_001",
                       "vlan-interface": "fortilink"
                     },
                     "scope member": [
                       {
-                        "name": "site_002",
+                        "name": "dev_001",
                         "vdom": "root"
                       }
                     ],
-                    "url": "/pm/config/adom/dc_amer/obj/fsp/managed-switch/"
+                    "url": "/pm/config/adom/demo/obj/fsp/managed-switch/"
                   }
                 ],
                 "session": 54501
@@ -2532,36 +2544,31 @@ follows the FortiManager GUI logic:
                       "code": -10,
                       "message": "The data is invalid for selected url"
                     },
-                    "url": "/pm/config/adom/dc_amer/obj/fsp/managed-switch/"
+                    "url": "/pm/config/adom/demo/obj/fsp/managed-switch/"
                   }
                 ],
                 "id": 1
               }            
-  
+
    .. tab-item:: RESPONSE
 
-      .. code-block:: json
+      .. code-block:: json         
 
          {
            "id": 3,
            "result": [
              {
                "data": {
-                 "switch-id": "S108DVRC8W1KH102"
+                 "switch-id": "fsw_001"
                },
                "status": {
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/pm/config/adom/adom_dc3/obj/fsp/managed-switch"
+               "url": "/pm/config/adom/demo/obj/fsp/managed-switch"
              }
            ]
          }
-
-Add a Model FortiSwitch with FortiManager 7.4
-_____________________________________________
-
-
 
 How to create a custom command?
 +++++++++++++++++++++++++++++++
