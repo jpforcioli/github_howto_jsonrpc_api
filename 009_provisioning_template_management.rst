@@ -1500,7 +1500,7 @@ firmware enforcement set to firmware version ``6.4.3-b00451``:
          The request above is declaring a FortiAP device in ``dev_001`` device's
          DB. Then the ``push`` attribute instructs FortiManager to consider
          it for Central Management and this is why it becomes visible in the
-         ***AP Manager*** > ***Managed FortiAPs***  page.
+         **AP Manager** > **Managed FortiAPs**  page.
 
    .. tab-item:: RESPONSE
 
@@ -1560,8 +1560,8 @@ Recent versions of FortiManager (7.0.x) seem to use a different API request:
          directly. If you look in ``dev_001`` device's Device DB, then you won't
          see your FortiAP device. It will show up after an install operation.
    
-         For the ``_platform-type`` attribute, please refer to section 
-         :ref:```How to get the ``_platform-type``?```
+         For the ``_platform-type`` attribute, please refer to the section 
+         :ref:`How to get the Platform Type?`
 
    .. tab-item:: RESPONSE
 
@@ -1623,8 +1623,8 @@ attribute):
          directly. If you look in ``dev_001`` device's Device DB, then you won't
          see your FortiAP device. It will show up after an install operation.
    
-         For the ``_platform-type`` attribute, please refer to section 
-         :ref:```How to get the ``_platform-type``?```
+         For the ``_platform-type`` attribute, please refer to the section 
+         :ref:`How to get the Platform Type?`
 
    .. tab-item:: RESPONSE
 
@@ -1687,8 +1687,8 @@ Profile for the ``dev_001`` managed device in the ``demo`` ADOM:
          directly. If you look in ``dev_001`` device's Device DB, then you won't
          see your FortiAP device. It will show up after an install operation.
    
-         For the ``_platform-type`` attribute, please refer to section 
-         :ref:```How to get the ``_platform-type``?```         
+         For the ``_platform-type`` attribute, please refer to the section 
+         :ref:`How to get the Platform Type?`
 
    .. tab-item:: RESPONSE
 
@@ -1710,8 +1710,8 @@ Profile for the ``dev_001`` managed device in the ``demo`` ADOM:
            ]
          }
 
-How to get the ``_platform-type``?
-++++++++++++++++++++++++++++++++++
+How to get the Platform Type?
++++++++++++++++++++++++++++++
 
 To add a Model FortiAP, you need to specify the ``_platform-type``.
 
@@ -1776,8 +1776,8 @@ respective ``_platform-type`` values using the following API request:
            ]
          }
 
-The returned ``val`` attribute is the ``_platform-type`` value to use when
-adding a Model AP.
+      The returned ``val`` attribute is the ``_platform-type`` value to use when
+      adding a Model AP.
 
 How to delete a FortiAP profile?
 ++++++++++++++++++++++++++++++++
