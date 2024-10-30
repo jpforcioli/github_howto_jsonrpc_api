@@ -1464,8 +1464,8 @@ The following example shows how to get the list of interface actions in a the ``
 FortiAP Management
 ------------------
 
-How to create a Model FortiAP with firmware enforcement?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to create a Model FortiAP?
+++++++++++++++++++++++++++++++
 
 The example below demonstrates how to add the Model FortiAP named ``fap_001``
 using the ``fap_profile_001`` for the ``dev_001`` managed device, and with a
@@ -1495,6 +1495,13 @@ firmware enforcement set to firmware version ``6.4.3-b00451``:
            "session": "{{session}}"
          }
 
+      .. note::
+   
+         The request above is declaring a FortiAP device in ``dev_001`` device's
+         DB. Then the ``push`` attribute instructs FortiManager to consider
+         it for Central Management and this is why it becomes visible in the
+         ***AP Manager*** > ***Managed FortiAPs***  page.
+
    .. tab-item:: RESPONSE
 
       .. code-block:: json
@@ -1516,7 +1523,7 @@ firmware enforcement set to firmware version ``6.4.3-b00451``:
            ]
          }
 
-Recent versions of FortiManager (7.0.x) seem to use a different method:
+Recent versions of FortiManager (7.0.x) seem to use a different API request:
 
 .. tab-set::
 
@@ -1547,6 +1554,15 @@ Recent versions of FortiManager (7.0.x) seem to use a different method:
            "session": "{{session}}"
          }
 
+      .. note::
+   
+         The request above is declaring a FortiAP device in the ``demo`` ADOM DB
+         directly. If you look in ``dev_001`` device's Device DB, then you won't
+         see your FortiAP device. It will show up after an install operation.
+   
+         For the ``_platform-type`` attribute, please refer to section 
+         :ref:```How to get the ``_platform-type``?```
+
    .. tab-item:: RESPONSE
 
       .. code-block:: json
@@ -1567,7 +1583,7 @@ Recent versions of FortiManager (7.0.x) seem to use a different method:
            ]
          }
 
-And more recently, we have seen this new form (using an explicit ``_is-model``
+And more recently, this new API request form (using an explicit ``_is-model``
 attribute):
 
 .. tab-set::
@@ -1600,6 +1616,15 @@ attribute):
            ],
            "session": "{{session}}"
          }
+
+      .. note::
+   
+         The request above is declaring a FortiAP device in the ``demo`` ADOM DB
+         directly. If you look in ``dev_001`` device's Device DB, then you won't
+         see your FortiAP device. It will show up after an install operation.
+   
+         For the ``_platform-type`` attribute, please refer to section 
+         :ref:```How to get the ``_platform-type``?```
 
    .. tab-item:: RESPONSE
 
@@ -1655,6 +1680,15 @@ Profile for the ``dev_001`` managed device in the ``demo`` ADOM:
            ],
            "session": "{{session}}"
          }
+
+      .. note::
+   
+         The request above is declaring a FortiAP device in the ``demo`` ADOM DB
+         directly. If you look in ``dev_001`` device's Device DB, then you won't
+         see your FortiAP device. It will show up after an install operation.
+   
+         For the ``_platform-type`` attribute, please refer to section 
+         :ref:```How to get the ``_platform-type``?```         
 
    .. tab-item:: RESPONSE
 
@@ -2464,8 +2498,8 @@ after an installation.
 Add a Model FortiSwitch with FortiManager 7.0/7.2
 _________________________________________________
 
-The following method is forcing the Model FortiSwitch to appear both in
-FortiSwitch Manager and its corresponding Device DB:
+The example below demonstrates how to add a Model FortiSwitch named ``fsw_001``
+for the ``dev_001`` managed device:
 
 .. tab-set::
 
@@ -2479,19 +2513,22 @@ FortiSwitch Manager and its corresponding Device DB:
            "params": [
              {
                "data": {
-                 "name": "branch2_fsw",
+                 "name": "fsw_001",
                  "switch-id": "S108DVEN3ND-GG54"
                },
                "push": 1,
-               "url": "/pm/config/device/branch2_fgt/vdom/root/switch-controller/managed-switch"
+               "url": "/pm/config/device/dev_001/vdom/root/switch-controller/managed-switch"
              }
            ],
            "session": "{{session}}"
          }
 
       .. note::
-
-         The attribute ``push`` is very important here.
+   
+         The request above is declaring a FortiSwitch device in ``dev_001``
+         device's DB. Then the ``push`` attribute instructs FortiManager to 
+         consider it for Central Management and this is why it becomes visible 
+         in the ***FortiSwitch Manager*** > ***Managed FortiSwitches***  page.
 
    .. tab-item:: RESPONSE
 
@@ -2509,7 +2546,7 @@ FortiSwitch Manager and its corresponding Device DB:
                  "message": "OK"
                },
                "taskid": 503,
-               "url": "/pm/config/device/branch2_fgt/vdom/root/switch-controller/managed-switch" 
+               "url": "/pm/config/device/dev_001/vdom/root/switch-controller/managed-switch" 
              }
            ]
         }
@@ -2555,6 +2592,13 @@ device ``dev_001`` in the ``demo`` ADOM:
            ],
            "session": "{{session}}"
          }
+
+      .. note::
+   
+         The request above is declaring a FortiSwitch device in the ``demo``
+         ADOM DB directly. If you look in ``dev_001`` device's Device DB, then
+         you won't see your FortiSwitch device. It will show up after an
+         install operation.
 
       .. warning::
 
