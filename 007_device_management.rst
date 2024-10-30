@@ -1819,7 +1819,7 @@ The following example shows how to add the ``cluster_001`` Model HA Cluster in t
 
       .. warning::
 
-         - The ``prio`` attribute in the ``ha_slave`` list has to be set With
+         - The ``prio`` attribute in the ``ha_slave`` list has to be set with
            an integer!         
 
    .. tab-item:: RESPONSE
@@ -1955,14 +1955,14 @@ The following example shows how to create the ``cluster_001`` Model HA Cluster, 
                      {
                        "idx": 0,
                        "name": "cluster_001-1",
-                       "prio": "200",
+                       "prio": 200,
                        "role": "master",
                        "sn": "FGVMUL0000000001"
                      },
                      {
                        "idx": 1,
                        "name": "cluster_001-2",
-                       "prio": "100",
+                       "prio": 100,
                        "role": "slave",
                        "sn": "FGVMUL0000000002"
                      }
@@ -2971,7 +2971,6 @@ ADOM. It showcases using a Device Blueprint and the new ``meta variables`` block
            "session": "{{session}}"
          }
 
-
    .. tab-item:: RESPONSE
 
       .. code-block:: json      
@@ -2991,6 +2990,16 @@ ADOM. It showcases using a Device Blueprint and the new ``meta variables`` block
              }
            ]
          }
+
+.. warning:
+
+   If you plan to trigger an installation immediately afterward, it’s better to
+   wait for the *Add Device* operation to complete. The best approach is to
+   monitor the task returned. 
+
+   Sometimes, devices may be added successfully, but additional operations
+   specified by the Device Blueprint (such as **Split Switch Ports** or 
+   **Pre-Run CLI Template** ) might still be in progress.
          
 How to enable the auto-link flag on a Model Device?
 +++++++++++++++++++++++++++++++++++++++++++++++++++
