@@ -1467,142 +1467,96 @@ FortiAP Management
 How to create a Model FortiAP with firmware enforcement?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**REQUEST**:
+The example below demonstrates how to add the Model FortiAP named ``fap_001``
+using the ``fap_profile_001`` for the ``dev_001`` managed device, and with a
+firmware enforcement set to firmware version ``6.4.3-b00451``:
 
-.. code-block::
+.. tab-set::
 
-   {
-     "id": "2e2e8c25-c412-41b7-8ffd-97cacdd4985f",
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "_prefer-img-ver": "6.4.3-b00451",
-           "name": "fap_001",
-           "wtp-id": "FP421ETF18002996",
-           "wtp-profile": "FAP421E-default"
-         },
-         "push": 1,
-         "url": "/pm/config/device/foobar_001/vdom/root/wireless-controller/wtp"
-       }
-     ],
-     "session": 2597
-   }
-
-**RESPONSE**:
-
-.. code-block::
-
-   {
-     "id": "2e2e8c25-c412-41b7-8ffd-97cacdd4985f",
-     "result": [
-       {
-         "data": {
-           "wtp-id": "FP421ETF18002996"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "taskid": 111,
-         "url": "/pm/config/device/foobar_001/vdom/root/wireless-controller/wtp"
-       }
-     ]
-   }
-
-Recent versions of FortiManager (7.0.x) seem to use a different method:
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "_platform-type": 63,
-           "name": "fap_site_2",
-           "wtp-id": "PU431FTH20026061",
-           "wtp-profile": "branches"
-         },
-         "scope member": [
-           {
-             "name": "cluster_site_2",
-             "vdom": "root"
-           }
-         ],
-         "url": "/pm/config/adom/production/obj/wireless-controller/wtp"
-       }
-     ],
-     "session": "yieRVVWz0wDz7mwP5n/lRkjBitMY1wdm5UtmFAXVq2TnzIzcU+TUmiBfw9LIDuLoymlphNbTF1O+4aoWEhyuRQ=="
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "wtp-id": "PU431FTH20026061"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/production/obj/wireless-controller/wtp"
-       }
-     ]
-   }
-
-And more recently, we have seen this new form (using an explicit ``_is-model``
-attribute):
-
-.. tabs::
-
-   .. tab:: REQUEST
+   .. tab-item:: REQUEST
 
       .. code-block:: json
-
+      
          {
-           "id": "1",
+           "id": 3,
            "method": "add",
            "params": [
              {
-               "url": "/pm/config/adom/{{adom}}/obj/wireless-controller/wtp",
-               "scope member": [
-                 {
-                   "name": "dut_fgt_03",
-                   "vdom":"root"
-                 }
-               ],
                "data": {
-                 "name": "fap_002",
-                 "wtp-id": "FP23JFTF21002583",
-                 "wtp-profile": "FAP23JF-default",
-                 "_is-model": 1,
-                 "_platform-type": 71,
-                 "_prefer-img-ver": "7.2.2-b0318"
-               }
+                 "_prefer-img-ver": "6.4.3-b00451",
+                 "name": "fap_001",
+                 "wtp-id": "FP221E0000000001",
+                 "wtp-profile": "fap_profile_001"
+               },
+               "push": 1,
+               "url": "/pm/config/device/dev_001/vdom/root/wireless-controller/wtp"
              }
            ],
            "session": "{{session}}"
          }
 
-   .. tab:: RESPONSE
+   .. tab-item:: RESPONSE
 
       .. code-block:: json
 
          {
-           "id": "1",
+           "id": 3,
            "result": [
              {
                "data": {
-                 "wtp-id": "FP23JFTF21002583"
+                 "wtp-id": "FP221E0000000001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "taskid": 111,
+               "url": "/pm/config/device/dev_001/vdom/root/wireless-controller/wtp"
+             }
+           ]
+         }
+
+Recent versions of FortiManager (7.0.x) seem to use a different method:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "_platform-type": 50,
+                 "name": "fap_001",
+                 "wtp-id": "FP221E0000000001",
+                 "wtp-profile": "fap_profile_001"
+               },
+               "scope member": [
+                 {
+                   "name": "dev_001",
+                   "vdom": "root"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/wireless-controller/wtp"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "wtp-id": "FP221E0000000001"
                },
                "status": {
                  "code": 0,
@@ -1611,72 +1565,182 @@ attribute):
                "url": "/pm/config/adom/production/obj/wireless-controller/wtp"
              }
            ]
-         }        
+         }
+
+And more recently, we have seen this new form (using an explicit ``_is-model``
+attribute):
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/wireless-controller/wtp",
+               "scope member": [
+                 {
+                   "name": "dev_001",
+                   "vdom":"root"
+                 }
+               ],
+               "data": {
+                 "name": "fap_001",
+                 "wtp-id": "FP221E0000000001",
+                 "wtp-profile": "fap_profile_001",
+                 "_is-model": 1,
+                 "_platform-type": 50,
+                 "_prefer-img-ver": "7.2.2-b0318"
+               }
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "wtp-id": "FP221E0000000001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/wireless-controller/wtp"
+             }
+           ]
+         }
+
+Starting with FortiManager 7.6.2, Firmware Enforcement is now configured within
+the Firmware Template (#1082490). The example below demonstrates how to add a
+new Model FortiAP named ``fap_001`` using the ``fap_profile_001`` FortiAP
+Profile for the ``dev_001`` managed device in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "_is-model": 1,
+                 "_platform-type": 50,
+                 "name": "fap_001",
+                 "wtp-id": "FP221E0000000001",
+                 "wtp-profile": "fap_profile_001"
+               },
+               "scope member": [
+                 {
+                   "name": "dev_001",
+                   "vdom": "root"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/wireless-controller/wtp"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "wtp-id": "FP221E0000000001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/wireless-controller/wtp"
+             }
+           ]
+         }
 
 How to get the ``_platform-type``?
 ++++++++++++++++++++++++++++++++++
 
-To add a Model AP, you need to specify the ``_platform-type``.
+To add a Model FortiAP, you need to specify the ``_platform-type``.
 
-You can obtain the list of supported AP platforms along with their respective
-``_platform-type`` values using the following call:
+You can obtain the list of supported FortiAP platforms along with their
+respective ``_platform-type`` values using the following API request:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "pm/config/adom/root/_data/attropts/wireless-controller/wtp-profile/platform/type"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "get",
-     "params": [
-       {
-         "url": "pm/config/adom/root/_data/attropts/wireless-controller/wtp-profile/platform/type"
-       }
-     ],
-     "session": "Pn8cb2BcGEe9AOyjvbt3plrGjf7xLbXiC0BdJeHS/X+g2pBb02zK8yMUknEUIVUcmR3SXiDSSYRFDRcD0sHKfQ==",
-     "verbose": 1
-   }
+   .. tab-item:: RESPONSE
 
-**RESPONSE:**
+      .. code-block:: json
 
-.. code-block:: 
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": [
-           {
-             "help": "FortiWiFi local radio.",
-             "name": "FWF",
-             "val": 30
-           },
-           {
-             "help": "Default 11n AP.",
-             "name": "AP-11N",
-             "val": 33
-           },
-           {
-             "help": "FAP220B/221B.",
-             "name": "220B",
-             "val": 5
-           },
-           [...]		   
-           {
-             "help": "FAP433F.",
-             "name": "433F",
-             "val": 67
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "pm/config/adom/root/_data/attropts/wireless-controller/wtp-profile/platform/type"
-       }
-     ]
-   }
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": [
+                 {
+                   "help": "FortiWiFi local radio.",
+                   "name": "FWF",
+                   "val": 30
+                 },
+                 {
+                   "help": "Default 11n AP.",
+                   "name": "AP-11N",
+                   "val": 33
+                 },
+                 {
+                   "help": "FAP220B/221B.",
+                   "name": "220B",
+                   "val": 5
+                 },
+                 {"...": "..."},
+                 {
+                   "help": "FAP433F.",
+                   "name": "433F",
+                   "val": 67
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "pm/config/adom/root/_data/attropts/wireless-controller/wtp-profile/platform/type"
+             }
+           ]
+         }
 
 The returned ``val`` attribute is the ``_platform-type`` value to use when
 adding a Model AP.
@@ -2453,12 +2517,12 @@ FortiSwitch Manager and its corresponding Device DB:
 Add a Model FortiSwitch with FortiManager 7.4+
 ______________________________________________
 
-You can also use the following recommended alternative because it follows the 
+You can also use the following recommended alternative, which aligns with the 
 FortiManager GUI logic.
 
-The following example shows how to add a Model FortiSwtich named ``fsw_001``
-that is assigned to the ``fsw_template_001`` FortiSwitch Templte, for the
-``dev_001`` managed device in the ``demo`` ADOM:
+The example below shows how to add a Model FortiSwitch named ``fsw_001``,
+assigned to the ``fsw_template_001`` FortiSwitch Template, for the managed
+device ``dev_001`` in the ``demo`` ADOM:
 
 .. tab-set::
 
