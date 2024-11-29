@@ -1483,7 +1483,28 @@ The ``verbose`` attribute can be placed in the JSON RPC request as shown below:
 Operations on tables, objects and attributes
 --------------------------------------------
 
-This section is to explain some important mechanism related to tables, their objects, and their attributes.
+This section is to explain some important mechanism related to tables, their
+objects, and their attributes.
+
+How to update a table?
+++++++++++++++++++++++
+
+This section aims to clarify a common issue that arises, particularly for those
+new to using the FortiManager API. Often, when you add new entries to a table or
+delete existing ones, other existing entries may unexpectedly be removed.
+
+
+In FortiManager, a *table* refers to a structured configuration entity that
+holds a collection of related entries. For example, firewall.address and
+firewall.addrgrp are tables that manage firewall address objects and address
+groups, respectively. Below are their API paths:
+
+.. code-block::
+
+   /pm/config/adom/{adom}/obj/firewall/address
+   /pm/config/adom/{adom}/obj/firewall/addrgrp
+
+TBD.
 
 How to unset a specific attribute?
 ++++++++++++++++++++++++++++++++++
