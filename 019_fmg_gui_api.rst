@@ -394,7 +394,11 @@ ID is ``2243``:
          POST https://10.210.34.120/cgi-bin/module/flatui_proxy
          Content-Type: application/json
          Xsrf-Token: 7PdpjDYkaR18jfMoc6N9ccA+cXBx69T
-         data {"url":"/gui/deployment/adom/devices/39590/tasks/2243/log/preview","method":"get"}
+         
+         {
+           "url": "/gui/deployment/adom/devices/39590/tasks/2243/log/preview",
+           "method": "get"
+         }
          
    .. tab-item:: RESPONSE
 
