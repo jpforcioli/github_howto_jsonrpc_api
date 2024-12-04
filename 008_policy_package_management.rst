@@ -1238,6 +1238,186 @@ flag:
      ]
    }
 
+How to schedule a policy package install?
+_________________________________________
+
+The following example demonstrates how to schedule a policy package installation
+for he ``ppkg_001`` policy package in the ``demo``ADOM. The policy package
+will be installed on the ``dev_001`` and ``dev_002`` managed devices.
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "adom_rev_name": "scheduled_install_ppkg_001",
+                 "datetime": "2022-10-27 23:24",
+                 "scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   },
+                   {
+                     "name": "dev_002",
+                     "vdom": "root"
+                   }             
+                 ]
+               },
+               "url": "/pm/pkg/adom/demo/ppkg_001/schedule"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         The ``datetime`` attribute specifies the date and time when the policy
+         package install will be triggered.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/pkg/adom/demo/ppkg_001/schedule"
+             }
+           ]
+         }
+
+How to check for a scheduled policy package installation?
+_________________________________________________________
+
+The following example shows how to retrieve the schedule information for
+the ``ppkg_001`` policy package in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "schedule"
+               ],
+               "filter": [
+                 "name",
+                 "==",
+                 "ppkg_001"
+               ],
+               "option": [
+                 "schedule"
+               ],
+               "url": "/pm/pkg/adom/demo"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json      
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "ppkg_001",
+                   "oid": 7131,
+                   "schedule": {
+                     "adom_rev_name": "scheduled_install_ppkg_001",
+                     "datetime": "2022-10-27 23:24",
+                     "scope": [
+                       {
+                         "name": "dev_001",
+                         "vdom": "root"
+                       },
+                       {
+                         "name": "dev_002",
+                         "vdom": "root"
+                       }
+                     ]
+                   }
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/pkg/adom/demo"
+             }
+           ]
+         }
+
+      .. note:: 
+      
+         The ``schedule`` option appears to apply only to the entire            
+         ``pm/pkg/adom/{adom}`` table.
+
+         To narrow the output to the desired ``ppkg_001`` policy package, a
+         ``filter`` attribute has been applied.
+
+How to cancel a policy package scheduled install?
+_________________________________________________
+
+The following example shows how to cancel a scheduled policy package
+installation for the ``ppkg_001`` policy package in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json 
+      
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/pkg/adom/demo/ppkg_001/schedule"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json 
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/pkg/adom/demo/ppkg_001/schedule"
+             }
+           ]
+         }
+
 How to copy a firewall policy?
 ++++++++++++++++++++++++++++++
 
@@ -1311,178 +1491,6 @@ to the ``dut_fgt_10`` managed device and its ``root`` VDOM:
              }
            ]
          }        
-
-
-Scheduling operations for policy package
-++++++++++++++++++++++++++++++++++++++++
-
-How to schedule a policy package install?
-_________________________________________
-
-To schedule a policy package install for policy package ``pp_001`` from ADOM
-``adom_72_001`` against two of its installation targets (``adom_72_001_dev_001``
-and ``adom_72_001_dev_002``, and their respective ``root`` VDOMs):
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "adom_rev_name": "scheduled_install_pp_001",
-           "datetime": "2022-10-27 23:24",
-           "scope": [
-             {
-               "name": "adom_72_001_dev_001",
-               "vdom": "root"
-             },
-             {
-               "name": "adom_72_001_dev_002",
-               "vdom": "root"
-             }             
-           ]
-         },
-         "url": "/pm/pkg/adom/adom_72_001/pp_001/schedule"
-       }
-     ],
-     "session": "GorqROcoKWFpFT1pTDoxC1VICdiSmSxDm+nWGfs1UvBg8NsQwlSFQ0oShWHKZ0iOf1lWC172lODt0gq86lmdpA=="
-   }
-   
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/pkg/adom/adom_72_001/pp_001/schedule"
-       }
-     ]
-   }
-
-How to check for a scheduled policy package installation?
-_________________________________________________________
-
-To obtain the schedule information for policy package ``pp_001`` from ADOM
-``adom_72_001``: 
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "fields": [
-           "name",
-           "schedule"
-         ],
-         "filter": [
-           "name",
-           "==",
-           "pp_001"
-         ],
-         "option": [
-           "schedule"
-         ],
-         "url": "/pm/pkg/adom/adom_72_001"
-       }
-     ],
-     "session": "bN0lF16C5n3JhtmrB85zE3IZHJeazCTMs16RbfGxVO6mLnKEbBKFS53CpIbB0pe9RebYYaxP6IWDOSS4Bnx1/g=="
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "name": "pp_001",
-             "oid": 7131,
-             "schedule": {
-               "adom_rev_name": "pp_001_2022-10-23-22-56-49",
-               "datetime": "2022-10-23 23:56",
-               "scope": [
-                 {
-                   "name": "adom_72_001_dev_001",
-                   "vdom": "root"
-                 },
-                 {
-                   "name": "adom_72_001_dev_002",
-                   "vdom": "root"
-                 }
-               ]
-             }
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/pkg/adom/adom_72_001"
-       }
-     ]
-   }
-
-.. note:: 
-
-   - The ``schedule`` option seems to work only for the entire
-     ``pm/pkg/adom/{adom}`` table. 
-   - This is why the ``filter`` has been used to limit the output to the desired
-     ``pp_001`` policy package. 
-
-How to cancel a policy package scheduled install?
-_________________________________________________
-
-To cancel the policy package scheduled install for policy package ``pp_001``
-from ADOM ``adom_72_001``:
-
-**REQUEST:**
-
-.. code-block:: json 
-
-   {
-     "id": 3,
-     "method": "delete",
-     "params": [
-       {
-         "url": "/pm/pkg/adom/adom_72_001/pp_001/schedule"
-       }
-     ],
-     "session": "DTepc/8+5+SD3IOwZE/1fVlMMTx1OZA227E8qL+2R+UK7+wW00aUxBQQ80Ptqnb5He5RRJYKBjam9f2SXJ6gOw=="
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/pkg/adom/adom_72_001/pp_001/schedule"
-       }
-     ]
-   }
 
 How to get the status of all Policy Packages in an ADOM?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
