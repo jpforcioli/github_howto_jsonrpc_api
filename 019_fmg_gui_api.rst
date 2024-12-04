@@ -33,7 +33,7 @@ Use the following request to retrieve and save the session cookies:
          content-type: application/json
          Content-Length: 118
          
-          {
+         {
            "url": "/gui/userauth",
            "method": "login",
            "params": {
@@ -376,10 +376,99 @@ Caught in #0643655.
        ]
    }
 
-How to get the installation log for a given revision?
------------------------------------------------------
+How to get an installation log for a given task?
+------------------------------------------------
 
-TODO
+You need the task ID and the device OID :-)
+
+The following example shows how to retrieve the installation log for an
+installation made against device with the ``39590`` OID. The corresponding task
+ID is ``2243``:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: text
+
+         POST https://10.210.34.120/cgi-bin/module/flatui_proxy
+         Content-Type: application/json
+         Xsrf-Token: 7PdpjDYkaR18jfMoc6N9ccA+cXBx69T
+         data {"url":"/gui/deployment/adom/devices/39590/tasks/2243/log/preview","method":"get"}
+         
+   .. tab-item:: RESPONSE
+
+      .. code-block:: text
+   
+         200
+         date: Wed, 04 Dec 2024 14:25:30 GMT
+         cache-control: no-store,no-cache,must-revalidate
+         expires: -1
+         pragma: no-cache
+         x-time-request: 1733322330
+         x-frame-options: SAMEORIGIN
+         upgrade: h2
+         connection: Upgrade, Keep-Alive
+         vary: Accept-Encoding
+         strict-transport-security: max-age=63072000
+         x-ua-compatible: IE=Edge
+         x-xss-protection: 1; mode=block
+         x-content-type-options: nosniff
+         content-security-policy: frame-ancestors 'none'; object-src 'none'; script-src 'self';
+         content-length: 561
+         keep-alive: timeout=5, max=500
+         content-type: html
+   
+         Starting log (Run on device)
+   
+   
+         Start installing
+         fgt-001  config endpoint-control fctems
+         fgt-001 (fctems)  edit 1
+         fgt-001 (1)  set cloud-authentication-access-key ************
+         Provided string is not an EMS Cloud access key. Please provide a EMS Cloud access key.
+         (Length should be 20, provided string length is 10)
+         node_check_object fail! for cloud-authentication-access-key 0123456789
+         
+         value parse error before '0123456789'
+         Command fail. Return code -61
+         fgt-001 (1)  next
+         fgt-001 (fctems)  edit 2
+         fgt-001 (2)  set name "ems_002"
+         fgt-001 (2)  set fortinetone-cloud-authentication enable
+         fgt-001 (2)  set status enable
+         fgt-001 (2)  set cloud-authentication-access-key ************
+         Provided string is not an EMS Cloud access key. Please provide a EMS Cloud access key.
+         (Length should be 20, provided string length is 10)
+         node_check_object fail! for cloud-authentication-access-key 0123456789
+         
+         value parse error before '0123456789'
+         Command fail. Return code -61
+         fgt-001 (2)  next
+         Cannot configure two duplicate FortiCloud EMS. Global EMS entry '1' has the same access key (empty key).
+         object set operator error, -15 discard the setting
+         Command fail. Return code 1
+         fgt-001 (fctems)  edit 3
+         fgt-001 (3)  set name "ems_NNN"
+         fgt-001 (3)  set fortinetone-cloud-authentication enable
+         fgt-001 (3)  set status enable
+         fgt-001 (3)  next
+         Cannot configure two duplicate FortiCloud EMS. Global EMS entry '1' has the same access key (empty key).
+         object set operator error, -15 discard the setting
+         Command fail. Return code 1
+         fgt-001 (fctems)  end
+         fgt-001  config system zone
+         fgt-001 (zone)  edit "z_001"
+         fgt-001 (z_001)  set interface "port8" "port9" "port10"
+         fgt-001 (z_001)  next
+         fgt-001 (zone)  end
+         
+         
+         ---> generating verification report
+         <--- done generating verification report
+         
+         
+         install finished      
 
 Some URLs caught in #0659916
 ----------------------------
