@@ -30,7 +30,6 @@ How To FortiManager API?
    016_sys_proxy_json
    017_fmg_operations
    018_dbcache
-   019_fmg_gui_api
    020_vpn_management
    021_sub_fetch
    022_fmg_cloud
