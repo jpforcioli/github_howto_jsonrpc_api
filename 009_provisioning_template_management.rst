@@ -3369,6 +3369,45 @@ We can combine devices and device groups:
        }
    ]
 
+How to authorize a FortiSwitch?
++++++++++++++++++++++++++++++++
+
+Caught in #1096573.
+
+The following example demonstrates how to authorize a FortiSwitch controlled by
+the ``dev_001`` device in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "update",
+           "params": [
+             { 
+               "data": {
+                 "switch-id": "S108EN1000000000",
+                 "state": 2
+               },
+               "scope member": [
+                 {
+                   "name": "dev_001",
+                   "vdom": "root"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/fsp/managed-switch/S108EN1000000000"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      TBD
+
 How to update a port in a FortiSwitch Template?
 +++++++++++++++++++++++++++++++++++++++++++++++
 

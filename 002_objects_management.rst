@@ -1228,8 +1228,8 @@ To add FQDN ``www.foobar.com`` in ADOM ``adom_70_001``:
 Firewall Address Groups
 -----------------------
 
-How to add a single member
-++++++++++++++++++++++++++
+How to add a single member?
++++++++++++++++++++++++++++
 
 We add firewall address ``host_004`` in the existing address group ``foobar``
 from ADOM ``adom_dc2``:
@@ -1269,8 +1269,8 @@ from ADOM ``adom_dc2``:
      ]
    }
 
-How to delete a single member
-+++++++++++++++++++++++++++++
+How to delete a single member?
+++++++++++++++++++++++++++++++
 
 We delete firewall address ``host_004`` from the existing address group ``foobar``
 from ADOM ``adom_dc2``:
@@ -1405,7 +1405,124 @@ firewall addrgrp in the ``demo`` ADOM using the ``unset attrs`` described in :re
              }
            ]
          }           
-         
+
+How to get firewall addrgrp members along with their details?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example demonstrates how to use the ``expand datasrc`` attribute
+to obtain the full details of the members of the ``addrgrp_001`` address group
+in the ``demo`` ADOM:
+
+We're getting the member elements of our ``addrgrp_001`` address group:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "params": [
+             {
+               "expand datasrc": [
+                 {
+                   "datasrc": [
+                     {
+                       "fields": [
+                         "name",
+                         "subnet"
+                       ],
+                       "obj type": "firewall address"
+                     },
+                     {
+                       "fields": [
+                         "name",
+                         "member"
+                       ],
+                       "obj type": "firewall addrgrp"
+                     }
+                   ],
+                   "name": "member"
+                 }
+               ],
+               "filter": [
+                 "name",
+                 "==",
+                 "addrgrp_001"
+               ],
+               "url": "/pm/config/adom/demo/obj/firewall/addrgrp"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": [
+                 {
+                   "allow-routing": "disable",
+                   "color": 0,
+                   "comment": "",
+                   "dynamic_mapping": null,
+                   "exclude": "disable",
+                   "exclude-member": [],
+                   "member": [
+                     {
+                       "name": "host_005",
+                       "obj type": "firewall address",
+                       "subnet": [
+                         "10.0.0.5",
+                         "255.255.255.255"
+                       ]
+                     },
+                     {
+                       "name": "host_006",
+                       "obj type": "firewall address",
+                       "subnet": [
+                         "10.0.0.6",
+                         "255.255.255.255"
+                       ]
+                     },
+                     {
+                       "member": [
+                         "host_001",
+                         "host_002"
+                       ],
+                       "name": "addrgrp_002",
+                       "obj type": "firewall addrgrp"
+                     },
+                     {
+                       "member": [
+                         "host_003",
+                         "host_004"
+                       ],
+                       "name": "addrgrp_003",
+                       "obj type": "firewall addrgrp"
+                     }
+                   ],
+                   "name": "addrgrp_001",
+                   "tagging": null,
+                   "uuid": "c5097fe2-cbf3-51ea-94c7-4543af3302a3",
+                   "visibility": "enable"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/addrgrp"
+             }
+           ]
+         }
+      
 Wildcard FQDN
 -------------
 
@@ -1956,121 +2073,6 @@ How to delete an existing per-platform mapping?
      ]
    }   
 
-How to get firewall addgrp members along with their details?
-------------------------------------------------------------
-
-We can use the ``expand datasrc`` attribute.
-
-We're getting the member elements of our ``grp_003`` address group:
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "get",
-     "params": [
-       {
-         "expand datasrc": [
-           {
-             "datasrc": [
-               {
-                 "fields": [
-                   "name",
-                   "subnet"
-                 ],
-                 "obj type": "firewall address"
-               },
-               {
-                 "fields": [
-                   "name",
-                   "member"
-                 ],
-                 "obj type": "firewall addrgrp"
-               }
-             ],
-             "name": "member"
-           }
-         ],
-         "filter": [
-           "name",
-           "==",
-           "grp_003"
-         ],
-         "url": "/pm/config/adom/DEMO/obj/firewall/addrgrp"
-       }
-     ],
-     "session": "mnvLPffV1QUzdQkAPo9dv5ysdS0wzcvhZMX1w8Hv9Q07XYWtTqeClXEYhLN6e0aBvfuowZ7x/2FHORh7qFs5iw==",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": [
-           {
-             "allow-routing": "disable",
-             "color": 0,
-             "comment": "",
-             "dynamic_mapping": null,
-             "exclude": "disable",
-             "exclude-member": [],
-             "member": [
-               {
-                 "name": "host_005",
-                 "obj type": "firewall address",
-                 "subnet": [
-                   "10.0.0.5",
-                   "255.255.255.255"
-                 ]
-               },
-               {
-                 "name": "host_006",
-                 "obj type": "firewall address",
-                 "subnet": [
-                   "10.0.0.6",
-                   "255.255.255.255"
-                 ]
-               },
-               {
-                 "member": [
-                   "host_001",
-                   "host_002"
-                 ],
-                 "name": "grp_001",
-                 "obj type": "firewall addrgrp"
-               },
-               {
-                 "member": [
-                   "host_003",
-                   "host_004"
-                 ],
-                 "name": "grp_002",
-                 "obj type": "firewall addrgrp"
-               }
-             ],
-             "name": "grp_003",
-             "tagging": null,
-             "uuid": "c5097fe2-cbf3-51ea-94c7-4543af3302a3",
-             "visibility": "enable"
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/DEMO/obj/firewall/addrgrp"
-       }
-     ]
-   }
-
 How to get the full ADOM database objects syntax?
 -------------------------------------------------
 
@@ -2600,233 +2602,564 @@ ______________________________________________________
 
 Caught in #0363496.
 
-- To retrieve firewall address included in a specific IP address
+- Retrieve all firewall address objects matching a specific IP subnet
 
-  We can use the **<=** comparison operator.
+  The following example demonstrates how to use the ``<=`` (*in*) comparison
+  operator to retrieve all firewall address objects that match the specified
+  ``10.0.0.0/16`` subnet within the ``demo`` ADOM:
 
-  In the below example, we want all firewall addresses belonging to IP
-  subnet 3.14.142.0/24:
+  .. tab-set::
 
-  **REQUEST:**
+     .. tab-item:: REQUEST
 
-  .. code-block:: json
+        .. code-block:: json
 
-		  {
-		    "id": 1,
-		    "jsonrpc": "1.0",
-		    "method": "get",
-		    "params": [
-		      {
-		        "fields": [
-			  "name",
-			  "subnet"
-			],
-			"filter": [
-			  [
-			    "type",
-			    "==",
-			    "ipmask"
-			  ],
-			  "&&",
-			  [
-			    "subnet",
-			    "<=",
-			    [
-			      "3.14.142.0",
-			      "255.255.255.0"
-			    ]
-			  ]
-			],
-			"loadsub": 0,
-			"url": "/pm/config/adom/DEMO/obj/firewall/address"
-		      }
-		    ],
-		    "session": "BEzK9BQ9ZEMoDQVxCstqIxMWKmCA+Ewi6olABeRf+XbFm9kICX5nXGVwFyDvfg/4SKmT5DzuSS1hEmckePhYiYl5BsZ31EDm",
-		    "verbose": 1
-		  }
-
-  **RESPONSE:**
-  
-  .. code-block:: json		  
-
-		  {
-		    "id": 1,
-		    "result": [
-		      {
-		        "data": [
-			  {
-			    "name": "host_010",
-			    "subnet": [
-			      "3.14.142.63",
-			      "255.255.255.255"
-			    ]
-			  }
-			],
-			"status": {
-			  "code": 0,
-			  "message": "OK"
-			},
-			"url": "/pm/config/adom/DEMO/obj/firewall/address"
-		      }
-		    ]
-		  }  
-
-- To retrieve firewall address strictly matching a specic IP address
-
-  We can use the **==** comparison operator.
-
-  In the below example, we want all firewall addresses with an exact
-  match for IP address 3.14.142.63/32:
-  
-  **REQUEST:**
-
-  .. code-block:: json
-		  
-		  {
-		    "id": 1,
-		    "jsonrpc": "1.0",
-		    "method": "get",
-		    "params": [
-		      {
-		        "fields": [
-			  "name",
-			  "subnet"
-			],
-			"filter": [
-			  [
-			    "type",
-			    "==",
-			    "ipmask"
-			  ],
-			  "&&",
-			  [
-			    "subnet",
-			    "==",
-			    [
-			      "3.14.142.63",
-			      "255.255.255.255"
-			    ]
-			  ]
-			],
-			"loadsub": 0,
-			"url": "/pm/config/adom/DEMO/obj/firewall/address"
-		      }
-		    ],
-		    "session": "7StdWXSR+aCBi96k+XIsX7QiYJllIiObsp6MouYr5T9Zov+R5sNnTHs8jbO3mgOO0O77Di4wsdKaPSk1SgKh1uTnLUf7ba8j",
-		    "verbose": 1
-		  }
-
-  **RESPONSE:**
-
-  .. code-block:: json
-
-		  {
-		    "id": 1,
-		    "result": [
-		      {
-		        "data": [
-			  {
-			    "name": "host_010",
-			    "subnet": [
-			      "3.14.142.63",
-			      "255.255.255.255"
-			    ]
-			  }
-			],
-			"status": {
-			  "code": 0,
-			  "message": "OK"
-			},
-			"url": "/pm/config/adom/DEMO/obj/firewall/address"
-		      }
-		    ]
-		  }  
-
-- To retrieve all firewall addresses containing a specific IP address
-
-  We can use the **>=** comparison operator.
-
-  In the below example, we want all firewall addresses containing IP
-  10.1.0.111/32.
-
-  **REQUEST:**
-
-  .. code-block:: json
-
-		  {
-		    "id": 1,
-		    "jsonrpc": "1.0",
-		    "method": "get",
-		    "params": [
-		      {
-		        "fields": [
-			  "name",
-			  "subnet"
-			],
-			"filter": [
-			  [
-			    "type",
-			    "==",
-			    "ipmask"
-			  ],
-			  "&&",
-			  [
-			    "subnet",
-			    ">=",
-			    [
-			      "10.1.0.111",
-			      "255.255.255.255"
-			    ]
-			  ]
-			],
-			"loadsub": 0,
-			"url": "/pm/config/adom/DEMO/obj/firewall/address"
-		      }
-		    ],
-		    "session": "HjL4TOtmT+DejM8SEeBYwGZGNM6LhetafH9cgsLyf7ikeODmr2YlyipIW6b0VuaxqxEhaox9oXha0huWjA4Y7HHYMFnwpSWV",
-		    "verbose": 1
-		  }
+           {
+             "id": 3,
+             "method": "get",
+             "params": [
+               {
+                 "fields": [
+                   "name",
+                   "type",
+                   "subnet"
+                 ],
+                 "filter": [
+                   [
+                     "type",
+                     "==",
+                     "ipmask"
+                   ],
+                   "&&",
+                   [
+                     "subnet",
+                     "<=",
+                     [
+                       "10.0.0.0",
+                       "255.255.0.0"
+                     ]
+                   ]
+                 ],
+                 "loadsub": 0,
+                 "url": "/pm/config/adom/demo/obj/firewall/address"
+               }
+             ],
+             "session": "{{session}}",
+             "verbose": 1
+           }
 
 
-  **RESPONSE:**
+     .. tab-item:: RESPONSE
 
-  .. code-block:: json
+        .. code-block:: json
 
-		  {
-		    "id": 1,
-		    "result": [
-		      {
-		        "data": [
-			  {
-			    "name": "FABRIC_DEVICE",
-			    "subnet": [
-			      "0.0.0.0",
-			      "0.0.0.0"
-			    ]
-			  },
-			  {
-			    "name": "FIREWALL_AUTH_PORTAL_ADDRESS",
-			    "subnet": [
-			      "0.0.0.0",
-			      "0.0.0.0"
-			    ]
-			  },
-			  {
-			    "name": "all",
-			    "subnet": [
-			      "0.0.0.0",
-			      "0.0.0.0"
-			    ]
-			  }
-			],
-			"status": {
-			  "code": 0,
-			  "message": "OK"
-			},
-			"url": "/pm/config/adom/DEMO/obj/firewall/address"
-		      }
-		    ]
-		  }
+           {
+             "id": 3,
+             "result": [
+               {
+                 "data": [
+                   {
+                     "name": "host_001",
+                     "oid": 5672,
+                     "subnet": [
+                       "10.0.0.111",
+                       "255.255.255.255"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "name": "host_002",
+                     "oid": 5675,
+                     "subnet": [
+                       "10.0.0.112",
+                       "255.255.255.255"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "name": "subnet_001",
+                     "oid": 5674,
+                     "subnet": [
+                       "10.0.0.0",
+                       "255.255.255.0"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "name": "subnet_002",
+                     "oid": 5677,
+                     "subnet": [
+                       "10.0.0.0",
+                       "255.255.0.0"
+                     ],
+                     "type": "ipmask"
+                   }
+                 ],
+                 "status": {
+                   "code": 0,
+                   "message": "OK"
+                 },
+                 "url": "/pm/config/adom/demo/obj/firewall/address"
+               }
+             ]
+           }
+
+- Retrieve all firewall address objects that strictly match a specified IP 
+  address or subnet
+
+  The following example demonstrates how to use the ``==`` (*exact match*)
+  comparison operator to retrieve all firewall address objects that exactly
+  match the specified ``10.0.0.111/32`` IP address within the ``demo`` ADOM:
+
+  .. tab-set::
+
+     .. tab-item:: REQUEST
+
+        .. code-block:: json
+
+           {
+             "id": 3,
+             "method": "get",
+             "params": [
+               {
+                 "fields": [
+                   "name",
+                   "type",
+                   "subnet"
+                 ],
+                 "filter": [
+                   [
+                     "type",
+                     "==",
+                     "ipmask"
+                   ],
+                   "&&",
+                   [
+                     "subnet",
+                     "==",
+                     [
+                       "10.0.0.111",
+                       "255.255.255.255"
+                     ]
+                   ]
+                 ],
+                 "loadsub": 0,
+                 "url": "/pm/config/adom/demo/obj/firewall/address"
+               }
+             ],
+             "session": "{{session}}",
+             "verbose": 1
+           }
+
+     .. tab-item:: RESPONSE
+
+        .. code-block:: json
+
+           {
+             "id": 3,
+             "result": [
+               {
+                 "data": [
+                   {
+                     "name": "host_001",
+                     "oid": 5672,
+                     "subnet": [
+                       "10.0.0.111",
+                       "255.255.255.255"
+                     ],
+                     "type": "ipmask"
+                   }
+                 ],
+                 "status": {
+                   "code": 0,
+                   "message": "OK"
+                 },
+                 "url": "/pm/config/adom/demo/obj/firewall/address"
+               }
+             ]
+           }
+
+- Retrieve all firewall address subnets matching a specific IP address
+
+  The following example demonstrates how to use the ``>=`` (*contain*)
+  comparison operator to retrieve all firewall address objects that include the
+  specified ``10.0.0.111/32`` IP address in the ``demo`` ADOM:
+
+  .. tab-set::
+
+     .. tab-item:: REQUEST
+
+        .. code-block:: json
+
+           {
+             "id": 3,
+             "method": "get",
+             "params": [
+               {
+                 "fields": [
+                   "name",
+                   "type",
+                   "subnet"
+                 ],
+                 "filter": [
+                   [
+                     "type",
+                     "==",
+                     "ipmask"
+                   ],
+                   "&&",
+                   [
+                     "subnet",
+                     ">=",
+                     [
+                       "10.0.0.111",
+                       "255.255.255.255"
+                     ]
+                   ]
+                 ],
+                 "loadsub": 0,
+                 "url": "/pm/config/adom/demo/obj/firewall/address"
+               }
+             ],
+             "session": "{{session}}",
+             "verbose": 1
+           }
+
+     .. tab-item:: RESPONSE
+
+        .. code-block:: json
+
+           {
+             "id": 3,
+             "result": [
+               {
+                 "data": [
+                   {
+                     "name": "FABRIC_DEVICE",
+                     "oid": 3428,
+                     "subnet": [
+                       "0.0.0.0",
+                       "0.0.0.0"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "name": "FIREWALL_AUTH_PORTAL_ADDRESS",
+                     "oid": 3427,
+                     "subnet": [
+                       "0.0.0.0",
+                       "0.0.0.0"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "name": "RFC1918-10",
+                     "oid": 3430,
+                     "subnet": [
+                       "10.0.0.0",
+                       "255.0.0.0"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "name": "all",
+                     "oid": 3426,
+                     "subnet": [
+                       "0.0.0.0",
+                       "0.0.0.0"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "name": "host_001",
+                     "oid": 5672,
+                     "subnet": [
+                       "10.0.0.111",
+                       "255.255.255.255"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "name": "subnet_001",
+                     "oid": 5674,
+                     "subnet": [
+                       "10.0.0.0",
+                       "255.255.255.0"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "name": "subnet_002",
+                     "oid": 5677,
+                     "subnet": [
+                       "10.0.0.0",
+                       "255.255.0.0"
+                     ],
+                     "type": "ipmask"
+                   }
+                 ],
+                 "status": {
+                   "code": 0,
+                   "message": "OK"
+                 },
+                 "url": "/pm/config/adom/demo/obj/firewall/address"
+               }
+             ]
+           }
+
+- Retrieve all firewall address ranges containing a specific IP address
+
+  The following example demonstrates how to use the ``<=`` (*in*) and ``>=``
+  (*contain*) operators together to identify firewall address ranges that
+  include the ``10.0.0.111`` IP address within the ``demo`` ADOM:
+
+  .. tab-set::
+
+     .. tab-item:: REQUEST
+
+        .. code-block:: json
+
+           {
+             "id": 3,
+             "method": "get",
+             "params": [
+               {
+                 "fields": [
+                   "name",
+                   "type",
+                   "start-ip",
+                   "end-ip"
+                 ],
+                 "filter": [
+                   [
+                     "type",
+                     "==",
+                     "iprange"
+                   ],
+                   "&&",
+                   [
+                     [
+                       "start-ip",
+                       "<=",
+                       "10.0.0.111"
+                     ],
+                     "&&",
+                     [
+                       "end-ip",
+                       ">=",
+                       "10.0.0.111"
+                     ]
+                   ]
+                 ],
+                 "loadsub": 0,
+                 "url": "/pm/config/adom/demo/obj/firewall/address"
+               }
+             ],
+             "session": "{{session}}"
+             "verbose": 1
+           }
+
+     .. tab-item:: RESPONSE
+
+        .. code-block:: json           
+
+           {
+             "id": 3,
+             "result": [
+               {
+                 "data": [
+                   {
+                     "end-ip": "10.0.0.120",
+                     "name": "range_001",
+                     "oid": 5673,
+                     "start-ip": "10.0.0.100",
+                     "type": "iprange"
+                   }
+                 ],
+                 "status": {
+                   "code": 0,
+                   "message": "OK"
+                 },
+                 "url": "/pm/config/adom/demo/obj/firewall/address"
+               }
+             ]
+           }
+
+- Retrieve all firewall address subnets or ranges matching a specific IP address
+
+  The following example demonstrates how to build a complex filter expression to
+  search for objects based on various criteria. In this case, the objective is
+  to retrieve all firewall address ranges or subnets that match the
+  ``10.0.0.111/32`` IP address within the ``demo`` ADOM:
+
+  .. tab-set:: 
+
+     .. tab-item:: REQUEST
+
+        .. code-block:: json
+
+           {
+             "id": 3,
+             "method": "get",
+             "params": [
+               {
+                 "fields": [
+                   "name",
+                   "type",
+                   "subnet",
+                   "start-ip",
+                   "end-ip"
+                 ],
+                 "filter": [
+                   [
+                     [
+                       "type",
+                       "==",
+                       "iprange"
+                     ],
+                     "&&",
+                     [
+                       [
+                         "start-ip",
+                         "<=",
+                         "10.0.0.111"
+                       ],
+                       "&&",
+                       [
+                         "end-ip",
+                         ">=",
+                         "10.0.0.111"
+                       ]
+                     ]
+                   ],
+                   "||",
+                   [
+                     [
+                       "type",
+                       "==",
+                       "ipmask"
+                     ],
+                     "&&",
+                     [
+                       "subnet",
+                       ">=",
+                       [
+                         "10.0.0.111",
+                         "255.255.255.255"
+                       ]
+                     ]
+                   ]
+                 ],
+                 "loadsub": 0,
+                 "url": "/pm/config/adom/demo/obj/firewall/address"
+               }
+             ],
+             "session": "{{session}}",
+             "verbose": 1
+           }
+
+     .. tab-item:: RESPONSE
+
+        .. code-block:: json
+
+           {
+             "id": 3,
+             "result": [
+               {
+                 "data": [
+                   {
+                     "end-ip": "0.0.0.0",
+                     "name": "FABRIC_DEVICE",
+                     "oid": 3428,
+                     "start-ip": "0.0.0.0",
+                     "subnet": [
+                       "0.0.0.0",
+                       "0.0.0.0"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "end-ip": "0.0.0.0",
+                     "name": "FIREWALL_AUTH_PORTAL_ADDRESS",
+                     "oid": 3427,
+                     "start-ip": "0.0.0.0",
+                     "subnet": [
+                       "0.0.0.0",
+                       "0.0.0.0"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "end-ip": "0.0.0.0",
+                     "name": "RFC1918-10",
+                     "oid": 3430,
+                     "start-ip": "0.0.0.0",
+                     "subnet": [
+                       "10.0.0.0",
+                       "255.0.0.0"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "end-ip": "0.0.0.0",
+                     "name": "all",
+                     "oid": 3426,
+                     "start-ip": "0.0.0.0",
+                     "subnet": [
+                       "0.0.0.0",
+                       "0.0.0.0"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "end-ip": "0.0.0.0",
+                     "name": "host_001",
+                     "oid": 5672,
+                     "start-ip": "0.0.0.0",
+                     "subnet": [
+                       "10.0.0.111",
+                       "255.255.255.255"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "end-ip": "10.0.0.120",
+                     "name": "range_001",
+                     "oid": 5673,
+                     "start-ip": "10.0.0.100",
+                     "type": "iprange"
+                   },
+                   {
+                     "end-ip": "0.0.0.0",
+                     "name": "subnet_001",
+                     "oid": 5674,
+                     "start-ip": "0.0.0.0",
+                     "subnet": [
+                       "10.0.0.0",
+                       "255.255.255.0"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "end-ip": "0.0.0.0",
+                     "name": "subnet_002",
+                     "oid": 5677,
+                     "start-ip": "0.0.0.0",
+                     "subnet": [
+                       "10.0.0.0",
+                       "255.255.0.0"
+                     ],
+                     "type": "ipmask"
+                   }
+                 ],
+                 "status": {
+                   "code": 0,
+                   "message": "OK"
+                 },
+                 "url": "/pm/config/adom/demo/obj/firewall/address"
+               }
+             ]
+           }           
 
 How to get the Last Modified timestamp?
 _______________________________________

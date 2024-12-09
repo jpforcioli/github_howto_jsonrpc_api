@@ -932,8 +932,9 @@ query string!
 If the |fmg_api|  cannot be converted with the above instructions, then it's
 simply not supported for REST API.
 
-REST API is using HTTP basic authentication; you can use same credentias as
-with the |fmg_api|.
+REST API only supports HTTP basic authentication; you can use same credentias as
+with the |fmg_api|. It doesn't support token-based authentication; you can't use
+a ``Authorization`` header to pass a bearer token.
 
 Getting system status
 +++++++++++++++++++++
