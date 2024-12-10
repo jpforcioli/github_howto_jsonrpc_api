@@ -1179,6 +1179,58 @@ The following example shows how to import metadatas in the ``demo`` ADOM:
 Firewall Address
 ----------------
 
+How to add a IP Range firewall address?
++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to add the ``iprange_001`` firewall address in
+the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "color": 4,
+                 "comment": "IP range #001",
+                 "end-ip": "10.0.0.100",
+                 "name": "iprange_001",
+                 "start-ip": "10.0.0.1",
+                 "type": "iprange"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/address"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "iprange_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/address"
+             }
+           ]
+         }
+
+
 How to add a FQDN firewall address?
 +++++++++++++++++++++++++++++++++++
 
