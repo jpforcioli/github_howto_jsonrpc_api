@@ -1252,7 +1252,8 @@ When your FortiGate device appears in the Unauthorized Devices list within the
 ``root`` ADOM of your FortiManager, it means that something has been configured
 in its ``system.central-management`` config block.
 
-If ``system.central-management`` config block looks like the following example:
+If your FortiGate ``system.central-management`` config block looks like the
+following example:
 
 .. code-block:: text
 
@@ -1385,7 +1386,7 @@ unauthorized device in the ``demo`` ADOM of the trusted FortiManager:
          }       
 
 
-If ``system.central-management`` config block looks like the following example:
+If your FortiGate ``system.central-management`` config block looks like the following example:
 
 .. code-block:: text
 
