@@ -1227,9 +1227,9 @@ How to promote/authorize a real device?
 
    In older FortiManager versions, the left tree in the ADOM ``root`` for
    unmanaged devices was labeled *Unregistered Devices*, with a right-click
-   action named *Promote*.
-   
-	 Now, the left tree is labeled *Unauthorized Devices*, and the corresponding
+   action named *Promote*.   
+
+   Now, the left tree is labeled *Unauthorized Devices*, and the corresponding
 	 right-click action has been updated to *Authorize*.
    
 	 The term *Promote* can be considered synonymous with *Authorize*.
