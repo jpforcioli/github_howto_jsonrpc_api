@@ -1223,50 +1223,64 @@ How to promote/authorize a real device?
 
 .. note::
 
-   - ``authorize`` is a new wording introduced with recent FMG versions
+   The term *authorize* was introduced in recent FortiManager versions.
 
-   - With older FMG versions, the ADOM ``root``'s left tree for not yet managed
-     devices was named *Unregistered Devices* and the right-click action was
-     *Promote*
+   In older FortiManager versions, the left tree in the ADOM ``root`` for
+   unmanaged devices was labeled *Unregistered Devices*, with a right-click
+   action named *Promote*.
+   
+	 Now, the left tree is labeled *Unauthorized Devices*, and the corresponding
+	 right-click action has been updated to *Authorize*.
+   
+	 The term *Promote* can be considered synonymous with *Authorize*.
 
-   - Now left tree name is *Unauthorized Devices*, hence the new *Authorize*
-     right-click action
-
-   - *Promote* could be consider the same as *Authorize*!
-
-The main FMG JSON RPC URL is:
+You have two possible FortiManager API endpoints:
 
 .. code-block:: text
   
    /dvm/cmd/add/device
+   /dvm/cmd/add/dev-list
 
-This URL can be used to:
+These API endpoints can be used for the following purposes:
 
-1. Add a Model Device
-2. Add a real device (but not yet connected to FMG)
-3. Promote/Authorize a real device (already connected to FMG)
+1. Adding a Model Device
+2. Adding a real device (not yet connected to FortiManager)
+3. Promoting/Authorizing a real device that is already connected to FortiManager
+   (the focus of this section).
 
-You're now able to *Authorize* one of your unauthorized device using the following request.
+When your FortiGate device appears in the Unauthorized Devices list within the
+``root`` ADOM of your FortiManager, it means that something has been configured
+in its ``system.central-management`` config block.
 
-It shows how to on-board the ``dev_001`` unauthorized device in the ``demo`` 
-ADOM:
+If ``system.central-management`` config block looks like the following example:
+
+.. code-block:: text
+
+   config system central-management
+       set type fortimanager
+       set fmg <fmg_ip>
+       set serial-number <fmg_sn>
+   end
+
+then you FortiGate already trusts your FortiManager. In this case, you don't
+have to provide FortiGate credentials in the FortiManager API request. The
+following example demonstrates how to promote/authorize the ``dev_001``
+unauthorized device in the ``demo`` ADOM of the trusted FortiManager:
 
 .. tab-set::
 
    .. tab-item:: REQUEST
 
       .. code-block:: json
-      
+
          {
-           "id": 1,
+           "id": 3,
            "method": "exec",
            "params": [
              {
                "data": {
                  "adom": "demo",
                  "device": {
-                   "adm_pass": "fortinet",
-                   "adm_usr": "admin",
                    "device action": "promote_unreg",
                    "name": "dev_001"
                  },
@@ -1281,93 +1295,85 @@ ADOM:
          }
 
       .. note::
-      
-         - ``name`` has to be the device name as show in the GUI (not the 
-           hostname, the device name)
 
-         - ``adm_usr``/ ``adm_pass`` has to be similar to what's is currently 
-           set on your real device
+         The ``name`` must be the device name as displayed in the GUI (not the
+         hostname, but the device name). 
 
-           If device is from factory default configuration (and it retrieved 
-           its FMG IP via some external mechanisms like FortiDeploy/ortiCloud), 
-           it is ``admin`` and no password respectively. 
+         The ``device action`` is quite self-explanatory.
 
-           If you already set a password to the admin's account, then you have 
-           to reflect this password here.
+         It is always good practice to create a task using the ``create_task``  
+         flag. In any case, the ``/dvm/cmd/add/device`` endpoint is synchronous
+         and will only return once the device authorization process is complete.
 
-           If the authorize process gets stuck at 20% it's probably due to an
-           authentication error.
+   .. tab-item:: RESPONSE
 
-         - ``device action`` is quite meaningful
-
-         - It's always a good practise to create a task; in any cases, the 
-           operation will return only when the device authorization will be 
-           completed 
-
-
-   .. tab-item:: REQUEST
-     
       .. code-block:: json
-      
+
          {
-           "id": 1,
+           "id": 3,
            "result": [
              {
                "data": {
                  "device": {
-                   "adm_pass": "fortinet",
-                   "adm_usr": "admin",
-                   "av_ver": "89.01100(2021-09-14 12:26)",
+                   "av_ver": "1.00000(2018-04-09 18:07)",
                    "beta": -1,
-                   "branch_pt": 157,
-                   "build": 157,
+                   "branch_pt": 3470,
+                   "build": 3470,
                    "conf_status": 2,
                    "conn_mode": 1,
                    "conn_status": 1,
                    "dev_status": 0,
                    "faz.perm": 15,
-                   "flags": 2163073,
-                   "hostname": "fgt_dut1",
-                   "ip": "10.210.35.101",
+                   "first_tunnel_up": 1734097542,
+                   "flags": 2098561,
+                   "hdisk_size": 30720,
+                   "hostname": "fgt-002",
+                   "ip": "10.210.34.124",
                    "ips_ver": "6.00741(2015-12-01 02:30)",
-                   "last_checked": 1631652502,
-                   "maxvdom": 1,
-                   "mgmt_id": 810637395,
+                   "last_checked": 1734097621,
+                   "logdisk_size": 30107,
+                   "managed_sn": "FMG-VMREDACTED56",
+                   "maxvdom": 12,
+                   "mgmt.__data[0]": 3870643,
+                   "mgmt.__data[4]": 2091368448,
+                   "mgmt.__data[6]": 1,
                    "mgmt_if": "port1",
                    "mgmt_mode": 3,
-                   "mr": 0,
+                   "mgmt_uuid": "8ab0745c-b958-51ef-f5ad-f745a63ac5bd",
+                   "mr": 6,
                    "name": "dev_001",
-                   "oid": 1638,
+                   "oid": 39795,
                    "os_type": 0,
                    "os_ver": 7,
-                   "patch": 1,
-                   "platform_id": 133,
-                   "platform_str": "FortiGate-VM64-KVM",
-                   "sn": "FGVMSLREDACTED54",
+                   "patch": 2,
+                   "platform_id": 166,
+                   "platform_str": "FortiGate-VM64",
+                   "sn": "FGVMMLREDACTED43",
                    "source": 1,
                    "tab_status": "<unknown>",
-                   "tunnel_ip": "169.254.0.2",
+                   "tunnel_ip": "169.254.0.4",
                    "vdom": [
                      {
-                       "devid": 1638,
+                       "devid": 39795,
                        "ext_flags": 1,
                        "name": "root",
                        "oid": 3,
                        "opmode": 1,
                        "status": "<unknown>",
-                       "tab_status": "<unknown>"
+                       "tab_status": "<unknown>",
+                       "vdom_type": 1
                      }
                    ],
                    "version": 700,
-                   "vm.lic_type": 17,
-                   "vm_cpu": 4,
-                   "vm_cpu_limit": 32767,
-                   "vm_lic_expire": 0,
-                   "vm_mem": 3962,
+                   "vm.lic_type": 19,
+                   "vm_cpu": 1,
+                   "vm_cpu_limit": 4,
+                   "vm_lic_overdue_since": 0,
+                   "vm_mem": 1994,
                    "vm_mem_limit": 2147483647,
                    "vm_status": 3
                  },
-                 "taskid": 3315
+                 "taskid": 2283
                },
                "status": {
                  "code": 0,
@@ -1376,8 +1382,128 @@ ADOM:
                "url": "/dvm/cmd/add/device"
              }
            ]
+         }       
+
+
+If ``system.central-management`` config block looks like the following example:
+
+.. code-block:: text
+
+   config system central-management
+       set type fortimanager
+       set fmg <fmg_ip>
+   end
+
+then you FortiGate doesn't trust your FortiManager. In this case, you have to
+provide the FortiGate credentials since the trust establishment will be done
+during the promote/authorize process. The following example demonstrates how to
+promote/authorize the ``dev_001``  device in the ``demo`` ADOM of the untrusted FortiManager:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "device": {
+                   "adm_pass": "fortinet",
+                   "adm_usr": "admin",                   
+                   "device action": "promote_unreg",
+                   "name": "dev_001"
+                 },
+                 "flags": [
+                   "create_task"
+                 ]
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ],
+           "session": "{{session}}"
          }
-      
+
+      .. note::
+
+         You can provide the FortiGate credentials by using the ``adm_usr`` and
+         the ``adm_pass`` attributes for the login and the password,
+         respectively.
+
+The second ``/dvm/cmd/add/dev-list`` API endpoint is for promoting/authorizing a
+list of devices. The two following API requests are similar:
+
+.. tab-set::
+
+   .. tab-item:: ``/dvm/cmd/add/device``
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "device": {
+                   "device action": "promote_unreg",
+                   "name": "dev_001"
+                 },
+                 "flags": [
+                   "create_task",
+                   "nonblocking"
+                 ]
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: ``/dvm/cmd/add/dev-list``
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "dev-list": [
+                   {
+                     "device action": "promote_unreg",
+                     "name": "dev_001"
+                   },
+                 ],
+                 "flags": [
+                    "create_task",
+                 ]
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ],
+           "session": "{{session}}"
+         }         
+
+These two API requests are asynchronous! A task will be created as specified by the ``create_task`` flag, but the requests will return immediately. The authorization process will continue in the background.
+
+To make the ``/dvm/cmd/add/device`` API endpoint asynchronous, you need to add
+the ``nonblocking`` flag. However, this is the default behavior for the
+``/dvm/cmd/add/dev-list`` API endpoint!
+
+Why is this important? Because if you end your API session immediately after either of these API requests, the created task will fail with the message ``Failed to update device information.``.
+
+As a best practice, whenever an API request returns a task, you should monitor
+the task to ensure it completes successfully. At the very least, during task
+monitoring, the API session will remain active.
+
 Model Device
 ------------
 
