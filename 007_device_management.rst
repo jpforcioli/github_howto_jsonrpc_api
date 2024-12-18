@@ -2633,7 +2633,7 @@ commands`` system to set some metadatas:
 As you can see in the example above, setting metadata, especially for a
 cluster, can be complex.
 
-Starting with FortiManager 7.4.5/7.6.1 (#1043367), a new ``metadata`` attribute
+Starting with FortiManager 7.4.6/7.6.2 (#1043367), a new ``metadata`` attribute
 is available, simplifying the process, as shown below:
 
 .. code-block:: json
