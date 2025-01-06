@@ -674,55 +674,59 @@ How to operate a policy package diff operation?
 
 1. Trigger the policy package diff operation
 
-**REQUEST:**
+   ..tab-set::
 
-.. code-block:: json
+     .. tab-item:: REQUEST
 
-   {
-       "url": "/gui/adom/installation/pkg/install",
-       "method": "processPreview",
-       "params": {
-           "pkgOid": 3292,
-           "installDevIds": "170-0"
-       }
-   }
-
-where ``pkgOid`` and ``installDevIds`` are the policy package and managed
-device OIDs. For the managed device, "170-0" refers to device OID and VDOM OID.
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-       "result": [
+        .. code-block:: json
+        
            {
-               "data": {
-                   "isSchd": 0,
-                   "msg": "",
-                   "result": "ok",
-                   "tid": 369
-               },
-               "id": null,
-               "status": {
-                   "code": 0,
-                   "message": ""
-               },
-               "url": "/gui/adom/installation/pkg/install"
+               "url": "/gui/adom/installation/pkg/install",
+               "method": "processPreview",
+               "params": {
+                   "pkgOid": 3292,
+                   "installDevIds": "170-0"
+               }
            }
-       ]
-   }
 
-When we look in task monitor in FortiManager GUI, this action trigger a *copy*
-operation. 
+        where ``pkgOid`` and ``installDevIds`` are the policy package and 
+        managed device OIDs. For the managed device, "170-0" refers to device 
+        OID and VDOM OID.
 
-When the task is complete we have to trigger an install preview operation.
+     .. tab-item:: RESPONSE
+
+        .. code-block:: json
+        
+           {
+               "result": [
+                   {
+                       "data": {
+                           "isSchd": 0,
+                           "msg": "",
+                           "result": "ok",
+                           "tid": 369
+                       },
+                       "id": null,
+                       "status": {
+                           "code": 0,
+                           "message": ""
+                       },
+                       "url": "/gui/adom/installation/pkg/install"
+                   }
+               ]
+           }
+
+        When we look in task monitor in FortiManager GUI, this action trigger a 
+        *copy* operation. 
+        
+        When the task is complete we have to trigger an install preview 
+        operation.
 
 2. Trigger an install preview operation
 
-Here we could use the normal FortiManager JSON RPC API, but we have to remain in the
-same session. This is why we're using the flatui_proxy to trigger the install
-preview operation.
+   Here we could use the normal FortiManager JSON RPC API, but we have to 
+   remain in the same session. This is why we're using the flatui_proxy to
+   trigger the install preview operation.
 
 How to CSV export components from policy package?
 +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -890,7 +894,41 @@ _____________________
 The attribute ``downloadname`` is optional; if ommited, the CSV file name will
 be from the value of the ``filepath`` attribute.
 
+How to get the list of vulnerabilities for your managed devices?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+This is to get the list of vulnerabilities as shown in the following screenshot
+from FortiManager 7.4.5:
+
+.. thumbnail:: images/alternative_fortimanager_api/image_001.png
+
+The following example shows how to get the list of vulnerabilities for the
+managed devices in the ADOM ``root``:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: text
+
+         POST https://10.210.34.139/cgi-bin/module/flatui_auth
+         Content-Type: application/json
+         Xsrf-Token: P6DtO5DLqp8ox5ZI9sjgdw6lEzbAXuA
+
+         {
+             "url": "/gui/adoms/3/dvm/psirt",
+             "method": "get"
+         }
+
+      .. note::
+
+         ``3`` is the OID of the ADOM ``root``.
+
+   .. tab-item:: RESPONSE
+
+      .. literalinclude:: datas/alternative_fortimanager_api/output_001.json
+         :language: json
+      
 REST API
 --------
 
