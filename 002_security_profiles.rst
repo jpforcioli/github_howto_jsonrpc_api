@@ -3088,7 +3088,7 @@ Virtual Patching
 How to get the Virtual Patching Signatures list?
 ++++++++++++++++++++++++++++++++++++++++++++++++
 
-Caught in #0983425.
+Caught in #0983425 and #1103218
 
 Following example shows how to get the Virtual Patching Signatures list using 
 the ``demo`` ADOM:

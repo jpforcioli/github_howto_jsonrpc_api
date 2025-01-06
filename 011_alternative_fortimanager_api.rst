@@ -14,7 +14,7 @@ an *endpoint* for an operation that is available in the FortiManager GUI.
 
 .. warning::
 
-   - This API is not officially and may be modified without prior notice
+   - This API is not official and may be modified without prior notice
 
    - Use it only when the FortiManager JSON API cannot fulfill your needs
 
@@ -129,7 +129,7 @@ Use the following request to logout from your FortiManager:
          - Don't forget the trailing slash in the URL!
 
          - You have include the ``Xsrf-Token`` header as set during the login 
-           operation (see :ref:``How to Login?``). Don't rely on the value from
+           operation (see :ref:`How to Login?`). Don't rely on the value from
            this header; it won't match the one captured in the section
            :ref:`How to Login?`.
 
