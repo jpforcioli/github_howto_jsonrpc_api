@@ -9518,93 +9518,102 @@ How to add central dnat policies?
    }
 
 
-How to *Import Policy* in a policy package?
--------------------------------------------
+How to trigger an *Import Configuration*?
+-----------------------------------------
+
 It's a three steps process:
 
 1. Perform the dynamic interfaces mapping
 
-   **REQUEST:**
+   .. tab-set::
 
-   .. code-block::
+      .. tab-item:: REQUEST
 
-      {
-        "id": ANY-NUMBER,
-        "method": "exec",
-        "params": [
+         .. code-block::
+      
             {
-                "data": {
-                    "adom": "ADOM-NAME",
-                    "dst_name": "PACKAGE-NAME",
-                    "if_all_policy": "enable",
-                    "import_action": "policy_search",
-                    "name": "DEVICE-NAME",
-                    "vdom": "root",
-                    "if_all_objs": "none",
-                    "add_mappings": "enable"
-                },
-                "url": "/securityconsole/import/dev/objs"
+              "id": ANY-NUMBER,
+              "method": "exec",
+              "params": [
+                  {
+                      "data": {
+                          "adom": "ADOM-NAME",
+                          "dst_name": "PACKAGE-NAME",
+                          "if_all_policy": "enable",
+                          "import_action": "policy_search",
+                          "name": "DEVICE-NAME",
+                          "vdom": "root",
+                          "if_all_objs": "none",
+                          "add_mappings": "enable"
+                      },
+                      "url": "/securityconsole/import/dev/objs"
+                  }
+              ],
+              "session": "SESSION-ID"
             }
-        ],
-        "session": "SESSION-ID"
-      }
 
-   .. note::
-     
-      Please note the ``import_action`` set to ``policy_search``, and the
-      ``add_mappings`` set to ``enable``.
+         .. note::
+           
+            Please note the ``import_action`` set to ``policy_search``, and the
+            ``add_mappings`` set to ``enable``.
 
 2. Perform dynamic objects mappings
 
-   **REQUEST:**
-   
-   .. code-block::
-     
-      {
-        "id": 16,
-        "method": "exec",
-        "params": [
-            {
-                "data": {
-                    "adom": "ADOM-NAME",
-                    "dst_name": "PACKAGE-NAME",
-                    "if_all_policy": "enable",
-                    "import_action": "obj_search",
-                    "name": "DEVICE-NAME",
-                    "vdom": "root",
-                    "if_all_objs": "none",
-                    "add_mappings": "enable"
-                },
-                "url": "/securityconsole/import/dev/objs"
-            }
-        ],
-        "session": "SESSION-ID"
-      }
+   .. tab-set::
 
-   This time ``import_action`` was set to ``obj_search``.
+      .. tab-item:: REQUEST
+   
+         .. code-block::
+           
+            {
+              "id": 16,
+              "method": "exec",
+              "params": [
+                  {
+                      "data": {
+                          "adom": "ADOM-NAME",
+                          "dst_name": "PACKAGE-NAME",
+                          "if_all_policy": "enable",
+                          "import_action": "obj_search",
+                          "name": "DEVICE-NAME",
+                          "vdom": "root",
+                          "if_all_objs": "none",
+                          "add_mappings": "enable"
+                      },
+                      "url": "/securityconsole/import/dev/objs"
+                  }
+              ],
+              "session": "SESSION-ID"
+            }
+      
+         .. note::
+          
+            This time ``import_action`` is set to ``obj_search``.
 
 3. Importing policies and dependent dynamic interfaces and objects
 
-   **REQUEST:**
+   .. tab-set::
+    
+      .. tab-item:: REQUEST
 
-   .. code-block::
-
-      {
-        "id": ANY-NUMBER,
-        "method": "exec",
-        "params": [
+         .. code-block::
+      
             {
-                "data": {
-                    "adom": "ADOM-NAME",
-                    "dst_name": "PACKAGE-NAME",
-                    "if_all_policy": "enable",
-                    "import_action": "do",
-                    "name": "DEVICE-NAME",
-                    "vdom": "root",
-                    "if_all_objs": "filter"
-                },
-                "url": "/securityconsole/import/dev/objs"
-            }
-        ],
-        "session": "SESSION-ID"
-    }
+              "id": ANY-NUMBER,
+              "method": "exec",
+              "params": [
+                  {
+                      "data": {
+                          "adom": "ADOM-NAME",
+                          "dst_name": "PACKAGE-NAME",
+                          "if_all_policy": "enable",
+                          "import_action": "do",
+                          "name": "DEVICE-NAME",
+                          "vdom": "root",
+                          "if_all_objs": "filter"
+                      },
+                      "url": "/securityconsole/import/dev/objs"
+                  }
+              ],
+              "session": "SESSION-ID"
+          }
