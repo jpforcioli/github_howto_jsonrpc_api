@@ -1492,8 +1492,15 @@ to the ``dut_fgt_10`` managed device and its ``root`` VDOM:
            ]
          }        
 
+Policy Package Status
++++++++++++++++++++++
+
+.. note::
+  
+   See also :ref:`Policy Package Status for Managed devices`
+
 How to get the status of all Policy Packages in an ADOM?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+________________________________________________________
 
 The following example shows how to get the Policy Package status for all policy
 package in the ``demo`` ADOM:
@@ -1568,123 +1575,15 @@ package in the ``demo`` ADOM:
          - It shows the full path of the Policy Package. For instance, Policy
            Package ``pkg_001`` to ``pkg_003`` are in the
            ``folder_002`` folder which in turn is in the ``folder_002`` folder.
-           But the ``pkg_004`` Policy Package is in the implicit root folder.
+           But the ``pkg_004`` Policy Package is in the implicit ``root`` 
+           folder.
 
          - It also returns the ``status``. In this output all Policy Package are
            with the ``modified`` status. It means that they contains changes not
            yet pushed to theit assigtned  managed devices
 
-How to get the status of a specific Policy Package using a filter?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-Caught in #1071099.
-
-The following shows how to get a specific Policy Package using a filter:
-
-.. tab-set:: 
-
-   .. tab-item:: REQUEST
-
-      .. code-block:: json
-
-         {
-           "id": 4,
-           "method": "get",
-           "params": [
-             {
-               "filter": [
-                 "pkg",
-                 "==",
-                 [
-                   "folder_001",
-                   "folder_002",
-                   "pkg_001"
-                 ]
-               ],
-               "url": "/pm/config/adom/demo/_package/status"
-             }
-           ],
-           "session": "{{session}}",
-           "verbose": 1
-         }
-
-      .. note::
-
-         - The ``filter`` attribute contains a search criteria for the ``pkg``
-           attribute. It has to be strictly equal to the specified path
-
-         - The *path* in this case is a list where each element are representing
-           the path.
-
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-
-         {
-           "id": 4,
-           "result": [
-             {
-               "data": [
-                 {
-                   "dev": "dev_001",
-                   "pkg": "folder_001/folder_002/sites_HUB_PKG",
-                   "status": "modified",
-                   "vdom": "root"
-                 }
-               ],
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "/pm/config/adom/demo/_package/status"
-             }
-           ]
-         }
-
-      .. important::
-
-         - In the past (before FortiManager 7.6.1), filters could be applied
-           using either of the following formats:
-
-           #. Intuitive with slashes:
-
-              .. code-block:: 
-
-                 [
-                   "pkg",
-                   "==",
-                   "folder_001/folder_002/pkg_001"
-                 ]
-
-           #. Less intuitive with spaces:
-
-              .. code-block:: 
-
-                 [
-                   "pkg",
-                   "==",
-                   "folder_001 folder_002 pkg_001"
-                 ]
-
-         - However, folder or Policy Package names might contain slashes or 
-           spaces, making these approaches problematic. This is why the new 
-           format is now preferred.
-
-      .. tip::
-
-         - As an alternative to the filter based on the ``pkg`` attribute, you 
-           can consider using the ``oid`` one:
-
-           .. code-block:: json
-
-              [
-                "oid",
-                "==",
-                "1234"
-              ]
-
-How to get the status of a specific Policy Package without a filter?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to get the status of a specific Policy Package?
+___________________________________________________
 
 The following examples shows how to get the Policy Package status for the
 ``pkg_001`` Policy Package located in the ``folder_001/folder_002`` folder in
@@ -1771,6 +1670,191 @@ the ``demo`` ADOM.
                   }
                 ]
               }
+
+How to get the status of a specific Policy Package using a filter?
+__________________________________________________________________
+
+Caught in #1071099.
+
+The following example shows how to get the status of the ``ppkg_001`` Policy
+Package in the ``folder_001/folder_002`` folder of the ``demo`` ADOM and using a
+filter:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "method": "get",
+           "params": [
+             {
+               "filter": [
+                 "pkg",
+                 "==",
+                 [
+                   "folder_001",
+                   "folder_002",
+                   "ppkg_001"
+                 ]
+               ],
+               "url": "/pm/config/adom/demo/_package/status"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         - The ``filter`` attribute contains a search criteria for the ``pkg``
+           attribute. It has to be strictly equal to the specified path
+
+         - The *path* in this case is a list where each element are representing
+           the path.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "result": [
+             {
+               "data": [
+                 {
+                   "dev": "dev_001",
+                   "pkg": "folder_001/folder_002/ppkg_001",
+                   "status": "modified",
+                   "vdom": "root"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_package/status"
+             }
+           ]
+         }
+
+      .. important::
+
+         - In the past (before FortiManager 7.6.1), filters could be applied
+           using either of the following formats:
+
+           #. Intuitive with slashes:
+
+              .. code-block:: 
+
+                 [
+                   "pkg",
+                   "==",
+                   "folder_001/folder_002/ppkg_001"
+                 ]
+
+           #. Less intuitive with spaces:
+
+              .. code-block:: 
+
+                 [
+                   "pkg",
+                   "==",
+                   "folder_001 folder_002 ppkg_001"
+                 ]
+
+         - However, folder or Policy Package names might contain slashes or 
+           spaces, making these approaches problematic. This is why the new 
+           format is now preferred.
+
+      .. tip::
+
+         - As an alternative to the filter based on the ``pkg`` attribute, you 
+           can consider using the ``oid`` one:
+
+           .. code-block:: json
+
+              [
+                "oid",
+                "==",
+                "1234"
+              ]
+
+How to get list of Policy Package according to their status?
+____________________________________________________________
+
+What if you need to get the list of all Policy Packages assigned to your managed
+devices, but only the ones matching a very specific status? Like the ones that
+are in the ``modified`` status which means they shoud be re-installed?
+
+The following example shows how to get all the assigned Policy Package from the
+``demo`` ADOM which are with the ``modified`` status:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+            {
+             "filter": [
+               "status",
+               "==",
+               "modified"
+             ],
+             "url": "/pm/config/adom/knock_75362/_package/status/"
+            }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "dev": "dev_001",
+                   "pkg": "ppkg_001",
+                   "status": "modified",
+                   "vdom": "root"
+                 },
+                 {
+                   "dev": "dev_002",
+                   "pkg": "ppkg_001",
+                   "status": "modified",
+                   "vdom": "root"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_package/status/"
+             }
+           ]
+         }
+
+      .. note::
+
+         This output shows that there is only one Policy Package - ``ppkg_001``
+         - with the ``modified`` status.
+
+         This ``demo`` ADOM could be with other assigned Policy Packages like
+         ``ppkg_002``, ``ppkg_003``, etc., but they are definitely not in the 
+         ``modified`` status.
 
 How to figure out whether interface pair view are supported by a type of policies?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

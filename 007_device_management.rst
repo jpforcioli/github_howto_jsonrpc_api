@@ -115,6 +115,8 @@ To rename the ``fgt-741-001`` device to ``fgt-742-001`` in the ``dc_emea`` ADOM:
 Device status
 -------------
 
+Captured in #462768.
+
 This section is about getting the *Config Status*, *Policy Package Status*,
 *Provisioning Templates* status, ADOM membership, cluster member status, etc.
 for the managed devices.
@@ -122,217 +124,376 @@ for the managed devices.
 This is more or less the information showing up int the *Device Manager* >
 *Device & Groups* page of the FortiManager GUI:
 
-.. image:: images/device_manager_status.png
+.. thumbnail:: images/device_management/device_manager_status.png
 
-To get those *status* for a specific device:
+It is now possible to get these different status when getting the list of
+devices with the Fortimanager API URL ``/dvmdb/device[/<device>]``.
 
-**REQUEST:**
+You just have to pass the two options ``extra info`` and ``assignment info``.
 
-.. code-block:: json
+The following example shows how to get these *status* for a single managed
+cluster; ``cluster_001`` in this case:
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "option": [
-           "extra info",
-           "assignment info"
-         ],
-         "url": "/dvmdb/device/cluster_site_1"
-       }
-     ],
-     "session": "POAGtBw1yyb4wvLO6SNpVkQwzVtKFFQaER/I3B/BRZkJj7RkFjfBuhJdFHmP2ShOtr7SDOw1EyJuG+BwCPDOiA==",
-     "verbose": 1
-   }
+.. tab-set:: 
 
-**RESPONSE:**
+   .. tab-item:: REQUEST
 
-.. code-block:: json
-   :linenos:
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "adm_pass": [
-             "ENC",
-             "g9ZrdUj7gIqEKVU6aI9Azk8+hXo8BUUpRXFzN++KBvjfXH+dcK90agrchqFtsr2WH/nkbeLDxeS/jhmlnXKAg5/q+D6nYsrMDudW1SHLBWLgYzJccx9ja5tZOOwvYoYm1ac+txELl+U/XCIarQHlRB0AEO5syVKzfWAye8akyCNqVwGs"
-           ],
-           "adm_usr": "admin",
-           "app_ver": "",
-           "assignment info": [
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
              {
-               "name": "branches",
-               "status": "installed",
-               "type": "devprof"
-             }
-           ],
-           "...": "...",
-           "conf_status": "insync",
-           "conn_mode": "passive",
-           "conn_status": "up",
-           "db_status": "nomod",
-           "dev_status": "auto_updated",
-           "extra info": {
-             "adom": "production"
-           },
-           "ha_slave": [
-             {
-               "did": "cluster_site_1",
-               "flags": null,
-               "idx": 0,
-               "name": "i_04_fgt_11",
-               "obj ver": -1,
-               "oid": 1463,
-               "prio": 200,
-               "role": "master",
-               "sn": "FGVMULTM22000561",
-               "status": 1
-             },
-             {
-               "did": "cluster_site_1",
-               "flags": null,
-               "idx": 2147483647,
-               "name": "i_05_fgt_12",
-               "obj ver": -1,
-               "oid": 1464,
-               "prio": 100,
-               "role": "slave",
-               "sn": "FGVMULTM22000560",
-               "status": 2
-             }
-           ],
-           "...": "...",
-           "hostname": "i_04_fgt_11",
-           "...": "..."
-           "vdom": [
-             {
-               "assignment info": [
-                 {
-                   "name": "branches",
-                   "status": "installed",
-                   "type": "policy"
-                 },
-                 {
-                   "name": "1375-3",
-                   "status": "installed",
-                   "type": "wtp"
-                 },
-                 {
-                   "name": "branches",
-                   "status": "installed",
-                   "type": "wanprof"
-                 },
-                 {
-                   "name": "1375-3",
-                   "status": "installed",
-                   "type": "fsp"
-                 },
-                 {
-                   "name": "1375-3",
-                   "status": "imported",
-                   "type": "fext"
-                 },
-                 {
-                   "name": "branches",
-                   "status": "installed",
-                   "type": "cli"
-                 },
-                 {
-                   "name": "branches",
-                   "status": "installed",
-                   "stype": "_ipsec",
-                   "type": "template"
-                 },
-                 {
-                   "name": "branches",
-                   "status": "installed",
-                   "stype": "_router_static",
-                   "type": "template"
-                 },
-                 {
-                   "name": "branches",
-                   "status": "installed",
-                   "stype": "unkown",
-                   "type": "template"
-                 }
+               "option": [
+                 "extra info",
+                 "assignment info"
                ],
-               "...": "...",
-               "extra info": {
-                 "adom": "production"
-               },
-               "...": "..."
-               "name": "root",
-               "...": "..."
+               "url": "/dvmdb/device/cluster_001"
              }
            ],
-           "...": "..."
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/device/cluster_site_1"
-       }
-     ]
-   }
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-This output is showing a lot of information:
+   .. tab-item:: RESPONSE
 
-Lines 12-18
-  This is showing that the device (global scope) is assigned to a system
-  template (``devprof``) named ``branches`` and that it is in sync
-  (``installed``). It means the content of the system template has been applied
-  to real managed device.
+      .. code-block:: json
+         :linenos:
 
-Lines 20-24
-  Those are the device status.
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "adm_pass": [
+                   "ENC",
+                   "g9ZrdUj7gIqEKVU6aI9Azk8+hXo8BUUpRXFzN++KBvjfXH+dcK90agrchqFtsr2WH/nkbeLDxeS/jhmlnXKAg5/q+D6nYsrMDudW1SHLBWLgYzJccx9ja5tZOOwvYoYm1ac+txELl+U/XCIarQHlRB0AEO5syVKzfWAye8akyCNqVwGs"
+                 ],
+                 "adm_usr": "admin",
+                 "app_ver": "",
+                 "assignment info": [
+                   {
+                     "name": "system_template_001",
+                     "status": "installed",
+                     "type": "devprof"
+                   }
+                 ],
+                 "...": "...",
+                 "conf_status": "insync",
+                 "conn_mode": "passive",
+                 "conn_status": "up",
+                 "db_status": "nomod",
+                 "dev_status": "auto_updated",
+                 "extra info": {
+                   "adom": "demo"
+                 },
+                 "ha_slave": [
+                   {
+                     "did": "cluster_001",
+                     "flags": null,
+                     "idx": 0,
+                     "name": "dev_001",
+                     "obj ver": -1,
+                     "oid": 1463,
+                     "prio": 200,
+                     "role": "master",
+                     "sn": "FGVMULREDACTED61",
+                     "status": 1
+                   },
+                   {
+                     "did": "cluster_001",
+                     "flags": null,
+                     "idx": 2147483647,
+                     "name": "dev_002",
+                     "obj ver": -1,
+                     "oid": 1464,
+                     "prio": 100,
+                     "role": "slave",
+                     "sn": "FGVMULREDACTED60",
+                     "status": 2
+                   }
+                 ],
+                 "...": "...",
+                 "hostname": "dev_001",
+                 "...": "..."
+                 "vdom": [
+                   {
+                     "assignment info": [
+                       {
+                         "name": "ppkg_001",
+                         "status": "installed",
+                         "type": "policy"
+                       },
+                       {
+                         "name": "1375-3",
+                         "status": "installed",
+                         "type": "wtp"
+                       },
+                       {
+                         "name": "sdwan_template_001",
+                         "status": "installed",
+                         "type": "wanprof"
+                       },
+                       {
+                         "name": "1375-3",
+                         "status": "installed",
+                         "type": "fsp"
+                       },
+                       {
+                         "name": "1375-3",
+                         "status": "imported",
+                         "type": "fext"
+                       },
+                       {
+                         "name": "cli_template_group_001",
+                         "status": "installed",
+                         "type": "cli"
+                       },
+                       {
+                         "name": "ipsec_tunnel_template_001",
+                         "status": "installed",
+                         "stype": "_ipsec",
+                         "type": "template"
+                       },
+                       {
+                         "name": "static_route_template_001",
+                         "status": "installed",
+                         "stype": "_router_static",
+                         "type": "template"
+                       },
+                       "...": "...",
+                     ],
+                     "...": "...",
+                     "extra info": {
+                       "adom": "demo"
+                     },
+                     "...": "..."
+                     "name": "root",
+                     "...": "..."
+                   }
+                 ],
+                 "...": "..."
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device/cluster_site_1"
+             }
+           ]
+         }
+      
+      .. note::
 
-Lines 25-27
-  The device (global scope) belongs to ADOM ``production``.
-  One of its VDOMs could belong to another ADOM...
+         This output is showing a lot of information:
+               
+         Lines 12-18
+           This is showing that the device (global scope) is assigned to a
+           system template (``devprof``) named ``system_template_001`` and that
+           it is in sync (``installed``). It means the content of the system
+           template has been applied to real managed device.
 
-Lines 28-53
-  It indicates this is a cluster and here are the members. The ``status``
-  indicates the status of the member. ``1`` means the member is up while ``2``
-  means it is down.
+           The system template is not at the VDOM level. That's the only
+           template that need to be applied against the global scope.
 
-Lines 57-117
-  The ``vdom`` block gives the status information for all VDOMs. Lines 60-64
-  gives the policy package name (``branches``) and status (``installed``), lines
-  70-74 gives the SD-WAN Template name (``branches``) and status
-  (``installed``), etc.
+         Lines 20-24
+           Those are the device status. 
+         
+         Lines 25-27
+           The device (global scope) belongs to ADOM ``demo``.
 
-Lines 110-114
-  It gives the VDOM name (``root``) along with the ADOM it belongs to
-  (``production``).
+           One of its VDOMs could belong to other ADOMs.
+         
+         Lines 28-53
+           It indicates this is a cluster and with two members: ``dev_001`` and
+           ``dev_002``. The ``status`` indicates the status of the member. ``1``
+           means the member is up while ``2`` means it is down.
+         
+         Lines 57-101
+           The ``vdom`` block gives the status information for all VDOMs. Lines
+           61-65 gives the policy package name (``ppkg_001``) and
+           status (``installed``), lines
+           71-75 gives the SD-WAN Template name (``sdwan_template_001``) and
+           status (``installed``), etc.
+         
+         Lines 105-109
+           It gives the ADOM name (``demo``) the VDOM belongs to along with the
+           VDOM name (``root``).
 
+The following example shows how to get these *status* for the ``root`` VDOM of
+the ``dev_001`` managed device:
 
-This |fmg_api| request is very powerful: it can return the status information
-for all devices of all ADOMs!:
+.. tab-set:: 
 
-**REQUEST**:
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 1, 
+           "method": "get", 
+           "params": [
+             {
+               "option": [
+                 "extra info", 
+                 "assignment info"
+               ], 
+               "url": "/dvmdb/device/dev_001/vdom/root"
+             }
+           ], 
+           "session": "{{session}}"
+         }
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "option": [
-           "extra info",
-           "assignment info"
-         ],
-         "url": "/dvmdb/device"
-       }
-     ],
-     "session": "uN1mD86SolLxF7dwUZKLZcRh3doHd3ELSX0oxZjwA6El33hcGn9Xl8ImM2Th7v/lmIn825z4OqaN2EpbBazPFw==",
-     "verbose": 1
-   }
+   .. tab-item:: RESPONSE
 
+      .. code-block:: json
+
+         {
+           "id": 1, 
+           "result": [
+             {
+               "data": {
+                 "assignment info": [
+                   {
+                     "name": "ppkg_001", 
+                     "status": "installed", 
+                     "type": "policy"
+                   }, 
+                   {
+                     "name": "3565-3", 
+                     "status": "installed", 
+                     "type": "wtp"
+                   }
+                 ], 
+                 "comments": "", 
+                 "devid": "dev_001",
+                 "ext_flags": 1, 
+                 "extra info": {
+                   "adom": "demo"
+                 }, 
+                 "flags": 0, 
+                 "name": "root", 
+                 "node_flags": 4, 
+                 "obj ver": -1, 
+                 "oid": 3, 
+                 "opmode": 1, 
+                 "rtm_prof_id": 0
+               }, 
+               "status": {
+                 "code": 0, 
+                 "message": "OK"
+               }, 
+               "url": "/dvmdb/device/dev_001/vdom/root"
+             }
+           ]
+         }
+      
+The following example shows how to get these status for all managed devices:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "option": [
+                 "extra info",
+                 "assignment info"
+               ],
+               "url": "/dvmdb/device"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+Policy Package Status for Managed devices
++++++++++++++++++++++++++++++++++++++++++
+
+It's an alternative to obtain the Policy Package Status only. 
+
+It's a bit similar to what has been documented in section :ref:`Policy Package Status`.
+
+Goal is to get the Policy Package Status of a specific device or
+vdom. 
+
+The output should return the policy package status (``installed`` for instance)
+along with the name of the corresponding Policy Package. 
+
+If the Policy Package isn't in the ``root`` folder, then the complete or
+absolute path should be returned.
+
+We need to use the following method and url:
+
+.. list-table::
+   :widths: auto
+
+   * - **Method**
+     - .. code-block:: text
+
+         get
+
+   * - **URL**
+     - .. code-block:: text
+
+         /pm/config/adom/<adom>/_package/status/<device>/<vdom>
+
+The following example shows how to get the status of the Policy Package assigned
+to the ``dev_001`` managed device and its ``root`` VDOM in the ``demo`` ADOM:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_package/status/dev_001/root"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "dev": "dev_001",
+                 "pkg": "emea/spain/ppkg_001",
+                 "status": "installed",
+                 "vdom": "root"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_package/status/dev_001/root"
+             }
+           ]
+         }
+
+      .. note::
+         In the above output, you can see that the status of Policy Package
+         ``ppkg_001`` assigned to the ``root`` VDOM of the ``dev_001`` managed
+         device in the ``demo`` ADOM is ``installed``. 
+         Furthermore, you can see it is not in the ``root`` folder but in  the 
+         ``emea/spain`` folder.
 
 How to refresh a device?
 ------------------------
@@ -5784,227 +5945,6 @@ example:
            "verbose": 1
          }
 
-How to get the policy package status when getting list of devices?
-------------------------------------------------------------------
-
-Starting with #462768 it is now possible to get the policy package status directly when getting the list of devices with FMG API URL ``/dvmdb/device[/<device>]``.
-
-We just have to pass the two options ``extra info`` and ``assignment info`` as shown below:
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 1, 
-     "jsonrpc": "1.0", 
-     "method": "get", 
-     "params": [
-       {
-         "option": [
-           "extra info", 
-           "assignment info"
-         ], 
-         "url": "/dvmdb/device"
-       }
-     ], 
-     "session": "Xcm+v7DP6nhpMFuSPwvuiTl3yrR2sx8uEpwTyAWfc4U+aI5hUngzwRJ/PgwDWzSmRoXWkEmlQ9F2SnsEaXhUZ/CjTlc0JIZO"
-   }
-
-**RESPONSE:**
-
-.. code-block::
-
-   {
-     "id": 1, 
-     "result": [
-       {
-         "data": [
-           […]
-           "os_ver": 5, 
-           "patch": 5, 
-           "platform_str": "FortiGate-7000E", 
-           "psk": "", 
-           "sn": "FG73ES3E16000106", 
-           "source": 1, 
-           "tab_status": "", 
-           "tunnel_cookie": "", 
-           "tunnel_ip": "169.254.0.6", 
-           "vdom": [
-             {
-               "assignment info": [
-                 {
-                   "name": "DMZF7030_FWM01_FAT_001", 
-                   "status": "imported", 
-                   "type": "policy"
-                 }, 
-                 {
-                   "name": "3697-102", 
-                   "status": "imported", 
-                   "type": "wtp"
-                 }
-               ], 
-               "comments": "", 
-               "devid": "DMZF7030_FWM01", 
-               "ext_flags": 3, 
-               "extra info": {
-                  "adom": "GRAMEEN"
-               }, 
-               "flags": 0, 
-               "name": "FAT", 
-               "node_flags": 0, 
-               "obj ver": -1, 
-               "oid": 102, 
-               "opmode": 1, 
-               "rtm_prof_id": 0, 
-               "status": null, 
-               "tab_status": null
-             }, 
-             […]
-           ], 
-           "status": {
-           "code": 0, 
-           "message": "OK"
-         }, 
-         "url": "/dvmdb/device"
-       }
-     ]
-   }
-
-It also works for a VDOM:
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-   "id": 1, 
-                  "jsonrpc": "1.0", 
-                  "method": "get", 
-                  "params": [
-                    {
-                      "option": [
-                        "extra info", 
-                        "assignment info"
-                      ], 
-                      "url": "/dvmdb/device/peer6/vdom/root"
-                    }
-                  ], 
-                  "session": "PbJC6DrGjngxAk4Ep80yyBLCl3zUxUeGl2wZ8+xvxDPAQdm2PnLGcpb91PMGQg/3QxmEjHsg47akwZ2hC9RwLhDWDTT52VCE"
-                }
-
-**RESPONSE:**
-
-.. code-block::
-
-   {
-     "id": 1, 
-     "result": [
-       {
-         "data": {
-           "assignment info": [
-             {
-               "name": "default", 
-               "status": "installed", 
-               "type": "policy"
-             }, 
-             {
-               "name": "3565-3", 
-               "status": "installed", 
-               "type": "wtp"
-             }
-           ], 
-           "comments": "", 
-           "devid": "peer6", 
-           "ext_flags": 1, 
-           "extra info": {
-             "adom": "CM-LAB-001"
-           }, 
-           "flags": 0, 
-           "name": "root", 
-           "node_flags": 4, 
-           "obj ver": -1, 
-           "oid": 3, 
-           "opmode": 1, 
-           "rtm_prof_id": 0
-         }, 
-         "status": {
-           "code": 0, 
-           "message": "OK"
-         }, 
-         "url": "/dvmdb/device/peer6/vdom/root"
-       }
-     ]
-   }
-
-How to get the status of a policy package assigned to a specific device?
-------------------------------------------------------------------------
-
-Goal is to get the policy package status of a specific device or
-vdom. 
-
-The output should return the policy package status (``installed`` for instance)
-along with the name of the corresponding policy package. 
-
-If the policy package isn't the the ``root`` folder, then the complete or
-absolute path should be returned.
-
-We need to use the following method and url:
-
-+------------+------------------------------------------------------------+
-| **Method** | ``get``                                                    |
-+------------+------------------------------------------------------------+
-| **URL**    | ``/pm/config/adom/<adom>/_package/status/<device>/<vdom>`` |
-+------------+------------------------------------------------------------+
-
-The FortiManager JSON API request/response:
-
-To get the status of the policy package assigned to the managed device
-``sp_device_001`` and its VDOM ``root`` in ADOM ``TEST``:
-
-**REQUEST:**
-
-.. code-block:: json
-
-		{
-		  "id": 1,
-		  "jsonrpc": "1.0",
-		  "method": "get",
-		  "params": [
-		    {
-		      "url": "/pm/config/adom/TEST/_package/status/sp_device_001/root"
-		    }
-		  ],
-		  "session": "nr/snvgTdCwN15fNK1kcdjGQG8QwvUhtVfYaVN4kA2rbNL5fum2QiokmeESHqZFxPH68n/VTYjMFjEvdhQifg+IOWT1udfwv",
-		  "verbose": 1
-		}
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "dev": "sp_device_001",
-           "pkg": "emea/spain/pp.fw",
-           "status": "installed",
-           "vdom": "root"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/TEST/_package/status/sp_device_001/root"
-       }
-     ]
-   }
-
-In the above output, we can see that the status of policy package
-``pp.fw`` is ``installed``. Furthermore, we can see it is not in the
-``root`` folder but in ``emea/spain`` folder.
 
 Device revisions
 ----------------

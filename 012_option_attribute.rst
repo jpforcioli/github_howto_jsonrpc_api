@@ -45,7 +45,7 @@ For instance, it can be used to get the *Last Modified* timestamp information
 when retrieving objects (see :ref:`How to get the Last Modified timestamp?`) or
 to get the *Packages* assignment information (Policy Package, Provisioning
 Templates, FortiAP/FortiSwitch Template, etc.) for the managed devices (see
-:ref:`How to get the policy package status when getting list of devices?`).
+:ref:`Device status`).
 
 .. code-block:: json
 
