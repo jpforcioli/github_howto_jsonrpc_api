@@ -9521,99 +9521,323 @@ How to add central dnat policies?
 How to trigger an *Import Configuration*?
 -----------------------------------------
 
-It's a three steps process:
+It's a three-step process where the list of attributes and their
+corresponding values must be used very carefully.
 
-1. Perform the dynamic interfaces mapping
+#. Collect the firewall policies, interfaces and zones
 
-   .. tab-set::
-
-      .. tab-item:: REQUEST
-
-         .. code-block::
-      
-            {
-              "id": ANY-NUMBER,
-              "method": "exec",
-              "params": [
-                  {
-                      "data": {
-                          "adom": "ADOM-NAME",
-                          "dst_name": "PACKAGE-NAME",
-                          "if_all_policy": "enable",
-                          "import_action": "policy_search",
-                          "name": "DEVICE-NAME",
-                          "vdom": "root",
-                          "if_all_objs": "none",
-                          "add_mappings": "enable"
-                      },
-                      "url": "/securityconsole/import/dev/objs"
-                  }
-              ],
-              "session": "SESSION-ID"
-            }
-
-         .. note::
-           
-            Please note the ``import_action`` set to ``policy_search``, and the
-            ``add_mappings`` set to ``enable``.
-
-2. Perform dynamic objects mappings
-
-   .. tab-set::
-
-      .. tab-item:: REQUEST
+   This step involves collecting the list of firewall policies to be imported
+   along with the used system interfaces, system zones, and/or system sdwan
+   zones. 
    
-         .. code-block::
-           
+   The interfaces and zones will be used when creating the per-device mapping 
+   in the corresponding normalized interfaces.
+
+   The following example shows how to collect the firewall policies and
+   interfaces for the ``dev_001`` managed device that will then imported in the
+   ``ppkg_001`` Policy Package in the ``demo`` ADOM:
+   
+   .. tab-set::  
+      .. tab-item:: REQUEST
+  
+         .. code-block:: json
+  
             {
-              "id": 16,
+              "id": 1,
               "method": "exec",
               "params": [
-                  {
-                      "data": {
-                          "adom": "ADOM-NAME",
-                          "dst_name": "PACKAGE-NAME",
-                          "if_all_policy": "enable",
-                          "import_action": "obj_search",
-                          "name": "DEVICE-NAME",
-                          "vdom": "root",
-                          "if_all_objs": "none",
-                          "add_mappings": "enable"
-                      },
-                      "url": "/securityconsole/import/dev/objs"
-                  }
+                {
+                  "data": {
+                    "add_mappings": "enable",
+                    "adom": "demo",
+                    "dst_name": "ppkg_001",
+                    "dst_parent": 0,
+                    "if_all_objs": "none",
+                    "if_all_policy": "enable",
+                    "import_action": "policy_search",
+                    "position": "top",
+                    "name": "dev_001",
+                    "vdom": "root"
+                  },
+                  "url": "/securityconsole/import/dev/objs"
+                }
               ],
-              "session": "SESSION-ID"
+              "session": "{{session}}"
             }
-      
-         .. note::
-          
-            This time ``import_action`` is set to ``obj_search``.
 
-3. Importing policies and dependent dynamic interfaces and objects
+         .. note::
+  
+            You could replace the ``name`` and ``vdom`` attributes with:
+
+            .. code-block:: json
+
+               "scope": [
+                  {
+                    "name": "dev_001",
+                    "vdom": "root"
+                  }
+               ]
+
+            The important attributes are:
+            
+            - ``import_action`` which set to ``policy_search``. This is to
+              search for firewall policies to be imported.
+            - ``if_all_policy`` which is set to ``enable``.
+            - ``add_mappings`` which is set to ``enable``. This is important to
+              create the per-device mapping in the normalized interfaces.
+
+            ``position`` and ``if_all_objs`` attributes can't be explained yet.
+  
+      .. tab-item:: RESPONSE
+  
+         .. code-block:: json
+  
+            {
+              "id": 1,
+              "result": [
+                {
+                  "data": {
+                    "task": 2518
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/securityconsole/import/dev/objs"
+                }
+              ]
+            }
+
+         .. note::
+
+            Don't forget to monitor the progress of the returned ``task``.
+
+#. Collect the objects
+
+   This step involves collecting the list of objects to be imported.
+   
+   The following example shows how to collect the objects for the ``dev_001`` 
+   managed device ``dev_001`` that will then imported in the ``ppkg_001`` 
+   Policy Package in the ``demo`` ADOM:
 
    .. tab-set::
-    
+      
       .. tab-item:: REQUEST
 
-         .. code-block::
-      
+         .. code-block:: json
+
             {
-              "id": ANY-NUMBER,
+              "id": 7,
               "method": "exec",
               "params": [
-                  {
-                      "data": {
-                          "adom": "ADOM-NAME",
-                          "dst_name": "PACKAGE-NAME",
-                          "if_all_policy": "enable",
-                          "import_action": "do",
-                          "name": "DEVICE-NAME",
-                          "vdom": "root",
-                          "if_all_objs": "filter"
-                      },
-                      "url": "/securityconsole/import/dev/objs"
-                  }
+                {
+                  "data": {
+                    "add_mappings": "enable",
+                    "adom": "demo",
+                    "dst_name": "ppkg_001",
+                    "dst_parent": 0,
+                    "if_all_objs": "all",
+                    "if_all_policy": "disable",
+                    "import_action": "obj_search",
+                    "name": "dev_001",
+                    "position": "top",
+                    "vdom": "root"
+                  },
+                  "url": "/securityconsole/import/dev/objs"
+                }
               ],
-              "session": "SESSION-ID"
-          }
+              "session": "{{session}}"
+            }
+
+         .. note::
+  
+            You could replace the ``name`` and ``vdom`` attributes with:
+
+            .. code-block:: json
+
+               "scope": [
+                  {
+                    "name": "dev_001",
+                    "vdom": "root"
+                  }
+               ]
+
+            The important attributes are:
+            
+            - ``import_action`` which set to ``obj_search``. This is to
+              search for firewall policies to be imported.
+            - ``if_all_objs`` which is set to ``all``. It has to be set with 
+              ``all``!
+            - ``if_all_policy`` which is set to ``disable``.
+            - ``add_mappings`` which is set to ``enable``. This is important to
+              create the per-device mapping for applicable objects.
+
+            ``position`` and ``if_all_objs`` attributes can't be explained yet.
+  
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 7,
+              "result": [
+                {
+                  "data": {
+                    "task": 2519
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/securityconsole/import/dev/objs"
+                }
+              ]
+            }
+
+         .. note::
+
+            Don't forget to monitor the progress of the returned ``task``.
+
+#. Perform the import configuration
+
+   This step effectively perform the import configuration. It imports firewall
+   policies and objects collected in the two previous steps and also perform the
+   corresponding per-device mapping.
+   
+   The following example shows how to perform the import configuration for the
+   ``dev_001`` managed device. The firewall policies and objects will be 
+   imported within the ``ppkg_001`` Policy Package in the ``demo`` ADOM:
+
+   .. tab-set::
+      
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 10,
+              "method": "exec",
+              "params": [
+                {
+                  "data": {
+                    "add_mappings": "enable",
+                    "adom": "demo",
+                    "dst_name": "ppkg_001",
+                    "dst_parent": 0,
+                    "if_all_objs": "filter",
+                    "if_all_policy": "enable",
+                    "import_action": "do",
+                    "name": "dev_001",
+                    "position": "top",
+                    "vdom": "root"
+                  },
+                  "url": "/securityconsole/import/dev/objs"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+         .. note::
+  
+            You could replace the ``name`` and ``vdom`` attributes with:
+
+            .. code-block:: json
+
+               "scope": [
+                  {
+                    "name": "dev_001",
+                    "vdom": "root"
+                  }
+               ]
+
+            The important attributes are:
+            
+            - ``import_action`` which set to ``do``. 
+            - ``if_all_objs`` which is set to ``filter``. It means to only
+              import used objects; the one used in the firewall policies of the
+              ``dev_001`` managed devices. If you use the ``all`` value, used an
+              unused objects will be imported.
+            - ``if_all_policy`` which is set to ``enable``.
+            - ``position`` attribute can't be explained yet.
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+          
+            {
+              "id": 10,
+              "result": [
+                {
+                  "data": {
+                    "task": 2520
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/securityconsole/import/dev/objs"
+                }
+              ]
+            }            
+
+         .. note::
+
+            Don't forget to monitor the progress of the returned ``task``.
+
+Per-device mapping considerations
++++++++++++++++++++++++++++++++++
+
+For normalized interfaces
+_________________________
+
+If your ``dev_001`` managed device is with firewall policies using system
+interface ``port1`` and system zone (or system sdwan zone) ```z_underlay``, then
+you will get one normalized interface named ``port1`` with a new per-device
+mapping for ``dev_001:port1`` and a second normalized interface named
+``z_underlay`` with a new per-device mapping for ``dev_001:z_underlay``.
+
+If normalized interfaces ``port1`` and ``z_underlay`` don't exist they will be
+created with their per-device mapping as described in the paragraph above.
+
+If your ``dev_001`` managed device is with firewall policies using the
+``z_ul_001`` system zone made of the ``port1`` and ``port2`` system interfaces
+and your ``dev_002`` managed device is with firewall policies using the
+``z_ul_002`` system zone made of the same ``port1`` and ``port2`` system
+interfaces then you will still end with two distinct ``z_ul_001``  and
+``z_ul_002`` normalized interfaces with the ``dev_001:z_ul_001`` and
+``dev_002:z_ul_002`` respective per-device mapping. There's no API method to
+tell you you could just end with the ``z_ul`` normalized interfaces the two
+``dev_001:z_ul_001`` and ``dev_002:z_ul_002`` respective per-device mapping.
+
+For objects with per-device mapping support
+___________________________________________
+
+If your ``dev_001`` managed device is with firewall policies using the
+``addr_001`` firewall address with IP address ``10.0.0.1`` and your ``dev_002``
+managed device is firewall policies using the same name ``addr_001`` firewall
+address but with a different IP address ``10.0.0.2`` then you will end with a
+single ``addr_001`` firewall address.
+
+If ``addr_001`` wasn't existing before the import configuration operation, it
+will be created with main IP address ``10.0.0.1`` (provided the import
+configuration is trigered against the ``dev_001`` managed device first) and the
+``dev_002:10.0.0.2`` per-device mapping entry.
+
+If ``addr_001`` was existing before the import configuration operation, it will
+be updated with the two ``dev_001:10.0.0.1`` and ``dev_002:10.0.0.2`` per-device
+mapping entries.
+
+For objects without per-device mapping support
+______________________________________________
+
+FortiManager will always take the FortiGate value. 
+
+For instance if your ``dev_001`` managed device is with firewall policies using
+the ``ips_sensor_001`` IPS sensor with a single rule and your ``dev_002``
+managed device is with firewall policies using the same name ``ips_sensor_001``
+but with two complete different rules, then you will end with a single
+``ips_sensor_001`` IPS sensor. 
+This sensor will contain the configuration of the managed device that
+was used in the most recent import configuration operation. For instance, it
+will have two rules if the ``dev_002`` managed device was the one used in the
+most recent import configuration operation.
