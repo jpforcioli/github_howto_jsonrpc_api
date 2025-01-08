@@ -1782,14 +1782,14 @@ filter:
                 "1234"
               ]
 
-How to get list of Policy Package according to their status?
-____________________________________________________________
+How to get list of Policy Packages according to their status?
+_____________________________________________________________
 
 What if you need to get the list of all Policy Packages assigned to your managed
 devices, but only the ones matching a very specific status? Like the ones that
 are in the ``modified`` status which means they shoud be re-installed?
 
-The following example shows how to get all the assigned Policy Package from the
+The following example shows how to get all the assigned Policy Packages from the
 ``demo`` ADOM which are with the ``modified`` status:
 
 .. tab-set:: 
@@ -1851,6 +1851,12 @@ The following example shows how to get all the assigned Policy Package from the
 
          This output shows that there is only one Policy Package - ``ppkg_001``
          - with the ``modified`` status.
+
+         It is in the ``modified`` status for the ``dev_001`` and ``dev_002``
+         managed devices. The ``dev_001`` Policy Package could also have been
+         assigned to the ``dev_003`` managed device, but it is not in the
+         ``modified`` status (maybe the FortiManager administrator re-installed
+         the ``ppkg_001`` Policy Package for the ``dev_003`` managed device).
 
          This ``demo`` ADOM could be with other assigned Policy Packages like
          ``ppkg_002``, ``ppkg_003``, etc., but they are definitely not in the 
