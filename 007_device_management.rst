@@ -5724,44 +5724,65 @@ global`` default config for the FortiGate-1000D platform with 6.2 firmware:
 
       .. code-block:: json
       
-      		{
-      		  "id": 3,
-      		  "method": "get",
-      		  "params": [
-      		    {
-      		      "url": "/pm/config/devicetemplate/FortiGate-1000D/version/600/mr/2/global/system/global"
-      		    }
-      		  ],
-      		  "session": "{{session}}"
-      		  "verbose": 1,
-      		}
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/devicetemplate/FortiGate-1000D/version/600/mr/2/global/system/global"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
    .. tab-item:: RESPONSE
 
       .. code-block:: json
 
-      		{
-      		  "id": 3,
-      		  "result": [
-      		    {
-      		      "data": {
-      		        "admin-concurrent": "enable",
-      			      "admin-console-timeout": 0,
-      			      "admin-hsts-max-age": 15552000,
-      			      "admin-https-pki-required": "disable",
-      			      "admin-https-redirect": "enable",
-            			"admin-https-ssl-versions": [
-      			        "tlsv1-1",
-      			        "tlsv1-2",
-      			        "tlsv1-3"
-      			      ],
-      		        "admin-lockout-duration": 60,
-      		        "admin-lockout-threshold": 3,
-      		        "admin-login-max": 100,
-      		        "...": "..."
-      		    }
-            ]
-      		}
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "admin-concurrent": "enable",
+         	      "admin-console-timeout": 0,
+         	      "admin-hsts-max-age": 15552000,
+         	      "admin-https-pki-required": "disable",
+         	      "admin-https-redirect": "enable",
+             			"admin-https-ssl-versions": [
+         	        "tlsv1-1",
+         	        "tlsv1-2",
+         	        "tlsv1-3"
+         	      ],
+                 "admin-lockout-duration": 60,
+                 "admin-lockout-threshold": 3,
+                 "admin-login-max": 100,
+                 "...": "..."
+             }
+             ]
+         }
+
+If you want to get the entre default config, you can just use the following
+example:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/devicetemplate/FortiGate-1000D/version/600/mr/2/global/"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
 How to get the policy package status when getting list of devices?
 ------------------------------------------------------------------
