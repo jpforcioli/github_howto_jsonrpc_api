@@ -9521,6 +9521,11 @@ How to add central dnat policies?
 How to trigger an *Import Configuration*?
 -----------------------------------------
 
+The *Import Configuration* is when you need to copy objects from Device DB to
+ADOM DB. This operation is a strict offline operation! The managed devices don't
+need to be connected or even to be real. You can perform an import configuration
+against connected or offline managed devices and also against model devices.
+
 It's a three-step process where the list of attributes and their
 corresponding values must be used very carefully.
 
