@@ -3081,6 +3081,89 @@ You can now observe your FortiManager GUI, you should have a new Model Device li
 
    - This seems to work only starting with FortiManager 7.6.0
 
+How to add a Model Device with firmware enforcement enabled?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+*Firmware Enforcement* is a mechanism triggered by FortiManager when an existing
+Model Device matches a new device connection request: FortiManager will check
+for the firmware of the real device and if it doesn't match the specified one,
+it ill trigger an upgrade.
+
+The following example shows how to add a Model Device named ``dev_001``, with
+firmware enforcement enabled, in the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST:
+
+      .. code-block:: json
+
+         {
+           "id": 2,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "device": {
+                   "device action": "add_model",
+                   "mgmt_mode": "fmg",
+                   "mr": 2,
+                   "name": "root_dev_005",
+                   "os_type": "fos",
+                   "os_ver": "7.0",
+                   "platform_str": "FortiGate-40F",
+                   "prefer_img_ver": "7.2.9-b1688",
+                   "psk": "FGT40FREDACTED05"
+                 },
+                 "flags": [
+                   "create_task"
+                 ]
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ],
+           "session": "{{session}}"
+         }
+ 
+      .. note::
+
+         Firmware Enforcement is enable when you speficy a firmware version.
+         Here ``7.2.9-b1688``.
+
+When you upgrade a managed device, you have the option to ask FortiManager to
+send the new firmware or to ask the managed device to download it from the
+FortiGuard servers.
+
+During ZTP, the firmware is always sent by FortiManager.
+There's a new option available to instruct the device to obtain the firmware
+from the FortiGuard servers. You set the option in the ``prefer_img_ver``
+attribute directly as described below.
+
+Use this when you want your want FortiManager to send the firmware to the device:
+
+.. code-block:: json
+
+   {
+     "prefer_img_ver": "7.2.9-b1688"
+   }
+
+or:
+
+.. code-block:: json
+
+   {
+     "prefer_img_ver": "7.2.9-b1688|0",
+   }
+
+Use this when you want the device to download the firmware from the FortiGuard
+servers:
+
+.. code-block:: json
+
+   {
+     "prefer_img_ver": "7.2.9-b1688|8",
+   }
 
 How to add a SD-WAN Model Device?
 +++++++++++++++++++++++++++++++++
