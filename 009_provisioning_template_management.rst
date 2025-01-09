@@ -3384,6 +3384,31 @@ We can combine devices and device groups:
        }
    ]
 
+How to get the FortiSwitch Status?
+++++++++++++++++++++++++++++++++++
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "method": "get",
+           "params": [
+              {
+                "url": "/pm/config/adom/demo/_controller/status/fsw",
+                "scope member": [
+                  {
+                    "name": "All_FortiGate"
+                  }
+                ]
+              }
+            ],
+            "id": "5a4dee65-f6ec-40bf-9f05-eea76940745c",
+            "session": "{{session}}"
+         }
+
 How to authorize a FortiSwitch?
 +++++++++++++++++++++++++++++++
 
