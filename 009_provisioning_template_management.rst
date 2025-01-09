@@ -1908,238 +1908,239 @@ How to get list of managed FortiAPs from ADOM DB?
 
 Caught in #0610724.
 
-To get the managed FortiAPs for managed device ``cluster_site_2`` and its
-``root`` VDOM from ADOM ``production``:
+The following example shows how to get the managed FortiAPs controlled by the
+``dev_001`` mmanaged device and its ``root`` VDOM in the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set:: 
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "scope member": [
-           {
-             "name": "cluster_site_2",
-             "vdom": "root"
-           }
-         ],
-         "url": "/pm/config/adom/production/obj/wireless-controller/wtp"
-       }
-     ],
-     "session": "cDY7zhvU+dnifZ5yT78ESFWxgcXcDMwbUUEZo5yymQqj0ClhvqMDVYTLYVhj+e7XAq7fvxzWzHv53BBN6Eb7NA==",
-     "verbose": 1
-   }
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "scope member": [
+                 {
+                   "name": "dev_001",
+                   "vdom": "root"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/wireless-controller/wtp"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "_conn-state": "unknown",
-             "_data-chan-sec": 0,
-             "_last-checked": 0,
-             "_lldp-vlan": 0,
-             "_mesh-downlink": "disable",
-             "_mesh-hop-count": 0,
-             "_mesh-mode": 0,
-             "_mgmt-vlan-id": 0,
-             "_platform-type": 63,
-             "_rogue-ap-count": 0,
-             "_sensors-temperatures": [],
-             "_update-time": 0,
-             "_upgrade-time": 0,
-             "_wtp-port": 0,
-             "admin": "enable",
-             "apcfg-profile": [],
-             "bonjour-profile": [],
-             "firmware-provision-latest": "disable",
-             "image-download": "enable",
-             "index": 0,
-             "ip-fragment-preventing": "tcp-mss-adjust",
-             "lan": {
-               "port-esl-mode": "offline",
-               "port-esl-ssid": [],
-               "port-mode": "offline",
-               "port-ssid": [],
-               "port1-mode": "offline",
-               "port1-ssid": [],
-               "port2-mode": "offline",
-               "port2-ssid": [],
-               "port3-mode": "offline",
-               "port3-ssid": [],
-               "port4-mode": "offline",
-               "port4-ssid": [],
-               "port5-mode": "offline",
-               "port5-ssid": [],
-               "port6-mode": "offline",
-               "port6-ssid": [],
-               "port7-mode": "offline",
-               "port7-ssid": [],
-               "port8-mode": "offline",
-               "port8-ssid": []
-             },
-             "led-state": "enable",
-             "mesh-bridge-enable": "default",
-             "name": "fap_site_2",
-             "override-allowaccess": "disable",
-             "override-ip-fragment": "disable",
-             "override-lan": "disable",
-             "override-led-state": "disable",
-             "override-login-passwd-change": "disable",
-             "override-split-tunnel": "disable",
-             "radio-1": {
-               "_bssid": null,
-               "_client-count": 0,
-               "_country-code": 0,
-               "_country-name": null,
-               "_max-vaps": 0,
-               "_mesh-downlink": "disable",
-               "_mode": 0,
-               "_oper-chan": 0,
-               "_oper-txpower": 0,
-               "auto-power-target": "-70",
-               "drma-manual-mode": "ncf",
-               "override-band": "disable",
-               "override-channel": "disable",
-               "override-txpower": "disable",
-               "override-vaps": "disable",
-               "power-mode": "percentage",
-               "power-value": 27,
-               "radio-id": 0,
-               "vap1": null,
-               "vap2": null,
-               "vap3": null,
-               "vap4": null,
-               "vap5": null,
-               "vap6": null,
-               "vap7": null,
-               "vap8": null
-             },
-             "radio-2": {
-               "_bssid": null,
-               "_client-count": 0,
-               "_country-code": 0,
-               "_country-name": null,
-               "_max-vaps": 0,
-               "_mesh-downlink": "disable",
-               "_mode": 0,
-               "_oper-chan": 0,
-               "_oper-txpower": 0,
-               "auto-power-target": "-70",
-               "drma-manual-mode": "ncf",
-               "override-band": "disable",
-               "override-channel": "disable",
-               "override-txpower": "disable",
-               "override-vaps": "disable",
-               "power-mode": "percentage",
-               "power-value": 27,
-               "radio-id": 1,
-               "vap1": null,
-               "vap2": null,
-               "vap3": null,
-               "vap4": null,
-               "vap5": null,
-               "vap6": null,
-               "vap7": null,
-               "vap8": null
-             },
-             "radio-3": {
-               "_bssid": null,
-               "_client-count": 0,
-               "_country-code": 0,
-               "_country-name": null,
-               "_max-vaps": 0,
-               "_mesh-downlink": "disable",
-               "_mode": 0,
-               "_oper-chan": 0,
-               "_oper-txpower": 0,
-               "auto-power-target": "-70",
-               "drma-manual-mode": "ncf",
-               "override-band": "disable",
-               "override-channel": "disable",
-               "override-txpower": "disable",
-               "override-vaps": "disable",
-               "power-mode": "percentage",
-               "power-value": 27,
-               "radio-id": 2,
-               "vap1": null,
-               "vap2": null,
-               "vap3": null,
-               "vap4": null,
-               "vap5": null,
-               "vap6": null,
-               "vap7": null,
-               "vap8": null
-             },
-             "radio-4": {
-               "auto-power-target": "-70",
-               "override-band": "disable",
-               "override-channel": "disable",
-               "override-txpower": "disable",
-               "override-vaps": "disable",
-               "power-mode": "percentage",
-               "power-value": 27,
-               "radio-id": 3,
-               "vap1": null,
-               "vap2": null,
-               "vap3": null,
-               "vap4": null,
-               "vap5": null,
-               "vap6": null,
-               "vap7": null,
-               "vap8": null
-             },
-             "region": [],
-             "region-x": "0",
-             "region-y": "0",
-             "scope member": [
-               {
-                 "name": "cluster_site_2",
-                 "vdom": "root"
-               }
-             ],
-             "split-tunneling-acl": null,
-             "split-tunneling-acl-local-ap-subnet": "disable",
-             "split-tunneling-acl-path": "local",
-             "tun-mtu-downlink": 0,
-             "tun-mtu-uplink": 0,
-             "uuid": "71b0b548-93bd-51ec-a584-aa9d086c7a2f",
-             "wtp-id": "PU431FTH20026060",
-             "wtp-mode": "normal",
-             "wtp-profile": [
-               "branches"
-             ]
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/production/obj/wireless-controller/wtp"
-       }
-     ]
-   }
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "_conn-state": "unknown",
+                   "_data-chan-sec": 0,
+                   "_last-checked": 0,
+                   "_lldp-vlan": 0,
+                   "_mesh-downlink": "disable",
+                   "_mesh-hop-count": 0,
+                   "_mesh-mode": 0,
+                   "_mgmt-vlan-id": 0,
+                   "_platform-type": 63,
+                   "_rogue-ap-count": 0,
+                   "_sensors-temperatures": [],
+                   "_update-time": 0,
+                   "_upgrade-time": 0,
+                   "_wtp-port": 0,
+                   "admin": "enable",
+                   "apcfg-profile": [],
+                   "bonjour-profile": [],
+                   "firmware-provision-latest": "disable",
+                   "image-download": "enable",
+                   "index": 0,
+                   "ip-fragment-preventing": "tcp-mss-adjust",
+                   "lan": {
+                     "port-esl-mode": "offline",
+                     "port-esl-ssid": [],
+                     "port-mode": "offline",
+                     "port-ssid": [],
+                     "port1-mode": "offline",
+                     "port1-ssid": [],
+                     "port2-mode": "offline",
+                     "port2-ssid": [],
+                     "port3-mode": "offline",
+                     "port3-ssid": [],
+                     "port4-mode": "offline",
+                     "port4-ssid": [],
+                     "port5-mode": "offline",
+                     "port5-ssid": [],
+                     "port6-mode": "offline",
+                     "port6-ssid": [],
+                     "port7-mode": "offline",
+                     "port7-ssid": [],
+                     "port8-mode": "offline",
+                     "port8-ssid": []
+                   },
+                   "led-state": "enable",
+                   "mesh-bridge-enable": "default",
+                   "name": "fap_site_2",
+                   "override-allowaccess": "disable",
+                   "override-ip-fragment": "disable",
+                   "override-lan": "disable",
+                   "override-led-state": "disable",
+                   "override-login-passwd-change": "disable",
+                   "override-split-tunnel": "disable",
+                   "radio-1": {
+                     "_bssid": null,
+                     "_client-count": 0,
+                     "_country-code": 0,
+                     "_country-name": null,
+                     "_max-vaps": 0,
+                     "_mesh-downlink": "disable",
+                     "_mode": 0,
+                     "_oper-chan": 0,
+                     "_oper-txpower": 0,
+                     "auto-power-target": "-70",
+                     "drma-manual-mode": "ncf",
+                     "override-band": "disable",
+                     "override-channel": "disable",
+                     "override-txpower": "disable",
+                     "override-vaps": "disable",
+                     "power-mode": "percentage",
+                     "power-value": 27,
+                     "radio-id": 0,
+                     "vap1": null,
+                     "vap2": null,
+                     "vap3": null,
+                     "vap4": null,
+                     "vap5": null,
+                     "vap6": null,
+                     "vap7": null,
+                     "vap8": null
+                   },
+                   "radio-2": {
+                     "_bssid": null,
+                     "_client-count": 0,
+                     "_country-code": 0,
+                     "_country-name": null,
+                     "_max-vaps": 0,
+                     "_mesh-downlink": "disable",
+                     "_mode": 0,
+                     "_oper-chan": 0,
+                     "_oper-txpower": 0,
+                     "auto-power-target": "-70",
+                     "drma-manual-mode": "ncf",
+                     "override-band": "disable",
+                     "override-channel": "disable",
+                     "override-txpower": "disable",
+                     "override-vaps": "disable",
+                     "power-mode": "percentage",
+                     "power-value": 27,
+                     "radio-id": 1,
+                     "vap1": null,
+                     "vap2": null,
+                     "vap3": null,
+                     "vap4": null,
+                     "vap5": null,
+                     "vap6": null,
+                     "vap7": null,
+                     "vap8": null
+                   },
+                   "radio-3": {
+                     "_bssid": null,
+                     "_client-count": 0,
+                     "_country-code": 0,
+                     "_country-name": null,
+                     "_max-vaps": 0,
+                     "_mesh-downlink": "disable",
+                     "_mode": 0,
+                     "_oper-chan": 0,
+                     "_oper-txpower": 0,
+                     "auto-power-target": "-70",
+                     "drma-manual-mode": "ncf",
+                     "override-band": "disable",
+                     "override-channel": "disable",
+                     "override-txpower": "disable",
+                     "override-vaps": "disable",
+                     "power-mode": "percentage",
+                     "power-value": 27,
+                     "radio-id": 2,
+                     "vap1": null,
+                     "vap2": null,
+                     "vap3": null,
+                     "vap4": null,
+                     "vap5": null,
+                     "vap6": null,
+                     "vap7": null,
+                     "vap8": null
+                   },
+                   "radio-4": {
+                     "auto-power-target": "-70",
+                     "override-band": "disable",
+                     "override-channel": "disable",
+                     "override-txpower": "disable",
+                     "override-vaps": "disable",
+                     "power-mode": "percentage",
+                     "power-value": 27,
+                     "radio-id": 3,
+                     "vap1": null,
+                     "vap2": null,
+                     "vap3": null,
+                     "vap4": null,
+                     "vap5": null,
+                     "vap6": null,
+                     "vap7": null,
+                     "vap8": null
+                   },
+                   "region": [],
+                   "region-x": "0",
+                   "region-y": "0",
+                   "scope member": [
+                     {
+                       "name": "dev_001",
+                       "vdom": "root"
+                     }
+                   ],
+                   "split-tunneling-acl": null,
+                   "split-tunneling-acl-local-ap-subnet": "disable",
+                   "split-tunneling-acl-path": "local",
+                   "tun-mtu-downlink": 0,
+                   "tun-mtu-uplink": 0,
+                   "uuid": "71b0b548-93bd-51ec-a584-aa9d086c7a2f",
+                   "wtp-id": "PU431FREDACTED60",
+                   "wtp-mode": "normal",
+                   "wtp-profile": [
+                     "wtp_profile_001"
+                   ]
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/wireless-controller/wtp"
+             }
+           ]
+         }
 
-Should we want to retrieve the managed FortiAPs for multiples devices, we could
-use any of those `scope member` combinations:
+Should you want to retrieve the managed FortiAPs controlled multiples managed devices, you could use any of those ``scope member`` combinations:
 
 .. code-block:: json
 
    "scope member": [
      {
-       "name": "device_1",
+       "name": "dev_001",
        "vdom": "root"
      },
      {
-       "name": "device_2",
+       "name": "dev_002",
        "vdom": "root"
      },     
    ]
@@ -2148,10 +2149,10 @@ use any of those `scope member` combinations:
 
    "scope member": [
      {
-       "name": "device_group_1"
+       "name": "dev_grp_001"
      },
      {
-       "name": "device_group_2"
+       "name": "dev_grp_002"
      },     
    ]   
 
@@ -2159,17 +2160,17 @@ use any of those `scope member` combinations:
 
    "scope member": [
      {
-       "name": "device_group_1"
+       "name": "dev_grp_001"
      },
      {
-       "name": "device_group_2"
+       "name": "dev_grp_002"
      },
      {
-       "name": "device_1",
+       "name": "dev_001",
        "vdom": "root"
      },
      {
-       "name": "device_2",
+       "name": "dev_002",
        "vdom": "root"
      },     
    ]      
@@ -2180,7 +2181,7 @@ use any of those `scope member` combinations:
      {
        "name": "All_FortiGare"
      },
-   ]         
+   ]
    
 How to get a specific FortiAP profile?
 ++++++++++++++++++++++++++++++++++++++
