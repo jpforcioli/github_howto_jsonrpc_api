@@ -3528,54 +3528,56 @@ Hence, to enable the VDOM mode on a Model Device, better to review section
 How to enable the ``need_reset`` flag on a model device? 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This flag has been introduced in FortiManager 7.0/5/7.2.2 with #773777.
+This flag has been introduced in FortiManager 7.0.5/7.2.2 with #773777.
 
-It instructs FortiManager to factory reset the device being on-boarded.
+It instructs FortiManager to factory reset the real device being onboarded.
 
-The following request, is setting the ``need_reset`` flag for the Model Device
-``dev_001_001``:
+The following example shows how to set the ``need_reset`` flag for the
+``dev_001`` Model Device:
 
-**REQUEST:**
+.. tab-set:: 
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "set",
-     "params": [
-       {
-         "data": {
-           "flags": [
-             "is_model",
-             "linked_to_model",
-             "need_reset"
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "flags": [
+                   "is_model",
+                   "linked_to_model",
+                   "need_reset"
+                 ]
+               },
+               "url": "/dvmdb/device/dev_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+    
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "dev_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device/dev_001"
+             }
            ]
-         },
-         "url": "/dvmdb/device/dev_001_001"
-       }
-     ],
-     "session": "FDR8qgQgpueFsR51s+bktIJY/pLNeXHA/YmCYPONfYP+qZTg9Yf0KYEMYvz7UdGiQ0ItxQe/XzqN+wxSE3rKfg=="
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-   
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "name": "dev_001_001"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/device/dev_001_001"
-       }
-     ]
-   }
+         }
 
 How to add a model device linked to a pre-Run CLI Template?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
