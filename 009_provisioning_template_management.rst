@@ -1903,12 +1903,12 @@ When in Central FortiAP Management mode, we can use this trick where we delete w
 		  ]
 		}
 
-How to get list of managed FortiAPs from ADOM DB?
-+++++++++++++++++++++++++++++++++++++++++++++++++
+How to get list of FortiAPs for an ADOM?
+++++++++++++++++++++++++++++++++++++++++
 
 Caught in #0610724.
 
-The following example shows how to get the managed FortiAPs controlled by the
+The following example shows how to get the list of FortiAPs controlled by the
 ``dev_001`` mmanaged device and its ``root`` VDOM in the ``demo`` ADOM:
 
 .. tab-set:: 
@@ -2130,7 +2130,11 @@ The following example shows how to get the managed FortiAPs controlled by the
            ]
          }
 
-Should you want to retrieve the managed FortiAPs controlled multiples managed devices, you could use any of those ``scope member`` combinations:
+Should you want to retrieve the list of FortiAPs controlled by multiples managed
+devices, you could use any of the following ``scope member`` combinations.
+
+To get the list of FortiAPs controlled by the ``dev_001`` and ``dev_002``
+managed devices:
 
 .. code-block:: json
 
@@ -2145,6 +2149,9 @@ Should you want to retrieve the managed FortiAPs controlled multiples managed de
      },     
    ]
 
+To get the list of FortiAPs controlled by the managed devices belonging to the
+``dev_grp_001`` and ``dev_grp_002`` device groups:
+
 .. code-block:: json
 
    "scope member": [
@@ -2155,6 +2162,10 @@ Should you want to retrieve the managed FortiAPs controlled multiples managed de
        "name": "dev_grp_002"
      },     
    ]   
+
+To get the list of FortiAPs controlled by the ``dev_001`` and ``dev_002``
+managed devices and the managed devices belonging to the ``dev_grp_001`` and
+``dev_grp_002`` device groups:
 
 .. code-block:: json
 
@@ -2174,6 +2185,9 @@ Should you want to retrieve the managed FortiAPs controlled multiples managed de
        "vdom": "root"
      },     
    ]      
+
+To get the list of FortiAPs controlled by **all** managed devices of
+your ADOM:
 
 .. code-block:: json
 
