@@ -853,48 +853,53 @@ We get the list of assigned devices for System Template ``branches`` from ADOM
      ]
    }
 
-How to assign a system template to a device?
-____________________________________________
+How to assign a System Template to a managed device?
+____________________________________________________
 
-**REQUEST:**
+The following example shows how to assign the ``system_template_001`` to the
+``dev_001`` managed device in the ``demo`` ADOM:
 
-.. code-block:: json
+.. tab-set:: 
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "add",
-     "params": [
-       {
-         "data": [
-           {
-             "name": "branch2_fgt",
-             "vdom": "root"
-           }
-         ],
-         "url": "/pm/devprof/adom/DEMO/system.template.branches/scope member"
-       }
-     ],
-     "session": "ADeQPTL6U2bxwKra2E6NArY/6B6sQ8pixJf0g0ic46FpW3AZSXqPGzSrY8VJpgC0AsznEhlqgH7xYcJrl2VYCQ==",
-     "verbose": 1
-   }
+   .. tab-item:: REQUEST
 
-**RESPONSE:**
+      .. code-block:: json
 
-.. code-block:: json
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "name": "dev_001",
+                 "vdom": "root"
+               },
+               "url": "pm/devprof/adom/demo/system_template_001/scope member"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/devprof/adom/DEMO/system.template.branches/scope member"
-       }
-     ]
-   }
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "pm/devprof/adom/demo/system_template_001/scope member"
+             }
+           ]
+         }         
+
+      .. note::
+
+         The list of existing assigned managed devices is preserved.
 
 How to unassign a system template from a device?
 ________________________________________________
