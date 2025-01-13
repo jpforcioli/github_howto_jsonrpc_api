@@ -657,6 +657,120 @@ We can obtain it using the following request:
 
    The ``private-key`` cannot be exposed using the FortiManager API. 
 
+How to assign a Certificate Template to a managed device?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+In fact, you have to assign the corresponding Dynamic Local Certificate which is
+having the same name as the Certiticate Template.  The following example shows
+how to assign the ``certificate_template_001`` Dynamic Local Certificate to
+the ``dev_001`` managed device in the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 {
+                   "_scope": {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   },
+                   "local-cert": "certificate_template_001"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/dynamic/certificate/local/certificate_template_001/dynamic_mapping"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         The ``local-cert`` attribute should refer to an existing certificate in
+         the ``dev_001`` Device DB.
+         
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "_scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/dynamic/certificate/local/certificate_template_001/dynamic_mapping"
+             }
+           ]
+         }
+
+      .. note::
+
+         The list of existing assigned managed devices is preserved.
+
+How to unassign a Certificate Template to a managed device?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+In fact, you have to unassign the corresponding Dynamic Local Certificate which
+is having the same name as the Certiticate Template.  The following example
+shows how to unassign the ``certificate_template_001`` Dynamic Local Certificate
+from the ``dev_001`` managed device in the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/dynamic/certificate/local/certificate_template_001/dynamic_mapping/dev_001/root"
+             }
+           ],
+           "session": "{{session}}"
+         }
+         
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/dynamic/certificate/local/certificate_template_001/dynamic_mapping/dev_001/root"
+             }
+           ]
+         }
+
+      .. note::
+
+         The list of existing assigned managed devices is preserved.
+
 System Template
 ---------------
 
