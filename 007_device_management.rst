@@ -3525,7 +3525,7 @@ objects that should be placed in global scope.
 Hence, to enable the VDOM mode on a Model Device, better to review section
 :ref:`How to enable VDOM?`
 
-How to enable the ``need_reset`` flag on a model device? 
+How to enable the ``need_reset`` flag on a model device?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 This flag has been introduced in FortiManager 7.0.5/7.2.2 with #773777.
@@ -3575,6 +3575,89 @@ The following example shows how to set the ``need_reset`` flag for the
                  "message": "OK"
                },
                "url": "/dvmdb/device/dev_001"
+             }
+           ]
+         }
+
+It is possible to set `need_reset` option at the time you add the Model Device.
+The following example shows how to add the ``dev_001`` Model Device with the
+``need_reset`` option, in the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "device": {
+                   "device action": "add_model",
+                   "flags": [
+                     "need_reset"
+                   ],
+                   "mgmt_mode": "fmg",
+                   "mr": 6,
+                   "name": "dev_001",
+                   "os_type": "fos",
+                   "os_ver": "7.0",
+                   "sn": "FG100FREDACTED01"
+                 },
+                 "flags": [
+                   "create_task"
+                 ]
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json       
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "device": {
+                   "beta": -1,
+                   "branch_pt": 3454,
+                   "build": 3454,
+                   "conn_mode": 1,
+                   "dev_status": 1,
+                   "flags": 34427109376,
+                   "hostname": "FG100FREDACTED01",
+                   "maxvdom": 10,
+                   "mgmt_mode": 3,
+                   "mgmt_uuid": "4177fb9e-d40f-51ef-f6c8-f8cd016a0c58",
+                   "mr": 6,
+                   "name": "dev_001",
+                   "oid": 40147,
+                   "os_type": 0,
+                   "os_ver": 7,
+                   "patch": -1,
+                   "platform_id": 65,
+                   "platform_str": "FortiGate-100F",
+                   "sn": "FG100FREDACTED01",
+                   "source": 1,
+                   "tab_status": "<unknown>",
+                   "version": 700
+                 },
+                 "taskid": 2568
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvm/cmd/add/device"
              }
            ]
          }
