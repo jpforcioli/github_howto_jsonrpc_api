@@ -491,6 +491,8 @@ It can be exposed by using the following FortiManager CLI debug command:
            "session": 52098
          }
 
+You'll find additional details along with another alternative in section :ref:`How to add a Model HA Cluster with Device Blueprint and Metadata?`.
+
 How to unassign a metadata?
 +++++++++++++++++++++++++++
 
@@ -534,7 +536,7 @@ How to replace assigned device with another one?
 ++++++++++++++++++++++++++++++++++++++++++++++++
 
 The ``demo`` ADOM has the ``md_001`` metadata assigned to the ``dev_001`` device
-``site_003`` with value ``3``:
+with value ``1``:
 
 .. tab-set::
 
@@ -569,7 +571,7 @@ The ``demo`` ADOM has the ``md_001`` metadata assigned to the ``dev_001`` device
                    }
                  ],
                  "oid": 3989,
-                 "value": "3"
+                 "value": "1"
                },
                "status": {
                  "code": 0,
@@ -658,7 +660,7 @@ before the replace operation:
                    }
                  ],
                  "oid": 3989,
-                 "value": "3"
+                 "value": "1"
                },
                "status": {
                  "code": 0,
@@ -954,6 +956,9 @@ The following example set the ``var_001`` and ``var_002`` metadata variables fro
 
 How to assign a global metadata?
 ++++++++++++++++++++++++++++++++
+
+Here the *assign* is in the sense to copy the global metadatas defined in the
+Global ADOM into specific *normal* ADOMs.
 
 Global ADOM is having the global metadata ``g_hostname``.
 
