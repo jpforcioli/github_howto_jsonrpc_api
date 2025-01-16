@@ -3579,9 +3579,8 @@ The following example shows how to set the ``need_reset`` flag for the
            ]
          }
 
-It is possible to set `need_reset` option at the time you add the Model Device.
-The following example shows how to add the ``dev_001`` Model Device with the
-``need_reset`` option, in the ``demo`` ADOM:
+It is possible to set the ``need_reset`` option at the time you add the Model
+Device. The following example shows how to add the ``dev_001`` Model Device with the ``need_reset`` option, in the ``demo`` ADOM:
 
 .. tab-set:: 
 
