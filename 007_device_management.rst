@@ -2008,816 +2008,6 @@ VM? If we use:
 
 there is no longer any ambiguity.
 
-How to create a Model HA Cluster?
-+++++++++++++++++++++++++++++++++
-
-Goal is to add a Model HA Cluster composed of two FortiGate-60E devices using  the ``FGT60E0000000001`` and ``FGT60E0000000002`` Serial Numbers.
-
-The following example shows how to add the ``cluster_001`` Model HA Cluster in the ``demo`` ADOM:
-
-.. tab-set:: 
-   
-   .. tab-item:: REQUEST
-
-      .. code-block::
-      
-         {
-           "id": 1,
-           "method": "exec",
-           "params": [
-             {
-               "data": {
-                 "adom": "demo",
-                 "device": {
-                   "adm_pass": "",
-                   "adm_usr": "admin",
-                   "desc": "Cluster #001",
-                   "device action": "add_model",
-                   "extra commands": [
-                     {
-                       "method": "update",
-                       "params": [
-                         {
-                           "data": {
-                             "hbdev": [
-                               "dmz",
-                               0
-                             ],
-                             "monitor": [
-                               "wan1",
-                               "wan2"
-                             ],
-                             "password": "cluster_001"
-                           },
-                           "url": "/pm/config/device/%s/global/system/ha"
-                         }
-                       ]
-                     }
-                   ],
-                   "ha_group_name": "cluster_001",
-                   "ha_group_id": 1,
-                   "ha_mode": "AP",
-                   "ha_slave": [
-                     {
-                       "idx": 0,
-                       "name": "cluster_001",
-                       "prio": 200,
-                       "role": "master",
-                       "sn": "FGT60E0000000001"
-                     },
-                     {
-                       "idx": 1,
-                       "name": "cluster_001-1",
-                       "prio": 100,
-                       "role": "slave",
-                       "sn": "FGT60E0000000002"
-                     }
-                   ],
-                   "ip": "172.11.2.253",
-                   "mgmt_mode": "fmgfaz",
-                   "mr": 4,
-                   "name": "cluster_001",
-                   "os_type": "fos",
-                   "os_ver": "6.0",
-                   "platform_str": "FortiGate-60E",
-                   "sn": "FGT60E0000000001"
-                 },
-                 "flags": [
-                   "create_task"
-                 ]
-               },
-               "url": "/dvm/cmd/add/device"
-             }
-           ],
-           "session": "{{session}}",
-         }
-
-      .. note::
-      
-         - Prior to FMG 6.4.11, 7.0.7 and 7.2.2, naming convention used in the
-           ``ha_slave`` list was flexible:
-           For instance, FortiManager GUI was using the following naming
-           convention:
-           if main device name was ``foo`` then the cluster member names in the
-           ``ha_slave`` list were ``foo-0`` (for the primary) and ``foo-1``,
-           ``foo-2``, etc. for the secondary members.
-         - Starting with FMG 6.4.11, 7.0.7 and 7.2.2 (see #0800191), device
-           name has to be equal to the primary member name in the ``ha_slave``
-           list (see the above example)
-
-      .. warning::
-
-         - The ``prio`` attribute in the ``ha_slave`` list has to be set with
-           an integer!         
-
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-
-         {
-           "id": 1,
-           "result": [
-             {
-               "data": {
-                 "device": {
-                   "adm_pass": "m",
-                   "adm_usr": "admin",
-                   "beta": -1,
-                   "branch_pt": 1768,
-                   "build": 1768,
-                   "conn_mode": 1,
-                   "desc": "Cluster #001",
-                   "dev_status": 1,
-                   "flags": 262144,
-                   "ha_group_name": "cluster_001",
-                   "ha_mode": 1,
-                   "hostname": "FGT60E0000000001",
-                   "ip": "172.11.2.253",
-                   "maxvdom": 10,
-                   "mgmt_id": 1720333531,
-                   "mgmt_mode": 3,
-                   "mr": 4,
-                   "name": "cluster_001",
-                   "oid": 4562,
-                   "os_type": 0,
-                   "os_ver": 6,
-                   "patch": -1,
-                   "platform_id": 15,
-                   "platform_str": "FortiGate-60E",
-                   "sn": "FGT60E0000000001",
-                   "source": 1,
-                   "tab_status": "<unknown>",
-                   "version": 600
-                 },
-                 "taskid": 2528
-               },
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "/dvm/cmd/add/device"
-             }
-           ]
-         }
-      
-How to create a Model HA Cluster with new interfaces?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-This is often used for when you declare Model HA Cluster for VMs.
-By default, Model Devices or Model HA Devices for VMs come with a single ``port1`` interface.
-
-It means you have to create the missing interfaces and complete the HA setting
-(like heartbeat & monitored interfaces) in a second stage.
-
-Ideally, you would like a single API request to create the  Model HA Cluster along with its interfaces.
-
-The following example shows how to create the ``cluster_001`` Model HA Cluster, leveraging the ``extra commands`` system to create the missing interfaces and heartbeat/monitored interfaces:
-
-.. tab-set::
-
-   .. tab-item:: REQUEST
-
-      .. code-block:: json
-      
-         {
-           "id": 10,
-           "method": "exec",
-           "params": [
-             {
-               "data": {
-                 "adom": "demo",
-                 "device": {
-                   "adm_usr": "admin",
-                   "desc": "Cluster #001",
-                   "device action": "add_model",
-                   "extra commands": [
-                     {
-                       "method": "add",
-                       "params": [
-                         {
-                           "data": [
-                             {
-                               "name": "port2",
-                               "type": "physical",
-                               "vdom": "root"
-                             },
-                             {
-                               "name": "port3",
-                               "type": "physical",
-                               "vdom": "root"
-                             },
-                             {
-                               "name": "port4",
-                               "type": "physical",
-                               "vdom": "root"
-                             }
-                           ],
-                           "url": "pm/config/device/%s/global/system/interface"
-                         }
-                       ]
-                     },
-                     {
-                       "method": "update",
-                       "params": [
-                         {
-                           "data": {
-                             "hbdev": [
-                               "port3",
-                               0
-                             ],
-                             "monitor": [
-                               "port1",
-                               "port2"
-                             ],
-                             "password": "fortinet"
-                           },
-                           "url": "/pm/config/device/%s/global/system/ha"
-                         }
-                       ]
-                     }
-                   ],
-                   "ha_group_name": "cluster_001",
-                   "ha_group_id": 1,
-                   "ha_mode": "AP",
-                   "ha_slave": [
-                     {
-                       "idx": 0,
-                       "name": "cluster_001-1",
-                       "prio": 200,
-                       "role": "master",
-                       "sn": "FGVMUL0000000001"
-                     },
-                     {
-                       "idx": 1,
-                       "name": "cluster_001-2",
-                       "prio": 100,
-                       "role": "slave",
-                       "sn": "FGVMUL0000000002"
-                     }
-                   ],
-                   "meta fields": {
-                     "site_id": "1"
-                   },
-                   "mgmt_mode": "fmg",
-                   "mr": 0,
-                   "name": "cluster_001",
-                   "os_type": "fos",
-                   "os_ver": "7.0",
-                   "platform_str": "FortiGate-VM64-KVM",
-                   "prefer_img_ver": "7.0.2-b234",
-                   "sn": "FGVMUL0000000001"
-                 },
-                 "flags": [
-                   "create_task"
-                 ],
-                 "groups": [
-                   {
-                     "name": "branches"
-                   }
-                 ]
-               },
-               "target start": 2,
-               "url": "/dvm/cmd/add/device"
-             }
-           ],
-           "session": "{{session}}",
-         }
-      
-How to add a Model HA Cluster with ``session-pickup`` up and ``override`` enabled?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-The following example shows how to add the ``cluster_001`` leveraging the 
-``extra commands`` system to configure the ``session-pick`` and ``override`` HA 
-parameters:
-
-.. tab-set::
-
-   .. tab-item:: REQUEST
-
-      .. code-block:: json
-      
-         {
-           "id": 1,
-           "method": "exec",
-           "params": [
-             {
-               "data": {
-                 "adom": "demo",
-                 "device": {
-                   "adm_pass": "",
-                   "adm_usr": "admin",
-                   "desc": "Cluster #001",
-                   "device action": "add_model",
-                   "extra commands": [
-                     {
-                       "method": "update",
-                       "params": [
-                         {
-                           "data": {
-                             "session-pickup": "enable",
-                             "override": "enable",
-                             "hbdev": [
-                               "dmz",
-                               0
-                             ],
-                             "monitor": [
-                               "wan1",
-                               "wan2"
-                             ],
-                             "password": "cluster_001"
-                           },
-                           "url": "/pm/config/device/%s/global/system/ha"
-                         }
-                       ]
-                     }
-                   ],
-                   "ha_group_name": "cluster_001",
-                   "ha_group_id": 1,
-                   "ha_mode": "AP",
-                   "ha_slave": [
-                     {
-                       "idx": 0,
-                       "name": "cluster_001-0",
-                       "prio": 200,
-                       "role": "master",
-                       "sn": "FGT60F0000000001"
-                     },
-                     {
-                       "idx": 1,
-                       "name": "cluster_001-1",
-                       "prio": 100,
-                       "role": "slave",
-                       "sn": "FGT60F0000000002"
-                     }
-                   ],
-                   "ip": "172.11.2.253",
-                   "mgmt_mode": "fmgfaz",
-                   "mr": 0,
-                   "name": "cluster_001",
-                   "os_type": "fos",
-                   "os_ver": "7.0",
-                   "platform_str": "FortiGate-60F",
-                   "sn": "FGT60F0000000001"
-                 },
-                 "flags": [
-                   "create_task"
-                 ]
-               },
-               "url": "/dvm/cmd/add/device"
-             }
-           ],
-           "session": "{{session}}",
-         }
-
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-      
-         {
-           "id": 1,
-           "result": [
-             {
-               "data": {
-                 "device": {
-                   "adm_pass": "fortinet",
-                   "adm_usr": "admin",
-                   "beta": -1,
-                   "branch_pt": 231,
-                   "build": 231,
-                   "conn_mode": 1,
-                   "desc": "Cluster #001",
-                   "dev_status": 1,
-                   "flags": 262144,
-                   "ha_group_name": "cluster_001",
-                   "ha_mode": 1,
-                   "hostname": "FGT60F0000000001",
-                   "ip": "172.11.2.253",
-                   "maxvdom": 10,
-                   "mgmt_id": 129296930,
-                   "mgmt_mode": 3,
-                   "mr": 0,
-                   "name": "cluster_001",
-                   "oid": 300,
-                   "os_type": 0,
-                   "os_ver": 7,
-                   "patch": -1,
-                   "platform_id": 19,
-                   "platform_str": "FortiGate-60F",
-                   "sn": "FGT60F0000000001",
-                   "source": 1,
-                   "tab_status": "<unknown>",
-                   "version": 700
-                 },
-                 "taskid": 9
-               },
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "/dvm/cmd/add/device"
-             }
-           ]   
-         }  
-      
-How to add a Model HA Cluster with Device Blueprint and Metadata?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-The following example shows how to add the ``cluster_001`` Model HA Cluster 
-linked to the ``sites_BRANCH_DBP`` Device Blueprint and leveraging the ``extra 
-commands`` system to set some metadatas:
-
-.. tab-set::
-
-   .. tab-item:: REQUEST
-
-      .. dropdown:: Click to expand
-         :color: primary
-         :icon: chevron-up
-
-         .. code-block:: json
-
-            {
-                "method": "exec",
-                "params": [
-                    {
-                        "url": "/dvm/cmd/add/device",
-                        "data": {
-                            "adom": "production",
-                            "flags": [
-                                "create_task"
-                            ],
-                            "device": {
-                                "name": "cluster_001",
-                                "device action": "add_model",
-                                "device blueprint": "sites_BRANCH_DBP",
-                                "sn": "FGVMUL0000000001",
-                                "adm_usr": "admin",
-                                "desc": "Cluster #001",
-                                "mgmt_mode": "fmg",
-                                "os_ver": "7.0",
-                                "mr": 4,
-                                "os_type": "fos",
-                                "platform_str": "FortiGate-VM64-KVM",
-                                "ha_group_name": "cluster_001",
-                                "ha_group_id": 1,
-                                "ha_mode": "AP",
-                                "ha_slave": [
-                                    {
-                                        "idx": 0,
-                                        "name": "cluster_001",
-                                        "prio": 200,
-                                        "role": "master",
-                                        "sn": "FGVMUL0000000001"
-                                    },
-                                    {
-                                        "idx": 1,
-                                        "name": "cluster_001-1",
-                                        "prio": 100,
-                                        "role": "slave",
-                                        "sn": "FGVMUL0000000002"
-                                    }
-                                ],
-                                "extra commands": [
-                                    {
-                                        "method": "set",
-                                        "params": [
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "2"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/branch_id/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "branch"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/device_type/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "12"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/fpoc_instance_id/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "40.416775"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/latitude/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "-3.703790"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/longitude/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "1"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/member_id/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "28"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/timezone/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "6"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/vm_interface_number/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001-1",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "2"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/branch_id/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001-1",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "branch"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/device_type/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001-1",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "13"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/fpoc_instance_id/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001-1",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "40.416775"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/latitude/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001-1",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "-3.703790"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/longitude/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001-1",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "2"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/member_id/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001-1",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "28"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/timezone/dynamic_mapping"
-                                            },
-                                            {
-                                                "data": {
-                                                    "_scope": {
-                                                        "name": "cluster_001-1",
-                                                        "vdom": "global"
-                                                    },
-                                                    "value": "6"
-                                                },
-                                                "url": "/pm/config/adom/production/obj/fmg/variable/vm_interface_number/dynamic_mapping"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "method": "set",
-                                        "params": [
-                                            {
-                                                "data": [
-                                                    {
-                                                        "name": "port1",
-                                                        "type": "physical",
-                                                        "vdom": "root",
-                                                        "mode": "dhcp"
-                                                    },
-                                                    {
-                                                        "name": "port2",
-                                                        "type": "physical",
-                                                        "vdom": "root",
-                                                        "mode": "dhcp"
-                                                    },
-                                                    {
-                                                        "name": "port3",
-                                                        "type": "physical",
-                                                        "vdom": "root"
-                                                    },
-                                                    {
-                                                        "name": "port4",
-                                                        "type": "physical",
-                                                        "vdom": "root"
-                                                    },
-                                                    {
-                                                        "name": "port5",
-                                                        "type": "physical",
-                                                        "vdom": "root"
-                                                    },
-                                                    {
-                                                        "name": "port6",
-                                                        "type": "physical",
-                                                        "vdom": "root"
-                                                    }
-                                                ],
-                                                "url": "pm/config/device/%s/global/system/interface"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "method": "set",
-                                        "params": [
-                                            {
-                                                "data": {
-                                                    "member": [
-                                                        "port5",
-                                                        "port6"
-                                                    ]
-                                                },
-                                                "url": "pm/config/device/%s/global/system/interface/fortilink"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "method": "set",
-                                        "params": [
-                                            {
-                                                "data": {
-                                                    "session-pickup": "enable",
-                                                    "password": "fortinet"
-                                                },
-                                                "url": "/pm/config/device/%s/global/system/ha"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                ],
-                "session": "{{session}}",
-                "id": 8,
-            }
-
-         .. note::
-
-
-            This request is showing multiple things:
-
-            - Multiplexing several ``data`` block for setting the metadata
-            - Setting metadata for both HA members of the cluster being created
-            - Using the Device Blueprint
-       
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-
-         {
-             "result": [
-                 {
-                     "data": {
-                         "device": {
-                             "adm_usr": "admin",
-                             "beta": -1,
-                             "branch_pt": 2451,
-                             "build": 2451,
-                             "conn_mode": 1,
-                             "desc": "Cluster #001",
-                             "dev_status": 1,
-                             "faz.perm": 0,
-                             "flags": 1143209984,
-                             "fsw_cnt": 2,
-                             "ha_group_id": 1,
-                             "ha_group_name": "cluster_001",
-                             "ha_mode": 1,
-                             "hostname": "FGVMUL0000000001",
-                             "location_from": "unset",
-                             "maxvdom": 10,
-                             "mgmt_mode": 3,
-                             "mgmt_uuid": "d49ed100-8a1d-51ee-405c-3bb47665b888",
-                             "mgt_vdom": "root",
-                             "mr": 4,
-                             "name": "cluster_001",
-                             "node_flags": 4,
-                             "oid": 764,
-                             "os_type": 0,
-                             "os_ver": 7,
-                             "patch": -1,
-                             "platform_id": 157,
-                             "platform_str": "FortiGate-VM64-KVM",
-                             "prio": 200,
-                             "sn": "FGVMUL0000000001",
-                             "source": 1,
-                             "tab_status": "<unknown>",
-                             "version": 700,
-                             "vm.lic_type": 2,
-                             "vm_cpu": 1,
-                             "vm_cpu_limit": 1,
-                             "vm_lic_overdue_since": 0,
-                             "vm_mem": 1024,
-                             "vm_mem_limit": 1024,
-                             "vm_status": 3
-                         },
-                         "taskid": 392
-                     },
-                     "status": {
-                         "code": 0,
-                         "message": "OK"
-                     },
-                     "url": "/dvm/cmd/add/device"
-                 }
-             ],
-             "id": 8
-         }
-
-As you can see in the example above, setting metadata, especially for a
-cluster, can be complex.
-
-Starting with FortiManager 7.4.6/7.6.2 (#1043367), a new ``metadata`` attribute
-is available, simplifying the process, as shown below:
-
-.. code-block:: json
-
-   {
-     "meta variables": {
-       "var_001": "val_001", 
-       "var_002": "val_002",
-       "var_003": {
-         "FGT40F0000000001": "val_003_001",
-         "FGT40F0000000001": "val_003_002",
-         "FGT40F0000000001": "val_003_003"
-       }
-     }
-   }
-
-Explanation:
-
-- The ``var_001`` metadata is applied to all cluster members (in this case, 3
-  members) with the value ``val_001``
-- Similarly, ``var_002`` metadata is applied to all members with ``val_002``
-- The ``var_003`` metadata is unique for each cluster member, identified by
-  their serial numbers
 
 How to create a Model Device and add in in a group with a single request?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -8148,6 +7338,945 @@ Cluster
 Model HA Cluster
 ++++++++++++++++
 
+How to create a Model HA Cluster?
+_________________________________
+
+Goal is to add a Model HA Cluster composed of two FortiGate-60E devices using  the ``FGT60E0000000001`` and ``FGT60E0000000002`` Serial Numbers.
+
+The following example shows how to add the ``cluster_001`` Model HA Cluster in the ``demo`` ADOM:
+
+.. tab-set:: 
+   
+   .. tab-item:: REQUEST
+
+      .. code-block::
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "device": {
+                   "adm_pass": "",
+                   "adm_usr": "admin",
+                   "desc": "Cluster #001",
+                   "device action": "add_model",
+                   "extra commands": [
+                     {
+                       "method": "update",
+                       "params": [
+                         {
+                           "data": {
+                             "hbdev": [
+                               "dmz",
+                               0
+                             ],
+                             "monitor": [
+                               "wan1",
+                               "wan2"
+                             ],
+                             "password": "cluster_001"
+                           },
+                           "url": "/pm/config/device/%s/global/system/ha"
+                         }
+                       ]
+                     }
+                   ],
+                   "ha_group_name": "cluster_001",
+                   "ha_group_id": 1,
+                   "ha_mode": "AP",
+                   "ha_slave": [
+                     {
+                       "idx": 0,
+                       "name": "cluster_001",
+                       "prio": 200,
+                       "role": "master",
+                       "sn": "FGT60E0000000001"
+                     },
+                     {
+                       "idx": 1,
+                       "name": "cluster_001-1",
+                       "prio": 100,
+                       "role": "slave",
+                       "sn": "FGT60E0000000002"
+                     }
+                   ],
+                   "ip": "172.11.2.253",
+                   "mgmt_mode": "fmgfaz",
+                   "mr": 4,
+                   "name": "cluster_001",
+                   "os_type": "fos",
+                   "os_ver": "6.0",
+                   "platform_str": "FortiGate-60E",
+                   "sn": "FGT60E0000000001"
+                 },
+                 "flags": [
+                   "create_task"
+                 ]
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ],
+           "session": "{{session}}",
+         }
+
+      .. note::
+      
+         - Prior to FMG 6.4.11, 7.0.7 and 7.2.2, naming convention used in the
+           ``ha_slave`` list was flexible:
+           For instance, FortiManager GUI was using the following naming
+           convention:
+           if main device name was ``foo`` then the cluster member names in the
+           ``ha_slave`` list were ``foo-0`` (for the primary) and ``foo-1``,
+           ``foo-2``, etc. for the secondary members.
+         - Starting with FMG 6.4.11, 7.0.7 and 7.2.2 (see #0800191), device
+           name has to be equal to the primary member name in the ``ha_slave``
+           list (see the above example)
+
+      .. warning::
+
+         - The ``prio`` attribute in the ``ha_slave`` list has to be set with
+           an integer!         
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "device": {
+                   "adm_pass": "m",
+                   "adm_usr": "admin",
+                   "beta": -1,
+                   "branch_pt": 1768,
+                   "build": 1768,
+                   "conn_mode": 1,
+                   "desc": "Cluster #001",
+                   "dev_status": 1,
+                   "flags": 262144,
+                   "ha_group_name": "cluster_001",
+                   "ha_mode": 1,
+                   "hostname": "FGT60E0000000001",
+                   "ip": "172.11.2.253",
+                   "maxvdom": 10,
+                   "mgmt_id": 1720333531,
+                   "mgmt_mode": 3,
+                   "mr": 4,
+                   "name": "cluster_001",
+                   "oid": 4562,
+                   "os_type": 0,
+                   "os_ver": 6,
+                   "patch": -1,
+                   "platform_id": 15,
+                   "platform_str": "FortiGate-60E",
+                   "sn": "FGT60E0000000001",
+                   "source": 1,
+                   "tab_status": "<unknown>",
+                   "version": 600
+                 },
+                 "taskid": 2528
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ]
+         }
+      
+How to create a Model HA Cluster with new interfaces?
+_____________________________________________________
+
+This is often used for when you declare Model HA Cluster for VMs.
+By default, Model Devices or Model HA Devices for VMs come with a single ``port1`` interface.
+
+It means you have to create the missing interfaces and complete the HA setting
+(like heartbeat & monitored interfaces) in a second stage.
+
+Ideally, you would like a single API request to create the  Model HA Cluster along with its interfaces.
+
+The following example shows how to create the ``cluster_001`` Model HA Cluster, leveraging the ``extra commands`` system to create the missing interfaces and heartbeat/monitored interfaces:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 10,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "device": {
+                   "adm_usr": "admin",
+                   "desc": "Cluster #001",
+                   "device action": "add_model",
+                   "extra commands": [
+                     {
+                       "method": "add",
+                       "params": [
+                         {
+                           "data": [
+                             {
+                               "name": "port2",
+                               "type": "physical",
+                               "vdom": "root"
+                             },
+                             {
+                               "name": "port3",
+                               "type": "physical",
+                               "vdom": "root"
+                             },
+                             {
+                               "name": "port4",
+                               "type": "physical",
+                               "vdom": "root"
+                             }
+                           ],
+                           "url": "pm/config/device/%s/global/system/interface"
+                         }
+                       ]
+                     },
+                     {
+                       "method": "update",
+                       "params": [
+                         {
+                           "data": {
+                             "hbdev": [
+                               "port3",
+                               0
+                             ],
+                             "monitor": [
+                               "port1",
+                               "port2"
+                             ],
+                             "password": "fortinet"
+                           },
+                           "url": "/pm/config/device/%s/global/system/ha"
+                         }
+                       ]
+                     }
+                   ],
+                   "ha_group_name": "cluster_001",
+                   "ha_group_id": 1,
+                   "ha_mode": "AP",
+                   "ha_slave": [
+                     {
+                       "idx": 0,
+                       "name": "cluster_001-1",
+                       "prio": 200,
+                       "role": "master",
+                       "sn": "FGVMUL0000000001"
+                     },
+                     {
+                       "idx": 1,
+                       "name": "cluster_001-2",
+                       "prio": 100,
+                       "role": "slave",
+                       "sn": "FGVMUL0000000002"
+                     }
+                   ],
+                   "meta fields": {
+                     "site_id": "1"
+                   },
+                   "mgmt_mode": "fmg",
+                   "mr": 0,
+                   "name": "cluster_001",
+                   "os_type": "fos",
+                   "os_ver": "7.0",
+                   "platform_str": "FortiGate-VM64-KVM",
+                   "prefer_img_ver": "7.0.2-b234",
+                   "sn": "FGVMUL0000000001"
+                 },
+                 "flags": [
+                   "create_task"
+                 ],
+                 "groups": [
+                   {
+                     "name": "branches"
+                   }
+                 ]
+               },
+               "target start": 2,
+               "url": "/dvm/cmd/add/device"
+             }
+           ],
+           "session": "{{session}}",
+         }
+      
+How to add a Model HA Cluster with ``session-pickup`` up and ``override`` enabled?
+___________________________________________________________________________________
+
+The following example shows how to add the ``cluster_001`` leveraging the 
+``extra commands`` system to configure the ``session-pick`` and ``override`` HA 
+parameters:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "device": {
+                   "adm_pass": "",
+                   "adm_usr": "admin",
+                   "desc": "Cluster #001",
+                   "device action": "add_model",
+                   "extra commands": [
+                     {
+                       "method": "update",
+                       "params": [
+                         {
+                           "data": {
+                             "session-pickup": "enable",
+                             "override": "enable",
+                             "hbdev": [
+                               "dmz",
+                               0
+                             ],
+                             "monitor": [
+                               "wan1",
+                               "wan2"
+                             ],
+                             "password": "cluster_001"
+                           },
+                           "url": "/pm/config/device/%s/global/system/ha"
+                         }
+                       ]
+                     }
+                   ],
+                   "ha_group_name": "cluster_001",
+                   "ha_group_id": 1,
+                   "ha_mode": "AP",
+                   "ha_slave": [
+                     {
+                       "idx": 0,
+                       "name": "cluster_001-0",
+                       "prio": 200,
+                       "role": "master",
+                       "sn": "FGT60F0000000001"
+                     },
+                     {
+                       "idx": 1,
+                       "name": "cluster_001-1",
+                       "prio": 100,
+                       "role": "slave",
+                       "sn": "FGT60F0000000002"
+                     }
+                   ],
+                   "ip": "172.11.2.253",
+                   "mgmt_mode": "fmgfaz",
+                   "mr": 0,
+                   "name": "cluster_001",
+                   "os_type": "fos",
+                   "os_ver": "7.0",
+                   "platform_str": "FortiGate-60F",
+                   "sn": "FGT60F0000000001"
+                 },
+                 "flags": [
+                   "create_task"
+                 ]
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ],
+           "session": "{{session}}",
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "device": {
+                   "adm_pass": "fortinet",
+                   "adm_usr": "admin",
+                   "beta": -1,
+                   "branch_pt": 231,
+                   "build": 231,
+                   "conn_mode": 1,
+                   "desc": "Cluster #001",
+                   "dev_status": 1,
+                   "flags": 262144,
+                   "ha_group_name": "cluster_001",
+                   "ha_mode": 1,
+                   "hostname": "FGT60F0000000001",
+                   "ip": "172.11.2.253",
+                   "maxvdom": 10,
+                   "mgmt_id": 129296930,
+                   "mgmt_mode": 3,
+                   "mr": 0,
+                   "name": "cluster_001",
+                   "oid": 300,
+                   "os_type": 0,
+                   "os_ver": 7,
+                   "patch": -1,
+                   "platform_id": 19,
+                   "platform_str": "FortiGate-60F",
+                   "sn": "FGT60F0000000001",
+                   "source": 1,
+                   "tab_status": "<unknown>",
+                   "version": 700
+                 },
+                 "taskid": 9
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ]   
+         }  
+      
+How to add a Model HA Cluster with Device Blueprint and Metadata?
+_________________________________________________________________
+
+The following example shows how to add the ``cluster_001`` Model HA Cluster 
+linked to the ``sites_BRANCH_DBP`` Device Blueprint and leveraging the ``extra 
+commands`` system to set some metadatas:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. dropdown:: Click to expand
+         :color: primary
+         :icon: chevron-up
+
+         .. code-block:: json
+
+            {
+                "method": "exec",
+                "params": [
+                    {
+                        "url": "/dvm/cmd/add/device",
+                        "data": {
+                            "adom": "production",
+                            "flags": [
+                                "create_task"
+                            ],
+                            "device": {
+                                "name": "cluster_001",
+                                "device action": "add_model",
+                                "device blueprint": "sites_BRANCH_DBP",
+                                "sn": "FGVMUL0000000001",
+                                "adm_usr": "admin",
+                                "desc": "Cluster #001",
+                                "mgmt_mode": "fmg",
+                                "os_ver": "7.0",
+                                "mr": 4,
+                                "os_type": "fos",
+                                "platform_str": "FortiGate-VM64-KVM",
+                                "ha_group_name": "cluster_001",
+                                "ha_group_id": 1,
+                                "ha_mode": "AP",
+                                "ha_slave": [
+                                    {
+                                        "idx": 0,
+                                        "name": "cluster_001",
+                                        "prio": 200,
+                                        "role": "master",
+                                        "sn": "FGVMUL0000000001"
+                                    },
+                                    {
+                                        "idx": 1,
+                                        "name": "cluster_001-1",
+                                        "prio": 100,
+                                        "role": "slave",
+                                        "sn": "FGVMUL0000000002"
+                                    }
+                                ],
+                                "extra commands": [
+                                    {
+                                        "method": "set",
+                                        "params": [
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "2"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/branch_id/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "branch"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/device_type/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "12"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/fpoc_instance_id/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "40.416775"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/latitude/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "-3.703790"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/longitude/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "1"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/member_id/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "28"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/timezone/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "6"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/vm_interface_number/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001-1",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "2"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/branch_id/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001-1",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "branch"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/device_type/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001-1",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "13"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/fpoc_instance_id/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001-1",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "40.416775"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/latitude/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001-1",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "-3.703790"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/longitude/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001-1",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "2"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/member_id/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001-1",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "28"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/timezone/dynamic_mapping"
+                                            },
+                                            {
+                                                "data": {
+                                                    "_scope": {
+                                                        "name": "cluster_001-1",
+                                                        "vdom": "global"
+                                                    },
+                                                    "value": "6"
+                                                },
+                                                "url": "/pm/config/adom/production/obj/fmg/variable/vm_interface_number/dynamic_mapping"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "method": "set",
+                                        "params": [
+                                            {
+                                                "data": [
+                                                    {
+                                                        "name": "port1",
+                                                        "type": "physical",
+                                                        "vdom": "root",
+                                                        "mode": "dhcp"
+                                                    },
+                                                    {
+                                                        "name": "port2",
+                                                        "type": "physical",
+                                                        "vdom": "root",
+                                                        "mode": "dhcp"
+                                                    },
+                                                    {
+                                                        "name": "port3",
+                                                        "type": "physical",
+                                                        "vdom": "root"
+                                                    },
+                                                    {
+                                                        "name": "port4",
+                                                        "type": "physical",
+                                                        "vdom": "root"
+                                                    },
+                                                    {
+                                                        "name": "port5",
+                                                        "type": "physical",
+                                                        "vdom": "root"
+                                                    },
+                                                    {
+                                                        "name": "port6",
+                                                        "type": "physical",
+                                                        "vdom": "root"
+                                                    }
+                                                ],
+                                                "url": "pm/config/device/%s/global/system/interface"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "method": "set",
+                                        "params": [
+                                            {
+                                                "data": {
+                                                    "member": [
+                                                        "port5",
+                                                        "port6"
+                                                    ]
+                                                },
+                                                "url": "pm/config/device/%s/global/system/interface/fortilink"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "method": "set",
+                                        "params": [
+                                            {
+                                                "data": {
+                                                    "session-pickup": "enable",
+                                                    "password": "fortinet"
+                                                },
+                                                "url": "/pm/config/device/%s/global/system/ha"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "session": "{{session}}",
+                "id": 8,
+            }
+
+         .. note::
+
+
+            This request is showing multiple things:
+
+            - Multiplexing several ``data`` block for setting the metadata
+            - Setting metadata for both HA members of the cluster being created
+            - Using the Device Blueprint
+       
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+             "result": [
+                 {
+                     "data": {
+                         "device": {
+                             "adm_usr": "admin",
+                             "beta": -1,
+                             "branch_pt": 2451,
+                             "build": 2451,
+                             "conn_mode": 1,
+                             "desc": "Cluster #001",
+                             "dev_status": 1,
+                             "faz.perm": 0,
+                             "flags": 1143209984,
+                             "fsw_cnt": 2,
+                             "ha_group_id": 1,
+                             "ha_group_name": "cluster_001",
+                             "ha_mode": 1,
+                             "hostname": "FGVMUL0000000001",
+                             "location_from": "unset",
+                             "maxvdom": 10,
+                             "mgmt_mode": 3,
+                             "mgmt_uuid": "d49ed100-8a1d-51ee-405c-3bb47665b888",
+                             "mgt_vdom": "root",
+                             "mr": 4,
+                             "name": "cluster_001",
+                             "node_flags": 4,
+                             "oid": 764,
+                             "os_type": 0,
+                             "os_ver": 7,
+                             "patch": -1,
+                             "platform_id": 157,
+                             "platform_str": "FortiGate-VM64-KVM",
+                             "prio": 200,
+                             "sn": "FGVMUL0000000001",
+                             "source": 1,
+                             "tab_status": "<unknown>",
+                             "version": 700,
+                             "vm.lic_type": 2,
+                             "vm_cpu": 1,
+                             "vm_cpu_limit": 1,
+                             "vm_lic_overdue_since": 0,
+                             "vm_mem": 1024,
+                             "vm_mem_limit": 1024,
+                             "vm_status": 3
+                         },
+                         "taskid": 392
+                     },
+                     "status": {
+                         "code": 0,
+                         "message": "OK"
+                     },
+                     "url": "/dvm/cmd/add/device"
+                 }
+             ],
+             "id": 8
+         }
+
+As you can see in the example above, setting metadata, especially for a
+cluster, can be complex.
+
+Starting with FortiManager 7.4.6/7.6.2 (#1043367), a new ``metadata`` attribute
+is available, simplifying the process, as shown below:
+
+.. code-block:: json
+
+   {
+     "meta variables": {
+       "var_001": "val_001", 
+       "var_002": "val_002",
+       "var_003": {
+         "FGT40F0000000001": "val_003_001",
+         "FGT40F0000000001": "val_003_002",
+         "FGT40F0000000001": "val_003_003"
+       }
+     }
+   }
+
+Explanation:
+
+- The ``var_001`` metadata is applied to all cluster members (in this case, 3
+  members) with the value ``val_001``
+- Similarly, ``var_002`` metadata is applied to all members with ``val_002``
+- The ``var_003`` metadata is unique for each cluster member, identified by
+  their serial numbers
+
+The Device Blueprint doesn't need to exist! Here is another example of Model HA
+Cluster creation using an inline definition of a Device Blueprint:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "device": {
+                   "adm_usr": "admin",
+                   "device action": "add_model",
+                   "device blueprint": {
+                     "ha-config": "enable",
+                     "ha-hbdev": [
+                       "ha1",
+                       0,
+                       "ha2",
+                       0
+                     ],
+                     "ha-monitor": [
+                       "fortilink"
+                     ],
+                     "ha-password": "cluster_site_001",
+                     "prefer-img-ver": "7.4.3-b2573"
+                   },
+                   "ha_group_id": 1,
+                   "ha_group_name": "cluster_site_001",
+                   "ha_mode": "AP",
+                   "ha_slave": [
+                     {
+                       "idx": 0,
+                       "name": "cluster_site_001_1",
+                       "prio": 200,
+                       "role": "master",
+                       "sn": "FG100F1234500001"
+                     },
+                     {
+                       "idx": 1,
+                       "name": "cluster_site_001_2",
+                       "prio": 100,
+                       "role": "slave",
+                       "sn": "FG100F1234500002"
+                     }
+                   ],
+                   "meta variables": {
+                     "var_001": {
+                       "FG100F1234500001": "var_001_val_001",
+                       "FG100F1234500002": "var_001_val_002"
+                     },
+                     "var_002": {
+                       "FG100F1234500001": "var_002_val_001",
+                       "FG100F1234500002": "var_002_val_002"
+                     }
+                   },
+                   "mgmt_mode": "fmg",
+                   "mr": 4,
+                   "name": "cluster_site_001_1",
+                   "os_type": "fos",
+                   "os_ver": "7.0",
+                   "sn": "FG100F1234500001"
+                 },
+                 "flags": [
+                   "create_task"
+                 ]
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "device": {
+                   "adm_usr": "admin",
+                   "beta": -1,
+                   "branch_pt": 2721,
+                   "build": 2721,
+                   "conn_mode": 1,
+                   "dev_status": 1,
+                   "flags": 67371008,
+                   "ha_group_id": 1,
+                   "ha_group_name": "cluster_site_001",
+                   "ha_mode": 1,
+                   "hostname": "FG100F1234500001",
+                   "maxvdom": 10,
+                   "mgmt_mode": 3,
+                   "mgmt_uuid": "5c7a2508-d4e0-51ef-153a-9d6ef3ed6bb7",
+                   "mr": 4,
+                   "name": "cluster_site_001_1",
+                   "oid": 40147,
+                   "os_type": 0,
+                   "os_ver": 7,
+                   "patch": -1,
+                   "platform_id": 65,
+                   "platform_str": "FortiGate-100F",
+                   "prefer_img_ver": "7.4.3-b2573",
+                   "sn": "FG100F1234500001",
+                   "source": 1,
+                   "tab_status": "<unknown>",
+                   "version": 700
+                 },
+                 "taskid": 2597
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvm/cmd/add/device"
+             }
+           ]
+         }
+
 How to get the cluster members?
 +++++++++++++++++++++++++++++++
 
@@ -8393,79 +8522,95 @@ How to fail-over a cluster?
         ]
       }
 
-How to update the serial numbers of a cluster?
-++++++++++++++++++++++++++++++++++++++++++++++
+How to update/replace the serial numbers of a cluster?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This is for when you're not OK with the serial numbers showing up in the
-FortiManager GUI for a particular cluster.
+Update/Replace the serial number of the primary member
+______________________________________________________
 
-Sometimes for instance, you have three serial numbers: 2 are OK but the last
-one is from a RMA-ed device.
+The primary member is the device currently being managed by FortiManager through
+an active management session. It is unlikely that you will need to replace its
+serial number, but if you do, simply follow the steps outlined in the :ref:`How
+to change the serial number of a managed device?`.
 
-So the very first things to do are to identify what are the valid serial
-numbers and the role of each member, then to update the cluster's serial
-numbers using this request.
+Update/Replace the serial number of the secondary member
+________________________________________________________
 
-Following example shows how to update the serial number of the ``HUB1`` cluster
-and its ``HUB1`` and ``HUB1-2`` members:
+This scenario likely occurs when a member of your FortiGate cluster has failed.
+The remaining valid member takes over, but you still need to replace the failed
+unit by initiating an RMA process. The replacement unit will have a new serial
+number, which you will need to use to replace the failed member’s serial number
+in your managed FortiGate cluster.
 
-**REQUEST:**
+The following example, shows Following example shows how to update the serial
+number of the ``HUB1`` cluster and its ``HUB1`` and ``HUB1-2`` members:
 
-.. code-block:: 
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "ha_group_name": "hub1-cluster",
-           "ha_mode": "AP",
-           "ha_slave": [
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
              {
-               "idx": 0,
-               "name": "HUB1",
-               "role": "master",
-               "sn": "FGVM02TM20009482"
-             },
-             {
-               "idx": 1,
-               "name": "HUB1-2",
-               "role": "slave",
-               "sn": "FGVM02TM20009158"
+               "data": {
+                 "ha_group_name": "hub1-cluster",
+                 "ha_mode": "AP",
+                 "ha_slave": [
+                   {
+                     "idx": 0,
+                     "name": "HUB1",
+                     "role": "master",
+                     "sn": "FGVM02TM20009482"
+                   },
+                   {
+                     "idx": 1,
+                     "name": "HUB1-2",
+                     "role": "slave",
+                     "sn": "FGVM02TM20009158"
+                   }
+                 ],
+                 "name": "HUB1"
+               },
+               "url": "/dvm/cmd/update/ha"
              }
            ],
-           "name": "HUB1"
-         },
-         "url": "/dvm/cmd/update/ha"
-       }
-     ],
-     "session": "jFNr7wJS9ohIf53pk/aA3G4mQjWoRCrbVJBAVdN4uK8omsjH65AoztFzHKlHc84EkknxlFi/+lNSTFU7gOjwBfhPaj/dQze8",
-     "verbose": 1
-   }
+           "session": "{{session}}"
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: 
+      .. code-block:: json      
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvm/cmd/update/ha"
-       }
-     ]
-   }
+          {
+            "id": 1,
+            "result": [
+              {
+                "status": {
+                  "code": 0,
+                  "message": "OK"
+                },
+                "url": "/dvm/cmd/update/ha"
+              }
+            ]
+          }
 
 .. note:: 
 
    - You can also use the *Refresh* operation
    - See section :ref:`how to refresh a device?`
+
+Update/Replace the serial number of the members in a Model HA Cluster
+_____________________________________________________________________
+
+This is the simplest part! A Model HA Cluster consists of Model Devices that can
+be operated individually as if they were independent Model Devices. This means
+that to change the serial number of the members in a Model HA Cluster, you
+simply need to follow the process outlined in the section: :ref:`How to change
+the serial number of a managed device?` for each member.
 
 How to get cluster members status?
 ++++++++++++++++++++++++++++++++++
