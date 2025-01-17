@@ -8543,7 +8543,7 @@ number, which you will need to use to replace the failed member’s serial numbe
 in your managed FortiGate cluster.
 
 The following example, shows Following example shows how to update the serial
-number of the ``HUB1`` cluster and its ``HUB1`` and ``HUB1-2`` members:
+number of the ``dev_001`` cluster and its ``dev_001`` and ``dev_001`` members:
 
 .. tab-set::
   
@@ -8557,23 +8557,23 @@ number of the ``HUB1`` cluster and its ``HUB1`` and ``HUB1-2`` members:
            "params": [
              {
                "data": {
-                 "ha_group_name": "hub1-cluster",
+                 "ha_group_name": "cluster_001",
                  "ha_mode": "AP",
                  "ha_slave": [
                    {
                      "idx": 0,
-                     "name": "HUB1",
+                     "name": "dev_001",
                      "role": "master",
                      "sn": "FGVM02TM20009482"
                    },
                    {
                      "idx": 1,
-                     "name": "HUB1-2",
+                     "name": "dev_002",
                      "role": "slave",
                      "sn": "FGVM02TM20009158"
                    }
                  ],
-                 "name": "HUB1"
+                 "name": "dev_001"
                },
                "url": "/dvm/cmd/update/ha"
              }
