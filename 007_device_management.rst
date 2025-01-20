@@ -1298,7 +1298,7 @@ serial number of the ``dev_001`` managed device:
 
 	 Once FortiManager detects a real device with a matching serial number, it
 	 will reconnect to the new device.
-   
+
 	 However, if FortiManager is in *auto-update* mode (which is the default
 	 operating mode), it will retrieve the blank configuration from the new real
 	 device, overwriting the production configuration stored for the failed
