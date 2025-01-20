@@ -10380,9 +10380,9 @@ device in the ``demo`` ADOM:
 
       .. note::
 
-         The returned ``name`` is the master key to be used to delete the RMA
-         status (see section :ref:`How to delete the RMA status on a managed
-         device?`).
+         If you want to remove the RMA status later, use the returned ``name``.
+         This serves as the master key needed to delete the RMA status (refer 
+         to section :ref:`How to delete the RMA status on a managed device?`).
 
 How to get the RMA status of a managed device?
 ++++++++++++++++++++++++++++++++++++++++++++++

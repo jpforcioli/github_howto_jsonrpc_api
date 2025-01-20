@@ -877,10 +877,63 @@ or SFTP server:
 How to upgrade the FortiManager?
 ++++++++++++++++++++++++++++++++
 
-Caught in #0600185.
+Using the FortiManager API
+__________________________
+
+Caught in #1100531 (FMG 7.6.3).
+
+The following example shows how to upgrade the FortiManager. FortiManager will
+fetch the ``image.out`` firmware using the ``10.0.0.1`` TFTP server.
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method":"exec",
+           "params": [
+             {
+               "url": "/sys/upgrade",
+               "data": {
+                 "service": "tftp",
+                 "server":"10.0.0.1",
+                 "filename": "image.out"
+               }
+             }
+           ],
+           "session":"{{session}}"
+         }
+
+      .. note::
+         
+         You can also use ``scp``, ``ftp`` and ``sftp`` as the ``service``.
+         In this case, you need to provide the following details:
+
+         - ``username``: The username
+         - ``userpasswd``: The password
+         - ``port``: (Optional) He port number.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": {
+             "status": {
+               "code": 0,
+               "message": "OK"
+             },
+           "url": "/sys/upgrade"
+         }
 
 Using REST API to upgrade your FortiManager unit
 ________________________________________________
+
+Caught in #0600185.
 
 The following example shows how to upgrade your FortiManager unit:
 
