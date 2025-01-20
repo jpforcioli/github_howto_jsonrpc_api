@@ -1245,62 +1245,75 @@ FortiManager is still having the configuration of the failed device linked to a
 managed device whose serial number doesn't correspond to the new shipped device.
 
 It is possible to fix the wrong serial number maintained by FortiManager using
-the following |fmg_api| request:
+the following |fmg_api|. The following example shows how to change/replace the
+serial number of the ``dev_001`` managed device:
 
-**REQUEST:**
+.. tab-set:: 
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "sn": "FGVMULTM21001111"
-         },
-         "url": "/dvmdb/device/replace/sn/fgt"
-       }
-     ],
-     "session": "GD9Ce1EbGr+b1ebMUxC1PY4wPlgpQGu9y3vlyLCtrH7AE+wg9uXvENAKcIhbK86r2DpxngsZewLlokDZ2Av3uQ=="
-   }
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "sn": "FGVMULREDACTED11"
+               },
+               "url": "/dvmdb/device/replace/sn/dev_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note:: 
+
+         This API request is functionally equivalent to the following
+         FortiManager CLI command:
+         
+         .. code-block:: text
+
+            execute device replace sn dev_001 FGVMULREDACTED11
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device/replace/sn/dev_001"
+             }
+           ]
+         }
+
+.. warning::
+
+	 Once FortiManager detects a real device with a matching serial number, it
+	 will reconnect to the new device.
    
-This request is replacing the serial number of device named ``fgt`` with new
-serial number ``FGVMULTM21001111``.
+	 However, if FortiManager is in *auto-update* mode (which is the default
+	 operating mode), it will retrieve the blank configuration from the new real
+	 device, overwriting the production configuration stored for the failed
+	 managed device.
 
+   To avoid this, disable the *auto-update* mode before proceeding:
 
-**RESPONSE:**
+   .. code-block:: text
 
-.. code-block:: json
+      config system admin setting
+          set auto-update disable
+      end
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/device/replace/sn/fgt"
-       }
-     ]
-   }
-
-.. warning:: 
-
-   - Once the FortiManager will have a matching serial number, it will be able
-     to reconnect to the new device. 
-   - However, if FortiManager is in auto-update mode, it will just retrieve a
-     blank configuration: the one from the new device!
-   - You will lose the production configuration which was maintained by
-     FortiManager for the failed device.
-   - So better to implement this when FortiManager isn't in auto-update mode:
-
-     .. code-block:: text
-
-        config system admin setting
-        set auto-update disable
-        end
+   Alternatively, use the new FortiManager RMA feature for managed devices. 
+   More details can be found in section :ref:`How to RMA a managed device?`.  
 
 How to get unauthorized devices?
 --------------------------------
