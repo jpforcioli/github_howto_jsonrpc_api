@@ -1296,8 +1296,6 @@ serial number of the ``dev_001`` managed device:
 
 .. warning::
 
-   Test.
-
    Once FortiManager detects a real device with a matching serial number, it
    will reconnect to the new device.
 
