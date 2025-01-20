@@ -10313,6 +10313,175 @@ ADOM:
              ]
          }
 
+How to RMA a managed device?
+----------------------------
+
+FortiManager stores the configuration of the failed unit in the Device Database.
+When a replacement device is deployed, its serial number will not match the one
+stored in FortiManager. However, FortiManager allows you to update the serial
+number of the managed device, effectively treating it as a Model Device. Once
+the new device connects to FortiManager, it will push the configuration to the
+matching managed device seamlessly.
+
+FortiManager uses the ``onboard_rule`` sub-table of a managed device to
+designate it as being in an RMA situation.
+
+How to set the RMA status on a managed device?
+++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to set the RMA status of the ``dev_001`` managed
+device in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "adm_pass": "fortinet",
+                 "adm_usr": "admin",
+                 "flags": "specify-oldsn",
+                 "name": "_RMA_FGVMMLREDACTED43",
+                 "old_sn": "FGVMMLREDACTED43",
+                 "sn": "FGVMMLREDACTED61",
+                 "type": "maintenance"
+               },
+               "url": "/dvmdb/adom/demo/device/dev_001/onboard_rule"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "_RMA_FGVMMLREDACTED43"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/device/dev_001/onboard_rule"
+             }
+           ]
+         }
+
+      .. note::
+
+         The returned ``name`` is the master key to be used to delete the RMA
+         status (see section :ref:`How to delete the RMA status on a managed
+         device?`).
+
+How to get the RMA status of a managed device?
+++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the RMA status of the ``dev_001`` managed
+device in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/device/dev_001/onboard_rule"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "adm_pass": [
+                     "ENC",
+                     "SH2mSBw5WgWZzs9fW+NhuaFzMB4YmSiuBYlY/BbJSzOZ0kppOpw1p2j1YN10SI="
+                   ],
+                   "adm_usr": "admin",
+                   "did": "dev_001",
+                   "flags": "specify-oldsn",
+                   "name": "_RMA_FGVMMLREDACTED43",
+                   "oid": 40239,
+                   "old_sn": "FGVMMLREDACTED43",
+                   "seq": 1,
+                   "sn": "FGVMMLREDACTED61",
+                   "type": "maintenance"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/device/dev_001/onboard_rule"
+             }
+           ]
+         }
+
+How to delete the RMA status on a managed device?
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to delete the RMA status of the ``dev_001``
+managed device in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/device/dev_001/onboard_rule/__RMA_FGVMMLREDACTED43"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/device/dev_001/onboard_rule/__RMA_FGVMMLREDACTED43"
+             }
+           ]
+         }        
+
 SASE Controller
 ---------------
 
