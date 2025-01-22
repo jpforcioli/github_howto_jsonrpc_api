@@ -2882,9 +2882,9 @@ However, in the backend that's still two separate actions:
 How to get the list of Model Devices?
 +++++++++++++++++++++++++++++++++++++
 
-You will see that is not as simple as it seems.
+It's not as straightforward as it might seem at first glance.
 
-First, get your list of managed devices using:
+First, retrieve your list of managed devices by using:
 
 .. tab-set::
 
@@ -2923,21 +2923,21 @@ First, get your list of managed devices using:
                      "has_hdd",
                      "linked_to_model"
                    ],
-                   "name": "FGVMMLTM22006608",
+                   "name": "FGVMMLREDACTED08",
                    "oid": 4503,
-                   "sn": "FGVMMLTM22006608"
+                   "sn": "FGVMMLREDACTED08"
                  },        
                  {
                    "flags": null,
-                   "name": "FGVMMLTM23007255",
+                   "name": "FGVMMLREDACTED55",
                    "oid": 4440,
-                   "sn": "FGVMMLTM23007255"
+                   "sn": "FGVMMLREDACTED55"
                  },
                  {
                    "flags": null,
-                   "name": "FGVMPG0A8I110002",
+                   "name": "FGVMPGREDACTED02",
                    "oid": 3758,
-                   "sn": "FGVMPG0A8I110002"
+                   "sn": "FGVMPGREDACTED02"
                  },
                  {"..."},
                  {
@@ -3018,21 +3018,17 @@ If you are asked to retrieve the list of Model Devices only, you could be attemp
 
       .. note::
         
-         - As you can see it doesn't work.
+         As you can see, it doesn't work because the ``flags`` attribute isn't a
+         table but rather an integer, where flags are combined using bitwise 
+         *AND* operations.
 
-         - It's because the ``flags`` attribute isn't a table but an integer 
-           where flags are combined all together using bitwise AND operations.
+         When the ``verbose`` attribute is specified in the ``get`` request, 
+         FortiManager conveniently returns the ``flags`` attribute as a list.
 
-      .. note:: 
-      
-         - Because the ``verbose`` attribute is specified in the ``get`` 
-           request, FortiManager is nice enough to returne the ``flags`` 
-           attribute as a list
+         However, this can create confusion when filtering its content is 
+         required.
 
-         - But as you can see it is creating confusion for when it is required 
-           to filter its content
-      
-To get all Model Devices, you have to use the bitwise AND operator in the ``filter`` as shown below:
+To retrieve all Model Devices, you need to use the bitwise AND operator in the ``filter``, as demonstrated below:
 
 .. tab-set::
 
