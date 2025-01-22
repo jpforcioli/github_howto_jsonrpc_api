@@ -7440,10 +7440,18 @@ The following example shows how to add the ``cluster_001`` Model HA Cluster in t
            if main device name was ``foo`` then the cluster member names in the
            ``ha_slave`` list were ``foo-0`` (for the primary) and ``foo-1``,
            ``foo-2``, etc. for the secondary members.
+
          - Starting with FMG 6.4.11, 7.0.7 and 7.2.2 (see #0800191), device
            name has to be equal to the primary member name in the ``ha_slave``
            list (see the above example)
-
+         
+         - The HA parameters for this Model HA Cluster are configured using the
+           ``extra commands``, which function like passing a FortiManager API 
+           call within another FortiManager API call. You can now take advantage
+           of the device blueprint mechanism, as demonstrated in the examples
+           provided in the section: :ref:`How to add a Model HA Cluster with
+           Device Blueprint and Metadata?`.
+         
       .. warning::
 
          - The ``prio`` attribute in the ``ha_slave`` list has to be set with
@@ -7498,7 +7506,7 @@ The following example shows how to add the ``cluster_001`` Model HA Cluster in t
              }
            ]
          }
-      
+
 How to create a Model HA Cluster with new interfaces?
 _____________________________________________________
 
