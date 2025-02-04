@@ -3341,8 +3341,8 @@ To get the ADOM details the ``fgt-742-001`` belongs to:
 
          - The ``fgt-742-001`` device belongs to the ``dc_emea`` ADOM         
 
-How to install device settings against devices?
------------------------------------------------
+How to trigger an Install Device Settings?
+------------------------------------------
 
 To install Device Settings againt devices ``branch1`` and ``branch2`` from the
 ``demo`` ADOM:
@@ -3405,7 +3405,74 @@ To install Device Settings againt devices ``branch1`` and ``branch2`` from the
              }
            ]
          }
-      
+
+How to trigger a Quick Install?
+-------------------------------
+
+*Quick Install* is a GUI tool that internally calls the same API as *Install Device Settings*. For details, see section :ref:`How to trigger an Install Device Settings?`.
+
+The following example shows how to trigger a *Quick Install* against the
+``dev_001`` device in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "dev_rev_comments": "A device revision comment",
+                 "flags": [
+                   "none"
+                 ],
+                 "scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "global"
+                   },
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   }
+                 ]
+               },
+               "url": "/securityconsole/install/device"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         The install is covering the ``root`` VDOM along with the global scope
+         of the ``dev_001`` device.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 2681
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/install/device"
+             }
+           ]
+         }
+
 Device Groups
 -------------
 
@@ -5400,7 +5467,7 @@ To get the list of device revision for the ``hub2`` managed device:
          - It is possible to set the ``comments`` attribute when installing a
            Policy Package (see section :ref:`How to install a Policy Package?`)
            or triggering an Install Device Settings only (see section :ref:`How
-           to install device settings against devices?`)
+           to trigger an Install Device Settings?`)           
    
 How to get a specific device revision for a particular device?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
