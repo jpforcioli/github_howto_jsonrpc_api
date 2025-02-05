@@ -3450,7 +3450,7 @@ The following example shows how to trigger a *Quick Install* against the
 
       .. note::
 
-         The install is covering the ``root`` VDOM along with the global scope
+         The install covers the ``root`` VDOM as well as the global scope
          of the ``dev_001`` device.
 
    .. tab-item:: RESPONSE
