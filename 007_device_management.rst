@@ -4846,6 +4846,100 @@ How to create a transparent VDOM?
         ]
       }
 
+How to assign an interface to a VDOM?
++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to assign the ``port1`` interface to the
+``vd_001`` VDOM of the ``dev_001`` managed device:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "vdom": "vd_001"
+               },
+               "url": "/pm/config/device/dev_001/global/system/interface/port1"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "port1"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_001/global/system/interface/port1"
+             }
+           ]
+         }
+
+You could also have used a more subtile method where you just assign a VDOM to
+the interface matching your criteria. The following example shows how to assign
+the ``vd_001`` VDOM of the ``dev_001`` managed device to the interface matching
+the name ``port2``:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "update",
+           "params": [
+             {
+               "data": {
+                 "name": "port2",
+                 "vdom": "vd_001"
+               },
+               "filter": [
+                 "name",
+                 "==",
+                 "port2"
+               ],
+               "url": "/pm/config/device/dev_001/global/system/interface"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_001/global/system/interface"
+             }
+           ]
+         }        
+
 How to get the interfaces assigned to a VDOM?
 +++++++++++++++++++++++++++++++++++++++++++++
 
