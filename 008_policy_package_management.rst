@@ -4336,6 +4336,7 @@ How to insert a policy in an existing section?
 This section explains how to insert a new policy into an existing section. The new policy will be added at the end of the section.
 
 The process requires two API calls:
+
 - Retrieve the ``policyid`` of the last policy in the section.
 - Add the new policy after the retrieved ``policyid``.
 
@@ -4476,8 +4477,7 @@ The process requires two API calls:
          .. note::
   
             - The ``object position`` attribute is used to specify the position
-              of the new policy (see :ref:```Use the ``object position``
-              attribute```)
+              of the new policy (see :ref:```Use the ``object position`` attribute```)
   
       .. tab-item:: RESPONSE
   
