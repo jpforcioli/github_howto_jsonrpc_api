@@ -4333,14 +4333,13 @@ To insert a new firewall policy before the firewall policy with ``policyid``
 How to insert a policy in an existing section?
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-This section describes how to insert a new policy in an existing section. The
-new policy will added at the end of the existing section.
+This section explains how to insert a new policy into an existing section. The new policy will be added at the end of the section.
 
-It will require two API calls:
-- First one to get the `policyid` of the last policy of this section
-- Second one to add the new policy after the one retrieved in previous step
+The process requires two API calls:
+- Retrieve the ``policyid`` of the last policy in the section.
+- Add the new policy after the retrieved ``policyid``.
 
-#. Get the `policyid` of the last policy of the section
+#. Retrieve the ``policyid`` of the last policy in the section
 
    The example below shows how to get the `policyid` of the last policy of the
    section named ``Project #2`` in the ``ppkg_001`` Policy Package from the
