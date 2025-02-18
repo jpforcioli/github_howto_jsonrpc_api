@@ -4477,7 +4477,7 @@ The process requires two API calls:
          .. note::
   
             - The ``object position`` attribute is used to specify the position
-              of the new policy (see :ref:```Use the ``object position`` attribute```)
+              of the new policy.
   
       .. tab-item:: RESPONSE
   
