@@ -4330,6 +4330,179 @@ To insert a new firewall policy before the firewall policy with ``policyid``
          - ``policyid`` ``52``  is the policy id of the newly created firewall
            policy
 
+How to insert a policy in an existing section?
+++++++++++++++++++++++++++++++++++++++++++++++
+
+This section describes how to insert a new policy in an existing section. The
+new policy will added at the end of the existing section.
+
+It will require two API calls:
+- First one to get the `policyid` of the last policy of this section
+- Second one to add the new policy after the one retrieved in previous step
+
+#. Get the `policyid` of the last policy of the section
+
+   The example below shows how to get the `policyid` of the last policy of the
+   section named ``Project #2`` in the ``ppkg_001`` Policy Package from the
+   ``demo`` ADOM:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "method": "get",
+              "params": [
+                {
+                  "fields": [
+                    "policyid",
+                    "name",
+                    "global-label"
+                  ],
+                  "filter": [
+                    "global-label",
+                    "==",
+                    "Project #2"
+                  ],
+                  "loadsub": 0,
+                  "range": [
+                    0,
+                    1
+                  ],
+                  "sortings": [
+                    {
+                      "policyid": -1
+                    }
+                  ],
+                  "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+         .. note::
+
+            - The ``filter`` attribute is used to get the policies of the
+              section named ``Project #2``
+            - The ``sortings`` attribute is used to sort the policies in
+              descending order of their ``policyid`` attribute
+            - The ``range`` attribute is used to get the first policy of the
+              sorted list
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": [
+                    {
+                      "global-label": "Project #2",
+                      "obj seq": 21,
+                      "oid": 6363,
+                      "policyid": 101
+                    }
+                  ],
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+                }
+              ]
+            }        
+
+         .. note::
+
+            - The `policyid` of the last policy in the section named ``Project
+              #2`` is ``101``
+
+#. Add the new policy after the last policy of the section
+
+   The example below shows how to add a new policy after the last policy of the
+   section named ``Project #2`` in the ``ppkg_001`` Policy Package from the
+   ``demo`` ADOM:
+  
+   .. tab-set::
+  
+      .. tab-item:: REQUEST
+  
+         .. code-block:: json
+
+            {
+              "id": 4,
+              "method": "set",
+              "params": [
+                {
+                  "data": {
+                    "action": "accept",
+                    "dstaddr": [
+                      "host_001",
+                      "host_002"
+                    ],
+                    "dstintf": [
+                      "wan"
+                    ],
+                    "global-label": "Project #2",
+                    "logtraffic": "all",
+                    "object position": [
+                      "after",
+                      "101"
+                    ],
+                    "schedule": "always",
+                    "service": [
+                      "FTP",
+                      "HTTPS"
+                    ],
+                    "srcaddr": [
+                      "host_003",
+                      "host_004"
+                    ],
+                    "srcintf": [
+                      "lan"
+                    ],
+                    "status": "enable"
+                  },
+                  "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+         .. note::
+  
+            - The ``object position`` attribute is used to specify the position
+              of the new policy
+  
+      .. tab-item:: RESPONSE
+  
+         .. code-block:: json
+  
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": {
+                    "policyid": 102
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/pm/config/adom/demo/pkg/ppkg_001/firewall/policy"
+                }
+              ]
+            }
+  
+         .. note::
+  
+            - The `policyid` of the newly created policy is ``102``
+
 How to clone a policy?
 ++++++++++++++++++++++
 
