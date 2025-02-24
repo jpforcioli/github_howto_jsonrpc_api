@@ -1050,6 +1050,97 @@ The following example shows how to assign the `g_hostname` global metadata to th
            ]
          }
 
+How to get the assignement status for global metadatas?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #1123231.
+
+The following example shows how to get the assignment status for the
+global metadatas in the ``Global`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/global/_objstatus/fmg/variable"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         ``_objstatus`` keyword in the ``url`` attribute is the method to object
+         assignement status for the global metadatas.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "device": "demo_001",
+                   "objects": [
+                     {
+                       "category": 3200,
+                       "copied_timestamp": 1740385389,
+                       "latest_timestamp": 1740385324,
+                       "name": "g_var_001",
+                       "status": 0
+                     },
+                     {
+                       "category": 3200,
+                       "copied_timestamp": 1740385975,
+                       "latest_timestamp": 1739523189,
+                       "name": "g_var_002",
+                       "status": 0
+                     }
+                   ],
+                   "vdom": ""
+                 },
+                 {
+                   "device": "demo_002",
+                   "objects": [
+                     {
+                       "category": 3200,
+                       "copied_timestamp": 1740386024,
+                       "latest_timestamp": 1739523189,
+                       "name": "g_var_002",
+                       "status": 0
+                     }
+                   ],
+                   "vdom": ""
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/global/_objstatus/fmg/variable"
+             }
+           ]
+         }
+
+      .. note::
+
+         This output shows that:
+
+         - Global medata ``g_var_001`` is assigned to the ``demo_001`` ADOM.
+         - Global metadata ``g_var_002`` is assign to the ``demo_001`` and 
+           ``demo_002`` ADOMs.
+         
 How to Export/Import metadatas?
 +++++++++++++++++++++++++++++++
 
