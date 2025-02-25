@@ -262,8 +262,8 @@ To delete JSON API Connector ``json_api_connector_001`` from ADOM ``dc_amer``:
 Managing JSON API Connector tags?
 +++++++++++++++++++++++++++++++++
 
-Add IP addresses
-________________
+Add IP addresses to a single tag
+________________________________
 
 This request adds IPv4 addresses ``10.1.0.{1,2,3}`` and IPv6 addresses
 ``2001:DB8::{1,2,3}`` to the ``tag_001`` tag which has been declared within the
@@ -314,6 +314,87 @@ This request adds IPv4 addresses ``10.1.0.{1,2,3}`` and IPv6 addresses
              }
            ],
            "id": 3
+         }
+
+Add IP addresses to multiple tags
+_________________________________
+
+Caught in #1027981 (FMG 7.4.4/7.6.0).
+
+The following example shows how to add IP address to the ``tag_001``,
+``tag_002`` and ``tag_002`` tags for the ``json_api_connector_001`` JSON API
+Connector in the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": [
+                 {
+                   "command": "add",
+                   "group": "tag_001",
+                   "ip-addr": [
+                     "10.1.0.1",
+                     "10.1.0.2",
+                     "10.1.0.3"
+                   ],
+                   "path": "demo/json_api_connector_001"
+                 },
+                 {
+                   "command": "add",
+                   "group": "tag_002",
+                   "ip-addr": [
+                     "10.2.0.1",
+                     "10.2.0.2",
+                     "10.2.0.3",
+                     "10.2.0.4",
+                     "10.2.0.5",
+                     "10.2.0.6"
+                   ],
+                   "path": "demo/json_api_connector_001"
+                 },
+                 {
+                   "command": "add",
+                   "group": "tag_003",
+                   "ip-addr": [
+                     "10.3.0.1",
+                     "10.3.0.2",
+                     "10.3.0.3",
+                     "10.3.0.4",
+                     "10.3.0.5",
+                     "10.3.0.6"
+                   ],
+                   "path": "demo/json_api_connector_001"
+                 }
+               ],
+               "url": "/connector/user/manage"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/connector/user/manage"
+             }
+           ]
          }
 
 Get IP addresses
