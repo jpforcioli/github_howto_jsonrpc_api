@@ -4685,6 +4685,158 @@ How to unassign a device from a cli template group?
      ]
    }
 
+How to check a CLI Template or a CLI Template Group?
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This operation is triggered by the GUI when you use right-click a CLI Template
+or CLI Template Group and select *Validate*. It is also triggered when you
+right-click a CLI Template or CLI Template Group and you choose *Preview On
+Device* with the *Run Validation* toggle enabled.
+
+The following example shows how to check the ``cli_template_001`` CLI
+Template for the ``dev_001`` managed device in the ``demo`` ADOM.
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "cliprof": "cli_template_001",
+                 "scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   }
+                 ]
+               },
+               "url": "/securityconsole/cliprof/check"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 2801
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/cliprof/check"
+             }
+           ]
+         }
+
+You need to monitor the task. Below is an example of the task output when it
+completes:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+  
+         {
+           "id": 5,
+           "method": "get",
+           "params": [
+             {
+               "url": "/task/task/2801"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 5,
+           "result": [
+             {
+               "data": {
+                 "adom": 40500,
+                 "end_tm": 1740553300,
+                 "flags": 0,
+                 "id": 2801,
+                 "line": [
+                   {
+                     "detail": "Missing variable mapping on this device.",
+                     "end_tm": 1740553300,
+                     "err": 0,
+                     "history": [
+                       {
+                         "detail": "2025-02-26 08:01:38:check device variables",
+                         "name": "dev_001(root)",
+                         "percent": 0,
+                         "state": 0,
+                         "vdom": "root"
+                       },
+                       {
+                         "detail": "2025-02-26 08:01:40:Missing variable mapping on this device.",
+                         "name": "dev_001(root)",
+                         "percent": 100,
+                         "state": 5,
+                         "vdom": "root"
+                       }
+                     ],
+                     "ip": "",
+                     "name": "dev_001(root)",
+                     "oid": 40756,
+                     "percent": 100,
+                     "poid": 0,
+                     "start_tm": 1740553298,
+                     "state": "error",
+                     "vdom": "root"
+                   }
+                 ],
+                 "num_done": 0,
+                 "num_err": 1,
+         
+                 
+                 "num_lines": 1,
+                 "num_warn": 0,
+                 "percent": 100,
+                 "pid": 0,
+                 "src": "security console",
+                 "start_tm": 1740553298,
+                 "state": "error",
+                 "title": "cli template 'cli_template_001' validation",
+                 "tot_percent": 100,
+                 "user": "devops"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/task/task/2801"
+             }
+           ]
+         }
+
+      .. note::
+
+         In this example, the ``dev_001`` device is not having a value for a
+         used metadata.
+
 SD-WAN Template
 ---------------
 
