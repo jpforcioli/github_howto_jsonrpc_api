@@ -2021,6 +2021,24 @@ External Resources
 Starting with FortiManager 7.4.1 and 7.2.5 (#0934664), it is possible to manage
 external resource files hosted by FortiManager.
 
+.. note::
+
+   The following ``url`` is used in this section:
+   
+   .. code-block::
+   
+      /pm/config/global/_external/resource
+   
+   
+   This refers to the *Global ADOM* for convenience. Alternatively, you can use:
+   
+   .. code-block::
+   
+      /pm/config/adom/<adom>/_external/resource
+   
+   Both forms yield the same result. External resource files are accessible to 
+   all ADOMs.
+
 How to add a new external resource file?
 ++++++++++++++++++++++++++++++++++++++++
 
@@ -2106,6 +2124,117 @@ To add a new external resource file named ``addresses_004.txt``:
              }
            ]
          }                    
+
+How to get the list of external resource files?
++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #0953203 (7.2.5/7.4.2).
+
+The following example shows how to get the list of external resource files:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "pm/config/global/_external/resource"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "modified": 1739378022,
+                   "name": "file_001.txt",
+                   "size": 601428
+                 },
+                 {
+                   "modified": 1738768252,
+                   "name": "file_002.txt",
+                   "size": 55
+                 },
+                 {
+                   "modified": 1739950759,
+                   "name": "file_003.txt",
+                   "size": 64
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "pm/config/global/_external/resource"
+             }
+           ]
+         }
+
+      .. note:
+
+         For performance reason, the file content isn't returned. Some of the
+         files could be large.
+
+How to get an external resource file content?
++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to retrieve the content of the ``file_001.txt``
+external resource file:
+
+.. tab-set::
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "pm/config/global/_external/resource/file_001.txt"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "content": "38.180.91.21\n45.8.146.229\n45.83.140.121\n45.89.53.41\n86.104.72.41",
+                 "modified": 1739950759,
+                 "name": "file_001.txt",
+                 "size": 64
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "pm/config/global/_external/resource/file_001.txt"
+             }
+           ]
+         }         
 
 How to delete an external resource file?
 ++++++++++++++++++++++++++++++++++++++++
