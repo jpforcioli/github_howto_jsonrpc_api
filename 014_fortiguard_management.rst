@@ -2018,7 +2018,7 @@ TBD.
 External Resources
 ------------------
 
-Starting with FortiManager 7.4.1 (#0934664), it is possible to manage
+Starting with FortiManager 7.4.1 and 7.2.5 (#0934664), it is possible to manage
 external resource files hosted by FortiManager.
 
 How to add a new external resource file?
