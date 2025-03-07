@@ -133,6 +133,61 @@ The following example shows how to delete the ``md_001`` metadata in the ``demo`
            ]
          }
 
+How to rename a metadata?
++++++++++++++++++++++++++
+
+The following example shows how to rename the ``md_001`` metadata to ``md_002``
+in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "name": "md_002"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "md_002"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/fmg/variable/md_001"
+             }
+           ]
+         }
+
+      .. warning::
+
+         Objects and CLI Templates defined with the ``md_001`` metadata         
+         will not be updated and will continue referring to the now 
+         non-existent ``md_001`` metadata.
+
+         However, managed devices mapped to the ``md_001`` metadata will be
+         updated to reference the renamed ``md_002`` metadata.
+
 How to assign a metadata to devices?
 ++++++++++++++++++++++++++++++++++++
 
