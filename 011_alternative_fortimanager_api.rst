@@ -911,7 +911,7 @@ managed devices in the ADOM ``root``:
 
       .. code-block:: text
 
-         POST https://10.210.34.139/cgi-bin/module/flatui_auth
+         POST https://10.210.34.139/cgi-bin/module/flatui_proxy
          Content-Type: application/json
          Xsrf-Token: P6DtO5DLqp8ox5ZI9sjgdw6lEzbAXuA
 
