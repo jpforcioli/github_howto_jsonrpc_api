@@ -979,6 +979,10 @@ managed devices in the ADOM ``root``:
       .. literalinclude:: datas/alternative_fortimanager_api/output_001.json
          :language: json
       
+You can consider reading section :ref:`How to get Fortinet vulnerabilities for
+your managed devices?` to get the list of vulnerabilities for your managed
+devices using a more regular way.
+
 REST API
 --------
 

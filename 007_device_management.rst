@@ -1,6 +1,75 @@
 Device Management
 =================
 
+How to get a managed device OID?
+--------------------------------
+
+Some API calls require to pass the OID of a managed device rather than a
+symbolic device name. The following example shows how to get the OID of the
+``dev_001`` managed device:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name"
+               ],
+               "filter": [
+                 "name",
+                 "==",
+                 "dev_001"
+               ],
+               "option": [
+                 "no loadsub"
+               ],
+               "url": "/dvmdb/device"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         You could avoid the ``filter`` block by using the
+         ``/dvmdb/device/dev_001`` URL.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "dev_001",
+                   "oid": 276
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device"
+             }
+           ]
+         }
+
+      .. note::
+
+         The OID of the ``dev_001`` managed device is ``276``.
+         
+
 How to rename a managed device?
 -------------------------------
 
@@ -10761,4 +10830,112 @@ This example shows how to rename it to ``fss_001``:
                "url": "/dvmdb/device/FFSASEREDACTED67"
              }
            ]
+         }
+
+How to get Fortinet vulnerabilities for your managed devices?
+-------------------------------------------------------------
+
+Starting with FortiMager 7.6.3, you can get the Fortinet vulnerabilities for
+your managed devices.
+
+.. note::
+
+   For an alternate way to get the Fortinet vulnerabilities, refer to the
+   section :ref:`How to get the list of vulnerabilities for your managed 
+   devices?`.
+
+The following example shows how to get the Fortinet vulnerabilities for the
+``dev_001`` managed device in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "scope member": [
+                 {
+                   "oid": 276
+                 }
+               ],
+               "url": "/pm/config/adom/demo/_psirt/data"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         ``276`` is the OID of the ``dev_001`` managed device. For more details
+         on retrieving a device’s OID, refer to section :ref:`How to get a 
+         managed device OID?`.
+         
+
+   .. tab-item:: RESPONSE
+
+      .. literalinclude:: datas/alternative_fortimanager_api/output_002.json
+         :language: json
+
+You can also ask for the vulnerabilities of all managed devices belonging to the
+``grp_001`` device group in the ``demo`` ADOM:
+
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "scope member": [
+                 {
+                   "name": "grp_001"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/_psirt/data"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. literalinclude:: datas/alternative_fortimanager_api/output_003.json
+         :language: json
+
+Ultimately, you can use the ``All_FortiGate`` pre-defined device group to get
+the vulnerabilities of all managed FortiGate devices in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "scope member": [
+                 {
+                   "name": "All_FortiGate"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/_psirt/data"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
          }
