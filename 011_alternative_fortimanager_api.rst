@@ -49,7 +49,8 @@ Use the following request to retrieve and save the session cookies:
       .. note::
        
          - ``username`` and ``secretkey`` refer to a declared FortiManager 
-           administrator and the corresponding password
+           administrator and the corresponding password.
+         - The ``content-type`` header is mandatory.
 
    .. tab-item:: RESPONSE:
 
@@ -87,9 +88,41 @@ Use the following request to retrieve and save the session cookies:
            ]
          }
 
-You can now continue using those session cookies in your subsequent calls.
+A corresponding ``curl`` command could be:
 
-But this is also the time to set the `Xsrf-Token` header with the value of the
+.. tab-set::
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: shell
+
+         curl -k -s -c cookie.jar -H "Content-Type: application/json" \
+           https://10.210.34.143/cgi-bin/module/flatui_auth -d @login.json
+
+      .. note::
+
+         - It is important to save the returned cookies in the ``cookies.jar``
+           file. They will have to be re-used in subsequent calls.
+
+         - ``login.json`` file is with the following content:
+
+           .. code-block:: json
+           
+             {
+               "url": "/gui/userauth",
+               "method": "login",
+               "params": {
+                 "secretkey": "fortinet",
+                 "logintype": 0,
+                 "username": "devops"
+               }
+             }
+
+
+Again, remember to reuse the cookies returned in the login operations in your
+subsequent calls.
+
+This is also the time to set the `Xsrf-Token` header with the value of the
 captured ``HTTP_CSRF_TOKEN``. 
 
 The ``Xsrf-Token`` is required for all subsequent ``POST`` requests.
@@ -893,6 +926,23 @@ _____________________
 
 The attribute ``downloadname`` is optional; if ommited, the CSV file name will
 be from the value of the ``filepath`` attribute.
+
+How to download a FortiManager packet capture?
+++++++++++++++++++++++++++++++++++++++++++++++
+
+See section :ref:`FortiManager Packet capture` for more details about operating
+FortiManager packet captures using the FortiManager API.
+
+The following example shows how to download an existing FortiManager packet
+capture file:
+
+.. code-block:: shell
+
+   curl -o sniffer_port1.1.pcap  -v -s -k -b cookie.jar \
+     -H "Xsrf-Token: uvTrN9S6HJrxXWPanUkVwA5IRXDdql7" \
+     -H "Content-Type: application/json" \
+     'https://{{fmg_ip}}/flatui/api/gui/sniff/export?filename=sniffer_port1.1.pcap&downloadname=sniffer_port1.1.pcap'
+
 
 How to get the list of vulnerabilities for your managed devices?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

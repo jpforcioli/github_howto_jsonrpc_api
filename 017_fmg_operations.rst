@@ -1172,3 +1172,352 @@ The following example shows how to delete the ``11111`` task:
            "url": "/task/task/11111"
          }            
 
+FortiManager Packet capture
+---------------------------
+
+It is possible to make packet capture operations for traffic originating or
+destined to the FortiManager using the FortiManager API.
+
+How to get existing packet capture definitions?
++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get existing packet capture definitions:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/cli/global/system/sniffer"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+      
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "host": "10.0.0.1",
+                   "id": 1,
+                   "interface": "port1",
+                   "ipv6": "enable",
+                   "max-packet-count": 4000,
+                   "non-ip": "enable",
+                   "port": "80",
+                   "protocol": "6",
+                   "vlan": "1001"
+                 },
+                 {
+                   "host": "",
+                   "id": 2,
+                   "interface": "port3",
+                   "ipv6": null,
+                   "max-packet-count": 4000,
+                   "non-ip": null,
+                   "port": "1111",
+                   "protocol": "",
+                   "vlan": ""
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/cli/global/system/sniffer"
+             }
+           ]
+         }
+
+      .. note::
+
+         This output shows two existing packet capture definitions. 
+
+How to add a new packet capture definition?
++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to add a new packet capture definition:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "host": "10.1.2.3",
+                 "id": 0,
+                 "interface": "port8",
+                 "max-packet-count": 300
+               },
+               "url": "/cli/global/system/sniffer"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         The ``id`` field is mandatory. Setting it to ``0`` prompts 
+         FortiManager to automatically assign the next available ID.
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json   
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "id": 12
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/cli/global/system/sniffer"
+             }
+           ]
+         }
+
+      .. note::
+
+         The ``id`` of the create packet capture definition is ``12``.
+
+How to start a packet capture?
+++++++++++++++++++++++++++++++
+
+The following example shows how to start a packet capture from an existing
+packet capture definition:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "action": "start",
+                 "id": 1
+               },
+               "url": "/cli/global/system/sniffer"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         ``id`` is the ID of an existing packet capture definition.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/cli/global/system/sniffer"
+             }
+           ]
+         }
+
+How to restart a packet capture?
+++++++++++++++++++++++++++++++++
+
+*Restart* retains packets captured before the stop operation and includes newly captured packets in the final result.
+
+The following example demonstrates restarting a packet capture from an existing definition:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "action": "restart",
+                 "id": 1
+               },
+               "url": "/cli/global/system/sniffer"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         ``id`` is the ID of an existing packet capture definition.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/cli/global/system/sniffer"
+             }
+           ]
+         }
+
+How to stop a packet capture?
++++++++++++++++++++++++++++++
+
+The following example shows how to stop a packet capture from an existing
+packet capture definition:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "action": "stop",
+                 "id": 1
+               },
+               "url": "/cli/global/system/sniffer"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         ``id`` is the ID of an existing packet capture definition.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/cli/global/system/sniffer"
+             }
+           ]
+         }
+
+How to get the status of the packet captures?
++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the status of the packet captures:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "action": "progress"
+               },
+               "url": "/cli/global/system/sniffer"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "id": 1,
+                   "max_packets": 4000,
+                   "packets": 1308,
+                   "running": 0
+                 },
+                 {
+                   "id": 2,
+                   "max_packets": 4000,
+                   "packets": 407,
+                   "running": 1
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/cli/global/system/sniffer"
+             }
+           ]
+         }
+
+      .. note::
+
+         The output shows two packet captures: the one with ID ``1`` is stopped
+         (``running`` is ``0``) and the one with ID ``2`` is running
+         (``running`` is ``1``).
+
+How to download a packet capture?
++++++++++++++++++++++++++++++++++
+
+Seems doable via the FortiManager GUI API using an URl similar to:
+
+.. code-block:: text
+
+   https://{{fmg_ip}}/flatui/api/gui/sniff/export?filename=sniffer_{{interface}}.{{packet_capture_definition_id}}.pcap&downloadname=sniffer_{{interface}}.{{packet_capture-definition_id}}.pcap
+
+For more details, see the section :ref:`How to download a FortiManager packet capture?`
+
