@@ -7,59 +7,117 @@ URL Filtering
 Webfilter urlfilter
 +++++++++++++++++++
 
-This section is for the ``webfilter.urlfilter``  object.
+This section is for the ``webfilter.urlfilter`` object.
 
 How to add a new entry in a webfilter.urlfilter.entries?
 ________________________________________________________
 
 Goal is to add a new entry without overwritting the existing ones.
 
-To add a new entry ``www.url-003.com`` in the ``webfilter.urlfilter`` named
-``urlfilter_001``, with ID ``1``, in ADOM ``dc_emea``:
+The following example shows how to add a new entry ``www.url-001.com`` in the
+``webfilter.urlfilter`` with ID ``1`` in the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "url": "www.url-001.com"
+               },
+               "url": "/pm/config/adom/demo/obj/webfilter/urlfilter/1/entries"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-   {
-     "id": 3,
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "url": "www.url-003.com"
-         },
-         "url": "/pm/config/adom/dc_emea/obj/webfilter/urlfilter/1/entries"
-       }
-     ],
-     "session": "GcpTJdkN8A0VwkAQF+zBA70wdh7B+Qe3tZoGil4lR+rQlrUhy0nOjNeoJLKyQb/CgdXmuA8i5omm4WV/dE7cQw=="
-   }
+   .. tab-item:: RESPONSE
 
-.. note::
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "id": 1
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/webfilter/urlfilter/1/entries"
+             }
+           ]
+         }
 
-   - The ``webfilter.urlfilter`` ``urlfilter_001`` cannot be used as master key;
-     its ID ``1`` has to be used instead
+      .. note::
 
-**RESPONSE:**
+         ``1`` is the ID of the newly created URL entry.
 
-.. code-block:: json
+How to add multiple entries in a webfilter.urlfilter.entries?
+_____________________________________________________________
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "id": 4
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/dc_emea/obj/webfilter/urlfilter/1/entries"
-       }
-     ]
-   }
+Goal is to add multiple new entries without overwritting the existing ones.
 
+The following example shows how to add multiple new entries (``www.url-002.com``
+to ``www.url-004.com``) in the ``webfilter.urlfilter`` with ID ``1`` in the ``demo`` ADOM:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 {
+                   "url": "www.url-002.com"
+                 },
+                 {
+                   "url": "www.url-003.com"
+                 },
+                 {
+                   "url": "www.url-004.com"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/webfilter/urlfilter/1/entries"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "pm/config/adom/dc_amer/obj/webfilter/urlfilter/1/entries"
+             }
+           ]
+         }      
+
+      .. note::
+
+         In this case, no ID are returned.
+         
 How to delete an entry in a webfilter.urlfilter. entries?
 _________________________________________________________
 
