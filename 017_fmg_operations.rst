@@ -1521,3 +1521,46 @@ Seems doable via the FortiManager GUI API using an URl similar to:
 
 For more details, see the section :ref:`How to download a FortiManager packet capture?`
 
+How to license a FortiManager-VM?
+---------------------------------
+
+Captured in #1090271 (FortiManager 7.6.3).
+
+The following example shows how to license a FortiManager-VM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 2,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/sys/api/vmlicense",
+               "data": {
+                 "vmlicense": "-----BEGIN FMG VM LICENSE----- ..... -----END FMG VM LICENSE-----"
+               }
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK, System is rebooting"
+               },
+               "url": "/sys/api/vmlicense"
+             }
+           ],
+           "id": 2
+         }
