@@ -10943,7 +10943,7 @@ the vulnerabilities of all managed FortiGate devices in the ``demo`` ADOM:
 Per-device mapping for a specific managed device
 ------------------------------------------------
 
-To get the normalized interfaces mapped to a specific managed device see section :`ref:`How to get the normalized interfaces mapped to a specific managed device?`.
+To get the normalized interfaces mapped to a specific managed device see section :`ref:`How to get the metadata mapped to a specific managed device?`.
 
 To get the metadata mapped to a specific managed device see section :ref:`How to
 get the metadata mapped to a specific managed device?`.
