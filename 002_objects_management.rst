@@ -726,10 +726,11 @@ before the replace operation:
            ]
          }
 
-How to get the metadata values for a specific device?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to get the metadata mapped to a specific managed device?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The following example shows how to get all the metadata values for the ``dev_001`` device in the ``demo`` ADOM:
+The following example shows how to get all the metadata mapped to the
+``dev_001`` managed device in the ``demo`` ADOM:
 
 .. tab-set::
 
@@ -2152,52 +2153,59 @@ How to add a new per-platform mapping to an existing Normalized Interface?
      ]
    }
 
-How to get the normalized interfaces with a per-device mapping set for a specific device?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to get the normalized interfaces mapped to a specific managed device?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The following example shows how to get the list of normalized interfaces with a
-per-device mapping for the ``dut_fgt_03`` device and its ``root`` VDOM:
+per-device mapping for the ``dev_001`` device and its ``root`` VDOM in the ``demo`` ADOM:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: REQUEST
-
-      .. code-block:: json
-
-        {
-          "id": "1",
-          "method": "get",
-          "params":[
-            {
-              "url": "pm/config/adom/{{adom}}/obj/dynamic/interface",
-              "fields": ["name"],
-              "subfetch filter": 1,
-              "sub fetch": {
-                "dynamic_mapping": {
-                  "fields": ["_scope", "local_intf"],
-                  "subfetch count": ["==", 1],
-                  "scope member": [
-                    {
-                      "name": "dut_fgt_03",
-                      "vdom": "root"
-                    }
-                  ]
-                },
-                "platform_mapping": {
-                  "subfetch hidden": 1
-                }
-              }
-            }
-          ],
-          "session": "{{session}}"
-        }
-
-   .. tab:: RESPONSE
+   .. tab-item:: REQUEST
 
       .. code-block:: json
 
          {
-           "id": "1",
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name"
+               ],
+               "sub fetch": {
+                 "dynamic_mapping": {
+                   "fields": [
+                     "local-intf"
+                   ],
+                   "scope member": [
+                     {
+                       "name": "dev_001",
+                       "vdom": "root"
+                     }
+                   ],
+                   "subfetch count": [
+                     "==",
+                     1
+                   ]
+                 },
+                 "platform_mapping": {
+                   "subfetch hidden": 1
+                 }
+               },
+               "subfetch filter": 1,
+               "url": "/pm/config/adom/demo/obj/dynamic/interface"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
            "result": [
              {
                "data": [
@@ -2206,40 +2214,54 @@ per-device mapping for the ``dut_fgt_03`` device and its ``root`` VDOM:
                      {
                        "_scope": [
                          {
-                           "name": "dut_fgt_03",
+                           "name": "dev_001",
                            "vdom": "root"
                          }
                        ],
-                       "oid": 4890
+                       "local-intf": [
+                         "port10"
+                       ],
+                       "oid": 6392
                      }
                    ],
-                   "oid": 4889,
-                   "name": "foobar"
+                   "name": "dmz",
+                   "oid": 125
                  },
                  {
                    "dynamic_mapping": [
                      {
                        "_scope": [
                          {
-                           "name": "dut_fgt_03",
+                           "name": "dev_001",
                            "vdom": "root"
                          }
                        ],
-                       "oid": 4856
+                       "local-intf": [
+                         "port9"
+                       ],
+                       "oid": 6391
                      }
                    ],
-                   "oid": 112,
-                   "name": "wan"
+                   "name": "lan",
+                   "oid": 276
                  }
                ],
                "status": {
                  "code": 0,
                  "message": "OK"
                },
-               "url": "pm/config/adom/production/obj/dynamic/interface"
+               "url": "/pm/config/adom/demo/obj/dynamic/interface"
              }
            ]
-         }        
+         }
+
+      .. note::
+
+         The ``dev_001`` has two normalized interfaces with a per-device
+         mapping:
+         
+         - ``lan`` which is mapped to its ``port9``.
+         - ``dmz`` which is mapped to its ``port10``.
 
 How to delete an existing per-platform mapping?
 +++++++++++++++++++++++++++++++++++++++++++++++
