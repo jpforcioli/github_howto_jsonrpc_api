@@ -7931,5 +7931,5 @@ The following example shows how to export a selected list of templates:
          - The name of file (i.e., ``export_template_w1ClUv.json``) containing 
            the exported templates.
          - The task ID (i.e., ``68``) that you have to monitor. When the task is
-           complete, you can download the file.
-
+           complete, you can download the file. See section :ref:`How to 
+           download exported templates file?` for downloading the returned file.
