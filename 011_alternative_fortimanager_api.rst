@@ -927,6 +927,23 @@ _____________________
 The attribute ``downloadname`` is optional; if ommited, the CSV file name will
 be from the value of the ``filepath`` attribute.
 
+How to download exported templates file?
+++++++++++++++++++++++++++++++++++++++++
+
+See section :ref:`How to export a selected list of templates?` for more details
+about exporting FortiManager Provisioning Templates using the FortiManager API.
+
+The following example shows how to download an exported templates file:
+
+.. code-block:: shell
+
+   export filename=export_template_-FMG-VMTM24012156-BCBLjl.json
+   export takid=952
+
+   curl -o ${filename} -s -k -b cookie.jar \
+     -H "Content-Type: application/json" 
+     -H "Xsrf-Token: ${token}" https://10.210.34.120/flatui/api/gui/deploy/export\?filename=${filename}\&downloadname=${taskid}_${filename}
+
 How to download a FortiManager packet capture?
 ++++++++++++++++++++++++++++++++++++++++++++++
 

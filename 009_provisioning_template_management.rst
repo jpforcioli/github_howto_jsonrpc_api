@@ -7785,128 +7785,151 @@ To apply the ``fat_001`` Fabric Authorization Template onto the
 Export/import
 -------------
 
-Starting with FMG 7.2.0 build 1114, it is now possible to export/import the
-Provisioning Templates along with some other similar objects like FortiSwitch
-Template, FortiAP Profiles, etc.
+Caught in #0767892 - FortiManager 7.0.4/7.2.0.
+
+It is possible to export and import Provisioning Templates, along with other
+similar objects such as FortiSwitch Templates, FortiAP Profiles, and more.
 
 How to get the list of template which can be exported?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**REQUEST:**
+The following example shows how to get the list of exportable templates:
 
-.. code-block:: json
+.. tab-set:: 
 
-   {
-     "id": 3,
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "list_category": "yes"
-         },
-         "url": "/deployment/export/template"
-       }
-     ],
-     "session": "A9TEprfeUJVGQVh6KmBvq3DUj1OxK3/Y/H3BjldNv2h3h8x9ANQT2umZtaPxPEVAqK2HopBeirNEA3ox6AMozQ=="
-   }
+   .. tab-item:: REQUEST
 
-**RESPONSE:**
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "list_category": "yes"
+               },
+               "url": "/deployment/export/template"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "category": {
-             "ap-prof": "AP Profile",
-             "bgp-prof": "BGP Templates",
-             "ble-prof": "Bluetooth Profile",
-             "bonjour-prof": "Bonjour Profile",
-             "cert-prof": "Certificate Templates",
-             "cli-prof": "CLI Templates",
-             "cr-prof": "Threat Weight Templates",
-             "cst-prof": "NSX-T Service Templates",
-             "fext-prof": "FortiExtender Templates",
-             "ipsec-prof": "IPsec Tunnel Templates",
-             "qos-prof": "QoS Profile",
-             "route-prof": "Static Route Templates",
-             "sdwan-prof": "SD-WAN Templates",
-             "switch-prof": "FortiSwitch Templates",
-             "sys-prof": "System Templates"
-           }
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/deployment/export/template"
-       }
-     ]
-   }
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "category": {
+                   "ap-prof": "AP Profiles",
+                   "bgp-prof": "BGP Templates",
+                   "ble-prof": "Bluetooth Profiles",
+                   "bonjour-prof": "Bonjour Profiles",
+                   "cert-prof": "Certificate Templates",
+                   "cli-prof": "CLI Templates",
+                   "cr-prof": "Threat Weight Templates",
+                   "cst-prof": "NSX-T Service Templates",
+                   "dev-blueprint": "Device Blueprint Templates",
+                   "fext-prof": "FortiExtender Templates",
+                   "ips-prof": "IPS Templates",
+                   "ipsec-prof": "IPsec Tunnel Templates",
+                   "qos-prof": "QoS Profiles",
+                   "route-prof": "Static Route Templates",
+                   "sdwan-overlay-prof": "SD-WAN Overlay Templates",
+                   "sdwan-prof": "SD-WAN Templates",
+                   "switch-prof": "FortiSwitch Templates",
+                   "sys-prof": "System Templates",
+                   "tmplgrp-prof": "Template Groups"
+                 }
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/deployment/export/template"
+             }
+           ]
+         }
 
 How to export a selected list of templates?
 +++++++++++++++++++++++++++++++++++++++++++
 
-**REQUEST:**
+The following example shows how to export a selected list of templates:
 
-.. code-block:: json
+.. tab-set::
 
-   {
-     "id": 3,
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "adom": 162,
-           "category": [
-             "ap-prof",
-             "bgp-prof",
-             "ble-prof",
-             "bonjour-prof",
-             "cert-prof",
-             "cli-prof",
-             "cr-prof",
-             "cst-prof",
-             "fext-prof",
-             "ipsec-prof",
-             "qos-prof",
-             "route-prof",
-             "sdwan-prof",
-             "switch-prof",
-             "sys-prof"
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": 162,
+                 "category": [
+                   "ap-prof",
+                   "bgp-prof",
+                   "ble-prof",
+                   "bonjour-prof",
+                   "cert-prof",
+                   "cli-prof",
+                   "cr-prof",
+                   "cst-prof",
+                   "fext-prof",
+                   "ipsec-prof",
+                   "qos-prof",
+                   "route-prof",
+                   "sdwan-prof",
+                   "switch-prof",
+                   "sys-prof"
+                 ],
+                 "create_task": "true"
+               },
+               "url": "/deployment/export/template"
+             }
            ],
-           "create_task": "true"
-         },
-         "url": "/deployment/export/template"
-       }
-     ],
-     "session": "jhB4fV6YFtuKK+J7TDsOvlYC+6aPDsaPlqpp8iBC55gGjXb3AvpEpd0XSaP2RObspzlpElAuV3dIicaPwwUThg=="
-   }
+           "session": "{{session}}"
+         }
+      
+      .. note:: 
+      
+         You have to provide the ADOM OID (``162`` in the above request); it
+         won't work if you provide the ADOM name.
 
-.. note:: 
+   .. tab-item:: RESPONSE
 
-   - We have to provide the ADOM OID (``162`` in the above request); it won't
-     work if we provide the ADOM name.
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "file": "export_template_w1ClUv.json",
+                 "taskid": 68
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/deployment/export/template"
+             }
+           ]
+         }
 
-**RESPONSE:**
+      .. note:: 
+      
+         FortiManager returns two things:
 
-.. code-block:: json
+         - The name of file (i.e., ``export_template_w1ClUv.json``) containing 
+           the exported templates.
+         - The task ID (i.e., ``68``) that you have to monitor. When the task is
+           complete, you can download the file.
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "file": "export_template_w1ClUv.json",
-           "taskid": 68
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/deployment/export/template"
-       }
-     ]
-   }   

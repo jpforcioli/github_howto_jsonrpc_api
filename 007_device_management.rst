@@ -10885,7 +10885,6 @@ The following example shows how to get the Fortinet vulnerabilities for the
 You can also ask for the vulnerabilities of all managed devices belonging to the
 ``grp_001`` device group in the ``demo`` ADOM:
 
-
 .. tab-set::
 
    .. tab-item:: REQUEST
@@ -10935,6 +10934,39 @@ the vulnerabilities of all managed FortiGate devices in the ``demo`` ADOM:
                ],
                "url": "/pm/config/adom/demo/_psirt/data"
              }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+Some other URLs to explore:
+
+.. code-block:: text
+
+   /pm/config/adom/{adom}/_psirt/data/fap
+   /pm/config/adom/{adom}/_psirt/data/fsw
+   /pm/config/adom/{adom}/_psirt/data/fmg
+
+For instance:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+              {
+                "url": "pm/config/adom/demo/_psirt/data/fap",
+                "scope member": [
+                  {
+                    "name": "All_FortiGate"
+                  }
+                ]
+              }
            ],
            "session": "{{session}}",
            "verbose": 1
