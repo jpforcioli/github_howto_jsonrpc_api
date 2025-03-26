@@ -1625,7 +1625,83 @@ themselves:
 
          - Above output is for one managed device; it means the ``demo`` ADOM 
            was having only one managed device at the time this request was made
-         
+
+How to get the update history for a specific FortiGuard objects?
+----------------------------------------------------------------
+
+The update history gives you how many time and which database versions a
+FortiGuard object has been downloaded by FortiManager.
+
+Using FortiManager GUI, this is when you're in the ***FortiGuard*** >
+***Packages*** page and you click the ***Update History*** cell:
+
+.. thumbnail:: images/fortiguard_management/image_001.png
+
+In this case, you get this:
+
+.. thumbnail:: images/fortiguard_management/image_002.png
+
+The following shows the corresponding API request:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "data": {
+                 "category": {
+                   "fds": {
+                     "objid": [
+                       "05000000FAPV00000"
+                     ]
+                   }
+                 }
+               },
+               "url": "/um/misc/update_history"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "fds": {
+                   "05000000FAPV00000": {
+                     "history": [
+                       {
+                         "event": "PollUpdate",
+                         "size": 19432,
+                         "status": "Success",
+                         "update_time": 1742982143,
+                         "version": 131177
+                       }
+                     ]
+                   }
+                 }
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/misc/update_history"
+             }
+           ]
+         }        
+
 How to get the list of FortiGuard objects downloaded by FortiManager?
 ---------------------------------------------------------------------
 
