@@ -1136,6 +1136,91 @@ _______________
 Task Management
 ---------------
 
+How to get the latest task?
++++++++++++++++++++++++++++
+
+In other words, how do you retrieve the newest (most recently created) task using the FortiManager API?
+
+The following example demonstrates how to fetch the latest task by querying the
+``/task/task/`` endpoint, limiting the result to a single entry, and sorting by
+ID in descending order:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "loadsub": 0,
+               "range": [
+                 0,
+                 1
+               ],
+               "sortings": [
+                 {
+                   "id": -1
+                 }
+               ],
+               "url": "/task/task/",
+               "verbose": 1
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         The key elements of this requests are:
+
+         - ``range: [0, 1]``: Get results from index 0 to 1, meaning only the 
+           first item will be returned (pagination-like behavior).
+
+         ``sortings: [{"id": -1}]``: Sort by the ``id`` field in descending 
+           order (likely to get the most recent task first).
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "adom": 2073,
+                   "end_tm": 1743166837,
+                   "flags": 0,
+                   "id": 986,
+                   "num_done": 1,
+                   "num_err": 0,
+                   "num_lines": 1,
+                   "num_warn": 0,
+                   "percent": 100,
+                   "pid": 24587,
+                   "src": 0,
+                   "start_tm": 1743166837,
+                   "state": 4,
+                   "title": "deldevtitle",
+                   "tot_percent": 100,
+                   "user": "admin"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/task/task/"
+             }
+           ]
+         }        
+
 How to delete a task?
 +++++++++++++++++++++
 
