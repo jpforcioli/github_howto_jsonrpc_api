@@ -1181,8 +1181,11 @@ ID in descending order:
          - ``range: [0, 1]``: Get results from index 0 to 1, meaning only the 
            first item will be returned (pagination-like behavior).
 
-         ``sortings: [{"id": -1}]``: Sort by the ``id`` field in descending 
+         - ``sortings: [{"id": -1}]``: Sort by the ``id`` field in descending 
            order (likely to get the most recent task first).
+
+         - ``loadsub: 0``: Don't load sub-objects. Omit it if you need the
+           details of the task.
 
    .. tab-item:: RESPONSE
 
