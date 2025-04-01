@@ -2091,8 +2091,8 @@ Caught in #0778029.
 
 TBD.
 
-External Resources
-------------------
+Local External Resources
+------------------------
 
 Starting with FortiManager 7.4.1 and 7.2.5 (#0934664), it is possible to manage
 external resource files hosted by FortiManager.
@@ -2115,11 +2115,11 @@ external resource files hosted by FortiManager.
    Both forms yield the same result. External resource files are accessible to 
    all ADOMs.
 
-How to add a new external resource file?
-++++++++++++++++++++++++++++++++++++++++
+How to add a local external resource file?
+++++++++++++++++++++++++++++++++++++++++++
 
-Using |fmg_api| for adding a new external resource file
-_______________________________________________________
+Using |fmg_api| for adding a local external resource file
+_________________________________________________________
 
 To add a new external resource file named ``addresses_003.txt``:
 
@@ -2158,8 +2158,8 @@ To add a new external resource file named ``addresses_003.txt``:
            ]
          }
 
-Using REST API for adding a new external resource file
-______________________________________________________
+Using REST API for adding a local external resource file
+________________________________________________________
 
 To add a new external resource file named ``addresses_004.txt``:
 
@@ -2201,8 +2201,8 @@ To add a new external resource file named ``addresses_004.txt``:
            ]
          }                    
 
-How to get the list of external resource files?
-+++++++++++++++++++++++++++++++++++++++++++++++
+How to get the list of local external resource files?
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Caught in #0953203 (7.2.5/7.4.2).
 
@@ -2265,8 +2265,8 @@ The following example shows how to get the list of external resource files:
          For performance reason, the file content isn't returned. Some of the
          files could be large.
 
-How to get an external resource file content?
-+++++++++++++++++++++++++++++++++++++++++++++
+How to get a local external resource file content?
+++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The following example shows how to retrieve the content of the ``file_001.txt``
 external resource file:
@@ -2312,11 +2312,11 @@ external resource file:
            ]
          }         
 
-How to delete an external resource file?
-++++++++++++++++++++++++++++++++++++++++
+How to delete a local external resource file?
++++++++++++++++++++++++++++++++++++++++++++++
 
-Using |fmg_api| for deleting a new external resource file
-_________________________________________________________
+Using |fmg_api| for deleting a local external resource file
+___________________________________________________________
 
 To delete the external resource file named ``addresses_003.txt``:
 
@@ -2352,8 +2352,8 @@ To delete the external resource file named ``addresses_003.txt``:
            ]
          }
 
-Using REST API for deleting a new external resource file
-________________________________________________________
+Using REST API for deleting a local external resource file
+__________________________________________________________
 
 To add a new external resource file named ``addresses_004.txt``:
 
@@ -2381,4 +2381,251 @@ To add a new external resource file named ``addresses_004.txt``:
                "url": "/pm/config/global/_external/resource/addresses_004.txt"
              }
            ]
+         }
+
+Remote External Resources
+-------------------------
+
+Starting in version 7.6.3 (#1039834), FortiManager supports downloading external
+resources from a web server.
+
+Once downloaded by FortiManager, the file becomes a :ref:`local external resource <Local External Resources>`.
+
+How to add a remote external resource?
+++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to add a remote external resource file named
+`remote_external_resource_001`:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "http_auth": 0,
+                 "name": "remote_external_resource_001",
+                 "refresh_rate": 5,
+                 "status": 1,
+                 "url": "http://www.url-001.com/filename_001.txt",
+                 "use_web_proxy": 0
+               },
+               "url": "/um/external_resource"
+             }
+           ],
+           "session": "{{session}}",
+         }
+
+      .. note::
+
+         - ``http_auth: 0``: No authentication is required to access the URL.
+         - ``refresh_rate: 5``: FortiManager will check the URL and refresh the
+           file every 5 minutes.
+         - ``use_web_proxy: 0``: FortiManager will access the URL directly,
+           without using a proxy.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/external_resource"
+             }
+           ]
+         }
+
+How to get the existing remote external resources?
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the list of existing remote external
+resources:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/um/external_resource"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "object_list": [
+                   {
+                     "comment": "",
+                     "filename": "filename_001.txt",
+                     "http_auth": 0,
+                     "http_auth_password": "ENC [TRUNCATED]",
+                     "http_auth_username": "",
+                     "name": "remote_external_resource_001",
+                     "refresh_rate": 5,
+                     "status": 1,
+                     "type": 0,
+                     "url": "http://www.url-001.com/filename_001.txt",
+                     "use_web_proxy": 0
+                   },
+                   {
+                     "comment": "",
+                     "filename": "filename_002.txt",
+                     "http_auth": 0,
+                     "http_auth_password": "ENC [TRUNCATED]",
+                     "http_auth_username": "",
+                     "name": "remote_external_resource_002",
+                     "refresh_rate": 5,
+                     "status": 1,
+                     "type": 0,
+                     "url": "https://www.url-002.com/filename_002.txt",
+                     "use_web_proxy": 0
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/external_resource"
+             }
+           ]
+         }
+
+How to delete a remote external resource?
++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to delete the
+``remote_external_resource_001``:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "data": {
+                 "name": "foobar"
+               },
+               "url": "/um/external_resource"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/external_resource"
+             }
+           ]
+         }
+
+How to check for an external resource?
+++++++++++++++++++++++++++++++++++++++
+
+Caught in #1140702.
+
+The capability of FortiManager to fetch a remote external resource can be validated using the FortiManager API to check the corresponding URL.
+
+The example below describes how to check for an URL prior to set it in a remote
+external resource:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "opt": "check_url",
+                 "url": "http:/www.url-003.com"
+               },
+               "url": "/um/external_resource"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/external_resource"
+             }
+           ]
+         }
+
+      This output indicates that the ``http://www.url-003.com`` is valid.
+      An invalid URL would produce the following output:
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": -6,
+                 "message": "Invalid url"
+               },
+               "url": "/um/external_resource"
+             }
+           ]
          }        
+
+

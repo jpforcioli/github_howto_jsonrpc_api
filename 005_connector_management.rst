@@ -906,10 +906,10 @@ when editing a *Fortinet Single Sign-On Agent*.
 Thread Feeds Connectors
 -----------------------
 
-How to define External Resources hosted in FortiManager?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to define local or remote external resources hosted in FortiManager?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-See section :ref:`External Resources`.
+See sections :ref:`Local External Resources` and :ref:`Remote External Resources`.
 
 How to get resolved IP addresses for an IP Address Threat Feed?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
