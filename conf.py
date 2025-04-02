@@ -19,8 +19,8 @@ import time
 
 # -- Project information -----------------------------------------------------
 
-project = 'How to FortiManager API?'
-copyright = '2024'
+project = 'FortiManager API HOW-TO'
+copyright = '2025'
 author = 'Jean-Pierre Forcioli'
 
 # The full version, including alpha/beta/rc tags
@@ -75,7 +75,7 @@ images_config = {
 DOC_LOGO = "fortimanager_api_howto.png"
 html_static_path = ['_static']
 html_theme_options = {
-    "announcement": "How to FortiManager API?",
+    "announcement": "FortiManager API HOW-TO",
     "logo": {
 #        "image_light": "_static/light-fortinet-logo.png",
 #        "image_dark": "_static/dark-fortinet-logo.png",
