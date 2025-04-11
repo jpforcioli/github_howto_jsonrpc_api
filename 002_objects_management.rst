@@ -5093,9 +5093,9 @@ Following example applies to firewall address object type.
 
 It is showing how to add a new firewall address with an object revision note:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: REQUEST
+   .. tab-item:: REQUEST
 
       .. code-block:: json
 
@@ -5116,7 +5116,7 @@ It is showing how to add a new firewall address with an object revision note:
            "session": "{{ session }}"
          }        
          
-   .. tab:: RESPONSE
+   .. tab-item:: RESPONSE
 
       .. code-block:: json
 
@@ -5144,9 +5144,9 @@ Following example applies to firewall address object type.
 It is showing how to update both an existing firewall address and its associated
 object revision note:
 
-.. tabs:: 
+.. tab-set:: 
 
-   .. tab:: REQUEST
+   .. tab-item:: REQUEST
 
       .. code-block:: json
 
@@ -5165,7 +5165,7 @@ object revision note:
            "session": "{{ session }}"
          }
 
-   .. tab:: RESPONSE
+   .. tab-item:: RESPONSE
 
       .. code-block:: json
 
@@ -5185,16 +5185,14 @@ object revision note:
            ]
          }
 
-How to get the revision notes for a specific object?
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to get the object revision notes for a specific object?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Following example applies to firewall address object type.
+The following example demonstrates how to retrieve object revision notes for an existing firewall address object.
 
-It is showing how to get the revision notes for an existing firewall address:
+.. tab-set::
 
-.. tabs::
-
-   .. tab:: REQUEST
+   .. tab-item:: REQUEST
 
       .. code-block:: json
 
@@ -5210,7 +5208,7 @@ It is showing how to get the revision notes for an existing firewall address:
            "verbose": 1
          }
 
-   .. tab:: RESPONSE
+   .. tab-item:: RESPONSE
 
       .. code-block:: json
 
@@ -5277,21 +5275,192 @@ It is showing how to get the revision notes for an existing firewall address:
            ]
          }        
 
+This second example shows how to get the object revision notes for the
+``system_template_001`` System Template in the ``demo`` ADOM:
+
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_objrev/devprof/system_template_001"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: jso
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "obj ver": 2,
+                   "pkg obj": [
+                     {
+                       "act": 3,
+                       "category": 1511,
+                       "config": "{ \"description\": null, \"enabled-pages\": [ \"dns\" ], \"flags\": 1, \"oid\": 5737 }",
+                       "flags": 0,
+                       "key": "",
+                       "note": "DNS domain updated.",
+                       "oid": 5737,
+                       "pkg_oid": 5736,
+                       "timestamp": 1744378582,
+                       "url": "device profile settings",
+                       "user": "admin"
+                     },
+                     {
+                       "act": 3,
+                       "category": 534,
+                       "config": "{ \"action\": \"conf-sys-dns\", \"dynamic_mapping\": null, \"model\": \"all\", \"oid\": 5742, \"seq\": 1, \"value\": { \"alt-primary\": \"0.0.0.0\", \"alt-secondary\": \"0.0.0.0\", \"cache-notfound-responses\": 0, \"dns-cache-limit\": 5000, \"dns-cache-ttl\": 1800, \"domain\": [ \"domain.com\" ], \"fqdn-cache-ttl\": 0, \"fqdn-max-refresh\": 3600, \"fqdn-min-refresh\": 60, \"hostname-limit\": 5000, \"hostname-ttl\": 86400, \"interface-select-method\": 0, \"ip6-primary\": \"::\", \"ip6-secondary\": \"::\", \"log\": 0, \"primary\": \"8.8.8.8\", \"protocol\": 1, \"retry\": 2, \"secondary\": \"1.1.1.1\", \"server-select-method\": 1, \"source-ip\": \"0.0.0.0\", \"ssl-certificate\": \"Fortinet_Factory\", \"timeout\": 5, \"vrf-select\": 0 }, \"var-list\": [ { \"name\": \"system dns\\/cache-notfound-responses\", \"oid\": 5750, \"override\": 0 }, { \"name\": \"system dns\\/dns-cache-limit\", \"oid\": 5749, \"override\": 0 }, { \"name\": \"system dns\\/dns-cache-ttl\", \"oid\": 5748, \"override\": 0 }, { \"name\": \"system dns\\/dns-over-tls\", \"oid\": 5747, \"override\": 0 }, { \"name\": \"system dns\\/domain\", \"oid\": 5751, \"override\": 0 }, { \"name\": \"system dns\\/primary\", \"oid\": 5753, \"override\": 0 }, { \"name\": \"system dns\\/retry\", \"oid\": 5746, \"override\": 0 }, { \"name\": \"system dns\\/secondary\", \"oid\": 5752, \"override\": 0 }, { \"name\": \"system dns\\/server-hostname\", \"oid\": 5745, \"override\": 0 }, { \"name\": \"system dns\\/ssl-certificate\", \"oid\": 5744, \"override\": 0 }, { \"name\": \"system dns\\/timeout\", \"oid\": 5743, \"override\": 0 } ] }",
+                       "flags": 0,
+                       "key": "dns 1",
+                       "note": "DNS domain updated.",
+                       "oid": 5742,
+                       "pkg_oid": 5736,
+                       "timestamp": 1744378582,
+                       "url": "device template widget action-list dns 1",
+                       "user": "admin"
+                     },
+                     {
+                       "act": 3,
+                       "category": 27,
+                       "config": "{ \"oid\": 5740, \"status\": 1 }",
+                       "flags": 0,
+                       "key": "",
+                       "note": "DNS domain updated.",
+                       "oid": 5740,
+                       "pkg_oid": 5736,
+                       "timestamp": 1744378582,
+                       "url": "system snmp sysinfo",
+                       "user": "admin"
+                     }
+                   ]
+                 },
+                 {
+                   "obj ver": 1,
+                   "pkg obj": [
+                     {
+                       "act": 3,
+                       "category": 1511,
+                       "config": "{ \"description\": null, \"enabled-pages\": [ \"dns\" ], \"flags\": 1, \"oid\": 5737 }",
+                       "flags": 0,
+                       "key": "",
+                       "note": "Creation.\nDNS Settings only.",
+                       "oid": 5737,
+                       "pkg_oid": 5736,
+                       "timestamp": 1744378554,
+                       "url": "device profile settings",
+                       "user": "admin"
+                     },
+                     {
+                       "act": 3,
+                       "category": 534,
+                       "config": "{ \"action\": \"conf-sys-dns\", \"dynamic_mapping\": null, \"model\": \"all\", \"oid\": 5742, \"seq\": 1, \"value\": { \"alt-primary\": \"0.0.0.0\", \"alt-secondary\": \"0.0.0.0\", \"cache-notfound-responses\": 0, \"dns-cache-limit\": 5000, \"dns-cache-ttl\": 1800, \"fqdn-cache-ttl\": 0, \"fqdn-max-refresh\": 3600, \"fqdn-min-refresh\": 60, \"hostname-limit\": 5000, \"hostname-ttl\": 86400, \"interface-select-method\": 0, \"ip6-primary\": \"::\", \"ip6-secondary\": \"::\", \"log\": 0, \"primary\": \"8.8.8.8\", \"protocol\": 1, \"retry\": 2, \"secondary\": \"1.1.1.1\", \"server-select-method\": 1, \"source-ip\": \"0.0.0.0\", \"ssl-certificate\": \"Fortinet_Factory\", \"timeout\": 5, \"vrf-select\": 0 }, \"var-list\": [ { \"name\": \"system dns\\/cache-notfound-responses\", \"oid\": 5750, \"override\": 0 }, { \"name\": \"system dns\\/dns-cache-limit\", \"oid\": 5749, \"override\": 0 }, { \"name\": \"system dns\\/dns-cache-ttl\", \"oid\": 5748, \"override\": 0 }, { \"name\": \"system dns\\/dns-over-tls\", \"oid\": 5747, \"override\": 0 }, { \"name\": \"system dns\\/domain\", \"oid\": 5751, \"override\": 0 }, { \"name\": \"system dns\\/primary\", \"oid\": 5753, \"override\": 0 }, { \"name\": \"system dns\\/retry\", \"oid\": 5746, \"override\": 0 }, { \"name\": \"system dns\\/secondary\", \"oid\": 5752, \"override\": 0 }, { \"name\": \"system dns\\/server-hostname\", \"oid\": 5745, \"override\": 0 }, { \"name\": \"system dns\\/ssl-certificate\", \"oid\": 5744, \"override\": 0 }, { \"name\": \"system dns\\/timeout\", \"oid\": 5743, \"override\": 0 } ] }",
+                       "flags": 0,
+                       "key": "dns 1",
+              "note": "Creation.\nDNS Settings only.",
+              "oid": 5742,
+                       "pkg_oid": 5736,
+                       "timestamp": 1744378554,
+                       "url": "device template widget action-list dns 1",
+                       "user": "admin"
+                     },
+                     {
+                       "act": 3,
+                       "category": 27,
+                       "config": "{ \"oid\": 5740, \"status\": 1 }",
+                       "flags": 0,
+                       "key": "",
+                       "note": "Creation.\nDNS Settings only.",
+                       "oid": 5740,
+                       "pkg_oid": 5736,
+                       "timestamp": 1744378554,
+                       "url": "system snmp sysinfo",
+                       "user": "admin"
+                     }
+                   ]
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_objrev/devprof/system_template_001"
+             }
+           ]
+         }
+
+      .. note::
+
+         The returned ``obj ver`` can be used as a master key for deleting an
+         object revision (see :ref:`How to delete an object revision?`).
+
+How to delete an object revision?
++++++++++++++++++++++++++++++++++
+
+The following example shows how to delete the object revision version 2 for the
+``system_template_001`` System Template in the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_objrev/devprof/system_template_001/2"
+             }
+           ],
+           "session": "{{session}}
+         }
+
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_objrev/devprof/system_template_001/2"
+             }
+           ]
+         }
+
 How to revert to a specific object revision?
 ++++++++++++++++++++++++++++++++++++++++++++
 
-Following example applies to firewall address object type.
+The following example applies to the firewall address object type.
+It demonstrates how to revert an existing firewall address to a specific object revision.
 
-It is showing how to revert an existing firewall address to a specific object
-revision.
+Note that FortiManager does not provide a dedicated ``revert`` operation. Instead, it uses the replace |fmg_api| method with data retrieved from the desired object revision.
 
-In fact, there's no specific *revert* operation. FortiManager is using the
-``replace`` |fmg_api| method with datas obtained from the object revision to be
-reverted with:
+.. tab-set::
 
-.. tabs::
-
-   .. tab:: REQUEST
+   .. tab-item:: REQUEST
 
       .. code-block:: json
 
@@ -5312,7 +5481,7 @@ reverted with:
            "session": "{{ session }}"
          }        
          
-   .. tab:: RESPONSE
+   .. tab-item:: RESPONSE
 
       .. code-block:: json
 
