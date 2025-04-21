@@ -1907,6 +1907,82 @@ Possible values for the ``ostype`` attributes:
 How to create a Model Device?
 +++++++++++++++++++++++++++++
 
+Warning about the flags
+_______________________
+
+To figure out what to use in your API call, you could be attempted to capture
+the API request resutling from creating a Model Device via the FortiManager GUI.
+
+In FortiManager console, you can capture such an API call:
+
+- First activate the debug from a FortiManager console:
+
+  .. code-block:: text
+
+     diagnose debug service dvmcmd 255
+     diagnose debug enable
+
+- Then from the FortiManager GUI, create a new Model Device named ``dev_001`` in
+  the ``demo`` ADOM. The debug output should be similar to the following:
+
+  .. code-block:: text
+
+     [...]
+     { "client": "gui webforward:19905", "keep_session_idle": 1, "method": "exec", "params": [{ "data": { "adom": "demo", "device": { "adm_usr": "admin", "cluster_worker": null, "device blueprint": { "auth-template": null, "download_from_fgd": false, "enforce-device-config": 0, "folder": "\/", "linked-to-model": true, "pkg": null, "platform": "FortiGate-40F", "port-provisioning": 1, "prefer-img-ver": null, "prerun-cliprof": null, "sdwan-management": 0, "templates": [], "vm-log-disk": 0}, "faz.perm": 15, "faz.quota": 0, "flags": 262176, "meta variables": {}, "mgmt_mode": 3, "mr": 6, "name": "dev_001", "os_type": 0, "os_ver": 7, "psk": "dev_001", "version": 700}, "flags": ["create_task", "nonblocking"]}, "target start": 2, "url": "dvm\/cmd\/add\/device"}], "session": 33589}
+     [...]
+    
+
+  Once formatted, it gives you this:
+
+  .. code-block:: text
+
+{
+  "client": "gui webforward:19905",
+  "keep_session_idle": 1,
+  "method": "exec",
+  "params": [
+    {
+      "data": {
+        "adom": "demo",
+        "device": {
+          "adm_usr": "admin",
+          "cluster_worker": null,
+          "device blueprint": {
+            "auth-template": null,
+            "download_from_fgd": false,
+            "enforce-device-config": 0,
+            "folder": "/",
+            "linked-to-model": true,
+            "pkg": null,
+            "platform": "FortiGate-40F",
+            "port-provisioning": 1,
+            "prefer-img-ver": null,
+            "prerun-cliprof": null,
+            "sdwan-management": 0,
+            "templates": [],
+            "vm-log-disk": 0
+          },
+          "faz.perm": 15,
+          "faz.quota": 0,
+          "flags": 262176,
+          "meta variables": {},
+          "mgmt_mode": 3,
+          "mr": 6,
+          "name": "dev_001",
+          "os_type": 0,
+          "os_ver": 7,
+          "psk": "dev_001",
+          "version": 700
+        },
+        "flags": ["create_task", "nonblocking"]
+      },
+      "target start": 2,
+      "url": "dvm/cmd/add/device"
+    }
+  ],
+  "session": 33589
+}
+
 For a virtual appliance
 _______________________
 
@@ -8382,8 +8458,8 @@ is available, simplifying the process, as shown below:
        "var_002": "val_002",
        "var_003": {
          "FGT40F0000000001": "val_003_001",
-         "FGT40F0000000001": "val_003_002",
-         "FGT40F0000000001": "val_003_003"
+         "FGT40F0000000002": "val_003_002",
+         "FGT40F0000000003": "val_003_003"
        }
      }
    }
