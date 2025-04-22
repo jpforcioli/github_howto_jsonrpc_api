@@ -1907,13 +1907,14 @@ Possible values for the ``ostype`` attributes:
 How to create a Model Device?
 +++++++++++++++++++++++++++++
 
-Warning about the flags
-_______________________
+Stop using the flags attribute
+______________________________
 
-To figure out what to use in your API call, you could be attempted to capture
-the API request resutling from creating a Model Device via the FortiManager GUI.
+To determine the correct structure for your API call, you might be tempted to
+capture the API request triggered when creating a Model Device via the
+FortiManager GUI. 
 
-In FortiManager console, you can capture such an API call:
+You can do this from the FortiManager console:
 
 - First activate the debug from a FortiManager console:
 
@@ -2002,14 +2003,20 @@ In FortiManager console, you can capture such an API call:
        "session": 20107
      }
 
-The FortiManager is using:
+What changed and why ``flags`` should be avoided?
+
+In earlier FortiManager versions, the ``device blueprint`` block was not
+available. As a result, many configuration options were encoded using a numeric
+``flags`` value. You can still see this in the debug output above, as shown in
+the snippet below:
 
 .. code-block:: text
 
    "flags": 262176,
 
-to encode that you're addin a Model Device. You'll in next section that you can
-replace it witht:
+In this case, ``262176`` likely signifies that a Model Device is being added.
+However, in modern FortiManager versions, this can (and should) be replaced with
+a more explicit directive: 
 
 .. code-block:: text
 
@@ -2017,13 +2024,13 @@ replace it witht:
 
 .. note::
 
-   A Model Device created with the ``device action`` set to ``add_model`` will
-   be with the *Auto-Link Status* (i.e., ``linked_to_model`` attribute) enabled
-   by default.
+   A Model Device created with ``"device action": "add_model"`` will have
+   Auto-Link Status (i.e., ``linked_to_model`` attribute) enabled by default.
 
-FortiManager GUI also used to encode other parameters like ``linked_to_model``
-with this weird ``flags`` attribute. But as you can see in the above capture,
-you can now use the ``device blueprint`` to encode the same information:
+Now replace ``flags`` with ``device blueprint``! Historically, parameters like
+``linked_to_model`` were encoded within the cryptic ``flags`` attribute. As
+shown in the above debug capture, this can now be clearly expressed using the
+``device blueprint``: 
 
 .. code-block:: text
 
@@ -2031,8 +2038,10 @@ you can now use the ``device blueprint`` to encode the same information:
      "linked-to-model": true,
    }     
 
-To encode the ``need_reset`` (*ZTP Factory Reset* in FortiManager GUI), you can
-use the ``flags`` but with a symbolic value. See :ref:``How to enable the `need_reset` flag on a model device?``.
+There's a special case with the ``need_reset`` flag. To indicate that a device
+requires a factory reset (*ZTP Factory Reset* in FortiManager GUI), you can
+still use the ``flags`` field, but with symbolic values. See :ref:``How to
+enable the `need_reset` flag on a model device?``.
 
 For a virtual appliance
 _______________________
