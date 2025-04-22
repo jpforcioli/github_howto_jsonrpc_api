@@ -2027,10 +2027,11 @@ a more explicit directive:
    A Model Device created with ``"device action": "add_model"`` will have
    Auto-Link Status (i.e., ``linked_to_model`` attribute) enabled by default.
 
-Now replace ``flags`` with ``device blueprint``! Historically, parameters like
-``linked_to_model`` were encoded within the cryptic ``flags`` attribute. As
-shown in the above debug capture, this can now be clearly expressed using the
-``device blueprint``: 
+Now replace ``flags`` with ``device blueprint``! 
+
+Historically, parameters like ``linked_to_model`` were encoded within the
+cryptic ``flags`` attribute. As shown in the above debug capture, this can now
+be clearly expressed using the ``device blueprint``: 
 
 .. code-block:: text
 
