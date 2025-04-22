@@ -1949,7 +1949,7 @@ You can do this from the FortiManager console:
 
   Once formatted, it gives you this:
 
-  .. code-block:: text
+  .. code-block:: json
 
      {
        "client": "gui webforward:10720",
