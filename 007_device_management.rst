@@ -1928,7 +1928,21 @@ In FortiManager console, you can capture such an API call:
   .. code-block:: text
 
      [...]
-     { "client": "gui webforward:19905", "keep_session_idle": 1, "method": "exec", "params": [{ "data": { "adom": "demo", "device": { "adm_usr": "admin", "cluster_worker": null, "device blueprint": { "auth-template": null, "download_from_fgd": false, "enforce-device-config": 0, "folder": "\/", "linked-to-model": true, "pkg": null, "platform": "FortiGate-40F", "port-provisioning": 1, "prefer-img-ver": null, "prerun-cliprof": null, "sdwan-management": 0, "templates": [], "vm-log-disk": 0}, "faz.perm": 15, "faz.quota": 0, "flags": 262176, "meta variables": {}, "mgmt_mode": 3, "mr": 6, "name": "dev_001", "os_type": 0, "os_ver": 7, "psk": "dev_001", "version": 700}, "flags": ["create_task", "nonblocking"]}, "target start": 2, "url": "dvm\/cmd\/add\/device"}], "session": 33589}
+     { "client": "gui webforward:10720", "keep_session_idle": 1, "method":
+     "exec", "params": [{ "data": { "adom": "demo", "device": { "adm_usr":
+     "admin", "cluster_worker": null, "device blueprint": { "auth-template":
+     "fat_001", "dev-group": ["branches"], "download_from_fgd": true,
+     "enforce-device-config": 1, "folder": "\/", "linked-to-model": true, "pkg":
+     "ppkg_001", "platform": "FortiGate-40F", "port-provisioning": 1,
+     "prefer-img-ver": "7.6.3-b3510|8", "prerun-cliprof": "bootstrap",
+     "prov-type": "template-group", "sdwan-management": 1, "split-switch-port":
+     true, "template-group": "template_group_001", "templates": [],
+     "vm-log-disk": 0}, "faz.perm": 15, "faz.quota": 0, "flags": 262176, "meta
+     variables": {}, "mgmt_mode": 3, "mr": 6, "name": "dev_001", "os_type": 0,
+     "os_ver": 7, "sn": "FGT40F1234567890", "version": 700}, "flags":
+     ["create_task", "nonblocking"], "groups": [{ "adom": "demo", "name":
+     "branches"}]}, "target start": 2, "url": "dvm\/cmd\/add\/device"}],
+     "session": 20107}
      [...]
     
 
@@ -1936,52 +1950,89 @@ In FortiManager console, you can capture such an API call:
 
   .. code-block:: text
 
-{
-  "client": "gui webforward:19905",
-  "keep_session_idle": 1,
-  "method": "exec",
-  "params": [
-    {
-      "data": {
-        "adom": "demo",
-        "device": {
-          "adm_usr": "admin",
-          "cluster_worker": null,
-          "device blueprint": {
-            "auth-template": null,
-            "download_from_fgd": false,
-            "enforce-device-config": 0,
-            "folder": "/",
-            "linked-to-model": true,
-            "pkg": null,
-            "platform": "FortiGate-40F",
-            "port-provisioning": 1,
-            "prefer-img-ver": null,
-            "prerun-cliprof": null,
-            "sdwan-management": 0,
-            "templates": [],
-            "vm-log-disk": 0
-          },
-          "faz.perm": 15,
-          "faz.quota": 0,
-          "flags": 262176,
-          "meta variables": {},
-          "mgmt_mode": 3,
-          "mr": 6,
-          "name": "dev_001",
-          "os_type": 0,
-          "os_ver": 7,
-          "psk": "dev_001",
-          "version": 700
-        },
-        "flags": ["create_task", "nonblocking"]
-      },
-      "target start": 2,
-      "url": "dvm/cmd/add/device"
-    }
-  ],
-  "session": 33589
-}
+     {
+       "client": "gui webforward:10720",
+       "keep_session_idle": 1,
+       "method": "exec",
+       "params": [
+         {
+           "data": {
+             "adom": "demo",
+             "device": {
+               "adm_usr": "admin",
+               "cluster_worker": null,
+               "device blueprint": {
+                 "auth-template": "fat_001",
+                 "dev-group": ["branches"],
+                 "download_from_fgd": true,
+                 "enforce-device-config": 1,
+                 "folder": "/",
+                 "linked-to-model": true,
+                 "pkg": "ppkg_001",
+                 "platform": "FortiGate-40F",
+                 "port-provisioning": 1,
+                 "prefer-img-ver": "7.6.3-b3510|8",
+                 "prerun-cliprof": "bootstrap",
+                 "prov-type": "template-group",
+                 "sdwan-management": 1,
+                 "split-switch-port": true,
+                 "template-group": "template_group_001",
+                 "templates": [],
+                 "vm-log-disk": 0
+               },
+               "faz.perm": 15,
+               "faz.quota": 0,
+               "flags": 262176,
+               "meta variables": {},
+               "mgmt_mode": 3,
+               "mr": 6,
+               "name": "dev_001",
+               "os_type": 0,
+               "os_ver": 7,
+               "sn": "FGT40F1234567890",
+               "version": 700
+             },
+             "flags": ["create_task", "nonblocking"],
+             "groups": [{ "adom": "demo", "name": "branches" }]
+           },
+           "target start": 2,
+           "url": "dvm/cmd/add/device"
+         }
+       ],
+       "session": 20107
+     }
+
+The FortiManager is using:
+
+.. code-block:: text
+
+   "flags": 262176,
+
+to encode that you're addin a Model Device. You'll in next section that you can
+replace it witht:
+
+.. code-block:: text
+
+   "device action": "add_model",
+
+.. note::
+
+   A Model Device created with the ``device action`` set to ``add_model`` will
+   be with the *Auto-Link Status* (i.e., ``linked_to_model`` attribute) enabled
+   by default.
+
+FortiManager GUI also used to encode other parameters like ``linked_to_model``
+with this weird ``flags`` attribute. But as you can see in the above capture,
+you can now use the ``device blueprint`` to encode the same information:
+
+.. code-block:: text
+
+   "device blueprint": {
+     "linked-to-model": true,
+   }     
+
+To encode the ``need_reset`` (*ZTP Factory Reset* in FortiManager GUI), you can
+use the ``flags`` but with a symbolic value. See :ref:``How to enable the `need_reset` flag on a model device?``.
 
 For a virtual appliance
 _______________________

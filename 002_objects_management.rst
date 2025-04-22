@@ -5299,7 +5299,7 @@ This second example shows how to get the object revision notes for the
 
    .. tab-item:: RESPONSE
 
-      .. code-block:: jso
+      .. code-block:: json
 
          {
            "id": 3,
@@ -5429,9 +5429,8 @@ The following example shows how to delete the object revision version 2 for the
                "url": "/pm/config/adom/demo/_objrev/devprof/system_template_001/2"
              }
            ],
-           "session": "{{session}}
+           "session": "{{session}}"
          }
-
 
    .. tab-item:: RESPONSE
 
