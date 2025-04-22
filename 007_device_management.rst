@@ -2044,6 +2044,28 @@ requires a factory reset (*ZTP Factory Reset* in FortiManager GUI), you can
 still use the ``flags`` field, but with symbolic values. See :ref:``How to
 enable the `need_reset` flag on a model device?``.
 
+Ultimately, if you don't want to use the explicit ``"device action":
+"add_model"`` and keep using the ``flags`` attribute, then at least use symbolic
+values to combine multiple options as shown below:
+
+.. code-block:: text
+
+   "flags": [
+     "is_model",
+     "need_reset",
+     "linked_to_model",
+     "override_management_intf",
+   ],
+
+where in this specific example:
+
+- ``is_model``: indicates that you're adding a Model Device
+- ``need_reset``: indicates that the real device will require a factory reset  
+  (*ZTP Factory Reset* option)
+- ``linked_to_model``: indicates that the device is with *Auto-Link Status*
+  enabled.
+- ``override_management_intf``: enable the *Enforce Device Configuration* option.
+
 For a virtual appliance
 _______________________
 
