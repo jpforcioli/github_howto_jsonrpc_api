@@ -2802,147 +2802,307 @@ ADOM. It showcases using a Device Blueprint and the new ``meta variables`` block
    Sometimes, devices may be added successfully, but additional operations
    specified by the Device Blueprint (such as **Split Switch Ports** or 
    **Pre-Run CLI Template** ) might still be in progress.
-         
+
+Auto-link management
+++++++++++++++++++++
+
+Starting with FortiManager 7.0.3, the auto-link capability is enabled by default
+when adding a Model Device (Ref: #605560). This means no additional
+configuration is required during model device creation.
+
+For FortiManager versions prior to 7.0.3: due to limitation #0605560, it is not possible to create a Model Device and enable auto-link in a single API call. Instead, you must perform two separate API calls:
+
+1. Create the Model Device (see :ref:`How to create a Model Device?`)
+1. Enable the auto-link capability on the already created model device (see :ref:`How to enable the auto-link flag on a Model Device?` below).
+
 How to enable the auto-link flag on a Model Device?
-+++++++++++++++++++++++++++++++++++++++++++++++++++
+___________________________________________________
 
-Starting with FMG 7.0.3, this is no longer required. From #605560: *add
-linked_to_model to the default flag when adding model device to match GUI
-behavior when add from GUI*.
+Note that the auto-link flag is referred to by a different name - 
+``linked_to_model`` - in the FortiManager API.
 
-For older FMG version:
+It is important to preserve the original ``is_model`` flag, along with any    other flags that were set prior to this call. As a best practice, you should    first perform a ``get`` operation on the device, then append the 
+   ``linked_to_model`` flag to the existing flags list.
 
-Considering #0605560, it is not possible to create a model device and set the auto-link flag with a single API call. We need two separate API calls. Below is the one to enable the auto-link on an already created  model device platform (ie. the first API call):
+1. For instance, to get the existing ``flags``:
 
-**REQUEST**:
+   .. tab-set::
 
-.. code-block:: json
+      .. tab-item:: REQUEST
 
-		{
-		  "id": 1,
-		  "jsonrpc": "1.0",
-		  "method": "set",
-		  "params": [
-		    {
-		      "data": {
-		        "flags": [
-		          "is_model",
-			        "linked_to_model"
-		        ]
-		      },
-		      "url": "/dvmdb/device/device_001"
-		    }
-		  ],
-		  "session": "1zWEW7N3/CRhgK/Rj1fnA7K5QRqGiVu8OqK9P+wVmVM8lm0ZORVvmqkMptgHsQJB5zsIviMgzfF+jWuB3cE2o60VSoTuXUOh",
-		  "verbose": 1
-		}
+         .. code-block:: json
 
-**RESPONSE:**
+            {
+              "id": 3,
+              "method": "get",
+              "params": [
+                {
+                  "fields": [
+                    "name",
+                    "flags"
+                  ],
+                  "option": [
+                    "no loadsub"
+                  ],
+                  "url": "/dvmdb/adom/demo/device/dev_001"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }          
 
-.. code-block:: json
+      .. tab-item:: RESPONSE
 
-		{
-		  "id": 1,
-		  "result": [
-		    {
-		      "data": {
-		        "name": "device_001"
-		      },
-		      "status": {
-		        "code": 0,
-			"message": "OK"
-		      },
-		      "url": "/dvmdb/device/device_001"
-		    }
-		  ]
-		}
+         .. code-block:: json
 
-.. note::
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": {
+                    "flags": [
+                      "is_model",
+                      "need_reset"
+                    ],
+                    "name": "dev_001",
+                    "oid": 2551
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/device/dev_001"
+                }
+              ]
+            }
 
-   - We need to preserve the original flag ``is_model`` and all other
-     possible flags set prior to this call. It means that as a best
-     practice, it's better to ``get`` first the device and append the
-     flag ``linked_to_model`` to the original ``flags`` list.
+2. Now you can append the ``linked_to_model`` flag to the existing ``flags``:
 
-   - The auto-link (or auto-push) flag indicates to FortiManager that
-     it has to push the model device configuration **automatically**
-     as soon as the real device (with matching serial number or
-     pre-shared-key) shows up. As we can see above, the auto-link flag
-     name is having a complete different name: ``linked_to_model``.
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 4,
+              "method": "set",
+              "params": [
+                {
+                  "data": {
+                    "flags": [
+                      "is_model",
+                      "need_reset",
+                      "linked_to_model"
+                    ]
+                  },
+                  "url": "/dvmdb/adom/demo/device/dev_001"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 4,
+              "result": [
+                {
+                  "data": {
+                    "name": "dev_001"
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/device/dev_001"
+                }
+              ]
+            }
+
+How to disable the auto-link flag on a Model Device?
+____________________________________________________
+
+It is important to preserve the original ``is_model`` flag, along with any
+other flags that were set prior to this call. As a best practice, you should
+first perform a ``get`` operation on the device to get the list of existing flags.
+
+1. For instance, to get the existing ``flags``:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "method": "get",
+              "params": [
+                {
+                  "fields": [
+                    "name",
+                    "flags"
+                  ],
+                  "option": [
+                    "no loadsub"
+                  ],
+                  "url": "/dvmdb/adom/demo/device/dev_001"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }          
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": {
+                    "flags": [
+                      "is_model",
+                      "linked_to_model",
+                      "need_reset"
+                    ],
+                    "name": "dev_001",
+                    "oid": 2551
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/device/dev_001"
+                }
+              ]
+            }
+
+2. Now you can just remove the ``linked_to_model`` flag from the existing 
+   ``flags``:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 4,
+              "method": "set",
+              "params": [
+                {
+                  "data": {
+                    "flags": [
+                      "is_model",
+                      "need_reset"
+                    ]
+                  },
+                  "url": "/dvmdb/adom/demo/device/dev_001"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 4,
+              "result": [
+                {
+                  "data": {
+                    "name": "dev_001"
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/device/dev_001"
+                }
+              ]
+            }
 
 Multiplexing example
 ____________________
 
-Before FMG 7.0.3, we have to enable the ``linked_to_model`` by using a second
-API request. We do this, usually, right after the model device creation.
+Before FortiManager 7.0.3, you had to enable the ``linked_to_model`` by using a
+second API request. You were doing this, usually, right after the Model Device creation.
 
-FMG allows to create multiple model devices in one single API call using the
-``/dvm/cmd/add/dev-list``.
+FortiManager API allows to create multiple Model Devices in one single API call
+using the ``/dvm/cmd/add/dev-list`` endpoint.
 
 However, there's no url to enable the ``linked_to_model`` using a single API
 call. 
 
-We can still do it by multiplexing multiple ``data`` blocks:
+You can still do it by multiplexing multiple ``data`` blocks as shown below:
 
-**REQUEST:**
+.. tab-set:: 
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "flags": [
+                   "is_model", 
+                   "linked_to_model"
+                 ]
+               },
+               "url": "/dvmdb/adom/root/device/dev_001"
+             },
+             {
+               "data": {
+                 "flags": [
+                   "is_model", 
+                   "linked_to_model"
+                 ]
+               },
+               "url": "/dvmdb/adom/root/device/dev_002"
+             }
+           ],
+           "session": "{{session_id}}",
+           "id": 1
+         }  
 
-   {
-     "method": "set",
-     "params": [
-       {
-         "data": {
-           "flags": [
-             "is_model", 
-             "linked_to_model"
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "name": "dev_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/root/device/dev_001"
+             },
+             {
+               "data": {
+                 "name": "dev_002"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/root/device/dev_002"
+             }
            ]
-         },
-         "url": "/dvmdb/adom/root/device/knock_37288_dev_010"
-       },
-       {
-         "data": {
-           "flags": [
-             "is_model", 
-             "linked_to_model"
-           ]
-         },
-         "url": "/dvmdb/adom/root/device/knock_37288_dev_011"
-       }
-     ],
-     "session": "{{session_id}}",
-     "id": 1
-   }  
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "name": "knock_37288_dev_010"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/adom/root/device/knock_37288_dev_010"
-       },
-       {
-         "data": {
-           "name": "knock_37288_dev_011"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/adom/root/device/knock_37288_dev_011"
-       }
-     ]
-   }
+         }
 
 How to enable VDOM on a Model Device?
 +++++++++++++++++++++++++++++++++++++
