@@ -2813,6 +2813,7 @@ configuration is required during model device creation.
 For FortiManager versions prior to 7.0.3: due to limitation #0605560, it is not possible to create a Model Device and enable auto-link in a single API call. Instead, you must perform two separate API calls:
 
 1. Create the Model Device (see :ref:`How to create a Model Device?`)
+
 1. Enable the auto-link capability on the already created model device (see :ref:`How to enable the auto-link flag on a Model Device?` below).
 
 How to enable the auto-link flag on a Model Device?
