@@ -2823,8 +2823,7 @@ Note that the auto-link flag is referred to by a different name -
 
 It is important to preserve the original ``is_model`` flag, along with any
 other flags that were set prior to this call. As a best practice, you should
-first perform a ``get`` operation on the device, then append the
-``linked_to_model`` flag to the existing flags list.
+first perform a ``get`` operation on the device, then append the ``linked_to_model`` flag to the existing flags list.
 
 1. For instance, to get the existing ``flags``:
 
