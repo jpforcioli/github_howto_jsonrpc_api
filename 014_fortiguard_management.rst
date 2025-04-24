@@ -181,16 +181,16 @@ Management` secion.
 
          .. code-block:: text
 
-            major = version / 65535
-            minor = version % 65535
+            major = version / 65536
+            minor = version % 65536
 
          For example, using the returned version ``15355124`` from the
          API:
 
          .. code-block:: text
   
-            major = 15355124 / 65535 = 234
-            minor = 15355124 % 65535 = 19700
+            major = 15355124 / 65536 = 234
+            minor = 15355124 % 65536 = 19700
 
          Thus, the symbolic version is ``00234.19700`` matching what is shown in
          the FortiManager CLI.
