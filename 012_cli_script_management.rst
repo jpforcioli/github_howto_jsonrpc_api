@@ -321,16 +321,202 @@ The following example shows how to run the ``script_001`` against the ``dev_grp_
 How to run a CLI Script against a Provisioning Template?
 --------------------------------------------------------
 
-You can run a CLI Script against Provisioning Template.
+Captured in #0209576.
 
-This operation is only feasible via the API.
+You can run a CLI Script against any Provisioning Template.
 
-For instance, you can run a CLI Script against a System Template or a FortiSwitch Template.
+However, this operation is only supported via the API.
+
+For example, you can execute a CLI Script on a System Template or a FortiSwitch
+Template.
+
+How to run a CLI script against an IPsec Tunnel Template?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#. Create a CLI Script (target = *Policy & Objects or ADOM Database*)
+
+   This is the CLI Script used in this example:
+
+   .. code-block:: text
+
+      config vpn ipsec phase1-interface
+          edit "HUB1-VPN1"
+              set interface "port1"
+              set ike-version 2
+              set proposal aes256-sha256
+              set peertype any
+              set mode-cfg enable
+              set localid "local_id_001"
+              set remote-gw 10.0.0.3
+              set net-device enable
+              set add-route disable
+              set psksecret foobar
+              set network-overlay enable
+              set network-id 1
+          next
+      end
+
+   .. note::
+
+      This CLI script appears to include all the required attributes. For 
+      example, if the ``psksecret`` attribute is not specified, the script will 
+      fail.
+
+      If you're unsure which attributes are mandatory, you can use the
+      FortiManager GUI to create a new IPsec Tunnel Template. Then, use the
+      FortiManager CLI to view the corresponding CLI version with the following
+      command:
+
+      .. tab-set::
+         
+         .. tab-item:: CLI command
+          
+            .. code-block:: text
+
+               execute fmpolicy print-adom-package demo 23 6076 all HUB1-VPN1
+
+         .. tab-item:: CLI output
+
+            .. code-block:: text
+
+               Dump object [HUB1-VPN1] of category [vpn ipsec phase1-interface] in adom [demo] package [6076]:
+               ---------------
+               config vpn ipsec phase1-interface
+               edit "HUB1-VPN1"
+               set interface "port1"
+               set ike-version 2
+               set proposal aes256-sha256
+               set peertype any
+               set mode-cfg enable
+               set localid "local_id_001"
+               set remote-gw 10.0.0.3
+               set net-device enable
+               set add-route disable
+               set psksecret ********
+               set network-overlay enable
+               set network-id 1
+               
+               next
+               
+               end
+               
+               Dump object [HUB1-VPN1] of category [vpn ipsec phase2-interface] in adom [demo] package [6076]:
+               ---------------
+               config vpn ipsec phase2-interface
+               edit "HUB1-VPN1"
+               set phase1name "HUB1-VPN1"
+               set proposal aes256-sha256
+               set auto-negotiate enable
+               
+               next
+               
+               end         
+
+#. Find the *oid* of the destination IPsec Tunnel Template
+
+   It will be used as the target of the CLI Script execution.
+
+   Following example shows how to get the *oid* of the    
+   ``ipsec_tunnel_template_001`` IPsec Tunnel Template in the ``demo`` ADOM:
+
+   - Enter following FortiManager CLI command:
+
+     .. code-block:: text
+
+        execute fmpolicy print-adom-package demo 23 ?
+
+   - You should get the following output:
+
+     .. code-block:: text
+
+              ID        <package name>
+            5950        name=IPsec_Fortinet_Recommended, pathname=IPsec_Fortinet_Recommended
+            5954        name=BRANCH_IPsec_Recommended, pathname=BRANCH_IPsec_Recommended
+            5960        name=HUB_IPsec_Recommended, pathname=HUB_IPsec_Recommended
+            6076        name=ipsec_tunnel_template_001, pathname=ipsec_tunnel_template_001
+        
+   .. note::
+
+      - The *oid* of the ``ipsec_tunnel_template_001`` IPsec Tunnel Template 
+        is ``6076``
+
+#. Put the ADOM name, package oid (IPsec Tunnel Template oid) and CLI script 
+   name into your |fmg_api| request:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "method": "exec",
+              "params": [
+                {
+                  "data": {
+                    "adom": "demo",
+                    "package": 6076,
+                    "script": "script_001"
+                  },
+                  "url": "/dvmdb/adom/demo/script/execute"
+                }
+              ],
+              "session": "{{session}}"
+            }         
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": {
+                    "task": 1120
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/adom/demo/script/execute"
+                }
+              ]
+            }
+
+#. Check script log for its execution history
+
+   .. code-block:: text
+
+      -------Executing time: Thu Apr 24 07:41:12 2025-----------
+      
+      
+      
+      Starting log (Run on database)
+      
+      config vpn ipsec phase1-interface
+      edit "HUB1-VPN1"
+      set interface "port1"
+      set ike-version 2
+      set proposal aes256-sha256
+      set peertype any
+      set mode-cfg enable
+      set localid local_id_001
+      set remote-gw 10.0.0.3
+      set net-device enable
+      set add-route disable
+      set psksecret ******
+      set network-overlay enable
+      set network-id 1
+      next
+      end
+      Running script(script_001) on DB success
+      
+      ----------------End of Log-------------------------
 
 How to run a CLI script against a SD-WAN Template?
 ++++++++++++++++++++++++++++++++++++++++++++++++++
-
-Caught in #0209576.
 
 #. Create a CLI Script (target = *Policy & Objects or ADOM Database*)
 
