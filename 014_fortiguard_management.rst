@@ -20,8 +20,8 @@ following FortiManager CLI commands:
    execute fmupdate <option>
    diagnose fwmanager <option>
    
-How to get the FMG FGD object versions?
----------------------------------------
+How to get the FMG FortiGuard object versions?
+----------------------------------------------
 
 The below example has been collected by using the following FortiManager CLI:
 
@@ -57,59 +57,95 @@ Management` secion.
    .. tab-item:: RESPONSE      
 
       .. code-block:: json
-      
+
          {
-           "id": 1,
+           "id": 3,
            "result": [
              {
                "data": {
                  "as1": {
+                   "delta": 1,
                    "desc": "Antispam(IP)",
-                   "size": 821269740,
-                   "update_time": 1618820401,
-                   "version": 6738278
+                   "size": 0,
+                   "update_time": 0,
+                   "version": 0
                  },
                  "as2": {
+                   "delta": 1,
                    "desc": "Antispam(URI)",
                    "size": 0,
                    "update_time": 0,
                    "version": 0
                  },
                  "as4": {
+                   "delta": 1,
                    "desc": "Antispam(HASH)",
-                   "size": 28683496,
-                   "update_time": 1618821361,
-                   "version": 5318876
+                   "size": 0,
+                   "update_time": 0,
+                   "version": 0
                  },
                  "av": {
+                   "delta": 1,
                    "desc": "AntiVirus Query",
                    "size": 0,
                    "update_time": 0,
                    "version": 0
                  },
                  "av2": {
+                   "delta": 1,
                    "desc": "Outbreak Prevention",
-                   "size": 0,
-                   "update_time": 0,
-                   "version": 0
+                   "size": 2234602358,
+                   "update_time": 1740748501,
+                   "version": 1030686
+                 },
+                 "catl": {
+                   "delta": 0,
+                   "desc": "Query Category",
+                   "size": 17368,
+                   "update_time": 1710961260,
+                   "version": 655360
                  },
                  "fq": {
+                   "delta": 1,
                    "desc": "File Query",
+                   "size": 4281787620,
+                   "update_time": 1713868799,
+                   "version": 10617241
+                 },
+                 "geoip": {
+                   "delta": 0,
+                   "desc": "GeoIP",
+                   "size": 245852542,
+                   "update_time": 1744736400,
+                   "version": 131349
+                 },
+                 "iotm": {
+                   "delta": 0,
+                   "desc": "IoT(mapping)",
                    "size": 0,
                    "update_time": 0,
                    "version": 0
                  },
-                 "geoip": {
-                   "desc": "GeoIP",
-                   "size": 108984169,
-                   "update_time": 1617692460,
-                   "version": 131146
+                 "iotr": {
+                   "delta": 0,
+                   "desc": "IoT(range)",
+                   "size": 0,
+                   "update_time": 0,
+                   "version": 0
+                 },
+                 "iots": {
+                   "delta": 1,
+                   "desc": "IoT(single)",
+                   "size": 0,
+                   "update_time": 0,
+                   "version": 0
                  },
                  "wf": {
+                   "delta": 1,
                    "desc": "Webfilter",
-                   "size": 7054323572,
-                   "update_time": 1589577005,
-                   "version": 1522738
+                   "size": 13765660808,
+                   "update_time": 1739874023,
+                   "version": 15355124
                  }
                },
                "status": {
@@ -119,8 +155,46 @@ Management` secion.
                "url": "/um/misc/fgd_db_ver"
              }
            ]
-         }   
-      
+         }      
+
+      .. note::
+
+         If you look at the ``wf`` (webfilter) block, the ``version`` returned
+         is ``15355124``. However, running the FortiManager CLI command 
+         ``execute fmupdate fgd-dvber wf`` will show the version in a symbolic
+         major.minor format (``00234.19700``) as illustrated below:
+
+         .. code-block:: text
+
+            Category   Description         Version        Date/Time                  Size
+            --------   -----------         -------        ---------                  ----
+            wf         Webfilter           00234.19700    2025-02-18 11:20:23(CET)   12.82G
+
+
+         In this output, the version is represented in major.minor format where:
+         
+         - major = ``234``
+         - minor = ``19700``
+       
+         To convert the numeric ``version`` from the API to the symbolic format,
+         use the following formula:
+
+         .. code-block:: text
+
+            major = version / 65535
+            minor = version % 65535
+
+         For example, using the returned version ``15355124`` from the
+         API:
+
+         .. code-block:: text
+  
+            major = 15355124 / 65535 = 234
+            minor = 15355124 % 65535 = 19700
+
+         Thus, the symbolic version is ``00234.19700`` matching what is shown in
+         the FortiManager CLI.
+
 How to get the FMG upstream servers list?
 -----------------------------------------
       
