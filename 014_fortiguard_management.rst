@@ -27,7 +27,7 @@ The below example has been collected by using the following FortiManager CLI:
 
 .. code-block:: text
 
-   execute fmupdate fgd-dvber
+   diagnose fmupdate fgd-dvber
 
 with the debug enabled as described in the :ref:`Introduction to FortiGuard
 Management` secion.
