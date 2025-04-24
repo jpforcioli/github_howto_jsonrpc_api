@@ -161,7 +161,7 @@ Management` secion.
 
          If you look at the ``wf`` (webfilter) block, the ``version`` returned
          is ``15355124``. However, running the FortiManager CLI command 
-         ``execute fmupdate fgd-dvber wf`` will show the version in a symbolic
+         ``diagnose fmupdate fgd-dvber wf`` will show the version in a symbolic
          major.minor format (``00234.19700``) as illustrated below:
 
          .. code-block:: text
