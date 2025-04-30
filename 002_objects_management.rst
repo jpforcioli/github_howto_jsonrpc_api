@@ -4334,6 +4334,82 @@ within the ``dc_emea`` ADOM, your step 1 request will be:
      "session": "{{session}}"
    }
 
+How to where used only for direct object usage?
+_______________________________________________
+
+Caught in #1094113.
+
+To retrieve the list of objects that directly use a specific object within an
+ADOM, you can trigger a *where used* process with the ``flags`` set to include
+the ``direct used`` option.
+
+What is the behavior without ``direct used`` flag? If ``host_001`` (a firewall address object) is used in the following ways:
+
+- Directly in the address group ``grp_002``
+- Indirectly in the address group ``grp_001``, which includes ``grp_002``
+- Directly as the source in the firewall policy ``Policy_001``
+- Indirectly as the destination in ``Policy_002``, via its inclusion in ``grp_002``
+
+then the *where used* query will report all of these usages above.
+
+What is the behavior with ``direct used`` flag? When the *direct used* flag is
+enabled, only direct references are returned. For the same object ``host_001``,
+this means:
+
+- It is reported as a direct member of ``grp_002``
+- It is reported as a direct source in ``Policy_001``
+
+Indirect usages such as through nested groups or inherited references are
+excluded.
+
+The following example shows how to start a where used operation for the
+``host_001`` firewall address object in the ``demo`` ADOM using the ``direct
+used`` option:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "flags": [
+                   "direct used"
+                 ],
+                 "mkey": "host_001",
+                 "obj": "adom/demo/obj/firewall/address"
+               },
+               "url": "/cache/search/where/used/start"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "token": "wMuN/qxwRpppA68YKbHXAzGJ7x+6onf7kCF+KenBsqw="
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/cache/search/where/used/start"
+             }
+           ]
+         }
+
 Find duplicates objects
 +++++++++++++++++++++++
 
