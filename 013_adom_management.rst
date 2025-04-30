@@ -1842,6 +1842,48 @@ being ADOM upgraded:
            ]
          }            
 
+How to perform an ADOM upgrade dry-run?
++++++++++++++++++++++++++++++++++++++++
+
+Starting with FortiManager 7.4.7/7.6.3 (#1084231), it is now possible to start
+an ADOM upgrade dry-run.
+
+Following example shows how to perform the dry-run for the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/dvmdb/_upgrade",
+               "data": {
+                 "scope member": [
+                   {
+                     "oid":2629
+                   }
+                ],
+                "flags": [
+                  "same-version",
+                  "dryrun",
+                ]
+             }
+           ],
+           "Session": "{{session}}"
+         }
+
+      .. note::
+
+         - ``same-version``
+         - ``from-cli``
+         - ``dryrun``
+         - ``downgrade``
+
 ADOM Workspace Mode
 -------------------
 
