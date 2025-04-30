@@ -1850,7 +1850,146 @@ an ADOM upgrade dry-run.
 
 Following example shows how to perform the dry-run for the ``demo`` ADOM:
 
-.. tab-set::
+1. Trigger the dry-run
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+   
+            {
+              "id": 3,
+              "method": "exec",
+              "params": [
+                {
+                  "data": {
+                    "flags": 5,
+                    "scope member": [
+                      {
+                        "name": "demo"
+                      }
+                    ]
+                  },
+                  "url": "/dvmdb/_upgrade"
+                }
+              ],
+              "session": "{{session}}"
+            }
+   
+         .. note::
+
+            The ``flags`` attribute is a binary combination of the following
+            items:
+
+            .. code-block:: json
+
+               {
+                 "same-version": 1,
+                 "from-cli": 2,
+                 "dryrun": 4,
+                 "downgrade": 8
+               }
+
+            In this example above, ``5`` value means ``same-version`` + 
+            ``dryrun``.
+   
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json         
+
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": [
+                    {
+                      "code": 0,
+                      "oid": 2880,
+                      "task": 1161
+                    }
+                  ],
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvmdb/_upgrade"
+                }
+              ]
+            }        
+
+         .. note::
+
+            .. note::
+
+               As usual, when a task is returned, you have to wait for its
+               completion.
+
+2. Get the report
+
+   Once the task completes, you can use the following API request:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 8,
+              "method": "exec",
+              "params": [
+                {
+                  "data": {
+                    "taskid": 1161
+                  },
+                  "url": "/sys/task/result"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json            
+
+            {
+              "id": 8,
+              "result": [
+                {
+                  "data": {
+                    "results": [
+                      {
+                        "adomid": 2880,
+                        "adomname": "demo",
+                        "reports": []
+                      }
+                    ]
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "taskid": 1166,
+                  "url": "/sys/task/result"
+                }
+              ]
+            }
+
+         .. note::
+
+            The ``report`` should include all errors encountered during the
+            dry-run of the ``demo`` ADOM upgrade.
+            
+            In the example above, since the ``report`` contains no entries, it
+            indicates that the upgrade for the ``demo`` ADOM can proceed without
+            issues.
+
+The example above uses the ``/dvmdb/_upgrade`` endpoint, which allows you to specify one or multiple ADOMs via the ``scope member`` list.
+
+Alternatively, you can use the following form to trigger the upgrade process for a specific ADOM:
+
+.. tab-set:: 
 
    .. tab-item:: REQUEST
 
@@ -1861,29 +2000,35 @@ Following example shows how to perform the dry-run for the ``demo`` ADOM:
            "method": "exec",
            "params": [
              {
-               "url": "/dvmdb/_upgrade",
                "data": {
-                 "scope member": [
-                   {
-                     "oid":2629
-                   }
-                ],
-                "flags": [
-                  "same-version",
-                  "dryrun",
-                ]
+                 "flags": 4
+               },
+               "url": "/pm/config/adom/demo/_upgrade"
              }
            ],
-           "Session": "{{session}}"
+           "session": "{{session}}"
          }
 
-      .. note::
+   .. tab-item:: RESPONSE
 
-         - ``same-version``
-         - ``from-cli``
-         - ``dryrun``
-         - ``downgrade``
+      .. code-block:: json
 
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 1170
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_upgrade"
+             }
+           ]
+         }
+         
 ADOM Workspace Mode
 -------------------
 
