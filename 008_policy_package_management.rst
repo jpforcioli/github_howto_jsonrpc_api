@@ -2500,7 +2500,7 @@ maintain several utilization information like the Last Used, First Use, Packets,
 
 .. thumbnail:: images/image_004.png
 
-Getting the hitcount details is an *on demand* action that requires two steps.
+Getting the hitcount details is an *on demand* action that requires three steps.
 
 The following example shows how to get the policy hitcount information for the
 firewall policies in the ``ppkg_001`` Policy Package of the ``demo`` ADOM:
