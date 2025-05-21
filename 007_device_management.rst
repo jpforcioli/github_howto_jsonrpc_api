@@ -11299,3 +11299,57 @@ To get the **normalized interfaces** mapped to a specific managed device see sec
 
 To get the **metadata** mapped to a specific managed device see section
 :ref:`How to get the metadata mapped to a specific managed device?`.
+
+How to run CLI commands against a managed device?
+-------------------------------------------------
+
+Caught in #1155085.
+
+.. warning:: 
+
+   Not yet supported
+
+The following example shows how to run CLI commands against the ``dev_001`` and
+its ``root`` VDOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "command": [
+                   "diagnose sys filter addr 10.0.0.1",
+                   "diagnose sys session list"
+                 ],
+                 "device": "dev_001",
+                 "vdom": "root"
+               },
+               "url": "/deployment/run/cmd"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": -11,
+                 "message": "No permission for the resource"
+               },
+               "url": "/deployment/run/cmd"
+             }
+           ]
+         }
