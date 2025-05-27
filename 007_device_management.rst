@@ -11303,7 +11303,7 @@ To get the **metadata** mapped to a specific managed device see section
 How to run CLI commands against a managed device?
 -------------------------------------------------
 
-Caught in #1155085.
+Caught in #1155085 and #1072897.
 
 .. warning:: 
 
