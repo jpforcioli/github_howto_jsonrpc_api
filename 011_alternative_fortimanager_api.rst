@@ -371,6 +371,68 @@ This is to get most of the information exposed in the *License Information* widg
           }
         }        
 
+How to get the FortiManager Uptime?
++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the FortiManager uptime using the
+FortiManager GUI API:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: text
+
+         POST https://10.210.35.200:443/cgi-bin/module/flatui_proxy
+
+         {
+             "method": "get",
+             "url": "/gui/sys/uptime"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: text
+         :emphasize-lines: 27
+
+         {
+           "result": [
+             {
+               "data": {
+                 "admin": {
+                   "admin": "devops",
+                   "num": 5
+                 },
+                 "adom": true,
+                 "adomconfigable": 1,
+                 "bkptime": "Fri Apr 11 17:04:43 2025\n",
+                 "fazfeature": 0,
+                 "fips_mode": 0,
+                 "fwversion": "v7.6.4-build3525 250521 (Interim)",
+                 "ha": {
+                   "mode": {
+                     "txt": "Standalone",
+                     "val": 0
+                   }
+                 },
+                 "hostname": "fmg-76-interim",
+                 "offlineMode": 0,
+                 "platform": "FMG-VM64",
+                 "sn": "FMG-VMREDACTED56",
+                 "systemstamp": "1748491302",
+                 "systimeStr": "Thu May 29 2025 06:01:42|CEST",
+                 "uptimeSeconds": 632198
+               },
+               "id": null,
+               "status": {
+                 "code": 0,
+                 "message": ""
+               },
+               "url": "/gui/sys/info"
+             }
+           ]
+         }
+
 How to get session information?
 +++++++++++++++++++++++++++++++
 
