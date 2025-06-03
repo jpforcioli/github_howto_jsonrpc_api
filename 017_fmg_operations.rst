@@ -16,6 +16,9 @@ You can get any of the following FMG API endpoints:
    /cli/global/system/certificate/crl
    /cli/global/system/certificate/remote
 
+How to get a FortiManager CA certificate?
+_________________________________________
+
 The following example shows how to get the ``Fortinet_CA`` CA certificate:
 
 .. tab-set::
@@ -59,6 +62,71 @@ The following example shows how to get the ``Fortinet_CA`` CA certificate:
              }
            ]
          }
+
+How to get FortiManager local certificates?
++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to obtain the local certificate named
+``fmg_76_interim``:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/cli/global/system/certificate/local/fmg_76_interim"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+         
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "certificate": [
+                   ""
+                 ],
+                 "comment": "Created by generating certificate",
+                 "csr": [
+                   "\"-----BEGIN CERTIFICATE REQUEST-----\nMIICwzCCAasCAQAwYDELMAkGA1UEBhMCRlIxDTALBgNVBAgTBFBBQ0ExDTALBgNV\nBAcTBE5JQ0UxDTALBgNVBAoTBEZUTlQxDDAKBgNVBAsTA0NTRTEWMBQGA1UEAxMN\nMTAuMjEwLjM0LjEyMDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAOci\nyqMBhktIfIn+Sp4bP4HweF1sC/VlaPZ0mLeMLw7fmVRDK7AyLU+OsXh0aWp8z5AG\npD8hHAAI4XR1hpNdPiI/hlUQMhFzogKkUlGCE3ySJGtd8VfnApT9u5Rj8EQZd4+t\nVPgihXOUnBDh1o1qoygT0wsnDtyeVBMvrm0VeNb05PXcOVtSEDBc413I0lBIxcmE\nNsTN7WE2ZrAOxTHG2k+hcPU11pG9GQYgtdQmBjZ8NmTJ4YgysSYfCpOoBbAlNM4k\n5IidjuZ3/nVJvkaPQx4/+ZJmYPKP8CNLoEoZXYlvkSlgwgtockiuIL/UDa4IuuDe\nadsljRk9dHXzMgbxqEsCAwEAAaAeMBwGCSqGSIb3DQEJDjEPMA0wCwYDVR0PBAQD\nAgWgMA0GCSqGSIb3DQEBCwUAA4IBAQAFQOTl2hebF7mJ/bIewLThs48vf2V0nJno\nEyMlLdawvopIMnFmhzCyPiRq0pOrM2HU35gWzxNqa6qI0dZWJnou0Dz+47j6FTLf\nwImBcus0jAQMUcemsE2dIWvHWBgSCPwpk6uA1JZuq5hPlLiYsjDq2yZ/UFEdNbPR\nNsM8xkqqA0FDYsJS58tKRyUGuz6bBVrI6NRLhdjGPst4+l7sYm698kVje4BAFWRz\nz9guwDvxBaU7WuoN3J8i/vGjLcPVsxNUqauRimOOVbqef5BVeGjAz1VkctHwNJUv\niqx2cMLboaA9ZICgsVuCuU8gp7uZh+Sy4uDn0xP13HW6YQr99WGT\n-----END CERTIFICATE REQUEST-----\""
+                 ],
+                 "name": "fmg_76_interim",
+                 "password": [
+                   "ENC",
+                   "MTc1OTcyODc2MTU0NTQ0MfMjT28gWgaeXECowptaVosPVIMKEuEmtrinfaKFjRkApHykbKUowjXJ/ngVxU/izusQAVpC08KL+a5z6+ZP6jP5UelnHn0mBMbKpK775Qg4q+ftcY42rxTYPruRUyJ3T0NvncZoMCBolW7sZ4y8dOaGnHR4Kvg/TIx9mFmmZrle"
+                 ],
+                 "private-key": [
+                   "******"
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/cli/global/system/certificate/local/fmg-76-interim"
+             }
+           ]
+         }
+
+      .. note::
+
+         The returned certificate is a Certificate Signing Request (CSR) if the 
+         ``csr`` field is not empty.
+         if the ``csr`` field is empty, it means a signed certificate was 
+         returned, and the ``certificate`` field should be used instead.
 
 How to get FortiManager certificates in a human-readable form?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -143,6 +211,43 @@ The following example shows how to get the ``Fortinet_CA`` CA certificate in a h
              }
            ]
          }
+
+How to enroll a new FortiManager Certificate?
++++++++++++++++++++++++++++++++++++++++++++++
+
+To enroll a new FortiManager certificate, follow these steps:
+
+#. Create a Certificate Signing Request (CSR).
+#. Download the CSR and submit it to your internal PKI for signing.
+#. Import the signed certificate back into FortiManager.
+
+Create a Certificate Signing Request (CSR)
+__________________________________________
+
+There's no FortiManager JSON API endpoint available. You have to use the
+FortiManager GUI API.
+
+Please refer to :ref:`How to generate a FortiManager CSR using FortiManager GUI
+API?`.
+
+Download the CSR and submit it to your internal PKI for signing
+_______________________________________________________________
+
+You can download the CSR using the FortiManager JSON API.
+
+Please refer to :ref:`How to get FortiManager local certificates?`.
+
+Once, the CSR is downloaded, you can submit it to your internal PKI for signing.
+Then you will receive a signed certificate back that you will need to import in FortiManager.
+
+Import the signed certificate back into FortiManager
+____________________________________________________
+
+There's no FortiManager JSON API endpoint available. You have to use the
+FortiManager GUI API.
+
+Please refer to :ref:`How to import a signed certificated back using
+FortiManager GUI API?`.
 
 How to get the FortiManager System HA Status?
 ---------------------------------------------

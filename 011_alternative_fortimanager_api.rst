@@ -118,25 +118,26 @@ A corresponding ``curl`` command could be:
                }
              }
 
+.. warning::
 
-Again, remember to reuse the cookies returned in the login operations in your
-subsequent calls.
+   Remember to reuse the cookies returned during the login operation for **all 
+   subsequent requests**.
 
-This is also the time to set the `Xsrf-Token` header with the value of the
-captured ``HTTP_CSRF_TOKEN``. 
+   You must also set the ``Xsrf-Token`` header using the value from the 
+   ``HTTP_CSRF_TOKEN`` captured during login.
 
-The ``Xsrf-Token`` is required for all subsequent ``POST`` requests.
-For instance for the *Logout* operation.
+   The ``Xsrf-Token`` header is required for all ``POST`` requests, such as the 
+   *Logout* operation.
 
-However, you can also include it in your ``GET`` requests; it won’t cause any 
-issues.
+   While it is not required for ``GET`` requests, including the ``Xsrf-Token`` 
+   header in them is harmless and may be considered good practice.
 
-Considering the response above, you should set the following ``Xsrf-Token`` 
-header:
+   Based on the response above, the ``Xsrf-Token`` header should be set as 
+   follows:
 
-.. code-block:: text
+   .. code-block:: text
 
-   Xsrf-Token: 5XZchgLl1faoaKobfowPdMfTLsqTRVo
+      Xsrf-Token: 5XZchgLl1faoaKobfowPdMfTLsqTRVo
 
 how to Logout?
 ++++++++++++++
@@ -370,6 +371,131 @@ This is to get most of the information exposed in the *License Information* widg
             }
           }
         }        
+
+How to generate a FortiManager CSR using FortiManager GUI API?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This is to generate a Certificate Signing Request (CSR) for the FortiManager.
+Something equivalent to the following FortiManager CLI command:
+
+.. code-block:: text
+
+   execute certificate local generate fmg_76_interim 2048 fmg-76-interim.cmm.fortilab.net FR PACA NICE FTNT CSE jpforcioli@forinet.com
+
+The following example shows how to generate a Certificate Signing Request for
+the FortiManager using its GUI API:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: text
+
+         POST https://10.210.35.200:443/cgi-bin/module/flatui_proxy
+
+         {
+           "method": "post",
+           "url": "/gui/sys/certificate/generate",
+           "params": {
+             "gen_name": "fmg_76_interim",
+             "id_type": 1,
+             "gen_subject": "fmg_76_interim",
+             "gen_unit": ["CSE"],
+             "gen_org": "FTNT",
+             "gen_city": "NICE",
+             "gen_state": "PACA",
+             "gen_country": "FR",
+             "gen_email": "foo@bar.com",
+             "gen_subj_alt_name": "fmg-76-interim.cmm.fortilab.net",
+             "key_type": 1,
+             "gen_size": 2048,
+             "curve_name": "secp256r1",
+             "enroll_method": 0,
+             "gen_url": "",
+             "challenge_password": ""
+           }
+         }
+
+      .. note::
+  
+         - The ``gen_name`` is the name of the CSR to be generated.
+         - The ``gen_subject`` is the subject of the CSR.
+         - The ``gen_subj_alt_name`` is the Subject Alternative Name (SAN) of 
+           the CSR.
+         - The ``key_type`` can be either ``1`` for RSA or ``2`` for ECC.
+         - The ``gen_size`` is the key size in bits (e.g., 2048).
+         - The ``curve_name`` is used only if you choose ECC as key type.
+         - The ``id_type`` can be:
+
+           - `0`: for *Host IP*
+           - `1`: for *Domain Name*
+           - `2`: for *Email*
+
+           In all cases, the corresponding value has to be placed in the
+           `gen_subject`` field.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: text
+
+         {
+           "result": [
+             {
+               "data": null,
+               "id": null,
+               "status": {
+                 "code": 0,
+                 "message": ""
+               },
+               "url": "/gui/sys/certificate/generate"
+             }
+           ]
+         }
+
+How to import a signed certificated back using FortiManager GUI API?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+To import a signed certificate back into FortiManager, you will need to use the
+FortiManager GUI API. The JSON API does not provide an endpoint for this
+operation.
+
+The following example shows how to import a signed certificate named
+``fmg_76_interim`` using the FortiManager GUI API:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: shell
+
+         curl -v -s -k -b cookie.jar \
+           -H "Xsrf-Token: ${csrf_token}" \
+           -X POST \
+           https://${fmg}/flatui/api/gui/system/certification/local \
+           -F "cert_name=fmg_76_interim" \
+           -F "cert_key_name=" \
+           -F "password=" \
+           -F "csrfmiddlewaretoken=${csrf_token}" \
+           -F "csrf_token=${csrf_token}" \
+           -F "filepath=@foobar.crt" | jq
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "result": [
+             {
+               "data": null,
+               "id": null,
+               "status": {
+                 "code": 0,
+                 "message": ""
+               },
+               "url": "/gui/system/certification/local"
+             }
+           ]
+         }        
 
 How to get the FortiManager Uptime?
 +++++++++++++++++++++++++++++++++++
