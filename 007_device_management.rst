@@ -11303,7 +11303,7 @@ To get the **metadata** mapped to a specific managed device see section
 How to run CLI commands against a managed device?
 -------------------------------------------------
 
-Caught in #1155085 and #1072897.
+Caught in #1155085, #1072897 and #1133627.
 
 .. warning:: 
 
@@ -11353,3 +11353,20 @@ its ``root`` VDOM:
              }
            ]
          }
+
+.. note::
+
+   Not all CLI commands are supported and FortiManager will only authorize the
+   ones matching an internal hardocded list. Few commands that should work:
+
+   .. code-block:: text
+
+      diagnose vpn ike config list
+
+      diagnose sys session filter src 172.16.205.100
+      diagnose sys session filter dst 172.16.202.2
+      diagnose sys session list
+
+      execute factoryreset-for-central-management
+
+      execute replace-device fortiap FP433G0000000001 FP433G0000000002

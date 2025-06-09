@@ -2718,7 +2718,7 @@ have the information available when needed.
 FortiSwitch Management
 ----------------------
 
-How to add a model FortiSwich
+How to add a Model FortiSwich
 +++++++++++++++++++++++++++++
 
 Adding a Model FortiSwitch using the FortiSwitch Manager page in FortiManager
@@ -2761,7 +2761,7 @@ for the ``dev_001`` managed device:
          The request above is declaring a FortiSwitch device in ``dev_001``
          device's DB. Then the ``push`` attribute instructs FortiManager to 
          consider it for Central Management and this is why it becomes visible 
-         in the ***FortiSwitch Manager*** > ***Managed FortiSwitches***  page.
+         in the **FortiSwitch Manager** > **Managed FortiSwitches**  page.
 
    .. tab-item:: RESPONSE
 
@@ -2960,6 +2960,43 @@ How to create a custom command?
            ]
          }        
 
+How to create a FortiSwitch Template?
++++++++++++++++++++++++++++++++++++++
+
+How to clone a FortiSwitch Template?
+++++++++++++++++++++++++++++++++++++
+
+Caught in #0511364.
+
+The following example shows how to clone the
+``fsw_template_001`` FortiSwitch Template in the ``demo`` ADOM. New FortiSwitch
+Template name is ``fsw_template_002``:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "clone",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/switch-controller/managed-switch/fsw_template_001",
+               "data": {
+                 "name": "fsw_template_002",
+                 "switch-id": "fsw_template_002"
+               }
+             }
+           ],
+           "session": "{{session_id}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      TBD.
+
 How to add a customer command to a FortiSwitch Template?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -2973,6 +3010,7 @@ How to add a customer command to a FortiSwitch Template?
            "id": "1",
            "verbose": 1,
            "method": "add",
+
            "params": [
              {
                "url": "/pm/config/adom/{{adom}}/obj/switch-controller/managed-switch/fsw_template_001/custom-command",
@@ -3060,108 +3098,251 @@ How to assign a FortiSwitch template to a FortiSwitch?
 		  ]
 		}
 
+How to update a port in a FortiSwitch Template?
++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to update the port ``port4`` in the
+``fsw_template_001`` FortiSwitch Template in the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+             "id": 1,
+             "method": "update",
+             "params": [
+                 {
+                     "url":"/pm/config/adom/demo/obj/switch-controller/managed-switch/fsw_template_001/ports/port4",
+                     "data": {
+                         "allowed-vlans": [
+                             "quarantine",
+                             "vl_1002"
+                         ],
+                         "vlan": [
+                             "vl_1002"
+                         ]
+                     }
+                 }
+             ],
+             "session": "{{session_id}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "port-name": "port4"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/switch-controller/managed-switch/fsw_template_001/ports/port4"
+             }
+           ]
+         }
+
 How to import a FortiSwitch Template from a managed device?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Caught in #612834.
 
-**REQUEST:**
+.. tab-set:: 
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-		{
-		  "id": "70b61e3d-53fb-47e2-b763-64e8700331c8",
-		  "method": "exec",
-		  "params": [
-		    {
-		      "url": "pm/config/adom/root/_fsp/import/template",
-		      "data": {
-		        "switch": "S548DN4K16000358",
-			"template": "sdfas",
-			"device": {
-			  "name": "FortiGate-140E-POE",
-			  "vdom": "root"
-			}
-		      }
-		    }
-		  ]
-		}
+      .. code-block:: json
+      
+      		{
+      		  "id": "70b61e3d-53fb-47e2-b763-64e8700331c8",
+      		  "method": "exec",
+      		  "params": [
+      		    {
+      		      "url": "pm/config/adom/root/_fsp/import/template",
+      		      "data": {
+      		        "switch": "S548DNREDACTED58",
+      			"template": "sdfas",
+      			"device": {
+      			  "name": "FortiGate-140E-POE",
+      			  "vdom": "root"
+      			}
+      		      }
+      		    }
+      		  ]
+      		}
 
-How to get the default port configuration for a particular switch model?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to get the default port configuration for all supported FortiSwitch models?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**REQUEST:**
+The following example shows how to get the default port configuration for all
+the supported FortiSwitch models in the ``demo`` ADOM.
 
-.. code-block:: json
+.. tab-set:: 
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/adom/DB/_fsp/managed-switch/platforms/FortiSwitch-124D"
-       }
-     ],
-     "session": "BQza7EvapJmDJuT15xS5AZGz7h93b6JMAuLYhBNqwEokjDjcoYTLaW18YTDreVjUr+D49zDrmqt6uPEReGuYOg==",
-     "verbose": 1
-   }
+   .. tab-item:: REQUEST
 
-**RESPONSE:**
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_fsp/managed-switch/platforms"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+      
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
+         :emphasize-lines: 10
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": [
-           {
-             "capability": "0x000000000000000000000015394dffd7",
-             "capability32": "0x394dffd7",
-             "max-allowed-trunk-members": 8,
-             "name": "FortiSwitch-124D",
-             "poe-detection-type": 3,
-             "poe_ports": [],
-             "ports": [
-               "port1",
-               "port2",
-               "port3",
-               "port4",
-               "port5",
-               "port6",
-               "port7",
-               "port8",
-               "port9",
-               "port10",
-               "port11",
-               "port12",
-               "port13",
-               "port14",
-               "port15",
-               "port16",
-               "port17",
-               "port18",
-               "port19",
-               "port20",
-               "port21",
-               "port22",
-               "port23",
-               "port24",
-               "port25",
-               "port26"
-             ],
-             "prefix": "S124DN"
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/DB/_fsp/managed-switch/platforms/FortiSwitch-124D"
-       }
-     ]
-   }
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "capability": "0x00000000000000001306ea751c75f9ff",
+                   "capability32": "0x1c75f9ff",
+                   "max-allowed-trunk-members": 8,
+                   "name": "FortiSwitch-24VM",
+                   "poe-detection-type": 3,
+                   "poe_ports": [],
+                   "ports": [
+                     "port1",
+                     "port2",
+                     "port3",
+                     "port4",
+                     "port5",
+                     "port6",
+                     "port7",
+                     "port8",
+                     "port9",
+                     "port10",
+                     "port11",
+                     "port12",
+                     "port13",
+                     "port14",
+                     "port15",
+                     "port16",
+                     "port17",
+                     "port18",
+                     "port19",
+                     "port20",
+                     "port21",
+                     "port22",
+                     "port23",
+                     "port24"
+                   ],
+                   "prefix": "FS24VM"
+                 },
+                 "... TRUNCATED ..."
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_fsp/managed-switch/platforms"
+             }
+           ]
+         }
+
+.. tip::
+
+   By examining all returned ``name`` attributes, you'll get a list of all 
+   FortiSwitch models supported by your FortiManager.
+
+How to get the default port configuration for a particular FortiSwitch model?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the default port configuration for
+the FortiSwitch model ``FortiSwitch-124D`` in the ``demo`` ADOM.
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_fsp/managed-switch/platforms/FortiSwitch-124D"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": [
+                 {
+                   "capability": "0x000000000000000000000015394dffd7",
+                   "capability32": "0x394dffd7",
+                   "max-allowed-trunk-members": 8,
+                   "name": "FortiSwitch-124D",
+                   "poe-detection-type": 3,
+                   "poe_ports": [],
+                   "ports": [
+                     "port1",
+                     "port2",
+                     "port3",
+                     "port4",
+                     "port5",
+                     "port6",
+                     "port7",
+                     "port8",
+                     "port9",
+                     "port10",
+                     "port11",
+                     "port12",
+                     "port13",
+                     "port14",
+                     "port15",
+                     "port16",
+                     "port17",
+                     "port18",
+                     "port19",
+                     "port20",
+                     "port21",
+                     "port22",
+                     "port23",
+                     "port24",
+                     "port25",
+                     "port26"
+                   ],
+                   "prefix": "S124DN"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_fsp/managed-switch/platforms/FortiSwitch-124D"
+             }
+           ]
+         }
 
 How to add a per-device mapping to a vlan?
 ++++++++++++++++++++++++++++++++++++++++++
@@ -3566,53 +3747,6 @@ the ``dev_001`` device in the ``demo`` ADOM:
    .. tab-item:: RESPONSE
 
       TBD
-
-How to update a port in a FortiSwitch Template?
-+++++++++++++++++++++++++++++++++++++++++++++++
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-       "id": 1,
-       "method": "update",
-       "params": [
-           {
-               "url":"/pm/config/adom/{{adom}}/obj/switch-controller/managed-switch/branches/ports/port4",
-               "data": {
-                   "allowed-vlans": [
-                       "quarantine",
-                       "vl_1002"
-                   ],
-                   "vlan": [
-                       "vl_1002"
-                   ]
-               }
-           }
-       ],
-       "session": "{{session_id}}"
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "port-name": "port4"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/knock_37311/obj/switch-controller/managed-switch/branches/ports/port4"
-       }
-     ]
-   }
 
 FortiExtender
 -------------
