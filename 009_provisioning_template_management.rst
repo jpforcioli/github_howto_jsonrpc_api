@@ -2976,8 +2976,8 @@ than symbolic or human-readable values.
 The approach outlined here uses the ``object_template`` mechanism. This allows
 you to obtain the FortiSwitch Template's object structure, including its default
 values — presented symbolically where possible. That said, you'll still need to
-perform multiple API calls to determine which attributes should be removed,
-updated, or left unchanged.
+perform multiple API trial-and-error calls to determine which attributes should
+be removed, updated, or left unchanged.
 
 Retrieve the object template for the FortiSwitch Template
 _________________________________________________________
@@ -3154,10 +3154,11 @@ FortiSwitch Template in the ``demo`` ADOM:
 Create a FortiSwitch Template
 _____________________________
 
-Thanks to the object template, you can now create a FortiSwitch Template. It
-might depend of the FortiManager version, but from the object template returned
-in the :ref:`previous section<Retrieve the object template for the FortiSwitch
-Template>`, the following attributes have been removed:
+With the help of the object template, you can now proceed to create a
+FortiSwitch Template. The exact attributes required may vary depending on your
+FortiManager version. However, based on the object template retrieved in the
+:ref:`previous section<Retrieve the object template for the FortiSwitch
+Template>` - and the API trial-and-error calls you don't need to perform - the following attributes have been removed: 
 
 - ``custom-command``
 - ``dhcp-snooping-static-client``
@@ -3166,15 +3167,15 @@ Template>`, the following attributes have been removed:
 - ``route-offload-router``
 - ``vlan``
 
-Those ones have been added:
+The following attributes have been added:
 
-- ``switch-id``: the name of the FortiSwitch Template
-- ``_platform``: the FortiSwitch platform (to get list of supported platform,
-  see section :ref:`How to get the default port configuration for all supported 
-  FortiSwitch models?`)
+- ``switch-id``: Specifies the name of the FortiSwitch Template.
+- ``_platform``: Indicates the FortiSwitch platform. (To retrieve the list of
+  supported platforms, refer to: :ref:`How to get the default port configuration
+  for all supported FortiSwitch models?`)
 
-All combined, the following example shows how to create a FortiSwitch
-Template named ``fsw_template_001`` in the ``demo`` ADOM:
+Bringing this together, the example below demonstrates how to create a
+FortiSwitch Template named ``fsw_template_001`` in the ``demo`` ADOM:
 
 .. tab-set:: 
   
