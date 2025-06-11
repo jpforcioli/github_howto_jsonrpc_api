@@ -2977,25 +2977,40 @@ Template name is ``fsw_template_002``:
    .. tab-item:: REQUEST
 
       .. code-block:: json
-      
+
          {
-           "id": 1,
+           "id": 3,
            "method": "clone",
            "params": [
              {
-               "url": "/pm/config/adom/demo/obj/switch-controller/managed-switch/fsw_template_001",
                "data": {
-                 "name": "fsw_template_002",
                  "switch-id": "fsw_template_002"
-               }
+               },
+               "url": "pm/config/adom/demo/obj/switch-controller/managed-switch/fsw_template_001"
              }
            ],
-           "session": "{{session_id}}"
+           "session": "{{session}}"
          }
 
    .. tab-item:: RESPONSE
 
-      TBD.
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "switch-id": "fsw_template_002"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "pm/config/adom/demo/obj/switch-controller/managed-switch/fsw_template_001"
+             }
+           ]
+         }
 
 How to add a customer command to a FortiSwitch Template?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
