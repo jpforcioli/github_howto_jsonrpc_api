@@ -3290,8 +3290,8 @@ Template name is ``fsw_template_002``:
            ]
          }
 
-How to add a customer command to a FortiSwitch Template?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to add a custom command to a FortiSwitch Template?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. tab-set::
 
