@@ -2963,6 +2963,283 @@ How to create a custom command?
 How to create a FortiSwitch Template?
 +++++++++++++++++++++++++++++++++++++
 
+A FortiSwitch Template contains a large number of attributes. The key question
+is: which attributes need to be configured, and with what values?
+
+You can use the FortiManager GUI to create a FortiSwitch Template and then
+retrieve its attributes via the |fmg_api|. Alternatively, you can inspect the
+API calls made by the GUI using your browser's developer tools. However, both
+approaches will expose a significant number of attributes, and many of the
+returned values may not be meaningful — often represented as raw digits rather
+than symbolic or human-readable values.
+
+The approach outlined here uses the ``object_template`` mechanism. This allows
+you to obtain the FortiSwitch Template's object structure, including its default
+values — presented symbolically where possible. That said, you'll still need to
+perform multiple API calls to determine which attributes should be removed,
+updated, or left unchanged.
+
+Retrieve the object template for the FortiSwitch Template
+_________________________________________________________
+
+The following example shows how to retrieve the object template for the
+FortiSwitch Template in the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "object template": 1,
+               "url": "/pm/config/adom/demo/obj/switch-controller/managed-switch"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+          - The ``object template`` attribute is set to ``1`` to get the object
+            template of the FortiSwitch Template.
+
+          - The ``verbose`` attribute is set to ``1`` to get the object template
+            with symbolic values when possible.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "custom-command": {
+                   "oid": 0
+                 },
+                 "dhcp-server-access-list": "global",
+                 "dhcp-snooping-static-client": {
+                   "ip": "0.0.0.0",
+                   "mac": "00:00:00:00:00:00",
+                   "oid": 0
+                 },
+                 "firmware-provision": "disable",
+                 "firmware-provision-latest": "disable",
+                 "l3-discovered": 0,
+                 "mclag-igmp-snooping-aware": "enable",
+                 "mgmt-mode": 0,
+                 "oid": 0,
+                 "override-snmp-community": "disable",
+                 "override-snmp-sysinfo": "disable",
+                 "override-snmp-trap-threshold": "disable",
+                 "override-snmp-user": "disable",
+                 "poe-detection-type": 0,
+                 "ports": {
+                   "access-mode": "static",
+                   "aggregator-mode": "bandwidth",
+                   "allow-arp-monitor": "disable",
+                   "allowed-vlans-all": "disable",
+                   "arp-inspection-trust": "untrusted",
+                   "authenticated-port": 0,
+                   "bundle": "disable",
+                   "dhcp-snoop-option82-override": {
+                     "oid": 0
+                   },
+                   "dhcp-snoop-option82-trust": "disable",
+                   "dhcp-snooping": "untrusted",
+                   "discard-mode": "none",
+                   "dsl-profile": [
+                     "default"
+                   ],
+                   "edge-port": "enable",
+                   "encrypted-port": 0,
+                   "fec-capable": 0,
+                   "fec-state": "detect-by-module",
+                   "flap-duration": 30,
+                   "flap-rate": 5,
+                   "flap-timeout": 0,
+                   "flapguard": "disable",
+                   "flow-control": "disable",
+                   "igmp-snooping-flood-reports": "disable",
+                   "ip-source-guard": "disable",
+                   "lacp-speed": "slow",
+                   "learning-limit": 0,
+                   "lldp-profile": [
+                     "default-auto-isl"
+                   ],
+                   "lldp-status": "tx-rx",
+                   "log-mac-event": "disable",
+                   "loop-guard": "disabled",
+                   "loop-guard-timeout": 45,
+                   "max-bundle": 24,
+                   "mcast-snooping-flood-traffic": "disable",
+                   "mclag": "disable",
+                   "mclag-icl-port": 0,
+                   "member-withdrawal-behavior": "block",
+                   "min-bundle": 1,
+                   "mode": "static",
+                   "oid": 0,
+                   "p2p-port": 0,
+                   "packet-sample-rate": 512,
+                   "packet-sampler": "disabled",
+                   "pause-meter": 0,
+                   "pause-meter-resume": "50%",
+                   "pd-capable": 0,
+                   "poe-mode-bt-cabable": 0,
+                   "poe-port-mode": "ieee802-3at",
+                   "poe-port-power": "normal",
+                   "poe-port-priority": "low-priority",
+                   "poe-pre-standard-detection": "disable",
+                   "poe-status": "enable",
+                   "port-selection-criteria": "src-dst-ip",
+                   "ptp-status": "enable",
+                   "qos-policy": [
+                     "default"
+                   ],
+                   "restricted-auth-port": 0,
+                   "rpvst-port": "disabled",
+                   "sample-direction": "both",
+                   "sflow-counter-interval": 0,
+                   "speed": "auto",
+                   "status": "up",
+                   "sticky-mac": "disable",
+                   "stp-bpdu-guard": "disabled",
+                   "stp-bpdu-guard-timeout": 5,
+                   "stp-root-guard": "disabled",
+                   "stp-state": "enabled",
+                   "trunk-member": 0,
+                   "type": "physical"
+                 },
+                 "ptp-profile": [
+                   "default"
+                 ],
+                 "ptp-status": "disable",
+                 "purdue-level": "3",
+                 "qos-drop-policy": "taildrop",
+                 "qos-red-probability": 12,
+                 "radius-nas-ip": "0.0.0.0",
+                 "radius-nas-ip-override": "disable",
+                 "route-offload": "disable",
+                 "route-offload-mclag": "disable",
+                 "route-offload-router": {
+                   "oid": 0,
+                   "router-ip": "0.0.0.0"
+                 },
+                 "tunnel-discovered": 0,
+                 "vlan": {
+                   "assignment-priority": 128,
+                   "oid": 0
+                 }
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/switch-controller/managed-switch"
+             }
+           ]
+         }
+
+      .. note::
+
+         - As you can see, that's a lot of attributes!
+
+Create a FortiSwitch Template
+_____________________________
+
+Thanks to the object template, you can now create a FortiSwitch Template. It
+might depend of the FortiManager version, but from the object template returned
+in the :ref:`previous section<Retrieve the object template for the FortiSwitch
+Template>`, the following attributes have been removed:
+
+- ``custom-command``
+- ``dhcp-snooping-static-client``
+- ``oid``
+- ``ports``
+- ``route-offload-router``
+- ``vlan``
+
+Those ones have been added:
+
+- ``switch-id``: the name of the FortiSwitch Template
+- ``_platform``: the FortiSwitch platform (to get list of supported platform,
+  see section :ref:`How to get the default port configuration for all supported 
+  FortiSwitch models?`)
+
+All combined, the following example shows how to create a FortiSwitch
+Template named ``fsw_template_001`` in the ``demo`` ADOM:
+
+.. tab-set:: 
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+    
+         {
+           "id": 4,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "_platform": "FortiSwitch-108E",
+                 "dhcp-server-access-list": 50,
+                 "firmware-provision": 0,
+                 "firmware-provision-latest": 0,
+                 "l3-discovered": 0,
+                 "mclag-igmp-snooping-aware": 1,
+                 "mgmt-mode": 0,
+                 "override-snmp-community": 0,
+                 "override-snmp-sysinfo": 0,
+                 "override-snmp-trap-threshold": 0,
+                 "override-snmp-user": 0,
+                 "poe-detection-type": 0,
+                 "ptp-profile": [
+                   "default"
+                 ],
+                 "ptp-status": 0,
+                 "purdue-level": 3,
+                 "qos-drop-policy": 0,
+                 "qos-red-probability": 12,
+                 "radius-nas-ip": "0.0.0.0",
+                 "radius-nas-ip-override": 0,
+                 "route-offload": 0,
+                 "route-offload-mclag": 0,
+                 "switch-id": "fsw_template_001",
+                 "tunnel-discovered": 0
+               },
+               "url": "/pm/config/adom/demo/obj/switch-controller/managed-switch"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "result": [
+             {
+               "data": {
+                 "switch-id": "fsw_template_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/switch-controller/managed-switch"
+             }
+           ]
+         }        
+
 How to clone a FortiSwitch Template?
 ++++++++++++++++++++++++++++++++++++
 
