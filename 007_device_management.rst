@@ -4070,73 +4070,192 @@ To add the ``brasil`` device group into the ``amer`` device group, the
 How to get the device group members?
 ++++++++++++++++++++++++++++++++++++
 
-To get the list of devices belonging to device group ``foobar`` from ADOM
-``DEMO_008``:
+The following example shows how to get the list of devices belonging to a the
+device group ``dev_grp_001`` in the ADOM ``demo``:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block::
+   .. tab-item:: REQUEST
 
-   {
-   "id": 1,
-   "jsonrpc": "1.0",
-   "method": "get",
-   "params": [
-       {
-       "option": [
-           "object member"
-       ],
-       "url": "/dvmdb/adom/DEMO_008/group/foobar"
-       }
-   ],
-   "session": "JMss+Pu+jvJFzYXde99qPibZk2qS1bJfyRP9tEjg3HtSVFHe1Gb0vqEFWhoP91vgmZKIrLuCwK6hQsw0cSkdHw==",
-   "verbose": 1
-   }
+      .. code-block:: json
 
-**RESPONSE:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "desc": "",
-           "name": "foobar",
-           "object member": [
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
              {
-               "name": "demo_008_device_002",
-               "oid": 1483,
-               "vdom": "root",
-               "vdom_oid": 3
-             },
-             {
-               "name": "demo_008_device_003",
-               "oid": 1506,
-               "vdom": "root",
-               "vdom_oid": 3
-             },
-             {
-               "name": "foobar_001",
-               "oid": 1552,
-               "vdom": "root",
-               "vdom_oid": 3
+               "option": [
+                 "object member"
+               ],
+               "url": "/dvmdb/adom/demo/group/dev_grp_001"
              }
            ],
-           "oid": 1743,
-           "os_type": "fos",
-           "type": "normal"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/adom/DEMO_008/group/foobar"
-       }
-     ]
-   }
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "desc": "",
+                 "name": "dev_grp_001",
+                 "object member": [
+                   {
+                     "name": "dev_001",
+                     "oid": 1483,
+                     "vdom": "root",
+                     "vdom_oid": 3
+                   },
+                   {
+                     "name": "dev_002",
+                     "oid": 1506,
+                     "vdom": "root",
+                     "vdom_oid": 3
+                   },
+                   {
+                     "name": "dev_003",
+                     "oid": 1552,
+                     "vdom": "root",
+                     "vdom_oid": 3
+                   }
+                 ],
+                 "oid": 1743,
+                 "os_type": "fos",
+                 "type": "normal"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/group/dev_grp_001"
+             }
+           ]
+         }
+
+How to get all device groups a device belongs to?
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+There is no direct API endpoint to retrieve all device groups that a specific
+device belongs to.
+
+Instead, you must retrieve all device groups and then filter the results to find which ones include the device.
+
+The following example demonstrates how to identify the device groups in the
+``demo`` ADOM that include the device ``dev_001``.
+
+First you need to get all device groups in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "object member"
+               ],
+               "option": [
+                 "object member"
+               ],
+               "url": "/dvmdb/adom/demo/group"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json    
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "All_FortiGate",
+                   "object member": [
+                     {
+                       "name": "dev_001",
+                       "vdom": "root"
+                     },
+                     {
+                       "name": "dev_002",
+                       "vdom": "root"
+                     },
+                     {
+                       "name": "dev_003",
+                       "vdom": "root"
+                     },
+                     {
+                       "name": "dev_004",
+                       "vdom": "root"
+                     }
+                   ],
+                   "oid": 2515
+                 },
+                 {
+                   "name": "dev_grp_001",
+                   "object member": [
+                     {
+                       "name": "dev_001",
+                       "vdom": "root"
+                     },
+                     {
+                       "name": "dev_002",
+                       "vdom": "root"
+                     }
+                   ],
+                   "oid": 5833
+                 },
+                 {
+                   "name": "dev_grp_002",
+                   "object member": [
+                     {
+                       "name": "dev_grp_003"
+                     }
+                   ],
+                   "oid": 5529
+                 },
+                 {
+                   "name": "dev_grp_003",
+                   "object member": [
+                     {
+                       "name": "dev_001",
+                       "vdom": "root"
+                     }
+                   ],
+                   "oid": 5908
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/group"
+             }
+           ]
+         }
+
+Then, to determine which device groups the device ``dev_001`` belongs to, you
+must loop over each returned device group and:
+
+#. Check if the group has an ``object member`` attribute.
+#. Inspect each ``obejct member`` entry to see if its ``name`` matches 
+   ``dev_001``.
 
 How to delete a device from a device group?
 +++++++++++++++++++++++++++++++++++++++++++
