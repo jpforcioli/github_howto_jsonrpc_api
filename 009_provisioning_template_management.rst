@@ -8153,6 +8153,52 @@ To delete the ``template_group_001`` from the ``dc_africa`` ADOM:
            ]
          }
 
+SD-WAN Overlay Orchestration Template
+-------------------------------------
+
+How to trigger the generation of a SD-WAN Overlay Orchestration Template?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #1162254.
+
+The following example shows how to generate the
+``sdwan_overlay_orchestration_template_001`` SD-WAN Overlay Orchestration
+Template in the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_sdwan/overlay/orchestration",
+               "data": {
+                 "template": "sdwan_overlay_orchestration_template_001"
+               }
+             }
+           ],
+            "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json        
+
+         {
+             "data": null,
+             "id": 3,
+             "status": {
+                 "code": 0,
+                 "message": "OK"
+             },
+             "url": "/pm/config/adom/demo/_sdwan/overlay/orchestration"
+         }
+         
 Fabric Authorization Template
 -----------------------------
 

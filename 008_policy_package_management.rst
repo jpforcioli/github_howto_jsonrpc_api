@@ -2117,6 +2117,15 @@ The following example shows how to trigger an install device preview operation f
 
               "flags": 1
 
+           .. note::
+
+              To be verified: #1162796 is stating it should be with double 
+              quotes:
+
+              .. code-block::
+
+                 "flags": "1"
+
    .. tab-item:: RESPONSE
 
       .. code-block:: json
