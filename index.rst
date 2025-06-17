@@ -18,7 +18,7 @@ How To FortiManager API?
    003_docker_management
    004_sdwan_management
    005_connector_management
-   007_device_management
+   007_device_management/007_device_management
    008_policy_package_management
    009_provisioning_template_management
    010_fmg_configuration
