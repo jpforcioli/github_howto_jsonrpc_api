@@ -30,7 +30,7 @@ commit:
 	git push
 
 rtd: 
-	cp -rv *rst scripts Makefile make.bat README.md datas _images _static conf.py images index.rst .readthedocs.yaml requirements.txt ../github_howto_jsonrpc_api/
+	cp -rv 002_objects_management 007_device_management *rst scripts Makefile make.bat README.md datas _images _static conf.py images index.rst .readthedocs.yaml requirements.txt ../github_howto_jsonrpc_api/
 	LAST_GIT_LOG_MSG="$$(git log -1 --pretty=format:%B)"; cd ../github_howto_jsonrpc_api; make commit MSG="$${LAST_GIT_LOG_MSG}"
 
 livehtml:

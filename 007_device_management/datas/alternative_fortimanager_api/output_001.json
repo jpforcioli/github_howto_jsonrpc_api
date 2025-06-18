@@ -1,0 +1,4607 @@
+{
+    "result": [
+      {
+        "data": {
+          "byIrNumber": {
+            "FG-IR-23-356": {
+              "cve": [
+                "CVE-2023-46720"
+              ],
+              "cvss3": {
+                "cvss3_base_score": "6.3",
+                "cvss3_scoring_vector": "AV:L/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H/E:P/RL:X/RC:X&version=3.1"
+              },
+              "description": "Multiple stack-based buffer overflow vulnerabilities [CWE-121] in FortiOS may allow an authenticated attacker to achieve arbitrary code execution via specially crafted CLI commands.",
+              "impacted_products": {
+                "FortiOS": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "16"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "18"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "17"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "16"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "13"
+                  }
+                ]
+              },
+              "ir_number": "FG-IR-23-356",
+              "products": {
+                "FortiOS": [
+                  {
+                    "maximum_version": "7.2.7",
+                    "minimum_version": "6.0.13",
+                    "upgrade_to": "7.2.8"
+                  },
+                  {
+                    "maximum_version": "7.4.3",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.4"
+                  }
+                ]
+              },
+              "risk": 3,
+              "summary": "",
+              "threat_severity": "Medium",
+              "title": "Stack buffer overflow on bluetooth write feature"
+            },
+            "FG-IR-23-423": {
+              "cve": [
+                "CVE-2024-21754"
+              ],
+              "cvss3": {
+                "cvss3_base_score": "1.7",
+                "cvss3_scoring_vector": "AV:L/AC:H/PR:H/UI:R/S:U/C:L/I:N/A:N/E:F/RL:X/RC:R&version=3.1"
+              },
+              "description": "A use of password hash with insufficient computational effort vulnerability [CWE-916] affecting FortiOS and FortiProxy may allow a privileged attacker with super-admin profile and CLI access to decrypting the backup file.",
+              "impacted_products": {
+                "FortiOS": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "16"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "0"
+                  }
+                ],
+                "FortiProxy": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "19"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "18"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "17"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "16"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ]
+              },
+              "ir_number": "FG-IR-23-423",
+              "products": {
+                "FortiOS": [
+                  {
+                    "maximum_version": "7.2.8",
+                    "minimum_version": "6.4.0",
+                    "upgrade_to": "7.2.9"
+                  },
+                  {
+                    "maximum_version": "7.4.3",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.4"
+                  }
+                ],
+                "FortiProxy": [
+                  {
+                    "maximum_version": "7.4.2",
+                    "minimum_version": "2.0.0",
+                    "upgrade_to": "7.4.3"
+                  }
+                ]
+              },
+              "risk": 2,
+              "summary": "",
+              "threat_severity": "Low",
+              "title": "Weak key derivation for backup file"
+            },
+            "FG-IR-23-446": {
+              "cve": [
+                "CVE-2024-26015"
+              ],
+              "cvss3": {
+                "cvss3_base_score": "3.1",
+                "cvss3_scoring_vector": "AV:A/AC:H/PR:N/UI:N/S:C/C:N/I:L/A:N/E:F/RL:W/RC:R&version=3.1"
+              },
+              "description": "An incorrect parsing of numbers with different radices vulnerability [CWE-1389] in FortiOS and FortiProxy IP address validation feature may permit an unauthenticated attacker to bypass the IP blocklist via crafted requests.",
+              "impacted_products": {
+                "FortiOS": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "16"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ],
+                "FortiProxy": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "19"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "18"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "17"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "16"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ]
+              },
+              "ir_number": "FG-IR-23-446",
+              "products": {
+                "FortiOS": [
+                  {
+                    "maximum_version": "7.2.8",
+                    "minimum_version": "7.0.0",
+                    "upgrade_to": "7.2.9"
+                  },
+                  {
+                    "maximum_version": "7.4.3",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.4"
+                  }
+                ],
+                "FortiProxy": [
+                  {
+                    "maximum_version": "7.4.3",
+                    "minimum_version": "7.0.0",
+                    "upgrade_to": "7.4.4"
+                  }
+                ]
+              },
+              "risk": 2,
+              "summary": "",
+              "threat_severity": "Low",
+              "title": "FortiOS - IP address validation mishandles zero characters"
+            },
+            "FG-IR-23-460": {
+              "cve": [
+                "CVE-2024-23110"
+              ],
+              "cvss3": {
+                "cvss3_base_score": "7.4",
+                "cvss3_scoring_vector": "AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H/E:P/RL:U/RC:C&version=3.1"
+              },
+              "description": "Multiple stack-based buffer overflow vulnerabilities [CWE-121] in the command line interpreter of FortiOS may allow an authenticated attacker to execute unauthorized code or commands via specially crafted command line arguments.",
+              "impacted_products": {
+                "FortiOS": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "18"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "17"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "16"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ]
+              },
+              "ir_number": "FG-IR-23-460",
+              "products": {
+                "FortiOS": [
+                  {
+                    "maximum_version": "6.2.15",
+                    "minimum_version": "6.0.0",
+                    "upgrade_to": "6.2.16"
+                  },
+                  {
+                    "maximum_version": "6.4.14",
+                    "minimum_version": "6.4.0",
+                    "upgrade_to": "6.4.15"
+                  },
+                  {
+                    "maximum_version": "7.0.13",
+                    "minimum_version": "7.0.0",
+                    "upgrade_to": "7.0.14"
+                  },
+                  {
+                    "maximum_version": "7.2.6",
+                    "minimum_version": "7.2.0",
+                    "upgrade_to": "7.2.7"
+                  },
+                  {
+                    "maximum_version": "7.4.2",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.3"
+                  }
+                ]
+              },
+              "risk": 4,
+              "summary": "",
+              "threat_severity": "High",
+              "title": "Multiple buffer overflows in diag npu command"
+            },
+            "FG-IR-23-471": {
+              "cve": [
+                "CVE-2024-23111"
+              ],
+              "cvss3": {
+                "cvss3_base_score": "6.2",
+                "cvss3_scoring_vector": "AV:N/AC:L/PR:H/UI:R/S:U/C:H/I:H/A:H/E:P/RL:X/RC:R&version=3.1"
+              },
+              "description": "An improper neutralization of input during web page Generation ('Cross-site Scripting') vulnerability [CWE-79] in FortiOS and FortiProxy reboot page may allow a remote privileged attacker with super-admin access to execute JavaScript code via crafted HTTP GET requests.",
+              "impacted_products": {
+                "FortiOS": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ],
+                "FortiProxy": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ]
+              },
+              "ir_number": "FG-IR-23-471",
+              "products": {
+                "FortiOS": [
+                  {
+                    "maximum_version": "7.0.13",
+                    "minimum_version": "7.0.0",
+                    "upgrade_to": "7.0.14"
+                  },
+                  {
+                    "maximum_version": "7.2.6",
+                    "minimum_version": "7.2.0",
+                    "upgrade_to": "7.2.8"
+                  },
+                  {
+                    "maximum_version": "7.4.2",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.4"
+                  }
+                ],
+                "FortiProxy": [
+                  {
+                    "maximum_version": "7.0.14",
+                    "minimum_version": "7.0.0",
+                    "upgrade_to": "7.0.15"
+                  },
+                  {
+                    "maximum_version": "7.2.8",
+                    "minimum_version": "7.2.0",
+                    "upgrade_to": "7.2.9"
+                  },
+                  {
+                    "maximum_version": "7.4.2",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.3"
+                  }
+                ]
+              },
+              "risk": 3,
+              "summary": "",
+              "threat_severity": "Medium",
+              "title": "FortiOS/FortiProxy - XSS in reboot page"
+            },
+            "FG-IR-23-485": {
+              "cve": [
+                "CVE-2024-26006"
+              ],
+              "cvss3": {
+                "cvss3_base_score": "6.9",
+                "cvss3_scoring_vector": "AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:X/RC:X&version=3.1"
+              },
+              "description": "An improper neutralization of input during web page Generation vulnerability [CWE-79] in FortiOS and FortiProxy's web SSL VPN UI may allow a remote unauthenticated attacker to perform a Cross-Site Scripting attack via social engineering the targeted user into bookmarking a malicious samba server, then opening the bookmark.",
+              "impacted_products": {
+                "FortiOS": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "0"
+                  }
+                ],
+                "FortiProxy": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "16"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ]
+              },
+              "ir_number": "FG-IR-23-485",
+              "products": {
+                "FortiOS": [
+                  {
+                    "maximum_version": "7.0.13",
+                    "minimum_version": "6.4.0",
+                    "upgrade_to": "7.0.14"
+                  },
+                  {
+                    "maximum_version": "7.2.7",
+                    "minimum_version": "7.2.0",
+                    "upgrade_to": "7.2.8"
+                  },
+                  {
+                    "maximum_version": "7.4.3",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.4"
+                  }
+                ],
+                "FortiProxy": [
+                  {
+                    "maximum_version": "7.0.16",
+                    "minimum_version": "7.0.0",
+                    "upgrade_to": "7.0.17"
+                  },
+                  {
+                    "maximum_version": "7.2.9",
+                    "minimum_version": "7.2.0",
+                    "upgrade_to": "7.2.10"
+                  },
+                  {
+                    "maximum_version": "7.4.3",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.4"
+                  }
+                ]
+              },
+              "risk": 3,
+              "summary": "",
+              "threat_severity": "Medium",
+              "title": "Cross site scripting vulnerability in SSL VPN web UI"
+            },
+            "FG-IR-24-012": {
+              "cve": [
+                "CVE-2024-36505"
+              ],
+              "cvss3": {
+                "cvss3_base_score": "4.7",
+                "cvss3_scoring_vector": "AV:L/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N/E:P/RL:X/RC:R&version=3.1"
+              },
+              "description": "An improper access control vulnerability [CWE-284] in FortiOS may allow an attacker who has already successfully obtained write access to the underlying system (via another hypothetical exploit) to bypass the file integrity checking system.",
+              "impacted_products": {
+                "FortiOS": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "13"
+                  }
+                ]
+              },
+              "ir_number": "FG-IR-24-012",
+              "products": {
+                "FortiOS": [
+                  {
+                    "maximum_version": "7.0.14",
+                    "minimum_version": "6.4.13",
+                    "upgrade_to": "7.0.15"
+                  },
+                  {
+                    "maximum_version": "7.2.7",
+                    "minimum_version": "7.2.5",
+                    "upgrade_to": "7.2.8"
+                  },
+                  {
+                    "maximum_version": "7.4.3",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.4"
+                  }
+                ]
+              },
+              "risk": 3,
+              "summary": "",
+              "threat_severity": "Medium",
+              "title": "Real-time file system integrity checking write protection bypass"
+            },
+            "FG-IR-24-015": {
+              "cve": [
+                "CVE-2024-21762"
+              ],
+              "cvss3": {
+                "cvss3_base_score": "9.6",
+                "cvss3_scoring_vector": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H/E:H/RL:W/RC:C&version=3.1"
+              },
+              "description": "A out-of-bounds write vulnerability [CWE-787] in FortiOS and FortiProxy may allow a remote unauthenticated attacker to execute arbitrary code or command via specially crafted HTTP requests.Workaround : disable SSL VPN (disable webmode is NOT a valid workaround)Note: This is potentially being exploited in the wild.",
+              "impacted_products": {
+                "FortiOS": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "18"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "17"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "16"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ],
+                "FortiProxy": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ]
+              },
+              "ir_number": "FG-IR-24-015",
+              "products": {
+                "FortiOS": [
+                  {
+                    "maximum_version": "6.2.15",
+                    "minimum_version": "6.0.0",
+                    "upgrade_to": "6.2.16"
+                  },
+                  {
+                    "maximum_version": "6.4.14",
+                    "minimum_version": "6.4.0",
+                    "upgrade_to": "6.4.15"
+                  },
+                  {
+                    "maximum_version": "7.0.13",
+                    "minimum_version": "7.0.0",
+                    "upgrade_to": "7.0.14"
+                  },
+                  {
+                    "maximum_version": "7.2.6",
+                    "minimum_version": "7.2.0",
+                    "upgrade_to": "7.2.7"
+                  },
+                  {
+                    "maximum_version": "7.4.2",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.3"
+                  }
+                ],
+                "FortiProxy": [
+                  {
+                    "maximum_version": "2.0.13",
+                    "minimum_version": "1.0.0",
+                    "upgrade_to": "2.0.14"
+                  },
+                  {
+                    "maximum_version": "7.0.14",
+                    "minimum_version": "7.0.0",
+                    "upgrade_to": "7.0.15"
+                  },
+                  {
+                    "maximum_version": "7.2.8",
+                    "minimum_version": "7.2.0",
+                    "upgrade_to": "7.2.9"
+                  },
+                  {
+                    "maximum_version": "7.4.2",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.3"
+                  }
+                ]
+              },
+              "risk": 5,
+              "summary": "",
+              "threat_severity": "Critical",
+              "title": "Out-of-bound Write in sslvpnd"
+            },
+            "FG-IR-24-029": {
+              "cve": [
+                "CVE-2024-23113"
+              ],
+              "cvss3": {
+                "cvss3_base_score": "9.8",
+                "cvss3_scoring_vector": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H/E:H/RL:U/RC:C&version=3.1"
+              },
+              "description": "A use of externally-controlled format string vulnerability [CWE-134] in FortiOS fgfmd daemon may allow a remote unauthenticated attacker to execute arbitrary code or commands via specially crafted requests.A third-party report is indicating this may be exploited in the wild.",
+              "impacted_products": {
+                "FortiOS": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ],
+                "FortiPAM": [
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ],
+                "FortiProxy": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ],
+                "FortiSwitchManager": [
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ]
+              },
+              "ir_number": "FG-IR-24-029",
+              "products": {
+                "FortiOS": [
+                  {
+                    "maximum_version": "7.0.13",
+                    "minimum_version": "7.0.0",
+                    "upgrade_to": "7.0.14"
+                  },
+                  {
+                    "maximum_version": "7.2.6",
+                    "minimum_version": "7.2.0",
+                    "upgrade_to": "7.2.7"
+                  },
+                  {
+                    "maximum_version": "7.4.2",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.3"
+                  }
+                ],
+                "FortiPAM": [
+                  {
+                    "maximum_version": "1.2.0",
+                    "minimum_version": "1.0.0",
+                    "upgrade_to": "1.3.0"
+                  }
+                ],
+                "FortiProxy": [
+                  {
+                    "maximum_version": "7.0.15",
+                    "minimum_version": "7.0.0",
+                    "upgrade_to": "7.0.16"
+                  },
+                  {
+                    "maximum_version": "7.2.8",
+                    "minimum_version": "7.2.0",
+                    "upgrade_to": "7.2.9"
+                  },
+                  {
+                    "maximum_version": "7.4.2",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.3"
+                  }
+                ],
+                "FortiSwitchManager": [
+                  {
+                    "maximum_version": "7.0.3",
+                    "minimum_version": "7.0.0",
+                    "upgrade_to": "7.0.4"
+                  },
+                  {
+                    "maximum_version": "7.2.3",
+                    "minimum_version": "7.2.0",
+                    "upgrade_to": "7.2.4"
+                  }
+                ]
+              },
+              "risk": 5,
+              "summary": "",
+              "threat_severity": "Critical",
+              "title": "Format String Bug in fgfmd"
+            },
+            "FG-IR-24-036": {
+              "cve": [
+                "CVE-2024-26010"
+              ],
+              "cvss3": {
+                "cvss3_base_score": "6.7",
+                "cvss3_scoring_vector": "AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:W/RC:C&version=3.1"
+              },
+              "description": "A stack-based overflow vulnerability [CWE-124] in FortiOS, FortiProxy, FortiPAM and FortiSwitchManager may allow a remote attacker to execute arbitrary code or command via crafted packets reaching the fgfmd daemon, under certain conditions which are outside the control of the attacker.",
+              "impacted_products": {
+                "FortiOS": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "16"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "18"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "17"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "16"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "6",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ],
+                "FortiPAM": [
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ],
+                "FortiProxy": [
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "4",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "16"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "15"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "14"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "2",
+                    "minor": "0",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "13"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "12"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "11"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "10"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "9"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "8"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "1",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "7"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "6"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "5"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "4"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "1",
+                    "minor": "0",
+                    "patch": "0"
+                  }
+                ],
+                "FortiSwitchManager": [
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "1"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "2",
+                    "patch": "0"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "3"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "2"
+                  },
+                  {
+                    "major": "7",
+                    "minor": "0",
+                    "patch": "1"
+                  }
+                ]
+              },
+              "ir_number": "FG-IR-24-036",
+              "products": {
+                "FortiOS": [
+                  {
+                    "maximum_version": "7.0.14",
+                    "minimum_version": "6.0.0",
+                    "upgrade_to": "7.0.15"
+                  },
+                  {
+                    "maximum_version": "7.2.7",
+                    "minimum_version": "7.2.0",
+                    "upgrade_to": "7.2.8"
+                  },
+                  {
+                    "maximum_version": "7.4.3",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.4"
+                  }
+                ],
+                "FortiPAM": [
+                  {
+                    "maximum_version": "1.2.0",
+                    "minimum_version": "1.0.0",
+                    "upgrade_to": "1.3.0"
+                  }
+                ],
+                "FortiProxy": [
+                  {
+                    "maximum_version": "7.0.16",
+                    "minimum_version": "1.0.0",
+                    "upgrade_to": "7.0.17"
+                  },
+                  {
+                    "maximum_version": "7.2.9",
+                    "minimum_version": "7.2.0",
+                    "upgrade_to": "7.2.10"
+                  },
+                  {
+                    "maximum_version": "7.4.3",
+                    "minimum_version": "7.4.0",
+                    "upgrade_to": "7.4.4"
+                  }
+                ],
+                "FortiSwitchManager": [
+                  {
+                    "maximum_version": "7.0.3",
+                    "minimum_version": "7.0.1",
+                    "upgrade_to": "7.0.4"
+                  },
+                  {
+                    "maximum_version": "7.2.3",
+                    "minimum_version": "7.2.0",
+                    "upgrade_to": "7.2.4"
+                  }
+                ]
+              },
+              "risk": 3,
+              "summary": "",
+              "threat_severity": "Medium",
+              "title": "Buffer overflow in fgfmd"
+            }
+          },
+          "byPlatform": {
+            "FortiOS_7.4.2": [
+              "FG-IR-24-029",
+              "FG-IR-23-485",
+              "FG-IR-23-423",
+              "FG-IR-24-015",
+              "FG-IR-24-012",
+              "FG-IR-23-446",
+              "FG-IR-23-471",
+              "FG-IR-23-460",
+              "FG-IR-24-036",
+              "FG-IR-23-356"
+            ]
+          },
+          "numDevicesPerRisk": {
+            "5": 1
+          }
+        },
+        "id": null,
+        "status": {
+          "code": 0,
+          "message": ""
+        },
+        "url": "/gui/adoms/3/dvm/psirt"
+      }
+    ]
+  }

@@ -1726,7 +1726,119 @@ We're getting the member elements of our ``addrgrp_001`` address group:
              }
            ]
          }
-      
+
+Firewall VIP
+------------
+
+How to add a new Firewall VIP?
+++++++++++++++++++++++++++++++
+
+The following example shows how to add a new Firewall VIP named ``vip_001``
+in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "extintf": [
+                   "any"
+                 ],
+                 "extip": [
+                   "20.0.0.1-20.0.0.10"
+                 ],
+                 "mappedip": [
+                   "10.0.0.11-10.0.0.20"
+                 ],
+                 "name": "vip_001",
+                 "status": "enable"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/vip"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "vip_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/vip"
+             }
+           ]
+         }
+
+How to add a new Firewall VIP Group?
+++++++++++++++++++++++++++++++++++++
+
+The following example shows how to add a new Firewall VIP Group named
+``vipgrp_001`` in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "interface": [
+                   "any"
+                 ],
+                 "member": [
+                   "vip_001",
+                   "vip_002"
+                 ], 
+                 "name": "vipgrp_001"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/vipgrp"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "vipgrp_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/vipgrp"
+             }
+           ]
+         }
+
 Wildcard FQDN
 -------------
 
