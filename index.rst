@@ -13,7 +13,7 @@ How To FortiManager API?
 
    001_fmg_json_api_introduction
    012_option_attribute
-   002_objects_management
+   002_objects_management/index
    002_security_profiles
    003_docker_management
    004_sdwan_management

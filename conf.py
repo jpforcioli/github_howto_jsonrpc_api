@@ -41,7 +41,7 @@ extensions = [
     "sphinx_tabs.tabs",
     'sphinx_toolbox.collapse',
     'sphinx.ext.autosectionlabel',    
-    'sphinxcontrib.images',    
+    'sphinxcontrib.images',
     'sphinx_copybutton',
     "sphinx_design",
 ]

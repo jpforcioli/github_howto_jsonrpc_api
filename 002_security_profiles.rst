@@ -2573,7 +2573,7 @@ You trigger it using the *More* > *IPS Profile Usages* from the *Intrusion Preve
 
 .. thumbnail:: images/image_007.png
 
-For each managed device using IPS sensors, You can review the *Installed Timestamp*, the *Modified Timestamp* and most importantly the IPS sensor *Status* (whether it is in sync with the one used by the managed device):abbr:
+For each managed device using IPS sensors, You can review the *Installed Timestamp*, the *Modified Timestamp* and most importantly the IPS sensor *Status* (whether it is in sync with the one used by the managed device):
 
 .. thumbnail:: images/image_008.png
 
