@@ -198,6 +198,8 @@ Caught in #964977.
            "session": "{{session}}"
          }
 
+   .. tab-item:: RESPONSE
+
       .. code-block:: json
 
          {
@@ -212,7 +214,6 @@ Caught in #964977.
              }
            ]
          }
-
 
 How to get an Upgrade Preview for Firmware Template?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
