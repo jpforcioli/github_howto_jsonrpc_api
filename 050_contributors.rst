@@ -17,3 +17,6 @@ Contributors
 
    - Added a note about the `syntax` option in this Device Management
      :ref:`section <Dejan_Tosovic_001>`.
+
+   - How to get FortiExtender status 
+     (:ref:`How to get the FortiExtender status?`).

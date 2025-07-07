@@ -2546,8 +2546,8 @@ How to rename a managed FAP?
      ]
    }
 
-How to get FortiAP status?
-++++++++++++++++++++++++++
+How to get the FortiAP status?
+++++++++++++++++++++++++++++++
 
 Caught in #1058875.
 
@@ -2710,7 +2710,7 @@ controlled by the device with OID ``35009`` in the ``demo`` ADOM:
          }
 
 The goal isn't to obtain the FortiAP status (see section :ref:`How to get
-FortiAP status?`).
+the FortiAP status?`).
 
 The goal is to get and save the FortiAP status *somewhere* in FortiManager to
 have the information available when needed.
@@ -4485,6 +4485,62 @@ To delete the ``fext_001`` FortiExtender device from the ``dc_emea`` ADOM:
                "url": "pm/config/adom/dc_emea/obj/extension-controller/extender/fext_001"
              }
            ]
+         }
+
+.. _Dejan_Tosovic_001:
+
+How to get the FortiExtender Status?
+++++++++++++++++++++++++++++++++++++
+
+Following example is demonstrating how to get the status of the FortiExtender
+devices controlled by all the managed devices in the ``demo`` ADOM:
+
+.. tab-set::
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "verbose": 1,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_controller/status/fex",
+               "scope member": [
+                 {
+                   "name": "All_FortiGate"
+                 }
+               ]
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE 
+
+      .. code-block:: json
+
+         {
+             "result": [
+                 {
+                     "data": [
+                         {
+                             "conn": "",
+                             "data": "{ \"id\": \"FX201EREDACTED02\", \"name\": \"FEX201E\", \"system\": { \"addr_type\": \"\", \"cpu_usage\": 0, \"mem_usage\": 16, \"ip_address\": \"192.168.77.2\", \"ext_mac\": \"e0:23:ff:f5:87:26\", \"netmask\": \"255.255.255.0\", \"gateway\": \"192.168.77.1\", \"sw_version\": \"FXT201E-v7.0.3-build056\", \"hw_version\": \"P23421-02\", \"temperature\": \"63.00\", \"gps_lat\": \"\", \"gps_long\": \"\" }, \"software_version\": \"{\\\"fex\\\":\\\"FXT201E-v7.0.3-build056\\\", \\\"fem\\\":\\\"\\\"}\", \"modem1\": { \"activation_status\": \"\", \"band\": \"\", \"connect_status\": \"CONN_STATE_IDLE\", \"current_snr\": \"\", \"drc_cdma_evdo\": \"\", \"esn_imei\": \"359073069194540\", \"imsi\": \"\", \"lte_physical_cellid\": \"\", \"lte_rs_throughput\": \"\", \"lte_rssi\": \"\", \"lte_sinr\": \"\", \"lte_ts_throughput\": \"\", \"manufacturer\": \"Sierra Wireless, Incorporated\", \"model\": \"EM7455\", \"modem_type\": \"EM7455\", \"oma_dm_version\": \"\", \"operating_mode\": \"\", \"physical_port\": \"2-1.2\", \"pin_status\": \"\", \"plmn\": \"\", \"product\": \"Sierra Wireless, Incorporated\", \"revision\": \"SWI9X30C_02.32.11.00 r8042 CARMD-EV-FRMWR2 2019\\/05\\/15 21:52:20\", \"roaming_status\": \"\", \"rssi\": \"\", \"service\": \"\", \"signal_rsrp\": \"\", \"signal_rsrq\": \"\", \"signal_strength\": \"\", \"usb_wan_mac\": \"\", \"usim_status\": \"\", \"wireless_operator\": \"\", \"wireless_signal\": \"\", \"cdma_profile\": { \"idx\": \"\", \"status\": \"\", \"NAI\": \"\", \"home_addr\": \"\", \"primary_ha\": \"\", \"secondary_ha\": \"\", \"aaa_spi\": \"\", \"ha_spi\": \"\" }, \"sim1\": { \"carrier\": \"\", \"data_usage\": 0, \"iccid\": \"\", \"imsi\": \"\", \"is_active\": 0, \"maximum_allowed_data\": 0, \"modem\": 1, \"next_billing_date\": \"\", \"overage_allowed\": \"\", \"phone_number\": \"\", \"slot\": 1, \"status\": \"disable\" }, \"sim2\": { \"carrier\": \"\", \"data_usage\": 0, \"iccid\": \"\", \"imsi\": \"\", \"is_active\": 0, \"maximum_allowed_data\": 0, \"modem\": 1, \"next_billing_date\": \"\", \"overage_allowed\": \"\", \"phone_number\": \"\", \"slot\": 2, \"status\":          \"disable\" } }, \"connection_state\": \"Connected\" }",
+                             "dev": "dev_001",
+                             "sn": "FX201EREDACTED02",
+                             "state": "authorized",
+                             "type": "fex",
+                             "vdom": "root",
+                             "version": "{\"fex\":\"FXT201E-v7.0.3-build056\", \"fem\":\"\"}"
+                         }
+                     ],         
+                     "url": "pm/config/adom/demo/_controller/status/fex/"
+                 }
+             ],
+             "id": 1
          }
 
 CLI Template
