@@ -3484,7 +3484,67 @@ To retrieve all Model Devices, you need to use the bitwise AND operator in the `
 
               fmg_dvm_syntax.json:			"is_model": 262144,
               [...]
-         
+
+         .. _Dejan_Tosovic_001:
+
+         - Alternatively, you can ``get`` an existing managed device using the
+           ``syntax`` option and look at the returned ``flags`` attributes:
+
+           .. tab-set::
+
+              .. tab-item:: REQUEST
+
+                 .. code-block:: json
+
+                    {
+                      "id": 3,
+                      "method": "get",
+                      "params": [
+                        {
+                          "option": [
+                            "syntax"
+                          ],
+                          "url": "/dvmdb/device/dev_001"
+                        }
+                      ],
+                      "session": "{{session}}",
+                    }
+
+              .. tab-item:: RESPONSE
+
+                 .. code-block:: json
+
+                    {
+                      "...": "...",
+                      "flags": {
+                        "excluded": false,
+                        "opts": {
+                          "azure_vwan_nva": 8589934592,
+                          "backup_mode": 131072,
+                          "cnf_mode": 68719476736,
+                          "deny_api_access": 4398046511104,
+                          "discover": 8,
+                          "faz-autosync": 536870912,
+                          "fgsp_configured": 17179869184,
+                          "fips_mode": 524288,
+                          "has_hdd": 1,
+                          "interim_build": 1024,
+                          "ip-conflict": 268435456,
+                          "is_model": 262144,
+                          "linked_to_model": 67108864,
+                          "need_reset": 34359738368,
+                          "offline_mode": 4096,
+                          "override_management_intf": 1099511627776,
+                          "reload": 16,
+                          "sdwan_management": 2199023255552,
+                          "vdom_enabled": 2
+                        },
+                        "sz": 8,
+                        "type": "uint64"
+                      },
+                      "...": "..."
+                    }         
+
    .. tab-item:: RESPONSE
      
       .. code-block:: json
@@ -7086,7 +7146,7 @@ Certificates
 How to upload a certificate?
 ++++++++++++++++++++++++++++
 
-We need:
+You need:
 
 - A certificate file in PEM format
   
@@ -7122,51 +7182,99 @@ We need:
 
 - The password used to encrypt the key file
 
-We can now upload those element in a managed device ``branch11`` using the
-following FMG JSON RPC API call:
+The following example demonstrates how to combine all these elements to create the ``crt_001`` certificate on the managed device ``dev_001`` using the API request below:
 
-**REQUEST:**
+.. tab-set:: 
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "certificate": "-----BEGIN CERTIFICATE-----\nMIIDRjCCA[...]",
-           "name": "aforcioli_crt",
-           "password": "fortinet",
-           "private-key": "-----BEGIN ENCRYPTED PRIVATE KEY-----\[...]"
-         },
-         "url": "/pm/config/device/branch11/vdom/root/vpn/certificate/local"
-       }
-     ],
-     "session": "V2BYiSk9ErysCNisPGozVwtO/8Olp72vvnTcUIs5zHlydxKIioFC3tUs6KqyLBZ30pFShPfCXBBvhGg6POPCGKJtpEQyEjuD",
-     "verbose": 1
-   }
+      .. code-block:: json
 
-**RESPONSE:**
+         {
+           "id": 1,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "certificate": "-----BEGIN CERTIFICATE-----\nMIIDRjCCA[...]",
+                 "name": "crt_001",
+                 "password": "fortinet",
+                 "private-key": "-----BEGIN ENCRYPTED PRIVATE KEY-----\[...]"
+               },
+               "url": "/pm/config/device/branch11/vdom/root/vpn/certificate/local"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "name": "aforcioli_crt"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/device/branch11/vdom/root/vpn/certificate/local"
-       }   
-     ]
-   }
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "name": "crt_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_001/vdom/root/vpn/certificate/local"
+             }   
+           ]
+         }
+
+How to update an existing certificate?
+++++++++++++++++++++++++++++++++++++++
+
+The use case could be to renew an existing certificate.
+
+Following example shows how to update the ``crt_001`` certificate
+on the managed device ``dev_001`` using the API request below:
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "certificate": "-----BEGIN CERTIFICATE-----\nMIIEATCCAumgAwIBAgI[...]",
+                 "password": "fortinet",
+                 "private-key": "-----BEGIN ENCRYPTED PRIVATE KEY-----\nMIIFNTBfB[...]"
+               },
+               "url": "/pm/config/device/dev_001/vdom/root/vpn/certificate/local/crt_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "crt_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_001/vdom/root/vpn/certificate/local/crt_001"
+             }
+           ]
+         }
 
 How to show certificate details?
 ++++++++++++++++++++++++++++++++
