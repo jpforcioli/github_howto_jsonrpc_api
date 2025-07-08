@@ -4488,7 +4488,7 @@ To delete the ``fext_001`` FortiExtender device from the ``dc_emea`` ADOM:
            ]
          }
 
-.. _Dejan_Tosovic_001:
+.. _Dejan_Tosovic_002:
 
 How to get the FortiExtender Status?
 ++++++++++++++++++++++++++++++++++++

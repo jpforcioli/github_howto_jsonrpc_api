@@ -15,8 +15,9 @@ Contributors
    
 #. Dejan Tosovic, Fortinet Inc.
 
-   - Added a note about the `syntax` option in this Device Management
-     :ref:`section <Dejan_Tosovic_001>`.
+   - Added a note about the `syntax` option for retrieving the available
+     ``flags`` values applicable to managed devices (see :ref:`here
+     <Dejan_Tosovic_001>`).
 
    - How to get FortiExtender status 
      (:ref:`How to get the FortiExtender status?`).
