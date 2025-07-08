@@ -2027,6 +2027,12 @@ a more explicit directive:
    A Model Device created with ``"device action": "add_model"`` will have
    Auto-Link Status (i.e., ``linked_to_model`` attribute) enabled by default.
 
+.. note::
+
+   Where is this ``262176`` value from?
+
+   See :ref:`here <is_model_value_source>`.
+
 Now replace ``flags`` with ``device blueprint``! 
 
 Historically, parameters like ``linked_to_model`` were encoded within the
@@ -2041,8 +2047,7 @@ be clearly expressed using the ``device blueprint``:
 
 There's a special case with the ``need_reset`` flag. To indicate that a device
 requires a factory reset (*ZTP Factory Reset* in FortiManager GUI), you can
-still use the ``flags`` field, but with symbolic values. See :ref:``How to
-enable the `need_reset` flag on a model device?``.
+still use the ``flags`` field, but with symbolic values. See :ref:``How to enable the `need_reset` flag on a model device?``.
 
 Ultimately, if you don't want to use the explicit ``"device action":
 "add_model"`` and keep using the ``flags`` attribute, then at least use symbolic
@@ -3449,6 +3454,8 @@ To retrieve all Model Devices, you need to use the bitwise AND operator in the `
            "session": "{{session}}",
            "verbose": 1
          }
+
+      .. _is_model_value_source:
 
       .. tip::
 
