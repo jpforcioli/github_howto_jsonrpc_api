@@ -9,119 +9,122 @@ How to get all provisioning templates?
 
 Tested with FMG 7.2.2-INTERIM build 1247.
 
-Getting all templates from ADOM `adom_72_003`:
+The following example shows how to get provisioning templates in the ``demo``
+ADOM:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/template/adom/adom_72_003"
-       }
-     ],
-     "session": "jn9iXGAGSGicSBO6exwiFEqF2kgmVWlWWIGopnL/WqxBgJvVslB8+jvoxMUHP6xFgEByd4gXtt9Uci87nTsatw==",
-     "verbose": 1
-   }
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/template/adom/demo"
+             }
+           ],
+           "session": "{{demo}}",
+           "verbose": 1
+         }
    
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "name": "IPsec_Fortinet_Recommended",
-             "oid": 4119,
-             "template setting": {
-               "option": "readonly",
-               "stype": "_ipsec",
-               "widgets": [
-                 "_ipsec"
-               ]
-             },
-             "type": "template"
-           },
-           {
-             "name": "BRANCH_IPsec_Recommended",
-             "oid": 4123,
-             "template setting": {
-               "option": "readonly",
-               "stype": "_ipsec",
-               "widgets": [
-                 "_ipsec"
-               ]
-             },
-             "type": "template"
-           },
-           {
-             "name": "HUB_IPsec_Recommended",
-             "oid": 4129,
-             "template setting": {
-               "option": "readonly",
-               "stype": "_ipsec",
-               "widgets": [
-                 "_ipsec"
-               ]
-             },
-             "type": "template"
-           },
-           {
-             "name": "BRANCH_BGP_Recommended",
-             "oid": 4135,
-             "template setting": {
-               "option": "readonly",
-               "stype": "router_bgp",
-               "widgets": [
-                 "router_bgp"
-               ]
-             },
-             "type": "template"
-           },
-           {
-             "name": "HUB_BGP_Recommended",
-             "oid": 4140,
-             "template setting": {
-               "option": "readonly",
-               "stype": "router_bgp",
-               "widgets": [
-                 "router_bgp"
-               ]
-             },
-             "type": "template"
-           },
-           {
-             "name": "branches",
-             "oid": 4154,
-             "scope member": [
-               {
-                 "name": "adom_72_003_dev_001",
-                 "vdom": "root"
-               }
-             ],
-             "template setting": {
-               "stype": "_ipsec",
-               "widgets": [
-                 "_ipsec"
-               ]
-             },
-             "type": "template"
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/template/adom/adom_72_003"
-       }
-     ]
-   }
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "IPsec_Fortinet_Recommended",
+                   "oid": 4119,
+                   "template setting": {
+                     "option": "readonly",
+                     "stype": "_ipsec",
+                     "widgets": [
+                       "_ipsec"
+                     ]
+                   },
+                   "type": "template"
+                 },
+                 {
+                   "name": "BRANCH_IPsec_Recommended",
+                   "oid": 4123,
+                   "template setting": {
+                     "option": "readonly",
+                     "stype": "_ipsec",
+                     "widgets": [
+                       "_ipsec"
+                     ]
+                   },
+                   "type": "template"
+                 },
+                 {
+                   "name": "HUB_IPsec_Recommended",
+                   "oid": 4129,
+                   "template setting": {
+                     "option": "readonly",
+                     "stype": "_ipsec",
+                     "widgets": [
+                       "_ipsec"
+                     ]
+                   },
+                   "type": "template"
+                 },
+                 {
+                   "name": "BRANCH_BGP_Recommended",
+                   "oid": 4135,
+                   "template setting": {
+                     "option": "readonly",
+                     "stype": "router_bgp",
+                     "widgets": [
+                       "router_bgp"
+                     ]
+                   },
+                   "type": "template"
+                 },
+                 {
+                   "name": "HUB_BGP_Recommended",
+                   "oid": 4140,
+                   "template setting": {
+                     "option": "readonly",
+                     "stype": "router_bgp",
+                     "widgets": [
+                       "router_bgp"
+                     ]
+                   },
+                   "type": "template"
+                 },
+                 {
+                   "name": "branches",
+                   "oid": 4154,
+                   "scope member": [
+                     {
+                       "name": "adom_72_003_dev_001",
+                       "vdom": "root"
+                     }
+                   ],
+                   "template setting": {
+                     "stype": "_ipsec",
+                     "widgets": [
+                       "_ipsec"
+                     ]
+                   },
+                   "type": "template"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/adom/adom_72_003"
+             }
+           ]
+         }
 
 How to get the controller status?
 ---------------------------------
