@@ -100,11 +100,11 @@ ADOM:
                    "type": "template"
                  },
                  {
-                   "name": "branches",
+                   "name": "SITES_BRANCH_IPsec",
                    "oid": 4154,
                    "scope member": [
                      {
-                       "name": "adom_72_003_dev_001",
+                       "name": "dev_001",
                        "vdom": "root"
                      }
                    ],
@@ -121,11 +121,241 @@ ADOM:
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/pm/template/adom/adom_72_003"
+               "url": "/pm/template/adom/demo"
              }
            ]
          }
 
+How to get the list of used and modified provisioning templates?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+That's how FortiManager GUI can show you that a Template Group has been modified
+and explain why. For example, in the picture below, the ``sites`` Template Group
+is marked with the *Modified* status. If you hover your mouse over the red
+triangle icon, a tooltip appears with further details. You can see that two new
+templates were added (an IPsec Tunnel Template named ``sites_BRANCH_IPsec`` and
+an SD-WAN Template named ``sites_BRANCH_SDWAN``), and the existing System
+Template named ``sites_BRANCH_ST`` was also modified:
+
+.. thumbnail:: images/provisioning_templates/image_001.png
+
+To gather this information, FortiManager GUI used the following API call:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_package/dirty_info"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "oid": 42646,
+                   "templates": [
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "fwmprof setting enforced version/FortiGate-40F"
+                         }
+                       ],
+                       "template": "fwmprof/PSIRT_Thu_Jul_17_2025"
+                     },
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "fwmprof setting/42647"
+                         }
+                       ],
+                       "template": "fwmprof/PSIRT_Thu_Jul_17_2025"
+                     }
+                   ]
+                 },
+                 {
+                   "members": [
+                     {
+                       "action": "add",
+                       "url": "template/_ipsec/sites_BRANCH_IPsec"
+                     },
+                     {
+                       "action": "add",
+                       "url": "wanprof/sites_BRANCH_SDWAN"
+                     }
+                   ],
+                   "oid": 42650,
+                   "templates": [
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "device profile settings/42654"
+                         }
+                    ],
+                       "template": "devprof/sites_BRANCH_ST"
+                     },
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "device template widget action-list var-list/system dns/cache-notfound-responses"
+                         }
+                       ],
+                       "template": "devprof/sites_BRANCH_ST"
+                     },
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "device template widget action-list var-list/system dns/dns-cache-limit"
+                         }
+                       ],
+                       "template": "devprof/sites_BRANCH_ST"
+                     },
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "device template widget action-list var-list/system dns/dns-cache-ttl"
+                         }
+                       ],
+                       "template": "devprof/sites_BRANCH_ST"
+                     },
+                     {
+                       "objects": [
+                        {
+                           "action": "edit",
+                           "url": "device template widget action-list var-list/system dns/dns-over-tls"
+                         }
+                       ],
+                       "template": "devprof/sites_BRANCH_ST"
+                     },
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "device template widget action-list var-list/system dns/domain"
+                         }
+                       ],
+                       "template": "devprof/sites_BRANCH_ST"
+                     },
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "device template widget action-list var-list/system dns/primary"
+                         }
+                       ],
+                       "template": "devprof/sites_BRANCH_ST"
+                     },
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "device template widget action-list var-list/system dns/retry"
+                         }
+                       ],
+                       "template": "devprof/sites_BRANCH_ST"
+                     },
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "device template widget action-list var-list/system dns/secondary"
+                         }
+                       ],
+                       "template": "devprof/sites_BRANCH_ST"
+                     },
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "device template widget action-list var-list/system dns/server-hostname"
+                         }
+                       ],
+                       "template": "devprof/sites_BRANCH_ST"
+                     },
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "device template widget action-list var-list/system dns/ssl-certificate"
+                         }
+                       ],
+                       "template": "devprof/sites_BRANCH_ST"
+                     },
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "device template widget action-list var-list/system dns/timeout"
+                         }
+                       ],
+                       "template": "devprof/sites_BRANCH_ST"
+                     },
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "device template widget/dns/conf-sys-dns"
+                       }
+                       ],
+                       "template": "devprof/sites_BRANCH_ST"
+                     },
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                           "url": "system ntp/42659"
+                         }
+                       ],
+                       "template": "devprof/sites_BRANCH_ST"
+                     }
+                   ]
+                 },
+                {
+                   "oid": 42681,
+                   "templates": [
+                     {
+                       "objects": [
+                         {
+                           "action": "edit",
+                  "url": "system ntp/42659"
+                         }
+                       ],
+              "template": "devprof/sites_BRANCH_ST"
+                     }
+                   ]
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_package/dirty_info"
+            }
+           ]
+         }
+         
 How to get the controller status?
 ---------------------------------
 
