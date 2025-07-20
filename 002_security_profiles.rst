@@ -3230,3 +3230,39 @@ the ``demo`` ADOM:
              }
            ]
          }
+
+Inline CASB Profile
+-------------------
+
+How to get list of SaaS Applications?
++++++++++++++++++++++++++++++++++++++
+
+Caught in #1094160.
+
+The following example shows how to get the list of SaaS applications using the 
+``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "attr": "saas-application/name",
+               "option": "datasrc",
+               "url": "/pm/config/adom/demo/obj/casb/profile"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. literalinclude:: datas/security_profiles/output_001.json
+         :language: json

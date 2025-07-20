@@ -1,0 +1,765 @@
+{
+  "id": 3,
+  "result": [
+    {
+      "data": {
+        "casb saas-application": [
+          {
+            "casb-name": "adobe",
+            "domains": [],
+            "name": "adobe",
+            "obj seq": 21,
+            "oid": 4684,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "adobe-acrobat",
+            "domains": [],
+            "name": "adobe-acrobat",
+            "obj seq": 22,
+            "oid": 4685,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "adobe-creativecloud",
+            "domains": [],
+            "name": "adobe-creativecloud",
+            "obj seq": 23,
+            "oid": 4686,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "box",
+            "domains": [],
+            "name": "box",
+            "obj seq": 11,
+            "oid": 4674,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "docusign",
+            "domains": [],
+            "name": "docusign",
+            "obj seq": 2,
+            "oid": 4665,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "dropbox",
+            "domains": [],
+            "name": "dropbox",
+            "obj seq": 12,
+            "oid": 4675,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "dropbox-paper",
+            "domains": [],
+            "name": "dropbox-paper",
+            "obj seq": 1,
+            "oid": 4664,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "github",
+            "domains": [],
+            "name": "github",
+            "obj seq": 24,
+            "oid": 4687,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "gitlab",
+            "domains": [],
+            "name": "gitlab",
+            "obj seq": 25,
+            "oid": 4688,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "google",
+            "domains": [],
+            "name": "google",
+            "obj seq": 7,
+            "oid": 4670,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "google-calendar",
+            "domains": [],
+            "name": "google-calendar",
+            "obj seq": 17,
+            "oid": 4680,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "google-docs",
+            "domains": [],
+            "name": "google-docs",
+            "obj seq": 26,
+            "oid": 4689,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "google-drive",
+            "domains": [],
+            "name": "google-drive",
+            "obj seq": 9,
+            "oid": 4672,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "google-gmail",
+            "domains": [],
+            "name": "google-gmail",
+            "obj seq": 6,
+            "oid": 4669,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "google-maps",
+            "domains": [],
+            "name": "google-maps",
+            "obj seq": 28,
+            "oid": 4691,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "google-meet",
+            "domains": [],
+            "name": "google-meet",
+            "obj seq": 27,
+            "oid": 4690,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "google-translate",
+            "domains": [],
+            "name": "google-translate",
+            "obj seq": 29,
+            "oid": 4692,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "jira",
+            "domains": [],
+            "name": "jira",
+            "obj seq": 35,
+            "oid": 4698,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "linkedin",
+            "domains": [],
+            "name": "linkedin",
+            "obj seq": 30,
+            "oid": 4693,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "meta-facebook",
+            "domains": [],
+            "name": "meta-facebook",
+            "obj seq": 31,
+            "oid": 4694,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "meta-instagram",
+            "domains": [],
+            "name": "meta-instagram",
+            "obj seq": 32,
+            "oid": 4695,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "microsoft",
+            "domains": [],
+            "name": "microsoft",
+            "obj seq": 18,
+            "oid": 4681,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "microsoft-bing",
+            "domains": [],
+            "name": "microsoft-bing",
+            "obj seq": 16,
+            "oid": 4679,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "microsoft-office365",
+            "domains": [],
+            "name": "microsoft-office365",
+            "obj seq": 33,
+            "oid": 4696,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "microsoft-onedrive",
+            "domains": [],
+            "name": "microsoft-onedrive",
+            "obj seq": 4,
+            "oid": 4667,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "microsoft-outlook",
+            "domains": [],
+            "name": "microsoft-outlook",
+            "obj seq": 8,
+            "oid": 4671,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "notion",
+            "domains": [],
+            "name": "notion",
+            "obj seq": 15,
+            "oid": 4678,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "openai",
+            "domains": [],
+            "name": "openai",
+            "obj seq": 20,
+            "oid": 4683,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "servicenow",
+            "domains": [],
+            "name": "servicenow",
+            "obj seq": 34,
+            "oid": 4697,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "ubuntu",
+            "domains": [],
+            "name": "ubuntu",
+            "obj seq": 10,
+            "oid": 4673,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "vimeo",
+            "domains": [],
+            "name": "vimeo",
+            "obj seq": 5,
+            "oid": 4668,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "yahoo",
+            "domains": [],
+            "name": "yahoo",
+            "obj seq": 13,
+            "oid": 4676,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "yahoo-mail",
+            "domains": [],
+            "name": "yahoo-mail",
+            "obj seq": 19,
+            "oid": 4682,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "yandex",
+            "domains": [],
+            "name": "yandex",
+            "obj seq": 14,
+            "oid": 4677,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "casb-name": "youtube",
+            "domains": [],
+            "name": "youtube",
+            "obj seq": 3,
+            "oid": 4666,
+            "status": "enable",
+            "type": "built-in"
+          },
+          {
+            "domains": [],
+            "name": "adobe",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "adobe-acrobat",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "adobe-creativecloud",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "adp",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "adp-workforcenow",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "apple",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "apple-icloud",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "atlassian",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "box",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "confluence",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "discord",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "docusign",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "dropbox",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "dropbox-paper",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "dropbox-sign",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "github",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "gitlab",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "google",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "google-calendar",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "google-docs",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "google-drive",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "google-gmail",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "google-meet",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "google-play",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "google-translate",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "jira",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "linkedin",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "mailchimp",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "meta-facebook",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "meta-instagram",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "microsoft",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "microsoft-bing",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "microsoft-office365",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "microsoft-onedrive",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "microsoft-outlook",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "microsoft-teams",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "monday",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "notion",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "okta",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "openai",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "oracle-cloud",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "salesforce",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "salesforce-trailblazer",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "sap",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "servicenow",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "shopify",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "slack",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "snowflake",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "splunk-cloud",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "survey-monkey",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "tableau-cloud",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "trello",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "vimeo",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "webex",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "wix",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "workday",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "workday-myworkdayjobs",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "yahoo",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "yahoo-mail",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "yandex",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "youtube",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          },
+          {
+            "domains": [],
+            "name": "zoom",
+            "oid": 0,
+            "status": "enable",
+            "type": "customized"
+          }
+        ]
+      },
+      "status": {
+        "code": 0,
+        "message": "OK"
+      },
+      "url": "/pm/config/adom/demo/obj/casb/profile"
+    }
+  ]
+}
