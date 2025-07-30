@@ -1916,8 +1916,11 @@ The following example shows how to get the list of interface actions in a the ``
 FortiAP Management
 ------------------
 
+FortiAP Devices
++++++++++++++++
+
 How to create a Model FortiAP?
-++++++++++++++++++++++++++++++
+______________________________
 
 The example below demonstrates how to add the Model FortiAP named ``fap_001``
 using the ``fap_profile_001`` for the ``dev_001`` managed device, and with a
@@ -2163,7 +2166,7 @@ Profile for the ``dev_001`` managed device in the ``demo`` ADOM:
          }
 
 How to get the Platform Type?
-+++++++++++++++++++++++++++++
+_____________________________
 
 To add a Model FortiAP, you need to specify the ``_platform-type``.
 
@@ -2181,7 +2184,7 @@ respective ``_platform-type`` values using the following API request:
            "method": "get",
            "params": [
              {
-               "url": "pm/config/adom/root/_data/attropts/wireless-controller/wtp-profile/platform/type"
+               "url": "pm/config/adom/demo/_data/attropts/wireless-controller/wtp-profile/platform/type"
              }
            ],
            "session": "{{session}}",
@@ -2223,7 +2226,7 @@ respective ``_platform-type`` values using the following API request:
                  "code": 0,
                  "message": "OK"
                },
-               "url": "pm/config/adom/root/_data/attropts/wireless-controller/wtp-profile/platform/type"
+               "url": "pm/config/adom/demo/_data/attropts/wireless-controller/wtp-profile/platform/type"
              }
            ]
          }
@@ -2231,33 +2234,8 @@ respective ``_platform-type`` values using the following API request:
       The returned ``val`` attribute is the ``_platform-type`` value to use when
       adding a Model AP.
 
-How to delete a FortiAP profile?
-++++++++++++++++++++++++++++++++
-
-Caught in #0600899.
-
-When in Central FortiAP Management mode, we can use this trick where we delete what is matching the filter:
-
-**REQUEST:**
-
-.. code-block:: json
-
-		{
-		  "id": 1,
-		  "method": "delete",
-		  "params": [
-		    {
-		      "url": "pm/config/adom/62_NoVDOM/obj/wireless-controller/wtp-profile",
-		      "filter": [
-		        "name", "in", "foobar"
-		      ],
-		      "confirm":1
-		    }
-		  ]
-		}
-
 How to get list of FortiAPs for an ADOM?
-++++++++++++++++++++++++++++++++++++++++
+________________________________________
 
 Caught in #0610724.
 
@@ -2550,242 +2528,143 @@ your ADOM:
      },
    ]
    
-How to get a specific FortiAP profile?
-++++++++++++++++++++++++++++++++++++++
+You can filter the returned FortiAP details using the ``filter`` attribute as
+shown in the below example where the goal is to retrieve the connection status
+of the FortiAP controlled by the ``dev_001``, ``dev_002`` and ``dev_003``
+managed devices in the ``demo`` ADOM:
 
-To get the ``branches`` FortiAP profile from the ``root`` ADOM:
+.. tab-set::
 
-**REQUEST:**
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "method": "get",
-     "params": [
-       {
-         "url": "pm/config/adom/root/obj/wireless-controller/wtp-profile/branches",
-         "option": [
-           "get flags",
-           "get used",
-           "get devobj mapping",
-           "get meta",
-           "extra info"
-         ]
-       }
-     ],
-     "id": "7e0d5a6d-9528-4613-9f49-f2c1c91e6abc"
-   }
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "admin",
+                 "_conn-state"
+               ],
+               "loadsub": 0,
+               "scope member": [
+                 {
+                   "name": "dev_001",
+                   "vdom": "root"
+                 },
+                 {
+                   "name": "dev_002",
+                   "vdom": "root"
+                 },
+                 {
+                   "name": "dev_003",
+                   "vdom": "root"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/wireless-controller/wtp"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": "7e0d5a6d-9528-4613-9f49-f2c1c91e6abc",
-     "result": [
-       {
-         "data": {
-           "_created timestamp": 1659044466,
-           "_created-by": "admin",
-           "_last-modified-by": "admin",
-           "_modified timestamp": 1659044467,
-           "allowaccess": 0,
-           "ap-country": 1126,
-           "ap-handoff": 0,
-           "apcfg-profile": [],
-           "ble-profile": [],
-           "... TRUNCATED ...",
-           "radio-1": {
-               "... TRUNCATED ...",           
-               "vaps": [
-                 "ssid_001"
-               ],           
-               "... TRUNCATED ..."
-           }
-           "... TRUNCATED ..."
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "pm/config/adom/root/obj/wireless-controller/wtp-profile/branches"
-       }
-     ]
-   }
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "_conn-state": "idle",
+                   "admin": "enable",
+                   "name": "FP23JREDACTED594",
+                   "scope member": [
+                     {
+                       "name": "dev_001",
+                       "vdom": "root"
+                     }
+                   ]
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/wireless-controller/wtp"
+             }
+           ]
+         }
 
-How to get details of managed FortiAP?
-+++++++++++++++++++++++++++++++++++++++
-
-This is useful for instance, when we want to get the FortiAP status.
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "fields": [
-           "name",
-           "admin",
-           "_conn-state"
-         ],
-         "loadsub": 0,
-         "scope member": [
-           {
-             "name": "amer-00-fgt-01",
-             "vdom": "root"
-           },
-           {
-             "name": "amer-12-fgt-01",
-             "vdom": "root"
-           },
-           {
-             "name": "amer-13-fgt-01",
-             "vdom": "root"
-           }
-         ],
-         "url": "pm/config/adom/demo/obj/wireless-controller/wtp"
-       }
-     ],
-     "session": "{{session}}",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "_conn-state": "idle",
-             "admin": "enable",
-             "name": "FP23JFTF21002594",
-             "scope member": [
-               {
-                 "name": "amer-00-fgt-01",
-                 "vdom": "root"
-               }
-             ]
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "pm/config/adom/demo/obj/wireless-controller/wtp"
-       }
-     ]
-   }
-
-In the request, the scope member refers to three devices ``amer-00-fgt-01``,
-``amer-12-fgt-01`` and  ``amer-13-fgt-01`` (and their respective ``root``
-VDOM).
-
-We can also use device groups:
-
-.. code-block:: json
-
-   "scope member": [
-     {
-       "name": "device_group_01"
-     },
-     {
-       "name": "device_group_02"
-     }
-   ]
-
-We can specify the default all devices group:
-
-.. code-block:: json
-
-   "scope member": [
-       {
-           "name": "All_FortiGate"
-       }
-   ]
-
-We can combine devices and device groups:
-
-.. code-block:: json
+      .. note::
   
-   "scope member": [
-       {
-           "name": "device_01",
-           "vdom": "root"
-       },
-       {
-           "name": "device_group_01"
-       },
-       {
-           "name": "device_group_02"
-       }
-       {
-           "name": "device_02",
-           "vdom": "root"
-       }
-   ]
+         This output shows that ``dev_001``, only, is managing a FortiAP 
+         device, which currently has its connection in the `idle` state.
 		
 How to rename a managed FAP?
-++++++++++++++++++++++++++++
+____________________________
 
-**REQUEST:**
+The following example shows how to rename the managed FortiAP with ``wtp-id``
+set to ``PU431FREDACTED6060`` to the name ``fap_002`` for the ``dev_001`` managed device in the ``demo`` ADOM:
 
-.. code-block:: json
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "update",
-     "params": [
-       {
-         "data": {
-           "name": "barfoo",
-           "wtp-id": "PU431FTH20026060"
-         },
-         "scope member": [
-           {
-             "name": "cluster_site_2",
-             "vdom": "root"
-           }
-         ],
-         "url": "/pm/config/adom/production/obj/wireless-controller/wtp"
-       }
-     ],
-     "session": "Soi7tSb2eF8ZrT9kHFmEEZ5FJfl3fcAw1kypP+lg0/4T1JQ2YnCpOUe7w8ymTm1zCq8lR/pB++L8ed6BX4Tkcg=="
-   }
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "update",
+           "params": [
+             {
+               "data": {
+                 "name": "fap_002",
+                 "wtp-id": "PU431FREDACTED6060"
+               },
+               "scope member": [
+                 {
+                   "name": "dev_001",
+                   "vdom": "root"
+                 }
+               ],
+               "url": "/pm/config/adom/demo/obj/wireless-controller/wtp"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json      
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "wtp-id": "PU431FTH20026060"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/production/obj/wireless-controller/wtp"
-       }
-     ]
-   }
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "wtp-id": "PU431FREDACTED6060"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/wireless-controller/wtp"
+             }
+           ]
+         }
 
 How to get the FortiAP status?
-++++++++++++++++++++++++++++++
+______________________________
 
 Caught in #1058875.
 
-The following example shows how get the status for all of the FortiAP device
+The following example shows how get the status for all of the FortiAP devices
 controlled by the ``dev_001`` managed device and its ``root`` VDOM, in the
 ``demo`` ADOM:
 
@@ -2879,7 +2758,7 @@ controlled by the ``dev_001`` managed device and its ``root`` VDOM, in the
            just see section :ref:`How to refresh the FortiAP status?`
 
 How to refresh the FortiAP status?
-++++++++++++++++++++++++++++++++++     
+__________________________________
 
 .. warning::
 
@@ -2948,6 +2827,161 @@ the FortiAP status?`).
 
 The goal is to get and save the FortiAP status *somewhere* in FortiManager to
 have the information available when needed.
+
+How to update a FortiAP configuration?
+______________________________________
+
+The following example shows how to update few attributes of the ``radio-1`` for 
+the controlled FortiAP with ``wtp-id`` set to ``FP231E****000001`` of the
+``dev_001`` managed device in the ``demo`` ADOM:
+
+.. tab-set::
+
+    .. tab-item:: REQUEST
+  
+        .. code-block:: json
+
+           {
+             "id": 3,
+             "method": "update",
+             "params": [
+               {
+                 "data": {
+                   "auto-power-target": "-70",
+                   "drma-manual-mode": 3,
+                   "override-band": 0,
+                   "override-channel": 0,
+                   "override-txpower": 0,
+                   "override-vaps": 0,
+                   "power-mode": 2,
+                   "radio-id": 0
+                 },
+                 "scope member": {
+                   "name": "dev_001",
+                   "vdom": "root"
+                 },
+                 "url": "/pm/config/adom/demo/obj/wireless-controller/wtp/FP231E****000001/radio-1"
+               }
+             ],
+             "session": "{{session}}"
+           }
+
+
+    .. tab-item:: RESPONSE
+  
+        .. code-block:: json
+
+           {
+             "id": 3,
+             "result": [
+               {
+                 "status": {
+                   "code": 0,
+                   "message": "OK"
+                 },
+                 "url": "/pm/config/adom/demo/obj/wireless-controller/wtp/FP231E****000001/radio-1"
+               }
+             ]
+           }
+
+        .. note::
+
+           The attributes are only updated in ADOM DB. An installation is 
+           required to have those updated attributes copied to Device DB.
+
+FortiAP Profiles
+++++++++++++++++
+
+How to get a specific FortiAP profile?
+______________________________________
+
+To get the ``branches`` FortiAP profile from the ``root`` ADOM:
+
+**REQUEST:**
+
+.. code-block:: json
+
+   {
+     "method": "get",
+     "params": [
+       {
+         "url": "pm/config/adom/root/obj/wireless-controller/wtp-profile/branches",
+         "option": [
+           "get flags",
+           "get used",
+           "get devobj mapping",
+           "get meta",
+           "extra info"
+         ]
+       }
+     ],
+     "id": "7e0d5a6d-9528-4613-9f49-f2c1c91e6abc"
+   }
+
+**RESPONSE:**
+
+.. code-block:: json
+
+   {
+     "id": "7e0d5a6d-9528-4613-9f49-f2c1c91e6abc",
+     "result": [
+       {
+         "data": {
+           "_created timestamp": 1659044466,
+           "_created-by": "admin",
+           "_last-modified-by": "admin",
+           "_modified timestamp": 1659044467,
+           "allowaccess": 0,
+           "ap-country": 1126,
+           "ap-handoff": 0,
+           "apcfg-profile": [],
+           "ble-profile": [],
+           "... TRUNCATED ...",
+           "radio-1": {
+               "... TRUNCATED ...",           
+               "vaps": [
+                 "ssid_001"
+               ],           
+               "... TRUNCATED ..."
+           }
+           "... TRUNCATED ..."
+         },
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "pm/config/adom/root/obj/wireless-controller/wtp-profile/branches"
+       }
+     ]
+   }
+
+
+How to delete a FortiAP profile?
+________________________________
+
+Caught in #0600899.
+
+When in Central FortiAP Management mode, we can use this trick where we delete what is matching the filter:
+
+**REQUEST:**
+
+.. code-block:: json
+
+		{
+		  "id": 1,
+		  "method": "delete",
+		  "params": [
+		    {
+		      "url": "pm/config/adom/62_NoVDOM/obj/wireless-controller/wtp-profile",
+		      "filter": [
+		        "name", "in", "foobar"
+		      ],
+		      "confirm":1
+		    }
+		  ]
+		}
+
+
 
 FortiSwitch Management
 ----------------------
@@ -8492,11 +8526,17 @@ Template in the ``demo`` ADOM:
 Fabric Authorization Template
 -----------------------------
 
-How to generate?
-++++++++++++++++
+How to apply a Fabric Authoriztion Template?
+++++++++++++++++++++++++++++++++++++++++++++
 
-To apply the ``fat_001`` Fabric Authorization Template onto the
-``dc_emea_dev_002`` managed device in the ``dc_emea`` ADOM:
+Applying the Fabric Authorization Template to a managed device
+using the API is similar to using the *Generate* action from the FortiManager
+GUI, as shown in the image below:
+
+.. thumbnail:: images/provisioning_templates/image_002.png
+
+The following example shows how to apply the ``fat_001`` Fabric Authorization
+Template to the ``dev_001`` managed device in the ``demo`` ADOM:
 
 .. tab-set::
 
@@ -8510,10 +8550,10 @@ To apply the ``fat_001`` Fabric Authorization Template onto the
            "params": [
              {
                "data": {
-                 "adom": "dc_emea",
+                 "adom": "demo",
                  "scope": [
                    {
-                     "name": "dc_emea_dev_002",
+                     "name": "dev_001",
                      "vdom": "root"
                    }
                  ],
@@ -8544,6 +8584,14 @@ To apply the ``fat_001`` Fabric Authorization Template onto the
              }
            ]
          }
+
+      .. note::
+
+         Like with every API calls returning a task ID, you have to monitor the 
+         task status by getting ``/pm/task/{task}`` API endpoint.
+
+         The generated Lan Edge devices (FortiAP, FortiSwitch or FortiExtender)
+         will be created both in ADOM DB and Device DB.
 
 Export/import
 -------------
