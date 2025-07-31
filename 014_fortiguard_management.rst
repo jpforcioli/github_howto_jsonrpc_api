@@ -2169,7 +2169,7 @@ Local External Resources
 ------------------------
 
 Starting with FortiManager 7.4.1 and 7.2.5 (#0934664), it is possible to manage
-external resource files hosted by FortiManager.
+External Threat Feeds using *Local External Resources* files hosted by FortiManager.
 
 .. note::
 
@@ -2189,13 +2189,14 @@ external resource files hosted by FortiManager.
    Both forms yield the same result. External resource files are accessible to 
    all ADOMs.
 
-How to add a local external resource file?
-++++++++++++++++++++++++++++++++++++++++++
+How to add a local external resource?
++++++++++++++++++++++++++++++++++++++
 
-Using |fmg_api| for adding a local external resource file
-_________________________________________________________
+Using |fmg_api| for adding a local external resource
+____________________________________________________
 
-To add a new external resource file named ``addresses_003.txt``:
+The following example shows how to add the ``local_external_resource_001.txt``
+local external resource:
 
 .. tab-set::
 
@@ -2207,9 +2208,9 @@ To add a new external resource file named ``addresses_003.txt``:
            "method": "set",
            "params": [
              {
-               "url": "/pm/config/global/_external/resource/addresses_003.txt",
+               "url": "/pm/config/global/_external/resource/local_external_resource_001.txt",
                "data": {
-                 "content": "11.11.11.11\n11.11.11.22\n11.11.11.44\n"
+                 "content": "10.0.0.1\n10.0.0.2\n10.0.0.3\n"
                },
                "session": "{{session}}"
              }
@@ -2227,15 +2228,16 @@ To add a new external resource file named ``addresses_003.txt``:
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/pm/config/global/_external/resource/addresses_003.txt"
+               "url": "/pm/config/global/_external/resource/local_external_resource_001.txt"
              }
            ]
          }
 
-Using REST API for adding a local external resource file
-________________________________________________________
+Using REST API for adding a local external resource
+___________________________________________________
 
-To add a new external resource file named ``addresses_004.txt``:
+The following example shows how to add the ``local_external_resource_002.txt``
+local external resource file:
 
 .. tab-set::
 
@@ -2244,12 +2246,12 @@ To add a new external resource file named ``addresses_004.txt``:
       .. code-block:: shell
 
          curl -sk -u devops:fortinet -X PUT \
-         https://10.210.35.112/jsonrpc/pm/config/global/_external/resource/addresses_004.txt \ 
-         --data-binary @addresses_004.txt | jq
+         https://10.210.35.112/jsonrpc/pm/config/global/_external/resource/local_external_resource_002.txt \ 
+         --data-binary @local_external_resource_002.txt | jq
 
       .. note::
         
-         File ``addresses_004.txt`` is with following content:
+         File ``local_external_resource_002.txt`` is with following content:
          
          .. code-block:: text
           
@@ -2270,17 +2272,21 @@ To add a new external resource file named ``addresses_004.txt``:
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/pm/config/global/_external/resource/addresses_004.txt"
+               "url": "/pm/config/global/_external/resource/local_external_resource_002.txt"
              }
            ]
          }                    
 
-How to get the list of local external resource files?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to get the list of local external resources?
+++++++++++++++++++++++++++++++++++++++++++++++++
 
 Caught in #0953203 (7.2.5/7.4.2).
 
-The following example shows how to get the list of external resource files:
+
+Using |fmg_api| for getting the list of local external resources
+________________________________________________________________
+
+The following example shows how to get the list of local external resources:
 
 .. tab-set::
 
@@ -2310,20 +2316,15 @@ The following example shows how to get the list of external resource files:
              {
                "data": [
                  {
-                   "modified": 1739378022,
-                   "name": "file_001.txt",
-                   "size": 601428
+                   "modified": 1753994876,
+                   "name": "local_external_resource_002.txt",
+                   "size": 45
                  },
                  {
-                   "modified": 1738768252,
-                   "name": "file_002.txt",
-                   "size": 55
-                 },
-                 {
-                   "modified": 1739950759,
-                   "name": "file_003.txt",
-                   "size": 64
-                 }
+                   "modified": 1753994558,
+                   "name": "local_external_resource_001.txt",
+                   "size": 27
+                 }                
                ],
                "status": {
                  "code": 0,
@@ -2336,14 +2337,61 @@ The following example shows how to get the list of external resource files:
 
       .. note:
 
-         For performance reason, the file content isn't returned. Some of the
-         files could be large.
+         For performance reason, the ``content`` isn't returned. Some of them  
+         could be large.
 
-How to get a local external resource file content?
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Using REST API for getting the list of local external resources
+_______________________________________________________________
 
-The following example shows how to retrieve the content of the ``file_001.txt``
-external resource file:
+The following example shows how to get the list of local external resources:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: shell
+
+         curl -sk -u devops:fortinet -X GET \
+         https://10.210.35.112/jsonrpc/pm/config/global/_external/resource | jq
+
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "result": [
+             {
+               "data": [
+                 {
+                   "modified": 1753994876,
+                   "name": "local_external_resource_002.txt",
+                   "size": 45
+                 },
+                 {
+                   "modified": 1753994558,
+                   "name": "local_external_resource_001.txt",
+                   "size": 27
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/global/_external/resource"
+             }
+           ]
+         }        
+
+
+How to get the content of a local external resource?
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Using |fmg_api| for getting the content of a local external resource
+____________________________________________________________________
+
+The following example shows how to retrieve the ``content`` of the
+``local_external_resource_001.txt`` local external resource:
 
 .. tab-set::
    
@@ -2356,7 +2404,7 @@ external resource file:
            "method": "get",
            "params": [
              {
-               "url": "pm/config/global/_external/resource/file_001.txt"
+               "url": "pm/config/global/_external/resource/local_external_resource_001.txt"
              }
            ],
            "session": "{{session}}",
@@ -2372,27 +2420,178 @@ external resource file:
            "result": [
              {
                "data": {
-                 "content": "38.180.91.21\n45.8.146.229\n45.83.140.121\n45.89.53.41\n86.104.72.41",
-                 "modified": 1739950759,
-                 "name": "file_001.txt",
-                 "size": 64
+                 "content": "10.0.0.1\n10.0.0.2\n10.0.0.3\n"
+                 "modified": 1753994558,
+                 "name": "local_external_resource_001.txt",
+                 "size": 27
                },
                "status": {
                  "code": 0,
                  "message": "OK"
                },
-               "url": "pm/config/global/_external/resource/file_001.txt"
+               "url": "pm/config/global/_external/resource/local_external_resource_001.txt"
              }
            ]
-         }         
+         }
 
-How to delete a local external resource file?
-+++++++++++++++++++++++++++++++++++++++++++++
+Using REST API for getting the content of a local external resource
+___________________________________________________________________
 
-Using |fmg_api| for deleting a local external resource file
-___________________________________________________________
+The following example shows how to retrieve the ``content`` of the
+``local_external_resource_002.txt`` local external resource:
 
-To delete the external resource file named ``addresses_003.txt``:
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: shell
+
+         curl -sk -u devops:fortinet -X GET \
+         https://10.210.35.112/jsonrpc/pm/config/global/_external/resource/local_external_resource_002.txt
+
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: text
+
+         10.0.0.1
+         10.0.0.2
+         10.0.0.3
+         10.0.0.4
+         10.0.0.5
+
+      .. note::
+
+         This is not a JSON output.
+
+How to replace the entire ``content`` of a local external resource?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Using |fmg_api| for replacing the content of a local external resource
+______________________________________________________________________
+
+The example below shows how to replace the ``content`` of the
+``local_external_resource_001`` local external resource:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "content": "10.1.0.1\n10.1.0.2\n10.1.0.3\n"
+               },
+               "url": "pm/config/global/_external/resource/local_external_resource_001.txt"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         You just need to reapply the API call used when you created that local
+         external resource (see :ref:`How to add a local external resource?`) 
+         but with a new ``content`` block.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "pm/config/global/_external/resource/local_external_resource_001.txt"
+             }
+           ]
+         }
+
+Using REST API for replacing the content of a local external resource
+_____________________________________________________________________
+
+
+The example below shows how to replace the ``content`` of the
+``local_external_resource_002`` local external resource:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: shell
+
+         curl -sk -u devops:fortinet -X PUT \
+         https://10.210.34.120/jsonrpc/pm/config/global/_external/resource/local_external_resource_002.txt \
+         --data-binary @local_external_resource_002.txt | jq
+
+      .. note::
+
+         You just need to reapply the API call used when you created that local
+         external resource (see :ref:`How to add a local external resource?`) 
+         but with a new ``content`` block.        
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/global/_external/resource/local_external_resource_002.txt"
+             }
+           ]
+         }
+
+How to delete a local external resource?
+++++++++++++++++++++++++++++++++++++++++
+
+Using |fmg_api| for deleting a local external resource
+______________________________________________________
+
+The example below shows how to replace the ``content`` of the
+``local_external_resource_002.txt`` local external resource:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: shell
+
+         curl -sk -u devops:fortinet -X DELETE \
+         https://10.210.35.112/jsonrpc/pm/config/global/_external/resource/local_external_resource_002.txt \
+         | jq
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/global/_external/resource/local_external_resource_002.txt"
+             }
+           ]
+         }
+
+The following example shows how to delete the local external resource named 
+``local_external_resource_001.txt``:
 
 .. tab-set::
 
@@ -2404,7 +2603,7 @@ To delete the external resource file named ``addresses_003.txt``:
            "method": "delete",
            "params": [
              {
-               "url": "/pm/config/global/_external/resource/addresses_003.txt",
+               "url": "/pm/config/global/_external/resource/local_external_resource_001.txt",
                "session": "{{session}}"
              }
            ]
@@ -2421,15 +2620,16 @@ To delete the external resource file named ``addresses_003.txt``:
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/pm/config/global/_external/resource/addresses_003.txt"
+               "url": "/pm/config/global/_external/resource/local_external_resource_001.txt"
              }
            ]
          }
 
-Using REST API for deleting a local external resource file
-__________________________________________________________
+Using REST API for deleting a local external resource
+_____________________________________________________
 
-To add a new external resource file named ``addresses_004.txt``:
+The following example shows how to delete the local external resource named 
+``local_external_resource_002.txt``:
 
 .. tab-set::
 
@@ -2438,7 +2638,7 @@ To add a new external resource file named ``addresses_004.txt``:
       .. code-block:: shell
 
          curl -sk -u devops:fortinet -X DELETE \
-         https://10.210.35.112/jsonrpc/pm/config/global/_external/resource/addresses_004.txt \
+         https://10.210.35.112/jsonrpc/pm/config/global/_external/resource/local_external_resource_002.txt \
          | jq
 
    .. tab-item:: RESPONSE
@@ -2452,7 +2652,7 @@ To add a new external resource file named ``addresses_004.txt``:
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/pm/config/global/_external/resource/addresses_004.txt"
+               "url": "/pm/config/global/_external/resource/local_external_resource_002.txt"
              }
            ]
          }

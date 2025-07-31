@@ -3179,55 +3179,6 @@ device ``dev_001`` in the ``demo`` ADOM:
            ]
          }
 
-How to create a custom command?
-+++++++++++++++++++++++++++++++
-
-.. tab-set::
-
-   .. tab-item:: REQUEST
-
-      .. code-block:: json
-
-         {
-           "id": "1",
-           "method": "add",
-           "params": [
-             {
-               "url": "pm/config/adom/{{adom}}/obj/switch-controller/custom-command",
-               "data": 
-                 {
-                   "command": "config user tacacs\n    edit TACACS_SRV\n        set authorization enable\n        set authen-type ascii\n        set key fortinet123456\n        set server 10.0.0.1\n    next\nend",
-                   "command-name": "custom_command_002"
-                 }
-             }
-           ],
-           "session": "{{session}}"
-         }
-
-      .. note::
-
-         - You have to use the ``\n`` character to pass a line in the CLI script
-
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-
-         {
-           "id": "1",
-           "result": [
-             {
-               "data": {
-                 "command-name": "custom_command_002"
-               },
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "pm/config/adom/production/obj/switch-controller/custom-command"
-             }
-           ]
-         }        
-
 How to create a FortiSwitch Template?
 +++++++++++++++++++++++++++++++++++++
 
@@ -3557,6 +3508,55 @@ Template name is ``fsw_template_002``:
              }
            ]
          }
+
+How to create a custom command?
++++++++++++++++++++++++++++++++
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": "1",
+           "method": "add",
+           "params": [
+             {
+               "url": "pm/config/adom/{{adom}}/obj/switch-controller/custom-command",
+               "data": 
+                 {
+                   "command": "config user tacacs\n    edit TACACS_SRV\n        set authorization enable\n        set authen-type ascii\n        set key fortinet123456\n        set server 10.0.0.1\n    next\nend",
+                   "command-name": "custom_command_002"
+                 }
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         - You have to use the ``\n`` character to pass a line in the CLI script
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": "1",
+           "result": [
+             {
+               "data": {
+                 "command-name": "custom_command_002"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "pm/config/adom/production/obj/switch-controller/custom-command"
+             }
+           ]
+         }        
 
 How to add a custom command to a FortiSwitch Template?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -117,8 +117,87 @@ to ``www.url-004.com``) in the ``webfilter.urlfilter`` with ID ``1`` in the ``de
       .. note::
 
          In this case, no ID are returned.
+
+How to replace the entire list of webfilter.urlfilter.entries?
+___________________________________________________________________
+
+Sometimes, you receive a new list of URLs and don’t want to go through the
+tedious process of comparing which ones are present or missing from your
+existing ``webfilter.urlfilter.entries``, then updating accordingly. 
+
+It is much simpler and faster to just ignore the existing ``webfilter.urlfilter.entries`` list and replace it with the new one.
+
+The example below shows how to replace the contents of the
+``webfilter.urlfilter.entries`` sub-table of the URL Filter with ID ``1`` in the
+``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "entries": [
+                   {
+                     "action": "block",
+                     "url": "www.host-001.com"
+                   },
+                   {
+                     "action": "block",
+                     "url": "www.host-002.com"
+                   },
+                   {
+                     "action": "block",
+                     "url": "www.host-003.com"
+                   },
+                   {
+                     "action": "block",
+                     "url": "www.host-004.com"
+                   },
+                   {
+                     "action": "block",
+                     "url": "www.host-005.com"
+                   },
+                   {
+                     "action": "block",
+                     "url": "www.host-006.com"
+                   }
+                 ]
+               },
+               "revision note": "URL List v20250607-002.",
+               "url": "pm/config/adom/demo/obj/webfilter/urlfilter/1"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "id": 1
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "pm/config/adom/demo/obj/webfilter/urlfilter/1"
+             }
+           ]
+         }
          
-How to delete an entry in a webfilter.urlfilter. entries?
+How to delete an entry in a webfilter.urlfilter.entries?
 _________________________________________________________
 
 Goal is to delete an existing entry without overwritting the existing ones.
