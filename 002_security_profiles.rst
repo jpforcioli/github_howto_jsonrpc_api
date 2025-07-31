@@ -119,7 +119,7 @@ to ``www.url-004.com``) in the ``webfilter.urlfilter`` with ID ``1`` in the ``de
          In this case, no ID are returned.
 
 How to replace the entire list of webfilter.urlfilter.entries?
-___________________________________________________________________
+______________________________________________________________
 
 Sometimes, you receive a new list of URLs and don’t want to go through the
 tedious process of comparing which ones are present or missing from your
