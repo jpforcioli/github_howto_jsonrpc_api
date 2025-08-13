@@ -9606,49 +9606,139 @@ The following example shows how to trigger an unassign operation for the ``g_ppk
            ]
          }
 
-How to get ADOM options?
-------------------------
+How to get the assignment status for Global Policy Packages?
+------------------------------------------------------------
 
-We don't know what is this one doing yet...
+The following example shows how to get the assignement status for the Global
+Policy Packages:
 
-We discovered it during a debug of a FMG 7.0.1-INTERIM build 0080:
+.. tab-set::
 
-**REQUEST:**
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/adom/demo/_adom/options"
-       }
-     ],
-     "session": "TSigtab+3M9+fLF6QNdSxvkXUPShX97W5/VhKV4R1xb95WKYP8dfG/sEr8wsYfoiHUXqxZEWjnXwMalYShTFMg==",
-     "verbose": 1
-   }
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/global/_package/status"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json         
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "pkg list": []
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/demo/_adom/options"
-       }
-     ]
-   }
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "adom": "demo",
+                   "flags": 0,
+                   "pkg": "g_pkg_001",
+                   "status": "installed",
+                   "stype": 0,
+                   "type": 1
+                 },
+                 {
+                   "adom": "demo",
+                   "flags": 0,
+                   "pkg": "g_pkg_002",
+                   "status": "installed",
+                   "stype": 0,
+                   "type": 1
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/global/_package/status"
+             }
+           ]
+         }
+
+How to get the Policy Packages with Global Policy Packages?
+-----------------------------------------------------------
+
+The following example demonstrates how to get the list of Policy Packages in
+``demo`` ADOM which have received Global Policy Packages:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_adom/options"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "assign_excluded": "disable",
+                   "assign_name": "g_pkg_002",
+                   "name": "__gpkg__6111",
+                   "oid": 537523,
+                   "pkg list": [
+                     {
+                       "name": "pkg_002",
+                       "oid": 537517
+                     }
+                   ],
+                   "specify_assign_pkg_list": "enable"
+                 },
+                 {
+                   "assign_excluded": "disable",
+                   "assign_name": "g_pkg_001",
+                   "name": "__gpkg__6113",
+                   "oid": 537533,
+                   "pkg list": [
+                     {
+                       "name": "pkg_001",
+                       "oid": 537519
+                     }
+                   ],
+                   "specify_assign_pkg_list": "enable"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_adom/options"
+             }
+           ]
+         }  
+
+      .. note::
+
+         This output shows that two Policy Packages - ``pkg_001`` and
+         ``pkg_002`` have received the ``g_pkg_001`` and ``g_pkg_002`` Global 
+         Policy Packages respectively.
 
 Central DNAT
 ------------
