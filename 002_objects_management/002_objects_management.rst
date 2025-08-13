@@ -9,35 +9,6 @@ following |json_rpc_u|:
    /pm/config/adom/{adom}/obj/{path_to_object}
    /pm/config/global/obj/{path_to_object}
 
-How to reference objects when names have special characters?
-------------------------------------------------------------
-
-It is required to escape the special character using the ``\\`` (double
-back-slash) notation.
-
-For instance to update the ``Net_10.0.0.0/18`` (where ``/`` is the special
-character) located in the ``root`` ADOM:
-
-.. tab-set:: 
-
-   .. tab-item:: REQUEST
-
-      .. code-block::
-
-        {
-          "id": 4,
-          "method": "update",
-          "params": [
-            {
-              "url": "pm/config/adom/root/obj/firewall/address/Net_10.0.0.0\\/18",
-              "data": {
-                "subnet": "10.0.0.0/255.255.255.0",
-              }
-            }
-          ],
-          "session": "{{session}}",
-        }
-
 Metadata
 --------
 
@@ -1889,6 +1860,35 @@ To add wilcard FQDN ``*.foobar.*`` to ADOM ``adom_70_001``:
 
 Objects Operations
 ------------------
+
+How to reference objects when names have special characters?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+It is required to escape the special character using the ``\\`` (double
+back-slash) notation.
+
+For instance to update the ``Net_10.0.0.0/18`` (where ``/`` is the special
+character) located in the ``root`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block::
+
+        {
+          "id": 4,
+          "method": "update",
+          "params": [
+            {
+              "url": "pm/config/adom/root/obj/firewall/address/Net_10.0.0.0\\/18",
+              "data": {
+                "subnet": "10.0.0.0/255.255.255.0",
+              }
+            }
+          ],
+          "session": "{{session}}",
+        }
 
 Objects default values
 ++++++++++++++++++++++
