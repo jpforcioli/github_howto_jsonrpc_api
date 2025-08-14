@@ -673,6 +673,90 @@ Refresh multiple devices
      ]
    }  
 
+Device timezone
+---------------
+
+How to get the list of available timezones?
++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #1018335.
+
+The following example shows how to obtain the list of available timezones for
+the ``dev_001`` managed device:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "option": "get reserved",
+               "url": "/pm/config/device/demo_dev_001/global/system/timezone"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "Africa/Abidjan",
+                   "obj description": "",
+                   "oid": 0
+                 },
+                 {
+                   "name": "Africa/Accra",
+                   "obj description": "",
+                   "oid": 0
+                 },
+                 {
+                   "name": "Africa/Addis_Ababa",
+                   "obj description": "",
+                   "oid": 0
+                 },
+                 {"...": "..."},
+                 {
+                   "name": "W-SU",
+                   "obj description": "",
+                   "oid": 0
+                 },
+                 {
+                   "name": "WET",
+                   "obj description": "",
+                   "oid": 0
+                 },
+                 {
+                   "name": "Zulu",
+                   "obj description": "",
+                   "oid": 0
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/demo_dev_001/global/system/timezone"
+             }
+           ]
+         }
+
+      .. note::
+
+         Yes! You can check using your FortiGate CLI, but the ``config system
+         timezome`` does exist.
+
 Device coordinates
 ------------------
 
