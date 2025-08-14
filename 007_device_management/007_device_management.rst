@@ -1212,8 +1212,11 @@ The following example shows how to get the list of managed devices for all ADOMs
 
          - The ``demo_002`` ADOM manages two devices: ``dev_003``
 
+Real Device
+-----------
+
 How to add a real device?
--------------------------
++++++++++++++++++++++++++
 
 The following example shows how to add the ``dev_001`` in the ``demo`` ADOM:
 
@@ -1386,7 +1389,55 @@ The following example shows how to add the ``dev_001`` in the ``demo`` ADOM:
                 ]
               }            
 
+How to add a real device in a Fabric of FortiManager?
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+Caught in #1190999.
+
+The following example shows how to add the ``dev_001`` device to a FortiManager Fabric Member:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+             "id": 16,
+             "method": "exec",
+             "params": [
+                 {
+                     "data": {
+                         "adom": "vpn_mgmt76",
+                         "device": {
+                             "adm_pass": "v",
+                             "adm_usr": "admin",
+                             "cluster_worker": "FMG-VMREDACTED69",
+                             "ip": "10.8.71.31",
+                             "latitude": "5.61402118544992",
+                             "location_from": "GUI",
+                             "longitude": "-0.179085731506348",
+                             "mgmt_mode": "fmgfaz",
+                             "name": "vlan171_0031"
+                         },
+                         "flags": [
+                             "create_task",
+                             "nonblocking"
+                         ]
+                     },
+                     "url": "/dvm/cmd/add/device"
+                 }
+             ],
+             "session": "..."
+         }
+
+      .. note::
+
+         This request is sent to the FortiManager Fabric Supervisor.
+
+   .. tab-item:: RESPONSE
+
+      TBD
 
 How to change the serial number of a managed device?
 ----------------------------------------------------
