@@ -139,7 +139,7 @@ A corresponding ``curl`` command could be:
 
       Xsrf-Token: 5XZchgLl1faoaKobfowPdMfTLsqTRVo
 
-how to Logout?
+How to Logout?
 ++++++++++++++
 
 Use the following request to logout from your FortiManager:
@@ -371,6 +371,106 @@ This is to get most of the information exposed in the *License Information* widg
             }
           }
         }        
+
+How to get the FortiManager Event Logs?
++++++++++++++++++++++++++++++++++++++++
+
+This will return the logs usually displayed in the FortiManager GUI under the
+**System Settings** > **Event Logs** as shown in the image below:
+
+.. thumbnail:: images/alternative_fortimanager_api/image_002.png
+
+The following example shows how to return 10K event logs captured on August
+19th, 2025 between 8:19:54pm and 9:19:53pm using a structured format:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: text
+
+         POST https://10.210.35.120:443/cgi-bin/module/flatui_proxy
+
+         {
+             "method": "get",
+             "url": "/gui/sys/event-log",
+             "params": {
+                 "showRaw": 0,
+                 "startIndex": 0,
+                 "results": 10000,
+                 "key": "elog",
+                 "search": "1|1|2025-08-19!2025-08-19|5|0|0#2|1|20:19:54!21:19:53|5|0|0",
+                 "type": "sslog",
+                 "adom_to_read": ""
+             }
+         }
+
+      .. note::
+  
+         - ``showRaw`` is for instructing to return the log in a structured
+           format (``0``) or in a raw format (``1``).
+
+         - The ``startIndex`` parameter is used to specify the starting point 
+           for the logs to be returned. This is useful for pagination.
+
+         - The ``search`` parameter is used to filter the logs based on the 
+           date and time range. The format is as follows:
+
+           - `1|1|YYYY-MM-DD!YYYY-MM-DD|5|0|0`: Date range
+           - `2|1|HH:MM:SS!HH:MM:SS|5|0|0`: Time range
+
+           Keep it empty (i.e., ``""``) if you want all event logs.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "result": [
+             {
+               "data": {
+                 "filterList": "date,time,level,user,subtype,operation,performed_on,changes,desc,message,adom-1,1,0,0,0,0,0,0,0,0,0",
+                 "records": [
+                   {
+                     "adom": "",
+                     "changes": "Switched from ADOM root",
+                     "date": "2025-08-19",
+                     "desc": "Device Manager dvm log at information level",
+                     "level": "information",
+                     "msg": "",
+                     "operation": "Switch to new ADOM",
+                     "performed_on": "demo",
+                     "subtype": "dvm",
+                     "time": "21:19:42",
+                     "user": "admin-GUI(172.26.153.7)"
+                   },
+                   {"...": "..."},
+                   {
+                     "adom": "",
+                     "changes": "Receive an update package from fds(00033.00067-2508190155): 05004000NIDS02200(IPS Meta-Data), version:00033.00067-2508190155",
+                     "date": "2025-08-19",
+                     "desc": "Package update response from FortiGuard server received",
+                     "level": "information",
+                     "msg": "Receive an update package from fds(00033.00067-2508190155): 05004000NIDS02200(IPS Meta-Data), version:00033.00067-2508190155",
+                     "operation": "Update Response",
+                     "performed_on": "usfds1.fortinet.com",
+                     "subtype": "fgd",
+                     "time": "20:23:33",
+                     "user": "update_manager"
+                   }
+                 ],
+                 "subTypeList": "unknown,system,fgfm,devcfg,glbcfg,scrmgr,webport,scfw,scply,scvpn,epmgr,rev,dm,rtmon,lrmgr,ha,fmwmgr,fgd,fctmgr,fmlmgr,iolog,objcfg,dvm,fmgws,faz,logd,fips,devops,fazsys,logdev,logging,logfile,report,eventmgmt,logdb,hcache,diskquota,fortiview,ediscovery,fazha,incident,controller,unknown",
+                 "totalNumber": 198
+               },
+               "id": null,
+               "status": {
+                 "code": 0,
+                 "message": ""
+               },
+               "url": "/gui/sys/event-log"
+             }
+           ]
+         }          
 
 How to generate a FortiManager CSR using FortiManager GUI API?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
