@@ -2440,232 +2440,238 @@ Internet Service Objects
 How to get the regions that can be used in a Geographic Based Internet Service object?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-To get the regions that could be used to define a geographic based internet
-service object: 
+The following example shows how to get the regions that could be used to define
+a geographic based internet service object:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/root/_fdsdb/internet-service/region"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/adom/root/_fdsdb/internet-service/region"
-       }
-     ],
-     "session": "cE/JiIBEdO4fWbjUPcrkyTCxuNnT6IGv3NKKHbgXRdSLwphqWRCYRu0M1ZZq4iwMhbQgft8evZlgokRV1bukNg==",
-     "verbose": 1
-   }
+   .. tab-item:: RESPONSE
 
-**RESPONSE:**
+      .. code-block:: json
 
-.. code-block:: json   
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "id": 2,
-             "name": "Aargau",
-             "subarea": "34,1495,2468,3282,13226,13956,15459,17315,19920"
-           },
-           {
-             "id": 3,
-             "name": "Abidjan",
-             "subarea": "73"
-           },
-           {
-             "id": 4,
-             "name": "Abitibi-OuestQuebec",
-             "subarea": "12575"
-           },
-           {
-             "...": "..."
-           },
-           {
-             "id": 2141,
-             "name": "Zonguldak",
-             "subarea": "4207,27249"
-           },
-           {
-             "id": 2142,
-             "name": "Zulia",
-             "subarea": "3575,4819,14422,21046"
-           },
-           {
-             "id": 2143,
-             "name": "Zurich",
-             "subarea": "1836,6324,6902,7317,14740,17510,17737,18456,19790,20490,20503,21627,24895,25812,26600,27285"
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/_fdsdb/internet-service/region",
-         "version": "7.2557"
-       }
-     ]
-   }
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "id": 2,
+                   "name": "Aargau",
+                   "subarea": "34,1495,2468,3282,13226,13956,15459,17315,19920"
+                 },
+                 {
+                   "id": 3,
+                   "name": "Abidjan",
+                   "subarea": "73"
+                 },
+                 {
+                   "id": 4,
+                   "name": "Abitibi-OuestQuebec",
+                   "subarea": "12575"
+                 },
+                 {
+                   "...": "..."
+                 },
+                 {
+                   "id": 2141,
+                   "name": "Zonguldak",
+                   "subarea": "4207,27249"
+                 },
+                 {
+                   "id": 2142,
+                   "name": "Zulia",
+                   "subarea": "3575,4819,14422,21046"
+                 },
+                 {
+                   "id": 2143,
+                   "name": "Zurich",
+                   "subarea": "1836,6324,6902,7317,14740,17510,17737,18456,19790,20490,20503,21627,24895,25812,26600,27285"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/root/_fdsdb/internet-service/region",
+               "version": "7.2557"
+             }
+           ]
+         }
 
 
 How to get the countries that can be used in a Geographic Based Internet Service object?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-To get the countries that could be used to define a geographic based internet
-service object:
+The following example shows how to get the countries that could be used to
+define a geographic based internet service object:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/root/_fdsdb/internet-service/country"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/adom/root/_fdsdb/internet-service/country"
-       }
-     ],
-     "session": "B3w+I+2XazWeTp7nDKnycudpE7slpKntuw0BgsXlxu7cWi7qQyCd4lDUoWHdrRh/lSMLhVTh1cWdYTtJBY8BQQ==",
-     "verbose": 1
-   }
+   .. tab-item:: RESPONSE      
 
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "id": 4,
-             "name": "Afghanistan",
-             "subarea": "826,65535"
-           },
-           {
-             "id": 248,
-             "name": "Aland Islands",
-             "subarea": "65535"
-           },
-           {
-             "id": 8,
-             "name": "Albania",
-             "subarea": "206,478,505,527,561,607,951,978,1048,1719,1892,2045"
-           },
-           {
-             "...": "...",
-           },
-           {
-             "id": 887,
-             "name": "Yemen",
-             "subarea": "309,65535"
-           },
-           {
-             "id": 894,
-             "name": "Zambia",
-             "subarea": "431,1097,65535"
-           },
-           {
-             "id": 716,
-             "name": "Zimbabwe",
-             "subarea": "264,671,1152,2193,65535"
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/_fdsdb/internet-service/country",
-         "version": "7.2557"
-       }
-     ]
-   }
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "id": 4,
+                   "name": "Afghanistan",
+                   "subarea": "826,65535"
+                 },
+                 {
+                   "id": 248,
+                   "name": "Aland Islands",
+                   "subarea": "65535"
+                 },
+                 {
+                   "id": 8,
+                   "name": "Albania",
+                   "subarea": "206,478,505,527,561,607,951,978,1048,1719,1892,2045"
+                 },
+                 {
+                   "...": "...",
+                 },
+                 {
+                   "id": 887,
+                   "name": "Yemen",
+                   "subarea": "309,65535"
+                 },
+                 {
+                   "id": 894,
+                   "name": "Zambia",
+                   "subarea": "431,1097,65535"
+                 },
+                 {
+                   "id": 716,
+                   "name": "Zimbabwe",
+                   "subarea": "264,671,1152,2193,65535"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/root/_fdsdb/internet-service/country",
+               "version": "7.2557"
+             }
+           ]
+         }
 
 
 How to get the cities that can be used in a Geographic Based Internet Service object?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-To get the cities that could be used to define a geographic based internet
-service object:
+The following example shows how to get the cities that could be used to define a
+geographic based internet service object:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/adom/demo/_fdsdb/internet-service/city"
-       }
-     ],
-     "session": "{{session}}",
-     "verbose": 1
-   }
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_fdsdb/internet-service/city"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+      
+   .. tab-item:: RESPONSE
+      
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "id": 1,
+                   "name": "'s Hertogenbosch",
+                   "subarea": ""
+                 },
+                 {
+                   "id": 7,
+                   "name": "'s-Heer Hendrikskinderen",
+                   "subarea": ""
+                 },
+                 {
+                   "id": 13,
+                   "name": "3 de Mayo",
+                   "subarea": ""
+                 },
+                 {
+                   "...": "...",
+                 },        
+                 {
+                   "id": 27318,
+                   "name": "`Ayn al Fijah",
+                   "subarea": ""
+                 },
+                 {
+                   "id": 27319,
+                   "name": "`Ayn ash Sharqiyah",
+                   "subarea": ""
+                 },
+                 {
+                   "id": 29175,
+                   "name": "`Uqayribat",
+                   "subarea": ""
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/root/_fdsdb/internet-service/city",
+               "version": "7.2557"
+             }
+           ]
+         }        
 
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "id": 1,
-             "name": "'s Hertogenbosch",
-             "subarea": ""
-           },
-           {
-             "id": 7,
-             "name": "'s-Heer Hendrikskinderen",
-             "subarea": ""
-           },
-           {
-             "id": 13,
-             "name": "3 de Mayo",
-             "subarea": ""
-           },
-           {
-             "...": "...",
-           },        
-           {
-             "id": 27318,
-             "name": "`Ayn al Fijah",
-             "subarea": ""
-           },
-           {
-             "id": 27319,
-             "name": "`Ayn ash Sharqiyah",
-             "subarea": ""
-           },
-           {
-             "id": 29175,
-             "name": "`Uqayribat",
-             "subarea": ""
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/root/_fdsdb/internet-service/city",
-         "version": "7.2557"
-       }
-     ]
-   }        
-
-How to get the list of the Internet Service objects?
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to get the list of Internet Service objects?
+++++++++++++++++++++++++++++++++++++++++++++++++
 
 The following example shows how to get the list of Internet Service objects 
 from the ``demo`` ADOM:
@@ -2814,6 +2820,82 @@ from the ``demo`` ADOM:
            		}
 
      But according to the #0622870, it is better to consider the ``datasrc``  method explained in section [TODO] (datasrc).
+
+
+How to get the list of Internet Service FQDN objects?
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #1156791.
+
+The following shows how to get the list of Internet Service FQDN objects for the
+``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+     
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_fdsdb/firewall/internet-service-fortiguard"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+     
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "count": 17,
+                   "fqdn": "googledrive.com;mail.google.com;*.docs.google.com;*.drive.google.com;meet.google.com;mail-attachment.google.com;drive.usercontent.google.com;drive-data-export.usercontent.google.com;drive-data-export-eu.usercontent.google.com;sheets.google.com;slides.google.com;*.sites.google.com;jamboard.google.com;meetings.googleapis.com;meetings.clients6.google.com;sheets.googleapis.com;slides.googleapis.com;",
+                   "icon_id": 510,
+                   "id": 1,
+                   "name": "FQDN-Google-Gmail"
+                 },
+                 {
+                   "count": 3,
+                   "fqdn": "*.whatsapp.net;*.whatsapp.com;*.whatsapp.biz;",
+                   "icon_id": 512,
+                   "id": 2,
+                   "name": "FQDN-Meta-Whatsapp"
+                 },
+                 {
+                   "count": 4,
+                   "fqdn": "*.mzstatic.com;*.itunes.apple.com;*.apps.apple.com;ppq.apple.com;",
+                   "icon_id": 515,
+                   "id": 3,
+                   "name": "FQDN-Apple-App.Store"
+                 },
+                 {"...": "..."},
+                 {
+                   "count": 100,
+                   "fqdn": "transcribe.us-east-2.amazonaws.com;transcribe.us-east-2.api.aws;fips.transcribe.us-east-2.amazonaws.com;transcribe-fips.us-east-2.api.aws;transcribe.us-east-1.amazonaws.com;fips.transcribe.us-east-1.amazonaws.com;transcribe-fips.us-east-1.api.aws;transcribe.us-east-1.api.aws;transcribe.us-west-1.amazonaws.com;transcribe-fips.us-west-1.api.aws;transcribe.us-west-1.api.aws;fips.transcribe.us-west-1.amazonaws.com;transcribe.us-west-2.amazonaws.com;fips.transcribe.us-west-2.amazonaws.com;transcribe.us-west-2.api.aws;transcribe-fips.us-west-2.api.aws;transcribe.af-south-1.amazonaws.com;transcribe.af-south-1.api.aws;transcribe.ap-east-1.amazonaws.com;transcribe.ap-east-1.api.aws;transcribe.ap-south-1.amazonaws.com;transcribe.ap-south-1.api.aws;transcribe.ap-northeast-2.amazonaws.com;transcribe.ap-northeast-2.api.aws;transcribe.ap-southeast-1.amazonaws.com;transcribe.ap-southeast-1.api.aws;transcribe.ap-southeast-2.amazonaws.com;transcribe.ap-southeast-2.api.aws;transcribe.ap-northeast-1.amazonaws.com;transcribe.ap-northeast-1.api.aws;transcribe.ca-central-1.amazonaws.com;transcribe.ca-central-1.api.aws;fips.transcribe.ca-central-1.amazonaws.com;transcribe-fips.ca-central-1.api.aws;transcribe.eu-central-1.amazonaws.com;transcribe.eu-central-1.api.aws;transcribe.eu-west-1.amazonaws.com;transcribe.eu-west-1.api.aws;transcribe.eu-west-2.amazonaws.com;transcribe.eu-west-2.api.aws;transcribe.eu-west-3.amazonaws.com;transcribe.eu-west-3.api.aws;transcribe.eu-north-1.amazonaws.com;transcribe.eu-north-1.api.aws;transcribe.me-south-1.amazonaws.com;transcribe.me-south-1.api.aws;transcribe.sa-east-1.amazonaws.com;transcribe.sa-east-1.api.aws;transcribe.us-gov-east-1.amazonaws.com;transcribe.us-gov-east-1.api.aws;fips.transcribe.us-gov-east-1.amazonaws.com;transcribe-fips.us-gov-east-1.api.aws;transcribe.us-gov-west-1.amazonaws.com;transcribe-fips.us-gov-west-1.api.aws;fips.transcribe.us-gov-west-1.amazonaws.com;transcribe.us-gov-west-1.api.aws;transcribestreaming.us-east-2.amazonaws.com;transcribestreaming.us-east-2.api.aws;transcribestreaming-fips.us-east-2.amazonaws.com;transcribestreaming-fips.us-east-2.api.aws;transcribestreaming.us-east-1.amazonaws.com;transcribestreaming-fips.us-east-1.amazonaws.com;transcribestreaming-fips.us-east-1.api.aws;transcribestreaming.us-east-1.api.aws;transcribestreaming.us-west-2.amazonaws.com;transcribestreaming-fips.us-west-2.amazonaws.com;transcribestreaming.us-west-2.api.aws;transcribestreaming-fips.us-west-2.api.aws;transcribestreaming.af-south-1.amazonaws.com;transcribestreaming.af-south-1.api.aws;transcribestreaming.ap-south-1.amazonaws.com;transcribestreaming.ap-south-1.api.aws;transcribestreaming.ap-northeast-2.amazonaws.com;transcribestreaming.ap-northeast-2.api.aws;transcribestreaming.ap-southeast-1.amazonaws.com;transcribestreaming.ap-southeast-1.api.aws;transcribestreaming.ap-southeast-2.amazonaws.com;transcribestreaming.ap-southeast-2.api.aws;transcribestreaming.ap-northeast-1.amazonaws.com;transcribestreaming.ap-northeast-1.api.aws;transcribestreaming.ca-central-1.amazonaws.com;transcribestreaming.ca-central-1.api.aws;transcribestreaming-fips.ca-central-1.amazonaws.com;transcribestreaming-fips.ca-central-1.api.aws;transcribestreaming.eu-central-1.amazonaws.com;transcribestreaming.eu-central-1.api.aws;transcribestreaming.eu-west-1.amazonaws.com;transcribestreaming.eu-west-1.api.aws;transcribestreaming.eu-west-2.amazonaws.com;transcribestreaming.eu-west-2.api.aws;transcribestreaming.sa-east-1.amazonaws.com;transcribestreaming.sa-east-1.api.aws;transcribestreaming.us-gov-east-1.amazonaws.com;transcribestreaming.us-gov-east-1.api.aws;transcribestreaming-fips.us-gov-east-1.amazonaws.com;transcribestreaming-fips.us-gov-east-1.api.aws;transcribestreaming.us-gov-west-1.amazonaws.com;transcribestreaming-fips.us-gov-west-1.api.aws;transcribestreaming-fips.us-gov-west-1.amazonaws.com;transcribestreaming.us-gov-west-1.api.aws;",
+                   "icon_id": 504,
+                   "id": 105,
+                   "name": "FQDN-Amazon-AWS.Transcribe"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_fdsdb/firewall/internet-service-fortiguard",
+               "version": "7.4302"
+             }
+           ]
+         }        
 
 Operations on objects
 ---------------------
