@@ -542,4 +542,101 @@ ADOM ``adom_dut``:
 
 .. note::
 
-   We don't have any banned users. This is why the ``results`` array is empty. 
+   We don't have any banned users. This is why the ``results`` array is empty.
+
+How to execute a FortiOS CLI via the FortiManager API?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #1095838 (FortiOS 7.6.1).
+
+Starting with FortiOS 7.6.1, the FortiOS API supports executing any CLI commands
+using the ``/api/v2/monitor/system/config-script/execute`` endpoint. It means we
+can also levera it using the ``sys/proxy/json`` FortiManager API endpoint.
+
+The following example shows how to capture HTTPS traffic from all interface of
+the ``dev_001`` managed FortiGate in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "action": "post",
+                 "payload": [
+                   "config vdom",
+                   "edit root",
+                   "diagnose sniffer packet any \"port 443\" 4 3"
+                 ],
+                 "resource": "/api/v2/monitor/system/config-script/execute",
+                 "target": [
+                   "adom/demo/device/dev_001"
+                 ]
+               },
+               "url": "/sys/proxy/json"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         The ending parameters of the ``diagnose sniffer packet`` command are
+         ``4 3``. Here, ``4`` is the verbosity level, which exposes the packet 
+         headers and the interface name, while ``3`` specifies the number of 
+         packets to capture.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json      
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "response": {
+                     "action": "execute",
+                     "build": 3510,
+                     "http_method": "POST",
+                     "name": "config-script",
+                     "path": "system",
+                     "results": {
+                       "console": [
+                         "br_01  config vdom",
+                         "br_01 (vdom)  edit root",
+                         "current vf=root:0",
+                         "br_01 (root)  diagnose sniffer packet any \"port 443\" 4 3",
+                         "{\"time\":0.04507,\"hdr\":\"1MOyoQIABAAAAAAAAAAAAEAGAABxAAAA\"}",
+                         "{\"time\":20.257795,\"pkt\":[\"lDemaGJZCwBMAAAATAAAAA==\"],\"if\":{\"out\":\"port1\"},\"ip\":{\"proto\":6,\"src\":\"10.210.34.77\",\"dst\":\"209.40.117.130\"},\"tcp\":{\"sport\":22124,\"dport\":443,\"flags\":[\"syn\"],\"len\":0,\"seq\":681523272,\"csum\":5490,\"win\":4210}}",
+                         "{\"time\":21.314103,\"pkt\":[\"lTemaFY1DABMAAAATAAAAA==\"],\"if\":{\"out\":\"port1\"},\"ip\":{\"proto\":6,\"src\":\"10.210.34.77\",\"dst\":\"209.40.117.130\"},\"tcp\":{\"sport\":22124,\"dport\":443,\"flags\":[\"syn\"],\"len\":0,\"seq\":681523272,\"csum\":62829,\"win\":4210}}",
+                         "{\"time\":23.394127,\"pkt\":[\"lzemaO5tDQBMAAAATAAAAA==\"],\"if\":{\"out\":\"port1\"},\"ip\":{\"proto\":6,\"src\":\"10.210.34.77\",\"dst\":\"209.40.117.130\"},\"tcp\":{\"sport\":22124,\"dport\":443,\"flags\":[\"syn\"],\"len\":0,\"seq\":681523272,\"csum\":54629,\"win\":4210}}"
+                       ]
+                     },
+                     "serial": "FGVMMLREDACTED64",
+                     "status": "success",
+                     "vdom": "root",
+                     "version": "v7.6.3"
+                   },
+                   "status": {
+                     "code": 0,
+                     "message": "OK"
+                   },
+                   "target": "fgt-763"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/sys/proxy/json"
+             }
+           ]
+         }
