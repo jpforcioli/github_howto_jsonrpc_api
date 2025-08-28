@@ -44,7 +44,10 @@ ID is generated using the following logic:
 How to add a CLI Script?
 ------------------------
 
-The following example shows how to add the ``script_001`` CLI Script into the ``demo`` ADOM; this CLI script targets Policy Package or ADOM database content:
+Add a CLI Script to be executed against a Policy Package or the ADOM database
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to add the ``cli_script_001`` CLI Script into the ``demo`` ADOM; this CLI script targets Policy Package or ADOM database content:
 
 .. tab-set::
   
@@ -59,8 +62,8 @@ The following example shows how to add the ``script_001`` CLI Script into the ``
              {
                "data": {
                  "content": "<your content>",
-             	   "desc": "Script to add site_7 to the overlays",
-                 "name": "overlays.site_7",
+             	   "desc": "A CLI Script description",
+                 "name": "cli_script_001",
                  "target": "adom_database",
                  "type": "cli"
                },
@@ -79,7 +82,7 @@ The following example shows how to add the ``script_001`` CLI Script into the ``
            "result": [
              {
                "data": {
-                 "name": "script_001"
+                 "name": "cli_script_001"
                },
                "status": {
                  "code": 0,
@@ -89,7 +92,59 @@ The following example shows how to add the ``script_001`` CLI Script into the ``
              }
            ]
          }
+
+Add a Jinja CLI Script to be executed against the ADOM database
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Starting FortiManager 7.6.4, you can add a Jinja CLI Script to be executed
+against the ADOM database (ref: #1133295).
+
+The following example shows how to add the ``cli_script_001`` CLI Script into the ``demo`` ADOM; this CLI script targets Policy Package or ADOM database content:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block::
       
+         {
+           "id": 1,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "content": "<your content>",
+             	   "desc": "A Jinja CLI Script description",
+                 "name": "cli_script_001",
+                 "target": "adom_database",
+                 "type": "jinja"
+               },
+               "url": "/dvmdb/adom/demo/script"
+             }
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block::
+
+         {
+           "id": 149,
+           "result": [
+             {
+               "data": {
+                 "name": "cli_script_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/script"
+             }
+           ]
+         }
+
 How to run a CLI Script against a Policy Package?
 -------------------------------------------------
 
@@ -127,6 +182,52 @@ The following example shows how to run the ``script_001`` CLI Script against the
              {
                "data": {
                  "task": 452
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/script/execute"
+             }
+           ]
+         }
+
+How to run a Jinja CLI Script against a Policy Package?
+-------------------------------------------------------
+
+The following example shows how to run the ``cli_script_001`` CLI Script against the ``demo`` ADOM:
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+      	   "id": 1,
+           "method": "exec",
+      		 "params": [
+      		   {
+      		     "data": {
+      		       "adom": "demo",
+      			     "script": "cli_script_001"
+      		     },
+      		     "url": "/dvmdb/adom/demo/script/execute"
+      		   }
+      		 ],
+      		 "session": "{{session}}"
+      		}
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "task": 1217
                },
                "status": {
                  "code": 0,
