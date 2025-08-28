@@ -4340,6 +4340,138 @@ device group ``dev_grp_001`` in the ADOM ``demo``:
            ]
          }
 
+Starting with FortiManager 7.6.4 (#1184580), you can also use the ``expand
+member`` form which is giving more details about the ``vdom``. 
+
+The following example shows how to get the members for the ``group_001`` device 
+group in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "expand member": [
+                 {
+                   "fields": [
+                     "name",
+                     "oid"
+                   ],
+                   "url": "group"
+                 },
+                 {
+                   "fields": [
+                     "name",
+                     "oid"
+                   ],
+                   "url": "device"
+                 }
+               ],
+               "fields": [
+                 "name",
+                 "oid"
+               ],
+               "filter": [
+                 "name",
+                 "==",
+                 "grp_001"
+               ],
+               "url": "/dvmdb/adom/demo/group"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "expand member": {
+                     "device": [
+                       {
+                         "name": "dev_001",
+                         "oid": 8114,
+                         "vdom": {
+                           "comments": "",
+                           "devid": "dev_001",
+                           "ext_flags": 1,
+                           "flags": 0,
+                           "name": "root",
+                           "node_flags": 4,
+                           "oid": 3,
+                           "opmode": 1,
+                           "rtm_prof_id": 0,
+                           "status": null,
+                           "tab_status": null,
+                           "vdom_type": 1,
+                           "vpn_id": 0
+                         }
+                       },
+                       {
+                         "name": "dev_002",
+                         "oid": 8122,
+                         "vdom": {
+                           "comments": "",
+                           "devid": "dev_002",
+                           "ext_flags": 1,
+                           "flags": 0,
+                           "name": "root",
+                           "node_flags": 4,
+                           "oid": 3,
+                           "opmode": 1,
+                           "rtm_prof_id": 0,
+                           "status": null,
+                           "tab_status": null,
+                           "vdom_type": 1,
+                           "vpn_id": 0
+                         }
+                       },
+                       {
+                         "name": "dev_003",
+                         "oid": 8146,
+                         "vdom": {
+                           "comments": "",
+                           "devid": "dev_003",
+                           "ext_flags": 1,
+                           "flags": 0,
+                           "name": "root",
+                           "node_flags": 4,
+                           "oid": 3,
+                           "opmode": 1,
+                           "rtm_prof_id": 0,
+                           "status": null,
+                           "tab_status": null,
+                           "vdom_type": 1,
+                           "vpn_id": 0
+                         }
+                       }
+                     ]
+                   },
+                   "name": "grp_001",
+                   "oid": 8483
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/group"
+             }
+           ]
+         }        
+
 How to get all device groups a device belongs to?
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
