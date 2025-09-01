@@ -5509,6 +5509,119 @@ ______________________________
               ]
             }
 
+How to add a TP VDOM?
++++++++++++++++++++++
+
+Caught in #1107568.
+
+NOTE: to be reviewed.
+
+#. Create the VDOM.
+
+   The following example shows how to add the ``tp_vd_001`` VDOM to the 
+   ``dev_001`` managed device in the ``demo`` ADOM:
+
+   .. tab-set::
+   
+      .. tab-item:: REQUEST
+   
+         .. code-block:: json
+   
+            {
+              "method": "add",
+              "params": [
+                {
+                  "url": "/dvmdb/adom/demo/device/dev_001/vdom",
+                  "data": {
+                    "name": "tp_vd_001",
+                    "vdom_type": 1,
+                    "opmode": 2,
+                    "comments": "",
+                    "meta fields": {}
+                  }
+                }
+              ],
+              "id": "5c9e5c02-9e1a-4e9c-bb9e-7f3dc4b8219e"
+            }
+
+#. Update the VDOM settings.
+
+   .. tab-set::
+   
+      .. tab-item:: REQUEST
+   
+         .. code-block:: json
+
+            {
+                "method": "update",
+                "params": [
+                    {
+                        "url": "pm/config/device/dev_001/vdom/tp_vdom_001/system/settings",
+                        "data": {
+                            "opmode": 2,
+                            "inspection-mode": 0,
+                            "ngfw-mode": 0,
+                            "central-nat": 0,
+                            "manageip": [
+                                "1.2.3.4/255.255.255.0"
+                            ],
+                            "comments": "",
+                            "status": 1
+                        }
+                    }
+                ],
+                "id": "66a9891d-4888-4d0f-8d48-b656377da236"
+            }
+
+#. Add the network interfaces.
+
+   .. tab-set::
+   
+      .. tab-item:: REQUEST
+   
+         .. code-block:: json
+
+            {
+                "method": "update",
+                "params": [
+                    {
+                        "url": "pm/config/device/dev_001/global/system/interface/port7",
+                        "data": {
+                            "vdom": "tp_vd_001"
+                        }
+                    },
+                    {
+                        "url": "pm/config/device/dev_001/global/system/interface/port6",
+                        "data": {
+                            "vdom": "tp_vd_001"
+                        }
+                    }
+                ],
+                "id": "eacb3f06-e6bd-41e7-8f85-6bc29440aa2e"
+            }
+
+#. Add the default gateway.
+
+   .. tab-set::
+   
+      .. tab-item:: REQUEST
+   
+         .. code-block:: json
+
+            {
+                "method": "set",
+                "params": [
+                    {
+                        "url": "pm/config/device/dev_001/vdom/tp_vdom_001/router/static",
+                        "data": {
+                            "gateway": "0.0.0.0",
+                            "device": "port7"
+                        }
+                    }
+                ],
+                "id": "a0edcd61-d89c-46d2-8f9d-26d30985fe72"
+            }
+
 How to assign a VDOM to an ADOM?
 ++++++++++++++++++++++++++++++++
 
