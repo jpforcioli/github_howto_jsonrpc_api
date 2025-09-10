@@ -5535,7 +5535,7 @@ NOTE: to be reviewed.
                   "data": {
                     "name": "tp_vd_001",
                     "vdom_type": 1,
-                    "opmode": 2,
+                    "opmode": "transparent",
                     "comments": "",
                     "meta fields": {}
                   }
@@ -5600,28 +5600,6 @@ NOTE: to be reviewed.
                 "id": "eacb3f06-e6bd-41e7-8f85-6bc29440aa2e"
             }
 
-#. Add the default gateway.
-
-   .. tab-set::
-   
-      .. tab-item:: REQUEST
-   
-         .. code-block:: json
-
-            {
-                "method": "set",
-                "params": [
-                    {
-                        "url": "pm/config/device/dev_001/vdom/tp_vdom_001/router/static",
-                        "data": {
-                            "gateway": "0.0.0.0",
-                            "device": "port7"
-                        }
-                    }
-                ],
-                "id": "a0edcd61-d89c-46d2-8f9d-26d30985fe72"
-            }
-
 How to assign a VDOM to an ADOM?
 ++++++++++++++++++++++++++++++++
 
@@ -5665,142 +5643,6 @@ The following example how to assign the ``vd_001`` VDOM in the ``dev_001`` manag
            ]
          }
             
-How to create a transparent VDOM?
-+++++++++++++++++++++++++++++++++
-
-1. Create the VDOM
-
-   We create a transparent VDOM named ``vd_001`` on device ``cluster-hub``.  
-   Created VDOM will be placed in ADOM ``DEMO_007``.
-
-   **REQUEST:**
-
-   .. code-block:: json
-
-      {
-        "id": 1,
-        "jsonrpc": "1.0",
-        "method": "add",
-        "params": [
-          {
-            "data": {
-              "comments": "This is an transparent VDOM",
-              "name": "vd_001",
-              "opmode": "transparent"
-            },
-            "url": "/dvmdb/adom/DEMO_007/device/cluster-hub/vdom"
-          }
-        ],
-        "session": "Q2wKYk+ZPNkTmUvarZtH7zgPmwSdzQm9Qc1lOfUdpkplPlV0FP8iif8G2KkfqwWxnPmWNsFTYPwSATPO0CyVlg==",
-        "verbose": 1
-      }
-
-   **RESPONSE:**
-
-   .. code-block:: json
-
-      {
-        "id": 1,
-        "result": [
-          {
-            "data": {
-              "name": "vd_001"
-            },
-            "status": {
-              "code": 0,
-              "message": "OK"
-            },
-            "url": "/dvmdb/adom/DEMO_007/device/cluster-hub/vdom"
-          }
-        ]
-      }
- 
-2. Create and assign interfaces to the created ADOM
-
-   We're just going to show how to assign an existing interface - ``vd_001_lan``
-   - to our newly created VDOM.
-
-   **REQUEST:**
-
-   .. code-block:: json
-
-      {
-        "id": 1,
-        "jsonrpc": "1.0",
-        "method": "set",
-        "params": [
-          {
-            "data": {
-              "vdom": [
-                "vd_001"
-              ]
-            },
-            "url": "/pm/config/device/cluster-hub/global/system/interface/vd_001_wan"
-          }
-        ],
-        "session": "+xUiFSIxonu3cPDtzaZGS8rLCyNtzeUBECwEVCc5Bc4gJoXQ/OnfDN5r5e842sckc5Y0tz0Lb30gdJVw0GRbZQ==",
-        "verbose": 1
-      }
-
-   **RESPONSE:**
-
-   .. code-block:: json
-
-      {
-        "id": 1,
-        "result": [
-          {
-            "data": {
-              "name": "vd_001_wan"
-            },
-            "status": {
-              "code": 0,
-              "message": "OK"
-            },
-            "url": "/pm/config/device/cluster-hub/global/system/interface/vd_001_wan"
-          }
-        ]
-      }   
-
-3. For a transparent VDOM, you might have to add a management IP
-
-   **REQUEST:**
-
-   .. code-block:: json
-
-      {
-        "id": 1,
-        "jsonrpc": "1.0",
-        "method": "set",
-        "params": [
-          {
-            "data": {
-              "manageip": "10.0.0.3/255.255.255.0"
-            },
-            "url": "/pm/config/device/cluster-hub/vdom/vd_001/system/settings"
-          }
-        ],
-        "session": "4798rgJxvt9FS3aCqmeOkFY99YdoQctheFoFeUuoRSNKOrpkL9h0UDtJoJlxVRsqCHnAaQVNnMS0E3Ozr2FYmA==",
-        "verbose": 1
-      }
-
-   **RESPONSE:**
-
-   .. code-block:: json
-
-      {
-        "id": 1,
-        "result": [
-          {
-            "status": {
-              "code": 0,
-              "message": "OK"
-            },
-            "url": "/pm/config/device/cluster-hub/vdom/vd_001/system/settings"
-          }
-        ]
-      }
-
 How to assign an interface to a VDOM?
 +++++++++++++++++++++++++++++++++++++
 

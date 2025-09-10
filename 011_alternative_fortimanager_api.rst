@@ -659,6 +659,138 @@ FortiManager GUI API:
            ]
          }
 
+How to get the package versions?
+++++++++++++++++++++++++++++++++
+
+This is a pre-requisite for the section :ref:`How to set the package version?`.
+The following example shows how to get the package versions for the *IPS
+Signature Database (Regular)* (`07006000NIDS02405`) object, using the FortiManager GUI API:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: text
+
+         POST https://10.210.34.120/cgi-bin/module/flatui_proxy
+
+         {
+             "url": "/gui/adom/um/package/version",
+             "method": "get",
+             "params": {
+                 "key": "07006000NIDS02405"
+             }
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "result": [
+             {
+               "data": {
+                 "versions": [
+                   {
+                     "id": "latest",
+                     "text": "Latest"
+                   },
+                   {
+                     "id": 2228305,
+                     "text": "34.00081 (2025-09-10 01:33:00)"
+                   },
+                   {
+                     "id": 2228304,
+                     "text": "34.00080 (2025-09-09 00:35:00)"
+                   },
+                   {
+                     "id": 2228303,
+                     "text": "34.00079 (2025-09-06 00:38:00)"
+                   },
+                   {
+                     "id": 2228302,
+                     "text": "34.00078 (2025-09-04 01:49:00)"
+                   },
+                   {
+                     "id": 2228301,
+                     "text": "34.00077 (2025-09-03 00:56:00)"
+                   },
+                   {
+                     "id": 2228300,
+                     "text": "34.00076 (2025-09-02 01:48:00)"
+                   },
+                   {
+                     "id": 2228299,
+                     "text": "34.00075 (2025-08-30 00:34:00)"
+                   },
+                   {
+                     "id": 2228297,
+                     "text": "34.00073 (2025-08-28 01:52:00)"
+                   }
+                 ]
+               },
+               "id": null,
+               "status": {
+                 "code": 0,
+                 "message": ""
+               },
+               "url": "/gui/adom/um/package/version"
+             }
+           ]
+         }
+
+You can now use the returned `id` for setting the package version.         
+
+How to set the package version?
++++++++++++++++++++++++++++++++
+
+This is when you want to set the package version that FortiManager acting as a
+FDS server will serve to its managed FortiGate devices:
+
+.. thumbnail:: images/alternative_fortimanager_api/image_003.png
+
+
+The following example shows how to set the package version to
+``v6.4.5-build1234-210101`` using the FortiManager GUI API:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: text
+
+         POST https://10.210.34.120/cgi-bin/module/flatui_proxy
+
+         {
+             "url": "/gui/adom/um/package/version",
+             "method": "change",
+             "params": {
+                 "key": "07006000NIDS02405",
+                 "version": 2228300
+             }
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "result": [
+             {
+               "data": {
+                 "msg": "",
+                 "status": "ok"
+               },
+               "id": null,
+               "status": {
+                 "code": 0,
+                 "message": ""
+               },
+               "url": "/gui/adom/um/package/version"
+             }
+           ]
+         }
+
 How to get session information?
 +++++++++++++++++++++++++++++++
 
