@@ -750,8 +750,8 @@ FDS server will serve to its managed FortiGate devices:
 .. thumbnail:: images/alternative_fortimanager_api/image_003.png
 
 
-The following example shows how to set the package version to
-``v6.4.5-build1234-210101`` using the FortiManager GUI API:
+The following example shows how to set the package version for the *IPS
+Signature Database (Regular)* (``07006000NIDS02405``) object using the FortiManager GUI API:
 
 .. tab-set::
 
