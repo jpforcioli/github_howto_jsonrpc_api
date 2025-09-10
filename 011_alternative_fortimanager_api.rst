@@ -664,7 +664,7 @@ How to get the package versions?
 
 This is a pre-requisite for the section :ref:`How to set the package version?`.
 The following example shows how to get the package versions for the *IPS
-Signature Database (Regular)* (`07006000NIDS02405`) object, using the FortiManager GUI API:
+Signature Database (Regular)* (``07006000NIDS02405``) object, using the FortiManager GUI API:
 
 .. tab-set::
 
