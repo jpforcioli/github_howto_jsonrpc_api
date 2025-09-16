@@ -1,7 +1,7 @@
 Provisioning Template Management
 ================================
 
-General Introduction
+Templates Operations
 --------------------
 
 How to get all provisioning templates?
@@ -355,6 +355,64 @@ To gather this information, FortiManager GUI used the following API call:
             }
            ]
          }
+
+How to validate a template?
++++++++++++++++++++++++++++
+
+This is to make sure that all used metadata variables are resolved for the
+managed devices assigned to the template.
+
+The following example shows how to trigger a template validation for the
+``template_group_001`` Template Group assigned to the ``dev_001`` managed device
+in the ``demo``:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "flag": "json",
+                 "pkg": "adom/demo/tmplgrp/template_group_001",
+                 "scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   }
+                 ]
+               },
+               "url": "securityconsole/template/validate"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+        {
+          "id": 3,
+          "result": [
+            {
+              "data": {
+                "task": 28
+              },
+              "status": {
+                "code": 0,
+                "message": "OK"
+              },
+              "url": "securityconsole/template/validate"
+            }
+          ]
+        }
          
 How to get the controller status?
 ---------------------------------
