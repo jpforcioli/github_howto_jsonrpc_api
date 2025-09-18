@@ -704,253 +704,282 @@ Certificate Template
 How to create a Certificate Template?
 +++++++++++++++++++++++++++++++++++++
 
+When a Certificate Template is created, FortiManager also generates a Dynamic Local Certificate with the same name. The Certificate Template is used for enrolling certificates for managed devices, while the corresponding Dynamic Local Certificate enables referencing the device certificate within ADOM DB objects.
+Each time a Certificate Template is used to enroll a certificate for a managed
+device, FortiManager creates a new device-specific mapping (aka *per-device
+mapping*) in the Dynamic Local Certificate with the same name.
+
 How to create an external Certificate Template?
 _______________________________________________
 
-We create the certificate template ``fgt-gw`` in ADOM ``dc_los_angeles``:
+The following example shows how to create the ``certificate_template_001``
+Certificate Template in the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,   
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "name": "fgt-gw",
-           "id-type": 0,
-           "organization-unit": [
-             "CSE"
+      .. code-block:: json
+      
+         {
+           "id": 3,   
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "name": "certificate_template_001",
+                 "id-type": 0,
+                 "organization-unit": [
+                   "CSE"
+                 ],
+                 "organization": "Fortinet",
+                 "city": "Nice",
+                 "state": "PACA",
+                 "country": "FR",
+                 "email": "",
+                 "key-type": 0,
+                 "key-size": 3,
+                 "curve-name": 0,
+                 "scep-server": "https://10.0.0.1/app/cert/scep",
+                 "scep-password": "fortinet",
+                 "scep-ca-identifier": "ca_crt",
+                 "type": 0,
+                 "digest-type": 0
+               },
+               "url": "/pm/config/adom/demo/obj/certificate/template"
+             }
            ],
-           "organization": "Fortinet",
-           "city": "Nice",
-           "state": "PACA",
-           "country": "FR",
-           "email": "",
-           "key-type": 0,
-           "key-size": 3,
-           "curve-name": 0,
-           "scep-server": "https://10.0.0.1/scep/foobar",
-           "scep-password": "fortinet",
-           "scep-ca-identifier": "",
-           "type": 0,
-           "digest-type": 0
-         },
-         "url": "/pm/config/adom/dc_los_angeles/obj/certificate/template"
-       }
-     ],
-     "session": "I/fVV/gPmb1U58MnQ/35Uc92qqi01moTnNeQehw2kQpeAnfGkpEovsm8ztt5FziV7j3oSU1r22DURAY1wBrFVsZlKjRAsudE"     
-   }
-   
+           "session": "{{session}}"
+         }
+         
 How to create a local Certificate Template?
 ___________________________________________
 
-We create the certificate template ``certificate_template_001`` in ADOM
-``adom_72_001``:
+The following example shows how to create the ``certificate_template_002``
+Certificate Template in the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "city": "Nice",
-           "country": "FR",
-           "name": "certificate_template_001",
-           "organization": "FTNT",
-           "organization-unit": "CSE",
-           "state": "PACA",
-           "type": "local"
-         },
-         "url": "/pm/config/adom/adom_72_001/obj/certificate/template"
-       }
-     ],
-     "session": "I/fVV/gPmb1U58MnQ/35Uc92qqi01moTnNeQehw2kQpeAnfGkpEovsm8ztt5FziV7j3oSU1r22DURAY1wBrFVsZlKjRAsudE"
-   }  
-
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "name": "certificate_template_001"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/adom_72_001/obj/certificate/template"
-       }
-     ]
-   }
-
-How to generate a certificate using a Certificate Template?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-We generate a certificate for managed device ``adom_72_001_dev_001`` (and its
-VDOM ``root``) in ADOM ``adom_72_001`` using certificate template
-``certificate_template_001``:
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "adom": "adom_72_001",
-           "scope": [
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
              {
-               "name": "adom_72_001_dev_001",
-               "vdom": "root"
+               "data": {
+                 "city": "Nice",
+                 "country": "FR",
+                 "name": "certificate_template_001",
+                 "organization": "FTNT",
+                 "organization-unit": "CSE",
+                 "state": "PACA",
+                 "type": "local"
+               },
+               "url": "/pm/config/adom/demo/obj/certificate/template"
              }
            ],
-           "template": "certificate_template_001"
-         },
-         "url": "/securityconsole/sign/certificate/template"
-       }
-     ],
-     "session": "xFaabUP9DBZgZLb6jLrwzaeispnbifvVNsiD8kh3D2v8vio+8Jeotu+h2D7YZ2PDulZR++mWVdD65Vnpd9ye0oJqwn2VzeF/"
-   }
+           "session": "{{session}}"
+         }  
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json      
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "task": 4935
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/securityconsole/sign/certificate/template"
-       }
-     ]
-   }
-
-Upon task completion, FortiManager will place the generated certificate in
-managed device's Device DB. 
-
-We can obtain it using the following request:
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/config/device/adom_72_001_dev_001/vdom/root/vpn/certificate/local/certificate_template_001"
-       }
-     ],
-     "session": "Fal40VB0ye1pHdRBPv0OAX7k85b7nOMRQlSV5ZRA6yf+UL+G1a1MxYcA9gB5vmrATnj/MhlOZU65n5toZBkRBXIRrLCNc4h5",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "_certinfo": {
-             "is_ca": 0,
-             "issuer": "O = Fortinet Ltd., CN = Fortinet",
-             "negsn": 0,
-             "serial": "11:f1:48:3a:06:9d:67:d4",
-             "subject": "C = FR, ST = PACA, L = Nice, O = FTNT, OU = CSE, CN = adom_72_001_dev_001.root",
-             "subject_parsed": {
-               "C": "FR",
-               "CN": "adom_72_001_dev_001.root",
-               "L": "Nice",
-               "O": "FTNT",
-               "OU": "CSE",
-               "ST": "PACA"
-             },
-             "validfrom": "2022-08-22 17:37:44  GMT",
-             "validto": "2032-08-26 17:37:44  GMT",
-             "version": 1
-           },
-           "acme-ca-url": "https://acme-v02.api.letsencrypt.org/directory",
-           "acme-domain": null,
-           "acme-email": null,
-           "acme-renew-window": 30,
-           "acme-rsa-key-size": 2048,
-           "auto-regenerate-days": 0,
-           "auto-regenerate-days-warning": 0,
-           "ca-identifier": null,
-           "certificate": "-----BEGIN CERTIFICATE-----\nMIIDIDCCAggCCBHxSDoGnWfUMA0GCSqGSIb3DQEBBQUAMCsxFjAUBgNVBAoTDUZv\ncnRpbmV0IEx0ZC4xETAPBgNVBAMTCEZvcnRpbmV0MB4XDTIyMDgyMjE3Mzc0NFoX\nDTMyMDgyNjE3Mzc0NFowazELMAkGA1UEBhMCRlIxDTALBgNVBAgTBFBBQ0ExDTAL\nBgNVBAcTBE5pY2UxDTALBgNVBAoTBEZUTlQxDDAKBgNVBAsTA0NTRTEhMB8GA1UE\nAxQYYWRvbV83Ml8wMDFfZGV2XzAwMS5yb290MIIBIjANBgkqhkiG9w0BAQEFAAOC\nAQ8AMIIBCgKCAQEAp87wNOEOqm/+uc6vCQNL6cH5U9bMOxfZ0kmXHOui5pXeex+4\nr9Q2JoIkU+osWXwJXOuxDYCcK3ol6+5gX6Y60iPqfRS7VOXgNGd+z36r8hxIZjTe\neaNzHvml1nfxMwqALzf4wRn4zTB2GLJouV4RF8fxv4u0ockseDOnW07HVEPwv+ET\n1B7pxXMKh3RcnN630zETlLVFJ35kEf879iqC+Ony6pA0CtVdQTAdBCxxNaFVUjGK\nKaqWVx2yAjYp2eHl5e7mU0JEMCgOTS5A5mYqmevj04hw9s+LrvE4bshjq/eUdMSe\nQltZ2T9TP3dEWr8QSdu6wwq4EpP0Af/hK8k48QIDAQABow0wCzAJBgNVHRMEAjAA\nMA0GCSqGSIb3DQEBBQUAA4IBAQBN6qsjHJTFx0KGS/+VKuHkShC3vDgfUzn/qWcP\nnpkgUtU48JWIQSv4QVLtiLa+qfHnFv6TbQfVD/qcaDncdV2HE7F85po9QwyAf7ec\nqGcQw000qiojjMVsmt7abqiebJBJp8OtBdJutYv3OH1AtvIOV+Enj0YXPCtWzV9y\n2BMySPvYVA8VBJNbOfJE6QoTP/ZhR+xjHen6fPqOchjJXIAidIIOeVpH5msuSLuk\nk2F6K2Pow5gyvpgv/gwMMn+XZ2AzWKGfr2j1QXRVO9fHyNNB5e6RtQ+fJZgpLHh/\n8+zE6lSSUjvdPBM6t+4gvrun08trkdHzT3FSs5rWoqR2tMdS\n-----END CERTIFICATE-----",
-           "cmp-path": null,
-           "cmp-regeneration-method": "keyupate",
-           "cmp-server": null,
-           "cmp-server-cert": [],
-           "comments": null,
-           "csr": null,
-           "enroll-protocol": "none",
-           "extension": [
+         {
+           "id": 3,
+           "result": [
              {
-               "content": "CA:FALSE",
-               "critical": 0,
-               "name": "X509v3 Basic Constraints"
+               "data": {
+                 "name": "certificate_template_002"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/ademo/obj/certificate/template"
+             }
+           ]
+         }
+
+How to enroll a certificate using a Certificate Template?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example demonstrates how to enroll a certificate for the
+``dev_001`` managed device in the ``demo`` ADOM using
+``certificate_template_001`` Certificate Template.
+
+.. tab-set::
+  
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "scope": [
+                   {
+                     "name": "dev_001",
+                     "vdom": "root"
+                   }
+                 ],
+                 "template": "certificate_template_001"
+               },
+               "url": "/securityconsole/sign/certificate/template"
              }
            ],
-           "ike-localid": null,
-           "ike-localid-type": "asn1dn",
-           "last-updated": 0,
-           "name": "certificate_template_001",
-           "name-encoding": "printable",
-           "oid": 3172,
-           "password": [
-             "ENC",
-             "7ENU9ioxcoKvKJDeKgih/bzn7Wa+n3Oq64tpOtwsTXbdAzmaGtJx7AlTJNYcUdBk2/T3RX9tgiWPqSHWGAPKuIe4IuKOIeDWdtrcFvuY/SHTUk+rZ5ACIP2g9DgZ2Dk+AreXnXtzUEkTBws65+gCn3GuNae9vR1NN53E/HI9vI7VVF8+"
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 4935
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/sign/certificate/template"
+             }
+           ]
+         }
+
+After the task is completed, FortiManager saves the generated certificate in 
+the managed device's Device DB, using the Certificate Template name as the 
+certificate object's name. It also creates a per-device mapping entry in the 
+Dynamic Local Certificate that is automatically generated with the Certificate 
+Template.
+
+The enrolled certificate stored in the ``dev_001`` Device DB can be retrieved
+using the following request:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/device/demo/vdom/root/vpn/certificate/local/certificate_template_001"
+             }
            ],
-           "private-key-retain": "disable",
-           "range": "global",
-           "scep-url": null,
-           "source": "user",
-           "source-ip": "0.0.0.0",
-           "state": null,
-           "tmp-cert-file": null
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/device/adom_72_001_dev_001/vdom/root/vpn/certificate/local/certificate_template_001"
-       }
-     ]
-   }
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-.. note::
+      .. note::
 
-   The ``private-key`` cannot be exposed using the FortiManager API. 
+         You can see that FortiManager created the certificate object using the
+         Certificate Template name (``certificate_template_001``).
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "_certinfo": {
+                   "is_ca": 0,
+                   "issuer": "O = Fortinet Ltd., CN = Fortinet",
+                   "negsn": 0,
+                   "serial": "11:f1:48:3a:06:9d:67:d4",
+                   "subject": "C = FR, ST = PACA, L = Nice, O = FTNT, OU = CSE, CN = adom_72_001_dev_001.root",
+                   "subject_parsed": {
+                     "C": "FR",
+                     "CN": "adom_72_001_dev_001.root",
+                     "L": "Nice",
+                     "O": "FTNT",
+                     "OU": "CSE",
+                     "ST": "PACA"
+                   },
+                   "validfrom": "2022-08-22 17:37:44  GMT",
+                   "validto": "2032-08-26 17:37:44  GMT",
+                   "version": 1
+                 },
+                 "acme-ca-url": "https://acme-v02.api.letsencrypt.org/directory",
+                 "acme-domain": null,
+                 "acme-email": null,
+                 "acme-renew-window": 30,
+                 "acme-rsa-key-size": 2048,
+                 "auto-regenerate-days": 0,
+                 "auto-regenerate-days-warning": 0,
+                 "ca-identifier": null,
+                 "certificate": "-----BEGIN CERTIFICATE-----\nMIIDIDCCAggCCBHxSDoGnWfUMA0GCSqGSIb3DQEBBQUAMCsxFjAUBgNVBAoTDUZv\ncnRpbmV0IEx0ZC4xETAPBgNVBAMTCEZvcnRpbmV0MB4XDTIyMDgyMjE3Mzc0NFoX\nDTMyMDgyNjE3Mzc0NFowazELMAkGA1UEBhMCRlIxDTALBgNVBAgTBFBBQ0ExDTAL\nBgNVBAcTBE5pY2UxDTALBgNVBAoTBEZUTlQxDDAKBgNVBAsTA0NTRTEhMB8GA1UE\nAxQYYWRvbV83Ml8wMDFfZGV2XzAwMS5yb290MIIBIjANBgkqhkiG9w0BAQEFAAOC\nAQ8AMIIBCgKCAQEAp87wNOEOqm/+uc6vCQNL6cH5U9bMOxfZ0kmXHOui5pXeex+4\nr9Q2JoIkU+osWXwJXOuxDYCcK3ol6+5gX6Y60iPqfRS7VOXgNGd+z36r8hxIZjTe\neaNzHvml1nfxMwqALzf4wRn4zTB2GLJouV4RF8fxv4u0ockseDOnW07HVEPwv+ET\n1B7pxXMKh3RcnN630zETlLVFJ35kEf879iqC+Ony6pA0CtVdQTAdBCxxNaFVUjGK\nKaqWVx2yAjYp2eHl5e7mU0JEMCgOTS5A5mYqmevj04hw9s+LrvE4bshjq/eUdMSe\nQltZ2T9TP3dEWr8QSdu6wwq4EpP0Af/hK8k48QIDAQABow0wCzAJBgNVHRMEAjAA\nMA0GCSqGSIb3DQEBBQUAA4IBAQBN6qsjHJTFx0KGS/+VKuHkShC3vDgfUzn/qWcP\nnpkgUtU48JWIQSv4QVLtiLa+qfHnFv6TbQfVD/qcaDncdV2HE7F85po9QwyAf7ec\nqGcQw000qiojjMVsmt7abqiebJBJp8OtBdJutYv3OH1AtvIOV+Enj0YXPCtWzV9y\n2BMySPvYVA8VBJNbOfJE6QoTP/ZhR+xjHen6fPqOchjJXIAidIIOeVpH5msuSLuk\nk2F6K2Pow5gyvpgv/gwMMn+XZ2AzWKGfr2j1QXRVO9fHyNNB5e6RtQ+fJZgpLHh/\n8+zE6lSSUjvdPBM6t+4gvrun08trkdHzT3FSs5rWoqR2tMdS\n-----END CERTIFICATE-----",
+                 "cmp-path": null,
+                 "cmp-regeneration-method": "keyupate",
+                 "cmp-server": null,
+                 "cmp-server-cert": [],
+                 "comments": null,
+                 "csr": null,
+                 "enroll-protocol": "none",
+                 "extension": [
+                   {
+                     "content": "CA:FALSE",
+                     "critical": 0,
+                     "name": "X509v3 Basic Constraints"
+                   }
+                 ],
+                 "ike-localid": null,
+                 "ike-localid-type": "asn1dn",
+                 "last-updated": 0,
+                 "name": "certificate_template_001",
+                 "name-encoding": "printable",
+                 "oid": 3172,
+                 "password": [
+                   "ENC",
+                   "7ENU9ioxcoKvKJDeKgih/bzn7Wa+n3Oq64tpOtwsTXbdAzmaGtJx7AlTJNYcUdBk2/T3RX9tgiWPqSHWGAPKuIe4IuKOIeDWdtrcFvuY/SHTUk+rZ5ACIP2g9DgZ2Dk+AreXnXtzUEkTBws65+gCn3GuNae9vR1NN53E/HI9vI7VVF8+"
+                 ],
+                 "private-key-retain": "disable",
+                 "range": "global",
+                 "scep-url": null,
+                 "source": "user",
+                 "source-ip": "0.0.0.0",
+                 "state": null,
+                 "tmp-cert-file": null
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_001/vdom/root/vpn/certificate/local/certificate_template_001"
+             }
+           ]
+         }
+   
+      .. note::
+ 
+         The ``private-key`` cannot be exposed using the FortiManager API.  
 
 How to assign a Certificate Template to a managed device?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+When the managed device is already with a certificate not enrolled by the
+Certificate Template (for instance by uploading a certificate in the device
+Device DB - see :ref:`How to upload a certificate?`), and you still want to be
+able to refer to that certificate in some applicable ADOM DB objects, you can
+still decide to add a per-device mapping entry in the Dynamic Local Certificate 
+which was automatically generated with the Certificate Template.
 
 In fact, you have to assign the corresponding Dynamic Local Certificate which is
 having the same name as the Certiticate Template.  The following example shows
@@ -974,7 +1003,7 @@ the ``dev_001`` managed device in the ``demo`` ADOM:
                      "name": "dev_001",
                      "vdom": "root"
                    },
-                   "local-cert": "certificate_template_001"
+                   "local-cert": "cert_001"
                  }
                ],
                "url": "/pm/config/adom/demo/obj/dynamic/certificate/local/certificate_template_001/dynamic_mapping"
@@ -987,6 +1016,11 @@ the ``dev_001`` managed device in the ``demo`` ADOM:
 
          The ``local-cert`` attribute should refer to an existing certificate in
          the ``dev_001`` Device DB.
+
+         ``certificate_template_001`` is the name of the Dynamic Local 
+         Certificate object. It shares the same name as the Certificate 
+         Template because FortiManager automatically creates the Dynamic Local  
+         Certificate when the Certificate Template is created.
          
    .. tab-item:: RESPONSE
 

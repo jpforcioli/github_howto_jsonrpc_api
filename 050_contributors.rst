@@ -21,3 +21,8 @@ Contributors
 
    - How to get FortiExtender status 
      (:ref:`How to get the FortiExtender status?`).
+
+#. Johann Lo, Fortinet Inc.
+
+   - Helped in refactoring :ref:`How to upload a certificate?` and :ref:`How to 
+     assign a Certificate Template to a managed device?` 
