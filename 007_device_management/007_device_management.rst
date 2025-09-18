@@ -7456,6 +7456,14 @@ The following example demonstrates how to combine all these elements to create t
            ]
          }
 
+FortiManager saves this certificate in the ``dev_001`` Device DB. However, in
+most cases, the certificate needs to be referenced within objects declared in
+the ADOM DB. This can be accomplished by using the Dynamic Local Certificate
+object.
+The section :ref:`How to assign a Certificate Template to a managed device?`
+explains how to map a device certificate from the Device DB to a Dynamic Local
+Certificate in the ADOM DB.
+
 How to update an existing certificate?
 ++++++++++++++++++++++++++++++++++++++
 
@@ -7463,6 +7471,7 @@ The use case could be to renew an existing certificate.
 
 Following example shows how to update the ``crt_001`` certificate
 on the managed device ``dev_001`` using the API request below:
+
 .. tab-set:: 
 
    .. tab-item:: REQUEST
