@@ -1612,6 +1612,12 @@ How to promote/authorize a real device?
    
    The term *Promote* can be considered synonymous with *Authorize*.
 
+.. warning::
+
+   You cannot promote/authorize a device and set its meta variables using the
+   ``meta variables`` block as shown in multiple sections like in :ref:`How to 
+   add a list of Model Device?`.
+
 You have two possible FortiManager API endpoints:
 
 .. code-block:: text

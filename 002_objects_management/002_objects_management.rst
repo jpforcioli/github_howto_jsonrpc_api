@@ -3200,9 +3200,9 @@ Caught in #0363496.
 
 - Retrieve all firewall address subnets matching a specific IP address
 
-  The following example demonstrates how to use the ``>=`` (*contain*)
-  comparison operator to retrieve all firewall address objects that include the
-  specified ``10.0.0.111/32`` IP address in the ``demo`` ADOM:
+  The following example demonstrates how to use the ``>=`` (*greater than or
+  equal*) comparison operator to retrieve all firewall address objects that
+  include the specified ``10.0.0.111/32`` IP address in the ``demo`` ADOM:
 
   .. tab-set::
 
@@ -3325,6 +3325,11 @@ Caught in #0363496.
                }
              ]
            }
+
+  The response contains objects like ``all``, ``FABRIC_DEVICE`` or
+  ``FIREWALL_AUTH_PORTAL_ADDRESS`` which do not strict match. If a strict match
+  is required replace the ``>=`` operator with ``==`` in the block filtering
+  objects matching the ``ipmask`` type.
 
 - Retrieve all firewall address ranges containing a specific IP address
 
@@ -3579,6 +3584,178 @@ Caught in #0363496.
                }
              ]
            }           
+
+  The response contains objects like ``all``, ``FABRIC_DEVICE`` or
+  ``FIREWALL_AUTH_PORTAL_ADDRESS`` which do not strict match. If a strict match
+  is required replace the ``>=`` operator with ``==`` in the block filtering
+  objects matching the ``ipmask`` type.
+
+- Retrieve all firewall addresses with a per-device (dynamic) mapping, where the
+  subnet or range matches a specific IP address:
+
+  The following example demonstrates how to create a complex filter expression 
+  to search for objects based on multiple criteria. In this example, the goal 
+  is to retrieve all firewall address objects within the ``demo`` ADOM that 
+  have a per-device mapping subnet or range matching the IP address ``10.0.0.
+  111/32``:
+
+  .. tab-set:: 
+
+     .. tab-item:: REQUEST
+
+        .. code-block:: json
+
+           {
+             "id": 3,
+             "method": "get",
+             "params": [
+               {
+                 "fields": [
+                   "name",
+                   "type",
+                   "subnet",
+                   "start-ip",
+                   "end-ip"
+                 ],
+                 "sub fetch": {
+                   "dynamic_mapping": {
+                     "fields": [
+                       "name",
+                       "type",
+                       "subnet",
+                       "start-ip",
+                       "end-ip"
+                     ],
+                     "filter": [
+                       [
+                         [
+                           "type",
+                           "==",
+                           "iprange"
+                         ],
+                         "&&",
+                         [
+                           [
+                             "start-ip",
+                             "<=",
+                             "10.0.0.111"
+                           ],
+                           "&&",
+                           [
+                             "end-ip",
+                             ">=",
+                             "10.0.0.111"
+                           ]
+                         ]
+                       ],
+                       "||",
+                       [
+                         [
+                           "type",
+                           "==",
+                           "ipmask"
+                         ],
+                         "&&",
+                         [
+                           "subnet",
+                           ">=",
+                           [
+                             "10.0.0.111",
+                             "255.255.255.255"
+                           ]
+                         ]
+                       ]
+                     ]
+                   },
+                   "list": {
+                     "subfetch hidden": 1
+                   },
+                   "tagging": {
+                     "subfetch hidden": 1
+                   }
+                 },
+                 "url": "/pm/config/adom/demo/obj/firewall/address"
+               }
+             ],
+             "session": "{{session}}",
+             "verbose": 1
+           }
+
+        .. note::
+
+           For the ``sub fetch`` and ``subfetch hidden`` instructions, review
+           the :ref:`Sub fetch operations` section.
+           
+     .. tab-item:: RESPONSE
+
+        .. code-block:: json           
+
+           {
+             "id": 3,
+             "result": [
+               {
+                 "data": [
+                   {
+                     "dynamic_mapping": [
+                       {
+                         "_scope": [
+                           {
+                             "name": "dev_001",
+                             "vdom": "root"
+                           }
+                         ],
+                         "associated-interface": "any",
+                         "end-ip": "0.0.0.0",
+                         "oid": 6113,
+                         "start-ip": "0.0.0.0",
+                         "subnet": [
+                           "10.0.0.111",
+                           "255.255.255.255"
+                         ],
+                         "type": "ipmask"
+                       }
+                     ],
+                     "end-ip": "0.0.0.0",
+                     "name": "host_003",
+                     "oid": 6112,
+                     "start-ip": "0.0.0.0",
+                     "subnet": [
+                       "0.0.0.0",
+                       "0.0.0.0"
+                     ],
+                     "type": "ipmask"
+                   },
+                   {
+                     "dynamic_mapping": [
+                       {
+                         "_scope": [
+                           {
+                             "name": "dev_002",
+                             "vdom": "root"
+                           }
+                         ],
+                         "associated-interface": "any",
+                         "end-ip": "10.0.0.120",
+                         "oid": 6115,
+                         "start-ip": "10.0.0.110",
+                         "type": "iprange"
+                       }
+                     ],
+                     "end-ip": "20.0.0.1",
+                     "name": "host_004",
+                     "oid": 6114,
+                     "start-ip": "20.0.0.1",
+                     "type": "iprange"
+                   }
+                 ],
+                 "status": {
+                   "code": 0,
+                   "message": "OK"
+                 },
+                 "url": "/pm/config/adom/demo/obj/firewall/address"
+               }
+             ]
+           }
 
 How to get the Last Modified timestamp?
 _______________________________________

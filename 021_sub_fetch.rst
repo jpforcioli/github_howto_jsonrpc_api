@@ -1,373 +1,348 @@
 Sub fetch operations
 ====================
 
-How to reduce the amount of information returned in sub table?
+When getting a table, the ``sub fetch`` attribute allows to apply usual
+FortiManager API operations like ``fields`` or ``filter`` on sub-tables.
+
+.. note::
+
+   Since your interest is about sub-tables, you cannot use the:
+
+   .. code-block:: json
+
+      "loadsub": 0
+
+   mechanism which is preventing loading the sub-tables.
+
+How to reduce the amount of information returned in sub-table?
 --------------------------------------------------------------
 
 The ``fields`` operator can be used to reduce the volume of information to
 return.
 
-It can be used at different level as illustrated by the following example:
+It can be used at different table level as illustrated by the following example
+which demonstrates how to obtain specific attributes at both the main table
+level (the ``system sdwan health-check``) and its `sla` sub-table for the
+``dev_001`` managed device:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
-
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "fields": [
-           "addr-mode",
-           "detect-mode",
-           "protocol",
-           "latency-threshold",
-           "jitter-threshold",
-           "packetloss-threshold"
-         ],
-         "sub fetch": {
-           "sla": {
-             "fields": [
-               "latency-threshold",
-               "jitter-threshold",
-               "packetloss-threshold"
-             ]
-           }
-         },
-         "url": "/pm/config/device/branch2_fgt/vdom/root/system/sdwan/health-check"
-       }
-     ],
-     "session": "F1iti7XSIFitxu0dCk3bauiH70aTqe5Ro2XfoCaR/LUrSD1gOdJaE1G+/wilPdIjEsyAQ9SIy2oW9RWWVcKCvg==",
-     "verbose": 1
-   }
-   
-This |fmg_api| request is:
-
-- Retrieving all the ``health-check`` entries (only) from th SD-WAN
-  configuration of device ``branch2_fgt`` and its VDOM ``root``,
-
-- Is asking for specific attributes of the ``health-check`` table,
-
-- Also asking for specific attributes of the ``sla`` sub-table,
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "addr-mode": "ipv4",
-             "detect-mode": "active",
-             "oid": 2671,
-             "protocol": "http",
-             "sla": [
-               {
-                 "jitter-threshold": 50,
-                 "latency-threshold": 250,
-                 "oid": 2672,
-                 "packetloss-threshold": 5
-               }
-             ]
-           },
-           {
-             "addr-mode": "ipv4",
-             "detect-mode": "active",
-             "oid": 2665,
-             "protocol": "dns",
-             "sla": [
-               {
-                 "jitter-threshold": 50,
-                 "latency-threshold": 250,
-                 "oid": 2666,
-                 "packetloss-threshold": 5
-               }
-             ]
-           },
-           {
-             "addr-mode": "ipv4",
-             "detect-mode": "active",
-             "oid": 2675,
-             "protocol": "http",
-             "sla": [
-               {
-                 "jitter-threshold": 50,
-                 "latency-threshold": 250,
-                 "oid": 2676,
-                 "packetloss-threshold": 5
-               }
-             ]
-           },
-           {
-             "addr-mode": "ipv4",
-             "detect-mode": "active",
-             "oid": 2669,
-             "protocol": "ping",
-             "sla": [
-               {
-                 "jitter-threshold": 50,
-                 "latency-threshold": 250,
-                 "oid": 2670,
-                 "packetloss-threshold": 2
-               }
-             ]
-           },
-           {
-             "addr-mode": "ipv4",
-             "detect-mode": "active",
-             "oid": 2673,
-             "protocol": "http",
-             "sla": [
-               {
-                 "jitter-threshold": 50,
-                 "latency-threshold": 250,
-                 "oid": 2674,
-                 "packetloss-threshold": 5
-               }
-             ]
-           },
-           {
-             "addr-mode": "ipv4",
-             "detect-mode": "active",
-             "oid": 2667,
-             "protocol": "http",
-             "sla": [
-               {
-                 "jitter-threshold": 50,
-                 "latency-threshold": 250,
-                 "oid": 2668,
-                 "packetloss-threshold": 5
-               }
-             ]
-           },
-           {
-             "addr-mode": "ipv4",
-             "detect-mode": "active",
-             "oid": 3535,
-             "protocol": "ping",
-             "sla": [
-               {
-                 "jitter-threshold": 5,
-                 "latency-threshold": 300,
-                 "oid": 3536,
-                 "packetloss-threshold": 10
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "addr-mode",
+                 "detect-mode",
+                 "protocol",
+                 "latency-threshold",
+                 "jitter-threshold",
+                 "packetloss-threshold"
+               ],
+               "sub fetch": {
+                 "sla": {
+                   "fields": [
+                     "latency-threshold",
+                     "jitter-threshold",
+                     "packetloss-threshold"
+                   ]
+                 }
                },
-               {
-                 "jitter-threshold": 5,
-                 "latency-threshold": 400,
-                 "oid": 3537,
-                 "packetloss-threshold": 10
-               }
-             ]
-           },
-           {
-             "addr-mode": "ipv4",
-             "detect-mode": "active",
-             "oid": 3538,
-             "protocol": "ping",
-             "sla": [
-               {
-                 "jitter-threshold": 5,
-                 "latency-threshold": 100,
-                 "oid": 3539,
-                 "packetloss-threshold": 10
-               }
-             ]
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/device/branch2_fgt/vdom/root/system/sdwan/health-check"
-       }
-     ]
-   }
+               "url": "/pm/config/device/dev_001/vdom/root/system/sdwan/health-check"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "addr-mode": "ipv4",
+                   "detect-mode": "active",
+                   "oid": 2671,
+                   "protocol": "http",
+                   "sla": [
+                     {
+                       "jitter-threshold": 50,
+                       "latency-threshold": 250,
+                       "oid": 2672,
+                       "packetloss-threshold": 5
+                     }
+                   ]
+                 },
+                 {
+                   "addr-mode": "ipv4",
+                   "detect-mode": "active",
+                   "oid": 2665,
+                   "protocol": "dns",
+                   "sla": [
+                     {
+                       "jitter-threshold": 50,
+                       "latency-threshold": 250,
+                       "oid": 2666,
+                       "packetloss-threshold": 5
+                     }
+                   ]
+                 },
+                 {
+                   "addr-mode": "ipv4",
+                   "detect-mode": "active",
+                   "oid": 2675,
+                   "protocol": "http",
+                   "sla": [
+                     {
+                       "jitter-threshold": 50,
+                       "latency-threshold": 250,
+                       "oid": 2676,
+                       "packetloss-threshold": 5
+                     }
+                   ]
+                 },
+                 {
+                   "addr-mode": "ipv4",
+                   "detect-mode": "active",
+                   "oid": 2669,
+                   "protocol": "ping",
+                   "sla": [
+                     {
+                       "jitter-threshold": 50,
+                       "latency-threshold": 250,
+                       "oid": 2670,
+                       "packetloss-threshold": 2
+                     }
+                   ]
+                 },
+                 {
+                   "addr-mode": "ipv4",
+                   "detect-mode": "active",
+                   "oid": 2673,
+                   "protocol": "http",
+                   "sla": [
+                     {
+                       "jitter-threshold": 50,
+                       "latency-threshold": 250,
+                       "oid": 2674,
+                       "packetloss-threshold": 5
+                     }
+                   ]
+                 },
+                 {
+                   "addr-mode": "ipv4",
+                   "detect-mode": "active",
+                   "oid": 2667,
+                   "protocol": "http",
+                   "sla": [
+                     {
+                       "jitter-threshold": 50,
+                       "latency-threshold": 250,
+                       "oid": 2668,
+                       "packetloss-threshold": 5
+                     }
+                   ]
+                 },
+                 {
+                   "addr-mode": "ipv4",
+                   "detect-mode": "active",
+                   "oid": 3535,
+                   "protocol": "ping",
+                   "sla": [
+                     {
+                       "jitter-threshold": 5,
+                       "latency-threshold": 300,
+                       "oid": 3536,
+                       "packetloss-threshold": 10
+                     },
+                     {
+                       "jitter-threshold": 5,
+                       "latency-threshold": 400,
+                       "oid": 3537,
+                       "packetloss-threshold": 10
+                     }
+                   ]
+                 },
+                 {
+                   "addr-mode": "ipv4",
+                   "detect-mode": "active",
+                   "oid": 3538,
+                   "protocol": "ping",
+                   "sla": [
+                     {
+                       "jitter-threshold": 5,
+                       "latency-threshold": 100,
+                       "oid": 3539,
+                       "packetloss-threshold": 10
+                     }
+                   ]
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_001/vdom/root/system/sdwan/health-check"
+             }
+           ]
+         }
    
 How to hide a specific sub-table?
 ---------------------------------
 
 Caught in #0378630.
 
-``"loadsub": 0`` will hide all sub-tables.
-What if we need to hide specific sub-tables?
-We can use the ``"subfetch hidden": 1`` parameter:
+Since you can't use:
 
-Without this parameter:
+.. code-block:: json
 
-**REQUEST:**
+   "loadsub": 0
 
-.. code-block:: 
+anymore, you need a way to instruct FortiManager to not return some specific sub
+tables. You can use the:
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "get",
-     "params": [
-       {
-         "fields": [
-           "name"
-         ],
-         "url": "/dvmdb/device"
-       }
-     ],
-     "session": "G/pZCb81HjLViXhpyxaO5oh5dRfc9biuOdpuqO9EgZ8m4dNSouuboR7ftsAOLxfe+tWuNG+x50FmDFsxQfSHZrUId3IZqTjx",
-     "verbose": 1
-   }
+.. code-block:: json
 
-**RESPONSE:**
+   "subfetch hidden": 1
 
-.. code-block::
+instruction with a specific sub-table to prevent returning it.
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": [
-           {
-             "ha_slave": null,
-             "name": "adom_62_device_001",
-             "oid": 170,
-             "vdom": [
-               {
-                 "comments": "",
-                 "devid": "adom_62_device_001",
-                 "ext_flags": 1,
-                 "flags": null,
-                 "name": "root",
-                 "node_flags": 4,
-                 "oid": 3,
-                 "opmode": "nat",
-                 "rtm_prof_id": 0,
-                 "status": null,
-                 "tab_status": null,
-                 "vpn_id": 0
-               }
-             ]
-           },
-   [...]
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/device"
-       }
-     ]
-   }
+This is an example where the ``subfetch hidden`` instruction isn't used. The
+goal is to get the list of managed devices:
 
-We can see two sub-tables in this output: ``ha_slave`` and ``vdom``.
+.. tab-set::
 
-Let's hide the ``vdom`` sub-table:
+   .. tab-item:: REQUEST
 
-**REQUEST:**
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name"
+               ],
+               "url": "/dvmdb/device"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-.. code-block::
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "get",
-     "params": [
-       {
-         "fields": [
-           "name"
-         ],
-         "sub fetch": {
-           "vdom": {
-             "subfetch hidden": 1
-           }
-         },
-         "url": "/dvmdb/device"
-       }
-     ],
-     "session": "Y6Cfaezhd4Ecw54LvHiMdD5R5GNrqcJCKyscnx3SfPtSG0a613mw1jWsD/rSsbHSQc2H7tzayzlr6LUGyPkAP5zHuq4xAa4H",
-     "verbose": 1
-   }
+      .. code-block:: json      
 
-**RESPONSE:**
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": [
+                 {
+                   "ha_slave": null,
+                   "name": "dev_001",
+                   "oid": 170,
+                   "vdom": [
+                     {
+                       "comments": "",
+                       "devid": "dev_001",
+                       "ext_flags": 1,
+                       "flags": null,
+                       "name": "root",
+                       "node_flags": 4,
+                       "oid": 3,
+                       "opmode": "nat",
+                       "rtm_prof_id": 0,
+                       "status": null,
+                       "tab_status": null,
+                       "vpn_id": 0
+                     }
+                   ]
+                 },
+                 {"...": "..."},
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device"
+             }
+           ]
+         }
 
-.. code-block::
+FortiManager returned your list of managed devices. However, for each devices
+returned, you can see the ``ha_slave`` and ``vdom`` sub-tables. 
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": [
-           {
-             "ha_slave": null,
-             "name": "adom_62_device_001",
-             "oid": 170
-           },
-   [...]           
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/device"
-       }
-     ]
-   }
+The following example, which now uses the ``subfetch hidden`` instruction,
+demontrates how to instruct FortiManager not to return those two sub-tables:
 
-Let's hide the ``vdom`` and ``ha_slave`` sub-tables:
+.. tab-set::
 
-**REQUEST:**
+   .. tab-item:: REQUEST
 
-.. code-block::
-   
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "get",
-     "params": [
-       {
-         "fields": [
-           "name"
-         ],
-         "sub fetch": {
-           "ha_slave": {
-             "subfetch hidden": 1
-           },
-           "vdom": {
-             "subfetch hidden": 1
-           }
-         },
-         "url": "/dvmdb/device"
-       }
-     ],
-     "session": "WsqbdiVp+T0iIfU1av0jqCp8CtMKE7GuX8byAS/DnhTELhiyeDK/Lxd33GrkQaIYxIa6/z2g962HrqNsKWhCCOa43UKohnSs",
-     "verbose": 1
-   }
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name"
+               ],
+               "sub fetch": {
+                 "ha_slave": {
+                   "subfetch hidden": 1
+                 },
+                 "vdom": {
+                   "subfetch hidden": 1
+                 }
+               },
+               "url": "/dvmdb/device"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block::
+      .. code-block:: json
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": [
-           {
-             "name": "adom_62_device_001",
-             "oid": 170
-           },
-   [...]           
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/device"
-       }
-     ]
-   }
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "dev_001",
+                   "oid": 170
+                 },
+                 {"...", "..."},
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device"
+             }
+           ]
+         }
 
+Sub fetch TODO
+--------------
 
 Sub fetch dictionnary + subfetch hidden:
 
