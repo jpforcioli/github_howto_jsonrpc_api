@@ -3123,9 +3123,8 @@ operator to retrieve all firewall address objects that match the specified
            ]
          }
 
-Retrieve all firewall address objects that strictly match a specified IP address
-or subnet
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Retrieve all firewall address objects that strictly match an IP address or subnet
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 The following example demonstrates how to use the ``==`` (*exact match*)
 comparison operator to retrieve all firewall address objects that exactly match the specified ``10.0.0.111/32`` IP address within the ``demo`` ADOM:
@@ -3410,8 +3409,8 @@ include the ``10.0.0.111`` IP address within the ``demo`` ADOM:
            ]
          }
 
-Retrieve all firewall address subnets or ranges matching a specific IP address
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Retrieve all firewall address subnets or ranges matching an IP address
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 The following example demonstrates how to build a complex filter expression to
 search for objects based on various criteria. In this case, the objective is to retrieve all firewall address ranges or subnets that match the
@@ -3757,24 +3756,21 @@ per-device mapping subnet or range matching the IP address ``10.0.0.111/32``:
            ]
          }
 
-Retrieve all firewall address subnets or ranges matching a specific IP address,
-including in their per-device mapping entries
+Retrieve all firewall address subnets or ranges matching a specific IP address including in their per-device mapping entries
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-This is about getting the combined result of the API call from those two
-sections:
+This describes how to obtain the combined results from the API calls in the following two sections:
 
-- :ref:`Retrieve all firewall address subnets or ranges matching a specific IP 
-  address`
+- :ref:`Retrieve all firewall address subnets or ranges matching an IP address`
 - :ref:`Retrieve all firewall addresses with a per-device mapping, where the 
   subnet or range matches a specific IP address`
 
-You can achieve that by multiplexing at the ``params`` block level.
+This can be accomplished by multiplexing at the ``params`` block level.
 
-The following example shows how to get all firewall address objects matching (by
-``subnet``, ``range``, and per-device mapping ``subnet`` and ``range``too) the
-``10.0.0.111/32`` IP address; this time using a strict match for the ``ipmask``
-case in order to reduce the amount of returned data:
+The example below demonstrates how to retrieve all firewall address objects that
+match the IP address ``10.0.0.111/32`` (by subnet, range, and per-device mapping
+subnet and range as well). This time, a strict match is used for the ``ipmask``
+case to reduce the amount of returned data.
 
 .. tab-set::
 
