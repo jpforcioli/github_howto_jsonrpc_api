@@ -3019,186 +3019,187 @@ To get firewall address groups containing member ``host_001``:
 How to filter firewall address according to their IPs?
 ______________________________________________________
 
-Caught in #0363496.
+Most of the examples provided in this section are inspired by #0363496.
 
-- Retrieve all firewall address objects matching a specific IP subnet
+Retrieve all firewall address objects matching a specific IP subnet
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-  The following example demonstrates how to use the ``<=`` (*in*) comparison
-  operator to retrieve all firewall address objects that match the specified
-  ``10.0.0.0/16`` subnet within the ``demo`` ADOM:
+The following example demonstrates how to use the ``<=`` (*in*) comparison
+operator to retrieve all firewall address objects that match the specified
+``10.0.0.0/16`` subnet within the ``demo`` ADOM:
 
-  .. tab-set::
+.. tab-set::
 
-     .. tab-item:: REQUEST
+   .. tab-item:: REQUEST
 
-        .. code-block:: json
+      .. code-block:: json
 
-           {
-             "id": 3,
-             "method": "get",
-             "params": [
-               {
-                 "fields": [
-                   "name",
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "type",
+                 "subnet"
+               ],
+               "filter": [
+                 [
                    "type",
-                   "subnet"
+                   "==",
+                   "ipmask"
                  ],
-                 "filter": [
+                 "&&",
+                 [
+                   "subnet",
+                   "<=",
                    [
-                     "type",
-                     "==",
-                     "ipmask"
-                   ],
-                   "&&",
-                   [
-                     "subnet",
-                     "<=",
-                     [
-                       "10.0.0.0",
-                       "255.255.0.0"
-                     ]
+                     "10.0.0.0",
+                     "255.255.0.0"
                    ]
-                 ],
-                 "loadsub": 0,
-                 "url": "/pm/config/adom/demo/obj/firewall/address"
-               }
-             ],
-             "session": "{{session}}",
-             "verbose": 1
-           }
+                 ]
+               ],
+               "loadsub": 0,
+               "url": "/pm/config/adom/demo/obj/firewall/address"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
+   .. tab-item:: RESPONSE
 
-     .. tab-item:: RESPONSE
+      .. code-block:: json
 
-        .. code-block:: json
-
-           {
-             "id": 3,
-             "result": [
-               {
-                 "data": [
-                   {
-                     "name": "host_001",
-                     "oid": 5672,
-                     "subnet": [
-                       "10.0.0.111",
-                       "255.255.255.255"
-                     ],
-                     "type": "ipmask"
-                   },
-                   {
-                     "name": "host_002",
-                     "oid": 5675,
-                     "subnet": [
-                       "10.0.0.112",
-                       "255.255.255.255"
-                     ],
-                     "type": "ipmask"
-                   },
-                   {
-                     "name": "subnet_001",
-                     "oid": 5674,
-                     "subnet": [
-                       "10.0.0.0",
-                       "255.255.255.0"
-                     ],
-                     "type": "ipmask"
-                   },
-                   {
-                     "name": "subnet_002",
-                     "oid": 5677,
-                     "subnet": [
-                       "10.0.0.0",
-                       "255.255.0.0"
-                     ],
-                     "type": "ipmask"
-                   }
-                 ],
-                 "status": {
-                   "code": 0,
-                   "message": "OK"
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "host_001",
+                   "oid": 5672,
+                   "subnet": [
+                     "10.0.0.111",
+                     "255.255.255.255"
+                   ],
+                   "type": "ipmask"
                  },
-                 "url": "/pm/config/adom/demo/obj/firewall/address"
-               }
-             ]
-           }
+                 {
+                   "name": "host_002",
+                   "oid": 5675,
+                   "subnet": [
+                     "10.0.0.112",
+                     "255.255.255.255"
+                   ],
+                   "type": "ipmask"
+                 },
+                 {
+                   "name": "subnet_001",
+                   "oid": 5674,
+                   "subnet": [
+                     "10.0.0.0",
+                     "255.255.255.0"
+                   ],
+                   "type": "ipmask"
+                 },
+                 {
+                   "name": "subnet_002",
+                   "oid": 5677,
+                   "subnet": [
+                     "10.0.0.0",
+                     "255.255.0.0"
+                   ],
+                   "type": "ipmask"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/address"
+             }
+           ]
+         }
 
-- Retrieve all firewall address objects that strictly match a specified IP 
-  address or subnet
+Retrieve all firewall address objects that strictly match a specified IP address
+or subnet
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-  The following example demonstrates how to use the ``==`` (*exact match*)
-  comparison operator to retrieve all firewall address objects that exactly
-  match the specified ``10.0.0.111/32`` IP address within the ``demo`` ADOM:
+The following example demonstrates how to use the ``==`` (*exact match*)
+comparison operator to retrieve all firewall address objects that exactly match the specified ``10.0.0.111/32`` IP address within the ``demo`` ADOM:
 
-  .. tab-set::
+.. tab-set::
 
-     .. tab-item:: REQUEST
+   .. tab-item:: REQUEST
 
-        .. code-block:: json
+      .. code-block:: json
 
-           {
-             "id": 3,
-             "method": "get",
-             "params": [
-               {
-                 "fields": [
-                   "name",
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "type",
+                 "subnet"
+               ],
+               "filter": [
+                 [
                    "type",
-                   "subnet"
+                   "==",
+                   "ipmask"
                  ],
-                 "filter": [
+                 "&&",
+                 [
+                   "subnet",
+                   "==",
                    [
-                     "type",
-                     "==",
-                     "ipmask"
-                   ],
-                   "&&",
-                   [
-                     "subnet",
-                     "==",
-                     [
-                       "10.0.0.111",
-                       "255.255.255.255"
-                     ]
+                     "10.0.0.111",
+                     "255.255.255.255"
                    ]
-                 ],
-                 "loadsub": 0,
-                 "url": "/pm/config/adom/demo/obj/firewall/address"
-               }
-             ],
-             "session": "{{session}}",
-             "verbose": 1
-           }
+                 ]
+               ],
+               "loadsub": 0,
+               "url": "/pm/config/adom/demo/obj/firewall/address"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-     .. tab-item:: RESPONSE
+   .. tab-item:: RESPONSE
 
-        .. code-block:: json
+      .. code-block:: json
 
-           {
-             "id": 3,
-             "result": [
-               {
-                 "data": [
-                   {
-                     "name": "host_001",
-                     "oid": 5672,
-                     "subnet": [
-                       "10.0.0.111",
-                       "255.255.255.255"
-                     ],
-                     "type": "ipmask"
-                   }
-                 ],
-                 "status": {
-                   "code": 0,
-                   "message": "OK"
-                 },
-                 "url": "/pm/config/adom/demo/obj/firewall/address"
-               }
-             ]
-           }
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "host_001",
+                   "oid": 5672,
+                   "subnet": [
+                     "10.0.0.111",
+                     "255.255.255.255"
+                   ],
+                   "type": "ipmask"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/address"
+             }
+           ]
+         }
 
-- Retrieve all firewall address subnets matching a specific IP address
+Retrieve all firewall address subnets matching a specific IP address
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
   The following example demonstrates how to use the ``>=`` (*greater than or
   equal*) comparison operator to retrieve all firewall address objects that
@@ -3685,7 +3686,7 @@ Caught in #0363496.
 
            For the ``sub fetch`` and ``subfetch hidden`` instructions, review
            the :ref:`Sub fetch operations` section.
-           
+
      .. tab-item:: RESPONSE
 
         .. code-block:: json           
