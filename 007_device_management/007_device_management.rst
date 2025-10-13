@@ -3251,6 +3251,110 @@ You can still do it by multiplexing multiple ``data`` blocks as shown below:
            ]
          }
 
+How to get the list of Model Devices which are ready for auto-link?
+___________________________________________________________________
+
+A Model Device that is *ready for auto-link* is a Model Device added to FortiManager without the ``linked_to_model`` flag. In this case, when the actual device connects to FortiManager, the auto-link process does not start automatically. Instead, the FortiManager administrator will see the Model Device with the *Ready for Auto-link* status, as shown below:
+
+.. thumbnail:: images/image_013.png
+
+The actual device is also placed in the list of *Unregistered Devices* in the
+``root`` ADOM.  
+
+To start the auto-link process, the FortiManager administrator must hover the mouse over the yellow triangle and then click the *Auto-link Now* button:
+
+.. thumbnail:: images/image_014.png
+
+To get the list of Model Devices that are *ready for auto-link*, use a ``get``
+request with a filter on the ``flags`` and ``mgmt_mode`` attributes. The goal is
+to return devices where ``flags`` is set to ``is_model`` and ``mgmt_mode`` is
+``unreg`` as shown in the example below:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "mgmt_mode",
+                 "flags"
+               ],
+               "filter": [
+                 [
+                   "flags",
+                   "&",
+                   "is_model",
+                   "is_model"
+                 ],
+                 "&&",
+                 [
+                   "mgmt_mode",
+                   "==",
+                   "unreg"
+                 ]
+               ],
+               "loadsub": 0,
+               "url": "/dvmdb/device"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+          - The ``filter`` attribute uses a bitwise AND operator ``&`` to check 
+            if the ``is_model`` flag is set in the ``flags`` attribute.
+
+            If you consider the following syntax:
+
+            .. code-block:: text
+
+               "filter": [ <source>, <operator>, <target1>, <target2>, ... ]
+
+            then it tests if:
+            
+            .. code-block:: text
+              
+               (source & target1) = target2
+          
+          - The ``filter`` attribute also checks if the ``mgmt_mode`` is set to
+            ``unreg``.
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "flags": [
+                     "has_hdd",
+                     "is_model"
+                   ],
+                   "mgmt_mode": "unreg",
+                   "name": "FGVMMLREDACTED64",
+                   "oid": 867
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device"
+             }
+           ]
+         }    
+
 How to enable VDOM on a Model Device?
 +++++++++++++++++++++++++++++++++++++
 
