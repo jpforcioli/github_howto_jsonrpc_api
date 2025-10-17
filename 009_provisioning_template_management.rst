@@ -1426,47 +1426,49 @@ The legacy widget are the ones without override or per-device mapping support.
 Here we're showing how to modify the syslog severity for System Template
 ``default`` in ADOM ``root`` (caught in #0593505):
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+      	 {
+           "id": 96,
+      		 "method": "set",
+      		 "params": [
+      		   {
+      		     "data": {
+                 "exclude-list": null,
+                 "severity": 3
+      		     },
+               "url":
+     		       "pm/config/adom/demo/devprof/default/log/syslogd/filter"
+             },
+           ],
+     		   "session": "{{session}}"
+     		 } 
 
-		{
-		  "id": 96,
-		  "method": "set",
-		  "params": [
-		    {
-		      "data": {
-			"exclude-list": null,
-			"severity": 3
-		      },
-		      "url":
-		      "pm/config/adom/root/devprof/default/log/syslogd/filter"
-		    }
-		  ],
-		  "session": 5450
-		}
+   .. tab-item:: RESPONSE
 
-**RESPONSE:**
-
-.. code-block:: json
-
-		{
-		  "id": 96,
-		  "result": [
-		    {
-		      "data": {
-		        "exclude-list": null,
-			"severity": 3
-		      },
-		      "status": {
-		        "code": 0,
-			"message": "OK"
-		      },
-		      "url":
-		      "pm/config/adom/root/devprof/default/log/syslogd/filter"
-		    }
-		  ]
-		}
+      .. code-block:: json
+      
+         {
+           "id": 96,
+           "result": [
+             {
+               "data": {
+                 "exclude-list": null,
+         	       "severity": 3
+               },
+               "status": {
+                 "code": 0,
+         	       "message": "OK"
+               },
+               "url":
+               "pm/config/adom/demo/devprof/default/log/syslogd/filter"
+             }
+           ]
+         }
 
 **Widget with override or per-device mapping support**
 
@@ -1638,158 +1640,177 @@ list first.
 
 1. Using ``/pm/devprof/<adom>/<template>`` entry
 
-To add the *Interface* widget, we have to update the ``enabled options`` list by
-adding keyword ``interface``:
+   To add the *Interface* widget, we have to update the ``enabled options`` 
+   list by adding keyword ``interface``:
 
-**REQUEST:**
+   .. tab-set:: 
 
-.. code-block:: json
+      .. tab-item:: REQUEST
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "set",
-     "params": [
-       {
-         "data": {
-           "enabled options": [
-             "dns",
-             "admin",
-             "snmp",
-             "interface"
-           ]
-         },
-         "url": "pm/devprof/adom/demo/foobar"
-       }
-     ],
-     "session": "pDMQ1pEj7hu2oYneGyMI/IwFdiQv+CvRfXQUX/8kKLyB0CrvOgIaBXIyr1gpEBP3nRkKUHdm2VQhlag0k99e3A==",
-     "verbose": 1
-   }
+         .. code-block:: json
 
-**RESPONSE:**
+            {
+              "id": 3,
+              "method": "set",
+              "params": [
+                {
+                  "data": {
+                    "enabled options": [
+                      "dns",
+                      "admin",
+                      "snmp",
+                      "interface"
+                    ]
+                  },
+                  "url": "pm/devprof/adom/demo/system_template_001"
+                }
+              ],
+              "session": "{{session}}"
+            }
 
-.. code-block:: json
+      .. tab-item:: RESPONSE
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "pm/devprof/adom/germany/foobar"
-       }
-     ]
-   }
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "result": [
+                {
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "pm/devprof/adom/demo/system_template_001"
+                }
+              ]
+            }
 
 2. Using ``/pm/config/<adom>/devprof/<template>/device/profile/setting`` entry
 
-To add the *Interface* widget, we have to update the ``enabled-pages`` list by
-adding keyword ``interface``:
+   To add the *Interface* widget, we have to update the ``enabled-pages`` list 
+   by adding keyword ``interface``:
 
-**REQUEST:**
+   .. tab-set::
+    
+      .. tab-item:: REQUEST
 
-.. code-block:: json
+         .. code-block:: json
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "set",
-     "params": [
-       {
-         "data": {
-           "enabled-pages": [
-             "dns",
-             "admin",
-             "snmp",
-             "interface"
-           ]
-         },
-         "url": "pm/config/adom/demo/devprof/foobar/device/profile/setting"
-       }
-     ],
-     "session": "pDMQ1pEj7hu2oYneGyMI/IwFdiQv+CvRfXQUX/8kKLyB0CrvOgIaBXIyr1gpEBP3nRkKUHdm2VQhlag0k99e3A==",
-     "verbose": 1
-   }
+            {
+              "id": 3,
+              "method": "set",
+              "params": [
+                {
+                  "data": {
+                    "enabled-pages": [
+                      "dns",
+                      "admin",
+                      "snmp",
+                      "interface"
+                    ]
+                  },
+                  "url": "pm/config/adom/demo/devprof/system_template_001/device/profile/setting"
+                }
+              ],
+              "session": "{{session}}"
+            }
+    
+      .. tab-item:: RESPONSE
 
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "pm/config/adom/demo/devprof/foobar/device/profile/setting"
-       }
-     ]
-   }
+         .. code-block:: json         
+         
+            {
+              "id": 3,
+              "result": [
+                {
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "pm/config/adom/demo/devprof/system_template_001/device/profile/setting"
+                }
+              ]
+            }
 
 How to add a new *Config Interface* action in the interface widget?
 ___________________________________________________________________
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "set",
-     "params": [
-       {
-         "data": [
-           {
-             "action": "conf-intf",
-             "model": "all",
-             "value": "{\"name\": \"internal3\", \"ip\": \"172.16.$(region_id).$(site_id)/24\", \"allowaccess\": 7}",
-             "var-list": [
-               {
-                 "name": "system interface/allowaccess",
-                 "override": 0
+         {
+           "id": 1,
+           "jsonrpc": "1.0",
+           "method": "set",
+           "params": [
+             {
+               "data": [
+                 {
+                   "action": "conf-intf",
+                   "model": "all",
+                   "value": {
+                     "name": "wan1",
+                     "ip": "172.16.$(region_id).$(site_id)/24", 
+                     "allowaccess": [
+                        "ping",
+                        "https",
+                        "ssh"
+                     ],
+                     "mode": "static"
+                   },
+                   "var-list": [
+                     {
+                       "name": "system interface/allowaccess",
+                       "override": 0
+                     },
+                     {
+                       "name": "system interface/ip",
+                       "override": 0
+                     },
+                     {
+                       "name": "system interface/name",
+                       "override": 0
+                     }
+                   ]
+                 }
+               ],
+               "url": "pm/config/adom/demo/devprof/system_interface_001/device/template/widget/interface/action-list"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         The ``mode`` attribute isn't offered in the FortiManager GUI when you
+         configure an interface entry in the System Template page. The example 
+         above shows a nice where you can still configure other interface
+         attributes. You can then safely edit the System Template with the GUI
+         and performs changes, those *extra* attributes won't be removed or
+         modified.
+         
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "seq": 2
                },
-               {
-                 "name": "system interface/ip",
-                 "override": 0
+               "status": {
+                 "code": 0,
+                 "message": "OK"
                },
-               {
-                 "name": "system interface/name",
-                 "override": 0
-               }
-             ]
-           }
-         ],
-         "url": "pm/config/adom/demo/devprof/foobar/device/template/widget/interface/action-list"
-       }
-     ],
-     "session": "a2keKgYvGVxeNA1VkhlFFsm13A0y2zFq+Ozyr0MhCTvci85Yoe9C53NhbLHkxBdxNNgssSWpDFVLkDGBfz09lg==",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "seq": 2
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "pm/config/adom/demo/germany/devprof/foobar/device/template/widget/interface/action-list"
-       }
-     ]
-   }
+               "url": "pm/config/adom/demo/devprof/system_template_001/device/template/widget/interface/action-list"
+             }
+           ]
+         }
 
 How to get the settings of the DNS widget?
 __________________________________________
