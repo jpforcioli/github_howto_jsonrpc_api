@@ -1911,10 +1911,10 @@ How to export/import FortiGuard objects?
 
 Caught in #077802 (FortiManager 7.2.2).
 
+These export/import operations were implemented to enable an air-gapped 
+FortiManager to receive FortiGuard updates automatically.
 
-Those export/import operations have been implemented to allow an air-gapped FortiManager to receive FortiGuard Updates in an automated manner.
-
-For instance, it could be used in this quite common :bdg-link-primary-line:`data-diode <https://en.wikipedia.org/?title=Data_diode&redirect=no>` (OT environment) use case:
+For example, they can be used in a typical data-diode (OT environment) scenario:
 
 .. code-block:: text
 
@@ -1922,25 +1922,29 @@ For instance, it could be used in this quite common :bdg-link-primary-line:`data
 
 where:
 
-- ``INTERNET`` is the Internet where are located the public FortiGuard servers
-- ``FMG1`` is the FortiManager able to get FortiGuard objects from the Internet
-- ``DEVOPS`` is an external system from where you can trigger some |fmg_api| 
-  operations
-- ``data-diode`` is a data-diode
- 
-  - In this exemple, traffic can only flow from left to right
-- ``FMG2`` is the air-gapped FortiManager
+- ``INTERNET`` represents the public FortiGuard servers.
 
-  - It can't get get updates from the public FortiGuard servers
-  - It is managing the FortiGate devices
+- ``FMG1`` is the FortiManager instance connected to the Internet to retrieve 
+  FortiGuard objects.  
 
-In this use case, the ``DEVOPS`` system can:
+- ``DEVOPS`` is an external system capable of triggering FortiManager JSON RPC 
+  API operations.
 
-- Use the |fmg_api| to export FortiGuard objects from ``FMG1``
-- Use the |fmg_api| to import FortiGuard object to ``FMG2``
+- The ``data-diode`` allows traffic to flow only from left to right.
 
-Traffic from ``DEVOPS`` to ``FMG2`` will be accepted by the ``data-diode`` since
-going into the right direction; from left to right.
+- ``FMG2`` is the air-gapped FortiManager that cannot access public FortiGuard 
+  servers and manages FortiGate devices internally.
+
+In this setup, the ``DEVOPS`` system can:
+
+- Use the FortiManager API to **export FortiGuard objects** from 
+  ``FMG1``.
+
+- Use the FortiManager API to **import FortiGuard objects** into 
+  ``FMG2``.
+
+Traffic from ``DEVOPS`` to ``FMG2`` is permitted by the data-diode since it 
+flows in the allowed left-to-right direction.
 
 How to export a FortiGuard Object?
 ++++++++++++++++++++++++++++++++++
@@ -2026,6 +2030,261 @@ FortiGuard Object:
 
          - The ``base64`` attribute contains all the requested FortiGuard 
            objects in base64 format
+
+Starting with FortiManager 8.0.0 (#1125122), the export has been improved in
+term of flexibility with the addition of the ``filter`` attribute. You can now
+export specific FortiGuard objects based on different criteria: by system (e.g. 
+FGT, FCT, etc) or by version.
+
+For instance, if you want to export all FortiGuard objects, you can use
+following example:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "category": {
+                   "fds": {
+                     "filter": {
+                       "export-all": 1
+                     }
+                   }
+                 },
+                 "flags": "base64"
+               },
+               "url": "/um/object/export"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "category": {
+                   "fds": {
+                     "base64": "UFVURjA0MDAwMDAwAwAAAHiZEABAAAAAMj[...]",
+                   }
+                 },
+                 "taskid": 222
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/object/export"
+             }
+           ]
+         }            
+
+      .. note::
+      
+         If you get the following response:
+      
+         .. code-block:: json
+      
+            {
+              "id": 3,
+              "result": [
+                {
+                  "status": {
+                    "code": -10,
+                    "message": "The data is invalid for selected url"
+                  },
+                  "url": "/um/object/export"
+                }
+              ]
+            }
+      
+         then try again with this debug enabled in your FortiManager console:
+      
+         .. code-block:: text
+      
+            diagnose debug application fdssvrd 255
+            diagnose debug enable
+      
+         If you observe the following debug output:
+      
+         .. code-block:: text
+      
+            __base64_by_file,4416: too large for base64 export. 1473055431 vs 500000000
+            
+         then it means the base64 output is too large...
+
+You can also export FortiGuard objects based on their system and version. The
+following example exports all FortiGuard objects for FortiGate systems with
+version 7.6 and 7.4 and for FortiClient systems regardless of their version:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "category": {
+                   "fds": {
+                     "filter": {
+                       "system": {
+                         "FCT": [],
+                         "FGT": [
+                           "7.6",
+                           "7.4"
+                         ]
+                       }
+                     }
+                   }
+                 },
+                 "flags": "base64"
+               },
+               "url": "/um/object/export"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "category": {
+                   "fds": {
+                     "base64": "UFVURjA0MDAwMDAwAwAAAHiZEABAAAAAMj[...]",
+                   }
+                 },
+                 "taskid": 225
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/object/export"
+             }
+           ]
+         }            
+
+      .. note::
+
+         - The ``system`` attribute allows to specify one or multiple Fortinet 
+           products (e.g. ``FGT``, ``FCT``, etc)
+
+         - The version list for each system allows to specify one or multiple 
+           versions; if the version list is empty (as for ``FCT`` in the 
+           example above), then all versions are exported for the specified 
+           system.
+
+You can also export FortiGuard objects based on their object type and version as
+shown in the below example:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "category": {
+                   "fds": {
+                     "filter": {
+                       "object": [
+                         {
+                           "objid": "07002000NIDS02600",
+                           "version": [
+                             "34.89",
+                             "34.90"
+                           ]
+                         },
+                         {
+                           "objid": "07004000APDB00100",
+                           "version": [
+                             "all"
+                           ]
+                         },
+                         {
+                           "objid": "07004000SFAS00000"
+                         }
+                       ]
+                     }
+                   }
+                 },
+                 "flags": "base64"
+               },
+               "url": "/um/object/export"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "category": {
+                   "fds": {
+                     "base64": 
+                       "UFVURjA0MDAwMDAwAwAAAHiZEABAAAAAMj[...]",
+                     }
+                   }
+                 },
+                 "taskid": 233
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/object/export"
+             }
+           ]
+         }
+
+You can also explore the other flags ``delta`` and ``only`` that you can see as
+available options when using:
+
+.. code-block:: text
+  
+   fmupdate ftp fds-export ?
+
+and shows their corresponding API form by enabling debug in FortiManager:
+
+
+.. code-block:: text
+  
+   diagnose debug application fdssvrd 255
+   diagnose debug enable
 
 How to import a FortiGuard Object?
 ++++++++++++++++++++++++++++++++++

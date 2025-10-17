@@ -1785,12 +1785,12 @@ ___________________________________________________________________
 
       .. note::
 
-         The ``mode`` attribute isn't offered in the FortiManager GUI when you
-         configure an interface entry in the System Template page. The example 
-         above shows a nice where you can still configure other interface
-         attributes. You can then safely edit the System Template with the GUI
-         and performs changes, those *extra* attributes won't be removed or
-         modified.
+         The ``mode`` attribute is not available in the FortiManager GUI when 
+         configuring an interface entry on the System Template page. The 
+         example above demonstrates a scenario where other interface attributes 
+         can still be configured. You can then safely edit the System Template 
+         through the GUI to make further changes, as these additional 
+         attributes will not be removed or modified.        
          
    .. tab-item:: RESPONSE
 
