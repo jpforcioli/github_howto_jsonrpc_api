@@ -197,6 +197,11 @@ You just need to insert the API key:
      POST https://fmg_ip}}/jsonrpc?access_token=33fzwipq4amujunzgzn46mg1to9p8wbi
      [...]
 
+  .. warning::
+
+     Starting with FortiManager 7.4.7/7.6.2, you can no longer use this form 
+     (#1084776). 
+
 FortiManager Cloud API authentication
 +++++++++++++++++++++++++++++++++++++
 
