@@ -1991,7 +1991,8 @@ It's a four steps process:
 1. Trigger the Policy Package Install in preview mode
 2. Trigger the Install Preview 
 3. Collect the Install Preview output
-4. Cancel the Policy Package install process
+4. Cancel the Policy Package install process. Should you want to proceed with
+   the install, then commit the preview.
 
 Step #1: Trigger the Policy Package Install in preview mode
 ___________________________________________________________
@@ -2249,6 +2250,35 @@ The following example shows how to cancel a Policy Package Installation:
              }
            ]
          }
+
+Step #4: or... commit the preview
+_________________________________
+
+TBD.
+
+.. code-block:: json
+ 
+   {
+     "id": 1,
+     "method": "exec",
+     "session": "{{session}}",
+     "params": [
+       {
+         "url": "/securityconsole/package/commit",
+         "data": {
+           "adom": "demo",
+           "scope": [
+             {
+               "name": "fgt_001",
+               "vdom": "root"
+             }
+           ]
+         }
+       }
+     ],
+     "session": "{{session}}"
+   }
+
 
 How to trigger an install preview for multiple devices?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
