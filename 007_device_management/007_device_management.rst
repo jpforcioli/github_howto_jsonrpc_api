@@ -482,6 +482,83 @@ The following example shows how to get these status for all managed devices:
            "verbose": 1
          }
 
+Starting with FortiManager 7.4.8, 7.6.5 and 8.0.0 (#1192521), you can also use
+the new `_vdom/status` API request. as shown below:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_vdom/status"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "auto update": 1,
+                   "conf_status": "in sync",
+                   "db_status": "not modified",
+                   "dev": "dev_001"
+                 },
+                 {
+                   "auto update": 0,
+                   "dev": "dev_001",
+                   "status": "not modified",
+                   "vdom": "root"
+                 },
+                 {
+                   "auto update": 1,
+                   "conf_status": "in sync",
+                   "db_status": "not modified",
+                   "dev": "dev_002"
+                 },
+                 {"...": "..."},
+                 {
+                   "auto update": 0,
+                   "dev": "dev_009",
+                   "status": "modified",
+                   "vdom": "root"
+                 },
+                 {
+                   "auto update": 0,
+                   "conf_status": "unknown",
+                   "db_status": "modified",
+                   "dev": "dev_010"
+                 },
+                 {
+                   "auto update": 0,
+                   "dev": "dev_010",
+                   "status": "modified",
+                   "vdom": "root"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_vdom/status"
+             }
+           ]
+         }
+
 Policy Package Status for Managed devices
 +++++++++++++++++++++++++++++++++++++++++
 
