@@ -952,49 +952,57 @@ Some URLs caught in #0659916
 How to perform a device revision diff?
 ++++++++++++++++++++++++++++++++++++++
 
-The GUI-based device revision diff is entirely managed by the GUI side.
-The FortiManager GUI API is just used to return two revisions as shown below.
-We ask for a revision diff for device revisions 3 and 4 from device with ID
-434.
+The following example shows how to generate a diff for the device with
+ID `184` and its revisions `123` and `124`:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block::
+   .. tab-item:: REQUEST
+    
+      .. code-block::
 
-   POST https://10.210.35.208:443/cgi-bin/module/flatui_proxy
+         POST https://10.210.35.208:443/cgi-bin/module/flatui_proxy
    
-   {
-       "url": "/gui/adom/dvm/device/revision/diff",
-       "method": "get",
-       "params": {
-           "deviceId": "434",
-           "from": 3,
-           "to": 4,
-           "options": 1
-       },
-       "id": 1
-   }
+         {
+             "url": "/gui/adom/dvm/device/revision/diff",
+             "method": "get",
+             "params": {
+                 "deviceId": "184",
+                 "from": 123,
+                 "to": 124,
+                 "options": 0
+             },
+             "id": 1
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
+    
+      .. code-block::
 
-.. code-block::
+         {
+             "result": [
+                 {
+                     "data": {
+                         "patch": [ "..." ],
+                         "version1": "#config-version=FGVMK6-7...",
+                         "version2": "#config-version=FGVMK6-7..."
+                     },
+                     "id": 1,
+                     "status": {
+                         "code": 0,
+                         "message": ""
+                     },
+                     "url": "/gui/adom/dvm/device/revision/diff"
+                 }
+             ]
+         }            
+      
+      .. note::
 
-   {
-       "result": [
-           {
-               "data": {
-                   "version1": "#config-version=FG100F-6.0[...]",
-                   "version2": "#config-version=FG100F-6.0[...]",                 
-               },
-               "id": 1,
-               "status": {
-                   "code": 0,
-                   "message": ""
-               },
-               "url": "/gui/adom/dvm/device/revision/diff"
-           }
-       ]
-   }   
+          - The ``patch`` array contains the diff between the two device 
+            revisions.
+          - The ``version1`` and ``version2`` fields contain the full 
+            configuration of the two revisions.
 
 How to get the factory default config of a managed device?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
