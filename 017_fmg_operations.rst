@@ -901,7 +901,7 @@ The following example shows how to backup your FortiManager system to an externa
       .. note::
 
          - Once the task is completed, you can get your ``fmg_backup.dat`` 
-           FortiManger backup file, from the ``tmp`` folder of your
+           FortiManager backup file, from the ``tmp`` folder of your
            ``10.210.35.207`` FTP server
 
 .. warning::
