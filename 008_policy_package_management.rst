@@ -9983,7 +9983,11 @@ corresponding values must be used very carefully.
             - ``add_mappings`` which is set to ``enable``. This is important to
               create the per-device mapping in the normalized interfaces.
 
-            ``position`` and ``if_all_objs`` attributes can't be explained yet.
+            - ``position`` and ``if_all_objs`` attributes can't be explained 
+              yet.
+            - ``dst_parent`` is set to ``0`` to import in the ``root`` folder 
+              of the Policy Package tree.. You could set it to a specific 
+              folder ID should you want to import in a specific folder.
   
       .. tab-item:: RESPONSE
   
@@ -10152,8 +10156,8 @@ corresponding values must be used very carefully.
             - ``import_action`` which set to ``do``. 
             - ``if_all_objs`` which is set to ``filter``. It means to only
               import used objects; the one used in the firewall policies of the
-              ``dev_001`` managed devices. If you use the ``all`` value, used an
-              unused objects will be imported.
+              ``dev_001`` managed devices. If you use the ``all`` value, used 
+              and unused objects will be imported.
             - ``if_all_policy`` which is set to ``enable``.
             - ``position`` attribute can't be explained yet.
 
@@ -10184,11 +10188,11 @@ corresponding values must be used very carefully.
 Per-device mapping considerations
 +++++++++++++++++++++++++++++++++
 
-For normalized interfaces
+For normalized interfaces 
 _________________________
 
 If your ``dev_001`` managed device is with firewall policies using system
-interface ``port1`` and system zone (or system sdwan zone) ```z_underlay``, then
+interface ``port1`` and system zone (or system sdwan zone) ``z_underlay``, then
 you will get one normalized interface named ``port1`` with a new per-device
 mapping for ``dev_001:port1`` and a second normalized interface named
 ``z_underlay`` with a new per-device mapping for ``dev_001:z_underlay``.
