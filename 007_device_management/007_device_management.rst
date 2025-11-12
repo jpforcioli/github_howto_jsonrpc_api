@@ -6917,119 +6917,122 @@ How to get the upgrade path?
 This request gives the upgrade path for device ``hub1`` in ADOM ``DEMO_008`` for
 an upgrade to fortios firmware ``6.4.1``:
 
-**REQUEST:**
+.. tab-set:::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "adom": "DEMO_008",
-           "device": [
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
              {
-               "name": "hub1"
+               "data": {
+                 "adom": "demo",
+                 "device": [
+                   {
+                     "name": "dev_001"
+                   }
+                 ],
+                 "flags": "f_preview",
+                 "image": {
+                   "release": "6.4.1"
+                 }
+               },
+               "url": "/um/image/upgrade"
              }
            ],
-           "flags": "f_preview",
-           "image": {
-             "release": "6.4.1"
-           }
-         },
-         "url": "/um/image/upgrade"
-       }
-     ],
-     "session": "OrsMw6koz4lftKerRBVgTNaRS4LpgckYTDPRLB75UNZ0MJgeakk0Toax6nvKSJYIRTyX2o3m9dTL52cxD487aA==",
-     "verbose": 1
-   }
+           "session": "{{session}}",
+         }
 
-**RESPONSE:**
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "upgrade_path": [
+      .. code-block:: json      
+
+         {
+           "id": 1,
+           "result": [
              {
-               "name": "hub1",
-               "oid": 662,
-               "path": [
-                 "6.0.8-303",
-                 "6.2.4-1112",
-                 "6.4.1-1637"
-               ]
+               "data": {
+                 "upgrade_path": [
+                   {
+                     "name": "dev_001",
+                     "oid": 662,
+                     "path": [
+                       "6.0.8-303",
+                       "6.2.4-1112",
+                       "6.4.1-1637"
+                     ]
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/image/upgrade"
              }
            ]
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/um/image/upgrade"
-       }
-     ]
-   }
+         }
 
 With the introduction of the new Firmware Template (starting with FortiManager	
 7.0.0), we're seeing this form of request for getting the upgrade path:
 
-**REQUEST:**	
+.. tab-set::
 
-.. code-block:: json	
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1,
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "devices": [
+      .. code-block:: json	
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
              {
-               "image": "7.2.2",
-               "name": "dut_fgt_02"
+               "data": {
+                 "devices": [
+                   {
+                     "image": "7.2.2",
+                     "name": "dev_001"
+                   }
+                 ],
+                 "flags": 16
+               },
+               "url": "/um/image/upgrade/ext"
              }
            ],
-           "flags": 16
-         },
-         "url": "/um/image/upgrade/ext"
-       }
-     ],
-     "session": "ygNdJpGehf2e7W8RD4\/dYtUoGRHK5+vEwXBQ+GuyvSDvZXOYK1Loj6mkNTDzbHD35urOu0FKOy\/ThfYHPe4e4g=="
-   }
+           "session": "{{session}}"
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
+      .. code-block:: json	      
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "upgrade_path": [
+         {
+           "id": 1,
+           "result": [
              {
-               "name": "dut_fgt_02",
-               "oid": 183,
-               "path": [
-                 "7.2.2-b1255-F"
-               ]
+               "data": {
+                 "upgrade_path": [
+                   {
+                     "name": "dev_001",
+                     "oid": 183,
+                     "path": [
+                       "7.2.2-b1255-F"
+                     ]
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "\/um\/image\/upgrade\/ext"
              }
            ]
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "\/um\/image\/upgrade\/ext"
-       }
-     ]
-   }
+         }
 
 .. warning:: 
 
@@ -7047,7 +7050,8 @@ With the introduction of the new Firmware Template (starting with FortiManager
 
      when using the ``/um/image/upgrade/ext`` url.
 
-     Otherwise, it will trigger an upgrade instead of returning the upgrade path!
+     Otherwise, it will trigger an upgrade instead of returning the upgrade 
+     path!
 
 
 How to get list of available firmware for a specific platform?

@@ -7159,6 +7159,19 @@ Starting with FortiManager 7.6.1 you can just get the firewall policy with the
       .. note::
 
          - Look for the ``referrer object map`` sub-table.
+         - You can also use the "cli config" option as shown below:
+
+           .. code-block:: text
+
+              {
+                  "method": "get",
+                  "params": [
+                      {
+                          "url": "pm/config/adom/demo/pkg/pkg_001/firewall/policy/1",
+                          "option": ["get referred object map", "cli config"]
+                      }
+                  ]
+              }            
 
 Partial Install
 +++++++++++++++

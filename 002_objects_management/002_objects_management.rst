@@ -2153,6 +2153,9 @@ The following example shows how to get the CLI configuration for the ``host_001`
            .. code-block:: text
 
               execute fmpolicy print-device-object <...>
+
+         - If you use the `get` method, along with the `fields` attribute, then
+           the returned CLI will be only for the requested `fields`.
          
 Normalized Interfaces
 ---------------------

@@ -1,6 +1,18 @@
 CLI Script management
 =====================
 
+.. warning::
+
+   Starting with FortiManager 8.0.0 (# 1203111), CLI Scripts operations have 
+   been redesigned. CLI Scripts are now saved in the ADOM DB and the main JSON 
+   API endpoint is:
+
+   .. code-block:: 
+
+      /pm/config/adom/{adom}/obj/fmg/script
+
+   This chapter hasn't been updated yet with the new details
+
 A FortiManager CLI script could be defined with different targets:
 
 +-------------------------+---------------------------------------+
