@@ -356,6 +356,27 @@ To gather this information, FortiManager GUI used the following API call:
            ]
          }
 
+How to CLI Preview a template?
+++++++++++++++++++++++++++++++
+
+TBD.
+
+Notes from #1222894:
+
+- 7.6.4 and 7.6.5 are having different GUI features.
+- 7.6.4/7.6.5:
+  - The action is called *Preview CLI Configuration*. It is using this API 
+    ``/securityconsole/template/cli/preview`` and looks like the assigned 
+    devices (scope) is optional.
+
+- 7.6.5+/8.0.0:
+  - The action is called *Preview on Device*. It is using this API 
+    ``"/securityconsole/template/validate`` and assigned devices (scope) is 
+    required. It will provide a more accurate preview with meta variable 
+    replaced with mapping value; it will also process objects referenced in the 
+    template and add to the preview. Its like a dry-run of installation and 
+    provide a per device preview if there is no error.
+
 How to validate a template?
 +++++++++++++++++++++++++++
 
