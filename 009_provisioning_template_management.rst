@@ -8255,7 +8255,7 @@ Caught in #1201897.
               ]
             }
  
-5. To delete an existing static route
+5. To delete an existing static route 
 
    The following example shows how to delete the IPv4 static routes with
    ``seq-num`` ``1`` in the ``static_route_template_00§1`` Static Route 
