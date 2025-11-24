@@ -8210,50 +8210,50 @@ Caught in #1201897.
 4. To update an existing static route
 
   The following example shows how to update the IPv4 static routes with     
-   ``seq-num`` ``1`` in the ``static_route_template_001`` Static Route 
-   Template for the ``demo`` ADOM:
+  ``seq-num`` ``1`` in the ``static_route_template_001`` Static Route 
+  Template for the ``demo`` ADOM:
 
-   .. tab-set::
+  .. tab-set::
  
-      .. tab-item:: REQUEST
+     .. tab-item:: REQUEST
  
-         .. code-block:: json
+        .. code-block:: json
  
-            {
-              "id": 3,
-              "method": "update",
-              "params": [
-                {
-                  "data": {
-                    "device": [
-                      "port2"
-                    ]
-                  },
-                  "url": "/pm/config/adom/demo/template/_router_static/static_route_template_001/router/static/1"
-                }
-              ],
-              "session": "{{session}}"
-            }
+           {
+             "id": 3,
+             "method": "update",
+             "params": [
+               {
+                 "data": {
+                   "device": [
+                     "port2"
+                   ]
+                 },
+                 "url": "/pm/config/adom/demo/template/_router_static/static_route_template_001/router/static/1"
+               }
+             ],
+             "session": "{{session}}"
+           }
  
-      .. tab-item:: RESPONSE
+     .. tab-item:: RESPONSE
  
-         .. code-block:: json
+        .. code-block:: json
  
-            {
-              "id": 3,
-              "result": [
-                {
-                  "data": {
-                    "seq-num": 1
-                  },
-                  "status": {
-                    "code": 0,
-                    "message": "OK"
-                  },
-                  "url": "/pm/config/adom/demo/template/_router_static/static_route_template_001/router/static/1"
-                }
-              ]
-            }
+           {
+             "id": 3,
+             "result": [
+               {
+                 "data": {
+                   "seq-num": 1
+                 },
+                 "status": {
+                   "code": 0,
+                   "message": "OK"
+                 },
+                 "url": "/pm/config/adom/demo/template/_router_static/static_route_template_001/router/static/1"
+               }
+             ]
+           }
  
 5. To delete an existing static route
 
