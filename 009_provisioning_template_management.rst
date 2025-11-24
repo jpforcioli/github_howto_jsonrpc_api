@@ -8061,7 +8061,7 @@ Caught in #1201897.
 2. To get list of static routes
 
    The following example shows how to list all IPv4 static routes in the
-   ``static_route_template_00§1`` Static Route Template for the ``demo`` ADOM:
+   ``static_route_template_001`` Static Route Template for the ``demo`` ADOM:
 
    .. tab-set::
 
@@ -8136,7 +8136,7 @@ Caught in #1201897.
 
 
    The following example shows how to get the IPv4 static routes with     
-   ``seq-num`` ``1`` in the ``static_route_template_00§1`` Static Route 
+   ``seq-num`` ``1`` in the ``static_route_template_001`` Static Route 
    Template for the ``demo`` ADOM:
 
    .. tab-set::
@@ -8210,7 +8210,7 @@ Caught in #1201897.
 4. To update an existing static route
 
   The following example shows how to update the IPv4 static routes with     
-   ``seq-num`` ``1`` in the ``static_route_template_00§1`` Static Route 
+   ``seq-num`` ``1`` in the ``static_route_template_001`` Static Route 
    Template for the ``demo`` ADOM:
 
    .. tab-set::
