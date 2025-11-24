@@ -365,11 +365,13 @@ Notes from #1222894:
 
 - 7.6.4 and 7.6.5 are having different GUI features.
 - 7.6.4/7.6.5:
+
   - The action is called *Preview CLI Configuration*. It is using this API 
     ``/securityconsole/template/cli/preview`` and looks like the assigned 
     devices (scope) is optional.
 
 - 7.6.5+/8.0.0:
+
   - The action is called *Preview on Device*. It is using this API 
     ``"/securityconsole/template/validate`` and assigned devices (scope) is 
     required. It will provide a more accurate preview with meta variable 
@@ -1833,99 +1835,182 @@ ___________________________________________________________________
            ]
          }
 
-How to get the settings of the DNS widget?
-__________________________________________
+How to get the DNS entries in a System Template?
+________________________________________________
 
-**REQUEST:**
+1. Starting with FortiManager 7.6.5
 
-.. code-block::
+   Caught in #1228182.
+
+   The following example example shows how to get the DNS detail from the
+   ``system_template_001`` System Template in the ``demo`` ADOM:
+
+   .. tab-set::
+    
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "method": "get",
+              "params": [
+                {
+                  "url": "/pm/config/adom/demo/devprof/system_template_001/system/dns"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }
+
+    
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": {
+                    "alt-primary": "0.0.0.0",
+                    "alt-secondary": "0.0.0.0",
+                    "cache-notfound-responses": "disable",
+                    "dns-cache-limit": 5000,
+                    "dns-cache-ttl": 1800,
+                    "domain": [],
+                    "fqdn-cache-ttl": 0,
+                    "fqdn-max-refresh": 3600,
+                    "fqdn-min-refresh": 60,
+                    "hostname-limit": 5000,
+                    "hostname-ttl": 86400,
+                    "interface": [],
+                    "interface-select-method": "auto",
+                    "ip6-primary": "::",
+                    "ip6-secondary": "::",
+                    "log": "disable",
+                    "oid": 7472,
+                    "primary": "8.8.8.8",
+                    "protocol": "cleartext",
+                    "retry": 2,
+                    "root-servers": null,
+                    "secondary": "8.8.4.4",
+                    "server-select-method": "least-rtt",
+                    "source-ip": "0.0.0.0",
+                    "source-ip-interface": [],
+                    "ssl-certificate": [
+                      "Fortinet_Factory"
+                    ],
+                    "timeout": 5,
+                    "vrf-select": 0
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/pm/config/adom/demo/devprof/system_template_001/system/dns"
+                }
+              ]
+            } 
+
+2. Before FortiManager 7.6.5
+
+   The following example example shows how to get the DNS detail from the
+   ``system_template_001`` System Template in the ``demo`` ADOM:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
   
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "pm/config/adom/demo_001/devprof/corporates/device/template/widget/dns/action-list"
-       }
-     ],
-     "session": "NizInwxMIZ+USfDhYfkl8hM7bIVk6xd0VpDxTwpR3G0aj9XF7cMcPWEVic9qZQhidd+qz66BQAOuxWfD+btVsQ==",
-     "verbose": 1
-   }
+            {
+              "id": 3,
+              "method": "get",
+              "params": [
+                {
+                  "url": "pm/config/adom/demo/devprof/system_template_001/device/template/widget/dns/action-list"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }
 
-**RESPONSE:**
 
-.. code-block::
+      .. tab-item:: RESPONSE
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "action": "conf-sys-dns",
-             "dynamic_mapping": null,
-             "model": "all",
-             "seq": 1,
-             "value": {
-               "primary": "8.8.8.8",
-               "secondary": "1.1.1.1"
-             },
-             "var-list": [
-               {
-                 "name": "system dns/timeout",
-                 "override": null
-               },
-               {
-                 "name": "system dns/ssl-certificate",
-                 "override": null
-               },
-               {
-                 "name": "system dns/server-hostname",
-                 "override": null
-               },
-               {
-                 "name": "system dns/retry",
-                 "override": null
-               },
-               {
-                 "name": "system dns/dns-over-tls",
-                 "override": null
-               },
-               {
-                 "name": "system dns/dns-cache-ttl",
-                 "override": null
-               },
-               {
-                 "name": "system dns/dns-cache-limit",
-                 "override": null
-               },
-               {
-                 "name": "system dns/cache-notfound-responses",
-                 "override": null
-               },
-               {
-                 "name": "system dns/domain",
-                 "override": null
-               },
-               {
-                 "name": "system dns/secondary",
-                 "override": null
-               },
-               {
-                 "name": "system dns/primary",
-                 "override": null
-               }
-             ]
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "pm/config/adom/demo_001/devprof/corporates/device/template/widget/dns/action-list"
-       }
-     ]
-   }
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": [
+                    {
+                      "action": "conf-sys-dns",
+                      "dynamic_mapping": null,
+                      "model": "all",
+                      "seq": 1,
+                      "value": {
+                        "primary": "8.8.8.8",
+                        "secondary": "1.1.1.1"
+                      },
+                      "var-list": [
+                        {
+                          "name": "system dns/timeout",
+                          "override": null
+                        },
+                        {
+                          "name": "system dns/ssl-certificate",
+                          "override": null
+                        },
+                        {
+                          "name": "system dns/server-hostname",
+                          "override": null
+                        },
+                        {
+                          "name": "system dns/retry",
+                          "override": null
+                        },
+                        {
+                          "name": "system dns/dns-over-tls",
+                          "override": null
+                        },
+                        {
+                          "name": "system dns/dns-cache-ttl",
+                          "override": null
+                        },
+                        {
+                          "name": "system dns/dns-cache-limit",
+                          "override": null
+                        },
+                        {
+                          "name": "system dns/cache-notfound-responses",
+                          "override": null
+                        },
+                        {
+                          "name": "system dns/domain",
+                          "override": null
+                        },
+                        {
+                          "name": "system dns/secondary",
+                          "override": null
+                        },
+                        {
+                          "name": "system dns/primary",
+                          "override": null
+                        }
+                      ]
+                    }
+                  ],
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "pm/config/adom/demo/devprof/system_template_001/device/template/widget/dns/action-list"
+                }
+              ]
+            }
 
 How to change the FortiAnalyzer setting?
 ________________________________________
@@ -7912,8 +7997,306 @@ The following example shows how to delete the ``ipsec_tunnel_template_001`` in A
 Static Route Template
 ---------------------
 
-How to update/set a static route template?
+How to CRUD Static Route Template entries?
 ++++++++++++++++++++++++++++++++++++++++++
+
+Starting with FortiManager 7.6.4
+________________________________
+
+Caught in #1201897.
+
+1. To create a new static route
+
+   The following example shows how to add a IPv4 static route within the
+   ``static_route_template_001`` Static Route Template for the ``demo`` ADOM:
+
+   .. tab-set::
+     
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+   
+            {
+              "id": 3,
+              "method": "add",
+              "params": [
+                {
+                  "data": {
+                    "device": [
+                      "port1"
+                    ],
+                    "distance": 10,
+                    "dst": [
+                      "0.0.0.0",
+                      "0.0.0.0"
+                    ],
+                    "gateway": "10.210.35.254"
+                  },
+                  "url": "/pm/config/adom/demo/template/_router_static/static_route_template_001/router/static"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": {
+                    "seq-num": 1
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/pm/config/adom/demo/template/_router_static/static_route_template_001/router/static"
+                }
+              ]
+            }   
+
+2. To get list of static routes
+
+   The following example shows how to list all IPv4 static routes in the
+   ``static_route_template_00§1`` Static Route Template for the ``demo`` ADOM:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "method": "get",
+              "params": [
+                {
+                  "url": "/pm/config/adom/demo/template/_router_static/static_route_template_001/router/static"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": [
+                    {
+                      "_seq-num": null,
+                      "bfd": "disable",
+                      "blackhole": "disable",
+                      "device": [
+                        "port1"
+                      ],
+                      "distance": 10,
+                      "dst": [
+                        "0.0.0.0",
+                        "0.0.0.0"
+                      ],
+                      "dstaddr": [],
+                      "dynamic-gateway": "disable",
+                      "gateway": "10.210.35.254",
+                      "internet-service": [],
+                      "internet-service-custom": [],
+                      "internet-service-fortiguard": [],
+                      "link-monitor-exempt": "disable",
+                      "oid": 6216,
+                      "preferred-source": "0.0.0.0",
+                      "priority": 1,
+                      "sdwan-zone": [],
+                      "seq-num": 1,
+                      "src": [
+                        "0.0.0.0",
+                        "0.0.0.0"
+                      ],
+                      "status": "enable",
+                      "tag": 0,
+                      "weight": 0
+                    }
+                  ],
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/pm/config/adom/demo/template/_router_static/static_route_template_001/router/static"
+                }
+              ]
+            }
+
+3. To get a specific static route
+
+
+   The following example shows how to get the IPv4 static routes with     
+   ``seq-num`` ``1`` in the ``static_route_template_00§1`` Static Route 
+   Template for the ``demo`` ADOM:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "method": "get",
+              "params": [
+                {
+                  "url": "/pm/config/adom/demo/template/_router_static/static_route_template_001/router/static/1"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "result": [
+                {
+                  "data": {
+                    "_seq-num": null,
+                    "bfd": "disable",
+                    "blackhole": "disable",
+                    "comment": null,
+                    "device": [
+                      "port1"
+                    ],
+                    "distance": 10,
+                    "dst": [
+                      "0.0.0.0",
+                      "0.0.0.0"
+                    ],
+                    "dstaddr": [],
+                    "dynamic-gateway": "disable",
+                    "gateway": "10.210.35.254",
+                    "internet-service": [],
+                    "internet-service-custom": [],
+                    "internet-service-fortiguard": [],
+                    "link-monitor-exempt": "disable",
+                    "oid": 6216,
+                    "preferred-source": "0.0.0.0",
+                    "priority": 1,
+                    "sdwan-zone": [],
+                    "seq-num": 1,
+                    "src": [
+                      "0.0.0.0",
+                      "0.0.0.0"
+                    ],
+                    "status": "enable",
+                    "tag": 0,
+                    "weight": 0
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/pm/config/adom/demo/template/_router_static/static_route_template_001/router/static/1"
+                }
+              ]
+            }
+
+4. To update an existing static route
+
+  The following example shows how to update the IPv4 static routes with     
+   ``seq-num`` ``1`` in the ``static_route_template_00§1`` Static Route 
+   Template for the ``demo`` ADOM:
+
+  .. tab-set::
+
+     .. tab-item:: REQUEST
+
+        .. code-block:: json
+
+           {
+             "id": 3,
+             "method": "update",
+             "params": [
+               {
+                 "data": {
+                   "device": [
+                     "port2"
+                   ]
+                 },
+                 "url": "/pm/config/adom/demo/template/_router_static/static_route_template_001/router/static/1"
+               }
+             ],
+             "session": "{{session}}"
+           }
+
+     .. tab-item:: RESPONSE
+
+        .. code-block:: json
+
+           {
+             "id": 3,
+             "result": [
+               {
+                 "data": {
+                   "seq-num": 1
+                 },
+                 "status": {
+                   "code": 0,
+                   "message": "OK"
+                 },
+                 "url": "/pm/config/adom/demo/template/_router_static/static_route_template_001/router/static/1"
+               }
+             ]
+           }
+
+5. To delete an existing static route
+
+   The following example shows how to delete the IPv4 static routes with
+   ``seq-num`` ``1`` in the ``static_route_template_00§1`` Static Route 
+   Template for the ``demo`` ADOM:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "method": "delete",
+              "params": [
+                {
+                  "url": "/pm/config/adom/demo/template/_router_static/static_route_template_001/router/static/1"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "result": [
+                {
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/pm/config/adom/demo/template/_router_static/static_route_template_001/router/static/1"
+                }
+              ]
+            }
+
+Before FortiManager 7.6.4
+_________________________
 
 Caught in #0690603.
    
@@ -8017,127 +8400,136 @@ Caught in #0690603.
 How to get Static Route Templates?
 ++++++++++++++++++++++++++++++++++
 
-We get all Static Route Templates from ADOM ``root``:
+The following example shows how to get the Static Route Templates from the
+``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/template/_router_static/adom/root"
-       }
-     ],
-     "session": "KY9gBgxpcfKw2w7Ya6Qb0mG4jbh5kgPb4LytdywexHmHs7KK7nUx2gRz4vv/nShMnQq/PTZ2aps9gwbpcTBMzg==",
-     "verbose": 1
-   }
+      .. code-block:: json
 
-**RESPONSE:**
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/template/_router_static/adom/demo"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-.. code-block:: json
 
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "name": "branches",
-             "oid": 3924,
-             "scope member": [
-               {
-                 "name": "site_001",
-                 "vdom": "root"
-               }
-             ],
-             "template setting": {
-               "stype": "_router_static",
-               "widgets": [
-                 "_router_static"
-               ]
-             },
-             "type": "template"
-           },
-           {
-             "name": "hubs",
-             "oid": 3928,
-             "template setting": {
-               "stype": "_router_static",
-               "widgets": [
-                 "_router_static"
-               ]
-             },
-             "type": "template"
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/template/_router_static/adom/root"
-       }
-     ]
-   }
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "sdwan_overlay_template_001_HUB_Router",
+                   "oid": 6031,
+                   "template setting": {
+                     "description": "[Created by SDWAN Overlay Template: sdwan_overlay_template_001]",
+                     "option": "sdwan-overlay",
+                     "stype": "_router_static",
+                     "widgets": []
+                   },
+                   "type": "template"
+                 },
+                 {
+                   "name": "static_route_template_001",
+                   "oid": 6212,
+                   "template setting": {
+                     "description": "",
+                     "option": "sdwan-manager",
+                     "stype": "_router_static",
+                     "widgets": [
+                       "_router_static"
+                     ]
+                   },
+                   "type": "template"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_router_static/adom/demo"
+             }
+           ]
+         }        
+
+
+      .. note::
+
+         - The ``sdwan-manager`` option means the static route template was 
+           manually created by a FortiManager administrator and enabled for 
+           visibility in both:
+           - *Device Manager* > *Provisioning Templates* > *Static Route*
+           - *SD-WAN Manager* > *Templates* > *Static Route*
+         - The ``sdwan-overlay`` option indicates the static route template was 
+           automatically created by the SD-WAN Overlay Template. By design, it 
+           appears in the same GUI locations as the ``sdwan-manager`` option.
 
 How to get a specific Static Route Template?
 ++++++++++++++++++++++++++++++++++++++++++++
 
-We get Static Route Template ``branches`` from ADOM ``root``:
+The following example shows how to get the ``static_route_template_001`` Static
+Route Template for the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json 
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "url": "/pm/template/_router_static/adom/root/branches"
-       }
-     ],
-     "session": "6GkxtDeWVOQnARmjgHgEDRb4EiSj4c1g1xlCfJ2EHxmKnU3OJwGjSraJjQpDvxmp3914eOsvGWganKIQUUB6Ug==",
-     "verbose": 1
-   }
+      .. code-block:: json
 
-**RESPONSE:**
-
-.. code-block:: json
-  
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "name": "branches",
-           "oid": 3924,
-           "scope member": [
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
              {
-               "name": "site_001",
-               "vdom": "root"
+               "url": "/pm/template/_router_static/adom/demo/static_route_template_001"
              }
            ],
-           "template setting": {
-             "description": null,
-             "option": null,
-             "stype": "_router_static",
-             "widgets": [
-               "_router_static"
-             ]
-           },
-           "type": "template"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/template/_router_static/adom/root/branches"
-       }
-     ]
-   }
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "static_route_template_001",
+                 "oid": 6212,
+                 "template setting": {
+                   "description": "",
+                   "option": "sdwan-manager",
+                   "stype": "_router_static",
+                   "widgets": [
+                     "_router_static"
+                   ]
+                 },
+                 "type": "template"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_router_static/adom/demo/static_route_template_001"
+             }
+           ]
+         }
 
 How to assign a device to a Static Route Template?
 ++++++++++++++++++++++++++++++++++++++++++++++++++

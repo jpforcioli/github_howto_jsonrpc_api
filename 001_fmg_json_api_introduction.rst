@@ -1959,3 +1959,44 @@ assigned to the API user...
        }
      ]
    }
+
+JSON RPC API Method
+-------------------
+
+GET method
+++++++++++
+
+Straight forward...
+
+ADD method
+++++++++++
+
+Can only be used to add non-existing object.
+If object already exists, it JSON API throws an error.
+
+UPDATE method
++++++++++++++
+
+To update an objects.
+
+SET method
+++++++++++
+
+Can be used to add non-existing and existing objects.
+If object already exists, it gets overwritten. You could consider it as a
+combination of ADD+UPDATE method.
+
+REPLACE method
+++++++++++++++
+
+From #1192822.
+
+The UPDATE method will keep child table data. If you want to remove all child
+table content, use the REPLACE method.
+
+EXEC method
++++++++++++
+
+To operate the FortiManager, like login in, login out, triggering a Policy
+Package Install, etc.
+
