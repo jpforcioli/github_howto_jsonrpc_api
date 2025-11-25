@@ -9838,8 +9838,8 @@ the serial number of a managed device?` for each member.
 How to get cluster members status?
 ++++++++++++++++++++++++++++++++++
 
-To get the status of the ``site_1``'s cluster members in the ``production``
-ADOM:
+The following example shows how to get the status of the ``cluster_001``'s
+cluster members in the ``demo`` ADOM:
 
 .. tab-set:: 
 
@@ -9852,7 +9852,7 @@ ADOM:
            "method": "get",
            "params": [
              {
-               "url": "/dvmdb/adom/production/device/site_1/ha_slave"
+               "url": "/dvmdb/adom/demo/device/cluster_001/ha_slave"
              }
            ],
            "session": "{{session}}",
@@ -9870,26 +9870,26 @@ ADOM:
                "data": [
                  {
                    "conf_status": 1,
-                   "did": "site_1",
+                   "did": "cluster_001",
                    "flags": null,
                    "idx": 1,
-                   "name": "i-06-fgt-11",
+                   "name": "dev_001",
                    "oid": 1421,
                    "prio": 200,
                    "role": "master",
-                   "sn": "FGVM01TM23005111",
+                   "sn": "FGVM01REDACTED11",
                    "status": 1
                  },
                  {
                    "conf_status": 1,
-                   "did": "site_1",
+                   "did": "cluster_001",
                    "flags": null,
                    "idx": 0,
-                   "name": "i-07-fgt-12",
+                   "name": "dev_002",
                    "oid": 1422,
                    "prio": 100,
                    "role": "slave",
-                   "sn": "FGVM01TM23005112",
+                   "sn": "FGVM01REDACTED12",
                    "status": 1
                  }
                ],
@@ -9897,7 +9897,7 @@ ADOM:
                  "code": 0,
                  "message": "OK"
                },
-               "url": "/dvmdb/adom/production/device/site_1/ha_slave"
+               "url": "/dvmdb/adom/demo/device/cluster_001/ha_slave"
              }
            ]
          }            
