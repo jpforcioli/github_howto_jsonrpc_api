@@ -6368,6 +6368,116 @@ To set the Device VDOM metafields for VDOM ``cust_002`` from device
      ]   
    }
 
+How to get devices matching a specific VDOM name?
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the list of devices which have the
+specific ``vd_005`` VDOM in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name"
+               ],
+               "sub fetch": {
+                 "vdom": {
+                   "fields": [
+                     "name"
+                   ],
+                   "filter": [
+                     "name",
+                     "==",
+                     "vd_005"
+                   ]
+                 }
+               },
+               "url": "/dvmdb/adom/demo/device"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 80,
+           "result": [
+             {
+               "data": [
+                 {
+                   "ha_slave": null,
+                   "name": "dev_017",
+                   "oid": 6806,
+                   "onboard_rule": null,
+                   "vdom": [
+                     {
+                       "devid": "dev_017",
+                       "name": "vd_005",
+                       "oid": 6717
+                     }
+                   ]
+                 },
+                 {
+                   "ha_slave": null,
+                   "name": "dev_018",
+                   "oid": 6819,
+                   "onboard_rule": null,
+                   "vdom": [
+                     {
+                       "devid": "dev_018",
+                       "name": "vd_005",
+                       "oid": 6717
+                     }
+                   ]
+                 },
+                 {
+                   "ha_slave": null,
+                   "name": "dev_019",
+                   "oid": 6832,
+                   "onboard_rule": null,
+                   "vdom": [
+                     {
+                       "devid": "dev_019",
+                       "name": "vd_005",
+                       "oid": 6717
+                     }
+                   ]
+                 },
+                 {
+                   "ha_slave": null,
+                   "name": "dev_020",
+                   "oid": 6845,
+                   "onboard_rule": null,
+                   "vdom": [
+                     {
+                       "devid": "dev_020",
+                       "name": "vd_005",
+                       "oid": 6717
+                     }
+                   ]
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/device"
+             }
+           ]
+         }
+
 How to get default config for a particular type of device?
 ----------------------------------------------------------
 
