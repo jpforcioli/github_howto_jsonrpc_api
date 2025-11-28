@@ -6478,6 +6478,112 @@ specific ``vd_005`` VDOM in the ``demo`` ADOM:
            ]
          }
 
+How to create same VLAN in different devices/VDOMs?
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to create the same ``vl_1010`` VLAN in different
+devices/VDOMs using a single API call:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "interface": "port1",
+                 "name": "vl_1010",
+                 "vdom": "vd_005",
+                 "vlanid": "1010"
+               },
+               "url": "/pm/config/device/dev_017/global/system/interface"
+             },
+             {
+               "data": {
+                 "interface": "port1",
+                 "name": "vl_1010",
+                 "vdom": "vd_005",
+                 "vlanid": "1010"
+               },
+               "url": "/pm/config/device/dev_018/global/system/interface"
+             },
+             {
+               "data": {
+                 "interface": "port1",
+                 "name": "vl_1010",
+                 "vdom": "vd_005",
+                 "vlanid": "1010"
+               },
+               "url": "/pm/config/device/dev_019/global/system/interface"
+             },
+             {
+               "data": {
+                 "interface": "port1",
+                 "name": "vl_1010",
+                 "vdom": "vd_005",
+                 "vlanid": "1010"
+               },
+               "url": "/pm/config/device/dev_020/global/system/interface"
+             }
+           ],
+           "session": "{{sesssion}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 109,
+           "result": [
+             {
+               "data": {
+                 "name": "vl_1010"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_017/global/system/interface"
+             },
+             {
+               "data": {
+                 "name": "vl_1010"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_018/global/system/interface"
+             },
+             {
+               "data": {
+                 "name": "vl_1010"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_019/global/system/interface"
+             },
+             {
+               "data": {
+                 "name": "vl_1010"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dev_020/global/system/interface"
+             }
+           ]
+         }        
+
 How to get default config for a particular type of device?
 ----------------------------------------------------------
 
