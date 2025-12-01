@@ -7523,128 +7523,200 @@ When there's no match, FortiManager returns all available firmwares:
 How to upgrade a device?
 ++++++++++++++++++++++++	
 
-We upgrade device ``fgt_dut2``, from ADOM ``adom_dut``, to firmware ``6.4.3``: 	
+The following example shows how to upgrade the ``dev_001`` device, located in
+the  ``demo`` ADOM, to firmware version ``6.4.3``:
 
-**REQUEST:**	
+.. tab-set::
 
-.. code-block:: json	
+   .. tab-item:: REQUEST
 
-   {	
-     "id": 1,	
-     "jsonrpc": "1.0",	
-     "method": "exec",	
-     "params": [	
-       {	
-         "data": {	
-           "adom": "adom_dut",	
-           "create_task": "enable",	
-           "device": [	
+      .. code-block:: json	
+      
+         {	
+           "id": 3,	
+           "method": "exec",	
+           "params": [	
              {	
-               "name": "fgt_dut2"	
+               "data": {	
+                 "adom": "demo",	
+                 "create_task": "enable",	
+                 "device": [	
+                   {	
+                     "name": "dev_001"
+                   }	
+                 ],	
+                 "flags": [	
+                   "none"	
+                 ],	
+                 "image": {	
+                   "release": "6.4.3"	
+                 }	
+               },	
+               "url": "/um/image/upgrade"	
              }	
            ],	
-           "flags": [	
-             "none"	
-           ],	
-           "image": {	
-             "release": "6.4.3"	
-           }	
-         },	
-         "url": "/um/image/upgrade"	
-       }	
-     ],	
-     "session": "eTSSVMLIMkgNaAcCDWj4ah6oQPEYOvtZ3YB4Rz+0ZiI5L0dGfWt9uo+qB7rAmTmO5Ch1Ulstb4haJYc/Nn7hdA==",	
-     "verbose": 1	
-   }	
+           "session": "{{session}}"
+         }	
+            
+      .. note::	
+      
+         - ``flags`` attribute could be a combination (hence a list) of the 
+           following flags:
+      
+           ``none``	
+             No specific action required. This is the default value if 
+             ``flags``	
+             attribute is omitted. 	
+           ``f_boot_alt_partition``	
+             Boot from alternate partition after upgrade	
+           ``f_skip_retrieve``	
+             FMG won't retrieve the device configuration after upgrade	
+           ``f_skip_multi_steps``	
+             FMG will skip the multi-step upgrade process	
+           ``f_skip_fortiguard_img``	
+             FMG will let the device downloading the firmware from FortiGuard	
 
-.. note::	
 
-   - ``flags`` attribute could be a combination (hence a list) of the following	
-     flags:	
+   .. tab-item:: RESPONSE
 
-     ``none``	
-       No specific action required. This is the default value if ``flags``	
-       attribute is omitted. 	
-     ``f_boot_alt_partition``	
-       Boot from alternate partition after upgrade	
-     ``f_skip_retrieve``	
-       FMG won't retrieve the device configuration after upgrade	
-     ``f_skip_multi_steps``	
-       FMG will skip the multi-step upgrade process	
-     ``f_skip_fortiguard_img``	
-       FMG will let the device downloading the firmware from FortiGuard	
-   	
-**RESPONSE:**	
+      .. code-block:: json	
+      
+         {	
+           "id": 1,	
+           "result": [	
+             {	
+               "data": {	
+                 "taskid": 869	
+               },	
+               "status": {	
+                 "code": 0,	
+                 "message": "OK"	
+               },	
+               "url": "/um/image/upgrade"	
+             }	
+           ]	
+         }	
 
-.. code-block:: json	
+With the introduction of the new *Firmware Template* feature in FortiManager
+7.0.0, a new type of device upgrade is available. During this process,
+FortiManager automatically creates a temporary firmware template that exists
+only for the duration of the upgrade. The following example shows how to upgrade
+``dev_001`` and ``dev_002`` from the ``demo`` ADOM, using this mechanism:
 
-   {	
-     "id": 1,	
-     "result": [	
-       {	
-         "data": {	
-           "taskid": 869	
-         },	
-         "status": {	
-           "code": 0,	
-           "message": "OK"	
-         },	
-         "url": "/um/image/upgrade"	
-       }	
-     ]	
-   }	
+.. tab-set::
 
-With the introduction of the new Firmware Template (starting with FortiManager	
-7.0.0), we're seeing this form of device upgrade:	
+   .. tab-item:: REQUEST
 
-**REQUEST:**	
+      .. code-block:: json	
 
-.. code-block:: json	
-
-   {	
-     "id": "6d87500b-2e7e-4a50-bd86-101f12842bb3",	
-     "method": "exec",	
-     "params": [
-       {
-         "data": {
-           "create_task": "enable",
-           "adom": "demo",
-           "flags": 0,
-           "devices": [
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
              {
-               "name": "dut_fgt_2",
-               "image":"7.0.1-b0157"
+               "data": {
+                 "adom": "demo",
+                 "create_task": "enable",
+                 "devices": [
+                   {
+                     "image": "7.6.4-b3596-GA",
+                     "name": "dev_001"
+                   },
+                   {
+                     "image": "7.6.4-b3596-GA",
+                     "name": "dev_002"
+                   }
+                 ],
+                 "flags": 900
+               },
+               "url": "/um/image/upgrade/ext"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+      
+         - The attribute ``create_task`` will help in creating a task that 
+           could be used to monitor the progress of the upgrade process
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+   
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "key": "adom171_1764607120-1287129235",
+                 "status": "success",
+                 "taskid": 34
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/image/upgrade/ext"
              }
            ]
-         },
-         "url": "um/image/upgrade/ext"
-       }
-     ]
-   }
-
-.. note::
-
-   - The attribute ``create_task`` will help in creating a task that could be
-     used to monitor the progress of the upgrade process
-   - The |fmg_api| ``url`` attribute is different than the previous example.
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": "6d87500b-2e7e-4a50-bd86-101f12842bb3",
-     "data": {
-       "key": "adom3706_1648191562-670139803",
-       "status": "success",
-       "taskid": 4427
-     },
-     "status": { 
-       "code": 0,
-       "message": "OK"
-     },
-     "url":"/um/image/upgrade/ext"
-   }
+         }    
+   
+      .. note::
+   
+         The return ``key`` is the name of the auto-create firmware template 
+         that you can expose using the following FortiManager CLI:
+   
+         .. code-block:: text
+   
+            diagnose fwmanager profile list
+   
+         You will get an output similar to the following one:
+  
+         .. code-block:: text
+   
+            fwm profile files in adom root(3):
+             
+            fwm profile files in adom FortiCarrier(104):
+             
+            fwm profile files in adom demo(171):
+            adom171_1764607120-1287129235:
+            {
+             "adom_oid": 171,
+             "data": {
+              "enforced version": [
+               {
+                "flags": 104,
+                "platform": "FortiGate-VM64-KVM",
+                "product": 1,
+                "upgrade-path": 0,
+                "version": "7.6.4-b3596"
+               }, 
+               {
+                "flags": 104,
+                "platform": "FortiGate-VM64-KVM",
+                "product": 1,
+                "upgrade-path": 0,
+                "version": "7.6.4-b3596"
+               }
+              ],
+              "image-source": 0,
+              "schedule-end-time": "2025-12-01 20:38",
+              "schedule-start-time": "2025-12-01 17:38",
+              "schedule-type": 9
+             },
+             "name": "1764607120-1287129235",
+             "scope member": [
+              {
+               "oid": 173,
+               "vdom_oid": 3
+              }, 
+              {
+               "oid": 181,
+               "vdom_oid": 3
+              }
+             ]
+            }          
 
 How to get the upgrade history?
 +++++++++++++++++++++++++++++++
