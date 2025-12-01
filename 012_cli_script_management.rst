@@ -1522,3 +1522,153 @@ It contains the ``script_001`` and ``script_001`` CLI Script members:
              }
            ]
          }
+
+How to get the CLI Script scheduling details for a given managed FortiGate?
+---------------------------------------------------------------------------
+
+Caught in #1222086 (FortiManager 8.0.0).
+
+The following example shows how to get the CLI Script scheduling details for the
+``dev_00`` managed FortiGate in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/dvmdb/adom/demo/script/schedule/device/dev_001"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 44,
+           "result": [
+             {
+               "data": [
+                 {
+                   "filter_build": -1,
+                   "filter_device": 0,
+                   "filter_ostype": 0,
+                   "filter_osver": -1,
+                   "members": [],
+                   "name": "cli_script_001",
+                   "oid": 42683,
+                   "schedules": [
+                     {
+                       "datetime": "",
+                       "day_of_week": 0,
+                       "device": 6583,
+                       "run_on_db": 0,
+                       "timestamp": 1764595475,
+                       "type": 1,
+                       "user": "admin"
+                     }
+                   ],
+                   "target": 1,
+                   "timestamp": 1764595475,
+                   "type": 1
+                 },
+                 {
+                   "filter_build": -1,
+                   "filter_device": 0,
+                   "filter_ostype": 0,
+                   "filter_osver": -1,
+                   "members": [],
+                   "name": "cli_script_002",
+                   "oid": 42685,
+                   "schedules": [
+                     {
+                       "datetime": "",
+                       "day_of_week": 0,
+                       "device": 6583,
+                       "run_on_db": 0,
+                       "timestamp": 1764768766,
+                       "type": 4,
+                       "user": "admin"
+                     }
+                   ],
+                   "target": 1,
+                   "timestamp": 1764595974,
+                   "type": 1
+                 },
+                 {
+                   "filter_build": -1,
+                   "filter_device": 0,
+                   "filter_ostype": 0,
+                   "filter_osver": -1,
+                   "members": [],
+                   "name": "cli_script_003",
+                   "oid": 42687,
+                   "schedules": [
+                     {
+                       "datetime": "",
+                       "day_of_week": 0,
+                       "device": 6583,
+                       "run_on_db": 0,
+                       "timestamp": 1765546258,
+                       "type": 2,
+                       "user": "admin"
+                     }
+                   ],
+                   "target": 1,
+                   "timestamp": 1764596005,
+                   "type": 1
+                 },
+                 {
+                   "filter_build": -1,
+                   "filter_device": 0,
+                   "filter_ostype": 0,
+                   "filter_osver": -1,
+                   "members": [],
+                   "name": "cli_script_004",
+                   "oid": 42689,
+                   "schedules": [
+                     {
+                       "datetime": "",
+                       "day_of_week": 0,
+                       "device": 6583,
+                       "run_on_db": 0,
+                       "timestamp": 1765028180,
+                       "type": 5,
+                       "user": "admin"
+                     }
+                   ],
+                   "target": 0,
+                   "timestamp": 1764596186,
+                   "type": 1
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/script/schedule/device/dev_001"
+             }
+           ]
+         }
+
+      .. note::
+
+         By testing multiple schedule types, the following meanings for the 
+         ``type`` field in the returned ``schedules`` dictionary have been 
+         identified: 
+
+         - ``1``: Install schedule; the CLI script is executed at each 
+           installation. 
+         - ``2``: One-time schedule. 
+         - ``3``: Recurring daily schedule.
+	       - ``4``: Recurring weekly schedule.
+         - ``5``: Recurring monthly schedule.
