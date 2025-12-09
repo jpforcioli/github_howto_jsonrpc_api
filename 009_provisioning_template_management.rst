@@ -1198,7 +1198,7 @@ We want the list of system templates in ADOM ``DEMO_009``.
      ]   
    }
 
-How to clone a system template?
+How to clone a System Template?
 +++++++++++++++++++++++++++++++
 
 Caught in #0624808.
@@ -1364,7 +1364,7 @@ The following example shows how to assign the ``system_template_001`` to the
 
          The list of existing assigned managed devices is preserved.
 
-How to unassign a system template from a device?
+How to unassign a System Template from a device?
 ________________________________________________
 
 Just replace ``add`` with ``delete``.
@@ -1409,7 +1409,7 @@ Just replace ``add`` with ``delete``.
      ]
    }
 
-Modify a system template content?
+Modify a System Template content?
 +++++++++++++++++++++++++++++++++
 
 To change a template configuration, we can use this URL:
@@ -1835,6 +1835,219 @@ ___________________________________________________________________
            ]
          }
 
+How to get the list of interface actions?
+_________________________________________
+
+The following example shows how to get the list of interface actions in a the ``st_001`` in the ``demo`` ADOM:
+
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+     
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/devprof/st_001/device/template/widget/interface/action-list"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+     
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "action": "conf-intf",
+                   "dynamic_mapping": null,
+                   "model": "all",
+                   "oid": 18356,
+                   "seq": 1,
+                   "value": {
+                     "allowaccess": [
+                       "ping",
+                       "snmp",
+                       "http",
+                       "probe-response",
+                       "dnp",
+                       "ftm"
+                     ],
+                     "name": "$(ul_isp1)"
+                   },
+                   "var-list": null
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/devprof/st_001/device/template/widget/interface/action-list"
+             }
+           ]
+         }
+
+How to trigger a Post Action View?
+__________________________________
+
+The *Post Action View* allows you to preview the interfaces configuration as modified by the current System Template before 
+applying it to the managed devices.
+
+The following example shows how to trigger the Post Action View for 
+the ``system_template_001`` System Template in the ``demo`` ADOM 
+for Platform ``FortiGate-600F``:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "devmodel": "FortiGate-600F",
+                 "devprof": "system_template_001",
+                 "fetch": {
+                   "system interface": {},
+                   "system zone": {}
+                 }
+               },
+               "url": "/dvmdb/post/action/preview/adom/demo"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 51,
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "system interface": [
+                   { "...": "..." }
+                 ],
+                 "system zone": [
+                   {
+                     "description": null,
+                     "interface": [
+                       "port9",
+                       "port10"
+                     ],
+                     "intrazone": 1,
+                     "name": "zone_001",
+                     "tagging": null
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/post/action/preview/adom/demo"
+             }
+           ]
+         }
+
+      .. note::
+
+         The ``system interface`` section is truncated for brevity.
+
+You can also trigger the Post Action View for a specific managed 
+device. The following example shows how to trigger the Post Action 
+View for the managed device ``dev_001`` linked to System Template 
+``system_template_001`` in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "device": "dev_001",
+                 "devprof": "system_template_001",
+                 "fetch": {
+                   "system dhcp server": {},
+                   "system dns": {},
+                   "system zone": {}
+                 }
+               },
+               "url": "/dvmdb/post/action/preview/adom/demo"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         The ``device`` attribute should refer to an existing 
+         managed device linked to the System Template.
+
+         This time, the request is asking to preview the ``system 
+         dhcp server``, the ``system dns`` and the ``system zone``.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "cid": 71,
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "system dhcp server": [
+                   { "...", "..." },
+                 ],
+                 "system dns": {
+                   "...", "..."
+                 },
+                 "system zone": [
+                   {
+                     "description": null,
+                     "interface": [
+                       "port9",
+                       "port10"
+                     ],
+                     "intrazone": 1,
+                     "name": "zone_001",
+                     "tagging": null
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/post/action/preview/adom/demo"
+             }
+           ]
+         }
+
 How to get the DNS entries in a System Template?
 ________________________________________________
 
@@ -2069,68 +2282,6 @@ URL is:
 .. code-block::
 
    /pm/config/adom/<adom>/_devprof/import
-
-How to get the list of interface actions?
-+++++++++++++++++++++++++++++++++++++++++
-
-The following example shows how to get the list of interface actions in a the ``st_001`` in the ``demo`` ADOM:
-
-
-.. tab-set::
-
-   .. tab-item:: REQUEST
-     
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "method": "get",
-           "params": [
-             {
-               "url": "/pm/config/adom/demo/devprof/st_001/device/template/widget/interface/action-list"
-             }
-           ],
-           "session": "{{session}}",
-           "verbose": 1
-         }
-
-   .. tab-item:: RESPONSE
-     
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "result": [
-             {
-               "data": [
-                 {
-                   "action": "conf-intf",
-                   "dynamic_mapping": null,
-                   "model": "all",
-                   "oid": 18356,
-                   "seq": 1,
-                   "value": {
-                     "allowaccess": [
-                       "ping",
-                       "snmp",
-                       "http",
-                       "probe-response",
-                       "dnp",
-                       "ftm"
-                     ],
-                     "name": "$(ul_isp1)"
-                   },
-                   "var-list": null
-                 }
-               ],
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "/pm/config/adom/demo/devprof/st_001/device/template/widget/interface/action-list"
-             }
-           ]
-         }
 
 FortiAP Management
 ------------------
