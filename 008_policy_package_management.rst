@@ -3498,6 +3498,17 @@ To move the cloned firewall policy with ``policyid`` ``1071741830`` above the fi
 Firewall Policies
 -----------------
 
+The firewall policies are included in the Policy Package. The corresponding API endpoint is:
+
+.. code-block:: text
+
+   /pm/config/adom/{adom}/pkg/{pkg}/firewall/policy
+
+where:
+
+- ``adom`` is the ADOM name.
+- ``pkg`` is the Policy Package name.
+
 How to get a firewall policy based on its position?
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -9236,6 +9247,447 @@ It will revert the firewall policy with the config saved when it was just create
            ]
          }        
 
+Local-in Firewall Policies
+--------------------------
+
+The local-in firewall policies are included in the Policy Package. The corresponding API endpoint is:
+
+.. code-block:: text
+
+   /pm/config/adom/{adom}/pkg/{pkg}/firewall/local-in-policy
+
+where:
+
+- ``adom`` is the ADOM name.
+- ``pkg`` is the Policy Package name.
+
+How to get the local-in firewall policies?
+++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the local-in firewall policies in the
+``pkg_01`` Policy Package in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/pkg/pkg_001/firewall/local-in-policy"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }        
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json        
+
+         {
+           "id": 15,
+           "result": [
+             {
+               "data": [
+                 {
+                   "action": "accept",
+                   "comments": "Local-in policy #01",
+                   "dstaddr": [
+                     "host_002"
+                   ],
+                   "dstaddr-negate": "disable",
+                   "ha-mgmt-intf-only": "disable",
+                   "internet-service-src": "disable",
+                   "internet-service-src-fortiguard": [],
+                   "internet-service-src-negate": "disable",
+                   "intf": [
+                     "any"
+                   ],
+                   "obj seq": 1,
+                   "oid": 42696,
+                   "policyid": 2,
+                   "schedule": [
+                     "always"
+                   ],
+                   "service": [
+                     "ALL"
+                   ],
+                   "service-negate": "disable",
+                   "srcaddr": [
+                     "host_001"
+                   ],
+                   "srcaddr-negate": "disable",
+                   "status": "enable",
+                   "uuid": "a3104378-d0f0-51f0-ac3f-47c142a54a50",
+                   "virtual-patch": "disable"
+                 },
+                 {
+                   "action": "accept",
+                   "comments": "Local-in policy #02",
+                   "dstaddr": [
+                     "host_004"
+                   ],
+                   "dstaddr-negate": "disable",
+                   "ha-mgmt-intf-only": "disable",
+                   "internet-service-src": "disable",
+                   "internet-service-src-fortiguard": [],
+                   "internet-service-src-negate": "disable",
+                   "intf": [
+                     "any"
+                   ],
+                   "obj seq": 2,
+                   "oid": 42697,
+                   "policyid": 3,
+                   "schedule": [
+                     "always"
+                   ],
+                   "service": [
+                     "ALL"
+                   ],
+                   "service-negate": "disable",
+                   "srcaddr": [
+                     "host_003"
+                   ],
+                   "srcaddr-negate": "disable",
+                   "status": "enable",
+                   "uuid": "c324634e-d102-51f0-6569-1d1cb2b09e82",
+                   "virtual-patch": "disable"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/pkg_001/firewall/local-in-policy"
+             }
+           ]
+         }
+
+Should you want to get the local-in policy with the policy ID ``3``:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/pkg/pkg_001/firewall/local-in-policy/3"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 19,
+           "result": [
+             {
+               "data": {
+                 "action": "accept",
+                 "comments": "Local-in policy #02",
+                 "dstaddr": [
+                   "host_004"
+                 ],
+                 "dstaddr-negate": "disable",
+                 "ha-mgmt-intf-only": "disable",
+                 "internet-service-src": "disable",
+                 "internet-service-src-fortiguard": [],
+                 "internet-service-src-negate": "disable",
+                 "intf": [
+                   "any"
+                 ],
+                 "obj seq": 2,
+                 "oid": 42697,
+                 "policyid": 3,
+                 "schedule": [
+                   "always"
+                 ],
+                 "service": [
+                   "ALL"
+                 ],
+                 "service-negate": "disable",
+                 "srcaddr": [
+                   "host_003"
+                 ],
+                 "srcaddr-negate": "disable",
+                 "status": "enable",
+                 "uuid": "c324634e-d102-51f0-6569-1d1cb2b09e82",
+                 "virtual-patch": "disable"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/pkg_001/firewall/local-in-policy/3"
+             }
+           ]
+         }
+
+You could also have used the ``filter`` attribute:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "filter": [
+                 "policyid",
+                 "==",
+                 3
+               ],
+               "url": "/pm/config/adom/demo/pkg/pkg_001/firewall/local-in-policy"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 23,
+           "result": [
+             {
+               "data": [
+                 {
+                   "action": "accept",
+                   "comments": "Local-in policy #02",
+                   "dstaddr": [
+                     "host_004"
+                   ],
+                   "dstaddr-negate": "disable",
+                   "ha-mgmt-intf-only": "disable",
+                   "internet-service-src": "disable",
+                   "internet-service-src-fortiguard": [],
+                   "internet-service-src-negate": "disable",
+                   "intf": [
+                     "any"
+                   ],
+                   "obj seq": 2,
+                   "oid": 42697,
+                   "policyid": 3,
+                   "schedule": [
+                     "always"
+                   ],
+                   "service": [
+                     "ALL"
+                   ],
+                   "service-negate": "disable",
+                   "srcaddr": [
+                     "host_003"
+                   ],
+                   "srcaddr-negate": "disable",
+                   "status": "enable",
+                   "uuid": "c324634e-d102-51f0-6569-1d1cb2b09e82",
+                   "virtual-patch": "disable"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/pkg_001/firewall/local-in-policy"
+             }
+           ]
+         }
+
+How to add a local-in firewall policy?
+++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to add a local-in firewall policy in the
+``pkg_001`` Policy Package in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "action": "accept",
+                 "comments": "Local-in policy #03",
+                 "dstaddr": [
+                   "host_006"
+                 ],
+                 "intf": [
+                   "any"
+                 ],
+                 "schedule": [
+                   "always"
+                 ],
+                 "service": [
+                   "ALL"
+                 ],
+                 "srcaddr": [
+                   "host_005"
+                 ],
+                 "status": "enable"
+               },
+               "url": "/pm/config/adom/demo/pkg/pkg_001/firewall/local-in-policy"
+             }
+           ],
+           "session": "{{session}}",
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 39,
+           "result": [
+             {
+               "data": {
+                 "policyid": 4
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/pkg_001/firewall/local-in-policy"
+             }
+           ]
+         }
+
+      .. note::
+
+         The new local-in policy has been assigned the policy ID ``4``. It got
+         added at the end of the existing local-in policies.
+
+To add the local-in policy at a specific position, use the ``before`` or
+``after`` attribute. The following example shows how to add a local-in firewall
+policy before the local-in policy with policy ID ``4``:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "before": "4",
+               "data": {
+                 "action": "accept",
+                 "comments": "Local-in policy #04",
+                 "dstaddr": [
+                   "host_008"
+                 ],
+                 "intf": [
+                   "any"
+                 ],
+                 "schedule": [
+                   "always"
+                 ],
+                 "service": [
+                   "ALL"
+                 ],
+                 "srcaddr": [
+                   "host_007"
+                 ],
+                 "status": "enable"
+               },
+               "url": "/pm/config/adom/demo/pkg/pkg_001/firewall/local-in-policy"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. warning::
+
+         - The ``before`` attribute is outside of the ``data`` block.
+         - The value is the policy ID of the local-in policy before which the 
+           new local-in policy will be added and it has to be a **string**.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 47,
+           "result": [
+             {
+               "data": {
+                 "policyid": 7
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/pkg_001/firewall/local-in-policy"
+             }
+           ]
+         }
+
+How to delete a local-in firewall policy?
++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to delete the local-in firewall policy with the policy ID ``7`` in the ``pkg_001`` Policy Package 
+in the ``demo``:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/pkg/pkg_001/firewall/local-in-policy/7"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 51,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/pkg_001/firewall/local-in-policy/7"
+             }
+           ]
+         }
 
 Global Policies & objects
 -------------------------
