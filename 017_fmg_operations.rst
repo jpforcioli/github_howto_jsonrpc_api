@@ -798,7 +798,7 @@ Caught in #621300.
 Using REST API
 ______________
 
-FortiManager backup could be trigger with this simple API:
+FortiManager backup could be triggered with this simple API:
 
 .. code-block:: shell
 
