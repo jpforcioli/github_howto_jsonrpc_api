@@ -3969,15 +3969,16 @@ To retrieve all Model Devices, you need to use the bitwise AND operator in the `
 How to get the ADOM a device belongs to?
 ----------------------------------------
 
-Caught in #0414003.
-
-There are two methods:
+There are three methods:
 
 #. Combine ``object master`` with ``filter``
 #. Use the ``extra info`` option
+#. Use the `_is_member` attribute`
 
 How to get the ADOM a device belongs to using object master with filter?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #0414003.
 
 You can append the ``object master`` to the ``/dvmdb/device/<device>/``
 endpoint.
@@ -4117,7 +4118,109 @@ To get the ADOM details the ``fgt-742-001`` belongs to:
 
       .. note::
 
-         - The ``fgt-742-001`` device belongs to the ``dc_emea`` ADOM         
+         - The ``fgt-742-001`` device belongs to the ``dc_emea`` ADOM
+
+How to get the ADOM a device belongs to using `_is_master` attribute?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #1182782 (FortiManager 8.0.0).
+
+The following example shows how to check if the ``dev_001`` device and its
+``root`` VDOM belongs to the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "data": {
+                 "name": "dev_001",
+                 "vdom": "root"
+               },
+               "url": "/dvmdb/_is_member/adom/demo"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 36,
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "is member": 1
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/_is_member/adom/demo"
+             }
+           ]
+         }
+
+      .. note::
+
+         The ``is member`` attribute is set to ``1``, meaning that the 
+         ``dev_001`` device and its ``root`` VDOM belongs to the ``demo``
+         ADOM. ``0`` would mean it doesn't belong to the ``demo`` ADOM.
+
+You can also check for a device group. The following examples show how to check
+if the ``dev_grp_001`` device group belongs to the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "data": {
+                 "name": "dev_grp_001"
+               },
+               "url": "/dvmdb/_is_member/adom/demo"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 40,
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "is member": 1
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/_is_member/adom/demo"
+             }
+           ]
+         }
 
 How to trigger an Install Device Settings?
 ------------------------------------------
