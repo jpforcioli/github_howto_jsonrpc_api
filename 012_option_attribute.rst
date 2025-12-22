@@ -156,59 +156,89 @@ It is used to return the schema of a table or object.
 For instance, if you want to get the schema of a firewall address you can add
 the ``syntax`` option when the firewall address table/object from any ADOMs: 
 
-**REQUEST:**
+.. tab-set:: 
+   
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+      		{
+      		  "id": 1,
+      		  "method": "get",
+      		  "params": [
+      		    {
+      		      "option": [
+      		        "syntax"
+      		      ],
+      		      "url": "/pm/config/adom/demo/obj/firewall/address"
+      		    }
+      		  ],
+      		  "session": "{{session}}",
+      		  "verbose": 1
+      		}
 
-		{
-		  "id": 1,
-		  "jsonrpc": "1.0",
-		  "method": "get",
-		  "params": [
-		    {
-		      "option": [
-		        "syntax"
-		      ],
-		      "url": "/pm/config/adom/DEMO/obj/firewall/address"
-		    }
-		  ],
-		  "session": "W3daHCzw1EnwbH+kgzP8feD9YjnhXdov9k+wByHad4fgmyzz+lXKbZcWF7vg0c1HvxfFkFbEcnC6q0/q/ZtLkw==",
-		  "verbose": 1
-		}
+   .. tab-item:: RESPONSE
 
-**REPONSE:**
+      .. code-block:: json
 
-.. code-block:: 
-
-		{
-		  "id": 1,
-		  "result": [
-		    {
-		      "data": {
-		        "firewall address": {
-			"alimit": 400000,
-			"attr": {
-			  "_image-base64": {
-			  "max": 5120,
-			  "sz": 5120,
-			  "type": "string"
-			},
-			"allow-routing": {
-			  "default": "disable",
-			  "excluded": true,
-			  "help": "Enable/disable use of this address in the static route configuration.",
-			  "opts": {
-			    "disable": 0,
-			    "enable": 1
-			  },
-			  "sz": 4,
-			  "type": "uint32"
-			},
-		[...]
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": {
+                 "firewall address": {
+               		"alimit": 400000,
+             			"attr": {
+             			  "_image-base64": {
+               			  "max": 5120,
+               			  "sz": 5120,
+               			  "type": "string"
+                     },
+                   },
+             			"allow-routing": {
+             			  "default": "disable",
+             			  "excluded": true,
+             			  "help": "Enable/disable use of this address in the static route configuration.",
+             			  "opts": {
+             			    "disable": 0,
+             			    "enable": 1
+             			  },
+             			  "sz": 4,
+             			  "type": "uint32"
+         		    	},
+                   "...": "...",
+                 }
+               }
+             }
+           ]
+         }
 
 Since FMG 6.2.4/6.4.0 (#0603847, this option is also returning the table limit
 with attribute ``alimit``. For instance, from the above output, we can see it
 is possible to have up to 400000 firewall addresses.
+
+You can also ask for the schemo of all objects at once (captured in #1229558):
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "get",
+           "params": [
+             {
+               "option": [
+                 "syntax"
+               ],
+               "url": "/pm/config/adom/demo/obj"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
 How to get default values?
 ++++++++++++++++++++++++++
