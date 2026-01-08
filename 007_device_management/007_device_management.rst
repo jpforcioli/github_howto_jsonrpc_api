@@ -11943,6 +11943,10 @@ designate it as being in an RMA situation.
 How to set the RMA status on a managed device?
 ++++++++++++++++++++++++++++++++++++++++++++++
 
+This section demonstrates how to operate via API the *Swap Device* GUI action:
+
+.. thumbnail:: images/swap_device/swap_device_001.png
+
 The following example shows how to set the RMA status of the ``dev_001`` managed
 device in the ``demo`` ADOM:
 
