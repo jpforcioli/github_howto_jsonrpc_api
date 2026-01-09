@@ -120,7 +120,7 @@ system for the ``dev_001`` managed device in the ``demo`` ADOM:
            ]
          }		
 
-.. _dbcache_sdwan_configuration_for_all_devices:
+.. _dbcache_sdwan_configuration_for_all_devices: 
 
 How to get the SD-WAN configuration for all devices?
 ----------------------------------------------------
