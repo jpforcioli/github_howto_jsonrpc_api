@@ -202,6 +202,20 @@ You just need to insert the API key:
      Starting with FortiManager 7.4.7/7.6.2, you can no longer use this form 
      (#1084776). 
 
+Starting with FortiManager 7.6.6/8.0.0 (#1179653), you can also specify the API
+user name to be used using the ``access_user`` header as shown below:
+
+.. code-block:: text
+
+
+     POST https://{{fmg_ip}}/jsonrpc HTTP/1.1
+     [...]
+     Authorization: Bearer 33fzwipq4amujunzgzn46mg1to9p8wbi
+     access_user: {{ api_user_name }}
+     [...]
+
+It mainly helps with the first request when you have multiple API users defined in FortiManager. Subsequent requests use the cache, so ``access_user`` becomes irrelevant in those cases. When handling many requests, ``access_user`` only provides a marginal benefit — most of the performance gain comes from the cached API token.
+
 FortiManager Cloud API authentication
 +++++++++++++++++++++++++++++++++++++
 
