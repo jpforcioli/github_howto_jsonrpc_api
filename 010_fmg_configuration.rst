@@ -532,12 +532,12 @@ To import a certificate with a non-protected private key:
 How to change the SNMP community name?
 --------------------------------------
 
-Using the FortiManager GUI, you can define a new SNMP community and set its
-name. However, it is no longer possible to update the community name via the
-GUI, while it is possible via CLI and API.
+Using the FortiManager GUI, you can create a new SNMP community and set its
+name. However, it is not possible to modify the community name from the GUI,
+even though this is still supported via the CLI and API.
 
 The following example shows how to update the SNMP community name for the first
-community defined:
+defined SNMP community:
 
 .. tab-set::
 
