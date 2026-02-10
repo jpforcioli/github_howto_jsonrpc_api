@@ -2824,6 +2824,83 @@ from the ``demo`` ADOM:
 
      But according to the #0622870, it is better to consider the ``datasrc``  method explained in section [TODO] (datasrc).
 
+How to get the entries of an Internet Service object?
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the entries of the Internet Service
+object with ID `327886` (Microsoft-Intune) in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/_fdsdb/internet-service/327886/entry"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "botnet": 0,
+                   "category": 206,
+                   "city": 65535,
+                   "country": 702,
+                   "domain": 0,
+                   "ip_range": "4.145.74.224-4.145.74.255",
+                   "owner": 5,
+                   "popularity": 5,
+                   "port": [
+                     "80",
+                     "443"
+                   ],
+                   "proto": 6,
+                   "region": 65535,
+                   "reputation": 5
+                 },
+                 {"...": "..."},
+                 {
+                   "botnet": 0,
+                   "category": 206,
+                   "city": 65535,
+                   "country": 840,
+                   "domain": 0,
+                   "ip_range": "172.215.131.0-172.215.131.31",
+                   "owner": 5,
+                   "popularity": 5,
+                   "port": [
+                     "80",
+                     "443"
+                   ],
+                   "proto": 6,
+                   "region": 65535,
+                   "reputation": 5
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/_fdsdb/internet-service/327886/entry"
+             }
+           ]
+         }
 
 How to get the list of Internet Service FQDN objects?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
