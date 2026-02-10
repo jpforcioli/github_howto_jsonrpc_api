@@ -3345,3 +3345,65 @@ The following example shows how to get the list of SaaS applications using the
 
       .. literalinclude:: datas/security_profiles/output_001.json
          :language: json
+
+Alternatively, and starting with FortiManager 7.4.11, 7.6.7 or 8.0.0 (#1194560),
+you can use the following FortiManager API request:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "option": [
+                 "get reserved"
+               ],
+               "url": "/pm/config/adom/demo/obj/casb/saas-application"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "domains": [],
+                   "name": "adobe",
+                   "oid": 0,
+                   "status": "enable",
+                   "type": "customized"
+                 },
+                 {"...": "..."},
+                 {
+                   "casb-name": "jira",
+                   "domains": [],
+                   "input-attributes": null,
+                   "name": "jira",
+                   "obj seq": 35,
+                   "oid": 5067,
+                   "output-attributes": null,
+                   "status": "enable",
+                   "type": "built-in"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/casb/saas-application"
+             }
+           ]
+         }        
