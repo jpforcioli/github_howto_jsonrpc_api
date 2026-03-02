@@ -12421,3 +12421,53 @@ its ``root`` VDOM:
       execute factoryreset-for-central-management
 
       execute replace-device fortiap FP433G0000000001 FP433G0000000002
+
+Auto Onboarding Rules
+---------------------
+
+How to create a new auto onboarding rule?
++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to create a new auto onboarding rule:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "url": "/dvmdb/autoreg_rule",
+               "data": {
+                 "oid": 797, 
+                 "ruleid": 0,
+                 "seq": 2,
+                 "status": 0,
+                 "desc":"",
+                 "type": 1,
+                 "psk": "",
+                 "regadmin": "project_002",
+                 "snmask":"", 
+                 "platform": "FortiGate-VM64-KVM",
+                 "adom": "demo",
+                 "devgrp": "project_002",
+                 "nameprefix": "project_002_dev",
+                 "maxdev": 10,
+                 "imgver": "",
+                 "instlic": 0,
+                 "flexvm": "",
+                 "licpool": "",
+                 "instcfg": 2,
+                 "tmplgrp": "project_002",
+                 "ppkg": "project_002",
+                 "flags": 0,
+                 "idx": 2
+               }
+             }
+           ],
+           "session": "{{session}}"
+         }
