@@ -1974,8 +1974,8 @@ assigned to the API user...
      ]
    }
 
-JSON RPC API Method
--------------------
+JSON RPC API Methods
+--------------------
 
 GET method
 ++++++++++
@@ -2014,3 +2014,73 @@ EXEC method
 To operate the FortiManager, like login in, login out, triggering a Policy
 Package Install, etc.
 
+Here’s your text with improved English while fully preserving the reStructuredText (RST) syntax and formatting:  
+
+***
+
+Setting Scope
+-------------
+
+When setting a scope, you can specify either a device or a device group.  
+In both cases, you must use the ``name`` attribute. For example, to specify a device, you could use:
+
+.. code-block:: json
+   :caption: For a device
+
+   "_scope": [
+     {
+       "name": "dev_001"
+     }
+   ]
+
+Similarly, to specify a device group, you could use:
+
+.. code-block:: json
+   :caption: For a device group
+
+   "_scope": [
+     {
+       "name": "dev_grp_001"
+     }
+   ]
+
+As you can see, FortiManager cannot determine from the ``name`` attribute alone whether it refers to a device or a device group.
+
+For this reason, the ``name`` attribute by itself is always implicitly
+interpreted as a device group.
+
+If you want to specify a device, you must add the ``vdom`` attribute.  
+Even if the device does not use VDOMs, it always has an implicit ``root`` VDOM.
+
+Therefore, to specify the device ``dev_001``, you must use the following form:
+
+.. code-block:: json
+   :caption: For a device (correct form)
+
+   "_scope": [
+     {
+       "name": "dev_001",
+       "vdom": "root"
+     }
+   ]
+
+In scenarios where scope supports both devices and device groups, and where the
+device’s VDOM name is optional, you can include an additional attribute, ``is
+group``, to explicitly indicate that the scope member should be treated as a
+device group.
+In this specific case, if this attribute is not provided, the scope member is interpreted as a device by default:
+
+.. code-block:: json
+   :caption: For a device group (explicit form)
+
+   "_scope": [
+     {
+       "name": "dev_grp_001",
+       "is group": true
+     }
+   ]
+
+.. note::
+
+   The ``is group`` attribute is a JSON boolean. It can be either ``true`` or 
+   ``false``.
