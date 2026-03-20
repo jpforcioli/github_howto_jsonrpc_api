@@ -157,10 +157,18 @@ The following example shows how to add the ``cli_script_001`` CLI Script into th
            ]
          }
 
-How to run a CLI Script against a Policy Package?
--------------------------------------------------
+CLI Script execution
+--------------------
 
-The following example shows how to run the ``script_001`` CLI Script against the ``pkg_001`` Policy Package in the ``demo`` ADOM:
+You can execute CLI Scripts or Jinja CLI Scripts against remote devices, managed
+devices (Device DB), Policy Packages (ADOM DB) or directly against the ADOM
+(ADOM DB).
+
+How to execute a CLI Script against a Policy Package?
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to execute the ``cli_script_001`` CLI Script 
+against the ``pkg_001`` Policy Package in the ``demo`` ADOM:
 
 .. tab-set::
   
@@ -175,8 +183,8 @@ The following example shows how to run the ``script_001`` CLI Script against the
       		   {
       		     "data": {
       		       "adom": "demo",
-      			     "package": "pkg_001",
-      			     "script": "script_001"
+                 "package": "pkg_001",
+                 "script": "cli_script_001"
       		     },
       		     "url": "/dvmdb/adom/demo/script/execute"
       		   }
@@ -204,10 +212,10 @@ The following example shows how to run the ``script_001`` CLI Script against the
            ]
          }
 
-How to run a Jinja CLI Script against a Policy Package?
--------------------------------------------------------
+How to execute a Jinja CLI Script against an ADOM?
+++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The following example shows how to run the ``cli_script_001`` CLI Script against the ``demo`` ADOM:
+The following example shows how to execute the ``jinja_cli_script_001`` CLI Script against the ``demo`` ADOM:
 
 .. tab-set::
   
@@ -222,7 +230,7 @@ The following example shows how to run the ``cli_script_001`` CLI Script against
       		   {
       		     "data": {
       		       "adom": "demo",
-      			     "script": "cli_script_001"
+                 "script": "jinja_cli_script_001"
       		     },
       		     "url": "/dvmdb/adom/demo/script/execute"
       		   }
@@ -250,11 +258,11 @@ The following example shows how to run the ``cli_script_001`` CLI Script against
            ]
          }
 
-How to run a CLI Script against a device?
------------------------------------------
+How to execute a CLI Script against a device?
++++++++++++++++++++++++++++++++++++++++++++++
 
-The following example shows how to run the ``script_001`` CLI Script against 
-the ``dev_001`` device in the ``demo`` ADOM:
+The following example shows how to execute the ``cli_script_001`` CLI Script 
+against the ``dev_001`` device in the ``demo`` ADOM:
 
 .. tab-set::
 
@@ -275,7 +283,7 @@ the ``dev_001`` device in the ``demo`` ADOM:
                      "vdom": "global"
                    }
                  ],
-                 "script": "script_001"
+                 "script": "cli_script_001"
                },
                "url": "/dvmdb/adom/demo/script/execute"
              }
@@ -285,8 +293,8 @@ the ``dev_001`` device in the ``demo`` ADOM:
       
       .. note:: 
       
-         - A CLI Script cannot be run against a VDOM scope; this is why we set 
-           the ``vdom`` attribute to ``global``
+         - A CLI Script cannot be executed against a VDOM scope; this is why we 
+           set the ``vdom`` attribute to ``global``
          - But why don't you simply omit the ``vdom`` attribute in this case?
          - Because when you don't specify the ``vdom`` attribute, FortiManager 
            considers that you're targeting a Device Group
@@ -320,10 +328,15 @@ the ``dev_001`` device in the ``demo`` ADOM:
            please make sure you maintain the API session open during the CLI 
            script execution (just follow the task progress using a ``get`` on 
            ``/task/task/{task_id}``)
-      
-You can run a CLI script against multiple devices using a single API call.
 
-The following example shows how to run the ``script_001`` CLI Script against the ``dev_001`` and ``dev_002`` devices in the ``demo`` ADOM:
+
+How to execute a CLI Script against multiple devices?
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+You can execute a CLI script against multiple devices using a single API call.
+
+The following example shows how to execute the ``cli_script_001`` CLI Script
+against the ``dev_001`` and ``dev_002`` devices in the ``demo`` ADOM:
 
 .. tab-set::
   
@@ -348,7 +361,7 @@ The following example shows how to run the ``script_001`` CLI Script against the
             			    "vdom": "global"
              			  }
             			],
-            			"script": "script_001"
+            			"script": "cli_script_001"
       		      },
       		      "url": "/dvmdb/adom/demo/script/execute"
       		    }
@@ -376,11 +389,16 @@ The following example shows how to run the ``script_001`` CLI Script against the
            ]
          }
 
+How to execute a CLI Script against Device Groups?
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
 You can run a CLI Script against one or multiple Device Groups.
 
-By convention, if a ``scope`` entry only contains a ``name`` and no ``vdom`` attribute, then the ``name`` is considered as a Device Group name.
+By convention, if a ``scope`` entry only contains a ``name`` and no ``vdom``
+attribute, then the ``name`` is considered as a Device Group name. See
+:ref:`Setting Scope` section for more details.
 
-The following example shows how to run the ``script_001`` against the ``dev_grp_001`` and ``dev_grp_002`` in the ``demo`` ADOM:
+The following example shows how to execute the ``cli_script_001`` against the ``dev_grp_001`` and ``dev_grp_002`` in the ``demo`` ADOM:
 
 .. tab-set::
   
@@ -403,7 +421,7 @@ The following example shows how to run the ``script_001`` against the ``dev_grp_
                      "name": "dev_grp_002"
                    }
                  ],
-                 "script": "script_001"
+                 "script": "cli_script_001"
                },
                "url": "/dvmdb/adom/demo/script/execute"
              }
@@ -431,20 +449,25 @@ The following example shows how to run the ``script_001`` against the ``dev_grp_
         	 ]
          }
       
-How to run a CLI Script against a Provisioning Template?
---------------------------------------------------------
+How to execute a CLI Script against a Provisioning Template?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. warning::
+
+   You can achieve all of those operations in a simpler way by using the Jinja
+   CLI Script.
 
 Captured in #0209576.
 
-You can run a CLI Script against any Provisioning Template.
+You can execute a CLI Script against any Provisioning Template.
 
 However, this operation is only supported via the API.
 
 For example, you can execute a CLI Script on a System Template or a FortiSwitch
 Template.
 
-How to run a CLI script against an IPsec Tunnel Template?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to execute a CLI script against an IPsec Tunnel Template?
+_____________________________________________________________
 
 #. Create a CLI Script (target = *Policy & Objects or ADOM Database*)
 
@@ -628,8 +651,8 @@ How to run a CLI script against an IPsec Tunnel Template?
       
       ----------------End of Log-------------------------
 
-How to run a CLI script against a SD-WAN Template?
-++++++++++++++++++++++++++++++++++++++++++++++++++
+How to execute a CLI script against a SD-WAN Template?
+______________________________________________________
 
 #. Create a CLI Script (target = *Policy & Objects or ADOM Database*)
 
@@ -751,8 +774,8 @@ How to run a CLI script against a SD-WAN Template?
       
       ----------------End of Log-------------------------
 
-How to run a CLI Script against a System Template?
-++++++++++++++++++++++++++++++++++++++++++++++++++
+How to execute a CLI Script against a System Template?
+______________________________________________________
 
 #. Create a CLI Script (target = *Policy & Objects or ADOM Database*)
 
@@ -858,8 +881,8 @@ How to run a CLI Script against a System Template?
    
       ----------------End of Log-------------------------
 
-How to run a CLI Script against a FortiSwitch Template?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to execute a CLI Script against a FortiSwitch Template?
+___________________________________________________________
 
 #. Create a CLI Script (target = *Policy & Objects or ADOM Database*)
 
@@ -959,8 +982,8 @@ How to run a CLI Script against a FortiSwitch Template?
    
       ----------------End of Log-------------------------
 
-How to run a CLI Script against a FortiAP Profile?
-++++++++++++++++++++++++++++++++++++++++++++++++++
+How to execute a CLI Script against a FortiAP Profile?
+______________________________________________________
 
 #. Create a CLI Script (target = *Policy & Objects or ADOM Database*)
 
@@ -1083,10 +1106,10 @@ How to run a CLI Script against a FortiAP Profile?
       ----------------End of Log-------------------------
 
 How To get the latest CLI Script execution output?
---------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++
 
 For a CLI Script executed against a Policy Package
-++++++++++++++++++++++++++++++++++++++++++++++++++
+__________________________________________________
 
 The following example shows how to get the latest CLI Script execution output in the ``demo`` ADOM:
 
@@ -1131,7 +1154,7 @@ The following example shows how to get the latest CLI Script execution output in
          }
                         
 For a CLI Script executed against a specific device
-+++++++++++++++++++++++++++++++++++++++++++++++++++
+___________________________________________________
 
 The following example shows how to get the latest CLI Script execution output for the ``dev_001`` device in the ``demo`` ADOM:
 
@@ -1176,12 +1199,12 @@ The following example shows how to get the latest CLI Script execution output fo
          }        
 
 How to get a specific CLI Script execution output?
---------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++
 
 #. First you need to get its corresponding ``log_id`` by retrieving a
    summary of the execution list
 
-   - For CLI Scripts run against *Policy Packages*:
+   - For CLI Scripts executed against *Policy Packages*:
 
      .. tab-set::
 
@@ -1232,7 +1255,7 @@ How to get a specific CLI Script execution output?
                 ]
               }
 
-   - For CLI Scripts run against a specific device:
+   - For CLI Scripts executed against a specific device:
 
      .. tab-set::
 
@@ -1299,7 +1322,7 @@ How to get a specific CLI Script execution output?
 #. Now you can retrieve the CLI Script output using one of the returned 
    ``log_id``
 
-   - For a CLI Script run against a Policy Package
+   - For a CLI Script executed against a Policy Package
 
      .. tab-set::
 
@@ -1342,7 +1365,7 @@ How to get a specific CLI Script execution output?
                 ]
               }                
 
-   - For a CLI script run against a specific device
+   - For a CLI script executed against a specific device
 
      .. tab-set::
 
