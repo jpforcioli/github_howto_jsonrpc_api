@@ -2014,10 +2014,6 @@ EXEC method
 To operate the FortiManager, like login in, login out, triggering a Policy
 Package Install, etc.
 
-Here’s your text with improved English while fully preserving the reStructuredText (RST) syntax and formatting:  
-
-***
-
 Setting Scope
 -------------
 

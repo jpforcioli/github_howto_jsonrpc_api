@@ -9154,11 +9154,106 @@ To delete the ``template_group_001`` from the ``dc_africa`` ADOM:
            ]
          }
 
-SD-WAN Overlay Orchestration Template
--------------------------------------
+SD-WAN Overlay Template
+-----------------------
 
-How to trigger the generation of a SD-WAN Overlay Orchestration Template?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to get the SD-WAN Overlay Templates?
+++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the list of SD-WAN Overlay Template in
+the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/template/_sdwan_overlay/adom/demo"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "sot_001",
+                   "oid": 9728,
+                   "template setting": {
+                     "description": "",
+                     "stype": "_sdwan_overlay",
+                     "widgets": [
+                       "_sdwan_overlay"
+                     ]
+                   },
+                   "type": "template"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_sdwan_overlay/adom/demo"
+             }
+           ]
+         }
+
+How to delete a SD-WAN Overlay Template?
+++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to delete the ``sot_001`` SD-WAN Overlay
+Template in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/template/_sdwan_overlay/adom/demo/sot_001"
+             }
+           ],
+           "session": "Gnl3h+{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/template/_sdwan_overlay/adom/demo/sot_001"
+             }
+           ]
+         }        
+
+How to trigger the generation of a SD-WAN Overlay Template?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Caught in #1162254.
 

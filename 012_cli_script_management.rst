@@ -3,9 +3,9 @@ CLI Script management
 
 .. warning::
 
-   Starting with FortiManager 8.0.0 (# 1203111), CLI Scripts operations have 
-   been redesigned. CLI Scripts are now saved in the ADOM DB and the main JSON 
-   API endpoint is:
+   Starting with FortiManager 7.6.5 and 8.0.0 (# 1203111), CLI Scripts 
+   operations have been redesigned. CLI Scripts are now saved in the ADOM DB 
+   and the main JSON API endpoint is:
 
    .. code-block:: 
 
