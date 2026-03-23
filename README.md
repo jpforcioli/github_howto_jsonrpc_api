@@ -7,6 +7,7 @@
     - [To generate the HTML documentation](#to-generate-the-html-documentation)
     - [To read the HTML documentation](#to-read-the-html-documentation)
   - [Readthedoc](#readthedoc)
+  - [Build HTML Files using Docker](#build-html-files-using-docker)
 
 ## Linux with python3
 
@@ -55,3 +56,22 @@ with your browser.
 ```txt
 cp -rv *rst Makefile make.bat README.md datas _images _static conf.py images index.rst .readthedocs.yaml requirements.txt ../github_howto_jsonrpc_api/
 ```
+  
+  
+  
+
+## Build HTML files using Docker
+
+
+```shell
+cd howto_jsonrpc_api
+docker build -t sphinx-docs .
+docker run --rm -p 8000:8000 sphinx-docs
+```
+
+### To read the HTML documentation from Docker Server
+
+Now you can open following link in your browser:
+
+
+http://127.0.0.1:8000/index.html
