@@ -12422,13 +12422,21 @@ its ``root`` VDOM:
 
       execute replace-device fortiap FP433G0000000001 FP433G0000000002
 
-Auto Onboarding Rules
----------------------
+Onboarding Rules
+----------------
 
-How to create a new auto onboarding rule?
-+++++++++++++++++++++++++++++++++++++++++
+How to create a new onboarding rule?
+++++++++++++++++++++++++++++++++++++
 
-The following example shows how to create a new auto onboarding rule:
+Here is a polished version:
+
+The following example shows how to create a new auto-onboarding rule. It 
+matches all devices with the FortiGate-30G platform that present the
+`project_001_psk` pre-shared key (PSK). Matching devices are placed in the 
+`demo` ADOM and are upgraded if they are not already running firmware version 
+7.4.11. The `project_001_tmplgrp` template group and the `project_001_pkg` 
+policy package are then applied to these devices. Finally, their device names 
+are prefixed with `dev_`.
 
 .. tab-set::
 
@@ -12441,33 +12449,195 @@ The following example shows how to create a new auto onboarding rule:
            "method": "add",
            "params": [
              {
-               "url": "/dvmdb/autoreg_rule",
                "data": {
-                 "oid": 797, 
-                 "ruleid": 0,
-                 "seq": 2,
-                 "status": 0,
-                 "desc":"",
-                 "type": 1,
-                 "psk": "",
-                 "regadmin": "project_002",
-                 "snmask":"", 
-                 "platform": "FortiGate-VM64-KVM",
                  "adom": "demo",
-                 "devgrp": "project_002",
-                 "nameprefix": "project_002_dev",
-                 "maxdev": 10,
-                 "imgver": "",
-                 "instlic": 0,
-                 "flexvm": "",
-                 "licpool": "",
+                 "desc": "Auto Onboarding Rule for Project #00001.",
+                 "devgrp": "project_001_grp",
+                 "imgver": "7.4.11-b2878",
                  "instcfg": 2,
-                 "tmplgrp": "project_002",
-                 "ppkg": "project_002",
-                 "flags": 0,
-                 "idx": 2
-               }
+                 "instlic": 0,
+                 "maxdev": 10,
+                 "nameprefix": "dev_",
+                 "platform": "FortiGate-30G",
+                 "ppkg": "project_001_ppkg",
+                 "psk": "project_001_psk",
+                 "ruleid": 0,
+                 "status": 0,
+                 "tmplgrp": "project_001_tmplgrp",
+                 "type": 0
+               },
+               "url": "/dvmdb/autoreg_rule"
              }
            ],
            "session": "{{session}}"
          }
+
+      .. note::
+
+         - `status`: `0` means the onboarding rule is enabled; use `1` to 
+           disable it.  
+
+         - `type`: `1` means the API user’s API key is used as the PSK, in 
+           which case you must specify the API username with the `regadmin` 
+           attribute; `0` means you provide your own PSK using the `psk` 
+           attribute.  
+
+         - `instlic`: `1` means the Flex Connector specified by the `flexvm` 
+           attribute is used; `2` is for a *BYOL license*, in which case you 
+           must specify a license pool using the `licpool` attribute; `0` means 
+           the device does not need to be licensed.
+
+         - `instcfg`: `1` means FortiManager uses all templates and the Policy 
+           Package associated with the device group specified by the `devgrp` 
+           attribute; `2` means you must explicitly select the Template Group 
+           (`tmplgrp`) and the policy package (`ppkg`).
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "ruleid": 1
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/autoreg_rule"
+             }
+           ]
+         }
+
+How to get onboarding rules?
+++++++++++++++++++++++++++++
+
+The following example shows how to get existing onboarding rules:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/dvmdb/autoreg_rule"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "adom": "demo",
+                   "desc": "Auto Onboarding Rule for Project #00001.",
+                   "devgrp": "project_001_grp",
+                   "flags": 0,
+                   "flexvm": null,
+                   "imgver": "7.4.11-b2878",
+                   "instcfg": 2,
+                   "instlic": 0,
+                   "licpool": null,
+                   "maxdev": 10,
+                   "nameprefix": "dev_",
+                   "oid": 1226,
+                   "platform": "FortiGate-30G",
+                   "ppkg": "project_001_ppkg",
+                   "psk": "project_001_psk",
+                   "regadmin": null,
+                   "ruleid": 1,
+                   "seq": 1,
+                   "snmask": null,
+                   "status": 0,
+                   "tmplgrp": "project_001_tmplgrp",
+                   "type": 0
+                 },
+                 {
+                   "adom": "demo",
+                   "desc": "Auto Onboarding Rule for Project #00002.",
+                   "devgrp": "project_002_grp",
+                   "flags": 0,
+                   "flexvm": "",
+                   "imgver": "7.4.11-b2878",
+                   "instcfg": 2,
+                   "instlic": 0,
+                   "licpool": "",
+                   "maxdev": 10,
+                   "nameprefix": "dev_",
+                   "oid": 1227,
+                   "platform": "FortiGate-30G",
+                   "ppkg": "project_002_ppkg",
+                   "psk": "project_002_psk",
+                   "regadmin": "",
+                   "ruleid": 2,
+                   "seq": 2,
+                   "snmask": null,
+                   "status": 0,
+                   "tmplgrp": "project_002_tmplgrp",
+                   "type": 0
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/autoreg_rule"
+             }
+           ]
+         }        
+
+How to delete an onboarding rule?
++++++++++++++++++++++++++++++++++
+
+The following example shows how to delete the onboarding rule with `ruleid` `2`:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/dvmdb/autoreg_rule/2"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/autoreg_rule/2"
+             }
+           ]
+         }         
