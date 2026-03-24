@@ -105,8 +105,8 @@ The following example shows how to add the ``cli_script_001`` CLI Script into th
            ]
          }
 
-Add a Jinja CLI Script to be executed against the ADOM database
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to add a Jinja CLI Script to be executed against the ADOM database
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Starting FortiManager 7.6.4, you can add a Jinja CLI Script to be executed
 against the ADOM database (ref: #1133295).
@@ -153,6 +153,50 @@ The following example shows how to add the ``cli_script_001`` CLI Script into th
                  "message": "OK"
                },
                "url": "/dvmdb/adom/demo/script"
+             }
+           ]
+         }
+
+Starting FortiManager 7.6.5:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST   
+
+      .. code-block:: json
+
+         {
+           "id": 8,
+           "method": "set",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/fmg/script",
+               "data": {
+                 "content": "[REDACTED]",
+                 "name": "jinja_cli_script_001",
+                 "type": "jinja"
+               }
+             }
+           ], 
+           "session": {{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+        
+         {
+           "id": 8,
+           "result": [
+             {
+               "data": {
+                 "name": "adom_c_00001_set_post"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/c_00001/obj/fmg/script"
              }
            ]
          }
