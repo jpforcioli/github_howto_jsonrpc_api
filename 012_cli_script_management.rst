@@ -179,7 +179,7 @@ Starting FortiManager 7.6.5:
                }
              }
            ], 
-           "session": {{session}}"
+           "session": "{{session}}"
          }
 
       .. note::

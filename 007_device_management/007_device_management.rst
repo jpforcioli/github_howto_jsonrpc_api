@@ -12432,11 +12432,11 @@ Here is a polished version:
 
 The following example shows how to create a new auto-onboarding rule. It 
 matches all devices with the FortiGate-30G platform that present the
-`project_001_psk` pre-shared key (PSK). Matching devices are placed in the 
-`demo` ADOM and are upgraded if they are not already running firmware version 
-7.4.11. The `project_001_tmplgrp` template group and the `project_001_pkg` 
+``project_001_psk`` pre-shared key (PSK). Matching devices are placed in the 
+``demo`` ADOM and are upgraded if they are not already running firmware version 
+7.4.11. The ``project_001_tmplgrp`` template group and the ``project_001_pkg`` 
 policy package are then applied to these devices. Finally, their device names 
-are prefixed with `dev_`.
+are prefixed with ``dev_``.
 
 .. tab-set::
 
@@ -12474,23 +12474,23 @@ are prefixed with `dev_`.
 
       .. note::
 
-         - `status`: `0` means the onboarding rule is enabled; use `1` to 
+         - ``status``: ``0`` means the onboarding rule is enabled; use ``1`` to 
            disable it.  
 
-         - `type`: `1` means the API user’s API key is used as the PSK, in 
-           which case you must specify the API username with the `regadmin` 
-           attribute; `0` means you provide your own PSK using the `psk` 
+         - ``type``: ``1`` means the API user’s API key is used as the PSK, in 
+           which case you must specify the API username with the ``regadmin`` 
+           attribute; ``0`` means you provide your own PSK using the ``psk`` 
            attribute.  
 
-         - `instlic`: `1` means the Flex Connector specified by the `flexvm` 
-           attribute is used; `2` is for a *BYOL license*, in which case you 
-           must specify a license pool using the `licpool` attribute; `0` means 
-           the device does not need to be licensed.
+         - ``instlic``: ``1`` means the Flex Connector specified by the 
+           ``flexvm`` attribute is used; ``2`` is for a *BYOL license*, in 
+           which case you must specify a license pool using the ``licpool`` 
+           attribute; ``0`` means the device does not need to be licensed.
 
-         - `instcfg`: `1` means FortiManager uses all templates and the Policy 
-           Package associated with the device group specified by the `devgrp` 
-           attribute; `2` means you must explicitly select the Template Group 
-           (`tmplgrp`) and the policy package (`ppkg`).
+         - ``instcfg``: ``1`` means FortiManager uses all templates and the 
+           Policy Package associated with the device group specified by the 
+           ``devgrp`` attribute; ``2`` means you must explicitly select the 
+           Template Group (``tmplgrp``) and the policy package (`ppkg``).
 
    .. tab-item:: RESPONSE
 
@@ -12605,7 +12605,7 @@ The following example shows how to get existing onboarding rules:
 How to delete an onboarding rule?
 +++++++++++++++++++++++++++++++++
 
-The following example shows how to delete the onboarding rule with `ruleid` `2`:
+The following example shows how to delete the onboarding rule with ``ruleid`` ``2``:
 
 .. tab-set::
 
