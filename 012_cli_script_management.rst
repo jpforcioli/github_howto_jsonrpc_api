@@ -174,17 +174,22 @@ Starting FortiManager 7.6.5:
                "data": {
                  "content": "[REDACTED]",
                  "name": "jinja_cli_script_001",
-                 "type": "jinja"
+                 "type": "jinja",
+                 "target": "adomdb"
                }
              }
            ], 
            "session": {{session}}"
          }
 
+      .. note::
+
+         `target` must be set.
+
    .. tab-item:: RESPONSE
 
       .. code-block:: json
-        
+
          {
            "id": 8,
            "result": [
