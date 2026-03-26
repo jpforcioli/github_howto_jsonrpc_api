@@ -925,17 +925,26 @@ at the time of creation.
        Specifies the name of the firmware template.
 
      - ``enforced_version``  
-       Specifies the firmware version enforced for devices assigned to the template.
+       This attribute is an array of objects that specifies the firmware version enforced
+       for each of the devices assigned to the template.
 
        - ``platform``  
-         Specifies the platform for which the firmware version is enforced.  
-         Valid values include:
+         Specifies the platform for which the firmware version is enforced.  Values must
+         include a valid hardware platform supported by FortiManager that is in the range
+         defined by the ``product`` attribute. For example, if the ``product`` attribute 
+         is set to `1` (FortiGate), valid values for the ``platform`` attribute include:
          
-         - `FGT-Default`
-         - `FAP-Default`
-         - `FSW-Default`
-         - `FXT-Default`
-         - any valid hardware platform supported by FortiManager
+          - `FortiGate-40F`
+          - `FortiGate-60F`
+          - `FortiGate-VM64`
+          - `FGT-Default` (This is a special value that can be used to apply the enforced firmware
+           version to any FortiGate platform.)
+
+           A list of supported platforms can be retrieved using the following CLI command
+           on the FMG:
+
+           ``diagnose dvm supported-platforms list``
+
 
        - ``product``  
          Specifies the product for which the firmware version is enforced:
@@ -960,9 +969,18 @@ at the time of creation.
          | Only upgrade FortiGate       | Upgrade HA clusters only when all members up | 8                |
          | Clusters with all members up |                                              |                  |
          +------------------------------+----------------------------------------------+------------------+
+         | Skip Fortigate Disk Check    | Skip the auto disk check during upgrade      | 32               |
+         +------------------------------+----------------------------------------------+------------------+
          | Skip FortiGate Auto Scan     | Skip disk auto scan during upgrade           | 64               |
          | Disk                         |                                              |                  |
          +------------------------------+----------------------------------------------+------------------+
+
+         The default value is `104` and is calculated by combining the numeric values of the 
+         `Only Upgrade FortiGate Clusters with all members up`, `Skip Fortigate Disk Check` and
+         `Skip FortiGate Auto Scan Disk` flags.
+
+         `104 = 8 + 32 + 64`
+         
 Certificate Template
 --------------------
 
