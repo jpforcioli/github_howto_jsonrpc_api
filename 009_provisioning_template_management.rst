@@ -870,32 +870,32 @@ at the time of creation.
      This object is used to define the firmware template settings, such as:
      
      - ``schedule-day`` This attribute specifies the day(s) of the week when the upgrade task 
-        is scheduled to run and is only valid when the ``weekly`` schedule type is selected. 
-        The value is submitted as an array of strings that specify the day of the week. For 
-        example, to schedule the upgrade task to run every Monday, Wednesday, and Friday, the
-        value would be: 
+       is scheduled to run and is only valid when the ``weekly`` schedule type is selected. 
+       The value is submitted as an array of strings that specify the day of the week. For 
+       example, to schedule the upgrade task to run every Monday, Wednesday, and Friday, the
+       value would be: 
 
-          .. code-block:: json
+         .. code-block:: json
 
-            "schedule-day": [
-              "monday",
-              "wednesday",
-              "friday"
-            ] 
+           "schedule-day": [
+             "monday",
+             "wednesday",
+             "friday"
+           ] 
           
  
      - ``schedule-end-time`` This attribute specifies the end time for the upgrade task schedule. 
-        It is required when the schedule type is set to ``once``, ``daily``, or ``weekly``. The 
-        value must be submitted as a 24-hour date/time formatted string for the ``once`` schedule type 
-        (e.g., ``2024-12-31 23:59:00``) or as a 24-hour time formatted string for the ``daily`` 
-        and ``weekly`` schedule types (e.g., ``23:59:00``).
+       It is required when the schedule type is set to ``once``, ``daily``, or ``weekly``. The 
+       value must be submitted as a 24-hour date/time formatted string for the ``once`` schedule type 
+       (e.g., ``2024-12-31 23:59:00``) or as a 24-hour time formatted string for the ``daily`` 
+       and ``weekly`` schedule types (e.g., ``23:59:00``).
 
      - ``schedule-start-time`` This attribute specifies the start time for the upgrade task schedule. 
-        It is required when the schedule type is set to ``once``, ``daily``, or ``weekly``. The 
-        value must be submitted as a 24-hour date/time formatted string for the ``once`` schedule type 
-        (e.g., ``2024-12-31 23:59:00``) or as a 24-hour time formatted string for the ``daily`` 
-        and ``weekly`` schedule types (e.g., ``23:59:00``).
-        
+       It is required when the schedule type is set to ``once``, ``daily``, or ``weekly``. The 
+       value must be submitted as a 24-hour date/time formatted string for the ``once`` schedule type 
+       (e.g., ``2024-12-31 23:59:00``) or as a 24-hour time formatted string for the ``daily`` 
+       and ``weekly`` schedule types (e.g., ``23:59:00``).
+
      - ``schedule-type``
        These attributes are used to define the schedule for the upgrade task. The supported schedule
        types include:
