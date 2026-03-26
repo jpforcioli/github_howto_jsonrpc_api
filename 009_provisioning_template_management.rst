@@ -726,6 +726,8 @@ How to list Firmware Templates?
 
 Caught in #xxxxxx.
 
+To retreive a list the firmware templates in the ``nodevices`` ADOM: 
+
 .. tab-set:: 
 
    .. tab-item:: REQUEST
@@ -805,7 +807,159 @@ Caught in #xxxxxx.
             ],
             "id": "495"
         }
+      .. note::
 
+         - In this output, the firmware template includes samples of all supported
+          products using the default platform config values.
+
+
+How to create a new Firmware Template?
++++++++++++++++++++++++
+
+The following example shows how to create the ``firmware_template_001`` Firmware Template
+in the ``nodevices`` ADOM.  In this example, ``DEVICE_001`` is being assigned to the template
+at the time of creation.
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+          {
+            "id": "22",
+            "method": "add",
+            "params": [
+                {
+                    "data": {
+                        "fwmprof setting": {
+                            "description": "This is the description field data.",
+                            "enforced version": [
+                                {
+                                    "flags": 104,
+                                    "platform": "FGT-Default",
+                                    "product": 1,
+                                    "upgrade-path": 1,
+                                    "version": "7.2.11-b1740"
+                                }
+                            ],
+                            "image-source": null,
+                            "schedule-day": null,
+                            "schedule-end-time": null,
+                            "schedule-start-time": null,
+                            "schedule-type": 0
+                        },
+                        "name": "firmware_template_001",
+                        "type": "fwmprof",
+                        "scope member": [
+                            {
+                                "name": "DEVICE_001",
+                                "vdom": "root"
+                            }
+                        ],
+                    },
+                    "url": "pm/fwmprof/adom/nodevices"
+                }
+            ],
+            "session" : "{{session}}"
+        }
+
+.. note::
+
+   - ``fwmprof setting``  
+     This object is used to define the firmware template settings, such as:
+     
+     - ``schedule-day`` 
+        This attribute specifies the day(s) of the week when the upgrade task is scheduled to run 
+        and is only valid when the ``weekly`` schedule type is selected. The value is submitted as
+        an array of strings that specify the day of the week. For example, to schedule the upgrade
+        task to run every Monday, Wednesday, and Friday, the value would be: 
+        .. code-block:: json
+
+           "schedule-day": [
+             "monday",
+             "wednesday",
+             "friday"
+           ] 
+        
+ 
+     - ``schedule-end-time``
+     - ``schedule-start-time``
+     - ``schedule-type``
+       These attributes are used to define the schedule for the upgrade task. The supported schedule
+       types include:
+
+       - ``none`` — The upgrade task will not be scheduled to run automatically. Start and end times
+         are not required for this schedule type.
+       - ``once`` — The upgrade task will run only once at the specified start time. Start and end
+         times are required and must be submitted as a 24-hour date/time formatted string. 
+         For example: ``2024-12-31 23:59:00``.
+       - ``daily`` — The upgrade task will run every day at the specified start time. Start and end
+         times are required and must be submitted as a 24-hour time formatted string.
+         For example: ``23:59:00``. 
+       - ``weekly`` — The upgrade task will run on the specified days of the week at the specified
+         start time. Start and end times are required and must be submitted as a 24-hour time
+         formatted string as with the ``daily`` schedule type.  The ``schedule-day`` attribute is
+         also required for this schedule type to specify the day(s) of the week when the upgrade
+         task should run and is sumbitted as an array of strings. For example, to schedule the
+         upgrade task to run every Monday, Wednesday, and Friday, the value would be:
+          .. code-block:: json
+  
+              "schedule-day": [
+                "monday",
+                "wednesday",
+                "friday"
+              ]
+
+     - ``image-source``  
+       This attribute specifies the source of the firmware image:
+       
+       - `0` → image sourced from FortiGuard  
+       - `1` → image sourced from FortiManager  
+       - `null` → defaults to `0`
+
+     - ``name``  
+       Specifies the name of the firmware template.
+
+     - ``enforced_version``  
+       Specifies the firmware version enforced for devices assigned to the template.
+
+       - ``platform``  
+         Specifies the platform for which the firmware version is enforced.  
+         Valid values include:
+         
+         - `FGT-Default`
+         - `FAP-Default`
+         - `FSW-Default`
+         - `FXT-Default`
+         - any valid hardware platform supported by FortiManager
+
+       - ``product``  
+         Specifies the product for which the firmware version is enforced:
+         
+         - `1` → FortiGate
+         - `2` → FortiSwitch
+         - `3` → FortiAP
+         - `4` → FortiExtender
+         - `5` → FortiExtender-Modem
+
+       - ``flags``  
+         Specifies additional options for the enforced firmware version.  
+         Most flags apply only to the FortiGate platform.  
+         The value is calculated by summing the numeric values of the enabled flags:
+
+         +------------------------------+----------------------------------------------+------------------+
+         | Flag                         | Description                                  | Numeric Value    |
+         +==============================+==============================================+==================+
+         | Boot from Alternate          | Boot to secondary partition after upgrade    | 1                |
+         | Partition After upgrade      |                                              |                  |
+         +------------------------------+----------------------------------------------+------------------+
+         | Only upgrade FortiGate       | Upgrade HA clusters only when all members up | 8                |
+         | Clusters with all members up |                                              |                  |
+         +------------------------------+----------------------------------------------+------------------+
+         | Skip FortiGate Auto Scan     | Skip disk auto scan during upgrade           | 64               |
+         | Disk                         |                                              |                  |
+         +------------------------------+----------------------------------------------+------------------+
 Certificate Template
 --------------------
 
