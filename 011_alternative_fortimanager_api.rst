@@ -1471,12 +1471,12 @@ The following example shows how to partial install an IPS profile named
                 }
             }
 
-        .. note::
+         .. note::
           
-           - ``170`` is the OID of the ADOM to which the IPS profile belongs. 
-             You can't use the symbolic ADOM name.
-           - ``288`` is the category ID for IPS profiles. You can get it by 
-             using the command ``execute fmpolicy print-adom-object <adom> ?``.
+            - ``170`` is the OID of the ADOM to which the IPS profile belongs. 
+              You can't use the symbolic ADOM name.
+            - ``288`` is the category ID for IPS profiles. You can get it by 
+              using the command ``execute fmpolicy print-adom-object <adom> ?``.
 
       .. tab-item:: RESPONSE
 
@@ -1511,8 +1511,8 @@ The following example shows how to partial install an IPS profile named
 
          .. note::
            
-            - The list of targets is in the ``data`` block of the response. Each
-              target is represented by a device OID and a VDOM OID.
+            The list of targets is in the ``data`` block of the response. Each
+            target is represented by a device OID and a VDOM OID.
 
 #. Second, you can trigger the partial install operation for the IPS profile
    specifying the list of targets in the API request:
@@ -1523,7 +1523,7 @@ The following example shows how to partial install an IPS profile named
 
          .. code-block:: text
 
-            POST https://
+            POST https://10.210.34.126/cgi-bin/module/flatui-proxy
             Content-Type: application/json
             Xsrf-Token: 1dR+q9mBD3hKPWyw7xoZgmvViT3L5aA
             Content-Length: 487
