@@ -1137,53 +1137,53 @@ How to operate a policy package diff operation?
 
 1. Trigger the policy package diff operation
 
-   ..tab-set::
+   .. tab-set::
 
-     .. tab-item:: REQUEST
+      .. tab-item:: REQUEST
 
-        .. code-block:: json
+         .. code-block:: json
         
-           {
-               "url": "/gui/adom/installation/pkg/install",
-               "method": "processPreview",
-               "params": {
-                   "pkgOid": 3292,
-                   "installDevIds": "170-0"
-               }
-           }
+            {
+                "url": "/gui/adom/installation/pkg/install",
+                "method": "processPreview",
+                "params": {
+                    "pkgOid": 3292,
+                    "installDevIds": "170-0"
+                }
+            }
 
-        where ``pkgOid`` and ``installDevIds`` are the policy package and 
-        managed device OIDs. For the managed device, "170-0" refers to device 
-        OID and VDOM OID.
+         where ``pkgOid`` and ``installDevIds`` are the policy package and 
+         managed device OIDs. For the managed device, "170-0" refers to device 
+         OID and VDOM OID.
 
-     .. tab-item:: RESPONSE
+      .. tab-item:: RESPONSE
 
-        .. code-block:: json
+         .. code-block:: json
         
-           {
-               "result": [
-                   {
-                       "data": {
-                           "isSchd": 0,
-                           "msg": "",
-                           "result": "ok",
-                           "tid": 369
-                       },
-                       "id": null,
-                       "status": {
-                           "code": 0,
-                           "message": ""
-                       },
-                       "url": "/gui/adom/installation/pkg/install"
-                   }
-               ]
-           }
+            {
+                "result": [
+                    {
+                        "data": {
+                            "isSchd": 0,
+                            "msg": "",
+                            "result": "ok",
+                            "tid": 369
+                        },
+                        "id": null,
+                        "status": {
+                            "code": 0,
+                            "message": ""
+                        },
+                        "url": "/gui/adom/installation/pkg/install"
+                    }
+                ]
+            }
 
-        When we look in task monitor in FortiManager GUI, this action trigger a 
-        *copy* operation. 
+         When we look in task monitor in FortiManager GUI, this action trigger 
+         a *copy* operation. 
         
-        When the task is complete we have to trigger an install preview 
-        operation.
+         When the task is complete we have to trigger an install preview 
+         operation.
 
 2. Trigger an install preview operation
 
