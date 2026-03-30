@@ -1430,6 +1430,180 @@ You can consider reading section :ref:`How to get Fortinet vulnerabilities for
 your managed devices?` to get the list of vulnerabilities for your managed
 devices using a more regular way.
 
+How to partial install an IPS profile to all concerned targets?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Goal is to avoid specifying the list of targets (devices and VDOMs) to which the
+IPS profile has to be installed. This is really useful when you have a large
+number of targets and you don't want to specify them one by one in the API
+request.
+
+Unfortunately, this is not possible with the FortiManager JSON RPC API, but it
+is possible with the FortiManager GUI API at the price of an extra API call to
+get the list of targets.
+
+The following example shows how to partial install an IPS profile named
+``ips_profile_001`` to all concerned targets:
+
+#. First, you need to get the list of targets for the IPS profile:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: text
+
+            POST https://10.210.34.126/cgi-bin/module/flatui-proxy
+            Content-Type: application/json
+            Xsrf-Token: 1dR+q9mBD3hKPWyw7xoZgmvViT3L5aA
+            Content-Length: 213
+
+            {
+                "url": "/gui/installation/adoms/170/objects",
+                "method": "get",
+                "params": {
+                    "objects": [
+                        {
+                            "cate": 288,
+                            "key": "ips_sensor_001"
+                        }
+                    ]
+                }
+            }
+
+        .. note::
+          
+           - ``170`` is the OID of the ADOM to which the IPS profile belongs. 
+             You can't use the symbolic ADOM name.
+           - ``288`` is the category ID for IPS profiles. You can get it by 
+             using the command ``execute fmpolicy print-adom-object <adom> ?``.
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "result": [
+                {
+                  "data": [
+                    {
+                      "oid": 1074,
+                      "vdom": 3
+                    },
+                    {
+                      "oid": 1086,
+                      "vdom": 3
+                    },
+                    {
+                      "oid": 1062,
+                      "vdom": 3
+                    }
+                  ],
+                  "id": null,
+                  "status": {
+                    "code": 0,
+                    "message": ""
+                  },
+                  "url": "/gui/installation/adoms/170/objects"
+                }
+              ]
+            }
+
+         .. note::
+           
+            - The list of targets is in the ``data`` block of the response. Each
+              target is represented by a device OID and a VDOM OID.
+
+#. Second, you can trigger the partial install operation for the IPS profile
+   specifying the list of targets in the API request:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: text
+
+            POST https://
+            Content-Type: application/json
+            Xsrf-Token: 1dR+q9mBD3hKPWyw7xoZgmvViT3L5aA
+            Content-Length: 487
+
+            {
+                "url": "/gui/installation/adoms/170/objects",
+                "method": "post",
+                "params": {
+                    "objects": [
+                        {
+                            "cate":288, "key": "ips_sensor_001"
+                        }
+                    ],
+                    "scope": [
+                        {
+                            "oid": 1074,
+                            "vdom": 3
+                        },
+                        {
+                            "oid": 1086,
+                            "vdom": 3
+                        },
+                        {
+                            "oid": 1062,
+                            "vdom": 3
+                        }
+                    ],
+                    "comment": ""
+                }
+            }
+
+
+         .. note::
+
+            The list of targets is specified in the ``scope`` block of the 
+            request. Each target is represented by a device OID and a VDOM
+            OID. However, you could have used symbolic names instead of OIDs:
+
+            .. code-block:: json
+
+               "scope": [
+                    {
+                        "name": "dev_001",
+                        "vdom": "root"
+                    },
+                    {
+                        "name": "dev_002",
+                        "vdom": "root"
+                    },
+                    {
+                        "name": "dev_003",
+                        "vdom": "root"
+                    }
+               ]
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "result": [
+                {
+                  "data": {
+                    "taskId": 599
+                  },
+                  "id": null,
+                  "status": {
+                    "code": 0,
+                    "message": ""
+                  },
+                  "url": "/gui/installation/adoms/170/objects"
+                }
+              ]
+            }
+
+         .. note::
+            
+            The response contains the task ID of the partial install operation. 
+            You can use it to track the task completion.
+
 REST API
 --------
 
