@@ -1534,7 +1534,8 @@ The following example shows how to partial install an IPS profile named
                 "params": {
                     "objects": [
                         {
-                            "cate":288, "key": "ips_sensor_001"
+                            "cate":288, 
+                            "key": "ips_sensor_001"
                         }
                     ],
                     "scope": [
