@@ -1,6 +1,119 @@
 FortiManager operations
 =======================
 
+Custom Session Label
+--------------------
+
+This is a new feature introduced in FortiManager 8.0.0 (#1220831) that allows 
+administrators to specify a custom session label for better tracking of 
+changes. For example, the custom session label can be set to the ID of a 
+specific change request, and that label can then be searched in the event logs 
+to find all actions and operations performed in FortiManager to address that 
+change request.
+
+How to set a custom session label?
+++++++++++++++++++++++++++++++++++
+
+The following example shows how to set the custom session label to ``SR
+#00001``:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "custom_session_label": "SR #00001"
+               },
+               "url": "/sys/session/custom_session_label"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/sys/session/custom_session_label"
+             }
+           ]
+         }
+
+How to get the custom session label?
+++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get the custom session label:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "custom_session_label"
+               ],
+               "url": "/sys/session"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "result": [
+             {
+               "data": {
+                 "admin_adom": "root",
+                 "admin_prof": "Super_User",
+                 "admin_user": "devops",
+                 "adom_access": 0,
+                 "adom_list": [],
+                 "adom_override": 0,
+                 "current_adom_name": "root",
+                 "custom_session_label": "SR #00002",
+                 "email": "",
+                 "first_name": "",
+                 "last_name": "",
+                 "login_user": "devops",
+                 "time_left": 28800,
+                 "timestamp": 1774939043,
+                 "valid": 1
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/sys/session"
+             }
+           ]
+         }          
+
 FortiManager Certificates
 -------------------------
 
