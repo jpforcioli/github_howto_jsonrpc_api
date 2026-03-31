@@ -934,17 +934,25 @@ at the time of creation.
          defined by the ``product`` attribute. For example, if the ``product`` attribute 
          is set to `1` (FortiGate), valid values for the ``platform`` attribute include:
          
-          - `FortiGate-40F`
-          - `FortiGate-60F`
-          - `FortiGate-VM64`
-          - `FGT-Default` (This is a special value that can be used to apply the enforced firmware
-           version to any FortiGate platform.)
+         - `FortiGate-40F`
+         - `FortiGate-60F`
+         - `FortiGate-VM64`
+         - `FGT-Default` (This is a special value that can be used to apply the enforced firmware version to any FortiGate platform.)
 
-           A list of supported platforms can be retrieved using the following CLI command
-           on the FMG:
+         A list of supported platforms can be retrieved using the following CLI command
+         on the FMG:
 
-           ``diagnose dvm supported-platforms list``
+         ``diagnose dvm supported-platforms list``
 
+
+
+       - ``upgrade-path``  
+         This attribute specifies whether the upgrade path should be enforced for the firmware version. 
+         If set to `1`, the device will be required to follow the defined upgrade path to reach the target
+         firmware version. If set to `0`, the device can directly upgrade to the target firmware version
+         without following the defined upgrade path. The default value is `0`.
+
+      
 
        - ``product``  
          Specifies the product for which the firmware version is enforced:
@@ -976,11 +984,11 @@ at the time of creation.
          +------------------------------+----------------------------------------------+------------------+
 
          The default value is `104` and is calculated by combining the numeric values of the 
-         `Only Upgrade FortiGate Clusters with all members up`, `Skip Fortigate Disk Check` and
-         `Skip FortiGate Auto Scan Disk` flags.
+         ``Only Upgrade FortiGate Clusters with all members up``, ```Skip Fortigate Disk Check``` and
+         ``Skip FortiGate Auto Scan Disk`` flags.
 
-         `104 = 8 + 32 + 64`
-         
+         ``104 = 8 + 32 + 64```
+
 Certificate Template
 --------------------
 
