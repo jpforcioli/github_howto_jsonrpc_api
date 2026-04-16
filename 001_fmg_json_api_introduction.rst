@@ -199,14 +199,14 @@ You just need to insert the API key:
 
   .. warning::
 
-     Starting with FortiManager 7.4.7/7.6.2, you can no longer use this form 
-     (#1084776). 
+     Starting with FortiManager 7.4.7/7.6.2, you can no pass the API key using
+     the access_token query string (#1084776).
 
-Starting with FortiManager 7.6.6/8.0.0 (#1179653), you can also specify the API
+Starting with FortiManager 7.6.7/8.0.0 (#1179653), you can also specify the API
 user name to be used using the ``access_user`` header as shown below:
 
 .. code-block:: text
-
+   :emphasize-lines: 4
 
      POST https://{{fmg_ip}}/jsonrpc HTTP/1.1
      [...]
