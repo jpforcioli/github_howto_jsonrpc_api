@@ -2367,7 +2367,7 @@ the ``demo`` ADOM:
          - Once the task is completed, you can proceed with next step             
 
 Step #2: Trigger an install preview for multiple devices
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+________________________________________________________
 
 The following example shows how to trigger an install device preview operation for the ``dev_001``, ``dev_002`` and ``dev_003`` devices in the ``demo`` ADOM:
 
@@ -2462,7 +2462,7 @@ The following example shows how to trigger an install device preview operation f
          - Once the task is completed, you can proceed with next step
 
 Step #3: Collect the install device preview output
-++++++++++++++++++++++++++++++++++++++++++++++++++
+__________________________________________________
 
 The following example shows how to obtain the Install Preview output for the ``dev_001``, ``dev_002`` and ``dev_003`` devices in the ``demo`` ADOM:
 
