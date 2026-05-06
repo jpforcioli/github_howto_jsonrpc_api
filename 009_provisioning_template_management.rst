@@ -810,7 +810,7 @@ To retreive a list the firmware templates in the ``nodevices`` ADOM:
       .. note::
 
          - In this output, the firmware template includes samples of all supported
-          products using the default platform config values.
+         products using the default platform config values.
 
 
 How to create a new Firmware Template?
@@ -988,6 +988,19 @@ at the time of creation.
          ``Skip FortiGate Auto Scan Disk`` flags.
 
          ``104 = 8 + 32 + 64```
+       - ``type``  
+         This attribute specifies the object type and must be set to `fwmprof` for firmware templates.
+       - ``scope member``  
+         This attribute is an array of objects that specifies the devices assigned to the firmware template.  The scope member objects
+         can be included at the time of template creation or added later to assign devices to an existing template.
+
+         Each object in the array must include the following attributes:
+
+           - ``name``
+             Specifies the name of the device to be assigned to the firmware template.
+
+           - ``vdom``  
+             Specifies the VDOM of the device to be assigned to the firmware template. For non-VDOM devices, this value should be set to `root`.
 
 Certificate Template
 --------------------
