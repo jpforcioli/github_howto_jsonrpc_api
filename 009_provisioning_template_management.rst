@@ -925,9 +925,9 @@ to the template at the time of creation.
 
            - ``image-source`` specifies the source of the firmware image:
        
-              - ``0``: image sourced from FortiGuard  
-              - ``1``: image sourced from FortiManager  
-              - ``null``: defaults to ``0``
+             - ``0``: image sourced from FortiGuard  
+             - ``1``: image sourced from FortiManager  
+             - ``null``: defaults to ``0``
 
            - ``name`` specifies the name of the firmware template.
 
