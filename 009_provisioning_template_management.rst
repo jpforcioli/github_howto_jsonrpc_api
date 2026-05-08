@@ -864,99 +864,115 @@ to the template at the time of creation.
            "session": "{{session}}"
          }
 
-      .. note::
+    .. note::
 
-         - ``fwmprof setting`` is used to define the firmware template     
-           settings, such as:
+       - ``fwmprof setting``: defines the firmware template settings. The
+         possible attributes are:
+     
+         - ``schedule-day``: specifies the day(s) of the week when the upgrade 
+           task is scheduled to run and is only valid when the ``weekly`` 
+           schedule type is selected.
 
-           - ``schedule-day`` which specifies the day(s) of the week when the 
-             upgrade task is scheduled to run and is only valid when the 
-             ``weekly`` schedule type is selected. The value is submitted as
-             an array of strings that specify the day of the week. For example, 
-             to schedule the upgrade task to run every Monday, Wednesday, and 
-             Friday, the value would be:
+           The value is submitted as an array of strings that specify the day 
+           of the week. For example, to schedule the upgrade task to run every 
+           Monday, Wednesday, and Friday, the value would be: 
 
-             .. code-block:: json
+           .. code-block:: json
 
-                "schedule-day": [
-                  "monday",
-                  "wednesday",
-                  "friday"
-                ]
-        
-           - ``schedule-end-time``, ``schedule-start-time`` and 
-             ``schedule-type`` are used to define the schedule for the upgrade 
-             task. 
+              "schedule-day": [
+                "monday",
+                "wednesday",
+                "friday"
+              ]
+          
+         - ``schedule-end-time``: specifies the end time for the upgrade task 
+           schedule. It is required when the schedule type is set to ``once``, 
+           ``daily``, or ``weekly``. The value must be submitted as a 24-hour 
+           date/time formatted string for the ``once`` schedule type (e.g., 
+           ``2024-12-31 23:59:00``) or as a 24-hour time formatted string for 
+           the ``daily`` and ``weekly`` schedule types (e.g., ``23:59:00``).
+
+         - ``schedule-start-time``: specifies the start time for the upgrade 
+           task schedule. It is required when the schedule type is set to 
+           ``once``, ``daily``, or ``weekly``. The value must be submitted as a 
+           24-hour date/time formatted string for the ``once`` schedule type 
+           (e.g., ``2024-12-31 23:59:00``) or as a 24-hour time formatted 
+           string for the ``daily`` and ``weekly`` schedule types (e.g., 
+           ``23:59:00``).
+
+         - ``schedule-type``: defines the schedule for the upgrade task. The 
+           supported schedule types include:
+
+           - ``none``: the upgrade task will not be scheduled to run 
+             automatically. Start and end times are not required for this 
+             schedule type. 
+
+           - ``once``: the upgrade task will run only once at the specified 
+             start time. Start and end times are required and must be submitted 
+             as a 24-hour date/time formatted string. 
              
-             The supported ``schedule-type`` include:
+             For example: ``2024-12-31 23:59:00``.
 
-             - ``none``: The upgrade task will not be scheduled to run 
-               automatically. ``schedule-start-time`` and ``schedule-end-time`` 
-               are not required.
+           - ``daily``: the upgrade task will run every day at the specified 
+             start time. Start and end times are required and must be submitted 
+             as a 24-hour time formatted string.
 
-             - ``once``: The upgrade task will run only once at the specified 
-               ``schedule-start-time`` and ``schedule-end-time`` which are this
-               time required, using the 24-hour date/time formatted string.   
-               For example: ``2024-12-31 23:59:00``.
+             For example: ``23:59:00``.
+             
+           - ``weekly``: the upgrade task will run on the specified days of the 
+             week at the specified start time. Start and end times are required 
+             and must be submitted as a 24-hour time formatted string as with 
+             the ``daily`` schedule type.  The ``schedule-day`` attribute is
+             also required for this schedule type to specify the day(s) of the 
+             week when the upgrade task should run.
 
-             - ``daily``: The upgrade task will run every day at the specified 
-               ``schedule-start-time`` and ``schedule-end-time`` are required 
-               and must be submitted as a 24-hour time formatted string. For \ 
-               example: ``23:59:00``. 
-
-             - ``weekly``: The upgrade task will run on the specified  
-               ``schedule-day`` of the week at the specified
-               ``schedulae-start-time`` and ``schedule-end-time`` which are
-               required and must be submitted as a 24-hour time formatted
-               string as with the ``daily`` ``schedule-type``. The 
-               ``schedule-day`` attribute is also required for this
-               ``schedule-type`` to specify the day(s) of the week when
-               the upgrade task should run and is sumbitted as an array of 
-               strings. For example, to schedule the upgrade task to run every 
-               Monday, Wednesday, and Friday, the value would be:
-               
-               .. code-block:: json
-  
-                  "schedule-day": [
-                    "monday",
-                    "wednesday",
-                    "friday"
-                  ]
-
-           - ``image-source`` specifies the source of the firmware image:
+         - ``image-source``: specifies the source of the firmware image. The
+           supported values include:
        
-             - ``0``: image sourced from FortiGuard  
-             - ``1``: image sourced from FortiManager  
-             - ``null``: defaults to ``0``
+           - ``0``: image sourced from FortiGuard
+           - ``1``: image sourced from FortiManager
+           - ``null``: defaults to ``0``
 
-           - ``name`` specifies the name of the firmware template.
+         - ``name`` specifies the name of the firmware template.
 
-           - ``enforced_version`` specifies the firmware version enforced for 
-             devices assigned to the template.
+         - ``enforced_version``: specifies the firmware version enforced for 
+           devices assigned to the firmware template. This attribute is an 
+           array of objects that specifies the firmware version enforced for 
+           each of the devices assigned to the template.
 
-           - ``platform`` specifies the platform for which the firmware version 
-             is enforced. Valid values include:
+           - ``platform``: specifies the platform for which the firmware 
+             version is enforced. Values must include a valid hardware platform 
+             supported by FortiManager that is in the range defined by the 
+             ``product`` attribute. For example, if the ``product`` attribute 
+             is set to ``1`` (FortiGate), valid values for the ``platform`` 
+             attribute include:
+         
+             - ``FortiGate-40F``
+             - ``FortiGate-60F``
+             - ``FortiGate-VM64``
+             - ``FGT-Default`` (this is a special value that can be used to 
+               apply the enforced firmware version to any FortiGate platform)
 
-             - ``FGT-Default``
-             - ``FAP-Default``
-             - ``FSW-Default``
-             - ``FXT-Default``
-             - any valid hardware platform supported by FortiManager
+             A list of supported platforms can be retrieved using the following
+             FortiManager CLI command:
 
-           - ``product`` specifies the product for which the firmware version 
+             .. code-block:: text
+
+                diagnose dvm supported-platforms list`
+
+           - ``product``: specifies the product for which the firmware version 
              is enforced:
          
-             - ``1`` for ``FortiGate``
-             - ``2`` for ``FortiSwitch``
-             - ``3`` for ``FortiAP``
-             - ``4`` for ``FortiExtender``
-             - ``5`` for ``FortiExtender-Modem``
+             - ``1``: FortiGate
+             - ``2``: FortiSwitch
+             - ``3``: FortiAP
+             - ``4``: FortiExtender
+             - ``5``: FortiExtender-Modem
 
-           - ``flags`` specifies additional options for the enforced firmware 
-             version. Most flags apply only to the FortiGate platform.
-
-             The value is calculated by summing the numeric values of the 
-             enabled flags:
+           - ``flags``: specifies additional options for the enforced firmware 
+             version. Most flags apply only to the FortiGate platform. The 
+             value is calculated by summing the numeric values of the enabled 
+             flags:
 
              .. list-table:: Firmware Template Enforced Version Flags
                 :header-rows: 1
@@ -974,9 +990,21 @@ to the template at the time of creation.
                   - Upgrade HA clusters only when all members up
                   - ``8``
 
+                * - Skip Fortigate Disk Check 
+                  - Skip the auto disk check during upgrade
+                  - ``32``
+
                 * - Skip FortiGate Auto Scan Disk
                   - Skip disk auto scan during upgrade
                   - ``64``
+
+             The default value is ``104`` and is calculated by combining the 
+             numeric values of the following flags:
+             - ``Only Upgrade FortiGate Clusters with all members up`` (``8``)
+             - ``Skip Fortigate Disk Check`` (``32``)
+             - ``Skip FortiGate Auto Scan Disk`` (``64``)
+
+             Total is giving ``104`` (``8 + 32 + 64``).
 
 Certificate Template
 --------------------
