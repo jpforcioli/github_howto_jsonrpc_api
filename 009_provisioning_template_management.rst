@@ -1148,6 +1148,30 @@ The following example demonstrates how to enroll a certificate for the
            "session": "{{session}}"
          }
 
+      .. note::
+
+         When you debug FortiManager using the following CLI:
+
+         .. code-block:: text
+
+            diagnose debug service main 255
+            diagnose debug enable
+
+         you can see that the ``template`` value is a full path to the 
+         Certificate Template [1]_:
+
+         .. code-block:: text
+            :emphasize-lines: 5-6
+
+            Request [gui webforward:2911:fbce18d1-bda7-4ff9-9353-01a85adf7eeb]:
+            { "client": "gui webforward:2911", "id": 
+            "fbce18d1-bda7-4ff9-9353-01a85adf7eeb", "keep_session_idle": 1, 
+            "method": "exec", "params": [{ "data": { "adom": "demo", 
+            "scope": [{ "name": "dev_001", "vdom": "root"}], "template": "adom\/
+            demo\/obj\/certificate\/template\/certificate_template_001"}, 
+            "url": "\/securityconsole\/sign\/certificate\/template"}], 
+            "session": 59590}
+
    .. tab-item:: RESPONSE
 
       .. code-block:: json
@@ -9803,3 +9827,6 @@ The following example shows how to export a selected list of templates:
          - The task ID (i.e., ``68``) that you have to monitor. When the task is
            complete, you can download the file. See section :ref:`How to 
            download exported templates file?` for downloading the returned file.
+
+.. rubric:: Footnotes
+.. [1] Observed with FortiManager 8.0.1-INTERIM build 0126.
