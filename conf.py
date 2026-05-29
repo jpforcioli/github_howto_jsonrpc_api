@@ -38,12 +38,31 @@ release = '1.0.0'
 
 
 extensions = [ 
+    'myst_parser', # enable myst parser
     "sphinx_tabs.tabs",
     'sphinx_toolbox.collapse',
     'sphinx.ext.autosectionlabel',    
     'sphinxcontrib.images',
     'sphinx_copybutton',
     "sphinx_design",
+    'sphinx_togglebutton',
+]
+
+myst_enable_extensions = [
+    "amsmath",
+    "attrs_inline",
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "fieldlist",
+    "html_admonition",
+    "html_image",
+    "linkify",
+    "replacements",
+    "smartquotes",
+    "strikethrough",
+    "substitution",
+    "tasklist",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -53,6 +72,7 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '.gitignore', '.venv']
+exclude_patterns.append("README.md")
 
 # -- Options for HTML output -------------------------------------------------
 

@@ -2266,7 +2266,8 @@ be clearly expressed using the ``device blueprint``:
 
 There's a special case with the ``need_reset`` flag. To indicate that a device
 requires a factory reset (*ZTP Factory Reset* in FortiManager GUI), you can
-still use the ``flags`` field, but with symbolic values. See :ref:``How to enable the `need_reset` flag on a model device?``.
+still use the ``flags`` field, but with symbolic values. See 
+:ref:`enable_need_reset`.
 
 Ultimately, if you don't want to use the explicit ``"device action":
 "add_model"`` and keep using the ``flags`` attribute, then at least use symbolic
@@ -3518,6 +3519,8 @@ objects that should be placed in global scope.
 
 Hence, to enable the VDOM mode on a Model Device, better to review section
 :ref:`How to enable VDOM?`
+
+.. _enable_need_reset:
 
 How to enable the ``need_reset`` flag on a model device?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
