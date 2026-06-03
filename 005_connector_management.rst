@@ -1018,6 +1018,56 @@ the perspective of the ``dev_001`` managed device:
 SASE Connector
 --------------
 
+How to add a SASE Connector?
+++++++++++++++++++++++++++++
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo"
+                 "flags": [
+                   "create-task"
+                 ],
+                 "key": "12345678901234567890123456789012",
+                 "name": "Connector_to_FortiSASE"
+               },
+               "url": "/dmsase/add/service"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 68,
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 271
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dmsase/add/service"
+             }
+           ]
+         }
+
+
 TODO:
 
 .. code-block:: text
