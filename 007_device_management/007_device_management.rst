@@ -2821,6 +2821,252 @@ servers:
      "prefer_img_ver": "7.2.9-b1688|8",
    }
 
+
+How add a Model Device with the ``backup_mode`` flag enabled?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. note::
+
+   Captured in #1097450.
+
+When a real FortiGate device onboards against a Model Device, FortiManager
+normally pushes the provisioning configuration (Provisioning Templates and
+Policy Package) to it straight away. Enabling the ``backup_mode`` flag
+changes this behaviour: FortiManager first triggers a **retrieve** of the
+real device's existing configuration before pushing the configuration
+prepared on FortiManager. This is useful when you want to preserve or
+inspect the device's current state before any provisioning takes place.
+
+Currently, you can't set the ``backup_mode`` atomically when adding the Model Device — unlike other flags such as ``need_reset`` which are applied
+immediately. A second ``set`` call against the created Model Device is therefore required.
+
+#. Add the Model Device
+
+   Send an ``exec`` request to ``/dvm/cmd/add/device`` to create the Model
+   Device. You may include ``backup_mode`` in the ``flags`` array at this
+   point, but it will be silently ignored by FortiManager.
+
+   .. tab-set::
+      
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "method": "exec",
+              "params": [
+                {
+                  "data": {
+                    "adom": "demo",
+                    "device": {
+                      "device action": "add_model",
+                      "device blueprint": {
+                        "auth-template": "fabric_authorization_template_001",
+                        "dev-group": ["device_group_001"],
+                        "enforce-device-config": "enable",
+                        "folder": "/",
+                        "linked-to-model": true,
+                        "pkg": "pkg_001",
+                        "platform": "FortiGate-VM64",
+                        "port-provisioning": 10,
+                        "prerun-cliprof": "pre_run_cli_template_001",
+                        "prov-type": "template-group",
+                        "sdwan-management": "enable",
+                        "split-switch-port": true,
+                        "template-group": "template_group_001"
+                      },
+                      "flags": [
+                        "need_reset",
+                        "backup_mode"
+                      ],
+                      "mgmt_mode": "fmg",
+                      "mr": 6,
+                      "name": "dev_001",
+                      "os_type": "fos",
+                      "os_ver": "7.0",
+                      "platform_str": "FortiGate-VM64",
+                      "psk": "a_psk_for_dev_001"
+                    },
+                    "flags": ["create_task"]
+                  },
+                  "url": "/dvm/cmd/add/device"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "cid": 256,
+              "id": 3,
+              "result": [
+                {
+                  "data": {
+                    "device": {
+                      "beta": -1,
+                      "branch_pt": 3645,
+                      "build": 3645,
+                      "cluster_worker": [],
+                      "conn_mode": 1,
+                      "dev_status": 1,
+                      "flags": 3332964089856,
+                      "hostname": "FortiGate-VM64",
+                      "maxvdom": 10,
+                      "mgmt_mode": 3,
+                      "mgmt_uuid": "1fb17fac-5aa6-51f1-00f7-c15f4fd3ca57",
+                      "mr": 6,
+                      "name": "dev_001",
+                      "oid": 2513,
+                      "os_type": 0,
+                      "os_ver": 7,
+                      "patch": -1,
+                      "platform_id": 181,
+                      "platform_str": "FortiGate-VM64",
+                      "psk": "a_psk_for_dev_001",
+                      "source": 1,
+                      "tab_status": "<unknown>",
+                      "version": 700,
+                      "vm_cpu": 1,
+                      "vm_cpu_limit": 1,
+                      "vm_mem": 1024,
+                      "vm_mem_limit": 1024,
+                      "vm_status": 3
+                    },
+                    "taskid": 239
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/dvm/cmd/add/device"
+                }
+              ]
+            }
+
+#. Set the ``backup_mode`` flag
+
+   Issue a ``set`` call against the created Model Device, providing the **full
+   current flag list** plus ``backup_mode``.
+
+   .. warning::
+
+      Always re-specify every existing flag. The API replaces the entire flag
+      bitmask — any flag omitted from the list will be silently cleared.
+
+      To get the list of existing flags, you can do a ``get`` call on the Model 
+      Device right after its creation and check the ``flags`` attribute in the 
+      response.
+
+      .. tab-set::
+
+         .. tab-item:: REQUEST
+
+            .. code-block:: json
+
+               {
+                 "id": 5,
+                 "method": "get",
+                 "params": [
+                   {
+                     "fields": [
+                       "name",
+                       "flags"
+                     ],
+                     "loadsub": 0,
+                     "url": "dvmdb/adom/demo/device/dev_001"
+                   }
+                 ],
+                 "session": "{{session}}",
+                 "verbose": 1
+               }
+
+         .. tab-item:: RESPONSE
+
+            .. code-block:: json
+
+               {
+                 "cid": 258,
+                 "id": 5,
+                 "result": [
+                   {
+                     "data": {
+                       "flags": [
+                         "has_hdd",
+                         "is_model",
+                         "linked_to_model",
+                         "need_reset",
+                         "override_management_intf",
+                         "sdwan_management"
+                       ],
+                       "name": "dc_emea_dev_009",
+                       "oid": 2513
+                     },
+                     "status": {
+                       "code": 0,
+                       "message": "OK"
+                     },
+                     "url": "dvmdb/adom/demo/device/dev_001"
+                   }
+                 ]
+               }
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 6,
+              "method": "set",
+              "params": [
+                {
+                  "data": {
+                    "flags": [
+                      "has_hdd",
+                      "is_model",
+                      "linked_to_model",
+                      "need_reset",
+                      "override_management_intf",
+                      "sdwan_management",
+                      "backup_mode"
+                    ]
+                  },
+                  "url": "dvmdb/adom/demo/device/dev_001"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "cid": 259,
+              "id": 6,
+              "result": [
+                {
+                  "data": {
+                    "name": "dc_emea_dev_009"
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "dvmdb/adom/dc_emea/device/dc_emea_dev_009"
+                }
+              ]
+            }          
+         
+   The Model Device is now configured. When the real FortiGate connects and 
+   onboards, FortiManager will retrieve its existing configuration first,
+   before applying the Provisioning Templates and Policy Package.
+
 How to add a SD-WAN Model Device?
 +++++++++++++++++++++++++++++++++
 
