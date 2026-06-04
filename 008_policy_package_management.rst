@@ -1298,6 +1298,75 @@ will be installed on the ``dev_001`` and ``dev_002`` managed devices.
            ]
          }
 
+How to batch install Policy Packages?
+_____________________________________
+
+Caught in #1286068, FortiManager 8.0.1.
+
+This is for when you want to install multiple policy packages being in the same
+of different ADOMs!
+
+... warning:
+
+    TO BE TESTED.
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+        {
+          "method": "exec",
+          "params": [
+            {
+              "url": "/securityconsole/batch/install/package",
+              "data": {
+                "adom": "demo",
+                "flags": [
+                  "preview",
+                  "generate_rev"
+                ],
+                "adom_rev_name": "revision_2026-06-04-02-25-56-CEST",
+                "adom_rev_comments": "",
+                "target": [
+                  {
+                    "adom": "demo",
+                    "pkg": "pkg_001",
+                    "scope": [
+                      {
+                        "name": "dev_001",
+                        "vdom": "root"
+                      }
+                    ]
+                  },
+                  {
+                    "adom": "demo",
+                    "pkg": "pkg_002",
+                    "scope": [
+                      {
+                        "name": "dev_002",
+                        "vdom": "root"
+                      }
+                    ]
+                  },
+                  {
+                    "adom": "demo",
+                    "pkg": "pkg_003",
+                    "scope": [
+                      {
+                        "name": "dev_003",
+                        "vdom": "root"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "id": "3341cdf2-174a-40c5-95cc-66395eb16509"
+        }
+
 How to check for a scheduled policy package installation?
 _________________________________________________________
 
