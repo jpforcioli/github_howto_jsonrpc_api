@@ -2822,8 +2822,8 @@ servers:
    }
 
 
-How add a Model Device with the ``backup_mode`` flag enabled?
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to add a Model Device with the ``backup_mode`` flag enabled?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. note::
 
@@ -3063,9 +3063,9 @@ immediately. A second ``set`` call against the created Model Device is therefore
               ]
             }          
          
-   The Model Device is now configured. When the real FortiGate connects and 
-   onboards, FortiManager will retrieve its existing configuration first,
-   before applying the Provisioning Templates and Policy Package.
+The Model Device is now configured. When the real FortiGate connects and 
+onboards, FortiManager will retrieve its existing configuration first, before 
+applying the Provisioning Templates and Policy Package.
 
 How to add a SD-WAN Model Device?
 +++++++++++++++++++++++++++++++++
