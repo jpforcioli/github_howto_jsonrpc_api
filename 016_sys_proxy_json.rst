@@ -211,7 +211,15 @@ We can observe that:
        "target": [
            "/group/All_FortiGate"
        ]
-       
+
+  - You can also specify the target using the device OID:
+
+    .. code-block:: json
+
+       "target": [
+         "dev_oid/1111"
+       ]
+
 FNDN page for FMG JSON RPC API URL ``/sys/proxy/json`` is also exposing another
 attribute:
 
