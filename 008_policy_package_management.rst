@@ -4,65 +4,69 @@ Policy Package Management
 Folders
 -------
 
-How to create a folder hierarchy
-++++++++++++++++++++++++++++++++
+How to add a folder hierarchy?
+++++++++++++++++++++++++++++++
 
-**REQUEST:**
+The following example shows how to add a folder hierarchy with 4 levels in the
+``demo`` ADOM:
 
-.. code-block:: json
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1,
-     "method": "set",
-     "params": [
-       {
-         "data": [
-           {
-             "name": "folder_001",
-             "subobj": [
-               {
-                 "name": "folder_002",
-                 "subobj": [
-                   {
-                     "name": "folder_003",
-                     "subobj": [
-                       {
-                         "name": "folder_004",
-                         "type": "folder"
-                       }
-                     ],
-                     "type": "folder"
-                   }
-                 ],
-                 "type": "folder"
-               }
-             ],
-             "type": "folder"
-           }
-         ],
-         "url": "pm/pkg/adom/demo_001"
-       }
-     ],
-     "session": 46811
-   }
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "set",
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "folder_001",
+                   "subobj": [
+                     {
+                       "name": "folder_002",
+                       "subobj": [
+                         {
+                           "name": "folder_003",
+                           "subobj": [
+                             {
+                               "name": "folder_004",
+                               "type": "folder"
+                             }
+                           ],
+                           "type": "folder"
+                         }
+                       ],
+                       "type": "folder"
+                     }
+                   ],
+                   "type": "folder"
+                 }
+               ],
+               "url": "pm/pkg/adom/demo"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-**RESPONSE:**
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
 
-   { 
-     "id": 1,
-     "result": [
-       { 
-         "status": { 
-           "code": 0, 
-           "message": "OK"
-         }, 
-         "url": "pm/pkg/adom/demo_001"
-       }
-     ], 
-     "session": 46811
-   }
+         { 
+           "id": 1,
+           "result": [
+             { 
+               "status": { 
+                 "code": 0, 
+                 "message": "OK"
+               }, 
+               "url": "pm/pkg/adom/demo"
+             }
+           ]
+         }
 
 How to move a folder?
 +++++++++++++++++++++
@@ -128,57 +132,138 @@ How to delete a folder?
 Policy Packages
 ---------------
 
-How to create a policy package?
+How to add a policy package?
+++++++++++++++++++++++++++++
+
+The following example shows how to create the ``pkg_001`` Policy Package in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "name": "pkg_001",
+                 "package settings": {
+                   "central-nat": "disable",
+                   "consolidated-firewall-mode": "disable",
+                   "fwpolicy-implicit-log": "disable",
+                   "fwpolicy6-implicit-log": "disable",
+                   "ngfw-mode": "profile-based"
+                 },
+                 "type": "pkg"
+               },
+               "url": "/pm/pkg/adom/demo"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/pkg/adom/demo"
+             }
+           ]
+         }
+
+Starting with FMG 7.0.1 (#708471), the response will also contain the ``pkg
+oid``.
+
+How to delete a policy package?
 +++++++++++++++++++++++++++++++
 
-We create policy package ``pp.003`` in adom ``DEMO``:
+The following example shows how to delete the ``pkg_001`` Policy Package in the ``demo`` ADOM:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: shell
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "name": "pp.003",
-           "package settings": {
-             "central-nat": "disable",
-             "consolidated-firewall-mode": "disable",
-             "fwpolicy-implicit-log": "disable",
-             "fwpolicy6-implicit-log": "disable",
-             "ngfw-mode": "profile-based"
-           },
-           "type": "pkg"
-         },
-         "url": "/pm/pkg/adom/DEMO"
-       }
-     ],
-     "session": "4VUbMWg40/hOwzHt5/BRKRIbaAd0MBkTwprdFs4iG+w8QPSwyoa/MVrwHtVV7oQ463ifbp1I30eZ9FSluYtJuQ==",
-     "verbose": 1
-   }
+      .. code-block:: json
 
-**RESPONSE:**
+         {
+           "id": 4,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/pkg/adom/demo/pkg_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/pkg/adom/DEMO"
-       }
-     ]
-   }
+      .. code-block:: json
 
-Starting with FMG 7.0.1 (#708471), the response will also contain the ``pkg oid``.
+         {
+           "cid": 294,
+           "id": 4,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/pkg/adom/demo/pkg_001"
+             }
+           ]
+         }
+
+How to delete multiple policy packages?
++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to delete the ``pkg_001``, ``pkg_002`` and ``pkg_003`` Policy Packages in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 4,
+           "method": "delete",
+           "params": [
+             [
+               {
+                 "url": "/pm/pkg/adom/demo/pkg_001"
+               },
+               {
+                 "url": "/pm/pkg/adom/demo/pkg_002"
+               },
+               {
+                 "url": "/pm/pkg/adom/demo/pkg_003"
+               }
+             ]
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 308,
+           "id": 4,
+           "result": []
+         }
 
 How to get the list of Policy Package?
 ++++++++++++++++++++++++++++++++++++++
