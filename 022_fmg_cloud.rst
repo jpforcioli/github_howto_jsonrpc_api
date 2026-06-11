@@ -4,25 +4,45 @@ FortiManager Cloud
 How to create an IAM API user
 -----------------------------
 
-1. Navigate to ``https://support.fortinet.com``
-2. Login using your FortiCloud account
-3. Click *Services* > *IAM (Beta)*
-4. Click *API Users* > *ADD API USER*
-5. In *1. API User Details* enter a description (for instance ``FortiManager
+#. Open URL:
+
+   ```{button-link} https://support.fortinet.com
+   :color: primary
+   :shadow:
+   :expand:
+   FortiCloud Portal
+   ```
+
+#. Login using your FortiCloud account
+
+#. Click *Services* > *IAM (Beta)*
+
+#. Click *API Users* > *ADD API USER*
+
+#. In *1. API User Details* enter a description (for instance ``FortiManager
    API user``) then click *NEXT* 
-6. In *2. Permissions* manage to get the following table:
 
-   +----------------------------+---------+-------------+-----------------------+
-   |*Cloud Management & Service*|*Access* |*Access Type*|*Additional Permission*|
-   +============================+=========+=============+=======================+
-   | *FortiManager Cloud*       | checked | *Customer*  | *-*                   |
-   +----------------------------+---------+-------------+-----------------------+
+#. In *2. Permissions* manage to get the following table:
 
+   .. list-table::
+      :header-rows: 1
+      :widths: auto
+
+      * - Cloud Management & Service
+        - Access
+        - Access Type
+        - Additional Permission
+
+      * - FortiManager Cloud
+        - checked
+        - *Customer*
+        - 
+   
    Then click *NEXT*
 
-7. In *3. Confirmation* click *CONFIRM*
-8. In *4. Successful API User Registration* click *DOWNLOAD CREDENTIALS*
-9. We obtain the file ``API_Credential_E8766032-7319-409F-902A-REDACTEDD045_12_10_2021.txt``
+#. In *3. Confirmation* click *CONFIRM*
+#. In *4. Successful API User Registration* click *DOWNLOAD CREDENTIALS*
+#. We obtain the file ``API_Credential_E8766032-7319-409F-902A-REDACTEDD045_12_10_2021.txt``
 
    .. literalinclude:: datas/API_Credential_E8766032-7309-409F-902A-REDACTEDD045_12_10_2021.txt
 
@@ -43,17 +63,21 @@ in the credentials file:
 
 For instance:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block::
+   .. tab-item:: REQUEST
 
-   curl -H 'Content-Type: application/json' -X POST 'https://customerapiauth.fortinet.com/api/v1/oauth/token/' -d '{"username": "E8766032-7319-409F-902A-96376117D045", "password": "7b6593822fcc9860f81fb05d82ca3131!1Aa", "client_id": "FortiManager", "grant_type": "password"}'
+      .. code-block:: shell
 
-**RESPONSE:**
+         curl -H 'Content-Type: application/json' -X POST \
+           'https://customerapiauth.fortinet.com/api/v1/oauth/token/' \
+           -d '{"username": "E8766032-7319-409F-902A-REDACTEDD045", "password": "7b6593822REDACTED81fb05d82ca3131!1Aa", "client_id": "FortiManager", "grant_type": "password"}'
 
-.. code-block:: json
+   .. tab-item:: RESPONSE
 
-   {"access_token": "0cVmxFd3fQJsYThFxDuHaKY2HGKLW4", "expires_in": 14400, "message": "successfully authenticated", "refresh_token": "GVqCZ3F15xTSUZuOAZq5RF0Jfx3Ns3", "scope": "read write", "status": "success", "token_type": "Bearer"}
+      .. code-block:: json
+
+         {"access_token": "0cVmxFd3fQJsREDACTEDaKY2HGKLW4", "expires_in": 14400, "message": "successfully authenticated", "refresh_token": "GVqCZ3F1REDACTEDAZq5RF0Jfx3Ns3", "scope": "read write", "status": "success", "token_type": "Bearer"}
 
 You now have to conserve somewhere the returned ``access_token``.
 
