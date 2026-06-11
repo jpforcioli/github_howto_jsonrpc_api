@@ -5495,7 +5495,7 @@ devices controlled by all the managed devices in the ``demo`` ADOM:
 CLI Template
 ------------
 
-How to add a Cli Template?
+How to add a CLI Template?
 ++++++++++++++++++++++++++
 
 The following example shows how to add the ``cli_t_001`` CLI Template in the
@@ -5546,6 +5546,64 @@ The following example shows how to add the ``cli_t_001`` CLI Template in the
              }
            ]
          }
+
+How to add a Pre-Run CLI Template?
+++++++++++++++++++++++++++++++++++
+
+The API request is very similar to adding a CLI Template (see :ref:`How to add a
+CLI Template?`. You just need to add the ``provision`` attribute as shown in the
+example below.
+
+The following example shows how to add the ``pre_run_cli_t_001`` CLI Template in
+the ``demo`` ADOM:
+
+.. tab-set::
+   
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "name": "pre_run_cli_t_001",
+                 "provision": "enable",
+                 "script": "config system global\nset hostname branch_$(site_id)\nend",
+                 "type": "cli"
+               },
+               "url": "/pm/config/adom/demo/obj/cli/template"
+             }
+           ],
+           "session": "{{session}}"
+         }
+         
+      .. note::
+
+         - ``type`` could be ``cli`` or ``jinja``
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json      
+
+         {
+           "cid": 15,
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "pre_run_cli_t_001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/cli/template"
+             }
+           ]
+         }      
 
 How to delete a CLI Template?
 +++++++++++++++++++++++++++++
