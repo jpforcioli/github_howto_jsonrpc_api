@@ -237,32 +237,53 @@ The following example shows how to delete the ``pkg_001``, ``pkg_002`` and ``pkg
       .. code-block:: json
 
          {
-           "id": 4,
+           "id": 3,
            "method": "delete",
            "params": [
-             [
-               {
-                 "url": "/pm/pkg/adom/demo/pkg_001"
-               },
-               {
-                 "url": "/pm/pkg/adom/demo/pkg_002"
-               },
-               {
-                 "url": "/pm/pkg/adom/demo/pkg_003"
-               }
-             ]
+             {
+               "url": "/pm/pkg/adom/demo/pkg_001"
+             },
+             {
+               "url": "/pm/pkg/adom/demo/pkg_002"
+             },
+             {
+               "url": "/pm/pkg/adom/demo/pkg_003"
+             }
            ],
            "session": "{{session}}"
          }
+
 
    .. tab-item:: RESPONSE
 
       .. code-block:: json
 
          {
-           "cid": 308,
-           "id": 4,
-           "result": []
+           "cid": 1050,
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/pkg/adom/demo/pkg_001"
+             },
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/pkg/adom/demo/pkg_002"
+             },
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/pkg/adom/demo/pkg_003"
+             }
+           ]
          }
 
 How to get the list of Policy Package?
