@@ -8983,6 +8983,69 @@ Preview of a partial install of an updated policy
                ]
              }
 
+  - Optional Step: you can check about the partial install preview using the
+    following API example (caught in #1258568):
+
+    .. tab-set::
+
+       .. tab-item:: REQUEST
+
+          .. code-block:: json
+
+            {
+              "id": 10,
+              "method": "exec",
+              "params": [
+                {
+                  "data": {
+                    "preview_taskid": 20
+                  },
+                  "url": "/securityconsole/install/summary"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+       .. tab-item:: RESPONSE
+
+          .. code-block:: json
+
+             {
+               "cid": 2371,
+               "id": 10,
+               "result": [
+                 {
+                   "data": {
+                     "summary": [
+                       {
+                         "adom_name": "demo",
+                         "adom_oid": 168,
+                         "member": [
+                           {
+                             "name": "dev_001",
+                             "oid": 2569,
+                             "status": "ok",
+                             "vdom": [
+                               {
+                                 "name": "root",
+                                 "oid": 3,
+                                 "status": "ok"
+                               }
+                             ]
+                           }
+                         ]
+                       }
+                     ]
+                   },
+                   "status": {
+                     "code": 0,
+                     "message": "OK"
+                   },
+                   "url": "/securityconsole/install/summary"
+                 }
+               ]
+             }            
+         
   - Step #2: Once the returned task is completed, get the preview result
 
     .. tab-set::
