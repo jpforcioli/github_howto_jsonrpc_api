@@ -648,3 +648,173 @@ the ``dev_001`` managed FortiGate in the ``demo`` ADOM:
              }
            ]
          }
+
+Asynchronous API calls with /sys/proxy/json+++++++++++++++++++++++++++++++++++++++++++
+
+Starting with FortiManager 8.0.1 (#1284848), the FortiManager JSON RPC API
+supports asynchronous calls. It means that we can send a request to the
+FortiManager and get an immediate response, while the actual processing of the
+request is done in the background. This is particularly useful for long-running
+operations, such as executing CLI commands or retrieving large amounts of data
+from managed devices.
+
+The following example shows how to retrieve the status of the ``dev_001`` to
+``dev_003`` managed devices in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+             "id": 1,
+             "method": "exec",
+             "params": [
+                 {
+                     "url": "/sys/proxy/json",
+                     "data": {
+                         "target": [
+                             "adom/demo/device/dev_001",
+                             "adom/demo/device/dev_002",
+                             "adom/demo/device/dev_003"
+                         ],
+                         "action": "get",
+                         "resource": "/api/v2/monitor/system/status",
+                         "flags": [
+                             "create_task",
+                             "nonblocking"
+                         ]
+                     }
+                 }
+             ],
+             "session": "{{session}}",
+             "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+             "cid": 13,
+             "id": 1,
+             "result": [
+                 {
+                     "status": {
+                         "code": 0,
+                         "message": "OK"
+                     },
+                     "taskid": 30,
+                     "url": "/sys/proxy/json"
+                 }
+             ]
+         }  
+
+Once the returned ``taskid`` (``30`` in the response above) is completed, you
+can retrieve the results of the asynchronous operation by sending a follow-up
+request to the FortiManager JSON RPC API with the ``taskid``:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+             "id": 1,
+             "method": "exec",
+             "params": [
+                 {
+                     "url": "/sys/task/result",
+                     "data": {
+                         "taskid": 30
+                     }
+                 }
+             ],
+             "session": "{{session}}",
+             "verbose": 1
+         }        
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+             "data": [
+                 {
+                     "response": {
+                         "build": 167,
+                         "http_method": "GET",
+                         "name": "status",
+                         "path": "system",
+                         "results": {
+                             "hostname": "FGVMSREDACTED856",
+                             "log_disk_status": "available",
+                             "model": "FGVM64",
+                             "model_name": "FortiGate",
+                             "model_number": "VM64"
+                         },
+                         "serial": "FGVMSREDACTED856",
+                         "status": "success",
+                         "vdom": "root",
+                         "version": "v8.0.0"
+                     },
+                     "status": {
+                         "code": 0,
+                         "message": "OK"
+                     },
+                     "target": "dev_001"
+                 },
+                 {
+                     "response": {
+                         "build": 167,
+                         "http_method": "GET",
+                         "name": "status",
+                         "path": "system",
+                         "results": {
+                             "hostname": "FGVMSREDACTED858",
+                             "log_disk_status": "available",
+                             "model": "FGVM64",
+                             "model_name": "FortiGate",
+                             "model_number": "VM64"
+                         },
+                         "serial": "FGVMSREDACTED858",
+                         "status": "success",
+                         "vdom": "root",
+                         "version": "v8.0.0"
+                     },
+                     "status": {
+                         "code": 0,
+                         "message": "OK"
+                     },
+                     "target": "dev_002"
+                 },
+                 {
+                     "response": {
+                         "build": 167,
+                         "http_method": "GET",
+                         "name": "status",
+                         "path": "system",
+                         "results": {
+                             "hostname": "FGVMSREDACTED854",
+                             "log_disk_status": "available",
+                             "model": "FGVM64",
+                             "model_name": "FortiGate",
+                             "model_number": "VM64"
+                         },
+                         "serial": "FGVMSREDACTED854",
+                         "status": "success",
+                         "vdom": "root",
+                         "version": "v8.0.0"
+                     },
+                     "status": {
+                         "code": 0,
+                         "message": "OK"
+                     },
+                     "target": "dev_003"
+                 }
+             ],
+             "taskid": 30,
+             "url": "/sys/proxy/json"
+         }
