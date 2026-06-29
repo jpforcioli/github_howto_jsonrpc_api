@@ -7560,7 +7560,7 @@ How to get the upgrade path?
 This request gives the upgrade path for device ``hub1`` in ADOM ``DEMO_008`` for
 an upgrade to fortios firmware ``6.4.1``:
 
-.. tab-set:::
+.. tab-set::
 
    .. tab-item:: REQUEST
 
