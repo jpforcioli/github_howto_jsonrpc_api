@@ -7697,6 +7697,73 @@ With the introduction of the new Firmware Template (starting with FortiManager
      path!
 
 
+The upgrade path can change over time. For example, if one of the intermediate
+firmwares is found to have a critical vulnerability, it will be removed from
+the list, which could break the upgrade path. To avoid triggering an upgrade
+along a path that has since been modified, always fetch the upgrade path
+before triggering an upgrade, and make sure the response does not include the
+``no-path`` attribute. If the ``no-path`` attribute is present, it means there
+is no upgrade path for your managed device.
+
+The following example shows an attempt to retrieve an upgrade path for the
+managed device ``dev_001`` to reach a destination firmware that is no longer
+available:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "devices": [  
+                   {
+                     "image": "7.6.5",
+                     "name": "dev_001"
+                   }
+                 ],
+                 "flags": 16
+               },
+               "url": "/um/image/upgrade/ext"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+             "cid": 7,
+             "id": 3,
+             "result": [
+                 {
+                     "data": {
+                         "upgrade_path": [
+                             {
+                                 "name": "dev_001",
+                                 "no-path": 1,
+                                 "oid": 249,
+                                 "path": [
+                                 ]
+                             }
+                     },
+                     "status": {
+                         "code": 0,
+                         "message": "OK"
+                     },
+                     "url": "/um/image/upgrade/ext"
+                 }
+             ]
+         }
+ 
 How to get list of available firmware for a specific platform?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
