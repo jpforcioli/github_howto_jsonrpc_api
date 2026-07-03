@@ -7722,7 +7722,7 @@ available:
              {
                "data": {
                  "adom": "demo",
-                 "devices": [   
+                 "devices": [
                    {
                      "image": "7.6.5",
                      "name": "dev_001"
