@@ -1702,6 +1702,21 @@ ADOM with OID ``3``:
               }
             }
 
+         .. note::
+         
+            - ``3`` is the OID of the target ADOM.
+         
+            - ``dvmConfigDisplayOpts`` lists the menu items to expose under the
+              Device Manager configuration tree (e.g. ``dashboard``, 
+              ``interface``, ``dns``, ``administrator``, ``fortiguard``, etc.). 
+              Remove an entry from the array to hide the corresponding menu 
+              item; keep (or add back) an entry to expose it.
+         
+            - ``ptDisplayOpts`` lists the Provisioning Template types to expose
+              (e.g. ``dvm_pt_tmplgrp``, ``dvm_pt_ipsectmpl``, 
+              ``dvm_pt_certprof``, etc.), following the same enable/disable 
+              logic.
+
    .. tab-item:: RESPONSE
 
       .. code-block:: json
@@ -1719,21 +1734,6 @@ ADOM with OID ``3``:
              }
            ]
          }
-
-.. note::
-
-   - ``3`` is the OID of the target ADOM.
-
-   - ``dvmConfigDisplayOpts`` lists the menu items to expose under the
-     Device Manager configuration tree (e.g. ``dashboard``, ``interface``,
-     ``dns``, ``administrator``, ``fortiguard``, etc.). Remove an entry from
-     the array to hide the corresponding menu item; keep (or add back) an
-     entry to expose it.
-
-   - ``ptDisplayOpts`` lists the Provisioning Template types to expose
-     (e.g. ``dvm_pt_tmplgrp``, ``dvm_pt_ipsectmpl``, ``dvm_pt_certprof``,
-     etc.), following the same enable/disable logic.
-
 
 How to operate the Feature Visibility in Provioning Template?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
