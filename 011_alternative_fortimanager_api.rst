@@ -1618,6 +1618,17 @@ ADOM with OID ``3``:
 
    .. tab-item:: REQUEST
 
+      .. code-block:: text
+
+         POST https://10.210.34.126/cgi-bin/module/flatui-proxy
+         Content-Type: application/json
+         Xsrf-Token: 1dR+q9mBD3hKPWyw7xoZgmvViT3L5aA
+         Content-Length: 487
+
+         <paste the content of payload.json here>
+
+      An equivalent ``curl`` command:
+
       .. code-block:: shell
 
          curl -v -s -k -b cookie.jar \
