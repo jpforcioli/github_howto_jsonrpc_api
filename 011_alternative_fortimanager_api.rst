@@ -1601,9 +1601,134 @@ The following example shows how to partial install an IPS profile named
             }
 
          .. note::
-            
-            The response contains the task ID of the partial install operation. 
+
+            The response contains the task ID of the partial install operation.
             You can use it to track the task completion.
+
+How to operate the Feature Visibility in Device Manager?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This is to enable/disable the menu items exposed in the FortiManager GUI Device 
+Manager, for a given ADOM.
+
+The following example shows how to set the Feature Visibility for the ``root``
+ADOM with OID ``3``:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: shell
+
+         curl -v -s -k -b cookie.jar \
+           -H "Content-Type: application/json" \
+           -H "Xsrf-Token: ${csrf_token}" \
+           -X POST \
+           https://${fmg}:${port}/cgi-bin/module/flatui_proxy \
+           -d @payload.json | jq
+
+      .. note:: 
+
+         ``payload.json`` file is with the following content:
+
+         .. code-block:: json
+
+            {
+              "url": "/gui/adoms/3/customize",
+              "method": "update",
+              "params": {
+                "dvmCustomize": {
+                  "dvmConfigDisplayOpts": [
+                    "dashboard",
+                    "interface",
+                    "dns",
+                    "ipam",
+                    "staticroute_all",
+                    "webfltroverride",
+                    "phase1_all",
+                    "phase2_all",
+                    "aggregate",
+                    "manualkey_all",
+                    "concentrator",
+                    "vpnsettings",
+                    "cfgvdom",
+                    "glbresourcetbl",
+                    "administrator",
+                    "adminprof",
+                    "adminsettings",
+                    "snmp",
+                    "replacemsg",
+                    "replacemsggrp",
+                    "fortiguard",
+                    "vpncacert",
+                    "modem",
+                    "localhostid",
+                    "alertemailsett",
+                    "csf",
+                    "automation_stitch",
+                    "automation_trigger",
+                    "automation_action",
+                    "fortisandbox",
+                    "logsettings",
+                    "threatweight",
+                    "clionlyid"
+                  ],
+                  "ptDisplayOpts": [
+                    "dvm_pt_tmplgrp",
+                    "dvm_pt_ipsectmpl",
+                    "dvm_pt_bgptmpl",
+                    "dvm_pt_sdwantmpl",
+                    "dvm_pt_overlaytmpl",
+                    "dvm_pt_systmpl",
+                    "dvm_pt_routetmpl",
+                    "dvm_pt_apptmpl",
+                    "dvm_pt_clitmpl",
+                    "dvm_pt_fbauth",
+                    "dvm_pt_certprof",
+                    "dvm_pt_crprof"
+                  ]
+                }
+              }
+            }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "result": [
+             {
+               "data": null,
+               "id": null,
+               "status": {
+                 "code": 0,
+                 "message": ""
+               },
+               "url": "/gui/adoms/3/customize"
+             }
+           ]
+         }
+
+.. note::
+
+   - ``3`` is the OID of the target ADOM.
+
+   - ``dvmConfigDisplayOpts`` lists the menu items to expose under the
+     Device Manager configuration tree (e.g. ``dashboard``, ``interface``,
+     ``dns``, ``administrator``, ``fortiguard``, etc.). Remove an entry from
+     the array to hide the corresponding menu item; keep (or add back) an
+     entry to expose it.
+
+   - ``ptDisplayOpts`` lists the Provisioning Template types to expose
+     (e.g. ``dvm_pt_tmplgrp``, ``dvm_pt_ipsectmpl``, ``dvm_pt_certprof``,
+     etc.), following the same enable/disable logic.
+
+
+How to operate the Feature Visibility in Provioning Template?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+See {ref}`How to operate the Feature Visibility in Device Manager?` for more 
+details.
 
 REST API
 --------

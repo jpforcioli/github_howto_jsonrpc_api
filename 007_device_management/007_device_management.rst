@@ -7724,7 +7724,7 @@ available:
                  "adom": "demo",
                  "devices": [
                    {
-                     "image": "7.6.5",
+                     "image": "7.6.5",     
                      "name": "dev_001"
                    }
                  ],
@@ -7732,7 +7732,7 @@ available:
                },
                "url": "/um/image/upgrade/ext"
              }
-           ],
+           ],  
            "session": "{{session}}"
          }
 
