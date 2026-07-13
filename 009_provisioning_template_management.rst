@@ -7833,6 +7833,55 @@ recommended:
          .. literalinclude:: scripts/fmg_ipsec_tunnel_template_tunnel_add.py
             :language: python
 
+How to rename an existing tunnel entry in an IPsec Tunnel Interface?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #1300782.
+
+The following example show how to rename the existing tunnel entry `VPN1` into
+`VPN1` for the `ipsec_tunnel_template_001` in the `demo` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "set",
+           "params": [
+             {
+               "data": {
+                 "name": "VPN2"
+               },
+               "url": "/pm/config/adom/demo/template/_ipsec/ipsec_tunnel_template_001/vpn/ipsec/phase1-interface/VPN1"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 11,
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "VPN2"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/template/_ipsec/ipsec_tunnel_template_001/vpn/ipsec/phase1-interface/VPN2"
+             }
+           ]
+         }
+
 How to update an existing tunnel entry in an IPsec Tunnel Interface?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
