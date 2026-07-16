@@ -30,7 +30,7 @@
 .. toctree::
    :numbered:
    :maxdepth: 10
-   :caption: Device & Domain Management
+   :caption: Device & ADOM Management
 
    007_device_management/index
    013_adom_management
