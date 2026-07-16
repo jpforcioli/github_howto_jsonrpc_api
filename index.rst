@@ -8,34 +8,64 @@
 .. toctree::
    :numbered:
    :maxdepth: 10
-   :caption: Contents:
+   :caption: Getting Started
 
    001_fmg_json_api_introduction
    012_option_attribute
+   011_alternative_fortimanager_api
+   016_sys_proxy_json
+   021_sub_fetch
+
+.. toctree::
+   :numbered:
+   :maxdepth: 10
+   :caption: Objects & Policy Management
+
    002_objects_management/index
    002_security_profiles
-   003_docker_management
-   004_sdwan_management
-   005_connector_management
-   007_device_management/index
    008_policy_package_management
    009_provisioning_template_management
-   010_fmg_configuration
-   011_alternative_fortimanager_api
-   012_cli_script_management
-   013_adom_management
-   014_fortiguard_management
-   015_qos_management
-   016_sys_proxy_json
-   017_fmg_operations
-   018_dbcache
-   020_vpn_management
-   021_sub_fetch
-   022_fmg_cloud
    023_meta_fields
+
+.. toctree::
+   :numbered:
+   :maxdepth: 10
+   :caption: Device & Domain Management
+
+   007_device_management/index
+   013_adom_management
+   010_fmg_configuration
+
+.. toctree::
+   :numbered:
+   :maxdepth: 10
+   :caption: Network & Security Features
+
+   004_sdwan_management
+   020_vpn_management
+   015_qos_management
    024_csf
+   005_connector_management
+   014_fortiguard_management
+
+.. toctree::
+   :numbered:
+   :maxdepth: 10
+   :caption: Operations & Platform
+
+   017_fmg_operations
+   012_cli_script_management
+   018_dbcache
+   003_docker_management
+   022_fmg_cloud
+
+.. toctree::
+   :numbered:
+   :maxdepth: 10
+   :caption: About
+
    050_contributors
-   
+
 Indices and tables
 ==================
 
