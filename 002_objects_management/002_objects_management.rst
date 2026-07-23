@@ -1858,305 +1858,6 @@ To add wilcard FQDN ``*.foobar.*`` to ADOM ``adom_70_001``:
      ]
    }
 
-Objects Operations
-------------------
-
-How to reference objects when names have special characters?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-It is required to escape the special character using the ``\\`` (double
-back-slash) notation.
-
-For instance to update the ``Net_10.0.0.0/18`` (where ``/`` is the special
-character) located in the ``root`` ADOM:
-
-.. tab-set:: 
-
-   .. tab-item:: REQUEST
-
-      .. code-block::
-
-        {
-          "id": 4,
-          "method": "update",
-          "params": [
-            {
-              "url": "pm/config/adom/root/obj/firewall/address/Net_10.0.0.0\\/18",
-              "data": {
-                "subnet": "10.0.0.0/255.255.255.0",
-              }
-            }
-          ],
-          "session": "{{session}}",
-        }
-
-Objects default values
-++++++++++++++++++++++
-
-How to get the default values for a firewall address?
-_____________________________________________________
-
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "get",
-     "params": [
-       {
-         "object template": 1,
-         "url": "/pm/config/adom/DB/obj/firewall/address"
-       }
-     ],
-     "session": "HKERCCqx6ximKXlkWN7lxWIgqagVqpj0xXiJtFtYrpiLIL7X3nCuIdlnZw83N+N3JO95oUOOCIwE+emXMuLvcPvKXNHsVYSN",
-     "verbose": 1
-   }
-
-
-How to bulk add objects?
-++++++++++++++++++++++++
-
-You have two methods:
-
-- ``params`` multi-plexing
-- ``data`` multi-plexing
-
-``params`` multi-plexing
-________________________
-
-**REQUEST:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "name": "test_004",
-           "subnet": [
-             "10.0.0.4",
-             "255.255.255.0"
-           ]
-         },
-         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
-       },
-       {
-         "data": {
-           "name": "test_005",
-           "subnet": [
-             "10.0.0.5",
-             "255.255.255.0"
-           ]
-         },
-         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
-       },
-       {
-         "data": {
-           "name": "test_006",
-           "subnet": [
-             "10.0.0.6",
-             "255.255.255.0"
-           ]
-         },
-         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
-       }
-     ],
-     "session": "H4bqANWVw4+9ChxkRYdNfdtu4kE+5emeSojgay0fOghSwAPaFuzoBSZHjcvWc6l3TanYih4q9QktzVvLNTdpzA==",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": {
-           "name": "test_004"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
-       },
-       {
-         "data": {
-           "name": "test_005"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
-       },
-       {
-         "data": {
-           "name": "test_006"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
-       }
-     ]
-   }
-
-
-``data`` multi-plexing
-______________________
-
-**REQUEST:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "add",
-     "params": [
-       {
-         "data": [
-           {
-             "name": "test_001",
-             "subnet": [
-               "10.0.0.1",
-               "255.255.255.0"
-             ]
-           },
-           {
-             "name": "test_002",
-             "subnet": [
-               "10.0.0.2",
-               "255.255.255.0"
-             ]
-           },
-           {
-             "name": "test_003",
-             "subnet": [
-               "10.0.0.3",
-               "255.255.255.0"
-             ]
-           }
-         ],
-         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
-       }
-     ],
-     "session": "31rAPPvgsYtaqwXnlwKZJrJQHff1V5hbfwj9lB62868KC1n73fF739Z+wTP+J5CoTxjKSWE8TqY7mTHyFovW7w==",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
-       }
-     ]
-   }
-
-How to get CLI configuration of a new object?
-+++++++++++++++++++++++++++++++++++++++++++++
-
-This is a new feature from FortiManager 7.6.0 (#0954842).
-
-The following example shows how to get the CLI configuration for the ``host_001`` firewall address which is going to be created in the ``demo`` ADOM:
-
-.. tab-set::
-
-   .. tab-item:: REQUEST
-
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "method": "add",
-           "params": [
-             {
-               "data": {
-                 "color": 4,
-                 "name": "host_001",
-                 "subnet": "10.0.0.1/32"
-               },
-               "option": [
-                 "cli config"
-               ],
-               "url": "/pm/config/adom/demo/obj/firewall/address"
-             }
-           ],
-           "session": "{{seession}}"
-         }
-        
-      .. note::
-
-         - The ``cli config`` is asking FortiManager to just generate the CLI
-           configuration that could have been used to create this object
-         
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "result": [
-             {
-               "data": {
-                 "cli config": "config firewall address\nedit \"host_001\"\nset uuid 01dc1d34-4275-51ef-365b-135128a140a9\nset color 4\nset subnet 10.0.0.1 255.255.255.255\n\nnext\nend\n"
-               },
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "/pm/config/adom/demo/obj/firewall/address"
-             }
-           ]
-         }
-
-      .. note::
-
-         - The ``host_001`` isn't created!
-         - FortiManager just returned its CLI configuration
-         - ``cli config`` option work also with the ``update`` method or more
-           recently, starting with FortiManager 7.6.1 with the ``get`` method
-           (caught in #1057509)
-
-           In the case of the ``get`` method, the ``cli config`` option can be
-           used when getting an object or a sub-table of an object. But it can't
-           be used when getting a table.
-
-           Combining the ``cli config`` option with the ``get`` method is giving
-           an API way of obtaining the same result as the FortiManager CLI
-           commands:
-           
-           .. code-block:: text
-
-              execute fmpolicy print-adom-object <...>
-
-           or 
-
-           .. code-block:: text
-
-              execute fmpolicy print-device-object <...>
-
-         - If you use the `get` method, along with the `fields` attribute, then
-           the returned CLI will be only for the requested `fields`.
-         
 Normalized Interfaces
 ---------------------
 
@@ -2413,30 +2114,6 @@ How to delete an existing per-platform mapping?
      ]
    }   
 
-How to get the full ADOM database objects syntax?
--------------------------------------------------
-
-Caught in #0607071.
-
-**REQUEST:**
-
-.. code-block:: json
-
-		{
-		  "id": 1,
-		  "method": "get",
-		  "params": [
-		    {
-		      "url": "pm/config/adom/root/obj",
-		      "option": "syntax"
-		    }
-		  ]
-		}
-
-.. note::
-
-   Option ``syntax`` is described in section [TODO].
-   
 Internet Service Objects
 ------------------------
 
@@ -2977,9 +2654,394 @@ The following shows how to get the list of Internet Service FQDN objects for the
            ]
          }        
 
-Operations on objects
----------------------
+Replacement Message Group
+-------------------------
 
+How to get the default Replacement Message Groups?
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #1040582.
+
+The following example shows how to get the default Replacement Message Group for
+the ``demo`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 2,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/_system/replacemsg"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 2,
+           "result": [
+             {
+               "data": [
+                 {
+                   "carrier": 0,
+                   "groups": [
+                     "default",
+                     "utm"
+                   ],
+                   "msg-types": [
+                     {
+                       "_disp_desc": "admin_post_admin-disclaimer-text_desc",
+                       "_disp_name": "admin_post_admin-disclaimer-text",
+                       "...": "..."
+                     },
+                     "...",
+                   ],
+                   "...": "...",
+                 },
+                 "..."
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/dc_emea/obj/_system/replacemsg"
+             }
+           ]
+         }
+
+Objects Operations
+------------------
+
+How to reference objects when names have special characters?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+It is required to escape the special character using the ``\\`` (double
+back-slash) notation.
+
+For instance to update the ``Net_10.0.0.0/18`` (where ``/`` is the special
+character) located in the ``root`` ADOM:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block::
+
+        {
+          "id": 4,
+          "method": "update",
+          "params": [
+            {
+              "url": "pm/config/adom/root/obj/firewall/address/Net_10.0.0.0\\/18",
+              "data": {
+                "subnet": "10.0.0.0/255.255.255.0",
+              }
+            }
+          ],
+          "session": "{{session}}",
+        }
+
+Objects default values
+++++++++++++++++++++++
+
+How to get the default values for a firewall address?
+_____________________________________________________
+
+**REQUEST:**
+
+.. code-block:: json
+
+   {
+     "id": 1,
+     "jsonrpc": "1.0",
+     "method": "get",
+     "params": [
+       {
+         "object template": 1,
+         "url": "/pm/config/adom/DB/obj/firewall/address"
+       }
+     ],
+     "session": "HKERCCqx6ximKXlkWN7lxWIgqagVqpj0xXiJtFtYrpiLIL7X3nCuIdlnZw83N+N3JO95oUOOCIwE+emXMuLvcPvKXNHsVYSN",
+     "verbose": 1
+   }
+
+
+How to bulk add objects?
+++++++++++++++++++++++++
+
+You have two methods:
+
+- ``params`` multi-plexing
+- ``data`` multi-plexing
+
+``params`` multi-plexing
+________________________
+
+**REQUEST:**
+
+.. code-block::
+
+   {
+     "id": 1,
+     "jsonrpc": "1.0",
+     "method": "add",
+     "params": [
+       {
+         "data": {
+           "name": "test_004",
+           "subnet": [
+             "10.0.0.4",
+             "255.255.255.0"
+           ]
+         },
+         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
+       },
+       {
+         "data": {
+           "name": "test_005",
+           "subnet": [
+             "10.0.0.5",
+             "255.255.255.0"
+           ]
+         },
+         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
+       },
+       {
+         "data": {
+           "name": "test_006",
+           "subnet": [
+             "10.0.0.6",
+             "255.255.255.0"
+           ]
+         },
+         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
+       }
+     ],
+     "session": "H4bqANWVw4+9ChxkRYdNfdtu4kE+5emeSojgay0fOghSwAPaFuzoBSZHjcvWc6l3TanYih4q9QktzVvLNTdpzA==",
+     "verbose": 1
+   }
+
+**RESPONSE:**
+
+.. code-block::
+
+   {
+     "id": 1,
+     "result": [
+       {
+         "data": {
+           "name": "test_004"
+         },
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
+       },
+       {
+         "data": {
+           "name": "test_005"
+         },
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
+       },
+       {
+         "data": {
+           "name": "test_006"
+         },
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
+       }
+     ]
+   }
+
+
+``data`` multi-plexing
+______________________
+
+**REQUEST:**
+
+.. code-block::
+
+   {
+     "id": 1,
+     "jsonrpc": "1.0",
+     "method": "add",
+     "params": [
+       {
+         "data": [
+           {
+             "name": "test_001",
+             "subnet": [
+               "10.0.0.1",
+               "255.255.255.0"
+             ]
+           },
+           {
+             "name": "test_002",
+             "subnet": [
+               "10.0.0.2",
+               "255.255.255.0"
+             ]
+           },
+           {
+             "name": "test_003",
+             "subnet": [
+               "10.0.0.3",
+               "255.255.255.0"
+             ]
+           }
+         ],
+         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
+       }
+     ],
+     "session": "31rAPPvgsYtaqwXnlwKZJrJQHff1V5hbfwj9lB62868KC1n73fF739Z+wTP+J5CoTxjKSWE8TqY7mTHyFovW7w==",
+     "verbose": 1
+   }
+
+**RESPONSE:**
+
+.. code-block::
+
+   {
+     "id": 1,
+     "result": [
+       {
+         "status": {
+           "code": 0,
+           "message": "OK"
+         },
+         "url": "/pm/config/adom/DEMO_008/obj/firewall/address"
+       }
+     ]
+   }
+
+How to get CLI configuration of a new object?
++++++++++++++++++++++++++++++++++++++++++++++
+
+This is a new feature from FortiManager 7.6.0 (#0954842).
+
+The following example shows how to get the CLI configuration for the ``host_001`` firewall address which is going to be created in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "color": 4,
+                 "name": "host_001",
+                 "subnet": "10.0.0.1/32"
+               },
+               "option": [
+                 "cli config"
+               ],
+               "url": "/pm/config/adom/demo/obj/firewall/address"
+             }
+           ],
+           "session": "{{seession}}"
+         }
+        
+      .. note::
+
+         - The ``cli config`` is asking FortiManager to just generate the CLI
+           configuration that could have been used to create this object
+         
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "cli config": "config firewall address\nedit \"host_001\"\nset uuid 01dc1d34-4275-51ef-365b-135128a140a9\nset color 4\nset subnet 10.0.0.1 255.255.255.255\n\nnext\nend\n"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/obj/firewall/address"
+             }
+           ]
+         }
+
+      .. note::
+
+         - The ``host_001`` isn't created!
+         - FortiManager just returned its CLI configuration
+         - ``cli config`` option work also with the ``update`` method or more
+           recently, starting with FortiManager 7.6.1 with the ``get`` method
+           (caught in #1057509)
+
+           In the case of the ``get`` method, the ``cli config`` option can be
+           used when getting an object or a sub-table of an object. But it can't
+           be used when getting a table.
+
+           Combining the ``cli config`` option with the ``get`` method is giving
+           an API way of obtaining the same result as the FortiManager CLI
+           commands:
+           
+           .. code-block:: text
+
+              execute fmpolicy print-adom-object <...>
+
+           or 
+
+           .. code-block:: text
+
+              execute fmpolicy print-device-object <...>
+
+         - If you use the `get` method, along with the `fields` attribute, then
+           the returned CLI will be only for the requested `fields`.
+         
+How to get the full ADOM database objects syntax?
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #0607071.
+
+**REQUEST:**
+
+.. code-block:: json
+
+		{
+		  "id": 1,
+		  "method": "get",
+		  "params": [
+		    {
+		      "url": "pm/config/adom/root/obj",
+		      "option": "syntax"
+		    }
+		  ]
+		}
+
+.. note::
+
+   Option ``syntax`` is described in section [TODO].
+   
 Cloning objects
 +++++++++++++++
 
@@ -3025,6 +3087,219 @@ ________________________________
 		    }
 		  ]
 		}
+
+How to copy objects?
+++++++++++++++++++++
+
+Here the word *copy* refers to the action of copying an object from ADOM DB to
+Device DB.
+
+The target object isn't push down to the managed devices.
+
+A proper install operation should be triggered.
+
+The |fmg_api| endpoint used to trigger this copy operation isn't documented
+hence we used the output of the following FortiManager debug command compile the
+information shared in this section:
+
+.. code-block:: text
+
+   diagnose debug service main 255
+
+When we issue the following FortiManager CLI command to trigger a copy
+operation, we're getting the following output:
+
+.. code-block:: text
+
+   
+   # execute fmpolicy copy-adom-object dc_helsinki "firewall address" foo_002 france
+   Do you want to continue? (y/n)y
+
+   Request [/bin/newcli:14057:3]:
+   { "client": "\/bin\/newcli:14057", "id": 3, "method": "exec", "params": [{ "data": { "adom": 3273, "category": 140, "override_conflict": 1, "query_only": 0, "scope": [{ "oid": 3569}], "src_list": [{ "oid": 4827}]}, "url": "install\/global"}], "root": "securityconsole", "session": 12207}
+   Waiting for task 1347...
+   Task completed      
+
+In the following example, we copy the ``foo_002``  firewall address from the
+``dc_helsinki`` ADOM to the devices belonging to the ``france`` device group:
+
+.. tab-set:: 
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "dc_helsinki",
+                 "category": 140,
+                 "override_conflict": 1,
+                 "query_only": 0,
+                 "scope": [
+                   {
+                     "name": "france"
+                   }
+                 ],
+                 "src_list": [
+                   {
+                     "oid": 4827
+                   }
+                 ]
+               },
+               "url": "/securityconsole/install/global"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "task": 1350
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/securityconsole/install/global"
+             }
+           ]
+         }
+
+FortiManager will return a task ID (``task`` attribute) but won't run it in the
+background. We have to wait for the end of the request.
+
+The request is having a lot of numerical information:
+
+- The ``category`` attribute
+
+  - ``140`` is the category ID for the ``firewall address`` table
+
+  - Unfortunately, we cannot use the string ``"firewall address"`` as shown
+    below:
+
+    .. code-block:: json
+       
+       {
+         "category": "firewall address"
+       }
+
+    We have to use an id
+
+    How to get it?
+
+    To get the category ID of the ``firewall address`` table:
+
+    .. tab-set::
+
+       .. tab-item:: REQUEST
+
+          .. code-block:: json
+
+             {
+               "id": 3,
+               "method": "get",
+               "params": [
+                 {
+                   "option": [
+                     "syntax"
+                   ],
+                   "url": "/pm/config/adom/dc_helsinki/obj/firewall/address"
+                 }
+               ],
+               "session": "{{session}}"
+             }
+             
+    In the response, you have to get:
+
+    .. code-block:: text
+
+       .result[0]["data"]["firewall address"]["category"]
+
+- ``src_list`` attribute
+ 
+  - This list contains the OID of the objects to copy
+  - For the ``140`` category (``firewall address``) the ``src_list`` list
+    contain OID of firewall address objects
+  - How to get the OID of a firewall address?
+
+    .. tab-set::
+
+       .. tab-item:: REQUEST
+
+          .. code-block:: json
+
+             {
+               "id": 3,
+               "method": "get",
+               "params": [
+                 {
+                   "fields": [
+                     "name"
+                   ],
+                   "loadsub": 0,
+                   "url": "/pm/config/adom/dc_helsinki/obj/firewall/address/foo_002"
+                 }
+               ],
+               "session": "7bQB94D0zHu7I9EGtwIbQJEbrcH7qRBI/hwWbqrP/RVUWLd8h1PiFyTD+brojmELiV/rVHcSdYX2CqTAtEcmhg=="
+             }
+
+       .. tab-item:: RESPONSE
+
+          .. code-block:: json
+
+             {
+               "id": 3,
+               "result": [
+                 {
+                   "data": {
+                     "name": "foo_002",
+                     "oid": 4827
+                   },
+                   "status": {
+                     "code": 0,
+                     "message": "OK"
+                   },
+                   "url": "/pm/config/adom/dc_helsinki/obj/firewall/address/foo_002"
+                 }
+               ]
+             }
+
+You can use the usual ``scope``:
+
+.. code-block:: json
+
+   {
+     "scope": [
+        {
+          "name": "device_group_001",
+        },
+        {
+          "name": "device_group_002",
+        },
+        {
+          "name": "device_001",
+          "vdom": "vd_001"
+        },        
+        {
+          "name": "device_001",
+          "vdom": "vd_002"
+        },
+        {
+           "...": "..."
+        }
+     ]
+   }
 
 Filtering objects
 +++++++++++++++++
@@ -6331,219 +6606,6 @@ Note that FortiManager does not provide a dedicated ``revert`` operation. Instea
            ]
          }
 
-How to copy objects?
---------------------
-
-Here the word *copy* refers to the action of copying an object from ADOM DB to
-Device DB.
-
-The target object isn't push down to the managed devices.
-
-A proper install operation should be triggered.
-
-The |fmg_api| endpoint used to trigger this copy operation isn't documented
-hence we used the output of the following FortiManager debug command compile the
-information shared in this section:
-
-.. code-block:: text
-
-   diagnose debug service main 255
-
-When we issue the following FortiManager CLI command to trigger a copy
-operation, we're getting the following output:
-
-.. code-block:: text
-
-   
-   # execute fmpolicy copy-adom-object dc_helsinki "firewall address" foo_002 france
-   Do you want to continue? (y/n)y
-
-   Request [/bin/newcli:14057:3]:
-   { "client": "\/bin\/newcli:14057", "id": 3, "method": "exec", "params": [{ "data": { "adom": 3273, "category": 140, "override_conflict": 1, "query_only": 0, "scope": [{ "oid": 3569}], "src_list": [{ "oid": 4827}]}, "url": "install\/global"}], "root": "securityconsole", "session": 12207}
-   Waiting for task 1347...
-   Task completed      
-
-In the following example, we copy the ``foo_002``  firewall address from the
-``dc_helsinki`` ADOM to the devices belonging to the ``france`` device group:
-
-.. tab-set:: 
-
-   .. tab-item:: REQUEST
-
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "method": "exec",
-           "params": [
-             {
-               "data": {
-                 "adom": "dc_helsinki",
-                 "category": 140,
-                 "override_conflict": 1,
-                 "query_only": 0,
-                 "scope": [
-                   {
-                     "name": "france"
-                   }
-                 ],
-                 "src_list": [
-                   {
-                     "oid": 4827
-                   }
-                 ]
-               },
-               "url": "/securityconsole/install/global"
-             }
-           ],
-           "session": "{{session}}"
-         }
-
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "result": [
-             {
-               "data": {
-                 "task": 1350
-               },
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "/securityconsole/install/global"
-             }
-           ]
-         }
-
-FortiManager will return a task ID (``task`` attribute) but won't run it in the
-background. We have to wait for the end of the request.
-
-The request is having a lot of numerical information:
-
-- The ``category`` attribute
-
-  - ``140`` is the category ID for the ``firewall address`` table
-
-  - Unfortunately, we cannot use the string ``"firewall address"`` as shown
-    below:
-
-    .. code-block:: json
-       
-       {
-         "category": "firewall address"
-       }
-
-    We have to use an id
-
-    How to get it?
-
-    To get the category ID of the ``firewall address`` table:
-
-    .. tab-set::
-
-       .. tab-item:: REQUEST
-
-          .. code-block:: json
-
-             {
-               "id": 3,
-               "method": "get",
-               "params": [
-                 {
-                   "option": [
-                     "syntax"
-                   ],
-                   "url": "/pm/config/adom/dc_helsinki/obj/firewall/address"
-                 }
-               ],
-               "session": "{{session}}"
-             }
-             
-    In the response, you have to get:
-
-    .. code-block:: text
-
-       .result[0]["data"]["firewall address"]["category"]
-
-- ``src_list`` attribute
- 
-  - This list contains the OID of the objects to copy
-  - For the ``140`` category (``firewall address``) the ``src_list`` list
-    contain OID of firewall address objects
-  - How to get the OID of a firewall address?
-
-    .. tab-set::
-
-       .. tab-item:: REQUEST
-
-          .. code-block:: json
-
-             {
-               "id": 3,
-               "method": "get",
-               "params": [
-                 {
-                   "fields": [
-                     "name"
-                   ],
-                   "loadsub": 0,
-                   "url": "/pm/config/adom/dc_helsinki/obj/firewall/address/foo_002"
-                 }
-               ],
-               "session": "7bQB94D0zHu7I9EGtwIbQJEbrcH7qRBI/hwWbqrP/RVUWLd8h1PiFyTD+brojmELiV/rVHcSdYX2CqTAtEcmhg=="
-             }
-
-       .. tab-item:: RESPONSE
-
-          .. code-block:: json
-
-             {
-               "id": 3,
-               "result": [
-                 {
-                   "data": {
-                     "name": "foo_002",
-                     "oid": 4827
-                   },
-                   "status": {
-                     "code": 0,
-                     "message": "OK"
-                   },
-                   "url": "/pm/config/adom/dc_helsinki/obj/firewall/address/foo_002"
-                 }
-               ]
-             }
-
-You can use the usual ``scope``:
-
-.. code-block:: json
-
-   {
-     "scope": [
-        {
-          "name": "device_group_001",
-        },
-        {
-          "name": "device_group_002",
-        },
-        {
-          "name": "device_001",
-          "vdom": "vd_001"
-        },        
-        {
-          "name": "device_001",
-          "vdom": "vd_002"
-        },
-        {
-           "...": "..."
-        }
-     ]
-   }
-
 Per-device mapping
 ------------------
 
@@ -6877,67 +6939,3 @@ The following example delete per-device mapping entries for the ``dev_003`` and
            ]
          }
 
-Replacement Message Group
--------------------------
-
-How to get the default Replacement Message Groups?
-++++++++++++++++++++++++++++++++++++++++++++++++++
-
-Caught in #1040582.
-
-The following example shows how to get the default Replacement Message Group for
-the ``demo`` ADOM:
-
-.. tab-set:: 
-
-   .. tab-item:: REQUEST
-
-      .. code-block:: json
-
-         {
-           "id": 2,
-           "method": "get",
-           "params": [
-             {
-               "url": "/pm/config/adom/demo/obj/_system/replacemsg"
-             }
-           ],
-           "session": "{{session}}",
-           "verbose": 1
-         }
-
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-
-         {
-           "id": 2,
-           "result": [
-             {
-               "data": [
-                 {
-                   "carrier": 0,
-                   "groups": [
-                     "default",
-                     "utm"
-                   ],
-                   "msg-types": [
-                     {
-                       "_disp_desc": "admin_post_admin-disclaimer-text_desc",
-                       "_disp_name": "admin_post_admin-disclaimer-text",
-                       "...": "..."
-                     },
-                     "...",
-                   ],
-                   "...": "...",
-                 },
-                 "..."
-               ],
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "/pm/config/adom/dc_emea/obj/_system/replacemsg"
-             }
-           ]
-         }      
