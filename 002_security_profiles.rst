@@ -3218,6 +3218,194 @@ FortiManager API:
          - In this output above, FortiManager didn't return anything about the
            ``dc_amer`` ADOM since its global IPS sensor isn't assigned yet
 
+IPS Package Management
+++++++++++++++++++++++
+
+The following capabilities are available for querying IPS signature and package 
+information programmatically. They cover a range of use cases, from retrieving 
+the details of an individual signature (:ref:`How to get the detail of a
+specific IPS signature?`) to inspecting the contents of a full package release
+(see :ref:`How to fetch all signature IDs and details for a given package release version?`).
+
+You can look up a single signature by its ID (:ref:`How to get the detail of a
+specific IPS signature?`), or retrieve the complete set of signature IDs and
+details contained in a given package release version (:ref:`How to fetch all
+signature IDs and details for a given package release version?`). It is also
+possible to compare two versions and return only the delta - the
+signatures added between them. All listing queries support pagination through
+offset and limit parameters, so large result sets can be retrieved in 
+manageable chunks.
+
+In addition to listing the signatures themselves, you can query counts 
+directly: either the total number of signatures in a specific version, or the 
+number of signatures introduced between two versions. A summary query returns 
+the most recent IPS package releases, which is useful for determining the 
+latest available version. Finally, change log information can be retrieved for 
+an individual signature to track its history over time.
+
+Caught in #1271574 (FortiManager 8.0.1).
+
+How to get the detail of a specific IPS signature?
+__________________________________________________
+
+If you have a specific IPS signature ID, you can get its details using the
+following FortiManager API request:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "data": {
+                 "target": "/fgd/lookup/ency?source=ips&id=25536"
+               },
+               "url": "/um/query/productapi"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         The ``id`` attribute in the ``target`` attribute of the request is the 
+         IPS signature ID you want to query.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "cid": 96,
+           "id": 3,
+           "result": [
+             {
+               "data": "{\"OutbreakAlert\":[],\"ThreatSignal\":[],\"CVE\":\"\",\"Type\":\"ips\",\"ID\":25536,\"Name\":\"1024CMS.Standard.PHP.File.Inclusion\",\"isActive\":true,\"Risk\":\"high\",\"RiskID\":4,\"Summary\":\"This indicates an attack attempt against a remote command-execution vulnerability in 1024 CMS.<br/><br/>A vulnerability has been reported in 1024 CMS that may allow an attacker to execute shell commands on a vulnerable system. This is possible because the user input filters fail to properly sanitize the php_include parameter value that is passed to \\\"standard.php\\\". An attacker may include shell commands by supplying an injection string through the URL.\",\"Symptoms\":\"1024 CMS 1.4.4 and prior versions\",\"Analysis\":\"System Compromise: Remote attackers can gain control of vulnerable systems.\",\"Action\":\"Currently we are not aware of any patches supplied by the vendor for this issue.\",\"DefaultAction\":\"drop\",\"BehaviorList\":[],\"cve_id\":\"\",\"max_epss\":\"\",\"kev\":[],\"os_list\":[\"Windows\",\"Linux\",\"BSD\",\"Solaris\",\"MacOS\"],\"app_list\":[\"PHP_app\"],\"SecurityRefs\":[{\"reftype\":\"other\",\"refid\":\"\",\"url\":\"http://secunia.com/advisories/30951/\"}],\"DetectionAvailability\":[{\"product\":\"fgt\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_low\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_high\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"mobile\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_extended\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"vuln\",\"status\":true},{\"product\":\"fml\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips_extended\",\"status\":true}],\"GroupID\":440,\"Released\":\"2011-05-03 12:00:00\",\"Created\":\"2011-05-03 12:00:00\",\"Updated\":\"2021-11-03 12:00:00\",\"VulnType\":\"Code Injection\",\"Telemetry\":false}",
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/query/productapi"
+             }
+           ]
+         }
+
+How to fetch all signature IDs and details for a given package release version?
+_______________________________________________________________________________
+
+If you have a specific package version, you can get its signature details using
+the following FortiManager API request:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "data": {
+                 "target": "/srvupd/detail/ips/34.089?detail=1&offset=0&limit=3"
+               },
+               "url": "/um/query/productapi"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+        
+         The ``target`` attribute in the request contains the package version
+         you want to query (``34.089`` in this example).
+
+         The ``offset`` and ``limit`` attributes are used for pagination of 
+         the results. In this example, we are requesting the first 3 signatures 
+         of the package version ``34.089``.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 44,
+           "id": 3,
+           "result": [
+             {
+               "data": "[{\"Type\":\"ips\",\"Version\":\"34.089\",\"Timestamp\":1758683142,\"ID\":58953,\"Name\":\"ABB.Devices.devName.Path.Traversal\",\"Action\":\"Add\",\"Desc\":\"*\",\"Meta\":{},\"Data\":null,\"action_id\":1,\"OutbreakAlert\":[],\"ThreatSignal\":[],\"Detail\":{\"OutbreakAlert\":[],\"ThreatSignal\":[],\"CVE\":\"CVE-2024-51549\",\"Type\":\"ips\",\"ID\":58953,\"Name\":\"ABB.Devices.devName.Path.Traversal\",\"isActive\":true,\"Risk\":\"critical\",\"RiskID\":5,\"Summary\":\"This indicates an attack attempt to exploit a Path Traversal Vulnerability in multiple ABB devices.<br/><br/>The vulnerability is due to insufficient validation of user-supplied outputs. A remote anonymous attacker can exploit this vulnerability by sending a crafted request to the target server. Successful exploitation could lead to information disclosure.\",\"Symptoms\":\"ABB Matrix-296 version prior to 3.08.02<br/>ABB Matrix-264 version prior to 3.08.02<br/>ABB Matrix-232 version prior to 3.08.02<br/>ABB Matrix-216 version prior to 3.08.02<br/>ABB Matrix-11 version prior to 3.08.02<br/>ABB Nexus-3-264 version prior to 3.08.02<br/>ABB Nexus-3-2128 version prior to 3.08.02<br/>ABB Nexus-264-g version prior to 3.08.02<br/>ABB Nexus-264-f version prior to 3.08.02<br/>ABB Nexus-264-a version prior to 3.08.02<br/>ABB Nexus-264 version prior to 3.08.02<br/>ABB Nexus-2128-g version prior to 3.08.02<br/>ABB Nexus-2128-f version prior to 3.08.02<br/>ABB Nexus-2128-a version prior to 3.08.02<br/>ABB Nexus-2128 version prior to 3.08.02<br/>ABB Aspect-ent-96 version prior to 3.08.02<br/>ABB Aspect-ent-256 version prior to 3.08.02<br/>ABB Aspect-ent-2 version prior to 3.08.02<br/>ABB Aspect-ent-12 version prior to 3.08.02\",\"Analysis\":\"Information Disclosure: attackers can gain sensitive information from vulnerable systems.\",\"Action\":\"Upgrade to the latest version, available from the website<br/>https://search.abb.com/library/Download.aspx?DocumentID=9AKK108469A7497&LanguageCode=en&DocumentPartId=&Action=Launch\",\"DefaultAction\":\"drop\",\"BehaviorList\":[],\"cve_id\":\"CVE-2024-51549\",\"max_epss\":\"0.54%\",\"kev\":[],\"os_list\":[\"Other\"],\"app_list\":[\"PHP_app\"],\"SecurityRefs\":[{\"reftype\":\"cve\",\"refid\":\"2024-51549\",\"url\":\"http://cve.mitre.org/cgi-bin/cvename.cgi?name=cve-2024-51549\"}],\"DetectionAvailability\":[{\"product\":\"fgt\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_low\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_high\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"mobile\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_extended\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"vuln\",\"status\":true},{\"product\":\"fml\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips_extended\",\"status\":true}],\"GroupID\":448,\"Released\":\"2025-09-16 12:00:00\",\"Created\":\"2025-09-16 12:00:00\",\"Updated\":\"2025-10-01 12:00:00\",\"VulnType\":\"Path Traversal\",\"Telemetry\":false}},{\"Type\":\"ips\",\"Version\":\"34.089\",\"Timestamp\":1758683142,\"ID\":58934,\"Name\":\"D-Link.Devices.usb_paswd.hname.Command.Injection\",\"Action\":\"Add\",\"Desc\":\"*\",\"Meta\":{},\"Data\":null,\"action_id\":1,\"OutbreakAlert\":[],\"ThreatSignal\":[],\"Detail\":{\"OutbreakAlert\":[],\"ThreatSignal\":[],\"CVE\":\"CVE-2025-10440\",\"Type\":\"ips\",\"ID\":58934,\"Name\":\"D-Link.Devices.usb_paswd.hname.Command.Injection\",\"isActive\":true,\"Risk\":\"high\",\"RiskID\":4,\"Summary\":\"This indicates an attack attempt to exploit a Command Injection vulnerability in D-Link Routers.<br/><br/>The vulnerability is due to insufficient validation of user-supplied input in the application. A remote attacker can exploit this with a crafted request to execute arbitrary commands within the context of the system.\",\"Symptoms\":\"D-Link DI-8100 16.07.26A1<br/>D-Link DI-8100G 17.12.20A1<br/>D-Link DI-8200 16.07.26A1<br/>D-Link DI-8200G 17.12.20A1<br/>D-Link DI-8003 16.07.26A1<br/>D-Link DI-8003G 19.12.10A1\",\"Analysis\":\"System Compromise: Remote attackers can gain control of vulnerable systems.\",\"Action\":\"Currently we are unaware of any vendor supplied patch or updates available for this issue.\",\"DefaultAction\":\"drop\",\"BehaviorList\":[],\"cve_id\":\"CVE-2025-10440\",\"max_epss\":\"12.11%\",\"kev\":[],\"os_list\":[\"Other\"],\"app_list\":[\"Other\"],\"SecurityRefs\":[{\"reftype\":\"cve\",\"refid\":\"2025-10440\",\"url\":\"http://cve.mitre.org/cgi-bin/cvename.cgi?name=cve-2025-10440\"}],\"DetectionAvailability\":[{\"product\":\"fgt\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_low\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_high\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"mobile\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_extended\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"vuln\",\"status\":true},{\"product\":\"fml\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips_extended\",\"status\":true}],\"GroupID\":448,\"Released\":\"2025-09-15 12:00:00\",\"Created\":\"2025-09-15 12:00:00\",\"Updated\":\"2025-10-02 12:00:00\",\"VulnType\":\"OS Command Injection\",\"Telemetry\":false}},{\"Type\":\"ips\",\"Version\":\"34.089\",\"Timestamp\":1758683142,\"ID\":58982,\"Name\":\"Docker.Desktop.Container.Escape.Remote.Code.Execution\",\"Action\":\"Add\",\"Desc\":\"*\",\"Meta\":{},\"Data\":null,\"action_id\":1,\"OutbreakAlert\":[],\"ThreatSignal\":[],\"Detail\":{\"OutbreakAlert\":[],\"ThreatSignal\":[],\"CVE\":\"CVE-2025-9074\",\"Type\":\"ips\",\"ID\":58982,\"Name\":\"Docker.Desktop.Container.Escape.Remote.Code.Execution\",\"isActive\":true,\"Risk\":\"high\",\"RiskID\":4,\"Summary\":\"This indicates an attack attempt to exploit a Remote Code Execution Vulnerability in Docker Desktop.<br/><br/>The vulnerability is due to improper access controls of API requests from a container to the host. A remote attacker could exploit this vulnerability by sending a maliciously crafted request to the target server. Successful exploitation could lead to remote code executionon the vulnerable host.\",\"Symptoms\":\"Docker Desktop from 4.25 prior to 4.44.3\",\"Analysis\":\"System Compromise: Remote attackers can gain control of vulnerable systems.\",\"Action\":\"Apply the most recent upgrade or patch from the vendor.<br/>https://docs.docker.com/desktop/release-notes/#4443\",\"DefaultAction\":\"drop\",\"BehaviorList\":[],\"cve_id\":\"CVE-2025-9074\",\"max_epss\":\"1.63%\",\"kev\":[],\"os_list\":[\"Windows\",\"Linux\"],\"app_list\":[\"Other\"],\"SecurityRefs\":[{\"reftype\":\"cve\",\"refid\":\"2025-9074\",\"url\":\"http://cve.mitre.org/cgi-bin/cvename.cgi?name=cve-2025-9074\"}],\"DetectionAvailability\":[{\"product\":\"fgt\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_low\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_high\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"mobile\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_extended\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"vuln\",\"status\":true},{\"product\":\"fml\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips_extended\",\"status\":true}],\"GroupID\":448,\"Released\":\"2025-09-22 12:00:00\",\"Created\":\"2025-09-22 12:00:00\",\"Updated\":\"2025-10-01 12:00:00\",\"VulnType\":\"Permission/Privilege/Access Control\",\"Telemetry\":false}}]",
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/query/productapi"
+             }
+           ]
+         }
+
+How to fetch delta signature IDs between two package versions?
+______________________________________________________________
+
+You can obtain the list of signature IDs that were added between two package
+versions using the following FortiManager API request:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "data": {
+                 "target": "/srvupd/detail/ips/34.085/34.089?detail=1&offset=0&limit=3"
+               },
+               "url": "/um/query/productapi"
+             }
+           ],
+           "session": "{{version}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         The ``target`` attribute in the request contains the two package 
+         versions you want to compare (``34.085`` and ``34.089`` in this 
+         example).
+
+         The ``offset`` and ``limit`` attributes are used for pagination of 
+         the results. In this example, we are requesting the first 3 signatures 
+         that were added between the two package versions.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json         
+
+         {
+           "cid": 60,
+           "id": 3,
+           "result": [
+             {
+               "data": "[{\"Type\":\"ips\",\"Version\":\"34.089\",\"Timestamp\":1758683142,\"ID\":58953,\"Name\":\"ABB.Devices.devName.Path.Traversal\",\"Action\":\"Add\",\"Desc\":\"*\",\"Meta\":{},\"Data\":null,\"action_id\":1,\"OutbreakAlert\":[],\"ThreatSignal\":[],\"Detail\":{\"OutbreakAlert\":[],\"ThreatSignal\":[],\"CVE\":\"CVE-2024-51549\",\"Type\":\"ips\",\"ID\":58953,\"Name\":\"ABB.Devices.devName.Path.Traversal\",\"isActive\":true,\"Risk\":\"critical\",\"RiskID\":5,\"Summary\":\"This indicates an attack attempt to exploit a Path Traversal Vulnerability in multiple ABB devices.<br/><br/>The vulnerability is due to insufficient validation of user-supplied outputs. A remote anonymous attacker can exploit this vulnerability by sending a crafted request to the target server. Successful exploitation could lead to information disclosure.\",\"Symptoms\":\"ABB Matrix-296 version prior to 3.08.02<br/>ABB Matrix-264 version prior to 3.08.02<br/>ABB Matrix-232 version prior to 3.08.02<br/>ABB Matrix-216 version prior to 3.08.02<br/>ABB Matrix-11 version prior to 3.08.02<br/>ABB Nexus-3-264 version prior to 3.08.02<br/>ABB Nexus-3-2128 version prior to 3.08.02<br/>ABB Nexus-264-g version prior to 3.08.02<br/>ABB Nexus-264-f version prior to 3.08.02<br/>ABB Nexus-264-a version prior to 3.08.02<br/>ABB Nexus-264 version prior to 3.08.02<br/>ABB Nexus-2128-g version prior to 3.08.02<br/>ABB Nexus-2128-f version prior to 3.08.02<br/>ABB Nexus-2128-a version prior to 3.08.02<br/>ABB Nexus-2128 version prior to 3.08.02<br/>ABB Aspect-ent-96 version prior to 3.08.02<br/>ABB Aspect-ent-256 version prior to 3.08.02<br/>ABB Aspect-ent-2 version prior to 3.08.02<br/>ABB Aspect-ent-12 version prior to 3.08.02\",\"Analysis\":\"Information Disclosure: attackers can gain sensitive information from vulnerable systems.\",\"Action\":\"Upgrade to the latest version, available from the website<br/>https://search.abb.com/library/Download.aspx?DocumentID=9AKK108469A7497&LanguageCode=en&DocumentPartId=&Action=Launch\",\"DefaultAction\":\"drop\",\"BehaviorList\":[],\"cve_id\":\"CVE-2024-51549\",\"max_epss\":\"0.54%\",\"kev\":[],\"os_list\":[\"Other\"],\"app_list\":[\"PHP_app\"],\"SecurityRefs\":[{\"reftype\":\"cve\",\"refid\":\"2024-51549\",\"url\":\"http://cve.mitre.org/cgi-bin/cvename.cgi?name=cve-2024-51549\"}],\"DetectionAvailability\":[{\"product\":\"fgt\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_low\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_high\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"mobile\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_extended\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"vuln\",\"status\":true},{\"product\":\"fml\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips_extended\",\"status\":true}],\"GroupID\":448,\"Released\":\"2025-09-16 12:00:00\",\"Created\":\"2025-09-16 12:00:00\",\"Updated\":\"2025-10-01 12:00:00\",\"VulnType\":\"Path Traversal\",\"Telemetry\":false}},{\"Type\":\"ips\",\"Version\":\"34.085\",\"Timestamp\":1758078255,\"ID\":58873,\"Name\":\"ALFA.AIP-W512.formBTClinetSetting.Buffer.Overflow\",\"Action\":\"Add\",\"Desc\":\"*\",\"Meta\":{},\"Data\":null,\"action_id\":1,\"OutbreakAlert\":[],\"ThreatSignal\":[],\"Detail\":{\"OutbreakAlert\":[],\"ThreatSignal\":[],\"CVE\":\"CVE-2025-45846\",\"Type\":\"ips\",\"ID\":58873,\"Name\":\"ALFA.AIP-W512.formBTClinetSetting.Buffer.Overflow\",\"isActive\":true,\"Risk\":\"high\",\"RiskID\":4,\"Summary\":\"This indicates an attack attempt against a Buffer Overflow vulnerability in ALFA AIP-W512.<br/><br/>The vulnerability is due to insufficient sanitizing of user supplied inputs in the application. A remote attacker may be ableto exploit this to execute arbitrary code within the context of the application or possibly cause a denial-of-service condition.\",\"Symptoms\":\"ALFA AIP-W512 version 3.2.2.2.3\",\"Analysis\":\"System Compromise: Remote attackers can gain control of vulnerable systems.\",\"Action\":\"Currently, we are unaware of any vendor supplied patch or updates available for this issue.\",\"DefaultAction\":\"drop\",\"BehaviorList\":[],\"cve_id\":\"CVE-2025-45846\",\"max_epss\":\"0.51%\",\"kev\":[],\"os_list\":[\"Other\"],\"app_list\":[\"Other\"],\"SecurityRefs\":[{\"reftype\":\"cve\",\"refid\":\"2025-45846\",\"url\":\"http://cve.mitre.org/cgi-bin/cvename.cgi?name=cve-2025-45846\"}],\"DetectionAvailability\":[{\"product\":\"fgt\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_low\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_high\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"mobile\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_extended\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"vuln\",\"status\":true},{\"product\":\"fml\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips_extended\",\"status\":true}],\"GroupID\":448,\"Released\":\"2025-09-09 12:00:00\",\"Created\":\"2025-09-09 12:00:00\",\"Updated\":\"2025-10-06 12:00:00\",\"VulnType\":\"Buffer Errors\",\"Telemetry\":false}},{\"Type\":\"ips\",\"Version\":\"34.085\",\"Timestamp\":1758078255,\"ID\":58878,\"Name\":\"ALFA.WiFi.CampPro.APSecurity.Buffer.Overflow\",\"Action\":\"Add\",\"Desc\":\"*\",\"Meta\":{},\"Data\":null,\"action_id\":1,\"OutbreakAlert\":[],\"ThreatSignal\":[],\"Detail\":{\"OutbreakAlert\":[],\"ThreatSignal\":[],\"CVE\":\"CVE-2025-29045\",\"Type\":\"ips\",\"ID\":58878,\"Name\":\"ALFA.WiFi.CampPro.APSecurity.Buffer.Overflow\",\"isActive\":true,\"Risk\":\"high\",\"RiskID\":4,\"Summary\":\"This indicates an attack attempt against a Buffer Overflow vulnerability in ALFA WiFi CampPro.<br/><br/>The vulnerability is due toinsufficient sanitizing of user supplied inputs in the application. A remote attacker may be able to exploit this to execute arbitrary code within the context of the application or possibly cause a denial-of-service condition.\",\"Symptoms\":\"ALFA WiFi CampPro version 2.29\",\"Analysis\":\"System Compromise: Remote attackers can gain control of vulnerable systems.\",\"Action\":\"Currently, we are unaware of any vendor supplied patch or updates available for this issue.\",\"DefaultAction\":\"drop\",\"BehaviorList\":[],\"cve_id\":\"CVE-2025-29045\",\"max_epss\":\"1.01%\",\"kev\":[],\"os_list\":[\"Other\"],\"app_list\":[\"Other\"],\"SecurityRefs\":[{\"reftype\":\"cve\",\"refid\":\"2025-29045\",\"url\":\"http://cve.mitre.org/cgi-bin/cvename.cgi?name=cve-2025-29045\"}],\"DetectionAvailability\":[{\"product\":\"fgt\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_low\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_high\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"mobile\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_extended\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"vuln\",\"status\":true},{\"product\":\"fml\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips_extended\",\"status\":true}],\"GroupID\":448,\"Released\":\"2025-09-09 12:00:00\",\"Created\":\"2025-09-09 12:00:00\",\"Updated\":\"2025-10-02 12:00:00\",\"VulnType\":\"Buffer Errors\",\"Telemetry\":false}}]",
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/query/productapi"
+             }
+           ]
+         }
 
 Virtual Patching
 ----------------

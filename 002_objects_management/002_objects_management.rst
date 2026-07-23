@@ -5347,203 +5347,259 @@ parameter with the proper path.
 Find and Replace
 ++++++++++++++++
 
-In the below example, we want to replace the antivirus profile
-``av-profile-001`` used by some of our firewall policies, with antivirus profile
-``av-profile-002``.
+The example below shows how to find and replace the firewall address group
+``grp_002`` used by some of our firewall policies, with firewall address group
+``grp_001`` in the ``demo`` ADOM.
 
-First you need to *where used* the antivirus profile ``av-profile-001`` object:
+First you need to *where used* the firewall address group ``grp_002`` object. As
+you know the *where used* is a three steps process (see :ref:`How to where used from within a normal ADOM?`).
 
-- As you know the *where used* is a three steps process:
+#. Step #1: You need to start a new *where used* task
 
-  - Step #1: We Need To Start A New Where Used Task
+   .. tab-set::
 
-    **REQUEST:**
+      .. tab-item:: REQUEST
 
-    .. code-block:: json
+         .. code-block:: json
 
-                    {
-                      "id": 1,
-                      "method": "exec",
-                      "params": [                
-                        {
-                          "data": {
-                            "flags": [ 
-                             "direct used"
-                            ],
-                            "mkey": "av-profile-001",
-                            "obj": "adom/DEMO/obj/antivirus/profile"
+            {
+              "id": 1,
+              "method": "exec",
+              "params": [                
+                {
+                  "data": {
+                    "flags": [ 
+                     "direct used"
+                    ],
+                    "mkey": "grp_002",
+                    "obj": "adom/demo/obj/firewall/addrgrp"
+                  },
+                  "url": "cache/search/where/used/start"
+            	}
+              ], 
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            { 
+              "id": 1, 
+              "result": [
+                { 
+                  "data": { 
+                    "token": "ng9jCDhg9qZVmUt4oaYPZw=="
+                  }, 
+                  "status": { 
+                    "code": 0, 
+                    "message": "OK"
+                  }, 
+                  "url": "cache/search/where/used/start"
+                }
+              ]
+            }
+
+#. Step #2: Monitor the task completion using the returned ``token``
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 1, 
+              "method": "exec", 
+              "params": [
+                { 
+                  "token": "ng9jCDhg9qZVmUt4oaYPZw==", 
+                  "url": "cache/search/where/used/get/summary"
+                }
+              ], 
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            { 
+              "id": 1, 
+              "result": [
+                { 
+                  "data": { 
+                    "percent": 100
+                  }, 
+                  "status": { 
+                    "code": 0, 
+                    "message": "OK"
+                  }, 
+                  "url": "cache/search/where/used/get/summary"
+                }
+              ]
+            }
+
+        .. note::
+          
+           If the ``percent`` value is not equal to 100, retry until it reaches 
+           100.
+
+#. Step #3: Collect the *where used* result using the returned ``token``
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            { 
+              "id": 1,
+              "method": "exec", 
+              "params": [
+                { 
+                  "token": "ng9jCDhg9qZVmUt4oaYPZw==", 
+                  "url": "cache/search/where/used/get/detail"
+                }
+              ], 
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "id": 1,
+              "result": [
+                {
+                  "data": {
+                    "percent": 100,
+                    "total_num": 4,
+                    "where_used": [
+                      {
+                        "data": [
+                          {
+                            "attr": "srcaddr",
+                            "category": 181,
+                            "mapping_name": "firewall policy",
+                            "mattr": "policyid",
+                            "mkey": "2",
+                            "pkg": {
+                              "name": "default",
+                              "oid": 6225,
+                              "type": "policy package"
+                            }
                           },
-                          "url": "cache/search/where/used/start"
-                    	}
-                      ], 
-                      "session": 20456
-                    }
-
-    **RESPONSE:**
-
-    .. code-block:: json
-
-                    { 
-                      "id": 1, 
-                      "result": [
-                        { 
-                          "data": { 
-                            "token": "ng9jCDhg9qZVmUt4oaYPZw=="
-                          }, 
-                          "status": { 
-                            "code": 0, 
-                            "message": "OK"
-                          }, 
-                          "url": "cache/search/where/used/start"
-                        }
-                      ]
-                    }
-
-  - Step #2: with the returned *token*, we need to wait for the task to be
-    completed:
-
-    **REQUEST:**
-
-    .. code-block:: json
-
-                    { 
-                      "id": 1, 
-                      "method": "exec", 
-                      "params": [
-                        { 
-                          "token": "ng9jCDhg9qZVmUt4oaYPZw==", 
-                          "url": "cache/search/where/used/get/summary"
-                        }
-                      ], 
-                      "session": 20456
-                    }
-
-    **RESPONSE:**
-
-    .. code-block:: json
-
-                    { 
-                      "id": 1, 
-                      "result": [
-                        { 
-                          "data": { 
-                            "percent": 100
-                          }, 
-                          "status": { 
-                            "code": 0, 
-                            "message": "OK"
-                          }, 
-                          "url": "cache/search/where/used/get/summary"
-                        }
-                      ]
-                    }
-
-    If the *percent* value isn't equal to 100, just retry till it is 100.
-
-  - Step #3: we can collect the *where used* result:
-
-    **REQUEST:**
-
-	.. code-block:: json
-
-                    { 
-                      "id": 1,
-                      "method": "exec", 
-                      "params": [
-                        { 
-                          "token": "ng9jCDhg9qZVmUt4oaYPZw==", 
-                          "url": "cache/search/where/used/get/detail"
-                        }
-                      ], 
-                      "session": 20456
-                    }
-
-
-    **RESPONSE:**
-	
-	.. code-block:: json
-	
-                    { 
-                      "id": 1, 
-                      "result": [
-                        { 
-                          "data": { 
-                            "percent": 100, 
-                            "total_num": 2, 
-                            "where_used": [
-                              { 
-                                "data": [
-                                  { 
-                                    "attr": "av-profile", 
-                                    "category": 181, 
-                                    "mapping_name": "firewall policy", 
-                                    "mattr": "policyid", 
-                                    "mkey": "1", 
-                                    "pkg": { 
-                                      "name": "default", 
-                                      "oid": 4685
-                                    }
-                                  }, 
-                                  { 
-                                    "attr": "av-profile", 
-                                    "category": 181, 
-                                    "mapping_name": "firewall policy", 
-                                    "mattr": "policyid", 
-                                    "mkey": "2", 
-                                    "pkg": { 
-                                      "name": "default", 
-                                      "oid": 4685
-                                    }
-                                  }
-                                ], 
-                                "root": { 
-                                  "name": "DEMO", 
-                                  "oid": 136
-								}
-                              }
-                            ]
-                          }, 
-                          "status": { 
-                            "code": 0, 
-                            "message": "OK"
-                          }, 
-                          "url": "cache/search/where/used/get/detail"
-                        }
-                      ]
-                    }
-
-    From the above output, we can see that our antivirus profile
-    ``av-profile-001`` is used by two firewall policies (id 1 and 2
-    respectively) in policy package ``default`` from ADOM ``DEMO``.
-
-- We can now proceed with the replace operation
-
-  - To replace ``av-profile-001`` with ``av-profile-002`` for policy #1
-
-    **REQUEST:**
-
-	.. code-block:: json
-
-                    { 
-                      "id": 1, 
-                      "method": "update", 
-                      "params": [
-                        { 
-                          "url": "pm/config/adom/DEMO/pkg/default/firewall/policy/1", 
-                          "used objs": { 
-                            "from": "obj/antivirus/profile/av-profile-001", 
-                            "to": [
-                              "av-profile-002"
-                            ]
+                          {
+                            "attr": "srcaddr",
+                            "category": 181,
+                            "mapping_name": "firewall policy",
+                            "mattr": "policyid",
+                            "mkey": "2",
+                            "pkg": {
+                              "name": "pkg_002",
+                              "oid": 6439,
+                              "type": "policy package"
+                            }
+                          },
+                          {
+                            "attr": "dstaddr",
+                            "category": 181,
+                            "last use": 1,
+                            "mapping_name": "firewall policy",
+                            "mattr": "policyid",
+                            "mkey": "4",
+                            "pkg": {
+                              "name": "pkg_002",
+                              "oid": 6439,
+                              "type": "policy package"
+                            }
+                          },
+                          {
+                            "attr": "dstaddr",
+                            "category": 181,
+                            "last use": 1,
+                            "mapping_name": "firewall policy",
+                            "mattr": "policyid",
+                            "mkey": "3",
+                            "pkg": {
+                              "name": "pkg_002",
+                              "oid": 6439,
+                              "type": "policy package"
                           }
+                        ],
+                        "root": {
+                          "name": "demo",
+                          "oid": 2831
                         }
-                      ], 
-                      "session": 20456
-                    }
+                      }
+                    ]
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/cache/search/where/used/get/detail"
+                }
+              ]
+            }
 
-    **RESPONSE:**
+       .. note::
+        
+          - The ``where_used`` attribute contains the list of all firewall
+            policies using the firewall address group ``grp_002``.
+          - The ``mkey`` attribute is the policy id of the firewall policy
+            using the firewall address group ``grp_002``.
+          - The ``pkg`` attribute is the policy package containing the
+            firewall policy using the firewall address group ``grp_002``.
 
-	TBD
+You can now proceed with the replace operation. To replace ``grp_002`` with
+``grp_001`` for policy 3 of policy package ``pkg_002`` in the ``demo`` ADOM, you can use the following request:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "update",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/pkg/pkg_002/firewall/policy/3",
+               "used objs": {
+                 "attr": [
+                   "dstaddr"
+                 ],
+                 "from": "obj/firewall/addrgrp/grp_002",
+                 "to": [
+                   "grp_001"
+                 ]
+               }
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json            
+
+         {
+           "cid": 73,
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/demo/pkg/pkg_002/firewall/policy/3"
+             }
+           ]
+         }  
 
 How to find and replace objects in firewall policy?
 ___________________________________________________
