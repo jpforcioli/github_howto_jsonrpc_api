@@ -1607,14 +1607,14 @@ There is a second alternative which consists in using the ``get reserved`` optio
              fmg.debug = False
 
 
-The dnsfilter domain-filter object
-++++++++++++++++++++++++++++++++++
+DNS Filtering
+-------------
 
 The ``dnsfilter.domain-filter`` used by the ``dnsfilter.profile`` is the
 counterpart of the ``webfilter.urlfilter`` used by the ``webfilter.profile``.
 
 How to empty the ``dnsfilter.domain-filter.entries`` table?
-___________________________________________________________
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 You can use the |json_rpc_m| ``update`` or ``set`` as shown below:
 
@@ -3232,16 +3232,20 @@ specific IPS signature?`), or retrieve the complete set of signature IDs and
 details contained in a given package release version (:ref:`How to fetch all
 signature IDs and details for a given package release version?`). It is also
 possible to compare two versions and return only the delta - the
-signatures added between them. All listing queries support pagination through
+signatures added between them (:ref:`How to fetch delta signature IDs between 
+two package versions?`). All listing queries support pagination through
 offset and limit parameters, so large result sets can be retrieved in 
 manageable chunks.
 
 In addition to listing the signatures themselves, you can query counts 
-directly: either the total number of signatures in a specific version, or the 
-number of signatures introduced between two versions. A summary query returns 
-the most recent IPS package releases, which is useful for determining the 
-latest available version. Finally, change log information can be retrieved for 
-an individual signature to track its history over time.
+directly: either the total number of signatures in a specific version (:ref:`How
+to get total count of signatures for a given package version?`), or 
+the number of signatures introduced between two versions (:ref:`How to get the
+total count of signatures between two package versions?`). A summary query 
+returns the most recent IPS package releases, which is useful for determining
+the latest available version (:ref:`How to list the latest IPS packages?`). 
+Finally, change log information can be retrieved for an individual signature to
+track its history over time (:ref:`How to get the changelog info for a specific IPS signature ID?`).
 
 Caught in #1271574 (FortiManager 8.0.1).
 
@@ -3398,6 +3402,219 @@ versions using the following FortiManager API request:
            "result": [
              {
                "data": "[{\"Type\":\"ips\",\"Version\":\"34.089\",\"Timestamp\":1758683142,\"ID\":58953,\"Name\":\"ABB.Devices.devName.Path.Traversal\",\"Action\":\"Add\",\"Desc\":\"*\",\"Meta\":{},\"Data\":null,\"action_id\":1,\"OutbreakAlert\":[],\"ThreatSignal\":[],\"Detail\":{\"OutbreakAlert\":[],\"ThreatSignal\":[],\"CVE\":\"CVE-2024-51549\",\"Type\":\"ips\",\"ID\":58953,\"Name\":\"ABB.Devices.devName.Path.Traversal\",\"isActive\":true,\"Risk\":\"critical\",\"RiskID\":5,\"Summary\":\"This indicates an attack attempt to exploit a Path Traversal Vulnerability in multiple ABB devices.<br/><br/>The vulnerability is due to insufficient validation of user-supplied outputs. A remote anonymous attacker can exploit this vulnerability by sending a crafted request to the target server. Successful exploitation could lead to information disclosure.\",\"Symptoms\":\"ABB Matrix-296 version prior to 3.08.02<br/>ABB Matrix-264 version prior to 3.08.02<br/>ABB Matrix-232 version prior to 3.08.02<br/>ABB Matrix-216 version prior to 3.08.02<br/>ABB Matrix-11 version prior to 3.08.02<br/>ABB Nexus-3-264 version prior to 3.08.02<br/>ABB Nexus-3-2128 version prior to 3.08.02<br/>ABB Nexus-264-g version prior to 3.08.02<br/>ABB Nexus-264-f version prior to 3.08.02<br/>ABB Nexus-264-a version prior to 3.08.02<br/>ABB Nexus-264 version prior to 3.08.02<br/>ABB Nexus-2128-g version prior to 3.08.02<br/>ABB Nexus-2128-f version prior to 3.08.02<br/>ABB Nexus-2128-a version prior to 3.08.02<br/>ABB Nexus-2128 version prior to 3.08.02<br/>ABB Aspect-ent-96 version prior to 3.08.02<br/>ABB Aspect-ent-256 version prior to 3.08.02<br/>ABB Aspect-ent-2 version prior to 3.08.02<br/>ABB Aspect-ent-12 version prior to 3.08.02\",\"Analysis\":\"Information Disclosure: attackers can gain sensitive information from vulnerable systems.\",\"Action\":\"Upgrade to the latest version, available from the website<br/>https://search.abb.com/library/Download.aspx?DocumentID=9AKK108469A7497&LanguageCode=en&DocumentPartId=&Action=Launch\",\"DefaultAction\":\"drop\",\"BehaviorList\":[],\"cve_id\":\"CVE-2024-51549\",\"max_epss\":\"0.54%\",\"kev\":[],\"os_list\":[\"Other\"],\"app_list\":[\"PHP_app\"],\"SecurityRefs\":[{\"reftype\":\"cve\",\"refid\":\"2024-51549\",\"url\":\"http://cve.mitre.org/cgi-bin/cvename.cgi?name=cve-2024-51549\"}],\"DetectionAvailability\":[{\"product\":\"fgt\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_low\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_high\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"mobile\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_extended\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"vuln\",\"status\":true},{\"product\":\"fml\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips_extended\",\"status\":true}],\"GroupID\":448,\"Released\":\"2025-09-16 12:00:00\",\"Created\":\"2025-09-16 12:00:00\",\"Updated\":\"2025-10-01 12:00:00\",\"VulnType\":\"Path Traversal\",\"Telemetry\":false}},{\"Type\":\"ips\",\"Version\":\"34.085\",\"Timestamp\":1758078255,\"ID\":58873,\"Name\":\"ALFA.AIP-W512.formBTClinetSetting.Buffer.Overflow\",\"Action\":\"Add\",\"Desc\":\"*\",\"Meta\":{},\"Data\":null,\"action_id\":1,\"OutbreakAlert\":[],\"ThreatSignal\":[],\"Detail\":{\"OutbreakAlert\":[],\"ThreatSignal\":[],\"CVE\":\"CVE-2025-45846\",\"Type\":\"ips\",\"ID\":58873,\"Name\":\"ALFA.AIP-W512.formBTClinetSetting.Buffer.Overflow\",\"isActive\":true,\"Risk\":\"high\",\"RiskID\":4,\"Summary\":\"This indicates an attack attempt against a Buffer Overflow vulnerability in ALFA AIP-W512.<br/><br/>The vulnerability is due to insufficient sanitizing of user supplied inputs in the application. A remote attacker may be ableto exploit this to execute arbitrary code within the context of the application or possibly cause a denial-of-service condition.\",\"Symptoms\":\"ALFA AIP-W512 version 3.2.2.2.3\",\"Analysis\":\"System Compromise: Remote attackers can gain control of vulnerable systems.\",\"Action\":\"Currently, we are unaware of any vendor supplied patch or updates available for this issue.\",\"DefaultAction\":\"drop\",\"BehaviorList\":[],\"cve_id\":\"CVE-2025-45846\",\"max_epss\":\"0.51%\",\"kev\":[],\"os_list\":[\"Other\"],\"app_list\":[\"Other\"],\"SecurityRefs\":[{\"reftype\":\"cve\",\"refid\":\"2025-45846\",\"url\":\"http://cve.mitre.org/cgi-bin/cvename.cgi?name=cve-2025-45846\"}],\"DetectionAvailability\":[{\"product\":\"fgt\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_low\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_high\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"mobile\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_extended\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"vuln\",\"status\":true},{\"product\":\"fml\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips_extended\",\"status\":true}],\"GroupID\":448,\"Released\":\"2025-09-09 12:00:00\",\"Created\":\"2025-09-09 12:00:00\",\"Updated\":\"2025-10-06 12:00:00\",\"VulnType\":\"Buffer Errors\",\"Telemetry\":false}},{\"Type\":\"ips\",\"Version\":\"34.085\",\"Timestamp\":1758078255,\"ID\":58878,\"Name\":\"ALFA.WiFi.CampPro.APSecurity.Buffer.Overflow\",\"Action\":\"Add\",\"Desc\":\"*\",\"Meta\":{},\"Data\":null,\"action_id\":1,\"OutbreakAlert\":[],\"ThreatSignal\":[],\"Detail\":{\"OutbreakAlert\":[],\"ThreatSignal\":[],\"CVE\":\"CVE-2025-29045\",\"Type\":\"ips\",\"ID\":58878,\"Name\":\"ALFA.WiFi.CampPro.APSecurity.Buffer.Overflow\",\"isActive\":true,\"Risk\":\"high\",\"RiskID\":4,\"Summary\":\"This indicates an attack attempt against a Buffer Overflow vulnerability in ALFA WiFi CampPro.<br/><br/>The vulnerability is due toinsufficient sanitizing of user supplied inputs in the application. A remote attacker may be able to exploit this to execute arbitrary code within the context of the application or possibly cause a denial-of-service condition.\",\"Symptoms\":\"ALFA WiFi CampPro version 2.29\",\"Analysis\":\"System Compromise: Remote attackers can gain control of vulnerable systems.\",\"Action\":\"Currently, we are unaware of any vendor supplied patch or updates available for this issue.\",\"DefaultAction\":\"drop\",\"BehaviorList\":[],\"cve_id\":\"CVE-2025-29045\",\"max_epss\":\"1.01%\",\"kev\":[],\"os_list\":[\"Other\"],\"app_list\":[\"Other\"],\"SecurityRefs\":[{\"reftype\":\"cve\",\"refid\":\"2025-29045\",\"url\":\"http://cve.mitre.org/cgi-bin/cvename.cgi?name=cve-2025-29045\"}],\"DetectionAvailability\":[{\"product\":\"fgt\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_low\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"av_extended_high\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"mobile\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"av_extended\",\"status\":false},{\"product\":\"fct\",\"sigdb\":\"vuln\",\"status\":true},{\"product\":\"fml\",\"sigdb\":\"av_active\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips\",\"status\":false},{\"product\":\"fgt\",\"sigdb\":\"ips_extended\",\"status\":true}],\"GroupID\":448,\"Released\":\"2025-09-09 12:00:00\",\"Created\":\"2025-09-09 12:00:00\",\"Updated\":\"2025-10-02 12:00:00\",\"VulnType\":\"Buffer Errors\",\"Telemetry\":false}}]",
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/query/productapi"
+             }
+           ]
+         }
+
+How to get total count of signatures for a given package version?
+_________________________________________________________________
+
+You can obtain the total count of signature in a given package version using 
+the following FortiManager API request:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "data": {
+                 "target": "/srvupd/count-detail/ips/34.089"
+               },
+               "url": "/um/query/productapi"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::
+
+         The ``target`` attribute in the request contains the package 
+         version you want to get the total count of signatures from (``34.089`` 
+         in this example).
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 92,
+           "id": 3,
+           "result": [
+             {
+               "data": "{\"Count\":39,\"Total\":39,\"Add\":36,\"Mod\":3,\"Del\":0}",
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/query/productapi"
+             }
+           ]
+         }
+
+      .. note::
+
+         ``Count: 39`` is the number of signatures to consider. This package
+         contains 39 signatures which were either added, modified or deleted.
+
+         ``Add: 36`` is the number of new signatures. ``Mod: 3`` is the number
+         of updated signatures and ``Del: 0`` is the number of removed
+         signatures. ``Total: 39`` is the sum of ``Add + Mod + Del``.
+
+How to get the total count of signatures between two package versions?
+______________________________________________________________________
+
+You can obtain the total count of signature IDs that were added between two
+package versions using the following FortiManager API request:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "data": {
+                 "target": "/srvupd/count-detail/ips/34.080/34.089"
+               },
+               "url": "/um/query/productapi"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+      .. note::         
+
+         The ``target`` attribute in the request contains the two package 
+         versions you want to compare (``34.085`` and ``34.089`` in this 
+         example).
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 96,
+           "id": 3,
+           "result": [
+             {
+               "data": "{\"Count\":226,\"Total\":226,\"Add\":129,\"Mod\":58,\"Del\":39}",
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/query/productapi"
+             }
+           ]
+         }
+
+      .. note::
+
+         ``Count: 39`` is the number of signatures to consider. There are
+         package 226 signatures which were either added, modified or deleted
+         between those two package versions.
+
+         ``Add: 129`` is the number of new signatures. ``Mod: 58`` is the number
+         of updated signatures and ``Del: 39`` is the number of removed
+         signatures. ``Total: 226`` is the sum of ``Add + Mod + Del``.
+
+How to list the latest IPS packages?
+____________________________________
+
+The example below shows how to get the last 10 IPS packages information:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "data": {
+                 "target": "/srvupd/summary?types=ips&limit=10"
+               },
+               "url": "/um/query/productapi"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 100,
+           "id": 3,
+           "result": [
+             {
+               "data": "[{\"Type\":\"ips\",\"Version\":\"36.260\",\"ID\":\"36.260\",\"OS\":\"\",\"Timestamp\":1784826668,\"New\":7,\"Mod\":2,\"Del\":0,\"Attr\":0,\"Rename\":0,\"PreRelease\":0,\"SUID\":6366661,\"Total\":0},{\"Type\":\"ips\",\"Version\":\"36.259\",\"ID\":\"36.259\",\"OS\":\"\",\"Timestamp\":1784736832,\"New\":13,\"Mod\":1,\"Del\":0,\"Attr\":0,\"Rename\":0,\"PreRelease\":0,\"SUID\":6363979,\"Total\":0},{\"Type\":\"ips\",\"Version\":\"36.258\",\"ID\":\"36.258\",\"OS\":\"\",\"Timestamp\":1784655048,\"New\":11,\"Mod\":10,\"Del\":0,\"Attr\":0,\"Rename\":0,\"PreRelease\":0,\"SUID\":6361720,\"Total\":0},{\"Type\":\"ips\",\"Version\":\"36.257\",\"ID\":\"36.257\",\"OS\":\"\",\"Timestamp\":1784566792,\"New\":8,\"Mod\":24,\"Del\":0,\"Attr\":0,\"Rename\":0,\"PreRelease\":0,\"SUID\":6360077,\"Total\":0},{\"Type\":\"ips\",\"Version\":\"36.256\",\"ID\":\"36.256\",\"OS\":\"\",\"Timestamp\":1784225777,\"New\":11,\"Mod\":4,\"Del\":0,\"Attr\":0,\"Rename\":0,\"PreRelease\":0,\"SUID\":6350232,\"Total\":0},{\"Type\":\"ips\",\"Version\":\"36.255\",\"ID\":\"36.255\",\"OS\":\"\",\"Timestamp\":1784134666,\"New\":4,\"Mod\":4,\"Del\":0,\"Attr\":0,\"Rename\":0,\"PreRelease\":0,\"SUID\":6347464,\"Total\":0},{\"Type\":\"ips\",\"Version\":\"36.254\",\"ID\":\"36.254\",\"OS\":\"\",\"Timestamp\":1784075133,\"New\":50,\"Mod\":3,\"Del\":0,\"Attr\":0,\"Rename\":0,\"PreRelease\":0,\"SUID\":6346146,\"Total\":0},{\"Type\":\"ips\",\"Version\":\"36.253\",\"ID\":\"36.253\",\"OS\":\"\",\"Timestamp\":1784051622,\"New\":46,\"Mod\":8,\"Del\":0,\"Attr\":0,\"Rename\":0,\"PreRelease\":0,\"SUID\":6345816,\"Total\":0},{\"Type\":\"ips\",\"Version\":\"36.252\",\"ID\":\"36.252\",\"OS\":\"\",\"Timestamp\":1783961518,\"New\":10,\"Mod\":21,\"Del\":0,\"Attr\":0,\"Rename\":0,\"PreRelease\":0,\"SUID\":6344283,\"Total\":0},{\"Type\":\"ips\",\"Version\":\"36.251\",\"ID\":\"36.251\",\"OS\":\"\",\"Timestamp\":1783614592,\"New\":0,\"Mod\":21,\"Del\":1,\"Attr\":0,\"Rename\":0,\"PreRelease\":0,\"SUID\":6338724,\"Total\":0}]",
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/query/productapi"
+             }
+           ]
+         }
+
+How to get the changelog info for a specific IPS signature ID?
+______________________________________________________________
+
+The example below shows how to get the changelog for a given IPS signature ID:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "data": {
+                 "target": "/srvupd/history/ips/56720"
+               },
+               "url": "/um/query/productapi"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 108,
+           "id": 3,
+           "result": [
+             {
+               "data": "[{\"Type\":\"ips\",\"Version\":\"36.256\",\"Timestamp\":1784225777,\"ID\":56720,\"Name\":\"D-Link.Routers.formDeviceReboot.Buffer.Overflow\",\"Action\":\"Mod\",\"Details\":\"*Sig Added\"},{\"Type\":\"ips\",\"Version\":\"29.943\",\"Timestamp\":1737998136,\"ID\":56720,\"Name\":\"D-Link.Routers.formDeviceReboot.Buffer.Overflow\",\"Action\":\"Mod\",\"Details\":\"Name:D-Link.DIR-605L.formDeviceReboot.Buffer.Overflow:D-Link.Routers.formDeviceReboot.Buffer.Overflow\"},{\"Type\":\"ips\",\"Version\":\"28.892\",\"Timestamp\":1730225097,\"ID\":56720,\"Name\":\"D-Link.DIR-605L.formDeviceReboot.Buffer.Overflow\",\"Action\":\"Mod\",\"Details\":\"Default_action:pass:drop\"},{\"Type\":\"ips\",\"Version\":\"28.887\",\"Timestamp\":1729530505,\"ID\":56720,\"Name\":\"D-Link.DIR-605L.formDeviceReboot.Buffer.Overflow\",\"Action\":\"Add\",\"Details\":\"*\"}]",
                "status": {
                  "code": 0,
                  "message": "OK"
