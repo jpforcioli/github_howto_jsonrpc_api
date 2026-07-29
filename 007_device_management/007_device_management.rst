@@ -13039,12 +13039,12 @@ ZTP
 How to generate a ZTP URL?
 ++++++++++++++++++++++++++
 
-Caught in #1310194 (FortiManager 8.0.1).
+Introduced in #1310194 (FortiManager 8.0.1).
 
-It allows to generate ZTP URLs from CLI scripts.
+This allows you to generate ZTP URLs from CLI scripts.
 
 The following example shows how to generate a ZTP URL from the
-``cli_script_001`` CLI Script for the ``dev_001`` managed device in the 
+``cli_script_001`` CLI script for the ``dev_001`` managed device in the 
 ``demo`` ADOM:
 
 .. tab-set::
@@ -13076,10 +13076,10 @@ The following example shows how to generate a ZTP URL from the
 
       .. note::
 
-         The ``encryption`` specifies whether you want to generate a ZTP URL
-         with an encrypted configuration or not. When it is set to ``1``, the
-         configuration is base64 encoded then encrypted. If set to ``0``, the
-         configuration is just base64 encoded.
+         The ``encryption`` field specifies whether to generate a ZTP URL
+         with an encrypted configuration. When set to ``1``, the
+         configuration is base64 encoded and then encrypted. When set to
+         ``0``, the configuration is only base64 encoded.
 
    .. tab-item:: RESPONSE
 
@@ -13105,4 +13105,3 @@ The following example shows how to generate a ZTP URL from the
              }
            ]
          }
-
