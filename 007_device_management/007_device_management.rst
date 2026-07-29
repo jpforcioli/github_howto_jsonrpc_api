@@ -13032,3 +13032,77 @@ The following example shows how to delete the onboarding rule with ``ruleid`` ``
              }
            ]
          }         
+
+ZTP
+---
+
+How to generate a ZTP URL?
+++++++++++++++++++++++++++
+
+Caught in #1310194 (FortiManager 8.0.1).
+
+It allows to generate ZTP URLs from CLI scripts.
+
+The following example shows how to generate a ZTP URL from the
+``cli_script_001`` CLI Script for the ``dev_001`` managed device in the 
+``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "encryption": 1,
+                 "scope": [
+                   {
+                     "name": "dev_001"
+                   }
+                 ],
+                 "script": "cli_script_001"
+               },
+               "url": "/dvmdb/generate/ztp/url"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+      .. note::
+
+         The ``encryption`` specifies whether you want to generate a ZTP URL
+         with an encrypted configuration or not. When it is set to ``1``, the
+         configuration is base64 encoded then encrypted. If set to ``0``, the
+         configuration is just base64 encoded.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 60,
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "device": "dev_001",
+                   "key": "DHWw5xQod/zyQX9RwU0ns7uGc/sFIbn9/5b+KeOorBg=",
+                   "link": "https://192.168.1.99/login?ztp-provision=enc.hMTplZshuhKKBg8TXZjqXlIm5RlLQu7bSZP+F1IgUuktrD8iK/3pA52BeDzn/Ea5n1N39nYzPW9lJjBrlsTuOGo1X1gq7PqkuA4tBjtZkCx2Ur4dDvIUlEWMMIz9nzHPuU5+rjGt+wZP+/FxqnO5VjKzdeVF6NZXNum4cI+8Y7cAEsWze5hksITnTKON3ZVNBgUrKClGvHnhHzlZHnBKkxlPudmbwIP2Xyb8xD/NceXbCNAYj8Q3pNaAnAy/m46ljzYHuFG/M+pqLNjkxA9wJMeitb7CkuS7E6291tTZZ991fYiGoGrLVhcF47x+LaB4RBMeF3WYttkgvGN9SIjMOZPjhit+eWLrzUxXxxYKST4K58nVPi0zrOlGznLJP/8d5e/oPCCPpnYwPa66fGTMehYRdsSRAazXPYZv2ka6tSnBto4K3M34tueutPQeMGqoICZF1OoVO+P6J5maMtoZlGldwO83LIcY7QIEqTEHpSvteemHS8/QUgn5dVvo9KGzwx2s6hhzGj3F19BJh0he9fYmB+cu8w900wbfHCE+aSxTAr/glQmqoBCWakUHWStVe9ZslAf7kWpKmOsc9JgrdJbZwr85Vb5W2EKmVaBoUE05GvNuOlWgZuAe2g7t7il7htXLa9YE8PtyCivDzDyHdLOZJoPZS2i4u6nFes4zzKprK6s3sHnoKC87U1dDmMVZrXUi4T9I71WzBg6K5BnjCBaWdUOnt2r/w6Z/pz9rq5cm4yB5UjMRx716f+jKzKoIwQLkQUJOC8nxdwoLo07IPPCfARjQ5RIqf/HhNY7iJTzU78kXtuPJBsFwDSIu/ormCjHEohV5xVGVnXsiwcUCW2cVoPA7uGtDJGNMgg2iZJtDJ6Oqs3oMsapXg9q3Ao7vJk3gk6z0zaHCgGEjREzLi7lsnrx1TzVJWPNTYPk5sLO2uWtOb1y3PJVE9ka8e8uY933gp11Aum0kuVyA1PKEw4+aADzk47790HmMkdPRZIBjR9XMxu41FkKarvVVk6FCqFmw52iMkWADVUmfktETT7fgY+gTPGW8aJ+j2uqKlx0t/ypqVroL700jYzCFOKf7cgj8BYhxf3403RcRWlvDQd4dKP8aXNBZAsZOrQnT3kqvIMQAI1sZByKIb2wbJgNsHZmXT8icinJNGkVE1XD1EEBf7TLlMgnfAjQijOLrjuq9HSWGy9PKIyKmVusfT/LQvlrdanGe3uWnRWYMOx74JbM6J8M+fkZg994ZU7tTDiDNPCYX0+UdoT/L3agfCbMCKudsGS6umOdbpczPhFC/Ix2MPBKpV3gCL+YOCQhWEYiaXpcfGsDkIPy8TxGLrl/esF7qIQyTTxEgu5WtSY3g8YdXh6dNE+cU59OTY4ssZpY3FmnF16X3g8+ZNmvjTW4ziDCD1lSsfPBXzcMCZWFZ8JJfMHKhMEo+RAk8OXT1mburuqgkTrW0iR4IPSuS8LcvIlDyPjfee6WQVeDYXn4Q3Tro3SuxY9FSs//vB0npCmKi5hBP0yfv+Z3J3ft6c63nSKVEcvGBAaefYYllAkgZgLuUvuovLlgIepzOAaJhsyuZWAffxzuw2ZMrV7bKj+4A3Y532dVYM57dvb3efah5zY5LDNHAM6YaMPjoqNdmEchcTS8XZyBki/pBB9xFkAmjQ2tduXOcfJSnSGCfiyvcJOhPtXhuxnBussTmZjK8gLYyrKGp.9b7895937101e666a44867808b1cf2cc0d2b7a49022ddafb1bd1733d4cd536fe"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/generate/ztp/url"
+             }
+           ]
+         }
+
