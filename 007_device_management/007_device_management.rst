@@ -5395,6 +5395,63 @@ How to delete a device group?
      ]
    }
 
+How to create a device group from a failed task?
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #1304764 (FortiManager 8.0.1).
+
+The created device group will contain all devices that failed the task.
+
+The following example shows how to create a device group ``err_grp_001``from a
+failed task with ID ``573`` in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+    
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "name": "err_grp_001",
+                 "state": 5,
+                 "task": 573
+               },
+               "url": "/dvmdb/adom/demo/group/by-task"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+    
+      .. code-block:: json
+
+         {
+           "cid": 25,
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "oid": 3088
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom/demo/group/by-task"
+             }
+           ]
+         }
+
+      .. note::
+        
+         The created device group ``err_grp_001`` has an OID of ``3088``.
+
 How to delete a device?
 -----------------------
 
