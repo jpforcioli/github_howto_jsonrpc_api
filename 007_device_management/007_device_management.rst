@@ -3765,7 +3765,9 @@ For example, suppose you declare a model device without the auto-link flag
 enabled, then connect the FortiGate to the FortiManager. The device will appear
 in a *Ready for Auto-link* state as shown in the image below:
 
-.. thumbnail:: images/image_015.png
+.. card::
+
+   .. thumbnail:: images/image_015.png
 
 If you now enable the auto-link flag on the model device, the auto-link process
 will not start automatically, since it is up to the FortiGate device to trigger
