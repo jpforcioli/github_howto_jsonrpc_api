@@ -3759,7 +3759,7 @@ How to force a Model Device to be auto-linked?
 
 Caught in #1281899 (FortiManager 7.6.8/8.0.1).
 
-This is for when you don't want to wait for the FortiGate to trigger the auto-link process. You can force it by using the ``/exec/fgfm//autolink-device`` endpoint.
+This is for when you don't want to wait for the FortiGate to trigger the auto-link process. You can force it by using the ``/cli/global/exec/fgfm//autolink-device`` endpoint.
 
 For example, suppose you declare a model device without the auto-link flag
 enabled, then connect the FortiGate to the FortiManager. The device will appear
@@ -3771,7 +3771,7 @@ in a *Ready for Auto-link* state as shown in the image below:
 
 If you now enable the auto-link flag on the model device, the auto-link process
 will not start automatically, since it is up to the FortiGate device to trigger
-it. You can force it from the FortiManager side using the ``/exec/fgfm/autolink-device`` endpoint.
+it. You can force it from the FortiManager side using the ``/cli/global/exec/fgfm/autolink-device`` endpoint.
 
 The following example shows how to force the auto-link process for the ``dev_001`` model device:
 
