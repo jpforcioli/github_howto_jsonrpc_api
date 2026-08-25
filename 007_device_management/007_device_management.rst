@@ -13160,7 +13160,7 @@ How to generate a ZTP URL?
 
 Introduced in #1310194 (FortiManager 8.0.1).
 
-This allows you to generate ZTP URLs from CLI scripts.
+This allows you to generate ZTP URLs from CLI scripts and Jinja CLI scripts.
 
 The following example shows how to generate a ZTP URL from the
 ``cli_script_001`` CLI script for the ``dev_001`` managed device in the 
