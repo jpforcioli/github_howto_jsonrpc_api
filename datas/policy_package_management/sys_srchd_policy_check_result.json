@@ -4,8 +4,8 @@
   "result": [
     {
       "data": {
-        "name": "dc_paris",
-        "pkgname": "pkg_002",
+        "name": "demo",
+        "pkgname": "pkg_001",
         "rec": [
           {
             "full_shadow_count": "0",

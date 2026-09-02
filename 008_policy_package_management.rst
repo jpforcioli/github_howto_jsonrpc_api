@@ -3419,13 +3419,11 @@ Package check for the ``pkg_001`` in the ADOM ``demo``:
               ]
             }          
 
-         .. note::
+         Loop this operation till:
 
-            Loop this operation till:
+         .. math::
 
-            .. math::
-
-               num_done * num_lines * percent = tot_percent
+            num\_done * num\_lines * 100 = tot\_percent
 
 #. Get the Policy Package check result
 
@@ -3456,7 +3454,7 @@ Package check for the ``pkg_001`` in the ADOM ``demo``:
 
          .. literalinclude:: datas/policy_package_management/sys_srchd_policy_check_result.json
             :language: json
-            
+
 Policy Blocks
 -------------
 
