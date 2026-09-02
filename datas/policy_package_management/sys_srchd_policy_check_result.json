@@ -1,0 +1,3005 @@
+{
+  "cid": 194,
+  "id": 6,
+  "result": [
+    {
+      "data": {
+        "name": "dc_paris",
+        "pkgname": "pkg_002",
+        "rec": [
+          {
+            "full_shadow_count": "0",
+            "name": "4",
+            "none policy count": "0",
+            "none_rec": [],
+            "partial_shadow_count": "0",
+            "rec": [],
+            "type": 3
+          },
+          {
+            "name": "5",
+            "rec": [
+              {
+                "ids": [
+                  1,
+                  2
+                ]
+              },
+              {
+                "ids": [
+                  11,
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17,
+                  18,
+                  19,
+                  20
+                ]
+              },
+              {
+                "ids": [
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29,
+                  30
+                ]
+              },
+              {
+                "ids": [
+                  31,
+                  32,
+                  33,
+                  34,
+                  35,
+                  36,
+                  37,
+                  38,
+                  39,
+                  40
+                ]
+              },
+              {
+                "ids": [
+                  41,
+                  42,
+                  43,
+                  44,
+                  45,
+                  48,
+                  49,
+                  50
+                ]
+              },
+              {
+                "ids": [
+                  46,
+                  47
+                ]
+              },
+              {
+                "ids": [
+                  51,
+                  52,
+                  53,
+                  54,
+                  55,
+                  56,
+                  57,
+                  58,
+                  59,
+                  60
+                ]
+              },
+              {
+                "ids": [
+                  61,
+                  62,
+                  63,
+                  64,
+                  65,
+                  66,
+                  67,
+                  68,
+                  69,
+                  70
+                ]
+              },
+              {
+                "ids": [
+                  71,
+                  72,
+                  73,
+                  74,
+                  75,
+                  76,
+                  77,
+                  78,
+                  79,
+                  80
+                ]
+              },
+              {
+                "ids": [
+                  81,
+                  82,
+                  83,
+                  84,
+                  85,
+                  86,
+                  87,
+                  88,
+                  89,
+                  90
+                ]
+              },
+              {
+                "ids": [
+                  91,
+                  92,
+                  93,
+                  94,
+                  95,
+                  96,
+                  97,
+                  98,
+                  99,
+                  100
+                ]
+              }
+            ],
+            "type": 3
+          },
+          {
+            "name": "1",
+            "rec": [
+              {
+                "name": "3699",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "sanctioned"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1028",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "block-high-risk"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "sniffer-profile"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "wifi-default"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1420",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "sniffer-profile"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "wifi-default"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "3305",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "g-default"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "3285",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "google-translate"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "microsoft-outlook"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "microsoft-onedrive"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "adobe-creativecloud"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "microsoft-office365"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "box"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "jira"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "adobe"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "vimeo"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "yahoo"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "github"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "gitlab"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "google"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "notion"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "openai"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "ubuntu"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "yandex"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "dropbox"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "youtube"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "docusign"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "linkedin"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "microsoft"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "servicenow"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "yahoo-mail"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "google-docs"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "google-maps"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "google-meet"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "google-drive"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "google-gmail"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "adobe-acrobat"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "dropbox-paper"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "meta-facebook"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "meta-instagram"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "microsoft-bing"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "google-calendar"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "3207",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "edm-keyword"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "mip-label"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "keyword"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "ssn-us"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "credit-card"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-edm-can-natl_id-sin"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "3208",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-pol-krs-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-fra-vatin-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-chn-natl_id-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-uk-pass-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-usa-pass-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-aut-vatin-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-source_code-c"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-uk-health_id-nhs-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-ita-pass-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-jpn-pass-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-lux-vatin-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-esp-pass-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-chn-license-plate-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-fra-pass-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-irl-vatin-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-jpn-mn-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-aut-pass-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-source_code-java"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-twn-natl_id-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-can-pass-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-ita-fiscal-code-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-aus-pass-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-bra-cnpj-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-fra-natl_id-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-glb-cc-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-glb-swift-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-source_code-go"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-jpn-health_id-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-source_code-python"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-pol-regon-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-usa-natl_id-ssn-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-kor-pass-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-can-bank_account-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-usa-dl-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-jpn-cn-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-source_code-powershell"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-usa-aba_rtn-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-can-health_service-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-tha-natl_id-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-can-natl_id-sin-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-sec-cisco_config"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-esp-natl_id-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-aus-abn-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-ind-natl_id-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-kor-natl_id-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-pol-natl_id-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-uk-dl-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-can-dl-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-twn-bank_account-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-mys-natl_id-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-sec-fortigate_config"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-ita-dl-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-jpn-dl-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-kor-dl-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-gbr-nino-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-bgr-ucn_id-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-aut-ssn-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-chn-dl-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-deu-dl-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-per-tin-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-aus-health_id-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-aus-tin-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-fra-dl-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-esp-tin-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-swe-natl_id-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-dnk-natl_id-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-fra-tin-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-hkg-natl_id-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-swe-tin-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-aut-tin-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-bel-tin-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-hrv-tin-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-fin-tin-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-hun-tin-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-mex-bank_code-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-jpn-rrn-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-nzl-health_id-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-idn-tin-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-usa-mbi-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-lux-tin-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-mex-curp-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-bra-dl-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-nld-natl_id-bsn-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-nzl-tin-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-bel-natl_id-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-bel-vatin-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-isl-natl_id-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-usa-npi-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-fin-natl_id-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-isr-natl_id-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-usa-tin-itin-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-grc-tin-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-esp-tin-cif-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-pol-tin-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-che-natl_id-ahv-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-can-phin-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-deu-vatin-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-bra-cpf-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-sgp-natl_id-dict-low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-deu-tin-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-irl-tin-ppsn-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-prt-tin-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-balkans-natl_id-umcn-dict-med"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-nld-vatin-dict-high"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "3210",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "Large-File"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "Content_Summary"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "Content_Archive"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "sniffer-profile"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1038",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-source_code"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-can-hia"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fg-can-pii"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1693",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "2312",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "sniffer-profile"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "2910",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "sniffer-profile"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "140",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "EMS_ALL_UNKNOWN_CLIENTS"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "all"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "none"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "metadata-server"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "login.windows.net"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "login.microsoft.com"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "login.microsoftonline.com"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "gmail.com"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "wildcard.google.com"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "wildcard.dropbox.com"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "SSLVPN_TUNNEL_ADDR1"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "FABRIC_DEVICE"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "foobar"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "141",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "all"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "none"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "SSLVPN_TUNNEL_IPv6_ADDR1"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "142",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "TELEMETRY"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "269",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "all_hosts"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "all_routers"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "OSPF"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "EIGRP"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "Bonjour"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "all"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1636",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "all"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1440",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1841",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "IPv6-address"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "IPv4-address"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "171",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "none"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "always"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "default-darrp-optimize"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1364",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "shared-1M-pipe"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "low-priority"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "high-priority"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "medium-priority"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "guarantee-100kbps"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "384",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "General"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "Network Services"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "Tunneling"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "Web Proxy"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "Authentication"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "VoIP, Messaging & Other Applications"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "Web Access"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "File Access"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "Remote Access"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "Email"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "167",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "RAUDIO"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "TALK"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "RADIUS-OLD"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "GTP"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "QUAKE"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "NONE"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "GOPHER"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "FINGER"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "NNTP"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "WAIS"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "Internet-Locator-Service"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "REXEC"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "UUCP"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "NetMeeting"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "MMS"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "CVSPSERVER"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "AOL"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "VDOLIVE"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "RLOGIN"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "RSH"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "WINFRAME"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "TIMESTAMP"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "INFO_REQUEST"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "INFO_ADDRESS"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "PING6"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "gFTP"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "FTP"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1563",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "deep-inspection"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "custom-deep-inspection"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "no-inspection"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "certificate-inspection"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "2016",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "Adobe Login"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "googleapis.com"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "google-play"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "firefox update server"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "Gotomeeting"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "google-drive"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "itunes"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "swscan.apple.com"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "google-play3"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "citrix"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "Windows update 2"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "skype"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "autoupdate.opera.com"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "update.microsoft.com"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "softwareupdate.vmware.com"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "live.com"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "adobe"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "apple"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "eease"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "google-play2"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "icloud"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "android"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "auth.gfx.ms"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "dropbox.com"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "appstore"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fortinet"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "mzstatic-apple"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "verisign"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "cdn-apple"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "microsoft"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "344",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "288",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "high_security"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "ips-inbound"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "sniffer-profile"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "all_default_pass"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "protect_client"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "all_default"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "protect_http_server"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "wifi-default"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "protect_email_server"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "2322",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1760",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "2223",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "quarantine"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "sniffer"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1584",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "en"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "fr"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "pg"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "sp"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "big5"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "GB2312"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "euc-kr"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "x-sjis"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "2028",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "URL_Blocked_by_Fabric_SecOps"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "Domain_Blocked_by_Fabric_SecOps"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "IP_Blocked_by_Fabric_SecOps"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "MAC_Blocked_by_Fabric_SecOps"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1076",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "auth-intf-wqt.root"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "3623",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "255",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "px_is1_001_sgt_001"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "147",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "guest"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "3278",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1482",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "strict"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1659",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "457",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "4067",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "unrated"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "trustworthy"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "low"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "moderate"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "suspicious"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "high"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "1413",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "sniffer-profile"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "default"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "monitor-all"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "wifi-default"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              },
+              {
+                "name": "2939",
+                "rec": [
+                  {
+                    "rec": [
+                      {
+                        "name": "arrp-default-medium-density"
+                      }
+                    ],
+                    "type": 5
+                  },
+                  {
+                    "rec": [
+                      {
+                        "name": "arrp-default-high-density"
+                      }
+                    ],
+                    "type": 5
+                  }
+                ],
+                "type": 4
+              }
+            ],
+            "type": 3
+          }
+        ],
+        "status": "ok",
+        "timestamp": 1788351893,
+        "type": 1
+      },
+      "status": {
+        "code": 0,
+        "message": "OK"
+      },
+      "url": "/sys/srchd/policy_check_result"
+    }
+  ]
+}

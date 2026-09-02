@@ -3427,6 +3427,36 @@ Package check for the ``pkg_001`` in the ADOM ``demo``:
 
                num_done * num_lines * percent = tot_percent
 
+#. Get the Policy Package check result
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 6,
+              "method": "exec",
+              "params": [
+                {
+                  "data": {
+                    "adom": "demo",
+                    "device": "demo",
+                    "pkg": "pkg_001"
+                  },
+                  "url": "/sys/srchd/policy_check_result"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+
+      .. tab-item:: RESPONSE
+
+         .. literalinclude:: datas/policy_package_management/sys_srchd_policy_check_result.json
+            :language: json
+            
 Policy Blocks
 -------------
 
