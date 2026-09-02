@@ -3290,6 +3290,143 @@ _______________________________________________________
 You can only revert a firewall policy provided it does exist (see :ref:`How to 
 revert a firewall policy from a past changes?`
 
+How to trigger a Policy Package check?
+--------------------------------------
+
+Starting with FortiManager 8.0.1 (#1201910), it is possible to trigger a *Policy
+Package check* operation using the FortiManager API.
+
+It's a 3 steps Sprocess. The following example shows how to trigger a Policy
+Package check for the ``pkg_001`` in the ADOM ``demo``:
+
+#. Trigger the Policy Package check operation
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 3,
+              "method": "exec",
+              "params": [
+                {
+                  "data": {
+                    "act": 7,
+                    "adom": "demo",
+                    "category": 0,
+                    "count": 0,
+                    "pkg": "pkg_001",
+                    "start": 0
+                  },
+                  "url": "/sys/srchd/policy_check"
+                }
+              ],
+              "session": "{{session}}"
+            }
+
+      .. tab-item:: REPONSE
+
+         .. code-block:: json
+
+            {
+              "cid": 184,
+              "id": 3,
+              "result": [
+                {
+                  "data": {
+                    "task": 650
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/sys/srchd/policy_check"
+                }
+              ]
+            }
+
+#. Monitor the returned task ID:
+
+   .. tab-set::
+
+      .. tab-item:: REQUEST
+
+         .. code-block:: json
+
+            {
+              "id": 4,
+              "method": "get",
+              "params": [
+                {
+                  "url": "/task/task/650"
+                }
+              ],
+              "session": "{{session}}",
+              "verbose": 1
+            }
+
+      .. tab-item:: RESPONSE
+
+         .. code-block:: json
+
+            {
+              "cid": 185,
+              "id": 4,
+              "result": [
+                {
+                  "data": {
+                    "adom": 2901,
+                    "end_tm": 0,
+                    "flags": 0,
+                    "id": 650,
+                    "line": [
+                      {
+                        "detail": "",
+                        "end_tm": 0,
+                        "err": 0,
+                        "history": null,
+                        "ip": "",
+                        "name": "demo",
+                        "oid": 0,
+                        "percent": 0,
+                        "poid": 0,
+                        "start_tm": 1788351156,
+                        "state": "pending",
+                        "vdom": ""
+                      }
+                    ],
+                    "num_done": 0,
+                    "num_err": 0,
+                    "num_lines": 1,
+                    "num_warn": 0,
+                    "percent": 0,
+                    "pid": 0,
+                    "src": "policy check",
+                    "start_tm": 1788351156,
+                    "state": "pending",
+                    "title": "Policy Check",
+                    "tot_percent": 0,
+                    "user": "SYSTEM"
+                  },
+                  "status": {
+                    "code": 0,
+                    "message": "OK"
+                  },
+                  "url": "/task/task/650"
+                }
+              ]
+            }          
+
+         .. note::
+
+            Loop this operation till:
+
+            .. math::
+
+               num_done * num_lines * percent = tot_percent
+
 Policy Blocks
 -------------
 
