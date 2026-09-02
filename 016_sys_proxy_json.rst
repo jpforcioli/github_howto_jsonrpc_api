@@ -649,7 +649,8 @@ the ``dev_001`` managed FortiGate in the ``demo`` ADOM:
            ]
          }
 
-Asynchronous API calls with /sys/proxy/json+++++++++++++++++++++++++++++++++++++++++++
+Asynchronous API calls with /sys/proxy/json
++++++++++++++++++++++++++++++++++++++++++++
 
 Starting with FortiManager 8.0.1 (#1284848), the FortiManager JSON RPC API
 supports asynchronous calls. It means that we can send a request to the
