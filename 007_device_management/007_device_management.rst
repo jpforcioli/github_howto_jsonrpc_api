@@ -7513,151 +7513,133 @@ How to trigger a retrieve operation?
 Against a single device
 +++++++++++++++++++++++
 
-We trigger a retrieve operation for device ``fgt_dut`` in ADOM ``adom_dut``:
+The following example shows how to trigger a retrieve operation for the device
+``fgt_001`` in the ADOM ``demo``:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block::
+   .. tab-item:: REQUEST
 
-   {
-     "id": 1,
-     "jsonrpc": "1.0",
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "adom": "adom_dut",
-           "flags": [
-             "none"
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "flags": [
+                   "create_task",
+                   "nonblocking"
+                 ],
+                 "reload-dev-member-list": [
+                   {
+                     "name": "fgt_001"
+                   }
+                 ]
+               },
+               "url": "/dvm/cmd/reload/dev-list"
+             }
            ],
-           "reload-dev-member-list": [
-             { 
-               "name": "fgt_dut"
+           "session": "{{session}}"
+         }
+
+      .. note:: 
+
+         - The ``create_task`` flag creates a task that lets you follow the
+           progress of the operation from the FortiManager GUI (under
+           *System Settings* > *Task Monitor*).
+
+         - The ``nonblocking`` flag makes this API call return immediately.
+           However, you must keep the API session alive, otherwise you won't
+           be able to review the task information.
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 246,
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "pid": 3713,
+                 "taskid": 661
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvm/cmd/reload/dev-list"
              }
            ]
-         },
-         "url": "/dvm/cmd/reload/dev-list"
-       }
-     ],
-     "session": "P5Yk9twDAS+yPdcC0gkDu+Rk1q3LpNzAQ5Bg4UsvcpbjdQLl2EuBETew1iuqOSncJufexxD69KyaWwP/gCZ8Gg==",
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block::
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvm/cmd/reload/dev-list"
-       }
-     ]
-   }
+         }
 
 Against multiple devices
 ++++++++++++++++++++++++
 
-We retrieve from device ``apac-12-fgt-01`` to ``apac-24-fgt-01`` in ADOM
-``demo``:
+The following example shows how to to trigger a retrieve operation for the
+devices ``fgt_001`` and ``fgt_002`` in the ADOM ``demo``:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json 
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "adom": "demo",
-           "flags": [
-             "create_task",
-             "nonblocking"
+      .. code-block:: json
+         
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "flags": [
+                   "create_task",
+                   "nonblocking"
+                 ],
+                 "reload-dev-member-list": [
+                   {
+                     "name": "fgt_001"
+                   },
+                   {
+                     "name": "fgt_002"
+                   }
+                 ]
+               },
+               "url": "/dvm/cmd/reload/dev-list"
+             }
            ],
-           "reload-dev-member-list": [
+           "session": "{{session}}",
+         }        
+
+      .. note:: 
+
+         You can't use a device group name...
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 260, 
+           "id": 3,
+           "result": [
              {
-               "name": "apac-12-fgt-01"
-             },
-             {
-               "name": "apac-13-fgt-01"
-             },
-             {
-               "name": "apac-14-fgt-01"
-             },
-             {
-               "name": "apac-15-fgt-01"
-             },
-             {
-               "name": "apac-16-fgt-01"
-             },
-             {
-               "name": "apac-17-fgt-01"
-             },
-             {
-               "name": "apac-18-fgt-01"
-             },
-             {
-               "name": "apac-19-fgt-01"
-             },
-             {
-               "name": "apac-20-fgt-01"
-             },
-             {
-               "name": "apac-21-fgt-01"
-             },
-             {
-               "name": "apac-22-fgt-01"
-             },
-             {
-               "name": "apac-23-fgt-01"
-             },
-             {
-               "name": "apac-24-fgt-01"
+               "data": {
+                 "pid": 4297,
+                 "taskid": 662
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvm/cmd/reload/dev-list"
              }
            ]
-         },
-         "url": "/dvm/cmd/reload/dev-list"
-       }
-     ],
-     "session": "nv7+Daewp8QrUEIqPGfS3HXL/j4pWYwJNnOHHfh8Z1yd9VeNv1gwIybuqwls9XGRSrybgP2l+i6tu5iWOrYpbw=="
-   }
-
-.. note:: 
-
-   - The ``create_task`` flag will create a task that will allow you to follow
-     the progress of the operation from FortiManager GUI (under *System
-     Settings* > *Task Monitor*)
-   - The ``nonblocking`` flag will make this API call to return immediately. But
-     you still have to maintain the API session alive otherwise you won't be
-     able to review the task information.
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "pid": 23223,
-           "taskid": 600
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvm/cmd/reload/dev-list"
-       }
-     ]
-   }
+         }
 
 Firmware upgrade
 ----------------
