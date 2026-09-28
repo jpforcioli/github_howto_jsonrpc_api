@@ -557,7 +557,22 @@ To install the ``branches`` Policy Package from ADOM ``demo``:
       .. note::
 
          - There's not ``scope`` attribute; it means that the Policy Package
-           will be install against all the assigned Installation Targets
+           will be install against all the assigned Installation Targets.
+
+           .. warning:
+
+              Starting with FortiManager 7.6 and 8.0, the ``scope`` attribute   
+              is mandatory (#1217387). To install your Policy Package against 
+              all the assigned Installation Targets, you can use the following
+              ``scope``:
+              
+              .. code-block:: json
+
+                 "scope": [
+                   {
+                     "name": "All_FortiGate"
+                   }
+                 ]
 
          - ``adom_rev_comments`` will be used as a comment for the created ADOM
            Revision
