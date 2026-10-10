@@ -473,260 +473,47 @@ We can also add ``wtp`` or ``fext`` as other ``ctypes``.
 
 Firmware Template
 -----------------
+
 Introduction
 ++++++++++++
 
 Caught in #711918.
 
-Main FMG JSON RPC API ``url`` for firmware template seems to be:
+A Firmware Template defines the firmware version to enforce on the managed
+devices assigned to it (FortiGate, FortiAP, FortiSwitch, FortiExtender, etc.),
+along with the options and schedule used to upgrade them.
 
-.. code-block:: 
+The FortiManager JSON RPC API exposes Firmware Templates through two distinct
+sets of URLs:
 
-   /um/image/template/upgrade
+- ``/pm/fwmprof/adom/<adom>`` is used to manage the Firmware Templates
+  themselves (list, create, assign devices, etc.).
 
-How to assign a device?
-+++++++++++++++++++++++
+- ``/um/image/template/<command>`` is used to run operations with a Firmware
+  Template, where ``<command>`` can be:
 
-Caught in #964977.
+  - ``upgrade``: to trigger an upgrade
+  - ``preview``: to obtain the upgrade path
+  - ``cancel``: to cancel an upgrade for specific devices
+  - ``report``: to generate the upgrade report
 
-.. tab-set:: 
-
-   .. tab-item:: REQUEST
-
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "method": "add",
-           "params": [
-             {
-               "data": [
-                 {
-                   "name": "dc_emea_001",
-                   "vdom": "root"
-                 }
-               ],
-               "url": "/pm/fwmprof/adom/dc_emea/fmw_001/scope member"
-             }
-           ],
-           "session": "{{session}}"
-         }
-
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "result": [
-             {
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "/pm/fwmprof/adom/dc_emea/fmw_001/scope member"
-             }
-           ]
-         }
-
-How to get an Upgrade Preview for Firmware Template?
-++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-Caught in #1076332.
-
-This is useful for reviewing which devices will require an upgrade.
-
-The following example demonstrates how to retrieve an upgrade preview for the
-`firmware_template_001` Firmware Template within the ``demo`` ADOM:
-
-.. tab-set::
-
-   .. tab-item:: REQUEST
-
-      .. code-block:: json
-        
-         {
-           "id": 3,
-           "method": "exec",
-           "params": [
-             {
-               "data": {
-                 "adom": "demo",
-                 "name": "firmware_template_001"
-               },
-               "url": "/um/image/template/preview"
-             }
-           ]
-         }
-
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "result": [
-             {
-               "data": {
-                 "report": {
-                   "adom-name": "demo",
-                   "adom_oid": 38741,
-                   "device-number": 1,
-                   "devices": [
-                     {
-                       "end-time": 1732884824,
-                       "name": "fgt-001",
-                       "oid": 39590,
-                       "package-status": 1,
-                       "skip-path": 0,
-                       "start-time": 0,
-                       "taskid": 0,
-                       "tasks": [
-                         {
-                           "current_version": "7.6.0-b3401",
-                           "package-status": 1,
-                           "platform": "FortiGate-VM64",
-                           "product": 1,
-                           "profile_name": "firmware_template_001",
-                           "result": 0,
-                           "serial": "FGVMMLREDACTED39",
-                           "target_version": "7.4.4-b2662",
-                           "upgrade_path": [
-                             "7.4.4-b2662"
-                           ]
-                         }
-                       ]
-                     }
-                   ],
-                   "end-time": 1732884824,
-                   "name": "firmware_template_001",
-                   "report-time": 1732884824,
-                   "start-time": 0,
-                   "success-number": 0,
-                   "taskid": 0
-                 },
-                 "status": "success",
-                 "taskid": 0
-               },
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "/um/image/template/preview"
-             }
-           ]
-         }
-
-      .. note::
-
-         In this example, the ``fgt-001`` device will require an upgrade. 
-        
-         However, considering the ``current_version`` and ``target_version``
-         attributes, this would actually result in a downgrade. 
-
-         Regardless of the scenario, the ``upgrade_path`` attribute will 
-         outline the steps required to reach the target version.
-
-How to get an Upgrade Report for Firmware Template?
-+++++++++++++++++++++++++++++++++++++++++++++++++++
-
-Caught in #0919211.
-
-To get the Upgrade Report generated by the ``to_fgt_740`` Firmware Template in the ``dc_emea`` ADOM:
-
-.. tab-set::
-
-   .. tab-item:: REQUEST
-
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "method": "exec",
-           "params": [
-             {
-               "data": {
-                 "adom": "dc_emea",
-                 "name": "fgt_to_740"
-               },
-               "url": "um/image/template/report"
-             }
-           ],
-           "session": "{{session}}"
-         }
-
-   .. tab-item:: RESPONSE
-
-      .. code-block:: json
-
-         {
-           "id": 3,
-           "result": [
-             {
-               "data": {
-                 "report": [
-                   {
-                     "adom-name": "dc_emea",
-                     "adom-oid": 165,
-                     "device-number": 1,
-                     "devices": [
-                       {
-                         "end-time": 1700776054,
-                         "name": "fgt-741-001",
-                         "oid": 175,
-                         "package-status": 0,
-                         "skip-path": 1,
-                         "start-time": 1700775638,
-                         "taskid": 9,
-                         "tasks": [
-                           {
-                             "current_version": "7.4.1-b2463",
-                             "package-status": 0,
-                             "platform": "FortiGate-VM64",
-                             "product": 1,
-                             "profile_name": "fgt_to_740",
-                             "result": 0,
-                             "serial": "FGVMMLTM22002647",
-                             "target_version": "7.4.0-b2360",
-                             "upgrade_path": [
-                               "7.4.0-b2360"
-                             ]
-                           }
-                         ]
-                       }
-                     ],
-                     "end-time": 1700776054,
-                     "name": "fgt_to_740",
-                     "report-time": 1700776054,
-                     "start-time": 1700775638,
-                     "success-number": 1,
-                     "taskid": 9
-                   }
-                 ]
-               },
-               "status": {
-                 "code": 0,
-                 "message": "OK"
-               },
-               "url": "um/image/template/report"
-             }
-           ]
-         }            
-         
-      .. note::
-
-         - In this output, there's a single Upgrade Report.
+The sections below follow a typical workflow: list and create a Firmware
+Template, assign devices to it, preview the upgrade, cancel it if needed, and
+finally get the upgrade report.
 
 .. note::
-  
-   To get the upgrade reports for your managed devices, see section :ref:`How 
-   to get the Upgrade Report for managed devices?`.
+
+   To upgrade a device without creating a Firmware Template, see section
+   :ref:`How to upgrade a device?`.
 
 How to list Firmware Templates?
 +++++++++++++++++++++++++++++++
 
-The following example shows how to retrieve the list of firmware templates for
-the ``demo`` ADOM:
+Listing the Firmware Templates of an ADOM is a good starting point: it returns
+their names, settings, and the firmware versions they enforce.
+
+The following example shows how to get the list of Firmware Templates in the
+``demo`` ADOM:
 
 .. tab-set::
 
@@ -810,15 +597,21 @@ the ``demo`` ADOM:
 
       .. note::
 
-         In this output, the firmware template includes samples of all
-         supported products using the default platform config values.
+         In this output, the Firmware Template enforces a firmware version for
+         each supported product (FortiAP, FortiSwitch, FortiExtender and
+         FortiGate), using the default platform of each product.
 
-How to create a new Firmware Template?
-++++++++++++++++++++++++++++++++++++++
+How to create a Firmware Template?
+++++++++++++++++++++++++++++++++++
 
-The following example shows how to create the ``firmware_template_001`` Firmware
-Template in the ``demo`` ADOM.  In this example, ``dev_001`` is being assigned
-to the template at the time of creation.
+A Firmware Template is created with an ``add`` request against the
+``/pm/fwmprof/adom/<adom>`` URL. Devices can be assigned at creation time using
+the ``scope member`` attribute, or later (see :ref:`How to assign a device to a
+Firmware Template?`).
+
+The following example shows how to create the ``firmware_template_001``
+Firmware Template in the ``demo`` ADOM. In this example, the ``dev_001`` device
+is assigned to the template at creation time:
 
 .. tab-set::
 
@@ -866,16 +659,58 @@ to the template at the time of creation.
 
       .. note::
 
-         - ``fwmprof setting``: defines the firmware template settings. The
-           possible attributes are:
-     
-           - ``schedule-day``: specifies the day(s) of the week when the 
-             upgrade task is scheduled to run and is only valid when the 
-             ``weekly`` schedule type is selected.
+         - ``name``: the name of the Firmware Template.
 
-             The value is submitted as an array of strings that specify the day 
-             of the week. For example, to schedule the upgrade task to run 
-             every Monday, Wednesday, and Friday, the value would be: 
+         - ``scope member``: the list of devices assigned to the Firmware
+           Template.
+
+         - ``fwmprof setting``: the Firmware Template settings. The possible
+           attributes are:
+
+           - ``description``: a free-text description.
+
+           - ``schedule-type``: defines the schedule of the upgrade task. The
+             supported schedule types are:
+
+             - ``none``: the upgrade task won't be scheduled to run
+               automatically. Start and end times aren't required.
+
+             - ``once``: the upgrade task will run only once, at the specified
+               start time. Start and end times are required and must be
+               24-hour date/time formatted strings.
+
+               For example: ``2024-12-31 23:59:00``.
+
+             - ``daily``: the upgrade task will run every day, at the specified
+               start time. Start and end times are required and must be 24-hour
+               time formatted strings.
+
+               For example: ``23:59:00``.
+
+             - ``weekly``: the upgrade task will run on the specified days of
+               the week, at the specified start time. Start and end times are
+               required and must be 24-hour time formatted strings, as for the
+               ``daily`` schedule type. The ``schedule-day`` attribute is also
+               required to specify the day(s) of the week.
+
+             In the example above, the value ``0`` corresponds to ``none``.
+
+           - ``schedule-start-time``: the start time of the upgrade task. It
+             is required when ``schedule-type`` is ``once``, ``daily``, or
+             ``weekly``. The value must be a 24-hour date/time formatted string
+             for the ``once`` schedule type (e.g., ``2024-12-31 23:59:00``), or
+             a 24-hour time formatted string for the ``daily`` and ``weekly``
+             schedule types (e.g., ``23:59:00``).
+
+           - ``schedule-end-time``: the end time of the upgrade task. It
+             follows the same rules as ``schedule-start-time``.
+
+           - ``schedule-day``: the day(s) of the week when the upgrade task is
+             scheduled to run. It is only valid when ``schedule-type`` is
+             ``weekly``.
+
+             The value is an array of strings. For example, to run the upgrade
+             task every Monday, Wednesday, and Friday:
 
              .. code-block:: json
 
@@ -884,129 +719,375 @@ to the template at the time of creation.
                   "wednesday",
                   "friday"
                 ]
-          
-           - ``schedule-end-time``: specifies the end time for the upgrade task 
-             schedule. It is required when the schedule type is set to 
-             ``once``, ``daily``, or ``weekly``. The value must be submitted as 
-             a 24-hour date/time formatted string for the ``once`` schedule 
-             type (e.g., ``2024-12-31 23:59:00``) or as a 24-hour time 
-             formatted string for the ``daily`` and ``weekly`` schedule types 
-             (e.g., ``23:59:00``).
 
-           - ``schedule-start-time``: specifies the start time for the upgrade 
-             task schedule. It is required when the schedule type is set to 
-             ``once``, ``daily``, or ``weekly``. The value must be submitted as 
-             a 24-hour date/time formatted string for the ``once`` schedule 
-             type (e.g., ``2024-12-31 23:59:00``) or as a 24-hour time 
-             formatted string for the ``daily`` and ``weekly`` schedule types 
-             (e.g., ``23:59:00``).
+           - ``image-source``: the source of the firmware image. The supported
+             values are:
 
-           - ``schedule-type``: defines the schedule for the upgrade task. The 
-             supported schedule types include:
-
-             - ``none``: the upgrade task will not be scheduled to run 
-               automatically. Start and end times are not required for this 
-               schedule type. 
-
-             - ``once``: the upgrade task will run only once at the specified 
-               start time. Start and end times are required and must be 
-               submitted as a 24-hour date/time formatted string. 
-             
-               For example: ``2024-12-31 23:59:00``.
-
-             - ``daily``: the upgrade task will run every day at the specified 
-               start time. Start and end times are required and must be 
-               submitted as a 24-hour time formatted string.
-
-               For example: ``23:59:00``.
-             
-             - ``weekly``: the upgrade task will run on the specified days of 
-               the week at the specified start time. Start and end times are 
-               required and must be submitted as a 24-hour time formatted 
-               string as with the ``daily`` schedule type.  The 
-               ``schedule-day`` attribute is also required for this schedule 
-               type to specify the day(s) of the week when the upgrade task 
-               should run.
-
-           - ``image-source``: specifies the source of the firmware image. The
-             supported values include:
-       
              - ``0``: image sourced from FortiGuard
              - ``1``: image sourced from FortiManager
              - ``null``: defaults to ``0``
 
-           - ``name`` specifies the name of the firmware template.
+           - ``enforced version``: the firmware versions enforced on the
+             devices assigned to the Firmware Template. This is an array of
+             objects, one per product/platform, with the following attributes:
 
-           - ``enforced_version``: specifies the firmware version enforced for 
-             devices assigned to the firmware template. This attribute is an 
-             array of objects that specifies the firmware version enforced for 
-             each of the devices assigned to the template.
+             - ``product``: the product for which the firmware version is
+               enforced:
 
-             - ``platform``: specifies the platform for which the firmware 
-               version is enforced. Values must include a valid hardware 
-               platform supported by FortiManager that is in the range defined 
-               by the ``product`` attribute. For example, if the ``product`` 
-               attribute is set to ``1`` (FortiGate), valid values for the 
-               ``platform`` attribute include:
-         
+               - ``1``: FortiGate
+               - ``2``: FortiAP
+               - ``3``: FortiSwitch
+               - ``4``: FortiExtender
+               - ``5``: FortiExtender-Modem
+
+             - ``platform``: the platform for which the firmware version is
+               enforced. It must be a valid hardware platform supported by
+               FortiManager and belonging to the product defined by the
+               ``product`` attribute. For example, when ``product`` is ``1``
+               (FortiGate), valid values include:
+
                - ``FortiGate-40F``
                - ``FortiGate-60F``
                - ``FortiGate-VM64``
-               - ``FGT-Default`` (this is a special value that can be used to 
-                 apply the enforced firmware version to any FortiGate platform)
+               - ``FGT-Default`` (a special value that applies the enforced
+                 firmware version to any FortiGate platform)
 
-               A list of supported platforms can be retrieved using the 
+               The list of supported platforms can be obtained with the
                following FortiManager CLI command:
 
                .. code-block:: text
 
-                  diagnose dvm supported-platforms list`
+                  diagnose dvm supported-platforms list
 
-             - ``product``: specifies the product for which the firmware 
-               version is enforced:
-         
-               - ``1``: FortiGate
-               - ``2``: FortiSwitch
-               - ``3``: FortiAP
-               - ``4``: FortiExtender
-               - ``5``: FortiExtender-Modem
+             - ``version``: the enforced firmware version (e.g.,
+               ``7.2.11-b1740``).
 
-           - ``flags``: specifies additional options for the enforced firmware 
-             version. Most flags apply only to the FortiGate platform. The 
-             value is calculated by summing the numeric values of the enabled 
-             flags:
+             - ``flags``: additional options for the enforced firmware version.
+               Most flags only apply to FortiGate. The value is the sum of the
+               numeric values of the enabled flags:
 
-             .. list-table:: Firmware Template Enforced Version Flags
-                :header-rows: 1
-                :widths: 30 50 20
+               .. list-table:: Firmware Template Enforced Version Flags
+                  :header-rows: 1
+                  :widths: 30 50 20
 
-                * - Flag
-                  - Description
-                  - Numeric Value
+                  * - Flag
+                    - Description
+                    - Numeric Value
 
-                * - Boot from Alternate Partition After upgrade
-                  - Boot to secondary partition after upgrade
-                  - ``1``
+                  * - Boot from Alternate Partition After Upgrade
+                    - Boot to the secondary partition after upgrade
+                    - ``1``
 
-                * - Only upgrade FortiGate Clusters with all members up
-                  - Upgrade HA clusters only when all members up
-                  - ``8``
+                  * - Only Upgrade FortiGate Clusters with All Members Up
+                    - Upgrade HA clusters only when all members are up
+                    - ``8``
 
-                * - Skip Fortigate Disk Check 
-                  - Skip the auto disk check during upgrade
-                  - ``32``
+                  * - Skip FortiGate Disk Check
+                    - Skip the automatic disk check during upgrade
+                    - ``32``
 
-                * - Skip FortiGate Auto Scan Disk
-                  - Skip disk auto scan during upgrade
-                  - ``64``
+                  * - Skip FortiGate Auto Scan Disk
+                    - Skip the disk auto scan during upgrade
+                    - ``64``
 
-             The default value is ``104`` and is calculated by combining the 
-             numeric values of the following flags:
-             - ``Only Upgrade FortiGate Clusters with all members up`` (``8``)
-             - ``Skip Fortigate Disk Check`` (``32``)
-             - ``Skip FortiGate Auto Scan Disk`` (``64``)
+               The default value is ``104`` (``8 + 32 + 64``), which enables
+               the following flags:
 
-             Total is giving ``104`` (``8 + 32 + 64``).
+               - *Only Upgrade FortiGate Clusters with All Members Up* (``8``)
+               - *Skip FortiGate Disk Check* (``32``)
+               - *Skip FortiGate Auto Scan Disk* (``64``)
+
+How to assign a device to a Firmware Template?
+++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #964977.
+
+Once a Firmware Template exists, devices can be assigned to it by adding them
+to its ``scope member`` attribute.
+
+The following example shows how to assign the ``root`` VDOM of the
+``dc_emea_001`` device to the ``fmw_001`` Firmware Template in the ``dc_emea``
+ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": [
+                 {
+                   "name": "dc_emea_001",
+                   "vdom": "root"
+                 }
+               ],
+               "url": "/pm/fwmprof/adom/dc_emea/fmw_001/scope member"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/fwmprof/adom/dc_emea/fmw_001/scope member"
+             }
+           ]
+         }
+
+How to get an Upgrade Preview for a Firmware Template?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #1076332.
+
+Before running an upgrade, you can get a preview to review which devices
+require an upgrade and the upgrade path that will be followed for each of them.
+
+The following example shows how to get an upgrade preview for the
+``firmware_template_001`` Firmware Template in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "name": "firmware_template_001"
+               },
+               "url": "/um/image/template/preview"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "report": {
+                   "adom-name": "demo",
+                   "adom_oid": 38741,
+                   "device-number": 1,
+                   "devices": [
+                     {
+                       "end-time": 1732884824,
+                       "name": "fgt-001",
+                       "oid": 39590,
+                       "package-status": 1,
+                       "skip-path": 0,
+                       "start-time": 0,
+                       "taskid": 0,
+                       "tasks": [
+                         {
+                           "current_version": "7.6.0-b3401",
+                           "package-status": 1,
+                           "platform": "FortiGate-VM64",
+                           "product": 1,
+                           "profile_name": "firmware_template_001",
+                           "result": 0,
+                           "serial": "FGVMMLREDACTED39",
+                           "target_version": "7.4.4-b2662",
+                           "upgrade_path": [
+                             "7.4.4-b2662"
+                           ]
+                         }
+                       ]
+                     }
+                   ],
+                   "end-time": 1732884824,
+                   "name": "firmware_template_001",
+                   "report-time": 1732884824,
+                   "start-time": 0,
+                   "success-number": 0,
+                   "taskid": 0
+                 },
+                 "status": "success",
+                 "taskid": 0
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/um/image/template/preview"
+             }
+           ]
+         }
+
+      .. note::
+
+         In this example, the ``fgt-001`` device requires an upgrade.
+
+         However, given the ``current_version`` and ``target_version``
+         attributes, this would actually be a downgrade.
+
+         In any case, the ``upgrade_path`` attribute lists the steps required
+         to reach the target version.
+
+How to cancel an upgrade for a specific device?
++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #1347474.
+
+When an upgrade has been triggered by a Firmware Template, you can cancel it
+for one or more specific devices, without affecting the other devices assigned
+to the template.
+
+The following example shows how to cancel the upgrade of the ``dev_001`` device
+in the ``demo`` ADOM, triggered by the ``firmware_template_001`` Firmware
+Template:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "demo",
+                 "name": "firmware_template_001",
+                 "devices": [
+                   {
+                     "name": "dev_001"
+                   }
+                 ]
+               },
+               "url": "/um/image/template/cancel"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+How to get an Upgrade Report for a Firmware Template?
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Caught in #0919211.
+
+After an upgrade, the Upgrade Report gives the outcome for each device assigned
+to the Firmware Template: start and end times, current and target versions,
+followed upgrade path, etc.
+
+The following example shows how to get the Upgrade Report generated by the
+``fgt_to_740`` Firmware Template in the ``dc_emea`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "adom": "dc_emea",
+                 "name": "fgt_to_740"
+               },
+               "url": "um/image/template/report"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "report": [
+                   {
+                     "adom-name": "dc_emea",
+                     "adom-oid": 165,
+                     "device-number": 1,
+                     "devices": [
+                       {
+                         "end-time": 1700776054,
+                         "name": "fgt-741-001",
+                         "oid": 175,
+                         "package-status": 0,
+                         "skip-path": 1,
+                         "start-time": 1700775638,
+                         "taskid": 9,
+                         "tasks": [
+                           {
+                             "current_version": "7.4.1-b2463",
+                             "package-status": 0,
+                             "platform": "FortiGate-VM64",
+                             "product": 1,
+                             "profile_name": "fgt_to_740",
+                             "result": 0,
+                             "serial": "FGVMMLTM22002647",
+                             "target_version": "7.4.0-b2360",
+                             "upgrade_path": [
+                               "7.4.0-b2360"
+                             ]
+                           }
+                         ]
+                       }
+                     ],
+                     "end-time": 1700776054,
+                     "name": "fgt_to_740",
+                     "report-time": 1700776054,
+                     "start-time": 1700775638,
+                     "success-number": 1,
+                     "taskid": 9
+                   }
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "um/image/template/report"
+             }
+           ]
+         }
+
+      .. note::
+
+         The ``report`` attribute is an array; in this output, it contains a
+         single Upgrade Report.
+
+.. note::
+
+   To get the Upgrade Reports for your managed devices, see section :ref:`How
+   to get the Upgrade Report for managed devices?`.
 
 Certificate Template
 --------------------
