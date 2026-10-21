@@ -1309,9 +1309,9 @@ How to `execute top` or `execute iotop`?
 `execute top`
 _____________
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: REQUEST
+   .. tab-item:: REQUEST
 
       .. code-block:: json
          
@@ -1332,9 +1332,9 @@ _____________
 `execute iotop`
 _______________
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: REQUEST
+   .. tab-item:: REQUEST
 
       .. code-block:: json
          

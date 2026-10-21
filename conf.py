@@ -39,8 +39,8 @@ release = '1.0.0'
 
 extensions = [ 
     'myst_parser', # enable myst parser
-    "sphinx_tabs.tabs",
-    'sphinx_toolbox.collapse',
+#    "sphinx_tabs.tabs",
+#    'sphinx_toolbox.collapse',
     'sphinx.ext.autosectionlabel',    
     'sphinxcontrib.images',
     'sphinx_copybutton',

@@ -3316,9 +3316,9 @@ ________________________
 
 To get firewall address groups containing member ``host_001``:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: REQUEST
+   .. tab-item:: REQUEST
 
       .. code-block:: json
 
@@ -3343,7 +3343,7 @@ To get firewall address groups containing member ``host_001``:
            "session": "{{ session }}"
          }            
 
-   .. tab:: RESPONSE
+   .. tab-item:: RESPONSE
 
       .. code-block:: json
 
@@ -4497,9 +4497,9 @@ _____________________
 What if goal is to retrieve all firewall addresses whose name start with
 ``host_``?
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: REQUEST
+   .. tab-item:: REQUEST
 
       .. code-block:: json
 
@@ -4525,7 +4525,7 @@ What if goal is to retrieve all firewall addresses whose name start with
            "verbose": 1
          }
 
-   .. tab:: RESPONSE
+   .. tab-item:: RESPONSE
 
       .. code-block:: json
 

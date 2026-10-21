@@ -567,54 +567,56 @@ Here is an example to install pending network & system settings changes for
 device ``FG600C-194-77``, with no VDOM (i.e. default ``root`` VDOM), from ADOM
 ``FOOBAR``:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
-
-   {
-     "id": 1, 
-     "method": "exec", 
-     "params": [
-       {
-         "data": {
-           "adom": "FOOBAR", 
-           "dev_rev_comments": "A comment", 
-           "flags": [
-             "none"
-           ], 
-           "scope": [
+      .. code-block:: json
+      
+         {
+           "id": 1, 
+           "method": "exec", 
+           "params": [
              {
-               "name": "FG600C-194-77", 
-               "vdom": "root"
+               "data": {
+                 "adom": "FOOBAR", 
+                 "dev_rev_comments": "A comment", 
+                 "flags": [
+                   "none"
+                 ], 
+                 "scope": [
+                   {
+                     "name": "FG600C-194-77", 
+                     "vdom": "root"
+                   }
+                 ]
+               }, 
+               "url": "/securityconsole/install/device"
+             }
+           ], 
+           "session": "cEeh7eax9AbTauJpEAtapIogYlWT5IQazR1vGvw7QAKsmUy3E7ZJ4FQINA1GMSatBQTOpFZ1fceuH7UqLRYfzMJwUYo9T5/F", 
+           "verbose": 1
+         }
+  
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+        
+         {
+           "id": 1, 
+           "result": [
+             {
+               "data": {
+                 "task": 2066
+               }, 
+               "status": {
+                 "code": 0, 
+                 "message": "OK"
+               }, 
+               "url": "/securityconsole/install/device"
              }
            ]
-         }, 
-         "url": "/securityconsole/install/device"
-       }
-     ], 
-     "session": "cEeh7eax9AbTauJpEAtapIogYlWT5IQazR1vGvw7QAKsmUy3E7ZJ4FQINA1GMSatBQTOpFZ1fceuH7UqLRYfzMJwUYo9T5/F", 
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-  
-   {
-     "id": 1, 
-     "result": [
-       {
-         "data": {
-           "task": 2066
-         }, 
-         "status": {
-           "code": 0, 
-           "message": "OK"
-         }, 
-         "url": "/securityconsole/install/device"
-       }
-     ]
-   }
+         }
 
 The response contains a task ID (here it is ``2066``).
 
@@ -688,54 +690,56 @@ For instance, to install policy package ``PP_FG600C-194-77`` from ADOM
 ``FOOBAR``, on managed device ``FG600C-194-77`` with no VDOM (i.e. default
 ``root`` VDOM):
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
-
-   {
-     "id": 1, 
-     "method": "exec", 
-     "params": [
-       {
-         "data": {
-           "adom": "CARWASH", 
-           "flags": [
-             "none"
-           ], 
-           "pkg": "PP_FG600C-194-77", 
-           "scope": [
+      .. code-block:: json
+      
+         {
+           "id": 1, 
+           "method": "exec", 
+           "params": [
              {
-               "name": "FG600C-194-77", 
-               "vdom": "root"
+               "data": {
+                 "adom": "CARWASH", 
+                 "flags": [
+                   "none"
+                 ], 
+                 "pkg": "PP_FG600C-194-77", 
+                 "scope": [
+                   {
+                     "name": "FG600C-194-77", 
+                     "vdom": "root"
+                   }
+                 ]
+               }, 
+               "url": "/securityconsole/install/package"
+             }
+           ], 
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1, 
+           "result": [
+             {
+               "data": {
+                 "task": 2071
+               }, 
+               "status": {
+                 "code": 0, 
+                 "message": "OK"
+               }, 
+               "url": "/securityconsole/install/package"
              }
            ]
-         }, 
-         "url": "/securityconsole/install/package"
-       }
-     ], 
-     "session": "hJdopAeMzkgdJ6uQbfIgz48Eq+aXy8B/IvkNnrUuBbT1ni6eQ8GbrZPlUv6enG1pAXVqwS4tWmkaC13jAa0RnJBxW4xcC6xi", 
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1, 
-     "result": [
-       {
-         "data": {
-           "task": 2071
-         }, 
-         "status": {
-           "code": 0, 
-           "message": "OK"
-         }, 
-         "url": "/securityconsole/install/package"
-       }
-     ]
-   }
+         }
 
 The response contains a task ID (here it is ``2071``).
 
@@ -762,146 +766,148 @@ To monitor a task, the JSON RPC method ``get`` can be used.
 
 For instance to monitor task ID ``2066``:
 
-**REQUEST:**
+.. tab-set:: 
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
-
-   {
-     "id": 1, 
-     "method": "get", 
-     "params": [
-       {
-         "url": "/task/task/2066"
-       }
-     ], 
-     "session": "lfNHxnG2uuGLwjaGiLFPvNSpeKD/0rc4bH0yiGnWK3VGpOPpAmmBY7hib9q3Wig7HGwL/hUMWdRTRYEBY4soYMHpz8ENRiMG", 
-     "verbose": 1
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1, 
-     "result": [
-       {
-         "data": {
-           "adom": 364, 
-           "end_tm": 1515752051, 
-           "flags": 0, 
-           "history": [
+      .. code-block:: json
+      
+         {
+           "id": 1, 
+           "method": "get", 
+           "params": [
              {
-               "detail": "2018-01-12 02:13:44:start to install dev(FG600C-194-77)", 
-               "name": "FG600C-194-77", 
-               "percent": 0, 
-               "vdom": null
-             }, 
-             {
-               "detail": "2018-01-12 02:13:46:init state: start to get pre-checksum", 
-               "name": "FG600C-194-77", 
-               "percent": 15, 
-               "vdom": null
-             }, 
-             {
-               "detail": "2018-01-12 02:13:53:get pre-checksum state: start get diff(chkout=1)", 
-               "name": "FG600C-194-77", 
-               "percent": 25, 
-               "vdom": null
-             }, 
-             {
-               "detail": "2018-01-12 02:13:53:script done state: start to FGFM install", 
-               "name": "FG600C-194-77", 
-               "percent": 35, 
-               "vdom": null
-             }, 
-             {
-               "detail": "2018-01-12 02:13:55:fgfm install state: prepare to post-checksum", 
-               "name": "FG600C-194-77", 
-               "percent": 80, 
-               "vdom": null
-             }, 
-             {
-               "detail": "2018-01-12 02:14:01:post-checksum state: start verification", 
-               "name": "FG600C-194-77", 
-               "percent": 90, 
-               "vdom": null
-             }, 
-             {
-               "detail": "2018-01-12 02:14:06:install and save finished status=OK", 
-               "name": "FG600C-194-77", 
-               "percent": 100, 
-               "vdom": null
-             }, 
-             {
-               "detail": "2018-01-12 02:13:46:Start copying shared objs to devdb, device(FG600C-194-77), vdomid(root)", 
-               "name": "FG600C-194-77(root)[copy]", 
-               "percent": 1, 
-               "vdom": "root"
-             }, 
-             {
-               "detail": "2018-01-12 02:13:46:Initiate request to install to real device", 
-               "name": "FG600C-194-77(root)[copy]", 
-               "percent": 80, 
-               "vdom": "root"
-             }, 
-             {
-               "detail": "2018-01-12 02:13:46:Copy to device done", 
-               "name": "FG600C-194-77(root)[copy]", 
-               "percent": 90, 
-               "vdom": "root"
-             }, 
-             {
-               "detail": "2018-01-12 02:14:11:Installation to real device done", 
-               "name": "FG600C-194-77(root)[copy]", 
-               "percent": 100, 
-               "vdom": "root"
+               "url": "/task/task/2066"
              }
            ], 
-           "id": 2066, 
-           "line": [
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1, 
+           "result": [
              {
-               "detail": "install and save finished status=OK", 
-               "err": 0, 
-               "ip": null, 
-               "name": "FG600C-194-77", 
-               "oid": 366, 
-               "percent": 100, 
-               "state": "done", 
-               "vdom": null
-             }, 
-             {
-               "detail": "Installation to real device done", 
-               "err": 0, 
-               "ip": "192.168.194.77", 
-               "name": "FG600C-194-77(root)[copy]", 
-               "oid": 366, 
-               "percent": 100, 
-               "state": "done", 
-               "vdom": "root"
+               "data": {
+                 "adom": 364, 
+                 "end_tm": 1515752051, 
+                 "flags": 0, 
+                 "history": [
+                   {
+                     "detail": "2018-01-12 02:13:44:start to install dev(FG600C-194-77)", 
+                     "name": "FG600C-194-77", 
+                     "percent": 0, 
+                     "vdom": null
+                   }, 
+                   {
+                     "detail": "2018-01-12 02:13:46:init state: start to get pre-checksum", 
+                     "name": "FG600C-194-77", 
+                     "percent": 15, 
+                     "vdom": null
+                   }, 
+                   {
+                     "detail": "2018-01-12 02:13:53:get pre-checksum state: start get diff(chkout=1)", 
+                     "name": "FG600C-194-77", 
+                     "percent": 25, 
+                     "vdom": null
+                   }, 
+                   {
+                     "detail": "2018-01-12 02:13:53:script done state: start to FGFM install", 
+                     "name": "FG600C-194-77", 
+                     "percent": 35, 
+                     "vdom": null
+                   }, 
+                   {
+                     "detail": "2018-01-12 02:13:55:fgfm install state: prepare to post-checksum", 
+                     "name": "FG600C-194-77", 
+                     "percent": 80, 
+                     "vdom": null
+                   }, 
+                   {
+                     "detail": "2018-01-12 02:14:01:post-checksum state: start verification", 
+                     "name": "FG600C-194-77", 
+                     "percent": 90, 
+                     "vdom": null
+                   }, 
+                   {
+                     "detail": "2018-01-12 02:14:06:install and save finished status=OK", 
+                     "name": "FG600C-194-77", 
+                     "percent": 100, 
+                     "vdom": null
+                   }, 
+                   {
+                     "detail": "2018-01-12 02:13:46:Start copying shared objs to devdb, device(FG600C-194-77), vdomid(root)", 
+                     "name": "FG600C-194-77(root)[copy]", 
+                     "percent": 1, 
+                     "vdom": "root"
+                   }, 
+                   {
+                     "detail": "2018-01-12 02:13:46:Initiate request to install to real device", 
+                     "name": "FG600C-194-77(root)[copy]", 
+                     "percent": 80, 
+                     "vdom": "root"
+                   }, 
+                   {
+                     "detail": "2018-01-12 02:13:46:Copy to device done", 
+                     "name": "FG600C-194-77(root)[copy]", 
+                     "percent": 90, 
+                     "vdom": "root"
+                   }, 
+                   {
+                     "detail": "2018-01-12 02:14:11:Installation to real device done", 
+                     "name": "FG600C-194-77(root)[copy]", 
+                     "percent": 100, 
+                     "vdom": "root"
+                   }
+                 ], 
+                 "id": 2066, 
+                 "line": [
+                   {
+                     "detail": "install and save finished status=OK", 
+                     "err": 0, 
+                     "ip": null, 
+                     "name": "FG600C-194-77", 
+                     "oid": 366, 
+                     "percent": 100, 
+                     "state": "done", 
+                     "vdom": null
+                   }, 
+                   {
+                     "detail": "Installation to real device done", 
+                     "err": 0, 
+                     "ip": "192.168.194.77", 
+                     "name": "FG600C-194-77(root)[copy]", 
+                     "oid": 366, 
+                     "percent": 100, 
+                     "state": "done", 
+                     "vdom": "root"
+                   }
+                 ], 
+                 "num_done": 2, 
+                 "num_err": 0, 
+                 "num_lines": 2, 
+                 "num_warn": 0, 
+                 "percent": 100, 
+                 "pid": 26153, 
+                 "src": "install device", 
+                 "start_tm": 1515752024, 
+                 "state": "done", 
+                 "title": "Install Device", 
+                 "tot_percent": 200, 
+                 "user": "admin"
+               }, 
+               "status": {
+                 "code": 0, 
+                 "message": "OK"
+               }, 
+               "url": "/task/task/2066"
              }
-           ], 
-           "num_done": 2, 
-           "num_err": 0, 
-           "num_lines": 2, 
-           "num_warn": 0, 
-           "percent": 100, 
-           "pid": 26153, 
-           "src": "install device", 
-           "start_tm": 1515752024, 
-           "state": "done", 
-           "title": "Install Device", 
-           "tot_percent": 200, 
-           "user": "admin"
-         }, 
-         "status": {
-           "code": 0, 
-           "message": "OK"
-         }, 
-         "url": "/task/task/2066"
-       }
-     ]
-   }
+           ]
+         }
 
 FortiManager is returning the whole history (or part of it if in the middle of
 the operation) and most importantly some global attributes that allow to figure
@@ -982,88 +988,90 @@ Different JSON RPC URL
 
 To get the list of managed devices and FortiGate ADOMs:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name"
+               ],
+               "loadsub": 0,
+               "url": "/dvmdb/device"
+             },
+             {
+               "fields": [
+                 "name"
+               ],
+               "filter": [
+                 "restricted_prds",
+                 "==",
+                 "fos"
+               ],
+               "loadsub": 0,
+               "url": "/dvmdb/adom"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "fields": [
-           "name"
-         ],
-         "loadsub": 0,
-         "url": "/dvmdb/device"
-       },
-       {
-         "fields": [
-           "name"
-         ],
-         "filter": [
-           "restricted_prds",
-           "==",
-           "fos"
-         ],
-         "loadsub": 0,
-         "url": "/dvmdb/adom"
-       }
-     ],
-     "session": "tCnuMMWQhq0rT4oEROMN5I5v5U+k3Ody1wBvcSHOZ9iyOJRbTlwIlRzTngW7CfLnmZ6Gtd2KpUw6YRqtFeuFwQ=="
-   }
+   .. tab-item:: RESPONSE
 
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "name": "fgt_dc1",
-             "oid": 164
-           },
-           {
-             "name": "fgt_dc2",
-             "oid": 227
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/device"
-       },
-       {
-         "data": [
-           {
-             "name": "adom_dc1",
-             "oid": 160
-           },
-           {
-             "name": "adom_dc2",
-             "oid": 162
-           },
-           {
-             "name": "root",
-             "oid": 3
-           },
-           {
-             "name": "rootp",
-             "oid": 10
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/dvmdb/adom"
-       }
-     ]
-   }
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "name": "fgt_dc1",
+                   "oid": 164
+                 },
+                 {
+                   "name": "fgt_dc2",
+                   "oid": 227
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/device"
+             },
+             {
+               "data": [
+                 {
+                   "name": "adom_dc1",
+                   "oid": 160
+                 },
+                 {
+                   "name": "adom_dc2",
+                   "oid": 162
+                 },
+                 {
+                   "name": "root",
+                   "oid": 3
+                 },
+                 {
+                   "name": "rootp",
+                   "oid": 10
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/dvmdb/adom"
+             }
+           ]
+         }
 
 Monitoring different elements in different ADOMs
 ++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1072,387 +1080,389 @@ To get the firewall policy statistics for all managed devices belonging to ADOM
 ``dc_emea`` along with all available interfaces for all managed managed devices
 belonging to ADOM ``dc_amer``:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
-
-   {
-     "id": 1,
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "action": "get",
-           "resource": "/api/v2/monitor/firewall/policy",
-           "target": [
-             "/adom/dc_emea/group/All_FortiGate"
-           ]
-         },
-         "url": "/sys/proxy/json"
-       },
-       {
-         "data": {
-           "action": "get",
-           "resource": "/api/v2/monitor/system/available-interfaces?format=name|ipv4_addresses",
-           "target": [
-             "/adom/dc_amer/group/All_FortiGate"
-           ]
-         },
-         "url": "/sys/proxy/json"
-       }    
-     ],
-     "session": "{{session}}"
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "data": [
-           {
-             "response": {
-               "action": "",
-               "build": 1255,
-               "http_method": "GET",
-               "name": "policy",
-               "path": "firewall",
-               "results": [
-                 {
-                   "active_sessions": 0,
-                   "asic_bytes": 0,
-                   "asic_packets": 0,
-                   "bytes": 0,
-                   "packets": 0,
-                   "policyid": 0,
-                   "software_bytes": 0,
-                   "software_packets": 0
-                 }
-               ],
-               "serial": "FGVMMLTM23000162",
-               "status": "success",
-               "vdom": "root",
-               "version": "v7.2.2"
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "action": "get",
+                 "resource": "/api/v2/monitor/firewall/policy",
+                 "target": [
+                   "/adom/dc_emea/group/All_FortiGate"
+                 ]
+               },
+               "url": "/sys/proxy/json"
              },
-             "status": {
-               "code": 0,
-               "message": "OK"
-             },
-             "target": "dut_fgt_03"
-           },
-           {
-             "response": {
-               "action": "",
-               "build": 234,
-               "http_method": "GET",
-               "name": "policy",
-               "path": "firewall",
-               "results": [
+             {
+               "data": {
+                 "action": "get",
+                 "resource": "/api/v2/monitor/system/available-interfaces?format=name|ipv4_addresses",
+                 "target": [
+                   "/adom/dc_amer/group/All_FortiGate"
+                 ]
+               },
+               "url": "/sys/proxy/json"
+             }    
+           ],
+           "session": "{{session}}"
+         }
+      
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "data": [
                  {
-                   "1_week_ipv4": {
-                     "bytes": [
-                       9073,
-                       246710,
-                       117978,
-                       0,
-                       0,
-                       0,
-                       0,
-                       0
+                   "response": {
+                     "action": "",
+                     "build": 1255,
+                     "http_method": "GET",
+                     "name": "policy",
+                     "path": "firewall",
+                     "results": [
+                       {
+                         "active_sessions": 0,
+                         "asic_bytes": 0,
+                         "asic_packets": 0,
+                         "bytes": 0,
+                         "packets": 0,
+                         "policyid": 0,
+                         "software_bytes": 0,
+                         "software_packets": 0
+                       }
                      ],
-                     "hit_count": [
-                       82,
-                       2281,
-                       1092,
-                       0,
-                       0,
-                       0,
-                       0,
-                       0
-                     ],
-                     "packets": [
-                       83,
-                       2281,
-                       1092,
-                       0,
-                       0,
-                       0,
-                       0,
-                       0
-                     ]
+                     "serial": "FGVMMLTM23000162",
+                     "status": "success",
+                     "vdom": "root",
+                     "version": "v7.2.2"
                    },
-                   "active_sessions": 0,
-                   "bytes": 374481,
-                   "first_used": 1673472304,
-                   "hit_count": 3465,
-                   "last_used": 1674124082,
-                   "packets": 3466,
-                   "policyid": 0
+                   "status": {
+                     "code": 0,
+                     "message": "OK"
+                   },
+                   "target": "dut_fgt_03"
                  },
                  {
-                   "active_sessions": 0,
-                   "bytes": 0,
-                   "packets": 0,
-                   "policyid": 1,
-                   "uuid": "d5da7da8-81ef-51ed-613b-60e3503a06a1"
-                 },
-                 {
-                   "active_sessions": 0,
-                   "bytes": 0,
-                   "packets": 0,
-                   "policyid": 2,
-                   "uuid": "b2cfeacc-90f5-51ed-12ba-ca7a5af8e4a7"
+                   "response": {
+                     "action": "",
+                     "build": 234,
+                     "http_method": "GET",
+                     "name": "policy",
+                     "path": "firewall",
+                     "results": [
+                       {
+                         "1_week_ipv4": {
+                           "bytes": [
+                             9073,
+                             246710,
+                             117978,
+                             0,
+                             0,
+                             0,
+                             0,
+                             0
+                           ],
+                           "hit_count": [
+                             82,
+                             2281,
+                             1092,
+                             0,
+                             0,
+                             0,
+                             0,
+                             0
+                           ],
+                           "packets": [
+                             83,
+                             2281,
+                             1092,
+                             0,
+                             0,
+                             0,
+                             0,
+                             0
+                           ]
+                         },
+                         "active_sessions": 0,
+                         "bytes": 374481,
+                         "first_used": 1673472304,
+                         "hit_count": 3465,
+                         "last_used": 1674124082,
+                         "packets": 3466,
+                         "policyid": 0
+                       },
+                       {
+                         "active_sessions": 0,
+                         "bytes": 0,
+                         "packets": 0,
+                         "policyid": 1,
+                         "uuid": "d5da7da8-81ef-51ed-613b-60e3503a06a1"
+                       },
+                       {
+                         "active_sessions": 0,
+                         "bytes": 0,
+                         "packets": 0,
+                         "policyid": 2,
+                         "uuid": "b2cfeacc-90f5-51ed-12ba-ca7a5af8e4a7"
+                       }
+                     ],
+                     "serial": "FGVMMLTM22006608",
+                     "status": "success",
+                     "vdom": "root",
+                     "version": "v7.0.2"
+                   },
+                   "status": {
+                     "code": 0,
+                     "message": "OK"
+                   },
+                   "target": "dut_fgt_01"
                  }
                ],
-               "serial": "FGVMMLTM22006608",
-               "status": "success",
-               "vdom": "root",
-               "version": "v7.0.2"
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/sys/proxy/json"
              },
-             "status": {
-               "code": 0,
-               "message": "OK"
-             },
-             "target": "dut_fgt_01"
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/sys/proxy/json"
-       },
-       {
-         "data": [
-           {
-             "response": {
-               "action": "",
-               "build": 1255,
-               "http_method": "GET",
-               "name": "available-interfaces",
-               "path": "system",
-               "results": [
+             {
+               "data": [
                  {
-                   "name": "any"
+                   "response": {
+                     "action": "",
+                     "build": 1255,
+                     "http_method": "GET",
+                     "name": "available-interfaces",
+                     "path": "system",
+                     "results": [
+                       {
+                         "name": "any"
+                       },
+                       {
+                         "ipv4_addresses": [
+                           {
+                             "cidr_netmask": 23,
+                             "ip": "10.210.35.104",
+                             "netmask": "255.255.254.0"
+                           }
+                         ],
+                         "name": "port1"
+                       },
+                       {
+                         "ipv4_addresses": [
+                           {
+                             "cidr_netmask": 24,
+                             "ip": "10.2.0.1",
+                             "netmask": "255.255.255.0"
+                           }
+                         ],
+                         "name": "port2"
+                       },
+                       {
+                         "name": "port3"
+                       },
+                       {
+                         "name": "port4"
+                       },
+                       {
+                         "name": "naf.root"
+                       },
+                       {
+                         "name": "l2t.root"
+                       },
+                       {
+                         "name": "ssl.root"
+                       },
+                       {
+                         "ipv4_addresses": [
+                           {
+                             "cidr_netmask": 24,
+                             "ip": "10.255.1.1",
+                             "netmask": "255.255.255.0"
+                           }
+                         ],
+                         "name": "fortilink"
+                       },
+                       {
+                         "name": "virtual-wan-link"
+                       }
+                     ],
+                     "revision": "1674589859.651219",
+                     "serial": "FGVMMLTM23000178",
+                     "status": "success",
+                     "vdom": "root",
+                     "version": "v7.2.2"
+                   },
+                   "status": {
+                     "code": 0,
+                     "message": "OK"
+                   },
+                   "target": "dut_fgt_04"
                  },
                  {
-                   "ipv4_addresses": [
-                     {
-                       "cidr_netmask": 23,
-                       "ip": "10.210.35.104",
-                       "netmask": "255.255.254.0"
-                     }
-                   ],
-                   "name": "port1"
+                   "response": {
+                     "action": "",
+                     "build": 1390,
+                     "http_method": "GET",
+                     "name": "available-interfaces",
+                     "path": "system",
+                     "results": [
+                       {
+                         "name": "any"
+                       },
+                       {
+                         "ipv4_addresses": [
+                           {
+                             "cidr_netmask": 23,
+                             "ip": "10.210.35.105",
+                             "netmask": "255.255.254.0"
+                           }
+                         ],
+                         "name": "port1"
+                       },
+                       {
+                         "ipv4_addresses": [
+                           {
+                             "cidr_netmask": 27,
+                             "ip": "172.18.0.30",
+                             "netmask": "255.255.255.224"
+                           }
+                         ],
+                         "name": "port2"
+                       },
+                       {
+                         "ipv4_addresses": [
+                           {
+                             "cidr_netmask": 24,
+                             "ip": "10.3.0.1",
+                             "netmask": "255.255.255.0"
+                           }
+                         ],
+                         "name": "port3"
+                       },
+                       {
+                         "name": "port4"
+                       },
+                       {
+                         "name": "naf.root"
+                       },
+                       {
+                         "name": "l2t.root"
+                       },
+                       {
+                         "name": "ssl.root"
+                       },
+                       {
+                         "ipv4_addresses": [
+                           {
+                             "cidr_netmask": 24,
+                             "ip": "10.255.1.1",
+                             "netmask": "255.255.255.0"
+                           }
+                         ],
+                         "name": "fortilink"
+                       },
+                       {
+                         "ipv4_addresses": [
+                           {
+                             "cidr_netmask": 32,
+                             "ip": "172.16.255.253",
+                             "netmask": "255.255.255.255"
+                           }
+                         ],
+                         "name": "HUB1-Lo"
+                       },
+                       {
+                         "name": "virtual-wan-link"
+                       }
+                     ],
+                     "revision": "1674589859.655205",
+                     "serial": "FGVMMLTM22002644",
+                     "status": "success",
+                     "vdom": "root",
+                     "version": "v7.2.4"
+                   },
+                   "status": {
+                     "code": 0,
+                     "message": "OK"
+                   },
+                   "target": "dut_fgt_05"
                  },
                  {
-                   "ipv4_addresses": [
-                     {
-                       "cidr_netmask": 24,
-                       "ip": "10.2.0.1",
-                       "netmask": "255.255.255.0"
-                     }
-                   ],
-                   "name": "port2"
-                 },
-                 {
-                   "name": "port3"
-                 },
-                 {
-                   "name": "port4"
-                 },
-                 {
-                   "name": "naf.root"
-                 },
-                 {
-                   "name": "l2t.root"
-                 },
-                 {
-                   "name": "ssl.root"
-                 },
-                 {
-                   "ipv4_addresses": [
-                     {
-                       "cidr_netmask": 24,
-                       "ip": "10.255.1.1",
-                       "netmask": "255.255.255.0"
-                     }
-                   ],
-                   "name": "fortilink"
-                 },
-                 {
-                   "name": "virtual-wan-link"
+                   "response": {
+                     "action": "",
+                     "build": 1390,
+                     "http_method": "GET",
+                     "name": "available-interfaces",
+                     "path": "system",
+                     "results": [
+                       {
+                         "name": "any"
+                       },
+                       {
+                         "ipv4_addresses": [
+                           {
+                             "cidr_netmask": 23,
+                             "ip": "10.210.35.102",
+                             "netmask": "255.255.254.0"
+                           }
+                         ],
+                         "name": "port1"
+                       },
+                       {
+                         "name": "naf.root"
+                       },
+                       {
+                         "name": "l2t.root"
+                       },
+                       {
+                         "name": "ssl.root"
+                       },
+                       {
+                         "ipv4_addresses": [
+                           {
+                             "cidr_netmask": 24,
+                             "ip": "10.255.1.1",
+                             "netmask": "255.255.255.0"
+                           }
+                         ],
+                         "name": "fortilink"
+                       },
+                       {
+                         "name": "virtual-wan-link"
+                       }
+                     ],
+                     "revision": "1674589859.656882",
+                     "serial": "FGVMMLTM22006609",
+                     "status": "success",
+                     "vdom": "root",
+                     "version": "v7.2.4"
+                   },
+                   "status": {
+                     "code": 0,
+                     "message": "OK"
+                   },
+                   "target": "dut_fgt_02"
                  }
                ],
-               "revision": "1674589859.651219",
-               "serial": "FGVMMLTM23000178",
-               "status": "success",
-               "vdom": "root",
-               "version": "v7.2.2"
-             },
-             "status": {
-               "code": 0,
-               "message": "OK"
-             },
-             "target": "dut_fgt_04"
-           },
-           {
-             "response": {
-               "action": "",
-               "build": 1390,
-               "http_method": "GET",
-               "name": "available-interfaces",
-               "path": "system",
-               "results": [
-                 {
-                   "name": "any"
-                 },
-                 {
-                   "ipv4_addresses": [
-                     {
-                       "cidr_netmask": 23,
-                       "ip": "10.210.35.105",
-                       "netmask": "255.255.254.0"
-                     }
-                   ],
-                   "name": "port1"
-                 },
-                 {
-                   "ipv4_addresses": [
-                     {
-                       "cidr_netmask": 27,
-                       "ip": "172.18.0.30",
-                       "netmask": "255.255.255.224"
-                     }
-                   ],
-                   "name": "port2"
-                 },
-                 {
-                   "ipv4_addresses": [
-                     {
-                       "cidr_netmask": 24,
-                       "ip": "10.3.0.1",
-                       "netmask": "255.255.255.0"
-                     }
-                   ],
-                   "name": "port3"
-                 },
-                 {
-                   "name": "port4"
-                 },
-                 {
-                   "name": "naf.root"
-                 },
-                 {
-                   "name": "l2t.root"
-                 },
-                 {
-                   "name": "ssl.root"
-                 },
-                 {
-                   "ipv4_addresses": [
-                     {
-                       "cidr_netmask": 24,
-                       "ip": "10.255.1.1",
-                       "netmask": "255.255.255.0"
-                     }
-                   ],
-                   "name": "fortilink"
-                 },
-                 {
-                   "ipv4_addresses": [
-                     {
-                       "cidr_netmask": 32,
-                       "ip": "172.16.255.253",
-                       "netmask": "255.255.255.255"
-                     }
-                   ],
-                   "name": "HUB1-Lo"
-                 },
-                 {
-                   "name": "virtual-wan-link"
-                 }
-               ],
-               "revision": "1674589859.655205",
-               "serial": "FGVMMLTM22002644",
-               "status": "success",
-               "vdom": "root",
-               "version": "v7.2.4"
-             },
-             "status": {
-               "code": 0,
-               "message": "OK"
-             },
-             "target": "dut_fgt_05"
-           },
-           {
-             "response": {
-               "action": "",
-               "build": 1390,
-               "http_method": "GET",
-               "name": "available-interfaces",
-               "path": "system",
-               "results": [
-                 {
-                   "name": "any"
-                 },
-                 {
-                   "ipv4_addresses": [
-                     {
-                       "cidr_netmask": 23,
-                       "ip": "10.210.35.102",
-                       "netmask": "255.255.254.0"
-                     }
-                   ],
-                   "name": "port1"
-                 },
-                 {
-                   "name": "naf.root"
-                 },
-                 {
-                   "name": "l2t.root"
-                 },
-                 {
-                   "name": "ssl.root"
-                 },
-                 {
-                   "ipv4_addresses": [
-                     {
-                       "cidr_netmask": 24,
-                       "ip": "10.255.1.1",
-                       "netmask": "255.255.255.0"
-                     }
-                   ],
-                   "name": "fortilink"
-                 },
-                 {
-                   "name": "virtual-wan-link"
-                 }
-               ],
-               "revision": "1674589859.656882",
-               "serial": "FGVMMLTM22006609",
-               "status": "success",
-               "vdom": "root",
-               "version": "v7.2.4"
-             },
-             "status": {
-               "code": 0,
-               "message": "OK"
-             },
-             "target": "dut_fgt_02"
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/sys/proxy/json"
-       }
-     ]
-   }
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/sys/proxy/json"
+             }
+           ]
+         }
    
 Working with symbolic (human readable) values
 ---------------------------------------------
@@ -1532,44 +1542,46 @@ The capability to unset a specific attribute was added in FMG 5.4.1 (#0365372).
 
 To unset the IP address the ``dmz`` interface from managed device ``TEST-FGT``:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 1, 
+           "method": "set", 
+           "params": [
+             {
+               "data": {
+                 "name": "dmz", 
+                 "unset attrs": [
+                   "ip"
+                 ]
+               }, 
+               "url": "pm/config/device/TEST-FGT/global/system/interface"
+             }
+           ], 
+           "session": "w4KqkMrExJNUibihOZakWE/0j8VCeKGP1MbeG3Pne6ac5m5FBSJuBd20uuocfPHUZJGzYA/N10ZPTjWmPbJ9AA==", 
+           "verbose": 1
+         }   
+      
+   .. tab-item:: RESPONSE
 
-   {
-     "id": 1, 
-     "method": "set", 
-     "params": [
-       {
-         "data": {
-           "name": "dmz", 
-           "unset attrs": [
-             "ip"
+      .. code-block:: json
+      
+         {
+           "id": 1, 
+           "result": [
+             {
+               "status": {
+                 "code": 0, 
+                 "message": "OK"
+               }, 
+               "url": "pm/config/device/TEST-FGT/global/system/interface"
+             }
            ]
-         }, 
-         "url": "pm/config/device/TEST-FGT/global/system/interface"
-       }
-     ], 
-     "session": "w4KqkMrExJNUibihOZakWE/0j8VCeKGP1MbeG3Pne6ac5m5FBSJuBd20uuocfPHUZJGzYA/N10ZPTjWmPbJ9AA==", 
-     "verbose": 1
-   }   
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1, 
-     "result": [
-       {
-         "status": {
-           "code": 0, 
-           "message": "OK"
-         }, 
-         "url": "pm/config/device/TEST-FGT/global/system/interface"
-       }
-     ]
-   }
+         }
 
 Sometimes, it seems just enough to *unset* an attribute by ommiting it when
 doing the ``set`` (captured in #891341).
@@ -1577,9 +1589,9 @@ doing the ``set`` (captured in #891341).
 In following example, to unset the ``secondary`` attribute of a System Template,
 you just need to set the System Template without mentioning the attribute:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: REQUEST
+   .. tab-item:: REQUEST
 
       .. code-block:: json
 
@@ -1635,180 +1647,188 @@ two things:
 When ``rpc-permit`` is ``none``, the API user can simply not log in to
 FortiManager:
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-       "id": 1,
-       "method": "exec",
-       "params": [
-           {
-               "data": {
-                   "user": "devops",
-                   "passwd": "fortinet"
-                },
+      .. code-block:: json
+      
+         {
+             "id": 1,
+             "method": "exec",
+             "params": [
+                 {
+                     "data": {
+                         "user": "devops",
+                         "passwd": "fortinet"
+                      },
+                     "url": "/sys/login/user"
+                 }
+             ],
+             "session": null
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 1,
+           "result": [
+             {
+               "status": {
+                 "code": -11,
+                 "message": "No permission for the resource"
+               },
                "url": "/sys/login/user"
-           }
-       ],
-       "session": null
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 1,
-     "result": [
-       {
-         "status": {
-           "code": -11,
-           "message": "No permission for the resource"
-         },
-         "url": "/sys/login/user"
-       }
-     ]
-   }
-
+             }
+           ]
+         }
+      
 When ``rpc-permit`` is ``read``, the API user cannot read-write anything, even
 if associated permission profile allows read-write permission:
 
 For instance, the API user associated with permission profile ``Super_User`` but
 with ``rpc-permit`` set to ``read`` can't create a new firewall address:
 
-**REQUEST:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "name": "host_1001",
-           "subnet": "10.0.0.2/32"
-         },
-         "url": "/pm/config/adom/dc_amer/obj/firewall/address"
-       }
-     ],
-     "session": "nMMf3m/6Pp28Azuhx/3PT/JinJT74r8zHNZ/a7BV9vKoklrpB4ca66y7uR20KDi31acSTKOSFf4bH1COB6mKDA=="
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
+.. tab-set::
   
-   {
-     "id": 3,
-     "result": [
-       {
-         "status": {
-           "code": -11,
-           "message": "No permission for the resource"
-         },
-         "url": "/pm/config/adom/dc_amer/obj/firewall/address"
-       }
-     ],
-     "session": 13807
-   }
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "name": "host_1001",
+                 "subnet": "10.0.0.2/32"
+               },
+               "url": "/pm/config/adom/dc_amer/obj/firewall/address"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+        
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": -11,
+                 "message": "No permission for the resource"
+               },
+               "url": "/pm/config/adom/dc_amer/obj/firewall/address"
+             }
+           ],
+           "session": 13807
+         }
 
 It is also applicable if the API user attempts to add a firewall object directly
 in the managed device using the ``sys/proxy/json``:
 
-**REQUEST:**
-
-.. code-block:: json
+.. tab-set::
   
-   {
-     "id": 3,
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "action": "post",
-           "payload": {
-             "color": 13,
-             "name": "host_1006",
-             "subnet": "10.0.0.6/32"
-           },
-           "resource": "/api/v2/cmdb/firewall/address",
-           "target": [
-             "/adom/dc_amer/device/dut_fgt_03"
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+        
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "action": "post",
+                 "payload": {
+                   "color": 13,
+                   "name": "host_1006",
+                   "subnet": "10.0.0.6/32"
+                 },
+                 "resource": "/api/v2/cmdb/firewall/address",
+                 "target": [
+                   "/adom/dc_amer/device/dut_fgt_03"
+                 ]
+               },
+               "url": "/sys/proxy/json"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": -11,
+                 "message": "No permission for the resource"
+               },
+               "url": "/sys/proxy/json"
+             }
            ]
-         },
-         "url": "/sys/proxy/json"
-       }
-     ],
-     "session": "TJSY8zbQOyMSVsZxIU4xL5Tj3es06do42OVDi2MVmattWPhxpDhpVIy4C0VbvNwt02Z+SOErU1Nb/2geB18jHg=="
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "status": {
-           "code": -11,
-           "message": "No permission for the resource"
-         },
-         "url": "/sys/proxy/json"
-       }
-     ]
-   }
-
+         }
+      
 (Benefit of #0601553)   
 
 Of course, such user can get (read) object:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "fields": [
+                 "name",
+                 "subnet"
+               ],
+               "loadsub": 0,
+               "url": "/pm/config/adom/dc_amer/obj/firewall/address/host_001"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-   {
-     "id": 3,
-     "method": "get",
-     "params": [
-       {
-         "fields": [
-           "name",
-           "subnet"
-         ],
-         "loadsub": 0,
-         "url": "/pm/config/adom/dc_amer/obj/firewall/address/host_001"
-       }
-     ],
-     "session": "E3tjmsND1L4zCe5qNw3V6xJAynVK1PYeZ3f1fNPI0Q/rLez1t9qMpSkUNkkScbjrJOPvDKHPUaNf3c7YQNvZig=="
-   }
+   .. tab-item:: RESPONSE
 
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "name": "host_001",
-           "oid": 4805,
-           "subnet": [
-             "21.103.33.206",
-             "255.255.255.255"
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "host_001",
+                 "oid": 4805,
+                 "subnet": [
+                   "21.103.33.206",
+                   "255.255.255.255"
+                 ]
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/dc_amer/obj/firewall/address/host_001"
+             }
            ]
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/dc_amer/obj/firewall/address/host_001"
-       }
-     ]
-   }
+         }
 
 When ``rpc-permit`` is ``read-write``, the API user can read-write what the
 permission profile is allowing him to read-write.
@@ -1816,42 +1836,44 @@ permission profile is allowing him to read-write.
 For instance, the API user associated with permission profile ``rw_all`` but
 only for ADOM ``dc_amer`` can't create a firewall address in ADOM ``dc_us``:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "name": "host_1001",
+                 "subnet": "10.0.0.2/32"
+               },
+               "url": "/pm/config/adom/dc_us/obj/firewall/address"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-   {
-     "id": 3,
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "name": "host_1001",
-           "subnet": "10.0.0.2/32"
-         },
-         "url": "/pm/config/adom/dc_us/obj/firewall/address"
-       }
-     ],
-     "session": "+sdy+ca8+NbZhTXxhjZOgByoZJiqCMhzEwo+9ufQ40z2zTjK/sLhFhxt1+atozzGwJ8wPHGBx50smv5hkekYgg=="
-   }
+   .. tab-item:: RESPONSE
 
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "status": {
-           "code": -11,
-           "message": "No permission for the resource"
-         },
-         "url": "/pm/config/adom/dc_us/obj/firewall/address"
-       }
-     ],
-     "session": 21
-   }
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": -11,
+                 "message": "No permission for the resource"
+               },
+               "url": "/pm/config/adom/dc_us/obj/firewall/address"
+             }
+           ],
+           "session": 21
+         }
 
 When ``rpc-permit`` is ``read-write``, and the user is also assigned with a
 device group, then the API user can't read-write a device which doesn't belong
@@ -1860,45 +1882,47 @@ to the device group: BUG!!!! (tested with FMG 7.2.3-INTERIM build 1360)
 In below example, device ``dut_fgt_03`` doesn't belong to the device group
 assigned to the API user...
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "name": "host_1001",
+                 "subnet": "10.0.0.2/32"
+               },
+               "url": "/pm/config/device/dut_fgt_03/vdom/root/firewall/address"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-   {
-     "id": 3,
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "name": "host_1001",
-           "subnet": "10.0.0.2/32"
-         },
-         "url": "/pm/config/device/dut_fgt_03/vdom/root/firewall/address"
-       }
-     ],
-     "session": "RiMtKVLNZH/zc5nVkZ/Y4XNFXAWCvCBnOXEySrUCNUrsdNJQpDqUrFa+5yYF7e2K1uRFq146GAQ8BKxIoLMvNQ=="
-   }
+   .. tab-item:: RESPONSE
 
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "name": "host_1001"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/device/dut_fgt_03/vdom/root/firewall/address"
-       }
-     ]
-   }
-
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "name": "host_1001"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/device/dut_fgt_03/vdom/root/firewall/address"
+             }
+           ]
+         }
+      
 Neither if he attempts to read-write directly a managed device which doesn't
 belong to the assigned device group, using ``sys/proxy/json``: BUG!!!! (tested
 with FMG 7.2.3-INTERIM build 1360)
@@ -1906,73 +1930,75 @@ with FMG 7.2.3-INTERIM build 1360)
 In below example, device ``dut_fgt_03`` doesn't belong to the device group
 assigned to the API user...
 
-**REQUEST:**
+.. tab-set::
 
-.. code-block:: json
+   .. tab-item:: REQUEST
 
-   {
-     "id": 3,
-     "method": "exec",
-     "params": [
-       {
-         "data": {
-           "action": "post",
-           "payload": {
-             "color": 13,
-             "name": "host_1007",
-             "subnet": "10.0.0.7/32"
-           },
-           "resource": "/api/v2/cmdb/firewall/address",
-           "target": [
-             "/adom/dc_amer/device/dut_fgt_03"
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "data": {
+                 "action": "post",
+                 "payload": {
+                   "color": 13,
+                   "name": "host_1007",
+                   "subnet": "10.0.0.7/32"
+                 },
+                 "resource": "/api/v2/cmdb/firewall/address",
+                 "target": [
+                   "/adom/dc_amer/device/dut_fgt_03"
+                 ]
+               },
+               "url": "/sys/proxy/json"
+             }
+           ],
+           "session": "{{session}}"
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+      
+         {  
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "response": {
+                     "build": 1396,
+                     "http_method": "POST",
+                     "http_status": 200,
+                     "mkey": "host_1007",
+                     "name": "address",
+                     "old_revision": "0105b076d0779621cfe555d34b1f6986",
+                     "path": "firewall",
+                     "revision": "3f2780027733bd7a9ba00b76d7197892",
+                     "revision_changed": true,
+                     "serial": "FGVMMLTM23000162",
+                     "status": "success",
+                     "vdom": "root",
+                     "version": "v7.2.4"
+                   },
+                   "status": {
+                     "code": 0,
+                     "message": "OK"
+                   },
+                   "target": "dut_fgt_03"
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/sys/proxy/json"
+             }
            ]
-         },
-         "url": "/sys/proxy/json"
-       }
-     ],
-     "session": "kOB0O/NuH7JPaTGVKsXCn5jWf8qkfAreEMFx2tElofuDioiKOfL42GJNMVBieEs1eTNe+0ehQY4sEkT4/gZJSQ=="
-   }
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {  
-     "id": 3,
-     "result": [
-       {
-         "data": [
-           {
-             "response": {
-               "build": 1396,
-               "http_method": "POST",
-               "http_status": 200,
-               "mkey": "host_1007",
-               "name": "address",
-               "old_revision": "0105b076d0779621cfe555d34b1f6986",
-               "path": "firewall",
-               "revision": "3f2780027733bd7a9ba00b76d7197892",
-               "revision_changed": true,
-               "serial": "FGVMMLTM23000162",
-               "status": "success",
-               "vdom": "root",
-               "version": "v7.2.4"
-             },
-             "status": {
-               "code": 0,
-               "message": "OK"
-             },
-             "target": "dut_fgt_03"
-           }
-         ],
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/sys/proxy/json"
-       }
-     ]
-   }
+         }
 
 JSON RPC API Methods
 --------------------

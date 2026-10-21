@@ -504,9 +504,9 @@ whether a change was made.
 For instance, you can obtain the checksum of the object database for the
 ``TEST`` ADOM using the following request:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: REQUEST
+   .. tab-item:: REQUEST
 
       .. code-block:: json
       
@@ -526,7 +526,7 @@ For instance, you can obtain the checksum of the object database for the
       		 "verbose": 1
          }
 
-   .. tab:: RESPONSE
+   .. tab-item:: RESPONSE
 
       .. code-block:: json
       		

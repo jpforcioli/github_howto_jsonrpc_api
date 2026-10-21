@@ -206,44 +206,46 @@ To delete entry ``www.url-003.com`` with ID ``4``, in the
 ``webfilter.urlfilter`` named ``urlfilter_001``, with ID ``1``, in ADOM
 ``dc_emea``:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "delete",
+           "params": [
+             {
+               "url": "/pm/config/adom/dc_emea/obj/webfilter/urlfilter/1/entries/4"
+             }
+           ],
+           "session": "{{session}}"
+         }
 
-   {
-     "id": 3,
-     "method": "delete",
-     "params": [
-       {
-         "url": "/pm/config/adom/dc_emea/obj/webfilter/urlfilter/1/entries/4"
-       }
-     ],
-     "session": "GcpTJdkN8A0VwkAQF+zBA70wdh7B+Qe3tZoGil4lR+rQlrUhy0nOjNeoJLKyQb/CgdXmuA8i5omm4WV/dE7cQw=="
-   }
+      .. note::
+      
+         - The ``webfilter.urlfilter`` ``urlfilter_001`` cannot be used as 
+           master key; its ID ``1`` has to be used instead
+         - The ``webfilter.urlfilter.entries`` ``www.url-003.com`` cannot be 
+           used as a master key; its ID ``4`` has to be used instead.
 
-.. note::
+   .. tab-item:: RESPONSE
 
-   - The ``webfilter.urlfilter`` ``urlfilter_001`` cannot be used as master key;
-     its ID ``1`` has to be used instead
-   - The ``webfilter.urlfilter.entries`` ``www.url-003.com`` cannot be used as a
-     master key; its ID ``4`` has to be used instead.
-
-**RESPONSE:**
-
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/dc_emea/obj/webfilter/urlfilter/1/entries/3"
-       }
-     ]
-   }
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/dc_emea/obj/webfilter/urlfilter/1/entries/3"
+             }
+           ]
+         }
 
 Web rating overrides
 ++++++++++++++++++++
@@ -255,48 +257,50 @@ _____________________________________
 
 To add a new web rating override in ADOM ``dc_amer``:
 
-**REQUEST:**
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
-
-   {
-     "id": 3,
-     "method": "add",
-     "params": [
-       {
-         "data": {
-           "comment": "Test #003",
-           "rating": [
-             "96"
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "method": "add",
+           "params": [
+             {
+               "data": {
+                 "comment": "Test #003",
+                 "rating": [
+                   "96"
+                 ],
+                 "status": "enable",
+                 "url": "www.url-003.com"
+               },
+               "url": "/pm/config/adom/dc_amer/obj/webfilter/ftgd-local-rating"
+             }
            ],
-           "status": "enable",
-           "url": "www.url-003.com"
-         },
-         "url": "/pm/config/adom/dc_amer/obj/webfilter/ftgd-local-rating"
-       }
-     ],
-     "session": "6vRSrzLBbOj1JB0thRDB1/dzUETGtibb3oohHEPXs+ppbcq99CkWp33QZLWPwd9rmYgeRXYozeXNSLjUIb6pjQ=="
-   }
+           "session": "{{session}}"
+         }
 
-**RESPONSE:**
+   .. tab-item:: RESPONSE
 
-.. code-block:: json
-
-   {
-     "id": 3,
-     "result": [
-       {
-         "data": {
-           "url": "www.url-003.com"
-         },
-         "status": {
-           "code": 0,
-           "message": "OK"
-         },
-         "url": "/pm/config/adom/dc_amer/obj/webfilter/ftgd-local-rating"
-       }
-     ]
-   }  
+      .. code-block:: json
+      
+         {
+           "id": 3,
+           "result": [
+             {
+               "data": {
+                 "url": "www.url-003.com"
+               },
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/dc_amer/obj/webfilter/ftgd-local-rating"
+             }
+           ]
+         }  
 
 Webfilter profile
 +++++++++++++++++
@@ -1618,9 +1622,9 @@ How to empty the ``dnsfilter.domain-filter.entries`` table?
 
 You can use the |json_rpc_m| ``update`` or ``set`` as shown below:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: REQUEST
+   .. tab-item:: REQUEST
 
       .. code-block:: json
 
@@ -1638,7 +1642,7 @@ You can use the |json_rpc_m| ``update`` or ``set`` as shown below:
            "session": "{{ session }}"
          }        
 
-   .. tab:: RESPONSE
+   .. tab-item:: RESPONSE
 
       .. code-block:: json
 
@@ -1678,52 +1682,54 @@ We can use any of those URL
 
 For instance:
 
-**REQUEST**:
+.. tab-set::
+  
+   .. tab-item:: REQUEST
 
-.. code-block:: json
+      .. code-block:: json
+      
+         {
+           "id": 1, 
+           "jsonrpc": "1.0", 
+           "method": "get", 
+           "params": [
+             {
+               "url": "/pm/config/adom/CM-LAB-001/_application/list"
+             }
+           ], 
+           "session": "{{session}}",
+           "verbose": 1
+         }
 
-   {
-     "id": 1, 
-     "jsonrpc": "1.0", 
-     "method": "get", 
-     "params": [
-       {
-         "url": "/pm/config/adom/CM-LAB-001/_application/list"
-       }
-     ], 
-     "session": "NFqDRmsSz8tdxPZ7TPLdPCewoXS8Tz/vvZyOXera6CVntGsNHbElddvtyW/gAdmacfrYsoyaQsAaIktFwQm2dmRfUocs1u4B", 
-     "verbose": 1
-   }
+   .. tab-item:: RESPONSE
 
-**RESPONSE**:
-
-.. code-block::
-
-   {
-     "id": 1, 
-     "result": [
-       {
-         "data": [
-           {
-             "behavior": "", 
-             "cat-id": "21", 
-             "category": "Email", 
-             "id": "16554", 
-             "language": "Chinese", 
-             "name": "126.Mail", 
-             "parameter": "", 
-             "popularity": "4.low", 
-             "protocol": "1.TCP, 9.HTTP, 26.SSL", 
-             "require_ssl_di": "No", 
-             "risk": "3.low", 
-             "shaping": "0", 
-             "sub-cat-id": "0", 
-             "sub-category": "(null)", 
-             "technology": "1.Browser-Based", 
-             "vendor": "9.Netease", 
-             "weight": "10"
-           }, 
-   [...]
+      .. code-block::
+      
+         {
+           "id": 1, 
+           "result": [
+             {
+               "data": [
+                 {
+                   "behavior": "", 
+                   "cat-id": "21", 
+                   "category": "Email", 
+                   "id": "16554", 
+                   "language": "Chinese", 
+                   "name": "126.Mail", 
+                   "parameter": "", 
+                   "popularity": "4.low", 
+                   "protocol": "1.TCP, 9.HTTP, 26.SSL", 
+                   "require_ssl_di": "No", 
+                   "risk": "3.low", 
+                   "shaping": "0", 
+                   "sub-cat-id": "0", 
+                   "sub-category": "(null)", 
+                   "technology": "1.Browser-Based", 
+                   "vendor": "9.Netease", 
+                   "weight": "10"
+                 }, 
+         [...]
 
 How to get the list of Application Categories?
 ++++++++++++++++++++++++++++++++++++++++++++++
@@ -1740,64 +1746,66 @@ To get some output, the ADOM has to contains a real device.
 If your ADOM doesn't have yet any real devices or only has Model
 Devices, the output will be null. 
 
-**REQUEST:**
+.. tab-set:: 
 
-.. code:: json
-	  
-	  {
-	    "id": 1, 
-	    "method": "get", 
-	    "params": [
-	      {
-	        "url": "pm/config/adom/ADOM_54_001/obj/_category/list"
-	      }
-	    ], 
-	    "session": "xkULr1ot8oq+HnVLlrxVC9KafsiO+ZvtU0Uot+LlueIqDegtqIw9W0lYSF1YkyUgCHLH/PxwnSmCjnfuLPoZrQ==", 
-	    "verbose": 1
-	  }
+   .. tab-item:: REQUEST
 
-**RESPONSE:**
+      .. code:: json
+      	  
+      	  {
+      	    "id": 1, 
+      	    "method": "get", 
+      	    "params": [
+      	      {
+      	        "url": "pm/config/adom/ADOM_54_001/obj/_category/list"
+      	      }
+      	    ], 
+      	    "session": "{{session}}",
+      	    "verbose": 1
+      	  }
 
-.. code:: json
+   .. tab-item:: RESPONSE
 
-	  {
-	    "id": 1, 
-	    "result": [
-	      {
-	        "data": [
-		  {
-		    "id": 19, 
-		    "name": "\"Botnet\""
-		  }, 
-		  {
-		    "id": 29, 
-		    "name": "\"Business\""
-		  }, 
-		  {
-		    "id": 30, 
-		    "name": "\"Cloud.IT\""
-		  }, 
-	          {
-		    "id": 5, 
-		    "name": "\"Video/Audio\""
-		  }, 
-		  {
-		    "id": 3, 
-		    "name": "\"VoIP\""
-		  }, 
-		  {
-		    "id": 25, 
-		    "name": "\"Web.Client\""
-		  }
-	        ], 
-		"status": {
-		  "code": 0, 
-		  "message": "OK"
-		}, 
-		"url": "pm/config/adom/ADOM_54_001/_category/list"
-	      }
-	    ]
-	  }
+      .. code:: json
+      
+      	  {
+      	    "id": 1, 
+      	    "result": [
+      	      {
+      	        "data": [
+      		  {
+      		    "id": 19, 
+      		    "name": "\"Botnet\""
+      		  }, 
+      		  {
+      		    "id": 29, 
+      		    "name": "\"Business\""
+      		  }, 
+      		  {
+      		    "id": 30, 
+      		    "name": "\"Cloud.IT\""
+      		  }, 
+      	          {
+      		    "id": 5, 
+      		    "name": "\"Video/Audio\""
+      		  }, 
+      		  {
+      		    "id": 3, 
+      		    "name": "\"VoIP\""
+      		  }, 
+      		  {
+      		    "id": 25, 
+      		    "name": "\"Web.Client\""
+      		  }
+      	        ], 
+      		"status": {
+      		  "code": 0, 
+      		  "message": "OK"
+      		}, 
+      		"url": "pm/config/adom/ADOM_54_001/_category/list"
+      	      }
+      	    ]
+      	  }
 
 Please also consider the new information from #0370036.
 

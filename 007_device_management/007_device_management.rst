@@ -10389,9 +10389,9 @@ How to get the cluster members?
 We want to retrieve the cluster members for device ``fgt-cluster`` in ADOM
 ``DEMO``:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: **REQUEST**
+   .. tab-item:: **REQUEST**
 
       .. code-block:: json
 
@@ -10408,7 +10408,7 @@ We want to retrieve the cluster members for device ``fgt-cluster`` in ADOM
            "verbose": 1
          }
   
-   .. tab:: **RESPONSE**
+   .. tab-item:: **RESPONSE**
 
       .. code-block:: json
 

@@ -10520,7 +10520,7 @@ The following example shows how to trigger an unassign operation for the ``g_ppk
          }
 
 How to get the assignment status for Global Policy Packages?
-------------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The following example shows how to get the assignement status for the Global
 Policy Packages:
@@ -10579,7 +10579,7 @@ Policy Packages:
          }
 
 How to get the Policy Packages with Global Policy Packages?
------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The following example demonstrates how to get the list of Policy Packages in
 ``demo`` ADOM which have received Global Policy Packages:
