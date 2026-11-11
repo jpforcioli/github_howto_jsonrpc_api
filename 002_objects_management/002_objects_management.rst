@@ -5277,6 +5277,30 @@ _______________________________________
                  having the ``policyid`` ``4``
                - The policy package ``pp.device1`` is in ADOM ``DEMO_014``
 
+   d) We can now end the where used process
+
+      .. tab-set::
+
+         .. tab-item:: REQUEST
+
+            .. code-block:: json
+
+               {
+                 "id": 1,
+                 "method": "exec",
+                 "params": [
+                   {
+                     "token": "K11EnEPIkRUx23ws7sbm6A==",
+                     "url": "/cache/search/where/used/end"
+                   }
+                 ],
+                 "session": "{{session}}"
+               }
+            
+            .. note::
+
+               Captured in #1356766.
+
 How to where used from within a normal ADOM?
 ____________________________________________
 
@@ -5382,6 +5406,52 @@ used`` option:
                "url": "/cache/search/where/used/start"
              }
            ]
+         }
+
+How to where used multiple objects?
+___________________________________
+
+Starting with FortiManager 8.0.3 (#1356766), you can perform a *where used*
+operation for multiple objects in a single request. This is particularly useful
+when you want to check the usage of several firewall addresses or other objects
+at once. It works for multiple objects from different ADOMs.
+
+The following example shows how to start a *where used* operation for multiple
+firewall address objects in the ``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "exec",
+           "params": [
+             {
+               "url": "cache/search/where/used/start",
+               "data": { 
+                 "targets": [
+                   {
+                     "obj": "adom/demo_001/obj/ips/sensor",
+                     "mkey": [
+                       "ips-sensor-001",
+                       "ips-sensor-002"
+                     ]
+                   },
+                   {
+                     "obj": "adom/demo_002/obj/firewall/address",
+                     "mkey": "addr_001",
+                     "flags": [
+                       "direct used"
+                     ]
+                   }
+                 ]
+               }
+             }
+           ],
+           "session": "{{session}}"
          }
 
 Find duplicates objects

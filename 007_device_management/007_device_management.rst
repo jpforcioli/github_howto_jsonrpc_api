@@ -13206,3 +13206,170 @@ The following example shows how to generate a ZTP URL from the
              }
            ]
          }
+
+Automation Stitches
+-------------------
+
+Starting with FortiManager 9.0.3 (#1316659), you can use the FortiManager API to
+create and manage automation stitches. Automation stitches allow you to automate
+tasks and workflows across your Fortinet managed devices.
+
+How to get existing automation stitches?
+++++++++++++++++++++++++++++++++++++++++
+
+The following example shows how to get existing automation stitches in the
+``demo`` ADOM:
+
+.. tab-set::
+
+   .. tab-item:: REQUEST
+
+      .. code-block:: json
+
+         {
+           "id": 3,
+           "method": "get",
+           "params": [
+             {
+               "url": "/pm/config/adom/demo/obj/fmg/playbook"
+             }
+           ],
+           "session": "{{session}}",
+           "verbose": 1
+         }
+
+   .. tab-item:: RESPONSE
+
+      .. code-block:: json
+
+         {
+           "cid": 68,
+           "id": 3,
+           "result": [
+             {
+               "data": [
+                 {
+                   "action": [
+                     {
+                       "mailto": "admin@acme.com",
+                       "oid": 9854,
+                       "scheduled-time": 11,
+                       "script": [],
+                       "seq-num": 1,
+                       "type": "email"
+                     }
+                   ],
+                   "description": "Send email when selected devices go offline.",
+                   "name": "fgfm_down",
+                   "oid": 9852,
+                   "pending-change-idle-hours": null,
+                   "playbook target": [
+                     {
+                       "device": 3548,
+                       "oid": 9853
+                     },
+                     {
+                       "device": 3602,
+                       "oid": 9855
+                     },
+                     {
+                       "device": 3590,
+                       "oid": 9856
+                     },
+                     {
+                       "device": 3573,
+                       "oid": 9857
+                     },
+                     {
+                       "device": 3480,
+                       "oid": 9858
+                     }
+                   ],
+                   "status": "enable",
+                   "trigger": [
+                     "connection-down"
+                   ]
+                 }
+               ],
+               "status": {
+                 "code": 0,
+                 "message": "OK"
+               },
+               "url": "/pm/config/adom/dc_paris/obj/fmg/playbook"
+             }
+           ]
+         }
+
+      .. note::
+
+         This output shows a single automation stitch named ``fgfm_down`` that 
+         sends an email when selected devices go offline. 
+         
+         The ``action`` attribute specifies the ``email`` type. It is a list
+         meaning that multiple actions can be defined. The possible actions   
+         types are:
+
+         - ``email``
+         - ``snmp-trap``
+         - ``run-script``
+
+         For instance, you can define an automation stitch that sends an email
+         and a SNMP trap, then trigger the execution of multiple CLI Templates 
+         when a specific event occurs:
+
+         .. code-block:: json
+
+            "action": [
+              {
+                "mailto": "admin@acom.com",
+                "oid": 9854,
+                "scheduled-time": 11,
+                "script": [],
+                "seq-num": 1,
+                "type": "email"
+              },
+              {
+                "mailto": null,
+                "oid": 9859,
+                "scheduled-time": 4,
+                "script": [],
+                "seq-num": 2,
+                "type": "snmp-trap"
+              },
+              {
+                "mailto": null,
+                "oid": 9860,
+                "scheduled-time": 5,
+                "script": [
+                  "test_003",
+                  "test_002",
+                  "test_001"
+                ],
+                "seq-num": 3,
+                "type": "run-script"
+              }
+            ]
+        
+         The ``playbook target`` attribute lists the devices OID of the managed
+         devices to be monitored by the automation stitch. 
+         
+         The ``status`` attribute indicates that stitches is enabled.
+         
+         The ``trigger`` attribute specifies the event that triggers the 
+         automation stitch, which in this case is a ``connection-down`` event.
+         It is a list meaning that multiple triggers can be defined. The 
+         possible triggers are:
+
+         - :``out-of-sync``: Managed device is out of sync with FortiManager.
+         - :``vulnerability``: Managed device has a vulnerability,
+         - :``connection-down``: Managed device is offline.
+         - :``pending-changes``: Managed device has pending changes.
+
+         For the ``pending-changes`` trigger, you can specify the number of 
+         hours that the device has been in a pending change state before the 
+         automation stitch is triggered. This is done using the 
+         ``pending-change-idle-hours`` attribute. For example, if you set 
+         ``pending-change-idle-hours`` to 2, the automation stitch will only be 
+         triggered if the device has been in a pending change state for at 
+         least 2 hours. If the device has been in a pending change state for
+         less than 2 hours, the automation stitch will not be triggered.
